@@ -1,0 +1,16 @@
+.board_content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+}
+.board_menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.board_controls{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

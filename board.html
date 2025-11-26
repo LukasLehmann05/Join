@@ -4,53 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Board</title>
+    <link rel="stylesheet" href="style/board_style.css">
 </head>
 <body>
-    <section class="board_menu">
-        <h1>Board</h1>
-        <div class="search_task">
-            <input type="text">
-            <button>
-                <img src="" alt="">
-            </button>
-        </div>
-        <button class="add_task">
-            Add task
-            <img src="" alt="">
-        </button>
-    </section>
-    <section class="table_header">
-        <div class="column_header">
-            To do
-            <button>
-                <img src="" alt="">
-            </button>
-        </div>
-        <div class="column_header">
-            In progress
-            <button>
-                <img src="" alt="">
-            </button>
-        </div>
-        <div class="column_header">
-            Await feedback
-            <button>
-                <img src="" alt="">
-            </button>
-        </div>
-        <div class="column_header">
-            Done
-            <button>
-                <img src="" alt="">
-            </button>
-        </div>
-    </section>
-      
-    <section class="board_table">
-        // this section includes colums with state of tasks like "To do", "In Progress", "Await feedback", "Done"
-        // beside tasks can move from one column to another by drag and drop
-
-    </section>
+    <div class="board_content">
+        
+        <section class="board_menu">
+            <h1>Board</h1>
+            <div class="board_controls">
+                <div class="search_task">
+                    <input type="text">
+                    <button>
+                        <img src="" alt="">
+                    </button>
+                </div>
+                <button class="add_task">
+                    Add task
+                    <img src="" alt="">
+                </button>
+            </div>
+        </section>
+        <section class="table_header">
+            <div class="column_header">
+                To do
+                <button>
+                    <img src="" alt="">
+                </button>
+            </div>
+            <div class="column_header">
+                In progress
+                <button>
+                    <img src="" alt="">
+                </button>
+            </div>
+            <div class="column_header">
+                Await feedback
+                <button>
+                    <img src="" alt="">
+                </button>
+            </div>
+            <div class="column_header">
+                Done
+                <button>
+                    <img src="" alt="">
+                </button>
+            </div>
+        </section>
+        
+        <section class="board_table">
+            <!-- this section includes colums with state of tasks like "To do", "In Progress", "Await feedback", "Done" -->
+            <!-- beside tasks can move from one column to another by drag and drop -->
+            
+        </section>
+    </div>
     
 </body>
 </html>
