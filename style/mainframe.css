@@ -38,8 +38,12 @@ article{
     gap: 20px;
 }
 
-.sidebar-nav :hover {
+.sidebar-nav .active{
     background-color: #091931;
+}
+
+.sidebar-nav :hover {
+    background-color: #2A3D59;
 }
 
 .sidebar-nav-section {
