@@ -20,6 +20,20 @@ let testTask = {
       ]
     }
 
+let testUser = {
+    "user_id_1": {
+      "email": "max.mustermann@example.com",
+      "name": "Max Mustermann",
+      "password": "hashed_password_123"
+    },
+    "user_id_2": {
+      "email": "erika.musterfrau@example.com",
+      "name": "Erika Musterfrau",
+      "password": "hashed_password_456"
+    }
+	
+  }
+
 function renderNoTasksToDo(columnId) {
     const container = document.getElementById(columnId);
     container.innerHTML = noTasksDoToTemplate(columnId);
@@ -41,6 +55,26 @@ function renderTaskCard(task, containerId) {
     container.innerHTML = taskCardTemplate(task);
 }
 
+function getInitialsFromUser(user) {
+    const initials = user.name  
+        .split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase();
+    return initials;
+}
+
+function renderAssignedUserIcons(task, containerId) {
+    for (let userId of task.assigned_to) {
+        const user = testUser[userId];
+        const initials = getInitialsFromUser(user);
+        const iconHTML = assignedUserIconTemplate(initials);
+        const container = document.getElementById(containerId);
+        container.innerHTML += iconHTML;
+    }
+}
+
 renderNoTasksToDo('toDoContainer');
 renderTaskCard(testTask, 'inProgressContainer');
 renderSubtaskProgress('number_of_subtasks', testTask.subtasks);
+renderAssignedUserIcons(testTask, 'assigned_users_container');
