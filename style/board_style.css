@@ -31,6 +31,7 @@
 .column_title{
     font-size: 20px;
     font-weight: 700;
+    color: #42526E
 }
 
 .column_header{
@@ -87,4 +88,10 @@ h1{
     color:white;
     font-family: "Inter_bold";
     font-size: 21px;
+}
+
+.table_header .column_header button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
