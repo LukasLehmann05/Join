@@ -21,10 +21,6 @@
 
 .table_header{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 320px;
-    width: 100%;
     gap: 16px;
 }
 
@@ -37,8 +33,7 @@
 .column_header{
     display: flex;
     align-items: center;
-    gap: 10px;
-    min-width: 200px;
+    width: calc(100% / 4);
     justify-content: space-between;
 }
 
@@ -94,4 +89,13 @@ h1{
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+.board_table{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 320px;
+    width: 100%;
+    gap: 16px;
 }
