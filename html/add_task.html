@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="../style/standard.css">
+    <link rel="stylesheet" href="../style/mainframe.css">
+    <link rel="stylesheet" href="../style/add_task.css">
+    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+</head>
+
+<body class="body">
+    <aside class="sidebar">
+        <section class="logo-section">
+            <img class="logo" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
+        </section>
+        <nav class="sidebar-nav">
+            <a href="#" class="sidebar-nav-section">
+                <img class="nav-icons" src="../assets/icons/sideBar/summary.svg" alt="summary icon">
+                <p>Summary</p>
+            </a>
+            <a href="#" class="sidebar-nav-section current-selection">
+                <img class="nav-icons" src="../assets/icons/sideBar/addTask.svg" alt="Add Task icon">
+                <p>Add Task</p>
+            </a>
+            <a href="#" class="sidebar-nav-section">
+                <img class="nav-icons" src="../assets/icons/sideBar/board.svg" alt="Board icon">
+                <p>Board</p>
+            </a>
+            <a href="#" class="sidebar-nav-section">
+                <img class="nav-icons" src="../assets/icons/sideBar/contacts.svg" alt="Contacts icon">
+                <p>Contacts</p>
+            </a>
+
+        </nav>
+        <footer class="sidebar-footer">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Legal notice</a>
+        </footer>
+    </aside>
+    <article>
+        <header class="header">
+            <nav class="header-nav">
+                <p>Kanban Project Management Tool</p>
+                <section class="header-side-buttons">
+                    <a href="#">
+                        <img src="../assets/icons/header/help.svg" alt="help icon">
+                    </a>
+                    <a href="#">
+                        <img src="../assets/icons/header/user_placeholder.svg" alt="user icon">
+                    </a>
+                </section>
+            </nav>
+        </header>
+        <main class="main-content">
+            <article class="add-task-content">
+                <header>
+                    <h1 class="h1">Add Task</h1>
+                </header>
+                <main class="task-details">
+                    <section>
+                        <form class="input-form">
+                            <label>Title<span class="required">*</span></label>
+                            <input class="task-input" type="text" placeholder="Enter a title">
+                        </form>
+                        <form class="input-form">
+                            <label>Description</label>
+                            <input class="task-input" type="text" placeholder="Enter a description">
+                        </form>
+                        <form class="input-form">
+                            <label>Due date<span class="required">*</span></label>
+                            <input class="task-input" type="date" placeholder="dd/mm/yyyy">
+                        </form>
+                    </section>
+                    <section class="seperator"></section>
+                    <section>
+                        <form class="input-form">
+                            <label>Priority<span class="required">*</span></label>
+                            <section class="priority-section">
+                                <button class="priority-button">
+                                    <p>Urgent</p>
+                                    <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
+                                </button>
+                                <button class="priority-button bg-yellow">
+                                    <p>Medium</p>
+                                    <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
+                                </button>
+                                <button class="priority-button">
+                                    <p>Low</p>
+                                    <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
+                                </button>
+                            </section>
+                        </form>
+                        <form class="input-form">
+                            <label>Assigned to</label>
+                            <select name="" id=""></select>
+                        </form>
+                        <form class="input-form">
+                            <label>Category<span class="required">*</span></label>
+                            <select name="" id=""></select>
+                        </form>
+                        <form class="input-form">
+                            <label>Subtask</label>
+                            <input class="task-input" type="text" placeholder="Add new subtask">
+                        </form>
+                    </section>
+                </main>
+                <aside class="action-button-section">
+                    <button class="action-buttons">
+                        <p>Clear</p>
+                        <img src="../assets/icons/contacts/close.svg" alt="clear icon">
+                    </button>
+                    <button class="action-buttons">
+                        <p>Create Task</p>
+                        <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
+                    </button>
+                </aside>
+            </article>
+        </main>
+    </article>
+</body>
+
+</html>
