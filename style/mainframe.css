@@ -3,6 +3,11 @@
     src: url(../assets/fonts/inter/Inter_18pt-Regular.ttf);
 }
 
+@font-face {
+    font-family: "Inter_bold";
+    src: url(../assets/fonts/inter/Inter_18pt-Bold.ttf);
+}
+
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -18,8 +23,13 @@
 
 .body {
     display: flex;
-    justify-content: space-between;
     font-family: "Inter";
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .sidebar-nav {
@@ -28,8 +38,18 @@
     gap: 20px;
 }
 
-.sidebar-nav :hover {
+.sidebar-nav .active{
     background-color: #091931;
+}
+
+.sidebar-nav :hover {
+    background-color: #2A3D59;
+}
+
+.sidebar_upper_section{
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
 }
 
 .sidebar-nav-section {
@@ -65,14 +85,11 @@
 }
 
 .sidebar-footer a:hover {
-    background-color: #091931;
+    color: #29ABE2;
+    font-weight: 600;
 }
 
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, .2);
     z-index: 20;
     font-weight: 400;
@@ -85,7 +102,7 @@
     justify-content: space-between;
     align-items: center;
     margin-right: auto;
-    padding-left: 348px;
+    padding-left: calc(348px - 232px);
     padding-right: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -105,11 +122,10 @@
 }
 
 .main-content {
-    position: fixed;
-    top: 96px;
-    left: 348px;
     max-width: 1440px;
-    margin-right: auto;
+    padding: 0px 64px;
+    background-color: #F6F7F8;
+    height: 100%;
 }
 
 .current-selection {

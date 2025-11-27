@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Board</title>
+    <link rel="stylesheet" href="style/board_style.css">
+    <link rel="stylesheet" href="./style/standard.css">
+    <link rel="stylesheet" href="./style/mainframe.css">
+    <link rel="shortcut icon" href="./assets/icons/logo/logoSmall.svg">
+</head>
+
+<body class="body">
+    <aside class="sidebar">
+        <div class="sidebar_upper_section">
+            <section class="logo-section">
+                <img class="logo" src="./assets/icons/logo/logo_white.svg" alt="Join logo">
+            </section>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-nav-section">
+                    <img class="nav-icons" src="./assets/icons/sideBar/summary.svg" alt="summary icon">
+                    <p>Summary</p>
+                </a>
+                <a href="#" class="sidebar-nav-section">
+                    <img class="nav-icons" src="./assets/icons/sideBar/addTask.svg" alt="Add Task icon">
+                    <p>Add Task</p>
+                </a>
+                <a href="#" class="sidebar-nav-section active">
+                    <img class="nav-icons" src="./assets/icons/sideBar/board.svg" alt="Board icon">
+                    <p>Board</p>
+                </a>
+                <a href="#" class="sidebar-nav-section">
+                    <img class="nav-icons" src="./assets/icons/sideBar/contacts.svg" alt="Contacts icon">
+                    <p>Contacts</p>
+                </a>
+            </nav>
+        </div>
+        <footer class="sidebar-footer">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Legal notice</a>
+        </footer>
+    </aside>
+    <article>
+        <header class="header">
+            <nav class="header-nav">
+                <p>Kanban Project Management Tool</p>
+                <section class="header-side-buttons">
+                    <a href="#">
+                        <img src="./assets/icons/header/help.svg" alt="help icon">
+                    </a>
+                    <a href="#">
+                        <img src="./assets/icons/header/user_placeholder.svg" alt="user icon">
+                    </a>
+                </section>
+            </nav>
+        </header>
+        <main class="main-content">
+                <section class="board_menu">
+                    <h1>Board</h1>
+                    <div class="board_controls">
+                        <div class="search_task">
+                            <input type="text" placeholder="Find Task" id="find_task">
+                            <button>
+                                <img src="./assets/icons/board/search_glas.svg" alt="">
+                            </button>
+                        </div>
+                        <button class="button_add_task">
+                            <p>Add task</p>
+                            <img src="./assets/icons/board/add_white.svg" alt="add_task icon">
+                        </button>
+                    </div>
+                </section>
+                <section class="table_header">
+                    <div class="column_header">
+                        <p class="column_title">To do</p>
+                        <button>
+                            <img src="./assets/icons/board/plus_boarder_var1.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="column_header">
+                        <p class="column_title">In progress</p>
+                        <button>
+                            <img src="./assets/icons/board/plus_boarder_var1.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="column_header">
+                        <p class="column_title">Await feedback</p>
+                        <button>
+                            <img src="./assets/icons/board/plus_boarder_var1.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="column_header">
+                        <p class="column_title">Done</p>
+                    </div>
+                </section>
+                
+                <section class="board_table">
+                    <div class="column_content" id="toDoContainer">
+                        das ist ein langer text um zu testen ob die spalte auch mit langen inhalten klar kommt und ob der text umbrechen tut wie gewünscht oder ob ich da noch was anpassen muss
+
+
+
+                    </div>
+                    <div class="column_content"></div>
+                    <div class="column_content"></div>
+                    <div class="column_content"></div>
+                    <!-- this section includes colums with state of tasks like "To do", "In Progress", "Await feedback", "Done" -->
+                    <!-- beside tasks can move from one column to another by drag and drop -->
+                    
+                </section>
+        </main>
+    </article>
+
+    <script src="./scripts/board_templates.js"></script>
+    <script src="./scripts/board.js"></script>
+</body>
+
+
+
+</html>
