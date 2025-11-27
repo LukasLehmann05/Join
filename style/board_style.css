@@ -205,3 +205,30 @@ h1{
 .single_task_content .subtask_status_bar .subtask_info p{
     color: black
 }
+.assigned_user_avatar{
+    width:32px;
+    height:32px;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight: 400;
+    font-size:16px;
+    font-family: "Inter";
+}
+
+.assigned_users_section_and_priority .assigned_users{
+    display: flex;
+    margin-top: 16px;
+    position: relative;
+}
+
+.assigned_user_avatar {
+    margin-left: -12px;
+    border: 2px solid #fff;
+    z-index: 1;
+}
+.assigned_user_avatar:first-child {
+    margin-left: 0; 
+}
