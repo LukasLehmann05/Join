@@ -9,16 +9,16 @@ function noTasksDoToTemplate(columnId) {
 function taskCardTemplate(task) {
     return  `
             <div class="single_task_content">
-                <p class="category" id="category">${task.category}</p>
-                <h3 id="title">${task.title}</h3>
-                <p id="description">${task.description}</p>
+                <p class="category">${task.category}</p>
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
                 <div class="subtask_status_bar">
                     <div class="subtask_status_bar_bg">
                         <div class="subtask_status_bar_fill" style="width: 60%;"></div> <!-- Dynamische Breite je nach Fortschritt -->
                     </div>
                     <div class="subtask_info">
                         <p class="number_of_subtasks" id="number_of_subtasks">3/5</p>
-                        <span class="subtask_status_bar_text">Subtasks</span>
+                        <p class="subtask_status_bar_text">Subtasks</p>
                     </div>
                 </div>
                 <div class="assigned_users_section_and_priority">
