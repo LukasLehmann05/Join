@@ -85,7 +85,8 @@ article{
 }
 
 .sidebar-footer a:hover {
-    background-color: #091931;
+    color: #29ABE2;
+    font-weight: 600;
 }
 
 .header {
