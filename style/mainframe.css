@@ -3,6 +3,11 @@
     src: url(../assets/fonts/inter/Inter_18pt-Regular.ttf);
 }
 
+@font-face {
+    font-family: "Inter_bold";
+    src: url(../assets/fonts/inter/Inter_18pt-Bold.ttf);
+}
+
 .sidebar {
     display: flex;
     flex-direction: column;
