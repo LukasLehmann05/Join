@@ -53,7 +53,6 @@ h1{
     background-color: white;
 }
 
-/* Rahmenfarbe ändern, wenn das Input-Feld fokussiert ist */
 .search_task:has(input:focus) {
     border-color: #29ABE2;
 }
@@ -132,4 +131,32 @@ h1{
     border: 1px dashed #A8A8A8;
     background-color: #E7E7E7;
     border-radius: 10px;
+}
+
+/* .subtask_status_bar styles */
+.subtask_status_bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.subtask_status_bar_bg {
+    width: 120px;
+    height: 8px;
+    background: #d1d1d1;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.subtask_status_bar_fill {
+    height: 100%;
+    background: #29ABE2;
+    border-radius: 4px 0 0 4px;
+    transition: width 0.3s;
+}
+.subtask_status_bar_text {
+    font-size: 14px;
+    color: #42526E;
 }
