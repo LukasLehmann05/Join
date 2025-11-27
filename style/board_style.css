@@ -99,3 +99,12 @@ h1{
     width: 100%;
     gap: 16px;
 }
+
+.board_table .column_content{
+    background-color: #e5e7e8;
+    min-height: 500px;
+    width: calc(100% / 4);
+    margin-top: 4px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
