@@ -115,7 +115,7 @@ h1{
     background-color: #f0f2f3;
     min-height: 500px;
     width: calc(100% / 4);
-    margin-top: 4px;
+    margin-top: 8px;
     box-sizing: border-box;
     word-wrap: break-word;
 }
@@ -133,7 +133,6 @@ h1{
     border-radius: 10px;
 }
 
-/* .subtask_status_bar styles */
 .subtask_status_bar {
     display: flex;
     align-items: center;
@@ -159,4 +158,50 @@ h1{
 .subtask_status_bar_text {
     font-size: 14px;
     color: #42526E;
+}
+
+.single_task_content{
+    background-color: white;
+    border-radius: 24px;
+    padding: 16px;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.single_task_content .category{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    background-color: #0038FF;
+    font-family: "Inter";
+    padding: 4px 16px;
+    border-radius: 8px;
+}
+
+.single_task_content h3{
+    font-size: 16px;
+    font-weight: 700;
+    margin: 16px 0px 8px 0px;
+    font-family: "Inter_bold";
+}
+
+.single_task_content p{
+    font-size: 16px;
+    font-weight: 400;
+    color: #A8A8A8;
+    font-family: "Inter";
+}
+
+.single_task_content .subtask_status_bar .subtask_info{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-family: "Inter";
+}
+
+.single_task_content .subtask_status_bar .subtask_info p{
+    color: black
 }
