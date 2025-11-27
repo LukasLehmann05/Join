@@ -36,3 +36,9 @@ function assignedUserIconTemplate(initials) {
             </div>
             `
 }
+
+function priorityIndicatorTemplate( iconPath) {
+    return `
+            <img src="${iconPath}" alt="Priority Icon" />
+            `
+}

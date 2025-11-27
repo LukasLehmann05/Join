@@ -3,7 +3,7 @@ let testTask = {
       "title": "Implementiere Login-Funktion",
       "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
       "due_date": "2025-12-10",
-      "priority": "High",
+      "priority": "Urgent",
       "assigned_to": [
         "user_id_1",
         "user_id_2"
@@ -74,7 +74,26 @@ function renderAssignedUserIcons(task, containerId) {
     }
 }
 
+function getIconForPriority(priority) {
+    const iconfolderpath = "./assets/icons/addTask/";
+    switch(priority) {
+        case 'Urgent':
+            return iconfolderpath + "urgentTask.svg";
+        case 'Medium':
+            return iconfolderpath + "medTask.svg";
+        case 'Low':
+            return iconfolderpath + "lowTask.svg";
+    }
+}
+
+function renderPriorityIndicator(task, elementId) {
+    const iconPath = getIconForPriority(task.priority);
+    const element = document.getElementById(elementId);
+    element.innerHTML = priorityIndicatorTemplate(iconPath);
+}
+
 renderNoTasksToDo('toDoContainer');
 renderTaskCard(testTask, 'inProgressContainer');
 renderSubtaskProgress('number_of_subtasks', testTask.subtasks);
 renderAssignedUserIcons(testTask, 'assigned_users_container');
+renderPriorityIndicator(testTask, 'priority');
