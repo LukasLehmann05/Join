@@ -218,9 +218,16 @@ h1{
     font-family: "Inter";
 }
 
+.assigned_users_section_and_priority{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+}
+
 .assigned_users_section_and_priority .assigned_users{
     display: flex;
-    margin-top: 16px;
     position: relative;
 }
 
