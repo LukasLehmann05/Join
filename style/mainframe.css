@@ -46,6 +46,12 @@ article{
     background-color: #2A3D59;
 }
 
+.sidebar_upper_section{
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+}
+
 .sidebar-nav-section {
     display: flex;
     justify-content: flex-start;
