@@ -32,7 +32,7 @@ function noTaskDoneTemplate() {
 
 function taskCardTemplate(task, taskId) {
     return  `
-            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}">
+            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
                 <p class="category">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
@@ -64,5 +64,17 @@ function assignedUserIconTemplate(initials) {
 function priorityIndicatorTemplate( iconPath) {
     return `
             <img src="${iconPath}" alt="Priority Icon" />
+            `
+}
+
+function overlayTemplate() {
+    return `
+                <button class="close_overlay_button" onclick="closeOverlay()">
+                    <img src="../assets/icons/board/close_overlay.svg" alt="close overlay icon">
+                </button>
+                <span class="close_button" onclick="closeOverlay()">&times;</span>
+                <div id="overlay_task_details">
+                    <!-- Task details will be dynamically inserted here -->
+                </div>
             `
 }

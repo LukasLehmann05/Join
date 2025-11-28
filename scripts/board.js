@@ -202,3 +202,12 @@ renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
 renderSubtaskProgress(testTasks.task_id_0123);
 renderAssignedUserIcons(testTasks.task_id_0123);
 renderPriorityIndicator(testTasks.task_id_0123);
+
+function openTaskInOverlay(taskId) {
+    console.log("Open task overlay for task ID:", taskId);
+    let overlay = document.getElementById('overlay');
+    overlay.classList.add('show');
+    let overlayContent = document.querySelector('.overlay_content');
+    overlayContent.classList.add('show');
+
+}
