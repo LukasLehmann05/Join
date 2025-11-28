@@ -11,18 +11,18 @@
     justify-content: space-between;
     align-items: center;
     font-family: "Inter_bold";
-    margin-right: 24px;
 }
 
 .board_controls{
     display: flex;
-    justify-content: space-between; /* geändert von center zu space-between */
+    justify-content: space-between;
     gap: 32px;
+    margin-right: 24px;
 }
 
 .table_header{
     display: flex;
-    gap: 16px;
+    gap: 24px;
 }
 
 .column_title{
@@ -31,7 +31,7 @@
     color: #42526E
 }
 
-.column_header{
+.table_header .column_header{
     display: flex;
     align-items: center;
     width: calc(100% / 4);
@@ -104,11 +104,7 @@ h1{
 
 .board_table{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 320px;
-    width: 100%;
-    gap: 16px;
+    gap: 24px;
 }
 
 .board_table .column_content{
@@ -138,10 +134,12 @@ h1{
     align-items: center;
     gap: 12px;
     margin-top: 8px;
+    width: 100%;
 }
 
 .subtask_status_bar_bg {
-    width: 120px;
+    display: flex;
+    flex: 1;
     height: 8px;
     background: #d1d1d1;
     border-radius: 4px;
