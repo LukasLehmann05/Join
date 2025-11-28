@@ -49,9 +49,22 @@ let testUser = {
 	
   }
 
-function renderNoTasksToDo(columnId) {
+function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
-    container.innerHTML = noTasksDoToTemplate(columnId);
+    switch(columnId) {
+        case 'toDoColumn':
+            container.innerHTML = noTasksDoToTemplate();
+            break;
+        case 'inProgressColumn':
+            container.innerHTML = noTaskInProgressTemplate();
+            break;
+        case 'awaitFeedbackColumn':
+            container.innerHTML = noTaskInFeedbackTemplate();
+            break;
+        case 'doneColumn':
+            container.innerHTML = noTaskDoneTemplate();
+            break;
+    }
 }
 
 function formatSubtaskProgress(subtasks) {
@@ -131,7 +144,6 @@ function dropHandler(event) {
     event.preventDefault();
     const taskId = event.dataTransfer.getData("text/plain");  
     const taskElement = document.getElementById(taskId);
-    // Entferne das "No tasks To do"-Element, falls vorhanden
     const noTaskElement = event.currentTarget.querySelector('.no_task_yet');
     if (noTaskElement) {
         noTaskElement.remove();
@@ -142,7 +154,7 @@ function dropHandler(event) {
 function checkIfNoTasksInColumn(columnId) {
     const container = document.getElementById(columnId);
     if (container.innerHTML.trim() === '') {
-        renderNoTasksToDo(columnId);
+        renderNoTaskInfo(columnId);
     }
 }
 
@@ -151,13 +163,12 @@ function observeColumnEmpty(columnId) {
     if (!container) return;
     const observer = new MutationObserver(() => {
         if (container.innerHTML.trim() === '') {
-            renderNoTasksToDo(columnId);
+            renderNoTaskInfo(columnId);
         }
     });
     observer.observe(container, { childList: true, subtree: false });
 }
 
-// Beispiel: Eventlistener für mehrere Spalten beim Laden aktivieren
 document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty('toDoColumn');
     observeColumnEmpty('inProgressColumn');
@@ -165,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty('doneColumn');
 });
 
-renderNoTasksToDo('toDoColumn');
+renderNoTaskInfo('toDoColumn');
 renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
 renderSubtaskProgress('number_of_subtasks', testTasks.task_id_0123.subtasks);
 renderAssignedUserIcons(testTasks.task_id_0123, 'assigned_users_container');
