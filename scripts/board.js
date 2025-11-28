@@ -1,4 +1,6 @@
-let testTask = {
+let testTasks = {
+  "task_id_0123": 
+    {
       "category": "Development",
       "title": "Implementiere Login-Funktion",
       "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
@@ -18,7 +20,20 @@ let testTask = {
           "done": false
         }
       ]
+    },
+    "task_id_4567":
+    {
+      "category": "Marketing",
+      "title": "Social Media Post erstellen",
+      "description": "Post für die Vorstellung des neuen Features planen.",
+      "due_date": "2025-12-01",
+      "priority": "Medium",
+      "assigned_to": [
+        "user_id_2"
+      ],
+      "subtasks": []
     }
+  }
 
 let testUser = {
     "user_id_1": {
@@ -51,8 +66,9 @@ function renderSubtaskProgress(elementId, subtasks) {
 }
 
 function renderTaskCard(task, containerId) {
+    let taskId = getTaskIdAsStringFromTask(task);
     const container = document.getElementById(containerId);
-    container.innerHTML = taskCardTemplate(task);
+    container.innerHTML = taskCardTemplate(task, taskId);
 }
 
 function getInitialsFromUser(user) {
@@ -92,8 +108,65 @@ function renderPriorityIndicator(task, elementId) {
     element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
 
-renderNoTasksToDo('toDoContainer');
-renderTaskCard(testTask, 'inProgressContainer');
-renderSubtaskProgress('number_of_subtasks', testTask.subtasks);
-renderAssignedUserIcons(testTask, 'assigned_users_container');
-renderPriorityIndicator(testTask, 'priority');
+function getTaskIdAsStringFromTask(task) {
+    for (let id in testTasks) {
+        if (testTasks[id] === task) {
+            console.log(id);
+            
+            return id;
+        }
+    }
+    return null;
+}
+
+function dragStartHandler(event) {
+    event.dataTransfer.setData("text/plain", event.target.id);
+}
+
+function dragOverHandler(event) {
+    event.preventDefault();
+}
+
+function dropHandler(event) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData("text/plain");  
+    const taskElement = document.getElementById(taskId);
+    // Entferne das "No tasks To do"-Element, falls vorhanden
+    const noTaskElement = event.currentTarget.querySelector('.no_task_yet');
+    if (noTaskElement) {
+        noTaskElement.remove();
+    }
+    event.currentTarget.appendChild(taskElement);
+}
+
+function checkIfNoTasksInColumn(columnId) {
+    const container = document.getElementById(columnId);
+    if (container.innerHTML.trim() === '') {
+        renderNoTasksToDo(columnId);
+    }
+}
+
+function observeColumnEmpty(columnId) {
+    const container = document.getElementById(columnId);
+    if (!container) return;
+    const observer = new MutationObserver(() => {
+        if (container.innerHTML.trim() === '') {
+            renderNoTasksToDo(columnId);
+        }
+    });
+    observer.observe(container, { childList: true, subtree: false });
+}
+
+// Beispiel: Eventlistener für mehrere Spalten beim Laden aktivieren
+document.addEventListener('DOMContentLoaded', () => {
+    observeColumnEmpty('toDoColumn');
+    observeColumnEmpty('inProgressColumn');
+    observeColumnEmpty('awaitFeedbackColumn');
+    observeColumnEmpty('doneColumn');
+});
+
+renderNoTasksToDo('toDoColumn');
+renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
+renderSubtaskProgress('number_of_subtasks', testTasks.task_id_0123.subtasks);
+renderAssignedUserIcons(testTasks.task_id_0123, 'assigned_users_container');
+renderPriorityIndicator(testTasks.task_id_0123, 'priority');
