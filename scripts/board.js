@@ -158,6 +158,13 @@ function checkIfNoTasksInColumn(columnId) {
     }
 }
 
+function renderNoTaskInfoOnDOMLoad(){
+    const columns = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
+    columns.forEach(columnId => {
+        checkIfNoTasksInColumn(columnId);
+    });
+}
+
 function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
     if (!container) return;
@@ -174,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty('inProgressColumn');
     observeColumnEmpty('awaitFeedbackColumn');
     observeColumnEmpty('doneColumn');
+    renderNoTaskInfoOnDOMLoad();
 });
 
 renderNoTaskInfo('toDoColumn');
