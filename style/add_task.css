@@ -59,6 +59,10 @@
     flex: 1;
 }
 
+.priority-button:hover {
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, .2);
+}
+
 .priority-section {
     display: flex;
     justify-content: space-between;
