@@ -33,7 +33,6 @@ function noTaskDoneTemplate() {
 function taskCardTemplate(task, taskId) {
     return  `
             <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
-            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
                 <p class="category">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
