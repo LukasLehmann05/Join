@@ -73,21 +73,22 @@ function formatSubtaskProgress(subtasks) {
     return `${completed}/${total}`;
 }
 
-function renderSubtaskProgress(elementId, subtasks) {
-    const element = document.getElementById(elementId);
-    element.innerHTML = formatSubtaskProgress(subtasks);
-    renderSubtaskStatusBar(elementId, subtasks);
+function renderSubtaskProgress(taskId) {
+  let elementId = getTaskIdAsStringFromTask(taskId) + '_subtasks_done';
+  console.log(elementId);
+  
+  const element = document.getElementById(elementId);
+  element.innerHTML = formatSubtaskProgress(taskId.subtasks);
+  renderSubtaskStatusBar(taskId);
 }
 
-function renderSubtaskStatusBar(elementId, subtasks) {
-    let relationOfDoneSubtasks = formatSubtaskProgress(subtasks).split('/');
+function renderSubtaskStatusBar(task) {
+    let relationOfDoneSubtasks = formatSubtaskProgress(task.subtasks).split('/');
     let percentage = 0;
     if (relationOfDoneSubtasks[1] > 0) {
         percentage = (relationOfDoneSubtasks[0] / relationOfDoneSubtasks[1]) * 100;
     }
-    // hier muss statt der elementId die taskId übergeben werden
-    
-    const fillElement = document.getElementById(`#${elementId}_subtask_status_bar_fill`);
+    const fillElement = document.getElementById(getTaskIdAsStringFromTask(task) + '_subtasks_status_bar');
     fillElement.style.width = `${percentage}%`;
 }
 
@@ -199,6 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 renderNoTaskInfo('toDoColumn');
 renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
-renderSubtaskProgress('number_of_subtasks', testTasks.task_id_0123.subtasks);
+renderSubtaskProgress(testTasks.task_id_0123);
 renderAssignedUserIcons(testTasks.task_id_0123, 'assigned_users_container');
 renderPriorityIndicator(testTasks.task_id_0123, 'priority');
