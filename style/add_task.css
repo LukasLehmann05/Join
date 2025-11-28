@@ -1,11 +1,7 @@
-@font-face {
-    font-family: "Inter";
-    src: url(../assets/fonts/inter/Inter_18pt-Regular.ttf);
-}
-
 .h1 {
     font-size: 61px;
     font-weight: 700;
+    font-family: "Inter_bold";
 }
 
 .add-task-content {
