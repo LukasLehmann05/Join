@@ -1,7 +1,31 @@
-function noTasksDoToTemplate(columnId) {
+function noTasksDoToTemplate() {
     return  ` 
             <div class="no_task_yet">
                  <p>No tasks To do</p>
+            </div>
+            `
+}
+
+function noTaskInProgressTemplate() {
+    return  ` 
+            <div class="no_task_yet">
+                 <p>No tasks In Progress</p>
+            </div>
+            `
+}
+
+function noTaskInFeedbackTemplate() {
+    return  ` 
+            <div class="no_task_yet">
+                 <p>No tasks For Feedback</p>
+            </div>
+            `
+}
+
+function noTaskDoneTemplate() {
+    return  ` 
+            <div class="no_task_yet">
+                 <p>No tasks Done</p>
             </div>
             `
 }
