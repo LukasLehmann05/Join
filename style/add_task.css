@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Inter";
+    src: url(../assets/fonts/inter/Inter_18pt-Regular.ttf);
+}
+
 .h1 {
     font-size: 61px;
     font-weight: 700;
@@ -5,6 +10,7 @@
 
 .add-task-content {
     margin-top: calc(206px - 96px);
+    font-family: "Inter";
 }
 
 .task-details {
@@ -33,6 +39,7 @@
 .seperator {
     width: 1px;
     background-color: #D1D1D1;
+    margin: 0px 5%;
 }
 
 .priority-button {
@@ -86,10 +93,31 @@
     align-items: center;
     font-size: 21px;
     line-height: 120%;
+    border-radius: 10px;
+    gap: 4px;
+    font-family: "Inter";
+    padding: 10px;
 }
 
 .action-button-section {
     display: flex;
     justify-content: flex-end;
     gap: 16px;
+    margin-top: 64px;
+}
+
+.task-detail-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+}
+
+.create-button {
+    background-color: #2A3647;
+    color: white;
+}
+
+.description-input {
+    flex: 1;
 }
