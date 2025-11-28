@@ -64,23 +64,23 @@
                 <main class="task-details">
                     <section class="task-detail-container">
                         <form class="input-form">
-                            <label>Title<span class="required">*</span></label>
-                            <input class="task-input" type="text" placeholder="Enter a title">
+                            <label for="task_title">Title<span class="required">*</span></label>
+                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title">
                         </form>
                         <form class="input-form description">
-                            <label>Description</label>
-                            <input class="task-input description" type="text" placeholder="Enter a description">
+                            <label for="task_description">Description</label>
+                            <textarea id="task_description" class="task-input description" type="text" placeholder="Enter a description"></textarea>
                         </form>
                         <form class="input-form">
-                            <label>Due date<span class="required">*</span></label>
-                            <input class="task-input" type="date" placeholder="dd/mm/yyyy">
+                            <label for="task_due_date">Due date<span class="required">*</span></label>
+                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy">
                         </form>
                     </section>
                     <section class="seperator"></section>
                     <section class="task-detail-container">
                         <form class="input-form">
-                            <label>Priority<span class="required">*</span></label>
-                            <section class="priority-section">
+                            <label for="priority_section">Priority<span class="required">*</span></label>
+                            <section class="priority-section" id="priority_section">
                                 <button class="priority-button">
                                     <p>Urgent</p>
                                     <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
@@ -96,16 +96,20 @@
                             </section>
                         </form>
                         <form class="input-form">
-                            <label>Assigned to</label>
-                            <select class="select-input" name="" id=""></select>
+                            <label for="task_assign">Assigned to</label>
+                            <select class="select-input" name="" id="task_assign">
+                                <option value="">Select contacts to assign</option>
+                            </select>
                         </form>
                         <form class="input-form">
-                            <label>Category<span class="required">*</span></label>
-                            <select class="select-input" name="" id=""></select>
+                            <label for="task_category">Category<span class="required">*</span></label>
+                            <select class="select-input" name="" id="task_category">
+                                <option value="">Select task category</option>
+                            </select>
                         </form>
                         <form class="input-form">
-                            <label>Subtask</label>
-                            <input class="task-input" type="text" placeholder="Add new subtask">
+                            <label for="task_subtask">Subtask</label>
+                            <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
                         </form>
                     </section>
                 </main>
