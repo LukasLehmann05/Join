@@ -101,6 +101,8 @@
     gap: 4px;
     font-family: "Inter";
     padding: 10px;
+    border: solid 1px;
+    border-color: #2A3647;
 }
 
 .action-button-section {
@@ -119,6 +121,16 @@
 .create-button {
     background-color: #2A3647;
     color: white;
+}
+
+.create-task :hover {
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+}
+
+.clear-button :hover {
+    border-color: #29ABE2;
+    color: #29ABE2;
 }
 
 .description {
