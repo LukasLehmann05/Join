@@ -236,3 +236,46 @@ h1{
 .assigned_user_avatar:first-child {
     margin-left: 0; 
 }
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.overlay_content {
+    padding: 48px 40px;
+    box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(200%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, visibility 0s 0.5s;
+
+    width: 30%;
+    height: 60%;
+    background-color: white;
+    border-radius: 30px;
+    z-index: 1000;
+}
+
+.overlay_content.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
