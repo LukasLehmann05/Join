@@ -11,13 +11,34 @@ const urgent_prio_button = document.getElementById("button_prio_urgent")
 
 let current_priority = "medium"
 
+let req_title = false
+let req_due_date = false
+
 function createTask() {
     console.log("TEST");
-
+    let can_create = checkForRequired()
+    if (can_create == true) {
+        console.log("CREATE");
+        
+    } else {
+        console.log("CANNOT");
+        
+    }
 }
 
 function checkForRequired() {
+    if (task_title.value != "") {
+        req_title = true
+    }
+    if (task_due_date.value != "") {
+        req_due_date = true
+    }
 
+    if (req_title == true && req_due_date == true) {
+        return true
+    } else {
+        return false
+    }
 }
 
 function clearAllInputs() {
@@ -25,6 +46,9 @@ function clearAllInputs() {
     task_description.value = ""
     task_subtask.value = ""
     task_due_date.value = ""
+    req_title = false
+    req_due_date = false
+    changePriority("medium")
 }
 
 function changePriority(priority) {
