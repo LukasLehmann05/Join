@@ -38,7 +38,7 @@ function taskCardTemplate(task, taskId) {
                 <p>${task.description}</p>
                 <div class="subtask_status_bar">
                     <div class="subtask_status_bar_bg">
-                        <div class="subtask_status_bar_fill" id="${taskId}_subtasks_status_bar" style="width: 60%;"></div> <!-- Dynamische Breite je nach Fortschritt -->
+                        <div class="subtask_status_bar_fill" id="${taskId}_subtasks_status_bar" style="width: 60%;"></div>
                     </div>
                     <div class="subtask_info">
                         <p class="number_of_subtasks" id="${taskId}_subtasks_done">0/5</p>
@@ -46,8 +46,8 @@ function taskCardTemplate(task, taskId) {
                     </div>
                 </div>
                 <div class="assigned_users_section_and_priority">
-                    <div class="assigned_users" id="assigned_users_container"></div>
-                    <div class="priority_indicator" id="priority"></div> <!-- hier wird das Bild je nach Priorität gerendert -->
+                    <div class="assigned_users" id="${taskId}_assigned_users"></div>
+                    <div class="priority_indicator" id="${taskId}_priority"></div>
                 </div>
             </div>
             `

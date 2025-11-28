@@ -75,8 +75,6 @@ function formatSubtaskProgress(subtasks) {
 
 function renderSubtaskProgress(taskId) {
   let elementId = getTaskIdAsStringFromTask(taskId) + '_subtasks_done';
-  console.log(elementId);
-  
   const element = document.getElementById(elementId);
   element.innerHTML = formatSubtaskProgress(taskId.subtasks);
   renderSubtaskStatusBar(taskId);
@@ -107,14 +105,17 @@ function getInitialsFromUser(user) {
     return initials;
 }
 
-function renderAssignedUserIcons(task, containerId) {
-    for (let userId of task.assigned_to) {
-        const user = testUser[userId];
-        const initials = getInitialsFromUser(user);
-        const iconHTML = assignedUserIconTemplate(initials);
-        const container = document.getElementById(containerId);
-        container.innerHTML += iconHTML;
-    }
+function renderAssignedUserIcons(task) {
+  let containerIdSuffix = 'assigned_users';
+  console.log(getTaskIdAsStringFromTask(task));
+  
+  for (let userId of task.assigned_to) {
+      const user = testUser[userId];
+      const initials = getInitialsFromUser(user);
+      const iconHTML = assignedUserIconTemplate(initials);
+      const container = document.getElementById(getTaskIdAsStringFromTask(task) + '_' + containerIdSuffix);
+      container.innerHTML += iconHTML;
+  }
 }
 
 function getIconForPriority(priority) {
@@ -129,17 +130,16 @@ function getIconForPriority(priority) {
     }
 }
 
-function renderPriorityIndicator(task, elementId) {
-    const iconPath = getIconForPriority(task.priority);
-    const element = document.getElementById(elementId);
-    element.innerHTML = priorityIndicatorTemplate(iconPath);
+function renderPriorityIndicator(task) {
+  let prioritySuffix = 'priority';
+  let iconPath = getIconForPriority(task.priority);
+  let element = document.getElementById(getTaskIdAsStringFromTask(task) + '_' + prioritySuffix);
+  element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
 
 function getTaskIdAsStringFromTask(task) {
     for (let id in testTasks) {
         if (testTasks[id] === task) {
-            console.log(id);
-            
             return id;
         }
     }
@@ -201,5 +201,5 @@ document.addEventListener('DOMContentLoaded', () => {
 renderNoTaskInfo('toDoColumn');
 renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
 renderSubtaskProgress(testTasks.task_id_0123);
-renderAssignedUserIcons(testTasks.task_id_0123, 'assigned_users_container');
-renderPriorityIndicator(testTasks.task_id_0123, 'priority');
+renderAssignedUserIcons(testTasks.task_id_0123);
+renderPriorityIndicator(testTasks.task_id_0123);
