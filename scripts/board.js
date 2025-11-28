@@ -75,7 +75,7 @@ function renderAssignedUserIcons(task, containerId) {
 }
 
 function getIconForPriority(priority) {
-    const iconfolderpath = "./assets/icons/addTask/";
+    const iconfolderpath = "../assets/icons/addTask/";
     switch(priority) {
         case 'Urgent':
             return iconfolderpath + "urgentTask.svg";
