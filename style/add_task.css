@@ -85,6 +85,12 @@
     border-radius: 10px;
     border-color: #D1D1D1;
     padding: 12px 21px;
+    font-family: "Inter";
+}
+
+.task-input ::placeholder {
+    opacity: 1;
+    color: #D1D1D1;
 }
 
 .required {
