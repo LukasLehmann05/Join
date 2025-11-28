@@ -107,7 +107,6 @@ function getInitialsFromUser(user) {
 
 function renderAssignedUserIcons(task) {
   let containerIdSuffix = 'assigned_users';
-  console.log(getTaskIdAsStringFromTask(task));
   
   for (let userId of task.assigned_to) {
       const user = testUser[userId];
