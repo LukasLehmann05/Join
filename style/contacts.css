@@ -3,6 +3,7 @@
     max-width: 1440px;
     background-color: #F6F7F8;
     height: 100%;
+    
 }
 
 .sidebar-contacts {
@@ -13,7 +14,7 @@
     background: #FFFFFF;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
     width: 33%;
-    z-index: 20;   /* creates issue with rest of main container -> h2 disappears behind contact list. without z-index box shadow from header interfers*/
+    /* z-index: 20; creates issue with rest of main container -> h2 disappears behind contact list. without z-index box shadow from header interfers*/
     height: calc(100vh - 96px);
 }
 
@@ -65,42 +66,8 @@
 
 .contact-display {
     width: 66%;
+    margin-left: 33%;
 }
 
 
 
-/* Frame 97 */
-
-
-
-/* Button */
-
-position: absolute;
-width: 456px;
-height: 101px;
-left: calc(50% - 456px/2);
-top: 0px;
-
-background: #FFFFFF;
-
-
-/* Contact list v1 */
-
-/* Auto-Layout */
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 32px 24px;
-
-position: absolute;
-width: 400px;
-height: 1188px;
-left: calc(50% - 400px/2);
-top: 0px;
-
-/* white */
-background: #FFFFFF;
-
-flex: none;
-order: 1;
-flex-grow: 0;
