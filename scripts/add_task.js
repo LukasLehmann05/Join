@@ -1,0 +1,6 @@
+const task_title = document.getElementById("task_title")
+const task_description = document.getElementById("task_description")
+const task_due_date = document.getElementById("task_due_date")
+const task_assign = document.getElementById("task_assign")
+const task_category = document.getElementById("task_category")
+const task_subtask = document.getElementById("task_subtask")
