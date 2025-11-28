@@ -1,7 +1,7 @@
 function noTasksDoToTemplate() {
     return  ` 
             <div class="no_task_yet">
-                 <p>No tasks To do</p>
+                 <p>No tasks to do</p>
             </div>
             `
 }
@@ -9,7 +9,7 @@ function noTasksDoToTemplate() {
 function noTaskInProgressTemplate() {
     return  ` 
             <div class="no_task_yet">
-                 <p>No tasks In Progress</p>
+                 <p>No tasks in progress</p>
             </div>
             `
 }
@@ -17,7 +17,7 @@ function noTaskInProgressTemplate() {
 function noTaskInFeedbackTemplate() {
     return  ` 
             <div class="no_task_yet">
-                 <p>No tasks For Feedback</p>
+                 <p>No tasks for feedback</p>
             </div>
             `
 }
@@ -25,7 +25,7 @@ function noTaskInFeedbackTemplate() {
 function noTaskDoneTemplate() {
     return  ` 
             <div class="no_task_yet">
-                 <p>No tasks Done</p>
+                 <p>No tasks done</p>
             </div>
             `
 }
