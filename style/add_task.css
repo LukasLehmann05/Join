@@ -70,14 +70,26 @@
     color: white;
 }
 
+.bg-red img {
+    filter: saturate(0) brightness(100);
+}
+
 .bg-yellow {
     background-color: #FFA800;
     color: white;
 }
 
+.yellow-filter img {
+    filter: brightness(0) saturate(100%) invert(74%) sepia(61%) saturate(3093%) hue-rotate(357deg) brightness(98%) contrast(110%);
+}
+
 .bg-green {
     background-color: #7AE229;
     color: white;
+}
+
+.bg-green img {
+    filter: saturate(0) brightness(100);
 }
 
 .task-input {
