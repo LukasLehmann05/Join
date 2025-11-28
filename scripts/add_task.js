@@ -19,7 +19,7 @@ function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
         console.log("CREATE");
-        
+        clearAllInputs()
     } else {
         console.log("CANNOT");
         
