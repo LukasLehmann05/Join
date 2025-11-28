@@ -76,6 +76,19 @@ function formatSubtaskProgress(subtasks) {
 function renderSubtaskProgress(elementId, subtasks) {
     const element = document.getElementById(elementId);
     element.innerHTML = formatSubtaskProgress(subtasks);
+    renderSubtaskStatusBar(elementId, subtasks);
+}
+
+function renderSubtaskStatusBar(elementId, subtasks) {
+    let relationOfDoneSubtasks = formatSubtaskProgress(subtasks).split('/');
+    let percentage = 0;
+    if (relationOfDoneSubtasks[1] > 0) {
+        percentage = (relationOfDoneSubtasks[0] / relationOfDoneSubtasks[1]) * 100;
+    }
+    // hier muss statt der elementId die taskId übergeben werden
+    
+    const fillElement = document.getElementById(`#${elementId}_subtask_status_bar_fill`);
+    fillElement.style.width = `${percentage}%`;
 }
 
 function renderTaskCard(task, containerId) {

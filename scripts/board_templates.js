@@ -38,7 +38,7 @@ function taskCardTemplate(task, taskId) {
                 <p>${task.description}</p>
                 <div class="subtask_status_bar">
                     <div class="subtask_status_bar_bg">
-                        <div class="subtask_status_bar_fill" style="width: 60%;"></div> <!-- Dynamische Breite je nach Fortschritt -->
+                        <div class="subtask_status_bar_fill" id="${taskId}_subtask_status_bar_fill" style="width: 60%;"></div> <!-- Dynamische Breite je nach Fortschritt -->
                     </div>
                     <div class="subtask_info">
                         <p class="number_of_subtasks" id="number_of_subtasks">3/5</p>
