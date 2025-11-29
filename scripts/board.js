@@ -145,6 +145,10 @@ function getTaskIdAsStringFromTask(task) {
     return null;
 }
 
+function getTaskByTaskId(taskId) {
+    return testTasks[taskId];
+}
+
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
@@ -204,9 +208,11 @@ renderAssignedUserIcons(testTasks.task_id_0123);
 renderPriorityIndicator(testTasks.task_id_0123);
 
 function openTaskInOverlay(taskId) {
+    let task = getTaskByTaskId(taskId);
     console.log("Open task overlay for task ID:", taskId);
     document.getElementById('overlay').classList.add('show');
     document.getElementById('overlay_content').classList.add('show');
+    renderOverlayContent(task, taskId);
 }
 
 function closeOverlay(event) {
@@ -218,4 +224,9 @@ function closeOverlay(event) {
 function toggleOverlay() {
     document.getElementById('overlay').classList.toggle('show');
     document.getElementById('overlay_content').classList.toggle('show');
+}
+
+function renderOverlayContent(task, taskId) {
+    const overlayContent = document.getElementById('overlay_content');
+    overlayContent.innerHTML = overlayContentTemplate(task, taskId);
 }
