@@ -211,19 +211,29 @@ function openTaskInOverlay(taskId) {
     let task = getTaskByTaskId(taskId);
     console.log("Open task overlay for task ID:", taskId);
     document.getElementById('overlay').classList.add('show');
-    document.getElementById('overlay_content').classList.add('show');
+    setTimeout(() => {
+        document.getElementById('overlay_content').classList.add('show');
+    }, 10);
     renderOverlayContent(task, taskId);
 }
 
 function closeOverlay(event) {
     if(event.target === event.currentTarget) {
-        toggleOverlay();
+        removeShowClass();
     }
 }
 
-function toggleOverlay() {
-    document.getElementById('overlay').classList.toggle('show');
-    document.getElementById('overlay_content').classList.toggle('show');
+function removeShowClass() {
+    const overlay = document.getElementById('overlay');
+    const content = document.getElementById('overlay_content');
+
+    if (overlay.classList.contains('show')) {
+        content.classList.remove('show');
+         setTimeout(() => {
+            overlay.classList.remove('show');
+        }, 500);
+    } 
+
 }
 
 function renderOverlayContent(task, taskId) {
