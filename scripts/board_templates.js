@@ -83,8 +83,10 @@ function overlayContentTemplate(task, taskId) {
             </div>
             <div class="priority_info">
                 <p class="attribute">Priority:</p>
-                <p>${task.priority}</p>
-                <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
+                <div class="priority_content">
+                    <p>${task.priority}</p>
+                    <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
+                </div>
             </div>
             <div class="assigned_users_info">
                 <p class="attribute">Assigned to:</p>
