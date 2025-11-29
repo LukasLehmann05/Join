@@ -205,9 +205,17 @@ renderPriorityIndicator(testTasks.task_id_0123);
 
 function openTaskInOverlay(taskId) {
     console.log("Open task overlay for task ID:", taskId);
-    let overlay = document.getElementById('overlay');
-    overlay.classList.add('show');
-    let overlayContent = document.getElementById('overlay_content');
-    overlayContent.classList.add('show');
+    document.getElementById('overlay').classList.add('show');
+    document.getElementById('overlay_content').classList.add('show');
+}
 
+function closeOverlay(event) {
+    if(event.target === event.currentTarget) {
+        toggleOverlay();
+    }
+}
+
+function toggleOverlay() {
+    document.getElementById('overlay').classList.toggle('show');
+    document.getElementById('overlay_content').classList.toggle('show');
 }
