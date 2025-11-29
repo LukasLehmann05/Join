@@ -207,7 +207,7 @@ function openTaskInOverlay(taskId) {
     console.log("Open task overlay for task ID:", taskId);
     let overlay = document.getElementById('overlay');
     overlay.classList.add('show');
-    let overlayContent = document.querySelector('.overlay_content');
+    let overlayContent = document.getElementById('overlay_content');
     overlayContent.classList.add('show');
 
 }
