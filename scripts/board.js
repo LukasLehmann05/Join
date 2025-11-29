@@ -4,7 +4,7 @@ let testTasks = {
       "category": "Development",
       "title": "Implementiere Login-Funktion",
       "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-      "due_date": "2025-12-10",
+      "due_date": "10/12/2025",
       "priority": "Urgent",
       "assigned_to": [
         "user_id_1",
