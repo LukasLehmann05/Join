@@ -67,14 +67,32 @@ function priorityIndicatorTemplate( iconPath) {
             `
 }
 
-function overlayTemplate() {
+function overlayContentTemplate(task, taskId) {
     return `
+            <div>
+                <p class="category_overlay">${task.category}</p>
                 <button class="close_overlay_button" onclick="closeOverlay()">
-                    <img src="../assets/icons/board/close_overlay.svg" alt="close overlay icon">
+                    <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
-                <span class="close_button" onclick="closeOverlay()">&times;</span>
-                <div id="overlay_task_details">
-                    <!-- Task details will be dynamically inserted here -->
-                </div>
+            </div>  
+            <h1>${task.title}</h1>
+            <p>${task.description}</p>
+            <div class="due_date_info">
+                <p>Due date:</p>
+                <p>${task.due_date}</p>
+            </div>
+            <div class="priority_info">
+                <p>Priority:</p>
+                <p>${task.priority}</p>
+                <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
+            </div>
+            <div class="assigned_users_info">
+                <p>Assigned to:</p>
+                <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
+            </div>
+            <div class="subtasks_info">
+                <p>Subtasks</p>
+                <div id="${taskId}_subtasks_list"></div>
+            </div>
             `
 }
