@@ -119,6 +119,16 @@ function overlayContentTemplate(task, taskId) {
                     <p>Edit</p>
                 </button>
             </div>
+            <div class="edit_overlay_button_container">
+                <button class="delete_overlay_button" onclick="deleteTaskOverlay('${taskId}')">
+                    <img src="../assets/icons/board/edit_task_icon.svg" alt="delete task icon">
+                    <p>Delete</p>
+                </button>
+                <button class="edit_overlay_button" onclick="openEditTaskOverlay('${taskId}')">
+                    <img src="../assets/icons/board/edit_task_icon.svg" alt="edit task icon">
+                    <p>Edit</p>
+                </button>
+            </div>
             `
 }
 
