@@ -276,6 +276,10 @@ h1{
     z-index: 1000;
 
     font-family: "Inter_Bold";
+
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
 }
 
 .overlay_content.show {
@@ -305,4 +309,23 @@ h1{
     cursor: pointer;
     display: flex;
     padding: 0px;
+}
+
+.overlay_content p{
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "Inter";
+}
+
+.overlay_content .due_date_info .attribute,
+.overlay_content .priority_info .attribute,
+.overlay_content .assigned_users_info .attribute,
+.overlay_content .subtasks_info .attribute {
+    color: #42526E;
+    width: 120px;
+}
+
+.overlay_content .due_date_info,
+.overlay_content .priority_info{
+    display: flex;
 }
