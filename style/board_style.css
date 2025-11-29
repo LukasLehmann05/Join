@@ -360,3 +360,13 @@ h1{
     font-size: 16px;
     font-weight: 400;
 }
+
+.overlay_content .priority_info .priority_content{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.overlay_content .priority_info .priority_content .priority_indicator{
+    display: flex;
+}
