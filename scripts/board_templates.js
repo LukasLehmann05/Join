@@ -69,7 +69,7 @@ function priorityIndicatorTemplate( iconPath) {
 
 function overlayContentTemplate(task, taskId) {
     return `
-            <div>
+            <div class="overlay_header">
                 <p class="category_overlay">${task.category}</p>
                 <button class="close_overlay_button" onclick="closeOverlay()">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
