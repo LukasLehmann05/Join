@@ -4,7 +4,7 @@ let testTasks = {
       "category": "Development",
       "title": "Implementiere Login-Funktion",
       "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-      "due_date": "2025-12-10",
+      "due_date": "10/12/2025",
       "priority": "Urgent",
       "assigned_to": [
         "user_id_1",
@@ -26,7 +26,7 @@ let testTasks = {
       "category": "Marketing",
       "title": "Social Media Post erstellen",
       "description": "Post für die Vorstellung des neuen Features planen.",
-      "due_date": "2025-12-01",
+      "due_date": "01/12/2025",
       "priority": "Medium",
       "assigned_to": [
         "user_id_2"
@@ -239,6 +239,7 @@ function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
+    renderAssignedUserInfos(taskId, 'assigned_users_overlay');
 }
 
 function swapImage(button, isHover) {
@@ -253,5 +254,17 @@ function swapImage(button, isHover) {
     } else {
         p_tag.style.color = "#2A3647";
         p_tag.style.fontFamily = "Inter";
+    }
+}
+
+function renderAssignedUserInfos(taskId, containerIdSuffix) {
+    let container = document.getElementById(taskId + '_' + containerIdSuffix);
+    let task = getTaskByTaskId(taskId);
+    for (let userId of task.assigned_to) {
+        const user = testUser[userId];
+        const initials = getInitialsFromUser(user);
+        const userName = user.name;
+        let userInfoHtml = assignedUserInfoTemplate(userName, initials);
+        container.innerHTML += userInfoHtml;
     }
 }
