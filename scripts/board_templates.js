@@ -78,21 +78,31 @@ function overlayContentTemplate(task, taskId) {
             <h1>${task.title}</h1>
             <p>${task.description}</p>
             <div class="due_date_info">
-                <p>Due date:</p>
+                <p class="attribute">Due date:</p>
                 <p>${task.due_date}</p>
             </div>
             <div class="priority_info">
-                <p>Priority:</p>
+                <p class="attribute">Priority:</p>
                 <p>${task.priority}</p>
                 <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
             </div>
             <div class="assigned_users_info">
-                <p>Assigned to:</p>
+                <p class="attribute">Assigned to:</p>
                 <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
             </div>
             <div class="subtasks_info">
-                <p>Subtasks</p>
+                <p class="attribute">Subtasks</p>
                 <div id="${taskId}_subtasks_list"></div>
+            </div>
+            <div class="edit_overlay_button_container">
+                <button class="delete_overlay_button" onclick="deleteTaskOverlay('${taskId}')">
+                    <img src="../assets/icons/board/edit_task_icon.svg" alt="delete task icon">
+                    <p>Delete</p>
+                </button>
+                <button class="edit_overlay_button" onclick="openEditTaskOverlay('${taskId}')">
+                    <img src="../assets/icons/board/edit_task_icon.svg" alt="edit task icon">
+                    <p>Edit</p>
+                </button>
             </div>
             `
 }
