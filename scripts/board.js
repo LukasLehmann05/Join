@@ -129,11 +129,10 @@ function getIconForPriority(priority) {
     }
 }
 
-function renderPriorityIndicator(task) {
-  let prioritySuffix = 'priority';
-  let iconPath = getIconForPriority(task.priority);
-  let element = document.getElementById(getTaskIdAsStringFromTask(task) + '_' + prioritySuffix);
-  element.innerHTML = priorityIndicatorTemplate(iconPath);
+function renderPriorityIndicator(task, prioritySuffix) {
+    let iconPath = getIconForPriority(task.priority);
+    let element = document.getElementById(getTaskIdAsStringFromTask(task) + '_' + prioritySuffix);
+    element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
 
 function getTaskIdAsStringFromTask(task) {
@@ -205,7 +204,7 @@ renderNoTaskInfo('toDoColumn');
 renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
 renderSubtaskProgress(testTasks.task_id_0123);
 renderAssignedUserIcons(testTasks.task_id_0123);
-renderPriorityIndicator(testTasks.task_id_0123);
+renderPriorityIndicator(testTasks.task_id_0123, 'priority');
 
 function openTaskInOverlay(taskId) {
     let task = getTaskByTaskId(taskId);
@@ -239,6 +238,7 @@ function removeShowClass() {
 function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
+    renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
 }
 
 function swapImage(button, isHover) {
