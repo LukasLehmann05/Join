@@ -240,3 +240,18 @@ function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
 }
+
+function swapImage(button, isHover) {
+    const img = button.querySelector('img');
+    const normalSrc = button.getAttribute('data-normal-src');
+    const hoverSrc = button.getAttribute('data-hover-src');
+    img.src = isHover ? hoverSrc : normalSrc;
+    let p_tag = button.querySelector('p');
+    if (isHover) {
+        p_tag.style.color = "#29ABE2";
+        p_tag.style.fontFamily = "Inter_Bold";
+    } else {
+        p_tag.style.color = "#2A3647";
+        p_tag.style.fontFamily = "Inter";
+    }
+}
