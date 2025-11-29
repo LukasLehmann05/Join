@@ -252,3 +252,14 @@ function overlayEditTaskTemplate(task, taskId) {
             ${overlayEditTaskSubtasksTemplate(task)}
             `
 }
+
+function assignedUserInfoTemplate(taskId, initials) {
+    let userHtmnl = assignedUserIconTemplate(initials);
+    return  `
+            <div class="assigned_user_info">
+                ${userHtmnl}
+                <p id="${taskId}_assigned_user_info"></p>
+            </div>
+
+            `;
+}
