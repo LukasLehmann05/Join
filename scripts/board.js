@@ -240,6 +240,7 @@ function renderOverlayContent(task, taskId) {
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
     renderAssignedUserInfos(taskId, 'assigned_users_overlay');
+    renderSubtasksListItems(taskId);
 }
 
 function swapImage(button, isHover) {
@@ -266,5 +267,15 @@ function renderAssignedUserInfos(taskId, containerIdSuffix) {
         const userName = user.name;
         let userInfoHtml = assignedUserInfoTemplate(userName, initials);
         container.innerHTML += userInfoHtml;
+    }
+}
+
+function renderSubtasksListItems(taskId) {
+    let containerId = taskId + '_subtasks_list';
+    let container = document.getElementById(containerId);
+    let task = getTaskByTaskId(taskId);
+    for (let subtask of task.subtasks) {
+        let subtaskHtml = subtasksListItemTemplate(subtask.title, subtask.done);
+        container.innerHTML += subtaskHtml;
     }
 }
