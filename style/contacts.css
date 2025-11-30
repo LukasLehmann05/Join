@@ -32,6 +32,7 @@
 .add-contact-btn {
     padding-top: 20px;
     margin-top: 20px;
+    padding: 8px 80px !important;
     margin-right: auto;
     margin-left: auto;
 }
@@ -63,5 +64,23 @@
     width: 66%;
 }
 
+.contact-header {
+    display: flex;
+    align-items: center;
+    margin-left: 80px;
+    margin-top: 110px;
+}
 
+.seperator-vertical{
+    width: 3px;
+    background-color: #29ABE2;
+    height: 59px;
+    border-radius: 3px;
+    margin: 0px 30px;
+}
+
+.contact-sub{
+    font-weight: 400;
+    font-size: 27px;
+}
 
