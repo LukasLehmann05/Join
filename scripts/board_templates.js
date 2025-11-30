@@ -264,11 +264,12 @@ function assignedUserInfoTemplate(userName, initials) {
             `;
 }
 
-function subtasksListItemTemplate(subtask, isDone) {
+function subtasksListItemTemplate(taskId, title, counter) {
     return `
             <div class="subtask_list_item">
-                <input type="checkbox" ${isDone ? 'checked' : ''} disabled>
-                <p>${subtask}</p>
+                <div class="subtask_checkbox_custom" id="${taskId}_subtask_checkbox_custom_${counter}">
+                </div>
+                <p>${title}</p>
             </div>
             `;
 }
