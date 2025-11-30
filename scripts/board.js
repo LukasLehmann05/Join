@@ -274,8 +274,23 @@ function renderSubtasksListItems(taskId) {
     let containerId = taskId + '_subtasks_list';
     let container = document.getElementById(containerId);
     let task = getTaskByTaskId(taskId);
+    let subtaskCounter = 0;
     for (let subtask of task.subtasks) {
-        let subtaskHtml = subtasksListItemTemplate(subtask.title, subtask.done);
+        subtaskCounter += 1;
+        let subtaskHtml = subtasksListItemTemplate(taskId, subtask.title, subtaskCounter);
         container.innerHTML += subtaskHtml;
+        renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtask.done);
+    }
+}
+
+function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
+    const doneImgPath ="../assets/icons/board/checkbox_done.svg"; 
+    const undoneImgPath ="../assets/icons/board/checkbox_undone.svg";
+    let checkboxCustomId = taskId + '_subtask_checkbox_custom_' + subtaskCounter;
+    let checkboxCustomElement = document.getElementById(checkboxCustomId);
+    if (subtaskDone) {
+        checkboxCustomElement.innerHTML = `<img src="${doneImgPath}" alt="checkbox done icon">`;
+    } else {
+        checkboxCustomElement.innerHTML = `<img src="${undoneImgPath}" alt="checkbox undone icon">`;
     }
 }
