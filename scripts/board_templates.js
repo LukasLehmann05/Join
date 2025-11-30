@@ -94,7 +94,7 @@ function overlayContentTemplate(task, taskId) {
             </div>
             <div class="subtasks_info">
                 <p class="attribute">Subtasks</p>
-                <div id="${taskId}_subtasks_list"></div>
+                <div class="subtasks_list" id="${taskId}_subtasks_list"></div>
             </div>
             <div class="edit_overlay_button_container">
                 <button 
