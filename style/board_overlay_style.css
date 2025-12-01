@@ -178,3 +178,31 @@
     align-items: center;
     justify-content: center;
 }
+
+.overlay_content .edit_overlay_header{
+    justify-content: flex-end;
+    padding: 10px 0px;
+}
+
+.overlay_content form label,
+.overlay_content form span{
+    color: #2A3647;
+    font-family: "Inter";
+    font-size: 20px;
+}
+
+.overlay_content .edit_priority_container .priority_form_title{
+    font-family: "Inter_Bold";
+}
+
+.overlay_content .edit_description_container form.input-form.description{
+    flex: unset;
+  
+}
+
+.overlay_content .edit_description_container form textarea{
+    height: calc( 120px - 24px );
+    line-height: 120%;
+    font-size: 20px;
+    font-family: "Inter";
+}
