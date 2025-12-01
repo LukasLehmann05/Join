@@ -4,6 +4,5 @@ function contactListsingle() {
 }
 
 function contactMain() {
-    return `
-    `
+    return ``
 }
