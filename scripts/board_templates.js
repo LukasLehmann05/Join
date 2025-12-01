@@ -172,7 +172,7 @@ function overlayEditTaskDescriptionTemplate(task) {
             <section class="edit_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
-                    <textarea id="task_description" class="task-input description" placeholder="Enter a description">${escapeTextareaContent(task.description)}</textarea>
+                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${escapeTextareaContent(task.description)}</textarea>
                 </form>
             </section>
             `
@@ -193,7 +193,7 @@ function overlayEditTaskPriorityTemplate(task) {
     return  `
             <section class="edit_priority_container">
                 <form class="input-form">
-                    <label for="priority_section">Priority</label>
+                    <span class="priority_form_title">Priority</span>
                     <section class="priority-section" id="priority_section">
                         <button class="priority-button">
                             <p>Urgent</p>
@@ -230,7 +230,7 @@ function overlayEditTaskSubtasksTemplate(task) {
     return  `
             <section class="edit_subtasks_container">
                 <form class="input-form">
-                    <label for="task_subtask">Subtask</label>
+                    <label for="task_subtask">Subtasks</label>
                     <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
                 </form>
             </section>
@@ -239,6 +239,11 @@ function overlayEditTaskSubtasksTemplate(task) {
 
 function overlayEditTaskTemplate(task, taskId) {
     return  `
+            <header class="overlay_header edit_overlay_header">
+                <button class="close_overlay_button" onclick="removeShowClass()">
+                    <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
+                </button>
+            </header>
             ${overlayEditTaskTitleTemplate(task)}
             ${overlayEditTaskDescriptionTemplate(task)}
             ${overlayEditTaskDueDateTemplate(task)}
