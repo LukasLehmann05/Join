@@ -137,8 +137,11 @@ function assignedUserInfoTemplate(userName, initials) {
 function subtasksListItemTemplate(taskId, title, counter) {
     return `
             <div class="subtask_list_item">
-                <div class="subtask_checkbox_custom" id="${taskId}_subtask_checkbox_custom_${counter}">
-                </div>
+                <button 
+                    class="subtask_checkbox_custom" 
+                    id="${taskId}_subtask_checkbox_custom_${counter}"
+                    onclick="toggleSubtaskDone('${taskId}', ${counter})">
+                </button>
                 <p>${title}</p>
             </div>
             `;

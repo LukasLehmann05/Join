@@ -294,3 +294,11 @@ function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
         checkboxCustomElement.innerHTML = `<img src="${undoneImgPath}" alt="checkbox undone icon">`;
     }
 }
+
+function toggleSubtaskDone(taskId, subtaskCounter) {
+    let task = getTaskByTaskId(taskId);
+    let subtaskIndex = subtaskCounter - 1; 
+    task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
+    renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
+    renderSubtaskProgress(task);
+}
