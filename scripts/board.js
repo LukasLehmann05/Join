@@ -4,7 +4,7 @@ let testTasks = {
       "category": "Development",
       "title": "Implementiere Login-Funktion",
       "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-      "due_date": "10/12/2025",
+      "due_date": "2025-12-10",
       "priority": "Urgent",
       "assigned_to": [
         "user_id_1",
@@ -301,4 +301,11 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
     renderSubtaskProgress(task);
+}
+
+function openEditTaskOverlay(taskId) {
+    const task = getTaskByTaskId(taskId);
+    const overlayContent = document.getElementById('overlay_content');
+    overlayContent.innerHTML = '';
+    overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
 }

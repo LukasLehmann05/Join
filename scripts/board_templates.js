@@ -148,3 +148,66 @@ function subtasksListItemTemplate(taskId, title, counter) {
             </div>
             `;
 }
+
+function escapeTextareaContent(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+function overlayEditTaskTemplate(task, taskId) {
+    return  `
+             <section class="task-detail-container">
+                <form class="input-form">
+                    <label for="task_title">Title</label>
+                    <input id="task_title" class="task-input" type="text" value="${task.title}" placeholder="Enter task title">
+                </form>
+                <form class="input-form description">
+                    <label for="task_description">Description</label>
+                    <textarea id="task_description" class="task-input description" placeholder="Enter a description">${escapeTextareaContent(task.description)}</textarea>
+                </form>
+                <form class="input-form">
+                    <label for="task_due_date">Due date</label>
+                    <input id="task_due_date" class="task-input" type="date" value="${task.due_date}" placeholder="dd/mm/yyyy">
+                </form>
+            </section>
+
+            <section class="edit_priority_container">
+                <form class="input-form">
+                    <label for="priority_section">Priority</label>
+                    <section class="priority-section" id="priority_section">
+                        <button class="priority-button">
+                            <p>Urgent</p>
+                            <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
+                        </button>
+                        <button class="priority-button bg-yellow">
+                            <p>Medium</p>
+                            <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
+                        </button>
+                        <button class="priority-button">
+                            <p>Low</p>
+                            <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
+                        </button>
+                    </section>
+                </form>
+            </section>
+            
+            <section class="edit_assigned_users_container">
+                <form class="input-form">
+                    <label for="task_assign">Assigned to</label>
+                    <select class="select-input" name="" id="task_assign">
+                        <option value="">Select contacts to assign</option>
+                    </select>
+                </form>
+            </section>
+
+            <section class="edit_subtasks_container">
+                <form class="input-form">
+                    <label for="task_subtask">Subtask</label>
+                    <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
+                </form>
+            </section>
+
+            `
+}
