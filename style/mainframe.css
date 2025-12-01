@@ -90,6 +90,10 @@ article{
 }
 
 .header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, .2);
     z-index: 20;
     font-weight: 400;
@@ -122,6 +126,9 @@ article{
 }
 
 .main-content {
+    position: relative;
+    top: 96px;
+    left: 348px;
     max-width: 1440px;
     padding: 0px 64px;
     background-color: #F6F7F8;
@@ -131,6 +138,19 @@ article{
 .current-selection {
     background-color: #091931;
 }
+article {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.content-wrapper {
+    max-width: 1440px;  
+    width: 100%;
+    min-height: 100vh;
+    display: flex;       
+    background: #f6f7f8;
+}
+
 article {
     flex: 1;
     display: flex;
