@@ -177,3 +177,15 @@
     font-size: 20px;
     line-height: 120%;
 }
+
+.required-info {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #ff3d00;
+    opacity: 0;
+}
+
+.missing-input {
+    border-color: #ff3d00;
+}

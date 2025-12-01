@@ -4,6 +4,9 @@ const task_due_date = document.getElementById("task_due_date")
 const task_assign = document.getElementById("task_assign")
 const task_category = document.getElementById("task_category")
 const task_subtask = document.getElementById("task_subtask")
+const req_title_text = document.getElementById("required_title")
+const req_due_date_text = document.getElementById("required_date")
+const req_category_text = document.getElementById("required_category")
 
 const low_prio_button = document.getElementById("button_prio_low")
 const medium_prio_button = document.getElementById("button_prio_medium")
@@ -21,7 +24,7 @@ function createTask() {
         console.log("CREATE");
         clearAllInputs()
     } else {
-        console.log("CANNOT");
+        missingInputs()
         
     }
 }
@@ -101,4 +104,15 @@ function changeToUrgentPrio() {
     removeOldBackground()
     current_priority = "urgent"
     urgent_prio_button.classList.add("bg-red")
+}
+
+function missingInputs() {
+    if (req_title == false) {
+        req_title_text.style.opacity = "1"
+        task_title.classList.add("missing-input")
+    }
+    if (req_due_date == false) {
+        req_due_date_text.style.opacity = "1"
+        task_due_date.classList.add("missing-input")
+    }
 }
