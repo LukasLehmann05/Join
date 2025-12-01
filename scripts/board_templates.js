@@ -156,23 +156,41 @@ function escapeTextareaContent(text) {
         .replace(/>/g, "&gt;");
 }
 
-function overlayEditTaskTemplate(task, taskId) {
+function overlayEditTaskTitleTemplate(task) {
     return  `
-             <section class="task_detail_container">
+             <section class="edit_title_container">
                 <form class="input-form">
                     <label for="task_title">Title</label>
                     <input id="task_title" class="task-input" type="text" value="${task.title}" placeholder="Enter task title">
                 </form>
+            </section>
+            `
+}
+
+function overlayEditTaskDescriptionTemplate(task) {
+    return  `
+            <section class="edit_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
                     <textarea id="task_description" class="task-input description" placeholder="Enter a description">${escapeTextareaContent(task.description)}</textarea>
                 </form>
+            </section>
+            `
+}
+
+function overlayEditTaskDueDateTemplate(task) {
+    return  `
+            <section class="edit_due_date_container">
                 <form class="input-form">
                     <label for="task_due_date">Due date</label>
                     <input id="task_due_date" class="task-input" type="date" value="${task.due_date}" placeholder="dd/mm/yyyy">
                 </form>
             </section>
+            `
+}
 
+function overlayEditTaskPriorityTemplate(task) {
+    return  `
             <section class="edit_priority_container">
                 <form class="input-form">
                     <label for="priority_section">Priority</label>
@@ -192,7 +210,11 @@ function overlayEditTaskTemplate(task, taskId) {
                     </section>
                 </form>
             </section>
-            
+            `
+}
+
+function overlayEditTaskAssignedUsersTemplate(task) {
+    return  `
             <section class="edit_assigned_users_container">
                 <form class="input-form">
                     <label for="task_assign">Assigned to</label>
@@ -201,13 +223,27 @@ function overlayEditTaskTemplate(task, taskId) {
                     </select>
                 </form>
             </section>
+            `
+}
 
+function overlayEditTaskSubtasksTemplate(task) {
+    return  `
             <section class="edit_subtasks_container">
                 <form class="input-form">
                     <label for="task_subtask">Subtask</label>
                     <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
                 </form>
             </section>
+            `
+}
 
+function overlayEditTaskTemplate(task, taskId) {
+    return  `
+            ${overlayEditTaskTitleTemplate(task)}
+            ${overlayEditTaskDescriptionTemplate(task)}
+            ${overlayEditTaskDueDateTemplate(task)}
+            ${overlayEditTaskPriorityTemplate(task)}
+            ${overlayEditTaskAssignedUsersTemplate(task)}
+            ${overlayEditTaskSubtasksTemplate(task)}
             `
 }
