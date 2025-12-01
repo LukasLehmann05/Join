@@ -70,34 +70,36 @@ function priorityIndicatorTemplate( iconPath) {
 
 function overlayContentTemplate(task, taskId) {
     return `
-            <div class="overlay_header">
+            <header class="overlay_header">
                 <p class="category_overlay">${task.category}</p>
                 <button class="close_overlay_button" onclick="removeShowClass()">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
-            </div>  
-            <h1>${task.title}</h1>
-            <p>${task.description}</p>
-            <div class="due_date_info">
-                <p class="attribute">Due date:</p>
-                <p>${task.due_date}</p>
-            </div>
-            <div class="priority_info">
-                <p class="attribute">Priority:</p>
-                <div class="priority_content">
-                    <p>${task.priority}</p>
-                    <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
+            </header>
+            <section class="overlay_main_content">
+                <h1>${task.title}</h1>
+                <p>${task.description}</p>
+                <div class="due_date_info">
+                    <p class="attribute">Due date:</p>
+                    <p>${task.due_date}</p>
                 </div>
-            </div>
-            <div class="assigned_users_info">
-                <p class="attribute">Assigned to:</p>
-                <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
-            </div>
-            <div class="subtasks_info">
-                <p class="attribute">Subtasks</p>
-                <div class="subtasks_list" id="${taskId}_subtasks_list"></div>
-            </div>
-            <div class="edit_overlay_button_container">
+                <div class="priority_info">
+                    <p class="attribute">Priority:</p>
+                    <div class="priority_content">
+                        <p>${task.priority}</p>
+                        <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
+                    </div>
+                </div>
+                <div class="assigned_users_info">
+                    <p class="attribute">Assigned to:</p>
+                    <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
+                </div>
+                <div class="subtasks_info">
+                    <p class="attribute">Subtasks</p>
+                    <div class="subtasks_list" id="${taskId}_subtasks_list"></div>
+                </div>
+            </section>
+            <aside class="edit_overlay_button_container">
                 <button 
                     class="edit_overlay_button seperator" 
                     onclick="deleteTaskOverlay('${taskId}')"
@@ -119,7 +121,7 @@ function overlayContentTemplate(task, taskId) {
                     <img src="../assets/icons/board/edit_button.svg" alt="edit task icon">
                     <p>Edit</p>
                 </button>
-            </div>
+            </aside>
             `
 }
 
