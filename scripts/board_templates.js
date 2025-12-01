@@ -101,7 +101,7 @@ function overlayContentTemplate(task, taskId) {
             </section>
             <aside class="edit_overlay_button_container">
                 <button 
-                    class="edit_overlay_button seperator" 
+                    class="edit_overlay_button seperator_overlay" 
                     onclick="deleteTaskOverlay('${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
@@ -158,7 +158,7 @@ function escapeTextareaContent(text) {
 
 function overlayEditTaskTemplate(task, taskId) {
     return  `
-             <section class="task-detail-container">
+             <section class="task_detail_container">
                 <form class="input-form">
                     <label for="task_title">Title</label>
                     <input id="task_title" class="task-input" type="text" value="${task.title}" placeholder="Enter task title">
