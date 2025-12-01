@@ -120,29 +120,6 @@ function overlayContentTemplate(task, taskId) {
                     <p>Edit</p>
                 </button>
             </div>
-            <div class="edit_overlay_button_container">
-                <button 
-                    class="edit_overlay_button seperator" 
-                    onclick="deleteTaskOverlay('${taskId}')"
-                    onmouseover="swapImage(this, true)" 
-                    onmouseout="swapImage(this, false)"
-                    data-normal-src="../assets/icons/board/delete_button.svg" 
-                    data-hover-src="../assets/icons/board/delete_button_hover.svg">
-
-                    <img src="../assets/icons/board/delete_button.svg" alt="delete task icon">
-                    <p>Delete</p>
-                </button>
-                <button 
-                    class="edit_overlay_button" 
-                    onclick="openEditTaskOverlay('${taskId}')"
-                    onmouseover="swapImage(this, true)" 
-                    onmouseout="swapImage(this, false)"
-                    data-normal-src="../assets/icons/board/edit_button.svg" 
-                    data-hover-src="../assets/icons/board/edit_button_hover.svg">
-                    <img src="../assets/icons/board/edit_button.svg" alt="edit task icon">
-                    <p>Edit</p>
-                </button>
-            </div>
             `
 }
 
