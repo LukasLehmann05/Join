@@ -77,16 +77,22 @@
     font-family: "Inter";
 }
 
-.overlay_content .due_date_info .attribute,
-.overlay_content .priority_info .attribute,
-.overlay_content .assigned_users_info .attribute,
-.overlay_content .subtasks_info .attribute {
+.overlay_main_content{
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.overlay_main_content .due_date_info .attribute,
+.overlay_main_content .priority_info .attribute,
+.overlay_main_content .assigned_users_info .attribute,
+.overlay_main_content .subtasks_info .attribute {
     color: #42526E;
     width: 120px;
 }
 
-.overlay_content .due_date_info,
-.overlay_content .priority_info{
+.overlay_main_content .due_date_info,
+.overlay_main_content .priority_info{
     display: flex;
 }
 
@@ -122,47 +128,47 @@
     font-weight: 400;
 }
 
-.overlay_content .priority_info .priority_content{
+.overlay_main_content .priority_info .priority_content{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.overlay_content .priority_info .priority_content .priority_indicator{
+.overlay_main_content .priority_info .priority_content .priority_indicator{
     display: flex;
 }
 
-.overlay_content .assigned_users_info .assigned_users{
+.overlay_main_content .assigned_users_info .assigned_users{
     margin-top: 8px
 }
 
-.overlay_content .assigned_users_info .assigned_users .assigned_user_content{
+.overlay_main_content .assigned_users_info .assigned_users .assigned_user_content{
     display: flex;
     gap: 16px;
     align-items: center;
     padding: 7px 16px;
 }
 
-.overlay_content .subtasks_info .subtasks_list{
+.overlay_main_content .subtasks_info .subtasks_list{
     margin-top: 8px;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.overlay_content .subtasks_info .subtasks_list .subtask_list_item{
+.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item{
     display: flex;
     align-items: center;
     gap: 20px;
     padding: 6px 16px;
 }
 
-.overlay_content .subtasks_info .subtasks_list .subtask_list_item p{
+.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item p{
     font-size: 16px;
     font-weight: 400;
 }
 
-.overlay_content .subtasks_info .subtasks_list .subtask_list_item .subtask_checkbox_custom{
+.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item .subtask_checkbox_custom{
     width:20px;
     height:20px;
     border:unset;
