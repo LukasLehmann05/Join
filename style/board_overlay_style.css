@@ -154,10 +154,21 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    padding-left: 20px;
+    padding: 6px 16px;
 }
 
 .overlay_content .subtasks_info .subtasks_list .subtask_list_item p{
     font-size: 16px;
     font-weight: 400;
+}
+
+.overlay_content .subtasks_info .subtasks_list .subtask_list_item .subtask_checkbox_custom{
+    width:20px;
+    height:20px;
+    border:unset;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
