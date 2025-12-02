@@ -9,6 +9,6 @@ function displayInList() {
 }
 
 function openDialog() {
-    let dialog = document.getElementById("addContact)");
-    dialog.open = true;
+    let element = document.getElementById("addContact");
+    element.open = true;
 };
