@@ -148,21 +148,27 @@ function getTaskByTaskId(taskId) {
     return testTasks[taskId];
 }
 
+let lastDropAcceptanceColumnId = null;
+let currentDraggedElementId = null;
+
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
+    lastDropAcceptanceColumnId = event.currentTarget.id;
+
+    console.log(lastDropAcceptanceColumnId);
+    
 }
 
-let lastDropAcceptanceColumnId = null;
 
 function dragOverHandler(event) {
-    const idOfColumnToDrop = getIdOfCurrentColumn(event);    
+    currentDraggedElementId = getIdOfCurrentColumn(event);   
 
-    if (lastDropAcceptanceColumnId !== idOfColumnToDrop) {
-        renderDropAcceptanceInColumn(idOfColumnToDrop);
-        lastDropAcceptanceColumnId = idOfColumnToDrop;
+
+    if (lastDropAcceptanceColumnId !== currentDraggedElementId) {
+        renderDropAcceptanceInColumn(currentDraggedElementId);
+        lastDropAcceptanceColumnId = currentDraggedElementId;
     }
     event.preventDefault();
-
 }
 
 function getIdOfCurrentColumn(event) {
@@ -171,9 +177,20 @@ function getIdOfCurrentColumn(event) {
 
 function renderDropAcceptanceInColumn(columnId) {
     const columnContent = document.getElementById(columnId);
-    // Nur hinzufügen, wenn noch kein Drop-Acceptance-Container existiert
     if (!columnContent.querySelector('.drop_acceptance')) {
         columnContent.innerHTML += showDropAcceptanceTemplate();
+    }
+    removeNoTaskInfoElement('no_task_yet');
+}
+
+function hideDropAcceptanceFromLastColumn() {
+    if (lastDropAcceptanceColumnId) {
+        const lastColumn = document.getElementById(lastDropAcceptanceColumnId);
+        const dropAcceptanceElement = lastColumn.querySelector('.drop_acceptance');
+        if (dropAcceptanceElement) {
+            dropAcceptanceElement.remove();
+        }
+        lastDropAcceptanceColumnId = null;
     }
 }
 
