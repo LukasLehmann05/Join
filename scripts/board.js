@@ -153,18 +153,36 @@ function dragStartHandler(event) {
 }
 
 function dragOverHandler(event) {
+    showDropAcceptanceInColumn(event);
     event.preventDefault();
+
+}
+
+function showDropAcceptanceInColumn(event) {
+    event.currentTarget.classList.add('drop-acceptance');
+}
+
+function hideDropAcceptanceInAllColumns() {
+    const columns = document.querySelectorAll('.column_content');
+    columns.forEach(column => {
+        column.classList.remove('drop-acceptance');
+    });
+}
+
+function removeNoTaskInfoElement(noTaskClassName) {    
+    const noTaskElement = document.querySelector(`.${noTaskClassName}`);
+    if (noTaskElement) {
+        noTaskElement.remove();
+    }
 }
 
 function dropHandler(event) {
     event.preventDefault();
     const taskId = event.dataTransfer.getData("text/plain");  
     const taskElement = document.getElementById(taskId);
-    const noTaskElement = event.currentTarget.querySelector('.no_task_yet');
-    if (noTaskElement) {
-        noTaskElement.remove();
-    }
     event.currentTarget.appendChild(taskElement);
+    removeNoTaskInfoElement('no_task_yet');
+    hideDropAcceptanceInAllColumns();
 }
 
 function checkIfNoTasksInColumn(columnId) {

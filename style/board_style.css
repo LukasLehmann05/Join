@@ -239,3 +239,9 @@ h1{
 .single_task_content.drag-tilt {
     transform: rotateZ(5deg);
 }
+
+.column_content.drop-acceptance {
+    background-color: transparent;
+    border: 2px dashed #A8A8A8;
+    border-radius: 12px;
+}
