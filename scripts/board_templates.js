@@ -30,6 +30,12 @@ function noTaskDoneTemplate() {
             `
 }
 
+function showDropAcceptanceTemplate() {
+    return  `
+            <div class="drop_acceptance"></div>
+            `
+}
+
 function taskCardTemplate(task, taskId) {
     return  `
             <div class="single_task_content" 

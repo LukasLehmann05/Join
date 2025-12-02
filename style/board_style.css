@@ -240,8 +240,9 @@ h1{
     transform: rotateZ(5deg);
 }
 
-.column_content.drop-acceptance {
+.column_content .drop_acceptance {
     background-color: transparent;
     border: 2px dashed #A8A8A8;
     border-radius: 12px;
+    height: 220px;
 }

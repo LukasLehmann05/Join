@@ -152,21 +152,35 @@ function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 
+let lastDropAcceptanceColumnId = null;
+
 function dragOverHandler(event) {
-    showDropAcceptanceInColumn(event);
+    const idOfColumnToDrop = getIdOfCurrentColumn(event);    
+
+    if (lastDropAcceptanceColumnId !== idOfColumnToDrop) {
+        renderDropAcceptanceInColumn(idOfColumnToDrop);
+        lastDropAcceptanceColumnId = idOfColumnToDrop;
+    }
     event.preventDefault();
 
 }
 
-function showDropAcceptanceInColumn(event) {
-    event.currentTarget.classList.add('drop-acceptance');
+function getIdOfCurrentColumn(event) {
+    return event.currentTarget.id;
+}
+
+function renderDropAcceptanceInColumn(columnId) {
+    const columnContent = document.getElementById(columnId);
+    // Nur hinzufügen, wenn noch kein Drop-Acceptance-Container existiert
+    if (!columnContent.querySelector('.drop_acceptance')) {
+        columnContent.innerHTML += showDropAcceptanceTemplate();
+    }
 }
 
 function hideDropAcceptanceInAllColumns() {
-    const columns = document.querySelectorAll('.column_content');
-    columns.forEach(column => {
-        column.classList.remove('drop-acceptance');
-    });
+    const columns = document.querySelectorAll('.column_content .drop_acceptance');
+    columns.forEach(drop => drop.remove());
+    lastDropAcceptanceColumnId = null;
 }
 
 function removeNoTaskInfoElement(noTaskClassName) {    
