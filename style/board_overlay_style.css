@@ -68,7 +68,14 @@
     border: none;
     cursor: pointer;
     display: flex;
-    padding: 0px;
+    padding: 5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+}
+
+.overlay_content .overlay_header .close_overlay_button:hover{
+    background-color: #E7E7E7;
 }
 
 .overlay_content p{
