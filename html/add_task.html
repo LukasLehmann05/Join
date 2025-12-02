@@ -65,7 +65,7 @@
                     <section class="task-detail-container">
                         <form class="input-form">
                             <label for="task_title">Title<span class="required">*</span></label>
-                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title">
+                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title" required>
                             <p id="required_title" class="required-info">This field is required</p>
                         </form>
                         <form class="input-form description">
@@ -74,7 +74,7 @@
                         </form>
                         <form class="input-form">
                             <label for="task_due_date">Due date<span class="required">*</span></label>
-                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy">
+                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy" required>
                             <p id="required_date" class="required-info">This field is required</p>
                         </form>
                     </section>
@@ -105,7 +105,7 @@
                         </form>
                         <form class="input-form">
                             <label for="task_category">Category<span class="required">*</span></label>
-                            <select class="select-input" name="category" id="task_category">
+                            <select class="select-input" name="category" id="task_category" required>
                                 <option value="">Select task category</option>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
