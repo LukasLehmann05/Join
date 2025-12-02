@@ -14,8 +14,10 @@ const urgent_prio_button = document.getElementById("button_prio_urgent")
 
 const subtask_button_section = document.getElementById("subtask_button_section")
 const subtask_list = document.getElementById("subtask_render")
+const contact_selector = document.getElementById("contact_selector")
 
 let subtask_buttons_active = false
+let contacts_shown = false
 
 let current_priority = "medium"
 
@@ -202,5 +204,11 @@ function addContactsToAssign() {
 }
 
 function showContacts() {
-    
+    if (contacts_shown == false) {
+        contact_selector.style.display = "block"
+        contacts_shown = true
+    } else {
+        contact_selector.style.display = "none"
+        contacts_shown = false
+    }
 }
