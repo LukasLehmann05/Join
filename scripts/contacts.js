@@ -7,3 +7,8 @@ function displayInList() {
     let list = document.getElementById("test");
     list.innerHTML = contactListsingle();
 }
+
+function openDialog() {
+    let dialog = document.getElementById("addContact)");
+    dialog.open = true;
+};
