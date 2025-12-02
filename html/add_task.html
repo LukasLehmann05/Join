@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 </head>
 
-<body class="body">
+<body class="body" onload="addContactsToAssign()">
     <aside class="sidebar">
         <div class="sidebar_upper_section">
             <section class="logo-section">
@@ -22,11 +22,11 @@
                     <img class="nav-icons" src="../assets/icons/sideBar/summary.svg" alt="summary icon">
                     <p>Summary</p>
                 </a>
-                <a href="#" class="sidebar-nav-section current-selection">
+                <a href="./add_task.html" class="sidebar-nav-section current-selection">
                     <img class="nav-icons" src="../assets/icons/sideBar/addTask.svg" alt="Add Task icon">
                     <p>Add Task</p>
                 </a>
-                <a href="#" class="sidebar-nav-section">
+                <a href="./board.html" class="sidebar-nav-section">
                     <img class="nav-icons" src="../assets/icons/sideBar/board.svg" alt="Board icon">
                     <p>Board</p>
                 </a>
@@ -38,8 +38,8 @@
             </nav>
         </div>
         <footer class="sidebar-footer">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Legal notice</a>
+            <a href="./privacyPolicy.html">Privacy Policy</a>
+            <a href="./legalNotice.html">Legal notice</a>
         </footer>
     </aside>
     <article>
@@ -65,7 +65,8 @@
                     <section class="task-detail-container">
                         <form class="input-form">
                             <label for="task_title">Title<span class="required">*</span></label>
-                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title">
+                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title" required>
+                            <p id="required_title" class="required-info">This field is required</p>
                         </form>
                         <form class="input-form description">
                             <label for="task_description">Description</label>
@@ -73,23 +74,24 @@
                         </form>
                         <form class="input-form">
                             <label for="task_due_date">Due date<span class="required">*</span></label>
-                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy">
+                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy" required>
+                            <p id="required_date" class="required-info">This field is required</p>
                         </form>
                     </section>
                     <section class="seperator"></section>
                     <section class="task-detail-container">
                         <form class="input-form">
-                            <label for="priority_section">Priority<span class="required">*</span></label>
+                            <p for="priority_section">Priority</p>
                             <section class="priority-section" id="priority_section">
-                                <button class="priority-button">
+                                <button class="priority-button" id="button_prio_urgent" onclick="changePriority('urgent')" type="button">
                                     <p>Urgent</p>
                                     <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
                                 </button>
-                                <button class="priority-button bg-yellow">
+                                <button class="priority-button bg-yellow" id="button_prio_medium" onclick="changePriority('medium')" type="button">
                                     <p>Medium</p>
                                     <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
                                 </button>
-                                <button class="priority-button">
+                                <button class="priority-button" id="button_prio_low" onclick="changePriority('low')" type="button">
                                     <p>Low</p>
                                     <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
                                 </button>
@@ -103,13 +105,32 @@
                         </form>
                         <form class="input-form">
                             <label for="task_category">Category<span class="required">*</span></label>
-                            <select class="select-input" name="" id="task_category">
+                            <select class="select-input" name="category" id="task_category" required>
                                 <option value="">Select task category</option>
+                                <option value="Technical Task">Technical Task</option>
+                                <option value="User Story">User Story</option>
                             </select>
+                            <p id="required_category" class="required-info">This field is required</p>
                         </form>
                         <form class="input-form">
-                            <label for="task_subtask">Subtask</label>
-                            <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
+                            <label for="task_subtask">Subtasks</label>
+                            <section class="subtask-section">
+                                <input onclick="showSubtaskButtons()" id="task_subtask" type="text" placeholder="Add new subtask">
+                                <aside id="subtask_button_section">
+                                    <button type="submit" onclick="addSubtask()">
+                                        <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg" alt="add_icon">
+                                    </button>
+                                    <div class="subtask-seperator"></div>
+                                    <button type="reset" onclick="clearSubtask()">
+                                        <img class="subtask-img" src="../assets/icons/contacts/close.svg" alt="close_icon">
+                                    </button>
+                                </aside>
+                            </section>
+                            <section class="subtask-display">
+                                <ul id="subtask_render">
+                                    
+                                </ul>
+                            </section>
                         </form>
                     </section>
                 </main>
@@ -119,13 +140,13 @@
                     </section>
                     <section class="button-section">
                         <div class="clear-button">
-                            <button class="action-buttons">
+                            <button class="action-buttons" onclick="clearAllInputs()">
                                 <p>Clear</p>
                                 <img src="../assets/icons/contacts/close.svg" alt="clear icon">
                             </button>
                         </div>
                         <div class="create-task">
-                            <button class="action-buttons create-button">
+                            <button class="action-buttons create-button" onclick="createTask()">
                                 <p>Create Task</p>
                                 <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
                             </button>
@@ -135,6 +156,9 @@
             </article>
         </main>
     </article>
+    <script src="../scripts/firebase.js"></script>
+    <script src="../scripts/add_task_templates.js"></script>
+    <script src="../scripts/add_task.js"></script>
 </body>
 
 </html>
