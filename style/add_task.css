@@ -189,3 +189,60 @@
 .missing-input {
     border-color: #ff3d00;
 }
+
+.subtask-section {
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #D1D1D1;
+    font-family: "Inter";
+    background-color: white;
+    padding: 12px 21px;
+}
+
+.subtask-section input {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    flex: 1;
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 400;
+}
+
+.subtask-section button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    display: flex;
+}
+
+.subtask-section aside {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    align-items: center;
+}
+
+.subtask-seperator {
+    width: 1px;
+    background-color: #D1D1D1;
+    height: 100%;
+}
+
+.subtask-img {
+    height: 24px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.filter-check {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(21%) saturate(782%) hue-rotate(175deg) brightness(92%) contrast(92%);;
+}
+
+.subtask-display {
+    display: flex;
+    flex-direction: column;
+}

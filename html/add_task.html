@@ -114,7 +114,21 @@
                         </form>
                         <form class="input-form">
                             <label for="task_subtask">Subtasks</label>
-                            <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
+                            <section class="subtask-section">
+                                <input id="task_subtask" type="text" placeholder="Add new subtask">
+                                <aside>
+                                    <button>
+                                        <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg" alt="add_icon">
+                                    </button>
+                                    <div class="subtask-seperator"></div>
+                                    <button>
+                                        <img class="subtask-img" src="../assets/icons/contacts/close.svg" alt="close_icon">
+                                    </button>
+                                </aside>
+                            </section>
+                            <section id="subtask_render" class="subtask-display">
+
+                            </section>
                         </form>
                     </section>
                 </main>
