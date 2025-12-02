@@ -16,9 +16,9 @@ let current_priority = "medium"
 
 let req_title = false
 let req_due_date = false
+let req_category = false
 
 function createTask() {
-    console.log("TEST");
     let can_create = checkForRequired()
     if (can_create == true) {
         console.log("CREATE");
@@ -30,14 +30,17 @@ function createTask() {
 }
 
 function checkForRequired() {
+    console.log(task_category.value);
     if (task_title.value != "") {
         req_title = true
     }
     if (task_due_date.value != "") {
         req_due_date = true
     }
-
-    if (req_title == true && req_due_date == true) {
+    if (task_category.value != "") {
+        req_category = true
+    }
+    if (req_title == true && req_due_date == true && req_category == true) {
         return true
     } else {
         return false
@@ -51,6 +54,7 @@ function clearAllInputs() {
     task_due_date.value = ""
     req_title = false
     req_due_date = false
+    req_category = false
     changePriority("medium")
 }
 
@@ -114,5 +118,9 @@ function missingInputs() {
     if (req_due_date == false) {
         req_due_date_text.style.opacity = "1"
         task_due_date.classList.add("missing-input")
+    }
+    if (req_category == false) {
+        req_category_text.style.opacity = "1"
+        task_category.classList.add("missing-input")
     }
 }
