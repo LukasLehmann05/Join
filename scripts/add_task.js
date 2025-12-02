@@ -24,6 +24,7 @@ let req_due_date = false
 let req_category = false
 
 let all_subtasks = []
+let all_contacts = []
 
 function createTask() {
     let can_create = checkForRequired()
@@ -37,7 +38,7 @@ function createTask() {
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, task_assign.value, all_subtasks)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, all_contacts, all_subtasks)
 }
 
 
@@ -67,6 +68,7 @@ function clearAllInputs() {
     req_due_date = false
     req_category = false
     all_subtasks = []
+    all_contacts = []
     changePriority("medium")
 }
 
