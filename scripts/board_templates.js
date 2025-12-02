@@ -33,7 +33,6 @@ function noTaskDoneTemplate() {
 function taskCardTemplate(task, taskId) {
     return  `
             <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
-            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
                 <p class="category">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
@@ -251,28 +250,4 @@ function overlayEditTaskTemplate(task, taskId) {
             ${overlayEditTaskAssignedUsersTemplate(task)}
             ${overlayEditTaskSubtasksTemplate(task)}
             `
-}
-
-function assignedUserInfoTemplate(userName, initials) {
-    let userHtmnl = assignedUserIconTemplate(initials);
-    return  `
-            <div class="assigned_user_content">
-                ${userHtmnl}
-                <p>${userName}</p>
-            </div>
-
-            `;
-}
-
-function subtasksListItemTemplate(taskId, title, counter) {
-    return `
-            <div class="subtask_list_item">
-                <button 
-                    class="subtask_checkbox_custom" 
-                    id="${taskId}_subtask_checkbox_custom_${counter}"
-                    onclick="toggleSubtaskDone('${taskId}', ${counter})">
-                </button>
-                <p>${title}</p>
-            </div>
-            `;
 }
