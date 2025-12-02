@@ -167,7 +167,6 @@ function findParentAndReturnId(element) {
     return null;
 }
 
-
 function dragOverHandler(event) {
     currentDropAcceptanceColumnId = getIdOfCurrentColumn(event);   
     if (lastDropAcceptanceColumnId !== currentDropAcceptanceColumnId) {
@@ -187,23 +186,6 @@ function renderDropAcceptanceInColumn(columnId) {
         columnContent.innerHTML += showDropAcceptanceTemplate();
     }
     removeNoTaskInfoElement(columnId);
-}
-
-function hideDropAcceptanceFromLastColumn() {
-    if (lastDropAcceptanceColumnId) {
-        const lastColumn = document.getElementById(lastDropAcceptanceColumnId);
-        const dropAcceptanceElement = lastColumn.querySelector('.drop_acceptance');
-        if (dropAcceptanceElement) {
-            dropAcceptanceElement.remove();
-        }
-        lastDropAcceptanceColumnId = null;
-    }
-}
-
-function hideDropAcceptanceInAllColumns() {
-    const columns = document.querySelectorAll('.column_content .drop_acceptance');
-    columns.forEach(drop => drop.remove());
-    lastDropAcceptanceColumnId = null;
 }
 
 function removeNoTaskInfoElement(columnId) {
@@ -228,17 +210,25 @@ function dropHandler(event) {
     hideDropAcceptanceInAllColumns();
 }
 
-function checkIfNoTasksInColumn(columnId) {
-    const container = document.getElementById(columnId);
-    if (container.innerHTML.trim() === '') {
-        renderNoTaskInfo(columnId);
-    }
+function hideDropAcceptanceInAllColumns() {
+    const columns = document.querySelectorAll('.column_content .drop_acceptance');
+    columns.forEach(drop => drop.remove());
+    lastDropAcceptanceColumnId = null;
 }
 
 function renderNoTaskInfoOnDOMLoad(){
     const columns = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
     columns.forEach(columnId => {
         checkIfNoTasksInColumn(columnId);
+    });
+}
+
+function checkIfNoTasksInColumn(columnId) {
+    const container = document.getElementById(columnId);
+    if (container.innerHTML.trim() === '') {
+        renderNoTaskInfo(columnId);
+    }
+    container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
     });
 }
 
