@@ -200,3 +200,7 @@ function addContactsToAssign() {
         task_assign.innerHTML += contact_option
     }
 }
+
+function showContacts() {
+    
+}

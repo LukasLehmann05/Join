@@ -240,10 +240,35 @@
 }
 
 .filter-check {
-    filter: brightness(0) saturate(100%) invert(19%) sepia(21%) saturate(782%) hue-rotate(175deg) brightness(92%) contrast(92%);;
+    filter: brightness(0) saturate(100%) invert(19%) sepia(21%) saturate(782%) hue-rotate(175deg) brightness(92%) contrast(92%);
+    ;
 }
 
 .subtask-display {
     display: flex;
     flex-direction: column;
+}
+
+.contact-button {
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #D1D1D1;
+    padding: 12px 21px;
+    font-family: "Inter";
+    background-color: white;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.contact-select-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.contact-element {
+    display: flex;
 }
