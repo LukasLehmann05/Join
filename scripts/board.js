@@ -308,4 +308,16 @@ function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
+    editTaskTemplateWrapper(task);
+}
+
+function editTaskTemplateWrapper(task){
+    const mainContent = document.getElementById('overlay_main_content');
+    mainContent.innerHTML = `
+    ${overlayEditTaskTitleTemplate(task)}
+    ${overlayEditTaskDescriptionTemplate(task)}
+    ${overlayEditTaskDueDateTemplate(task)}
+    ${overlayEditTaskPriorityTemplate(task)}
+    ${overlayEditTaskAssignedUsersTemplate(task)}
+    ${overlayEditTaskSubtasksTemplate(task)}`;
 }

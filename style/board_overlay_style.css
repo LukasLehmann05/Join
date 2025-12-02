@@ -28,7 +28,7 @@
     transform: translateX(200%);
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 
-    width: 500px;
+    width: 520px;
     /* min-height: 600px; */
     height: 900px;
     background-color: white;
@@ -188,7 +188,6 @@
 
 .overlay_content .edit_overlay_header{
     justify-content: flex-end;
-    padding: 10px 0px;
 }
 
 .overlay_content form label,
@@ -212,4 +211,9 @@
     line-height: 120%;
     font-size: 20px;
     font-family: "Inter";
+}
+
+.overlay_content .overlay_main_content{
+    flex-grow: 1;
+    overflow-y: auto;
 }
