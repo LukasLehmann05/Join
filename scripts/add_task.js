@@ -12,11 +12,18 @@ const low_prio_button = document.getElementById("button_prio_low")
 const medium_prio_button = document.getElementById("button_prio_medium")
 const urgent_prio_button = document.getElementById("button_prio_urgent")
 
+const subtask_button_section = document.getElementById("subtask_button_section")
+const subtask_list = document.getElementById("subtask_render")
+
+let subtask_buttons_active = false
+
 let current_priority = "medium"
 
 let req_title = false
 let req_due_date = false
 let req_category = false
+
+let all_subtasks = []
 
 function createTask() {
     let can_create = checkForRequired()
@@ -30,12 +37,11 @@ function createTask() {
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, task_assign.value, task_subtask.value)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, task_assign.value, all_subtasks)
 }
 
 
 function checkForRequired() {
-    console.log(task_category.value);
     if (task_title.value != "") {
         req_title = true
     }
@@ -60,6 +66,7 @@ function clearAllInputs() {
     req_title = false
     req_due_date = false
     req_category = false
+    all_subtasks = []
     changePriority("medium")
 }
 
@@ -127,5 +134,55 @@ function missingInputs() {
     if (req_category == false) {
         req_category_text.style.opacity = "1"
         task_category.classList.add("missing-input")
+    }
+}
+
+function showSubtaskButtons() {
+    if (subtask_buttons_active == false) {
+        subtask_button_section.style.display = "flex"
+        subtask_buttons_active = true
+    }
+}
+
+function hideSubtaskButtons() {
+    if (subtask_buttons_active == true) {
+        subtask_button_section.style.display = "none"
+        subtask_buttons_active = false
+    }
+}
+
+function clearSubtask() {
+    task_subtask.value = ""
+    hideSubtaskButtons()
+}
+
+function addSubtask() {
+    if (task_subtask.value != "") {
+        let subtask = task_subtask.value
+        let subtask_template = returnSubtaskTemplate(subtask)
+        subtask_list.innerHTML += subtask_template
+        all_subtasks.push(task_subtask.value)
+        task_subtask.value = ""
+        hideSubtaskButtons()
+    }
+}
+
+let testUser = {
+    "user_id_1": {
+      "email": "max.mustermann@example.com",
+      "name": "Max Mustermann",
+      "password": "hashed_password_123"
+    },
+    "user_id_2": {
+      "email": "erika.musterfrau@example.com",
+      "name": "Erika Musterfrau",
+      "password": "hashed_password_456"
+    }
+	
+}
+
+function addContactsToAssign() {
+    for (let user_id in testUser) {
+        let user = testUser[user_id]
     }
 }

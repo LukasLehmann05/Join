@@ -115,19 +115,21 @@
                         <form class="input-form">
                             <label for="task_subtask">Subtasks</label>
                             <section class="subtask-section">
-                                <input id="task_subtask" type="text" placeholder="Add new subtask">
-                                <aside>
-                                    <button>
+                                <input onclick="showSubtaskButtons()" id="task_subtask" type="text" placeholder="Add new subtask">
+                                <aside id="subtask_button_section">
+                                    <button type="submit" onclick="addSubtask()">
                                         <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg" alt="add_icon">
                                     </button>
                                     <div class="subtask-seperator"></div>
-                                    <button>
+                                    <button type="reset" onclick="clearSubtask()">
                                         <img class="subtask-img" src="../assets/icons/contacts/close.svg" alt="close_icon">
                                     </button>
                                 </aside>
                             </section>
-                            <section id="subtask_render" class="subtask-display">
-
+                            <section class="subtask-display">
+                                <ul id="subtask_render">
+                                    
+                                </ul>
                             </section>
                         </form>
                     </section>
@@ -155,6 +157,7 @@
         </main>
     </article>
     <script src="../scripts/firebase.js"></script>
+    <script src="../scripts/add_task_templates.js"></script>
     <script src="../scripts/add_task.js"></script>
 </body>
 
