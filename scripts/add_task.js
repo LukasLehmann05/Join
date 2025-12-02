@@ -26,6 +26,16 @@ let req_category = false
 let all_subtasks = []
 let all_contacts = []
 
+function init() {
+    //loadDataFromAPI()
+    addContactsToAssign()
+}
+
+function loadDataFromAPI() {
+    let joinData = fetchAllData()
+    console.log(joinData)
+}
+
 function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
