@@ -184,5 +184,7 @@ let testUser = {
 function addContactsToAssign() {
     for (let user_id in testUser) {
         let user = testUser[user_id]
+        let contact_option = returnContactOption(user.name)
+        task_assign.innerHTML += contact_option
     }
 }
