@@ -32,7 +32,8 @@ function noTaskDoneTemplate() {
 
 function taskCardTemplate(task, taskId) {
     return  `
-            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}">
+            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
+            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
                 <p class="category">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
@@ -65,4 +66,85 @@ function priorityIndicatorTemplate( iconPath) {
     return `
             <img src="${iconPath}" alt="Priority Icon" />
             `
+}
+
+function overlayContentTemplate(task, taskId) {
+    return `
+            <header class="overlay_header">
+                <p class="category_overlay">${task.category}</p>
+                <button class="close_overlay_button" onclick="removeShowClass()">
+                    <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
+                </button>
+            </header>
+            <section class="overlay_main_content">
+                <h1>${task.title}</h1>
+                <p>${task.description}</p>
+                <div class="due_date_info">
+                    <p class="attribute">Due date:</p>
+                    <p>${task.due_date}</p>
+                </div>
+                <div class="priority_info">
+                    <p class="attribute">Priority:</p>
+                    <div class="priority_content">
+                        <p>${task.priority}</p>
+                        <div class="priority_indicator" id="${taskId}_priority_overlay"></div>
+                    </div>
+                </div>
+                <div class="assigned_users_info">
+                    <p class="attribute">Assigned to:</p>
+                    <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
+                </div>
+                <div class="subtasks_info">
+                    <p class="attribute">Subtasks</p>
+                    <div class="subtasks_list" id="${taskId}_subtasks_list"></div>
+                </div>
+            </section>
+            <aside class="edit_overlay_button_container">
+                <button 
+                    class="edit_overlay_button seperator" 
+                    onclick="deleteTaskOverlay('${taskId}')"
+                    onmouseover="swapImage(this, true)" 
+                    onmouseout="swapImage(this, false)"
+                    data-normal-src="../assets/icons/board/delete_button.svg" 
+                    data-hover-src="../assets/icons/board/delete_button_hover.svg">
+
+                    <img src="../assets/icons/board/delete_button.svg" alt="delete task icon">
+                    <p>Delete</p>
+                </button>
+                <button 
+                    class="edit_overlay_button" 
+                    onclick="openEditTaskOverlay('${taskId}')"
+                    onmouseover="swapImage(this, true)" 
+                    onmouseout="swapImage(this, false)"
+                    data-normal-src="../assets/icons/board/edit_button.svg" 
+                    data-hover-src="../assets/icons/board/edit_button_hover.svg">
+                    <img src="../assets/icons/board/edit_button.svg" alt="edit task icon">
+                    <p>Edit</p>
+                </button>
+            </aside>
+            `
+}
+
+function assignedUserInfoTemplate(userName, initials) {
+    let userHtmnl = assignedUserIconTemplate(initials);
+    return  `
+            <div class="assigned_user_content">
+                ${userHtmnl}
+                <p>${userName}</p>
+            </div>
+
+            `;
+}
+
+function subtasksListItemTemplate(taskId, title, counter) {
+    return `
+            <div class="subtask_list_item">
+                <button 
+                    class="subtask_checkbox_custom" 
+                    id="${taskId}_subtask_checkbox_custom_${counter}"
+                    onclick="toggleSubtaskDone('${taskId}', ${counter})">
+                </button>
+                <p>${title}</p>
+            </div>
+            `;
 }

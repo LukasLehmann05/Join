@@ -108,7 +108,6 @@ h1{
 }
 
 .board_table .column_content{
-    background-color: #f0f2f3;
     min-height: 500px;
     width: calc(100% / 4);
     margin-top: 8px;
