@@ -195,15 +195,15 @@ function overlayEditTaskPriorityTemplate(task) {
                 <form class="input-form">
                     <span class="priority_form_title">Priority</span>
                     <section class="priority-section" id="priority_section">
-                        <button class="priority-button">
+                       <button class="priority-button" id="button_prio_urgent" onclick="changePriority('urgent')" type="button">
                             <p>Urgent</p>
                             <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
                         </button>
-                        <button class="priority-button bg-yellow">
+                        <button class="priority-button bg-yellow" id="button_prio_medium" onclick="changePriority('medium')" type="button">
                             <p>Medium</p>
                             <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
                         </button>
-                        <button class="priority-button">
+                        <button class="priority-button" id="button_prio_low" onclick="changePriority('low')" type="button">
                             <p>Low</p>
                             <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
                         </button>
