@@ -245,12 +245,7 @@ function overlayEditTaskTemplate(task, taskId) {
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
-            ${overlayEditTaskTitleTemplate(task)}
-            ${overlayEditTaskDescriptionTemplate(task)}
-            ${overlayEditTaskDueDateTemplate(task)}
-            ${overlayEditTaskPriorityTemplate(task)}
-            ${overlayEditTaskAssignedUsersTemplate(task)}
-            ${overlayEditTaskSubtasksTemplate(task)}
+            <section class="overlay_main_content" id="overlay_main_content"></section>
             <footer class="overlay_header edit_overlay_header">
                 <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
                     <p>Ok</p>
