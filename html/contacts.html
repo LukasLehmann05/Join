@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../style/mainframe.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
     <link rel="stylesheet" href="../style/board_style.css">
+    <link rel="stylesheet" href="../style/add_contact.css">
 </head>
 
 <body class="body">
@@ -59,7 +60,7 @@
         </header>
         <main class="contact-main">
             <aside class="sidebar-contacts">
-                <div onclick="displayInList()">
+                <div onclick="openDialog()">
                     <button class="button_add_task add-contact-btn">
                         <p>Add new contact</p>
                         <img src="../assets/icons/contacts/person_add.svg" alt="add_person icon">
@@ -70,7 +71,6 @@
                         <h2 class="single-letter font-size-20">A</h2>
                         <div class="seperator"></div>
                         <section id="test" onclick="displayInMain()" class="list-user">
-                            
                         </section>
                     </article>
                     <article class="single-letter-section">
@@ -207,9 +207,14 @@
                     <span class="contact-sub">Better with a team</span>
                 </div>
                 <article id="mainView" class="contact-main-view">
-
                 </article>
             </section>
+            <dialog id="addContact" class="add-Contact">
+                <section class="main-left">
+                    <img class="logo" src="../assets/icons/logo/logoSmall.svg" alt="Join logo">
+                </section>
+                <section class="main-right"></section>
+            </dialog>
         </main>
     </article>
     <script src="/scripts/contacts.js"></script>
