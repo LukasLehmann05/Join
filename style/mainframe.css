@@ -106,10 +106,7 @@ article{
     justify-content: space-between;
     align-items: center;
     margin-right: auto;
-    padding-left: calc(348px - 232px);
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 40px 20px calc(116px);
     max-width: 1440px;
 }
 
