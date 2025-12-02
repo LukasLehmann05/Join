@@ -189,13 +189,13 @@ function renderDropAcceptanceInColumn(columnId) {
 }
 
 function removeNoTaskInfoElement(columnId) {
-    const noTaskClassName = 'no_task_yet';
     const columnContent = document.getElementById(columnId);
-    findChildAndRemoveNoTaskElement(columnContent, noTaskClassName);
+    findChildAndRemoveNoTaskElement(columnContent);
 }
 
-function findChildAndRemoveNoTaskElement(parentElement, className) {
-    const noTaskElement = parentElement.querySelector(`.${className}`);
+function findChildAndRemoveNoTaskElement(parentElement) {
+    const noTaskClassName = 'no_task_yet';
+    const noTaskElement = parentElement.querySelector(`.${noTaskClassName}`);
     if (noTaskElement) {
         noTaskElement.remove();
     }
@@ -207,12 +207,12 @@ function dropHandler(event) {
     const taskElement = document.getElementById(taskId);
     event.currentTarget.appendChild(taskElement);
     taskElement.classList.remove('drag-tilt');
-    hideDropAcceptanceInAllColumns();
+    removeDropAcceptanceField();
 }
 
-function hideDropAcceptanceInAllColumns() {
-    const columns = document.querySelectorAll('.column_content .drop_acceptance');
-    columns.forEach(drop => drop.remove());
+function removeDropAcceptanceField() {
+    const columnOfDrop = document.getElementById(currentDropAcceptanceColumnId).querySelectorAll('.drop_acceptance');
+    columnOfDrop.forEach(drop => drop.remove());
     lastDropAcceptanceColumnId = null;
 }
 
