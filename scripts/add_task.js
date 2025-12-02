@@ -21,13 +21,18 @@ let req_category = false
 function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
-        console.log("CREATE");
+        sendTaskToDB()
         clearAllInputs()
     } else {
         missingInputs()
         
     }
 }
+
+function sendTaskToDB() {
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, task_assign.value, task_subtask.value)
+}
+
 
 function checkForRequired() {
     console.log(task_category.value);
