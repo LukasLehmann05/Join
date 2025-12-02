@@ -4,6 +4,6 @@ function returnSubtaskTemplate(subtask) {
 
 function returnContactOption(contact_name) {
     return `
-        <option value="${contact_name}">
+        <option value="${contact_name}">${contact_name}
         </option>`
 }
