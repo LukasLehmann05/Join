@@ -251,6 +251,12 @@ function overlayEditTaskTemplate(task, taskId) {
             ${overlayEditTaskPriorityTemplate(task)}
             ${overlayEditTaskAssignedUsersTemplate(task)}
             ${overlayEditTaskSubtasksTemplate(task)}
+            <footer class="overlay_header edit_overlay_header">
+                <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
+                    <p>Ok</p>
+                    <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
+                </button>
+            </footer>
             `
 }
 
