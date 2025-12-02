@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join - Sign up</title>
+
+    <link rel="stylesheet" href="../style/standard.css">
+    <link rel="stylesheet" href="../style/login.css">
+    <link rel="stylesheet" href="../style/signup.css">
+    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+    <script src="../js/signup.js" defer></script>
+</head>
+<body class="body">
+
+    <div class="login-wrapper">
+
+        <div class="login-logo-section">
+            <img class="login-logo" src="../assets/icons/logo/logoSmall.svg" alt="Join logo">
+        </div>
+
+        <div class="login-header">
+            <p class="login-header-text">Already a Join user?</p>
+            <a href="../pages/login.html" class="signup-button">Log in</a>
+        </div>
+
+        <main class="login-card">
+
+             <a href="../html/login.html" class="back-arrow"></a>
+
+            <h1 class="login-title">Sign up</h1>
+
+            <form class="login-form">
+     
+                <div class="input-wrapper">
+                    <input type="text" class="login-input" placeholder="Name" required>
+                    <img src="../assets/icons/contacts/person.svg" alt="User icon" class="input-icon">
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="email" class="login-input" placeholder="Email" required>
+                    <img src="../assets/icons/contacts/mail.svg" alt="Email icon" class="input-icon">
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="password" class="login-input" placeholder="Password" required>
+                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="password" class="login-input" placeholder="Confirm Password" required>
+                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+                </div>
+
+                <label class="privacy-check" style="align-self: flex-start; margin-top: 8px;">
+                    <input type="checkbox" id="privacy-checkbox">
+                    <span> I accept the <a href="#">Privacy policy</a></span>
+                </label>
+
+                <div class="login-buttons" style="margin-top: 24px;">
+                    <button
+                        type="submit"
+                        class="login-button-primary"
+                        id="signup-btn"
+                        disabled
+                    >
+                        Sign up
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <footer class="login-footer">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Legal notice</a>
+        </footer>
+    </div>
+
+</body>
+</html>
