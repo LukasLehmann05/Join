@@ -212,3 +212,7 @@ function showContacts() {
         contacts_shown = false
     }
 }
+
+function assignContact(contact) {
+    
+}

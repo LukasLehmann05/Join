@@ -254,7 +254,10 @@
 .contact-selector {
     display: none;
     position: relative;
-    top: 0px;
+}
+
+.contact-selector ul {
+    padding: 0px;
 }
 
 .contact-button {
@@ -277,8 +280,22 @@
     align-items: center;
     flex: 1;
     cursor: pointer;
+    border: none;
+    background-color: white;
+    gap: 16px;
+    padding: 0px 16px;
+    border-radius: 10px;
 }
 
 .contact-element {
     display: flex;
+}
+
+.contact-select-button P {
+    font-size: 20px;
+    line-height: 120%;
+    font-family: "Inter";
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
 }
