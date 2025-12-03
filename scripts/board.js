@@ -1,3 +1,7 @@
+let startDragColumnId = null;
+let currentDropAcceptanceColumnId = null;
+let lastDropAcceptanceColumnId = null;
+
 let testTasks = {
   "task_id_0123": 
     {
@@ -148,12 +152,9 @@ function getTaskByTaskId(taskId) {
     return testTasks[taskId];
 }
 
-let lastDropAcceptanceColumnId = null;
-let currentDropAcceptanceColumnId = null;
-
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
-    lastDropAcceptanceColumnId = findParentAndReturnId(event.target);
+    startDragColumnId = findParentAndReturnId(event.target);
 }
 
 function findParentAndReturnId(element) {
@@ -168,11 +169,19 @@ function findParentAndReturnId(element) {
 }
 
 function dragOverHandler(event) {
-    currentDropAcceptanceColumnId = getIdOfCurrentColumn(event);   
-    if (lastDropAcceptanceColumnId !== currentDropAcceptanceColumnId) {
+    currentDropAcceptanceColumnId = getIdOfCurrentColumn(event);
+
+    
+    if (startDragColumnId !== currentDropAcceptanceColumnId) {
         renderDropAcceptanceInColumn(currentDropAcceptanceColumnId);
         lastDropAcceptanceColumnId = currentDropAcceptanceColumnId;
     }
+    
+    if (lastDropAcceptanceColumnId !== null && lastDropAcceptanceColumnId !== currentDropAcceptanceColumnId && lastDropAcceptanceColumnId !== startDragColumnId) {
+        removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
+    }
+
+
     event.preventDefault();
 }
 
@@ -207,13 +216,13 @@ function dropHandler(event) {
     const taskElement = document.getElementById(taskId);
     event.currentTarget.appendChild(taskElement);
     taskElement.classList.remove('drag-tilt');
-    removeDropAcceptanceField();
+    removeDropAcceptanceFieldByColumnId(currentDropAcceptanceColumnId);
 }
 
-function removeDropAcceptanceField() {
-    const columnOfDrop = document.getElementById(currentDropAcceptanceColumnId).querySelectorAll('.drop_acceptance');
+function removeDropAcceptanceFieldByColumnId(columnId) {
+    const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
     columnOfDrop.forEach(drop => drop.remove());
-    lastDropAcceptanceColumnId = null;
+    startDragColumnId = null;
 }
 
 function renderNoTaskInfoOnDOMLoad(){
