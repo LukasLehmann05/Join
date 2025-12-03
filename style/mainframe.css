@@ -124,8 +124,8 @@ article{
 
 .main-content {
     position: relative;
-    top: 96px;
-    left: 348px;
+    top: 0;
+    left: 0;
     max-width: 1440px;
     padding: 0px 64px;
     background-color: #F6F7F8;
