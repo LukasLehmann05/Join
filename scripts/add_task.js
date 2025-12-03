@@ -198,7 +198,7 @@ let testUser = {
 function addContactsToAssign() {
     for (let user_id in testUser) {
         let user = testUser[user_id]
-        let contact_option = returnContactOption(user.name)
+        let contact_option = returnContactTemplate(user.name,user_id)
         task_assign.innerHTML += contact_option
     }
 }
