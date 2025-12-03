@@ -203,6 +203,13 @@
     padding: 12px 21px;
 }
 
+.form-title {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 400;
+    font-family: "Inter";
+}
+
 .subtask-section input {
     border: none;
     box-shadow: none;
@@ -305,7 +312,7 @@
     justify-content: flex-start;
 }
 
-.assigned-contact button{
+.assigned-contact button {
     background-color: #2A3647;
     color: white;
 }
