@@ -146,3 +146,33 @@ function escapeTextareaContent(text) {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 }
+
+
+function openAddTaskOverlay() {
+    const task = createEmptyTask();
+    // const taskId = generateNewTaskId(); // sollte von Firebase kommen
+    const taskId = 'task_id_' + Date.now(); // temporär
+    document.getElementById('overlay').classList.add('show');
+    setTimeout(() => {
+        document.getElementById('overlay_content').classList.add('show');
+    }, 10);
+    renderOverlayAddTask(task, taskId);
+}
+
+
+function createEmptyTask() {
+    return {
+        title: "",
+        description: "",
+        due_date: "",
+        priority: "low",
+        assigned_to: [],
+        subtasks: []
+    };
+}
+
+
+function renderOverlayAddTask(task, taskId) {
+    const overlayContent = document.getElementById('overlay_content');
+    // overlayContent.innerHTML = overlayContentTemplate(task, taskId);
+}
