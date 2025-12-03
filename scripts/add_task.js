@@ -224,6 +224,7 @@ function assignContact(contact_id) {
         const checkbox_icon = document.getElementById("checkbox_" + contact_id)
         checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
         contact_element.classList.add("assigned-contact")
+        checkbox_icon.classList.add("checkbox-filter")
         renderSmallContacts(contact_id)
     }
 }
@@ -235,6 +236,7 @@ function unassignContact(contact_id) {
     const checkbox_icon = document.getElementById("checkbox_" + contact_id)
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
     contact_element.classList.remove("assigned-contact")
+    checkbox_icon.classList.remove("checkbox-filter")
     removeSmallContact(contact_id)
 }
 
