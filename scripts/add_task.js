@@ -213,6 +213,14 @@ function showContacts() {
     }
 }
 
-function assignContact(contact) {
-    
+function assignContact(contact_id) {
+    if (all_contacts.includes(contact_id)) {
+        unassignContact(contact_id)
+    } else {
+        all_contacts.push(contact_id)
+    }
+}
+
+function unassignContact(contact_id) {
+
 }
