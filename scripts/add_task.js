@@ -45,7 +45,7 @@ function createTask() {
         clearAllInputs()
     } else {
         missingInputs()
-        
+
     }
 }
 
@@ -183,22 +183,22 @@ function addSubtask() {
 
 let testUser = {
     "user_id_1": {
-      "email": "max.mustermann@example.com",
-      "name": "Max Mustermann",
-      "password": "hashed_password_123"
+        "email": "max.mustermann@example.com",
+        "name": "Max Mustermann",
+        "password": "hashed_password_123"
     },
     "user_id_2": {
-      "email": "erika.musterfrau@example.com",
-      "name": "Erika Musterfrau",
-      "password": "hashed_password_456"
+        "email": "erika.musterfrau@example.com",
+        "name": "Erika Musterfrau",
+        "password": "hashed_password_456"
     }
-	
+
 }
 
 function addContactsToAssign() {
     for (let user_id in testUser) {
         let user = testUser[user_id]
-        let contact_option = returnContactTemplate(user.name,user_id)
+        let contact_option = returnContactTemplate(user.name, user_id)
         task_assign.innerHTML += contact_option
     }
 }
@@ -218,9 +218,18 @@ function assignContact(contact_id) {
         unassignContact(contact_id)
     } else {
         all_contacts.push(contact_id)
+        const contact_element = document.getElementById(contact_id)
+        const checkbox_icon = document.getElementById("checkbox_" + contact_id)
+        checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
+        contact_element.classList.add("assigned-contact")
     }
 }
 
 function unassignContact(contact_id) {
-
+    let contact_index = all_contacts.indexOf(contact_id)
+    all_contacts.splice(contact_index, 1)
+    const contact_element = document.getElementById(contact_id)
+    const checkbox_icon = document.getElementById("checkbox_" + contact_id)
+    checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
+    contact_element.classList.remove("assigned-contact")
 }

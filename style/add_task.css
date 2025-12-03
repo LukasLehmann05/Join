@@ -299,3 +299,8 @@
     flex: 1;
     justify-content: flex-start;
 }
+
+.assigned-contact button{
+    background-color: #2A3647;
+    color: white;
+}
