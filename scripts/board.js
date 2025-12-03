@@ -1,5 +1,4 @@
-let startDragColumnId = null;
-let currentDropAcceptanceColumnId = null;
+
 let lastDropAcceptanceColumnId = null;
 
 let testTasks = {
@@ -154,34 +153,17 @@ function getTaskByTaskId(taskId) {
 
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
-    startDragColumnId = findParentAndReturnId(event.target);
-}
-
-function findParentAndReturnId(element) {
-    let parent = element.parentElement;
-    while (parent) {
-        if (parent.classList.contains('column_content')) {
-            return parent.id;
-        }
-        parent = parent.parentElement;
-    }
-    return null;
 }
 
 function dragOverHandler(event) {
-    currentDropAcceptanceColumnId = getIdOfCurrentColumn(event);
+    const currentColumnId = getIdOfCurrentColumn(event);
 
-    
-    if (startDragColumnId !== currentDropAcceptanceColumnId) {
-        renderDropAcceptanceInColumn(currentDropAcceptanceColumnId);
-        lastDropAcceptanceColumnId = currentDropAcceptanceColumnId;
-    }
-    
-    if (lastDropAcceptanceColumnId !== null && lastDropAcceptanceColumnId !== currentDropAcceptanceColumnId && lastDropAcceptanceColumnId !== startDragColumnId) {
+    if (lastDropAcceptanceColumnId && lastDropAcceptanceColumnId !== currentColumnId) {
         removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
     }
 
-
+    lastDropAcceptanceColumnId = currentColumnId;
+    renderDropAcceptanceInColumn(currentColumnId);
     event.preventDefault();
 }
 
@@ -216,13 +198,12 @@ function dropHandler(event) {
     const taskElement = document.getElementById(taskId);
     event.currentTarget.appendChild(taskElement);
     taskElement.classList.remove('drag-tilt');
-    removeDropAcceptanceFieldByColumnId(currentDropAcceptanceColumnId);
+    removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
 }
 
 function removeDropAcceptanceFieldByColumnId(columnId) {
     const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
     columnOfDrop.forEach(drop => drop.remove());
-    startDragColumnId = null;
 }
 
 function renderNoTaskInfoOnDOMLoad(){
