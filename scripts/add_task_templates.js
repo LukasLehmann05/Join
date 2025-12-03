@@ -11,3 +11,7 @@ function returnContactTemplate(contact_name,user_id) {
                 </button type="button">
             </li>`
 }
+
+function returnSmallContactTemplate(user_id) {
+    return `<img src="../assets/icons/header/user_placeholder.svg" alt="contact_icon" id="small_contact_${user_id}">`
+}

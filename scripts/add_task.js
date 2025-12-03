@@ -15,6 +15,7 @@ const urgent_prio_button = document.getElementById("button_prio_urgent")
 const subtask_button_section = document.getElementById("subtask_button_section")
 const subtask_list = document.getElementById("subtask_render")
 const contact_selector = document.getElementById("contact_selector")
+const rendered_contact_images = document.getElementById("rendered_contact_images")
 
 let subtask_buttons_active = false
 let contacts_shown = false
@@ -27,6 +28,7 @@ let req_category = false
 
 let all_subtasks = []
 let all_contacts = []
+let rendered_contacts = []
 
 function init() {
     //loadDataFromAPI()
@@ -222,6 +224,7 @@ function assignContact(contact_id) {
         const checkbox_icon = document.getElementById("checkbox_" + contact_id)
         checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
         contact_element.classList.add("assigned-contact")
+        renderSmallContacts(contact_id)
     }
 }
 
@@ -232,4 +235,14 @@ function unassignContact(contact_id) {
     const checkbox_icon = document.getElementById("checkbox_" + contact_id)
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
     contact_element.classList.remove("assigned-contact")
+}
+
+function renderSmallContacts(contact_id) {
+    const small_contact_template = returnSmallContactTemplate(contact_id)
+    rendered_contact_images.innerHTML += small_contact_template
+}
+
+function removeSmallContact(contact_id) {
+    const small_contact_element = document.getElementById("small_contact_" + contact_id)
+    rendered_contact_images.removeChild(small_contact_element)
 }
