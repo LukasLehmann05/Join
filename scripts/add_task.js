@@ -28,7 +28,6 @@ let req_category = false
 
 let all_subtasks = []
 let all_contacts = []
-let rendered_contacts = []
 
 function init() {
     //loadDataFromAPI()
@@ -82,9 +81,9 @@ function clearAllInputs() {
     req_due_date = false
     req_category = false
     all_subtasks = []
-    all_contacts = []
     changePriority("medium")
     clearRequiredIndicators()
+    clearContacts()
 }
 
 function changePriority(priority) {
@@ -171,6 +170,20 @@ function hideSubtaskButtons() {
 function clearSubtask() {
     task_subtask.value = ""
     hideSubtaskButtons()
+}
+
+function clearContacts() {
+    console.log(all_contacts);
+
+    for (let index = 0; index < all_contacts.length; index++) {
+        const contact_element = document.getElementById(all_contacts[index]);
+        contact_element.classList.remove("assigned-contact")
+        const checkbox_icon = document.getElementById("checkbox_" + all_contacts[index])
+        checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
+        checkbox_icon.classList.remove("checkbox-filter")
+    }
+    //all_contacts = []
+    rendered_contact_images.innerHTML = ""
 }
 
 function addSubtask() {
