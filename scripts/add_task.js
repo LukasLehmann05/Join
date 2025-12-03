@@ -194,7 +194,6 @@ let testUser = {
         "name": "Erika Musterfrau",
         "password": "hashed_password_456"
     }
-
 }
 
 function addContactsToAssign() {

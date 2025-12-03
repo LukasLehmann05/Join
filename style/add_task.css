@@ -261,6 +261,8 @@
 .contact-selector {
     display: none;
     position: relative;
+    overflow-y: scroll;
+    max-height: 200px;
 }
 
 .contact-selector ul {
