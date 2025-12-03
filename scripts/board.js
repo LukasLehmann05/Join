@@ -155,15 +155,29 @@ function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 
+let startDropAcceptanceColumnId = null;
+let dragOverCounter = 0;
+
 function dragOverHandler(event) {
-    const currentColumnId = getIdOfCurrentColumn(event);
+    let currentColumnId = null;
+    if (dragOverCounter < 1) {
+        startDropAcceptanceColumnId = getIdOfCurrentColumn(event);        
+        currentColumnId = startDropAcceptanceColumnId;
+        dragOverCounter++;
+    }
+    else {
+        currentColumnId = getIdOfCurrentColumn(event);
+    }
 
     if (lastDropAcceptanceColumnId && lastDropAcceptanceColumnId !== currentColumnId) {
         removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
-    }
+    }    
 
     lastDropAcceptanceColumnId = currentColumnId;
-    renderDropAcceptanceInColumn(currentColumnId);
+    
+    if(startDropAcceptanceColumnId !== currentColumnId && currentColumnId !== null) {
+        renderDropAcceptanceInColumn(currentColumnId);
+    }
     event.preventDefault();
 }
 
@@ -172,7 +186,7 @@ function getIdOfCurrentColumn(event) {
 }
 
 function renderDropAcceptanceInColumn(columnId) {
-    const columnContent = document.getElementById(columnId);
+    const columnContent = document.getElementById(columnId);  
     if (!columnContent.querySelector('.drop_acceptance')) {
         columnContent.innerHTML += showDropAcceptanceTemplate();
     }
@@ -199,6 +213,8 @@ function dropHandler(event) {
     event.currentTarget.appendChild(taskElement);
     taskElement.classList.remove('drag-tilt');
     removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
+    startDropAcceptanceColumnId = null;
+    dragOverCounter = 0;
 }
 
 function removeDropAcceptanceFieldByColumnId(columnId) {
