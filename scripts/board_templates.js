@@ -159,13 +159,6 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
-function escapeTextareaContent(text) {
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-}
-
 function overlayEditTaskTitleTemplate(task) {
     return  `
              <section class="edit_title_container">
@@ -177,12 +170,12 @@ function overlayEditTaskTitleTemplate(task) {
             `
 }
 
-function overlayEditTaskDescriptionTemplate(task) {
+function overlayEditTaskDescriptionTemplate(task_description) {
     return  `
             <section class="edit_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
-                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${escapeTextareaContent(task.description)}</textarea>
+                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${task_description}</textarea>
                 </form>
             </section>
             `

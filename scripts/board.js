@@ -371,13 +371,21 @@ function openEditTaskOverlay(taskId) {
 function editTaskTemplateWrapper(task){
     const taskId = getTaskIdAsStringFromTask(task);
     const mainContent = document.getElementById('overlay_main_content');
+    let escapeTaskDescription = escapeTextareaContent(task.description);
     mainContent.innerHTML = `
     ${overlayEditTaskTitleTemplate(task)}
-    ${overlayEditTaskDescriptionTemplate(task)}
+    ${overlayEditTaskDescriptionTemplate(escapeTaskDescription)}
     ${overlayEditTaskDueDateTemplate(task)}
     ${overlayEditTaskPriorityTemplate(task)}
     ${overlayEditTaskAssignedUsersTemplate(task)}
     ${overlayEditTaskSubtasksTemplate(taskId)}`;
+}
+
+function escapeTextareaContent(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 }
 
 function renderSubtaskEditListItems(taskId) {
