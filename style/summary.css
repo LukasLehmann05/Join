@@ -9,7 +9,7 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 50px; 
+    margin-bottom: 40px; 
     margin-top: 0; 
 }
 
@@ -47,7 +47,7 @@ body {
 }
 
 .summary-stats-bottom {
-    margin-top: 48px;
+    margin-top: 32px;
 }
 
 .summary-cards-wrapper {
