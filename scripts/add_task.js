@@ -29,14 +29,16 @@ let req_category = false
 let all_subtasks = []
 let all_contacts = []
 
-function init() {
-    //loadDataFromAPI()
-    addContactsToAssign()
+async function init() {
+    let api_data = await loadDataFromAPI()
+    addContactsToAssign(api_data)
+
 }
 
 function loadDataFromAPI() {
     let joinData = fetchAllData()
     console.log(joinData)
+    return joinData
 }
 
 function createTask() {
@@ -182,7 +184,7 @@ function clearContacts() {
         checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
         checkbox_icon.classList.remove("checkbox-filter")
     }
-    //all_contacts = []
+    all_contacts = []
     rendered_contact_images.innerHTML = ""
 }
 
@@ -210,10 +212,11 @@ let testUser = {
     }
 }
 
-function addContactsToAssign() {
-    for (let user_id in testUser) {
-        let user = testUser[user_id]
-        let contact_option = returnContactTemplate(user.name, user_id)
+function addContactsToAssign(join_data) {
+    let contacts = join_data.contacts
+    for (let contact_id in contacts) {
+        let contact = contacts[contact_id]
+        let contact_option = returnContactTemplate(contact.name, contact_id)
         task_assign.innerHTML += contact_option
     }
 }
