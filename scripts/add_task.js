@@ -14,8 +14,11 @@ const urgent_prio_button = document.getElementById("button_prio_urgent")
 
 const subtask_button_section = document.getElementById("subtask_button_section")
 const subtask_list = document.getElementById("subtask_render")
+const contact_selector = document.getElementById("contact_selector")
+const rendered_contact_images = document.getElementById("rendered_contact_images")
 
 let subtask_buttons_active = false
+let contacts_shown = false
 
 let current_priority = "medium"
 
@@ -24,6 +27,19 @@ let req_due_date = false
 let req_category = false
 
 let all_subtasks = []
+let all_contacts = []
+
+async function init() {
+    let api_data = await loadDataFromAPI()
+    addContactsToAssign(api_data)
+
+}
+
+function loadDataFromAPI() {
+    let joinData = fetchAllData()
+    console.log(joinData)
+    return joinData
+}
 
 function createTask() {
     let can_create = checkForRequired()
@@ -32,12 +48,12 @@ function createTask() {
         clearAllInputs()
     } else {
         missingInputs()
-        
+
     }
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, task_assign.value, all_subtasks)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, all_contacts, all_subtasks)
 }
 
 
@@ -61,13 +77,15 @@ function checkForRequired() {
 function clearAllInputs() {
     task_title.value = ""
     task_description.value = ""
-    task_subtask.value = ""
     task_due_date.value = ""
     req_title = false
     req_due_date = false
     req_category = false
     all_subtasks = []
     changePriority("medium")
+    clearRequiredIndicators()
+    clearContacts()
+    clearSubtask()
 }
 
 function changePriority(priority) {
@@ -153,7 +171,23 @@ function hideSubtaskButtons() {
 
 function clearSubtask() {
     task_subtask.value = ""
+    all_subtasks = []
+    document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
+}
+
+function clearContacts() {
+    console.log(all_contacts);
+
+    for (let index = 0; index < all_contacts.length; index++) {
+        const contact_element = document.getElementById(all_contacts[index]);
+        contact_element.classList.remove("assigned-contact")
+        const checkbox_icon = document.getElementById("checkbox_" + all_contacts[index])
+        checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
+        checkbox_icon.classList.remove("checkbox-filter")
+    }
+    all_contacts = []
+    rendered_contact_images.innerHTML = ""
 }
 
 function addSubtask() {
@@ -169,22 +203,95 @@ function addSubtask() {
 
 let testUser = {
     "user_id_1": {
-      "email": "max.mustermann@example.com",
-      "name": "Max Mustermann",
-      "password": "hashed_password_123"
+        "email": "max.mustermann@example.com",
+        "name": "Max Mustermann",
+        "password": "hashed_password_123"
     },
     "user_id_2": {
-      "email": "erika.musterfrau@example.com",
-      "name": "Erika Musterfrau",
-      "password": "hashed_password_456"
+        "email": "erika.musterfrau@example.com",
+        "name": "Erika Musterfrau",
+        "password": "hashed_password_456"
     }
-	
 }
 
-function addContactsToAssign() {
-    for (let user_id in testUser) {
-        let user = testUser[user_id]
-        let contact_option = returnContactOption(user.name)
+function addContactsToAssign(join_data) {
+    let contacts = join_data.contacts
+    for (let contact_id in contacts) {
+        let contact = contacts[contact_id]
+        let contact_option = returnContactTemplate(contact.name, contact_id)
         task_assign.innerHTML += contact_option
+    }
+}
+
+function showContacts() {
+    if (contacts_shown == false) {
+        contact_selector.style.display = "block"
+        contacts_shown = true
+    } else {
+        contact_selector.style.display = "none"
+        contacts_shown = false
+    }
+}
+
+function assignContact(contact_id) {
+    if (all_contacts.includes(contact_id)) {
+        unassignContact(contact_id)
+    } else {
+        all_contacts.push(contact_id)
+        const contact_element = document.getElementById(contact_id)
+        const checkbox_icon = document.getElementById("checkbox_" + contact_id)
+        checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
+        contact_element.classList.add("assigned-contact")
+        checkbox_icon.classList.add("checkbox-filter")
+        renderSmallContacts(contact_id)
+    }
+}
+
+function unassignContact(contact_id) {
+    let contact_index = all_contacts.indexOf(contact_id)
+    all_contacts.splice(contact_index, 1)
+    const contact_element = document.getElementById(contact_id)
+    const checkbox_icon = document.getElementById("checkbox_" + contact_id)
+    checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
+    contact_element.classList.remove("assigned-contact")
+    checkbox_icon.classList.remove("checkbox-filter")
+    removeSmallContact(contact_id)
+}
+
+function renderSmallContacts(contact_id) {
+    const small_contact_template = returnSmallContactTemplate(contact_id)
+    rendered_contact_images.innerHTML += small_contact_template
+}
+
+function removeSmallContact(contact_id) {
+    const small_contact_element = document.getElementById("small_contact_" + contact_id)
+    rendered_contact_images.removeChild(small_contact_element)
+}
+
+function clearRequiredIndicators() {
+    req_title_text.style.opacity = "0"
+    req_due_date_text.style.opacity = "0"
+    req_category_text.style.opacity = "0"
+    task_title.classList.remove("missing-input")
+    task_due_date.classList.remove("missing-input")
+    task_category.classList.remove("missing-input")
+}
+
+function removeIndicatorOnInput(field) {
+    switch (field) {
+        case "title":
+            req_title_text.style.opacity = "0"
+            task_title.classList.remove("missing-input")
+            break;
+        case "due_date":
+            req_due_date_text.style.opacity = "0"
+            task_due_date.classList.remove("missing-input")
+            break;
+        case "category":
+            req_category_text.style.opacity = "0"
+            task_category.classList.remove("missing-input")
+            break;
+        default:
+            break;
     }
 }
