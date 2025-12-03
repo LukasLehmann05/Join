@@ -1,52 +1,4 @@
-let showWideOverlay = false;
-
-let newTitle = "";
-let newCategory = "";
-let newDescription = "";
-let newDueDate = "";
-let newPriority = "";
-let newAssigneesArr = [];
-let newSubtasksArr = [];
-let newState = "";
-
-
-function sendUpdatedTaskToDB(taskId) {
-    let taskToUpdate = getTaskToUpdate(taskId);
-    if (Object.keys(taskToUpdate).length !== 0) {
-        updateTask(taskId, taskToUpdate);
-    }
-    else {
-        console.log("No fields to update.");
-    }
-}
-
-
-function getTaskToUpdate(taskId) {
-    let taskToUpdate = getTaskByTaskId(taskId);
-    if (newTitle !== "") taskToUpdate.title = newTitle;
-    if (newCategory !== "") taskToUpdate.category = newCategory;
-    if (newDescription !== "") taskToUpdate.description = newDescription;
-    if (newDueDate !== "") taskToUpdate.due_date = newDueDate;
-    if (newPriority !== "") taskToUpdate.priority = newPriority;
-    if (newAssigneesArr.length > 0) taskToUpdate.assigned_to = newAssigneesArr;
-    if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
-    if (newState !== "") taskToUpdate.state = newState;
-    return taskToUpdate;
-}
-
-
-function getAllFieldValuesOfEditTaskWhenUpdated() {
-    newTitle = document.getElementById('task_title').value;
-    newDescription = document.getElementById('task_description').value;
-    newDueDate = document.getElementById('task_due_date').value;
-    newPriority = current_priority;
-    newAssigneesArr = allAssigneesArr;
-    newSubtasksArr = allSubtasksArr;
-}
-
-
 function openTaskInOverlay(taskId) {
-    clearElementsOfNewTask();
     let task = getTaskByTaskId(taskId);
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
@@ -56,60 +8,24 @@ function openTaskInOverlay(taskId) {
 }
 
 
-function clearElementsOfNewTask() {
-    newTitle = "";
-    newCategory = "";
-    newDescription = "";
-    newDueDate = "";
-    newPriority = "";
-    newAssigneesArr = [];
-    newSubtasksArr = [];
-    newState = "";
-}
-
-
 function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
-    renderPriorityIndicator(taskId, 'priority_overlay');
-    renderAssignedUserInfos(taskId, false, 'assigned_users_overlay');
+    renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
+    renderAssignedUserInfos(taskId, 'assigned_users_overlay');
     renderSubtasksListItems(taskId);
 }
 
 
-function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
-    let container = document.getElementById(containerIdSuffix);
+function renderAssignedUserInfos(taskId, containerIdSuffix) {
+    let container = document.getElementById(taskId + '_' + containerIdSuffix);
     let task = getTaskByTaskId(taskId);
-    getAssigneesOfTask(task);
-    
-    for (let userId of allAssigneesArr) {
-        const user = testUser[userId];
-        container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
-    }
-}
-
-
-function getAssigneesOfTask(task) {
-    allAssigneesArr = [];
     for (let userId of task.assigned_to) {
-        allAssigneesArr.push(userId);
-    }
-}
-
-
-function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
-    if(renderOnlyId) {
-        return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
-                    </div>
-                `;
-    }
-    else {
-        return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
-                    ${assignedUserNameTemplate(user.name)}
-                    </div>
-                `;
+        const user = testUser[userId];
+        const initials = getInitialsFromUser(user);
+        const userName = user.name;
+        let userInfoHtml = assignedUserInfoTemplate(userName, initials);
+        container.innerHTML += userInfoHtml;
     }
 }
 
@@ -148,24 +64,17 @@ function closeOverlay(event) {
 }
 
 
-function removeShowClass(buttonElement, taskId) {
-    const buttonSaveOverlayWhenClosed = buttonElement ? buttonElement.getAttribute('data-save-task-when-close-overlay') === 'true' : false;
-    if (buttonSaveOverlayWhenClosed) {
-        sendUpdatedTaskToDB(taskId);        
-    }
-
+function removeShowClass() {
     const overlay = document.getElementById('overlay');
-    const overlayContent = document.getElementById('overlay_content');
+    const contentContent = document.getElementById('overlay_content');
 
     if (overlay.classList.contains('show')) {
-        overlayContent.classList.remove('show');
+        contentContent.classList.remove('show');
          setTimeout(() => {
             overlay.classList.remove('show');
-            if(showWideOverlay) {
-                toggleTitleCategorySeparatorInAddTaskOverlay();
-            }
         }, 500);
-    }
+    } 
+
 }
 
 
@@ -190,93 +99,43 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     let subtaskIndex = subtaskCounter - 1; 
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
-    renderSubtaskProgress(taskId);
-    newSubtasksArr = task.subtasks;
+    renderSubtaskProgress(task);
 }
 
 
 function openEditTaskOverlay(taskId) {
+    const task = getTaskByTaskId(taskId);
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements(this, '${taskId}')`);
-    upsertTaskTemplateHandler(taskId);
-    renderAssignedUserInfos(taskId, true, 'rendered_contact_images');
+    overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
+    editTaskTemplateWrapper(task);
     renderSubtaskEditListItems(taskId);
-    addTaskInit();
 }
 
 
-function updateTaskElements(button, taskId) {
-    getAllFieldValuesOfEditTaskWhenUpdated();
-    removeShowClass(button, taskId);
-}
-
-
-function upsertTaskTemplateHandler(taskId){
-    renderOverlayUpsertTaskDetailsContainer();
-    upsertTaskTemplatesWrapperContainer1(taskId);
-    upsertTaskTemplatesWrapperContainer2(taskId);
-}
-   
-
-function renderOverlayUpsertTaskDetailsContainer() {
-    let mainContent = document.getElementById('overlay_main_content');
-    let detailContainerHtml = overlayUpsertTaskDetailsContainerTemplate();
-    mainContent.innerHTML = detailContainerHtml;
-}
-
-
-function upsertTaskTemplatesWrapperContainer1(taskId){
-    let task = checkTaskToAddOrEdit(taskId);
+function editTaskTemplateWrapper(task){
+    const taskId = getTaskIdAsStringFromTask(task);
+    const mainContent = document.getElementById('overlay_main_content');
     let escapeTaskDescription = escapeTextareaContent(task.description);
-    let taskDetailsContainer1 = document.getElementById('task_details_container_1');
-    taskDetailsContainer1.innerHTML = `
-    ${overlayUpsertTaskTitleTemplate(task.title)}
-    ${overlayUpsertTaskDescriptionTemplate(escapeTaskDescription)}
-    ${overlayUpsertTaskDueDateTemplate(task.due_date)}`; 
-}
-
-
-function upsertTaskTemplatesWrapperContainer2(taskId){
-    let taskDetailsContainer2 = document.getElementById('task_details_container_2');
-    taskDetailsContainer2.innerHTML = `
-    ${overlayUpsertTaskPriorityTemplate()}
-    ${overlayUpsertTaskAssignedUsersTemplate()}
-    ${overlayUpsertCategoryOptionTemplate()}
-    ${overlayUpsertTaskSubtasksTemplate(taskId)}`;
-}
-
-
-function checkTaskToAddOrEdit(taskId) {
-    if (taskId.startsWith('new_task_id_')) {
-        return createEmptyTask();
-    } else {
-        return getTaskByTaskId(taskId);
-    }
-}
-
-
-function createEmptyTask() {
-    return {
-        assigned_to: [],
-        category: "",
-        description: "",
-        due_date: "",
-        priority: "low",
-        subtasks: [],
-        title: "",
-        state: "todo"
-    };
+    mainContent.innerHTML = `
+    ${overlayEditTaskTitleTemplate(task)}
+    ${overlayEditTaskDescriptionTemplate(escapeTaskDescription)}
+    ${overlayEditTaskDueDateTemplate(task)}
+    ${overlayEditTaskPriorityTemplate(task)}
+    ${overlayEditTaskAssignedUsersTemplate(task)}
+    ${overlayEditTaskSubtasksTemplate(taskId)}`;
 }
 
 
 function renderSubtaskEditListItems(taskId) {
-    subtask_list = document.getElementById('subtask_render');
+    let containerId = taskId + '_subtasks_edit_list';
+    let subListContainer = document.getElementById(containerId);
     let task = getTaskByTaskId(taskId);
+    let subtaskCounter = 0;
     for (let subtask of task.subtasks) {
-        let subtaskHtml = returnSubtaskTemplate(subtask.title);
-        subtask_list.innerHTML += subtaskHtml;
-        allSubtasksArr.push(subtask.title);
+        subtaskCounter += 1;
+        let subtaskHtml = overlayEditSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
+        subListContainer.innerHTML += subtaskHtml;
     }
 }
 
@@ -286,39 +145,4 @@ function escapeTextareaContent(text) {
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
-}
-
-
-async function openAddTaskOverlay() {
-    clearElementsOfNewTask();
-    const taskId = 'new_task_id_' + Date.now();
-    document.getElementById('overlay').classList.add('show');
-    setTimeout(() => {
-        document.getElementById('overlay_content').classList.add('show');
-    }, 10);
-    renderOverlayAddTask(taskId).then(() => {
-        addTaskInit();
-    })
-}
-
-
-function renderOverlayAddTask(taskId) {
-    const overlayContent = document.getElementById('overlay_content');
-    overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', `createTask('${taskId}')`);
-    upsertTaskTemplateHandler(taskId);
-    toggleTitleCategorySeparatorInAddTaskOverlay();
-    return Promise.resolve();
-}
-
-
-function toggleTitleCategorySeparatorInAddTaskOverlay() {
-    document.getElementById('overlay_title').classList.toggle('show');
-    document.getElementsByClassName('upsert_category_container')[0].classList.toggle('show');
-    document.getElementById('overlay_separator_add_task').classList.toggle('show');
-    document.getElementById('overlay_main_content').classList.toggle('show_separator');
-    document.getElementById('overlay_content').classList.toggle('add_task_attributes');
-    document.getElementById('clear_button_container').classList.toggle('show');
-    document.getElementById('required_text_field_section').classList.toggle('show');
-    showWideOverlay = !showWideOverlay;
 }
