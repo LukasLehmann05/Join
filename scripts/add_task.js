@@ -235,6 +235,7 @@ function unassignContact(contact_id) {
     const checkbox_icon = document.getElementById("checkbox_" + contact_id)
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
     contact_element.classList.remove("assigned-contact")
+    removeSmallContact(contact_id)
 }
 
 function renderSmallContacts(contact_id) {
