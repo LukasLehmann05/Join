@@ -249,7 +249,6 @@ renderPriorityIndicator(testTasks.task_id_0123, 'priority');
 
 function openTaskInOverlay(taskId) {
     let task = getTaskByTaskId(taskId);
-    console.log("Open task overlay for task ID:", taskId);
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
@@ -350,9 +349,11 @@ function openEditTaskOverlay(taskId) {
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
     editTaskTemplateWrapper(task);
+    renderSubtaskEditListItems(taskId);
 }
 
 function editTaskTemplateWrapper(task){
+    const taskId = getTaskIdAsStringFromTask(task);
     const mainContent = document.getElementById('overlay_main_content');
     mainContent.innerHTML = `
     ${overlayEditTaskTitleTemplate(task)}
@@ -360,5 +361,17 @@ function editTaskTemplateWrapper(task){
     ${overlayEditTaskDueDateTemplate(task)}
     ${overlayEditTaskPriorityTemplate(task)}
     ${overlayEditTaskAssignedUsersTemplate(task)}
-    ${overlayEditTaskSubtasksTemplate(task)}`;
+    ${overlayEditTaskSubtasksTemplate(taskId)}`;
+}
+
+function renderSubtaskEditListItems(taskId) {
+    let containerId = taskId + '_subtasks_edit_list';
+    let subListContainer = document.getElementById(containerId);
+    let task = getTaskByTaskId(taskId);
+    let subtaskCounter = 0;
+    for (let subtask of task.subtasks) {
+        subtaskCounter += 1;
+        let subtaskHtml = overlayEditSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
+        subListContainer.innerHTML += subtaskHtml;
+    }
 }

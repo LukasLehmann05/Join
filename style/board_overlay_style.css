@@ -217,3 +217,17 @@
     flex-grow: 1;
     overflow-y: auto;
 }
+
+.overlay_content .edit_subtasks_container .subtasks_edit_list{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.overlay_content .edit_subtasks_container .subtasks_edit_list .subtask_edit_list_item{
+    list-style-type: disc;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter";
+}

@@ -236,15 +236,25 @@ function overlayEditTaskAssignedUsersTemplate(task) {
             `
 }
 
-function overlayEditTaskSubtasksTemplate(task) {
+function overlayEditTaskSubtasksTemplate(taskId) {
     return  `
             <section class="edit_subtasks_container">
                 <form class="input-form">
                     <label for="task_subtask">Subtasks</label>
                     <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
                 </form>
+                <div class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></div>
             </section>
             `
+}
+
+function overlayEditSubtaskListItemTemplate(taskId, title, counter) {
+    return `
+           <ul class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">
+                <li>${title}</li>
+            </ul>
+
+            `;
 }
 
 function overlayEditTaskTemplate(task, taskId) {
