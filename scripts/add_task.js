@@ -77,7 +77,6 @@ function checkForRequired() {
 function clearAllInputs() {
     task_title.value = ""
     task_description.value = ""
-    task_subtask.value = ""
     task_due_date.value = ""
     req_title = false
     req_due_date = false
@@ -86,6 +85,7 @@ function clearAllInputs() {
     changePriority("medium")
     clearRequiredIndicators()
     clearContacts()
+    clearSubtask()
 }
 
 function changePriority(priority) {
@@ -171,6 +171,8 @@ function hideSubtaskButtons() {
 
 function clearSubtask() {
     task_subtask.value = ""
+    all_subtasks = []
+    document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
 }
 
