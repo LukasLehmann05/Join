@@ -84,6 +84,7 @@ function clearAllInputs() {
     all_subtasks = []
     all_contacts = []
     changePriority("medium")
+    clearRequiredIndicators()
 }
 
 function changePriority(priority) {
@@ -247,4 +248,32 @@ function renderSmallContacts(contact_id) {
 function removeSmallContact(contact_id) {
     const small_contact_element = document.getElementById("small_contact_" + contact_id)
     rendered_contact_images.removeChild(small_contact_element)
+}
+
+function clearRequiredIndicators() {
+    req_title_text.style.opacity = "0"
+    req_due_date_text.style.opacity = "0"
+    req_category_text.style.opacity = "0"
+    task_title.classList.remove("missing-input")
+    task_due_date.classList.remove("missing-input")
+    task_category.classList.remove("missing-input")
+}
+
+function removeIndicatorOnInput(field) {
+    switch (field) {
+        case "title":
+            req_title_text.style.opacity = "0"
+            task_title.classList.remove("missing-input")
+            break;
+        case "due_date":
+            req_due_date_text.style.opacity = "0"
+            task_due_date.classList.remove("missing-input")
+            break;
+        case "category":
+            req_category_text.style.opacity = "0"
+            task_category.classList.remove("missing-input")
+            break;
+        default:
+            break;
+    }
 }
