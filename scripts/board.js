@@ -1,5 +1,7 @@
 
 let lastDropAcceptanceColumnId = null;
+let startDropAcceptanceColumnId = null;
+let dragOverCounter = 0;
 
 let testTasks = {
   "task_id_0123": 
@@ -70,11 +72,13 @@ function renderNoTaskInfo(columnId) {
     }
 }
 
+
 function formatSubtaskProgress(subtasks) {
     const completed = subtasks.filter(subtask => subtask.done).length;
     const total = subtasks.length;
     return `${completed}/${total}`;
 }
+
 
 function renderSubtaskProgress(taskId) {
   let elementId = getTaskIdAsStringFromTask(taskId) + '_subtasks_done';
@@ -82,6 +86,7 @@ function renderSubtaskProgress(taskId) {
   element.innerHTML = formatSubtaskProgress(taskId.subtasks);
   renderSubtaskStatusBar(taskId);
 }
+
 
 function renderSubtaskStatusBar(task) {
     let relationOfDoneSubtasks = formatSubtaskProgress(task.subtasks).split('/');
@@ -93,11 +98,13 @@ function renderSubtaskStatusBar(task) {
     fillElement.style.width = `${percentage}%`;
 }
 
+
 function renderTaskCard(task, containerId) {
     let taskId = getTaskIdAsStringFromTask(task);
     const container = document.getElementById(containerId);
     container.innerHTML = taskCardTemplate(task, taskId);
 }
+
 
 function getInitialsFromUser(user) {
     const initials = user.name  
@@ -107,6 +114,7 @@ function getInitialsFromUser(user) {
         .toUpperCase();
     return initials;
 }
+
 
 function renderAssignedUserIcons(task) {
   let containerIdSuffix = 'assigned_users';
@@ -120,6 +128,7 @@ function renderAssignedUserIcons(task) {
   }
 }
 
+
 function getIconForPriority(priority) {
     const iconfolderpath = "../assets/icons/addTask/";
     switch(priority) {
@@ -132,11 +141,13 @@ function getIconForPriority(priority) {
     }
 }
 
+
 function renderPriorityIndicator(task, prioritySuffix) {
     let iconPath = getIconForPriority(task.priority);
     let element = document.getElementById(getTaskIdAsStringFromTask(task) + '_' + prioritySuffix);
     element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
+
 
 function getTaskIdAsStringFromTask(task) {
     for (let id in testTasks) {
@@ -147,19 +158,29 @@ function getTaskIdAsStringFromTask(task) {
     return null;
 }
 
+
 function getTaskByTaskId(taskId) {
     return testTasks[taskId];
 }
+
 
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 
-let startDropAcceptanceColumnId = null;
-let dragOverCounter = 0;
 
 function dragOverHandler(event) {
+    startDropAcceptanceColumnId = getCurrentColumnId(event)[0];
+    let currentColumnId = getCurrentColumnId(event)[1];
+    clearLastDropAcceptanceIfChangedColumn(currentColumnId);
+    setDropAcceptanceInCurrentColumn(currentColumnId);
+    event.preventDefault();
+}
+
+
+function getCurrentColumnId(event) {
     let currentColumnId = null;
+
     if (dragOverCounter < 1) {
         startDropAcceptanceColumnId = getIdOfCurrentColumn(event);        
         currentColumnId = startDropAcceptanceColumnId;
@@ -168,22 +189,29 @@ function dragOverHandler(event) {
     else {
         currentColumnId = getIdOfCurrentColumn(event);
     }
+    return [startDropAcceptanceColumnId, currentColumnId];
+}
 
-    if (lastDropAcceptanceColumnId && lastDropAcceptanceColumnId !== currentColumnId) {
+
+function clearLastDropAcceptanceIfChangedColumn(currentColumnId) {
+     if (lastDropAcceptanceColumnId && lastDropAcceptanceColumnId !== currentColumnId) {
         removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
     }    
-
     lastDropAcceptanceColumnId = currentColumnId;
-    
+}
+
+
+function setDropAcceptanceInCurrentColumn(currentColumnId) {
     if(startDropAcceptanceColumnId !== currentColumnId && currentColumnId !== null) {
         renderDropAcceptanceInColumn(currentColumnId);
     }
-    event.preventDefault();
 }
+
 
 function getIdOfCurrentColumn(event) {
     return event.currentTarget.id;
 }
+
 
 function renderDropAcceptanceInColumn(columnId) {
     const columnContent = document.getElementById(columnId);  
@@ -193,10 +221,12 @@ function renderDropAcceptanceInColumn(columnId) {
     removeNoTaskInfoElement(columnId);
 }
 
+
 function removeNoTaskInfoElement(columnId) {
     const columnContent = document.getElementById(columnId);
     findChildAndRemoveNoTaskElement(columnContent);
 }
+
 
 function findChildAndRemoveNoTaskElement(parentElement) {
     const noTaskClassName = 'no_task_yet';
@@ -205,6 +235,7 @@ function findChildAndRemoveNoTaskElement(parentElement) {
         noTaskElement.remove();
     }
 }
+
 
 function dropHandler(event) {
     event.preventDefault();
@@ -217,10 +248,12 @@ function dropHandler(event) {
     dragOverCounter = 0;
 }
 
+
 function removeDropAcceptanceFieldByColumnId(columnId) {
     const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
     columnOfDrop.forEach(drop => drop.remove());
 }
+
 
 function renderNoTaskInfoOnDOMLoad(){
     const columns = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
@@ -228,6 +261,7 @@ function renderNoTaskInfoOnDOMLoad(){
         checkIfNoTasksInColumn(columnId);
     });
 }
+
 
 function checkIfNoTasksInColumn(columnId) {
     const container = document.getElementById(columnId);
@@ -237,6 +271,7 @@ function checkIfNoTasksInColumn(columnId) {
     container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
     });
 }
+
 
 function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
@@ -262,140 +297,3 @@ renderTaskCard(testTasks.task_id_0123, 'inProgressColumn');
 renderSubtaskProgress(testTasks.task_id_0123);
 renderAssignedUserIcons(testTasks.task_id_0123);
 renderPriorityIndicator(testTasks.task_id_0123, 'priority');
-
-function openTaskInOverlay(taskId) {
-    let task = getTaskByTaskId(taskId);
-    document.getElementById('overlay').classList.add('show');
-    setTimeout(() => {
-        document.getElementById('overlay_content').classList.add('show');
-    }, 10);
-    renderOverlayContent(task, taskId);
-}
-
-function closeOverlay(event) {
-    if(event.target === event.currentTarget) {
-        removeShowClass();
-    }
-}
-
-function removeShowClass() {
-    const overlay = document.getElementById('overlay');
-    const content = document.getElementById('overlay_content');
-
-    if (overlay.classList.contains('show')) {
-        content.classList.remove('show');
-         setTimeout(() => {
-            overlay.classList.remove('show');
-        }, 500);
-    } 
-
-}
-
-function renderOverlayContent(task, taskId) {
-    const overlayContent = document.getElementById('overlay_content');
-    overlayContent.innerHTML = overlayContentTemplate(task, taskId);
-    renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
-    renderAssignedUserInfos(taskId, 'assigned_users_overlay');
-    renderSubtasksListItems(taskId);
-}
-
-function swapImage(button, isHover) {
-    const img = button.querySelector('img');
-    const normalSrc = button.getAttribute('data-normal-src');
-    const hoverSrc = button.getAttribute('data-hover-src');
-    img.src = isHover ? hoverSrc : normalSrc;
-    let p_tag = button.querySelector('p');
-    if (isHover) {
-        p_tag.style.color = "#29ABE2";
-        p_tag.style.fontFamily = "Inter_Bold";
-    } else {
-        p_tag.style.color = "#2A3647";
-        p_tag.style.fontFamily = "Inter";
-    }
-}
-
-function renderAssignedUserInfos(taskId, containerIdSuffix) {
-    let container = document.getElementById(taskId + '_' + containerIdSuffix);
-    let task = getTaskByTaskId(taskId);
-    for (let userId of task.assigned_to) {
-        const user = testUser[userId];
-        const initials = getInitialsFromUser(user);
-        const userName = user.name;
-        let userInfoHtml = assignedUserInfoTemplate(userName, initials);
-        container.innerHTML += userInfoHtml;
-    }
-}
-
-function renderSubtasksListItems(taskId) {
-    let containerId = taskId + '_subtasks_list';
-    let container = document.getElementById(containerId);
-    let task = getTaskByTaskId(taskId);
-    let subtaskCounter = 0;
-    for (let subtask of task.subtasks) {
-        subtaskCounter += 1;
-        let subtaskHtml = subtasksListItemTemplate(taskId, subtask.title, subtaskCounter);
-        container.innerHTML += subtaskHtml;
-        renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtask.done);
-    }
-}
-
-function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
-    const doneImgPath ="../assets/icons/board/checkbox_done.svg"; 
-    const undoneImgPath ="../assets/icons/board/checkbox_undone.svg";
-    let checkboxCustomId = taskId + '_subtask_checkbox_custom_' + subtaskCounter;
-    let checkboxCustomElement = document.getElementById(checkboxCustomId);
-    if (subtaskDone) {
-        checkboxCustomElement.innerHTML = `<img src="${doneImgPath}" alt="checkbox done icon">`;
-    } else {
-        checkboxCustomElement.innerHTML = `<img src="${undoneImgPath}" alt="checkbox undone icon">`;
-    }
-}
-
-function toggleSubtaskDone(taskId, subtaskCounter) {
-    let task = getTaskByTaskId(taskId);
-    let subtaskIndex = subtaskCounter - 1; 
-    task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
-    renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
-    renderSubtaskProgress(task);
-}
-
-function openEditTaskOverlay(taskId) {
-    const task = getTaskByTaskId(taskId);
-    const overlayContent = document.getElementById('overlay_content');
-    overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
-    editTaskTemplateWrapper(task);
-    renderSubtaskEditListItems(taskId);
-}
-
-function editTaskTemplateWrapper(task){
-    const taskId = getTaskIdAsStringFromTask(task);
-    const mainContent = document.getElementById('overlay_main_content');
-    let escapeTaskDescription = escapeTextareaContent(task.description);
-    mainContent.innerHTML = `
-    ${overlayEditTaskTitleTemplate(task)}
-    ${overlayEditTaskDescriptionTemplate(escapeTaskDescription)}
-    ${overlayEditTaskDueDateTemplate(task)}
-    ${overlayEditTaskPriorityTemplate(task)}
-    ${overlayEditTaskAssignedUsersTemplate(task)}
-    ${overlayEditTaskSubtasksTemplate(taskId)}`;
-}
-
-function escapeTextareaContent(text) {
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-}
-
-function renderSubtaskEditListItems(taskId) {
-    let containerId = taskId + '_subtasks_edit_list';
-    let subListContainer = document.getElementById(containerId);
-    let task = getTaskByTaskId(taskId);
-    let subtaskCounter = 0;
-    for (let subtask of task.subtasks) {
-        subtaskCounter += 1;
-        let subtaskHtml = overlayEditSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
-        subListContainer.innerHTML += subtaskHtml;
-    }
-}
