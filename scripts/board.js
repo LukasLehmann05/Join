@@ -1,10 +1,13 @@
+
+let lastDropAcceptanceColumnId = null;
+
 let testTasks = {
   "task_id_0123": 
     {
       "category": "Development",
       "title": "Implementiere Login-Funktion",
       "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-      "due_date": "10/12/2025",
+      "due_date": "2025-12-10",
       "priority": "Urgent",
       "assigned_to": [
         "user_id_1",
@@ -152,19 +155,78 @@ function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 
+let startDropAcceptanceColumnId = null;
+let dragOverCounter = 0;
+
 function dragOverHandler(event) {
+    let currentColumnId = null;
+    if (dragOverCounter < 1) {
+        startDropAcceptanceColumnId = getIdOfCurrentColumn(event);        
+        currentColumnId = startDropAcceptanceColumnId;
+        dragOverCounter++;
+    }
+    else {
+        currentColumnId = getIdOfCurrentColumn(event);
+    }
+
+    if (lastDropAcceptanceColumnId && lastDropAcceptanceColumnId !== currentColumnId) {
+        removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
+    }    
+
+    lastDropAcceptanceColumnId = currentColumnId;
+    
+    if(startDropAcceptanceColumnId !== currentColumnId && currentColumnId !== null) {
+        renderDropAcceptanceInColumn(currentColumnId);
+    }
     event.preventDefault();
+}
+
+function getIdOfCurrentColumn(event) {
+    return event.currentTarget.id;
+}
+
+function renderDropAcceptanceInColumn(columnId) {
+    const columnContent = document.getElementById(columnId);  
+    if (!columnContent.querySelector('.drop_acceptance')) {
+        columnContent.innerHTML += showDropAcceptanceTemplate();
+    }
+    removeNoTaskInfoElement(columnId);
+}
+
+function removeNoTaskInfoElement(columnId) {
+    const columnContent = document.getElementById(columnId);
+    findChildAndRemoveNoTaskElement(columnContent);
+}
+
+function findChildAndRemoveNoTaskElement(parentElement) {
+    const noTaskClassName = 'no_task_yet';
+    const noTaskElement = parentElement.querySelector(`.${noTaskClassName}`);
+    if (noTaskElement) {
+        noTaskElement.remove();
+    }
 }
 
 function dropHandler(event) {
     event.preventDefault();
-    const taskId = event.dataTransfer.getData("text/plain");  
+    const taskId = event.dataTransfer.getData("text/plain");
     const taskElement = document.getElementById(taskId);
-    const noTaskElement = event.currentTarget.querySelector('.no_task_yet');
-    if (noTaskElement) {
-        noTaskElement.remove();
-    }
     event.currentTarget.appendChild(taskElement);
+    taskElement.classList.remove('drag-tilt');
+    removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
+    startDropAcceptanceColumnId = null;
+    dragOverCounter = 0;
+}
+
+function removeDropAcceptanceFieldByColumnId(columnId) {
+    const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
+    columnOfDrop.forEach(drop => drop.remove());
+}
+
+function renderNoTaskInfoOnDOMLoad(){
+    const columns = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
+    columns.forEach(columnId => {
+        checkIfNoTasksInColumn(columnId);
+    });
 }
 
 function checkIfNoTasksInColumn(columnId) {
@@ -172,12 +234,7 @@ function checkIfNoTasksInColumn(columnId) {
     if (container.innerHTML.trim() === '') {
         renderNoTaskInfo(columnId);
     }
-}
-
-function renderNoTaskInfoOnDOMLoad(){
-    const columns = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
-    columns.forEach(columnId => {
-        checkIfNoTasksInColumn(columnId);
+    container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
     });
 }
 
@@ -208,7 +265,6 @@ renderPriorityIndicator(testTasks.task_id_0123, 'priority');
 
 function openTaskInOverlay(taskId) {
     let task = getTaskByTaskId(taskId);
-    console.log("Open task overlay for task ID:", taskId);
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
@@ -301,4 +357,37 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
     renderSubtaskProgress(task);
+}
+
+function openEditTaskOverlay(taskId) {
+    const task = getTaskByTaskId(taskId);
+    const overlayContent = document.getElementById('overlay_content');
+    overlayContent.innerHTML = '';
+    overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
+    editTaskTemplateWrapper(task);
+    renderSubtaskEditListItems(taskId);
+}
+
+function editTaskTemplateWrapper(task){
+    const taskId = getTaskIdAsStringFromTask(task);
+    const mainContent = document.getElementById('overlay_main_content');
+    mainContent.innerHTML = `
+    ${overlayEditTaskTitleTemplate(task)}
+    ${overlayEditTaskDescriptionTemplate(task)}
+    ${overlayEditTaskDueDateTemplate(task)}
+    ${overlayEditTaskPriorityTemplate(task)}
+    ${overlayEditTaskAssignedUsersTemplate(task)}
+    ${overlayEditTaskSubtasksTemplate(taskId)}`;
+}
+
+function renderSubtaskEditListItems(taskId) {
+    let containerId = taskId + '_subtasks_edit_list';
+    let subListContainer = document.getElementById(containerId);
+    let task = getTaskByTaskId(taskId);
+    let subtaskCounter = 0;
+    for (let subtask of task.subtasks) {
+        subtaskCounter += 1;
+        let subtaskHtml = overlayEditSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
+        subListContainer.innerHTML += subtaskHtml;
+    }
 }

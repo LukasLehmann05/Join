@@ -30,10 +30,20 @@ function noTaskDoneTemplate() {
             `
 }
 
+function showDropAcceptanceTemplate() {
+    return  `
+            <div class="drop_acceptance"></div>
+            `
+}
+
 function taskCardTemplate(task, taskId) {
     return  `
-            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
-            <div class="single_task_content" draggable="true" ondragstart="dragStartHandler(event)" id="${taskId}" onclick="openTaskInOverlay('${taskId}')">
+            <div class="single_task_content" 
+                draggable="true" 
+                ondragstart="dragStartHandler(event); this.classList.add('drag-tilt');" 
+                ondragend="this.classList.remove('drag-tilt');"
+                id="${taskId}" 
+                onclick="openTaskInOverlay('${taskId}')">
                 <p class="category">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
@@ -101,7 +111,7 @@ function overlayContentTemplate(task, taskId) {
             </section>
             <aside class="edit_overlay_button_container">
                 <button 
-                    class="edit_overlay_button seperator" 
+                    class="edit_overlay_button seperator_overlay" 
                     onclick="deleteTaskOverlay('${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
@@ -147,4 +157,119 @@ function subtasksListItemTemplate(taskId, title, counter) {
                 <p>${title}</p>
             </div>
             `;
+}
+
+function escapeTextareaContent(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+function overlayEditTaskTitleTemplate(task) {
+    return  `
+             <section class="edit_title_container">
+                <form class="input-form">
+                    <label for="task_title">Title</label>
+                    <input id="task_title" class="task-input" type="text" value="${task.title}" placeholder="Enter task title">
+                </form>
+            </section>
+            `
+}
+
+function overlayEditTaskDescriptionTemplate(task) {
+    return  `
+            <section class="edit_description_container">
+                <form class="input-form description">
+                    <label for="task_description">Description</label>
+                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${escapeTextareaContent(task.description)}</textarea>
+                </form>
+            </section>
+            `
+}
+
+function overlayEditTaskDueDateTemplate(task) {
+    return  `
+            <section class="edit_due_date_container">
+                <form class="input-form">
+                    <label for="task_due_date">Due date</label>
+                    <input id="task_due_date" class="task-input" type="date" value="${task.due_date}" placeholder="dd/mm/yyyy">
+                </form>
+            </section>
+            `
+}
+
+function overlayEditTaskPriorityTemplate(task) {
+    return  `
+            <section class="edit_priority_container">
+                <form class="input-form">
+                    <span class="priority_form_title">Priority</span>
+                    <section class="priority-section" id="priority_section">
+                       <button class="priority-button" id="button_prio_urgent" onclick="changePriority('urgent')" type="button">
+                            <p>Urgent</p>
+                            <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
+                        </button>
+                        <button class="priority-button bg-yellow" id="button_prio_medium" onclick="changePriority('medium')" type="button">
+                            <p>Medium</p>
+                            <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
+                        </button>
+                        <button class="priority-button" id="button_prio_low" onclick="changePriority('low')" type="button">
+                            <p>Low</p>
+                            <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
+                        </button>
+                    </section>
+                </form>
+            </section>
+            `
+}
+
+function overlayEditTaskAssignedUsersTemplate(task) {
+    return  `
+            <section class="edit_assigned_users_container">
+                <form class="input-form">
+                    <label for="task_assign">Assigned to</label>
+                    <select class="select-input" name="" id="task_assign">
+                        <option value="">Select contacts to assign</option>
+                    </select>
+                </form>
+            </section>
+            `
+}
+
+function overlayEditTaskSubtasksTemplate(taskId) {
+    return  `
+            <section class="edit_subtasks_container">
+                <form class="input-form">
+                    <label for="task_subtask">Subtasks</label>
+                    <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
+                </form>
+                <div class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></div>
+            </section>
+            `
+}
+
+function overlayEditSubtaskListItemTemplate(taskId, title, counter) {
+    return `
+           <ul class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">
+                <li>${title}</li>
+            </ul>
+
+            `;
+}
+
+function overlayEditTaskTemplate(task, taskId) {
+    return  `
+            <header class="overlay_header edit_overlay_header">
+                <button class="close_overlay_button" onclick="removeShowClass()">
+                    <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
+                </button>
+            </header>
+            <section class="overlay_main_content" id="overlay_main_content"></section>
+            <footer class="overlay_header edit_overlay_header">
+                <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
+                    <p>Ok</p>
+                    <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
+                </button>
+            </footer>
+            `
 }
