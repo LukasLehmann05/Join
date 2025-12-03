@@ -172,12 +172,19 @@ textarea.task-input {
 }
 
 .select-input {
-    padding: 12px 16px;
+    padding: 12px 40px 12px 16px;
     border: solid 1px;
     border-radius: 10px;
     border-color: #D1D1D1;
     font-size: 20px;
     line-height: 120%;
+    background-image: url('../assets/icons/addTask/dropdown.svg');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 24px 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .button-section {
