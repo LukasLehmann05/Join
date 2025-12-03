@@ -287,6 +287,10 @@
     border-radius: 10px;
 }
 
+.contact-element :hover {
+    background-color: #F6F7F8;
+}
+
 .contact-element {
     display: flex;
 }
