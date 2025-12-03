@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
     <link rel="stylesheet" href="../style/board_style.css">
     <link rel="stylesheet" href="../style/add_contact.css">
+    <link rel="stylesheet" href="/style/add_task.css">
 </head>
 
 <body class="body">
@@ -24,15 +25,15 @@
                     <img class="nav-icons" src="../assets/icons/sideBar/summary.svg" alt="summary icon">
                     <p>Summary</p>
                 </a>
-                <a href="#" class="sidebar-nav-section">
+                <a href="/html/add_task.html" class="sidebar-nav-section">
                     <img class="nav-icons" src="../assets/icons/sideBar/addTask.svg" alt="Add Task icon">
                     <p>Add Task</p>
                 </a>
-                <a href="#" class="sidebar-nav-section">
+                <a href="/html/board.html" class="sidebar-nav-section">
                     <img class="nav-icons" src="../assets/icons/sideBar/board.svg" alt="Board icon">
                     <p>Board</p>
                 </a>
-                <a href="#" class="sidebar-nav-section active">
+                <a href="/html/contacts.html" class="sidebar-nav-section active">
                     <img class="nav-icons" src="../assets/icons/sideBar/contacts.svg" alt="Contacts icon">
                     <p>Contacts</p>
                 </a>
@@ -209,11 +210,46 @@
                 <article id="mainView" class="contact-main-view">
                 </article>
             </section>
-            <dialog id="addContact" class="add-Contact">
-                <section class="main-left">
-                    <img class="logo" src="../assets/icons/logo/logoSmall.svg" alt="Join logo">
-                </section>
-                <section class="main-right"></section>
+            <dialog id="addContact" class="dialog-window">
+                <div class="dialog-content">
+                    <section class="main-left">
+                        <img class="logo" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
+                        <h1 class="white">Add Contact</h1>
+                        <p class="contact-sub white">Tasks are better with a team!</p>
+                        <div class="seperator-horizontal"></div>
+                    </section>
+                    <section class="main-right">
+                        <div class="two-letter-name">
+                            <img src="../assets/icons/contacts/person.svg" alt="placeholder for name">
+                        </div>
+                        <div>
+                            <button onclick="dialogClose()"><img src="../assets/icons/contacts/close.svg" alt="close window"></button>
+                            <label class="subtask-section name">
+                                <input type="text" placeholder="Name">
+                            </label>
+                            <label class="subtask-section mail">
+                                <input type="email" placeholder="Email">
+                            </label>
+                            <label class="subtask-section phone">
+                                <input type="number" placeholder="Phone">
+                            </label>
+                            <section class="button-section">
+                                <div class="clear-button">
+                                    <button class="action-buttons" onclick="clearAllInputs()">
+                                        <p>Cancel</p>
+                                        <img src="../assets/icons/contacts/close.svg" alt="clear icon">
+                                    </button>
+                                </div>
+                                <div class="create-task">
+                                    <button class="action-buttons create-button" onclick="createTask()">
+                                        <p>Create contact</p>
+                                        <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
+                                    </button>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </div>
             </dialog>
         </main>
     </article>
