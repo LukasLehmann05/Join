@@ -1,3 +1,67 @@
-.add-Contact{
-   
+dialog[open] {
+    display: flex;
+    z-index: 31;
+}
+
+.dialog-window {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    z-index: 21;
+}
+
+.dialog-content{
+    margin: auto;
+    display: flex;
+    width: 900px;
+}
+
+.main-left{
+    width: 40%;
+    background-color: #2A3647;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 20px;
+    align-items: center;
+}
+
+.main-right {
+    flex: 1;
+    background-color: white;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 20px;
+    display: flex;
+}
+
+.white{
+    color: white;
+}
+
+.seperator-horizontal{
+    width: 59px;
+    background-color: #29ABE2;
+    height: 3px;
+    border-radius: 3px;
+}
+.name::after {
+  content: "";
+  width: 20px;
+  background: url("../assets/icons/contacts/person.svg") center / contain no-repeat;
+}
+
+.mail::after {
+  content: "";
+  width: 20px;
+  background: url("../assets/icons/contacts/mail.svg") center / contain no-repeat;
+}
+
+.phone::after {
+  content: "";
+  width: 20px;
+  background: url("../assets/icons/contacts/call.svg") center / contain no-repeat;
 }
