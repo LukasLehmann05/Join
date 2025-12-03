@@ -101,6 +101,18 @@
     font-family: "Inter";
 }
 
+/* Make inputs (and textarea) fill their container width and include padding
+   in width calculation. Textarea should only resize vertically. */
+.task-input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+textarea.task-input {
+    resize: vertical;
+    min-height: 120px;
+}
+
 .task-input ::placeholder {
     opacity: 1;
     color: #D1D1D1;
@@ -154,7 +166,6 @@
 }
 
 .description {
-    flex: 1;
     font-size: 20px;
     line-height: 120%;
     font-family: "Inter";
