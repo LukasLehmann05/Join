@@ -159,9 +159,10 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
-function overlayEditTaskTemplate(task, taskId) {
+function overlayUpsertTaskTemplate(taskId) {
     return  `
             <header class="overlay_header edit_overlay_header">
+                <h1 class="overlay_title">Add Task</h1>
                 <button class="close_overlay_button" onclick="removeShowClass()">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
@@ -176,40 +177,40 @@ function overlayEditTaskTemplate(task, taskId) {
             `
 }
 
-function overlayEditTaskTitleTemplate(task) {
+function overlayUpsertTaskTitleTemplate(taskTitle) {
     return  `
              <section class="edit_title_container">
                 <form class="input-form">
                     <label for="task_title">Title</label>
-                    <input id="task_title" class="task-input" type="text" value="${task.title}" placeholder="Enter task title">
+                    <input id="task_title" class="task-input" type="text" value="${taskTitle}" placeholder="Enter task title">
                 </form>
             </section>
             `
 }
 
-function overlayEditTaskDescriptionTemplate(task_description) {
+function overlayUpsertTaskDescriptionTemplate(taskDescription) {
     return  `
             <section class="edit_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
-                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${task_description}</textarea>
+                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${taskDescription}</textarea>
                 </form>
             </section>
             `
 }
 
-function overlayEditTaskDueDateTemplate(task) {
+function overlayUpsertTaskDueDateTemplate(taskDueDate) {
     return  `
             <section class="edit_due_date_container">
                 <form class="input-form">
                     <label for="task_due_date">Due date</label>
-                    <input id="task_due_date" class="task-input" type="date" value="${task.due_date}" placeholder="dd/mm/yyyy">
+                    <input id="task_due_date" class="task-input" type="date" value="${taskDueDate}" placeholder="dd/mm/yyyy">
                 </form>
             </section>
             `
 }
 
-function overlayEditTaskPriorityTemplate(task) {
+function overlayUpsertTaskPriorityTemplate() {
     return  `
             <section class="edit_priority_container">
                 <form class="input-form">
@@ -233,20 +234,29 @@ function overlayEditTaskPriorityTemplate(task) {
             `
 }
 
-function overlayEditTaskAssignedUsersTemplate(task) {
+function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
             <section class="edit_assigned_users_container">
                 <form class="input-form">
                     <label for="task_assign">Assigned to</label>
-                    <select class="select-input" name="" id="task_assign">
-                        <option value="">Select contacts to assign</option>
-                    </select>
+                    <button class="contact-button" type="button" onclick="showContacts()">
+                        <p>Select contacts to assign</p>
+                        <img src="../assets/icons/addTask/dropdown.svg" alt="dropdown_icon">
+                    </button>
+                    <div class="contact-selector" id="contact_selector">
+                        <ul id="task_assign">
+                            
+                        </ul>
+                    </div>
+                    <aside id="rendered_contact_images" class="rendered-contacts">
+                        
+                    </aside>
                 </form>
             </section>
             `
 }
 
-function overlayEditTaskSubtasksTemplate(taskId) {
+function overlayUpsertTaskSubtasksTemplate(taskId) {
     return  `
             <section class="edit_subtasks_container">
                 <form class="input-form">
@@ -258,7 +268,7 @@ function overlayEditTaskSubtasksTemplate(taskId) {
             `
 }
 
-function overlayEditSubtaskListItemTemplate(taskId, title, counter) {
+function overlayUpsertSubtaskListItemTemplate(taskId, title, counter) {
     return `
            <ul class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">
                 <li>${title}</li>
@@ -266,3 +276,16 @@ function overlayEditSubtaskListItemTemplate(taskId, title, counter) {
             `;
 }
 
+function overlayUpsertCategoryOptionTemplate() {
+    return `
+            <form class="input-form" category_template>
+                <label for="task_category">Category<span class="required">*</span></label>
+                <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
+                    <option value="">Select task category</option>
+                    <option value="Technical Task">Technical Task</option>
+                    <option value="User Story">User Story</option>
+                </select>
+                <p id="required_category" class="required-info">This field is required</p>
+            </form>
+            `
+}
