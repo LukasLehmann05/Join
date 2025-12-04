@@ -291,3 +291,12 @@ function overlayUpsertCategoryOptionTemplate() {
             </section>
             `
 }
+
+function overlayUpsertTaskDetailContainerTemplate() {
+    return  `
+            <section class="task_details_container" id="task_details_container_1"></section>
+            <section class="seperator"></section>
+            <section class="task_details_container" id="task_details_container_2"></section>
+            `
+
+}
