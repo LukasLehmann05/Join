@@ -52,9 +52,22 @@
                     <a href="#">
                         <img src="../assets/icons/header/help.svg" alt="help icon">
                     </a>
-                    <a href="#">
-                        <img src="../assets/icons/header/user_placeholder.svg" alt="user icon">
-                    </a>
+                    <button type="button" class="avatar-wrapper" id="avatar-button">
+                <div id="header-avatar" class="header-avatar"></div>
+            </button>
+
+            <!-- Dropdown-Menü -->
+            <div id="avatar-menu" class="avatar-menu hidden">
+                <button type="button" class="avatar-menu-item" id="menu-legal">
+                    Legal Notice
+                </button>
+                <button type="button" class="avatar-menu-item" id="menu-privacy">
+                    Privacy Policy
+                </button>
+                <button type="button" class="avatar-menu-item" id="menu-logout">
+                    Log out
+                </button>
+            </div>
                 </section>
             </nav>
         </header>
@@ -109,8 +122,8 @@
             </section>
 
         <section class="summary-greeting-section">
-            <p class="greeting-text">Good morning,</p>
-            <h2 class="greeting-name">Sofia Müller</h2>
+            <p class="greeting-text">Good morning!</p>
+            <h2 class="greeting-name"></h2>
         </section>
 
     </div> 
@@ -141,7 +154,8 @@
 </main>
 
     </article>
-    
+
+    <script src="../scripts/summary.js" defer></script>
 </body>
 
 </html>
