@@ -113,8 +113,13 @@ function openEditTaskOverlay(taskId) {
 
 
 function editTaskTemplateWrapper(taskId){
-    const task = getTaskByTaskId(taskId);
-    const taskId = getTaskIdAsStringFromTask(task);
+    let task = {};
+    if (taskId.startsWith('new_task_id_')) {
+        task = createEmptyTask();
+    } else {
+        task = getTaskByTaskId(taskId);
+    }
+    // const taskId = getTaskIdAsStringFromTask(task);
     const mainContent = document.getElementById('overlay_main_content');
     let escapeTaskDescription = escapeTextareaContent(task.description);
     mainContent.innerHTML = `
@@ -125,6 +130,19 @@ function editTaskTemplateWrapper(taskId){
     ${overlayUpsertTaskAssignedUsersTemplate()}
     ${overlayUpsertCategoryOptionTemplate()}
     ${overlayUpsertTaskSubtasksTemplate(taskId)}`;
+}
+
+
+function createEmptyTask() {
+    return {
+        assigned_to: [],
+        category: "",
+        description: "",
+        due_date: "",
+        priority: "low",
+        subtasks: [],
+        title: ""
+    };
 }
 
 
@@ -150,27 +168,13 @@ function escapeTextareaContent(text) {
 
 
 function openAddTaskOverlay() {
-    const task = createEmptyTask();
     // const taskId = generateNewTaskId(); // sollte von Firebase kommen
-    const taskId = 'task_id_' + Date.now(); // temporär
+    const taskId = 'new_task_id_' + Date.now(); // temporär
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     renderOverlayAddTask(taskId);
-}
-
-
-function createEmptyTask() {
-    return {
-        assigned_to: [],
-        category: "",
-        description: "",
-        due_date: "",
-        priority: "low",
-        subtasks: [],
-        title: ""
-    };
 }
 
 
