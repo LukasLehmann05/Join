@@ -231,3 +231,25 @@
     font-weight: 400;
     font-family: "Inter";
 }
+
+.overlay_header .overlay_title{
+    visibility: hidden;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.overlay_header .overlay_title.show{
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.overlay_content .category_template{
+    visibility: hidden;
+}
+
+.overlay_content .category_template.show{
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
