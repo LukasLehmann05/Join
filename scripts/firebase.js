@@ -1,209 +1,140 @@
-const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
+// firebase.js
 
+const FIREBASE_BASE_URL = 'https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app';
 
 /**
- * fetches data onetime and stores it in const "AllData" for everybodys use at the start
- * @async @global
+ * Holt die komplette "join"-Struktur aus der Realtime Database.
  */
-async function fetchAllDataGlobal() {
-    let AllData = {};
-    let joinFetch = await fetch(BASE_URL + ".json");
-    let joinData = await joinFetch.json();
-    return AllData.data = joinData;
-};
-
-
-//contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr, userId) {
-    const newTask = {
-        "category": task_category,
-        "title": task_title,
-        "description": task_description,
-        "due_date": task_due_date,
-        "priority": task_priority,
-        "state": task_state,
-        "assigned_to": allAssigneesArr,
-        "subtasks": allSubtasksArr,
-    }
-
-    let response = await fetch(`${BASE_URL}/tasks.json`, {
-        method: 'POST',
-        body: JSON.stringify(newTask),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    if (!response.ok) {
-        throw new Error('Error adding task: ' + response.status);
-    }
-    else {
-        let responseData = await response.json();
-        let newTaskId = responseData.name;
-        await assignNewTaskToUserById(newTaskId, userId);
-        if (window.location.pathname.endsWith('board.html')) {
-            displayNewTaskOnBoard(newTaskId, newTask);
-        }
-    }
-}
-
-
-async function updateTask(taskId, taskToUpdate) {
-    try {
-        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(taskToUpdate),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        if (!response.ok) {
-            throw new Error('Error updating task: ' + response.status);
-            }
-    } catch (error) {
-        console.error('Error updating task:', error)
-    }
-}
-
-
-async function deleteTask(taskId) {
-    try {
-        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-            method: 'DELETE'
-        })
-        if (!response.ok) {
-            throw new Error('Error deleting task: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error deleting task:', error)
-    }
-}
-
-
-async function getTaskById(taskId) {
-    try {
-    let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
-    let taskData = await taskFetch.json();
-    return taskData;
-    } catch (error) {
-        console.error('Error fetching task by ID:', error)
-        return null;
-    }
-}
-
-
 async function fetchAllData() {
-    let joinFetch = await fetch(BASE_URL + ".json")
-    let joinData = await joinFetch.json()
-    return joinData
+    const res = await fetch(`${FIREBASE_BASE_URL}/join.json`);
+    if (!res.ok) {
+        throw new Error('Fehler beim Laden der Daten: ' + res.status);
+    }
+    const data = await res.json();
+    return data || {};
 }
 
+/**
+ * Task in der DB speichern (Platzhalter – kannst du später ausfüllen)
+ */
+function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, all_contacts, all_subtasks) {
+    // TODO: Hier später echte Task-Speicherung einbauen
+    console.log('addTaskToDB noch nicht implementiert');
+}
+
+/* ==========================
+   USER / GUEST BACKEND-LOGIK
+   ========================== */
 
 /**
- *department contacts: post new Contact that got add to database
+ * Holt alle User aus /join/users.
  */
-async function postNewContactToDatabase(newUser) {
-    await fetch(BASE_URL + `/contacts.json`, {
+async function getAllUsers() {
+    const res = await fetch(`${FIREBASE_BASE_URL}/join/users.json`);
+    if (!res.ok) {
+        throw new Error('Fehler beim Laden der User: ' + res.status);
+    }
+    const data = await res.json();
+    return data || {};
+}
+
+/**
+ * Sucht einen User per E-Mail in /join/users.
+ * Rückgabe: { id, ...user } oder null
+ */
+async function getUserByEmail(email) {
+    const users = await getAllUsers();
+
+    for (const userId in users) {
+        const user = users[userId];
+        if (user && user.email && user.email.toLowerCase() === email.toLowerCase()) {
+            return { id: userId, ...user };
+        }
+    }
+
+    return null;
+}
+
+/**
+ * Legt einen neuen User in /join/users an.
+ * ⚠️ Nur zu Lernzwecken: Passwort im Klartext!
+ */
+async function createUserInDB(name, email, password) {
+    const newUser = {
+        name,
+        email,
+        password, // in echten Projekten: niemals Klartext!
+        role: 'user',
+        createdAt: new Date().toISOString()
+    };
+
+    const res = await fetch(`${FIREBASE_BASE_URL}/join/users.json`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(newUser)
     });
-};
 
+    if (!res.ok) {
+        throw new Error('Fehler beim Erstellen des Users: ' + res.status);
+    }
+
+    const resData = await res.json();
+    const id = resData.name; // Firebase generierte ID
+
+    return { id, ...newUser };
+}
 
 /**
- *department contacts: deletes this single contact in firebase
+ * Legt einen Guest-User in der DB an.
+ * Rückgabe: { id, name, email, role }
  */
-async function deleteThisContactFromDatabaseById(contactID) {
-    await fetch(BASE_URL + `/contacts/${contactID}.json`, {
-        method: 'DELETE',
+async function createGuestUserInDB() {
+    const guestUser = {
+        name: 'Guest',
+        email: 'guest@example.com',
+        role: 'guest',
+        createdAt: new Date().toISOString()
+    };
+
+    const res = await fetch(`${FIREBASE_BASE_URL}/join/users.json`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-    })
-};
-
-
-/**
- *department contacts: post edited contact information in firebase
- */
-async function editContactDataInDatabase(editedUser, contactID) {
-    await fetch(BASE_URL + `/contacts/${contactID}.json`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(editedUser),
+        body: JSON.stringify(guestUser)
     });
-};
 
+    if (!res.ok) {
+        throw new Error('Fehler beim Erstellen des Guest-Users: ' + res.status);
+    }
+
+    const resData = await res.json();
+    const id = resData.name; // Firebase gibt die generierte ID unter "name" zurück
+
+    return { id, ...guestUser };
+}
 
 /**
- *department contacts: get last contact id that was added to the database
+ * Prüft, ob es bereits einen Guest-User gibt.
+ * Wenn ja → diesen zurückgeben
+ * Wenn nein → neuen Guest-User anlegen.
  */
-async function getLastContactAddedFromDatabase() {
-    let joinFetch = await fetch(BASE_URL + `/contacts.json`)
-    let joinData = await joinFetch.json();
-    return Object.keys(joinData).at(-1);
-};
+async function getOrCreateGuestUser() {
+    const users = await getAllUsers();
 
-
-async function getContactById(contactID) {
-    try {
-    let contactFetch = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
-    if (!contactFetch.ok) {
-        throw new Error('Network response was not ok');
-    }
-    let contactData = await contactFetch.json();
-    if (contactData === null) {
-        return null;
-    }
-    return contactData;
-    } catch (error) {
-        console.error('Error fetching contact by ID:', error)
-        return null;
-    }
-}
-
-
-async function getAllTaskIdByUserId(userId) {
-    try {
-        let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
-        let joinDataAllTasksByUser = await joinFetchAllTasks.json();
-        let taskIdsByUser = [];
-        for (let taskId in joinDataAllTasksByUser) {
-            taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
+    // nach User mit role === 'guest' suchen
+    for (const userId in users) {
+        const user = users[userId];
+        if (user && user.role === 'guest') {
+            return {
+                id: userId,
+                ...user
+            };
         }
-        if (!joinFetchAllTasks.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return taskIdsByUser;
-    } catch (error) {
-        console.error('Error fetching tasks by user ID:', error);
     }
-}
 
-
-async function assignNewTaskToUserById(taskId, userId) {
-    try {
-        let userTasksArr = await getAllTaskIdByUserId(userId);
-        let taskObj = {[taskId]: true};
-        if (!userTasksArr) {
-            userTasksArr = [];
-        }
-        userTasksArr.push(taskObj);
-        let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(userTasksArr),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Error assigning task to user: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error assigning task to user:', error)
-    }
+    // kein Guest vorhanden → neu anlegen
+    return await createGuestUserInDB();
 }
