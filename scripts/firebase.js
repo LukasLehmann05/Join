@@ -17,8 +17,6 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
             'Content-Type': 'application/json'
         }
     })
-    let data = await response.json()
-    console.log('Task added:', data)
 }
 
 async function fetchAllData() {
