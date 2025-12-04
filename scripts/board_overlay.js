@@ -162,12 +162,13 @@ function openAddTaskOverlay() {
 
 function createEmptyTask() {
     return {
-        title: "",
+        assigned_to: [],
+        category: "",
         description: "",
         due_date: "",
         priority: "low",
-        assigned_to: [],
-        subtasks: []
+        subtasks: [],
+        title: ""
     };
 }
 
