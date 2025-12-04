@@ -86,25 +86,8 @@
 
 .overlay_main_content{
     display: flex;
-    gap: 8px;
+    gap: 24px;
     flex-direction: column;
-}
-
-.overlay_content .show_separator{
-    flex-direction: row;
-}
-
-.overlay_content.add_task_attributes{
-    width: 80%;
-    padding: 64px 5%;
-}
-
-.overlay_main_content .task_details_container{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex: 1;
-    font-family: "Inter";
 }
 
 .overlay_main_content .due_date_info .attribute,
@@ -143,7 +126,7 @@
     gap:8px
 }
 
-.overlay_content .edit_overlay_button_container .separator_overlay{
+.overlay_content .edit_overlay_button_container .seperator_overlay{
     border-right: 1px solid #A8A8A8;
 }
 
@@ -203,27 +186,27 @@
     justify-content: center;
 }
 
-.overlay_content .upsert_overlay_footer{
+.overlay_content .edit_overlay_header{
     justify-content: flex-end;
 }
 
 .overlay_content form label,
-.overlay_content form p{
+.overlay_content form span{
     color: #2A3647;
     font-family: "Inter";
     font-size: 20px;
 }
 
-.overlay_content .upsert_priority_container .priority_form_title{
+.overlay_content .edit_priority_container .priority_form_title{
     font-family: "Inter_Bold";
 }
 
-.overlay_content .upsert_description_container form.input-form.description{
+.overlay_content .edit_description_container form.input-form.description{
     flex: unset;
   
 }
 
-.overlay_content .upsert_description_container form textarea{
+.overlay_content .edit_description_container form textarea{
     height: calc( 120px - 24px );
     line-height: 120%;
     font-size: 20px;
@@ -235,78 +218,38 @@
     overflow-y: auto;
 }
 
-.overlay_content .upsert_subtasks_container .subtasks_upsert_list{
+.overlay_content .edit_subtasks_container .subtasks_edit_list{
     margin-top: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.overlay_header h1{
+.overlay_content .edit_subtasks_container .subtasks_edit_list .subtask_edit_list_item{
+    list-style-type: disc;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Inter";
+}
+
+.overlay_header .overlay_title{
     visibility: hidden;
-    opacity: 0;
-    height: 24px;
+    font-size: 24px;
     font-weight: 700;
 }
 
-.overlay_header h1.show{
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-    height: auto;
-}
-
-.overlay_content .upsert_category_container{
-    visibility: hidden;
-    opacity: 0;
-    height: 0;
-    min-height: 0;
-    max-height: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    pointer-events: none;
-    display: none;
-}
-
-.overlay_content .upsert_category_container.show{
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-    height: unset;
-    min-height: unset;
-    max-height: unset;
-    padding: unset;
-    margin: unset;
-    overflow: unset;
-    pointer-events: unset;
-    display: unset;
-}
-
-.overlay_separator_add_task{
-    width: 1px;
-    background-color: #D1D1D1;
-    margin: 0px 5%;
-    visibility: hidden;
-}
-
-.overlay_separator_add_task.show{
+.overlay_header .overlay_title.show{
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
 }
 
-.overlay_content .action-button-section{
-    margin-top: 12px;
-}
-
-.overlay_content .action-button-section .required-text,
-.overlay_content .action-button-section .button-section .clear-button{
+.overlay_content .category_template{
     visibility: hidden;
 }
 
-.overlay_content .action-button-section .required-text.show,
-.overlay_content .action-button-section .button-section .clear-button.show{
+.overlay_content .category_template.show{
     visibility: visible;
-
+    opacity: 1;
+    transition-delay: 0s;
 }
