@@ -184,4 +184,11 @@ function renderOverlayAddTask(taskId) {
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     editTaskTemplateWrapper(taskId);
+    showTitleAndCategoryInAddTaskOverlay();
+}
+
+
+function showTitleAndCategoryInAddTaskOverlay() {
+    document.getElementById('overlay_title').classList.add('show');
+    document.getElementsByClassName('edit_category_container')[0].classList.add('show');
 }
