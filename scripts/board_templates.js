@@ -162,7 +162,7 @@ function subtasksListItemTemplate(taskId, title, counter) {
 function overlayUpsertTaskTemplate(taskId) {
     return  `
             <header class="overlay_header edit_overlay_header">
-                <h1 class="overlay_title">Add Task</h1>
+                <h1 class="overlay_title" id="overlay_title">Add Task</h1>
                 <button class="close_overlay_button" onclick="removeShowClass()">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
@@ -278,14 +278,16 @@ function overlayUpsertSubtaskListItemTemplate(taskId, title, counter) {
 
 function overlayUpsertCategoryOptionTemplate() {
     return `
-            <form class="input-form" category_template>
-                <label for="task_category">Category<span class="required">*</span></label>
-                <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
-                    <option value="">Select task category</option>
-                    <option value="Technical Task">Technical Task</option>
-                    <option value="User Story">User Story</option>
-                </select>
-                <p id="required_category" class="required-info">This field is required</p>
-            </form>
+            <section class="edit_category_container">
+                <form class="input-form" category_template>
+                    <label for="task_category">Category<span class="required">*</span></label>
+                    <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
+                        <option value="">Select task category</option>
+                        <option value="Technical Task">Technical Task</option>
+                        <option value="User Story">User Story</option>
+                    </select>
+                    <p id="required_category" class="required-info">This field is required</p>
+                </form>
+            </section>
             `
 }
