@@ -197,4 +197,29 @@
         left: 40px;        
     }
 }
-    
+    .signup-toast {
+    position: fixed;
+    top: 70px;                  /* Höhe wie im Join-Original */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2A3647;  /* Dunkelblau */
+    color: white;
+    padding: 12px 22px;
+    border-radius: 20px;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.signup-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.hidden {
+    display: none;
+}

@@ -10,6 +10,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById("signup-password");
     const passwordConfirmInput = document.getElementById("signup-password-confirm");
 
+    function showSignupToast() {
+        const toast = document.getElementById("signup-toast");
+        if (!toast) return;
+
+        toast.classList.remove("hidden");
+
+        setTimeout(() => {
+            toast.classList.add("show");
+        }, 10);
+
+        // nach 2 Sekunden wieder ausblenden
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.classList.add("hidden"), 300);
+        }, 2000);
+    }
+
     // Checkbox steuert Button aktiv/deaktiv
     checkbox.addEventListener("change", () => {
         if (checkbox.checked) {
@@ -60,21 +77,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Neuen User in der DB anlegen
             const newUser = await createUserInDB(name, email, password);
             console.log("New user created:", newUser);
 
-            if (!newUser) {
-                alert("User could not be created.");
-                return;
-            }
+            // Toast anzeigen
+            showSignupToast();
 
-            // Direkt einloggen
-            localStorage.setItem("currentUser", JSON.stringify(newUser));
-            localStorage.setItem("isGuest", "false");
+            // kurze Delay, damit Toast sichtbar wird, bevor redirect passiert
+            setTimeout(() => {
+                // Direkt einloggen
+                localStorage.setItem("currentUser", JSON.stringify(newUser));
+                localStorage.setItem("isGuest", "false");
 
-            // Weiterleitung zur Summary
-            window.location.href = "../html/summary.html";
+                window.location.href = "../html/summary.html";
+            }, 1200);
         } catch (error) {
             console.error("Sign up failed:", error);
             alert("Sign up failed: " + error.message);
