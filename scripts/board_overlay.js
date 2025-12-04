@@ -111,25 +111,35 @@ function openEditTaskOverlay(taskId) {
     renderSubtaskEditListItems(taskId);
 }
 
-
+// baue hieraus einen taskTemplateHandler mit add und edit funktion
+// dieser ruft entsprechenden template wrapper auf
 function editTaskTemplateWrapper(taskId){
-    let task = {};
-    if (taskId.startsWith('new_task_id_')) {
-        task = createEmptyTask();
-    } else {
-        task = getTaskByTaskId(taskId);
-    }
-    // const taskId = getTaskIdAsStringFromTask(task);
-    const mainContent = document.getElementById('overlay_main_content');
+    let task = checkTaskToAddOrEdit(taskId);
     let escapeTaskDescription = escapeTextareaContent(task.description);
-    mainContent.innerHTML = `
+    let mainContent = document.getElementById('overlay_main_content');
+    let detailContainerHtml = overlayUpsertTaskDetailContainerTemplate();
+    mainContent.innerHTML = detailContainerHtml;
+    let taskDetailsContainer1 = document.getElementById('task_details_container_1');
+    let taskDetailsContainer2 = document.getElementById('task_details_container_2');
+    taskDetailsContainer1.innerHTML = `
     ${overlayUpsertTaskTitleTemplate(task.title)}
     ${overlayUpsertTaskDescriptionTemplate(escapeTaskDescription)}
-    ${overlayUpsertTaskDueDateTemplate(task.due_date)}
+    ${overlayUpsertTaskDueDateTemplate(task.due_date)}`; 
+
+    taskDetailsContainer2.innerHTML = `
     ${overlayUpsertTaskPriorityTemplate()}
     ${overlayUpsertTaskAssignedUsersTemplate()}
     ${overlayUpsertCategoryOptionTemplate()}
     ${overlayUpsertTaskSubtasksTemplate(taskId)}`;
+}
+
+
+function checkTaskToAddOrEdit(taskId) {
+    if (taskId.startsWith('new_task_id_')) {
+        return createEmptyTask();
+    } else {
+        return getTaskByTaskId(taskId);
+    }
 }
 
 
