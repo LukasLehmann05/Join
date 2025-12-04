@@ -104,26 +104,27 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 
 
 function openEditTaskOverlay(taskId) {
-    const task = getTaskByTaskId(taskId);
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayEditTaskTemplate(task, taskId);
-    editTaskTemplateWrapper(task);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
+    editTaskTemplateWrapper(taskId);
     renderSubtaskEditListItems(taskId);
 }
 
 
-function editTaskTemplateWrapper(task){
+function editTaskTemplateWrapper(taskId){
+    const task = getTaskByTaskId(taskId);
     const taskId = getTaskIdAsStringFromTask(task);
     const mainContent = document.getElementById('overlay_main_content');
     let escapeTaskDescription = escapeTextareaContent(task.description);
     mainContent.innerHTML = `
-    ${overlayEditTaskTitleTemplate(task)}
-    ${overlayEditTaskDescriptionTemplate(escapeTaskDescription)}
-    ${overlayEditTaskDueDateTemplate(task)}
-    ${overlayEditTaskPriorityTemplate(task)}
-    ${overlayEditTaskAssignedUsersTemplate(task)}
-    ${overlayEditTaskSubtasksTemplate(taskId)}`;
+    ${overlayUpsertTaskTitleTemplate(task.title)}
+    ${overlayUpsertTaskDescriptionTemplate(escapeTaskDescription)}
+    ${overlayUpsertTaskDueDateTemplate(task.due_date)}
+    ${overlayUpsertTaskPriorityTemplate()}
+    ${overlayUpsertTaskAssignedUsersTemplate()}
+    ${overlayUpsertCategoryOptionTemplate()}
+    ${overlayUpsertTaskSubtasksTemplate(taskId)}`;
 }
 
 
@@ -134,7 +135,7 @@ function renderSubtaskEditListItems(taskId) {
     let subtaskCounter = 0;
     for (let subtask of task.subtasks) {
         subtaskCounter += 1;
-        let subtaskHtml = overlayEditSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
+        let subtaskHtml = overlayUpsertSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
         subListContainer.innerHTML += subtaskHtml;
     }
 }
@@ -156,7 +157,7 @@ function openAddTaskOverlay() {
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
-    renderOverlayAddTask(task, taskId);
+    renderOverlayAddTask(taskId);
 }
 
 
@@ -173,7 +174,10 @@ function createEmptyTask() {
 }
 
 
-function renderOverlayAddTask(task, taskId) {
+function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     // overlayContent.innerHTML = overlayContentTemplate(task, taskId);
+    overlayContent.innerHTML = '';
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
+    editTaskTemplateWrapper(taskId);
 }
