@@ -25,6 +25,15 @@ function getCurrentUserSafe() {
     }
 }
 
+function requireAuth() {
+    const user = getCurrentUserSafe();
+
+    if (!user) {
+        // Kein gültiger User -> zurück zur Login-Seite
+        window.location.href = '../html/login.html';
+    }
+}
+
 function renderHeaderAvatar() {
     const avatarElement = document.getElementById('header-avatar');
     if (!avatarElement) return;
@@ -116,6 +125,7 @@ function setupAvatarMenu() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    requireAuth();
     renderHeaderAvatar();
     setupAvatarMenu();
     renderGreeting();
