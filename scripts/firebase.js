@@ -19,6 +19,41 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
     })
 }
 
+//fieldstoupdate == object with key value pairs (title : "new title")
+async function updateTask(taskId, fieldsToUpdate) {
+    try {
+        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
+            method: 'PATCH',
+            body: JSON.stringify(fieldsToUpdate),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (response.ok) {
+            console.log('Task updated successfully')
+        } else {
+            console.error('Error updating task:', response.status)
+        }
+    } catch (error) {
+        console.error('Error updating task:', error)
+    }
+}
+
+async function deleteTask(taskId) {
+    try {
+        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
+            method: 'DELETE'
+        })
+        if (response.ok) {
+            console.log('Task deleted successfully')
+        } else {
+            console.error('Error deleting task:', response.status)
+        }
+    } catch (error) {
+        console.error('Error deleting task:', error)
+    }
+}
+
 async function fetchAllData() {
     let joinFetch = await fetch('https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join.json')
     let joinData = await joinFetch.json()
