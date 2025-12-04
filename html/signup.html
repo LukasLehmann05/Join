@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../style/login.css">
     <link rel="stylesheet" href="../style/signup.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
-    <script src="../js/signup.js" defer></script>
+    
 </head>
 <body class="body">
 
@@ -29,43 +29,44 @@
             <h1 class="login-title">Sign up</h1>
 
             <form class="login-form">
-     
-                <div class="input-wrapper">
-                    <input type="text" class="login-input" placeholder="Name" required>
-                    <img src="../assets/icons/contacts/person.svg" alt="User icon" class="input-icon">
-                </div>
 
-                <div class="input-wrapper">
-                    <input type="email" class="login-input" placeholder="Email" required>
-                    <img src="../assets/icons/contacts/mail.svg" alt="Email icon" class="input-icon">
-                </div>
+    <div class="input-wrapper">
+        <input type="text" id="signup-name" class="login-input" placeholder="Name" required>
+        <img src="../assets/icons/contacts/person.svg" alt="User icon" class="input-icon">
+    </div>
 
-                <div class="input-wrapper">
-                    <input type="password" class="login-input" placeholder="Password" required>
-                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
-                </div>
+    <div class="input-wrapper">
+        <input type="email" id="signup-email" class="login-input" placeholder="Email" required>
+        <img src="../assets/icons/contacts/mail.svg" alt="Email icon" class="input-icon">
+    </div>
 
-                <div class="input-wrapper">
-                    <input type="password" class="login-input" placeholder="Confirm Password" required>
-                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
-                </div>
+    <div class="input-wrapper">
+        <input type="password" id="signup-password" class="login-input" placeholder="Password" required>
+        <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+    </div>
 
-                <label class="privacy-check">
-                    <input type="checkbox" id="privacy-checkbox">
-                    <span> I accept the <a href="../html/privacyPolicy.html">Privacy policy</a></span>
-                </label>
+    <div class="input-wrapper">
+        <input type="password" id="signup-password-confirm" class="login-input" placeholder="Confirm Password" required>
+        <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+    </div>
 
-                <div class="login-buttons">
-                    <button
-                        type="submit"
-                        class="login-button-primary signup-button-primary"
-                        id="signup-btn"
-                        disabled
-                    >
-                        Sign up
-                    </button>
-                </div>
-            </form>
+    <label class="privacy-check">
+        <input type="checkbox" id="privacy-checkbox">
+        <span> I accept the <a href="../html/privacyPolicy.html">Privacy policy</a></span>
+    </label>
+
+    <div class="login-buttons">
+        <button
+            type="submit"
+            class="login-button-primary signup-button-primary"
+            id="signup-btn"
+            disabled
+        >
+            Sign up
+        </button>
+    </div>
+</form>
+
         </main>
 
         <footer class="login-footer">
@@ -74,5 +75,7 @@
         </footer>
     </div>
 
+    <script src="../scripts/firebase.js"></script>
+    <script src="../scripts/signup.js" defer></script>
 </body>
 </html>
