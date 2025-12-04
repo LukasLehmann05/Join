@@ -159,6 +159,23 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
+function overlayEditTaskTemplate(task, taskId) {
+    return  `
+            <header class="overlay_header edit_overlay_header">
+                <button class="close_overlay_button" onclick="removeShowClass()">
+                    <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
+                </button>
+            </header>
+            <section class="overlay_main_content" id="overlay_main_content"></section>
+            <footer class="overlay_header edit_overlay_header">
+                <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
+                    <p>Ok</p>
+                    <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
+                </button>
+            </footer>
+            `
+}
+
 function overlayEditTaskTitleTemplate(task) {
     return  `
              <section class="edit_title_container">
@@ -246,23 +263,6 @@ function overlayEditSubtaskListItemTemplate(taskId, title, counter) {
            <ul class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">
                 <li>${title}</li>
             </ul>
-
             `;
 }
 
-function overlayEditTaskTemplate(task, taskId) {
-    return  `
-            <header class="overlay_header edit_overlay_header">
-                <button class="close_overlay_button" onclick="removeShowClass()">
-                    <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
-                </button>
-            </header>
-            <section class="overlay_main_content" id="overlay_main_content"></section>
-            <footer class="overlay_header edit_overlay_header">
-                <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
-                    <p>Ok</p>
-                    <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
-                </button>
-            </footer>
-            `
-}
