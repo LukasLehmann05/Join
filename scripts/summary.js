@@ -3,20 +3,6 @@ function getInitials(name) {
 
     const parts = name.trim().split(" ");
 
-    // Ein Name → erster Buchstabe
-    if (parts.length === 1) {
-        return parts[0][0].toUpperCase();
-    }
-
-    // Zwei oder mehr Namen → erste zwei Buchstaben
-    return (parts[0][0] + parts[1][0]).toUpperCase();
-}
-
-function getInitials(name) {
-    if (!name) return "?";
-
-    const parts = name.trim().split(" ");
-
     if (parts.length === 1) {
         return parts[0][0].toUpperCase();
     }
@@ -52,6 +38,31 @@ function renderHeaderAvatar() {
     }
 
     avatarElement.textContent = initials;
+}
+
+function renderGreeting() {
+    const greetingTextEl = document.querySelector('.greeting-text');
+    const greetingNameEl = document.querySelector('.greeting-name');
+
+    if (!greetingTextEl || !greetingNameEl) return;
+
+    const user = getCurrentUserSafe();
+    const fullName = user?.name?.trim() || 'Guest';
+
+    const hour = new Date().getHours();
+    let greeting = 'Good morning';
+
+    if (hour >= 12 && hour < 18) {
+        greeting = 'Good afternoon';
+    } else if (hour >= 18 || hour < 5) {
+        greeting = 'Good evening';
+    }
+
+    // Greeting mit Komma
+    greetingTextEl.textContent = `${greeting},`;
+
+    // Volle Name als Begrüßung
+    greetingNameEl.textContent = fullName;
 }
 
 
@@ -107,4 +118,5 @@ function setupAvatarMenu() {
 document.addEventListener("DOMContentLoaded", () => {
     renderHeaderAvatar();
     setupAvatarMenu();
+    renderGreeting();
 });
