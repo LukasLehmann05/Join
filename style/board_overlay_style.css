@@ -86,8 +86,24 @@
 
 .overlay_main_content{
     display: flex;
-    gap: 24px;
+    gap: 8px;
     flex-direction: column;
+}
+
+.overlay_content .show_seperator{
+    flex-direction: row;
+}
+
+.overlay_content.add_task_attributes{
+    width: 80%;
+    padding: 64px 5%;
+}
+
+.overlay_main_content .task_details_container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
 }
 
 .overlay_main_content .due_date_info .attribute,
@@ -186,7 +202,7 @@
     justify-content: center;
 }
 
-.overlay_content .edit_overlay_header{
+.overlay_content .edit_overlay_footer{
     justify-content: flex-end;
 }
 
@@ -232,16 +248,18 @@
     font-family: "Inter";
 }
 
-.overlay_header .overlay_title{
+.overlay_header h1{
     visibility: hidden;
-    font-size: 24px;
+    opacity: 0;
+    height: 24px;
     font-weight: 700;
 }
 
-.overlay_header .overlay_title.show{
+.overlay_header h1.show{
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
+    height: auto;
 }
 
 .overlay_content .edit_category_container{
@@ -269,4 +287,17 @@
     overflow: unset;
     pointer-events: unset;
     display: unset;
+}
+
+.overlay_seperator_add_task{
+    width: 1px;
+    background-color: #D1D1D1;
+    margin: 0px 5%;
+    visibility: hidden;
+}
+
+.overlay_seperator_add_task.show{
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
 }
