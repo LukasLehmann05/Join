@@ -1,5 +1,3 @@
-// signup.js
-
 document.addEventListener("DOMContentLoaded", () => {
     const checkbox = document.getElementById("privacy-checkbox");
     const signupBtn = document.getElementById("signup-btn");
@@ -39,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (inputElement) inputElement.classList.add("error");
     }
 
-    // Checkbox steuert Button aktiv/deaktiv
     if (checkbox && signupBtn) {
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
@@ -59,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Form-Submit -> User registrieren
     signupForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         clearFieldErrors();
@@ -71,13 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let hasError = false;
 
-        // Name
         if (!name) {
             setFieldError(nameInput, "error-signup-name", "Please enter your name.");
             hasError = true;
         }
 
-        // Email
         if (!email) {
             setFieldError(emailInput, "error-signup-email", "Please enter your email.");
             hasError = true;
@@ -86,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
             hasError = true;
         }
 
-        // Passwort
         if (!password) {
             setFieldError(passwordInput, "error-signup-password", "Please enter a password.");
             hasError = true;
@@ -95,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
             hasError = true;
         }
 
-        // Passwort-Bestätigung
         if (!passwordConfirm) {
             setFieldError(passwordConfirmInput, "error-signup-password-confirm", "Please confirm your password.");
             hasError = true;
@@ -104,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
             hasError = true;
         }
 
-        // Privacy-Checkbox
         if (!checkbox || !checkbox.checked) {
             const privacyErr = document.getElementById("error-signup-privacy");
             if (privacyErr) privacyErr.textContent = "You must accept the Privacy Policy.";
@@ -117,15 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             return;
         }
-
-        // Ab hier: Validierung ok -> Button blocken, Request ausführen
+        
         if (signupBtn) {
             signupBtn.disabled = true;
             signupBtn.textContent = "Signing up...";
         }
 
         try {
-            // Prüfen, ob E-Mail schon existiert
             const existingUser = await getUserByEmail(email);
             if (existingUser) {
                 setFieldError(emailInput, "error-signup-email", "An account with this email already exists.");
