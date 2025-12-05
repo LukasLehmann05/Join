@@ -1,3 +1,6 @@
+let stateWidthOverlay = false;
+
+
 function openTaskInOverlay(taskId) {
     let task = getTaskByTaskId(taskId);
     document.getElementById('overlay').classList.add('show');
@@ -72,9 +75,11 @@ function removeShowClass() {
         contentContent.classList.remove('show');
          setTimeout(() => {
             overlay.classList.remove('show');
+            if(stateWidthOverlay) {
+                removeTitleCategorySeperatorInAddTaskOverlay();
+            }
         }, 500);
-    } 
-
+    }
 }
 
 
@@ -203,15 +208,28 @@ function openAddTaskOverlay() {
 
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
-    // overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
-    showTitleAndCategoryInAddTaskOverlay();
+    showTitleCategorySeperatorInAddTaskOverlay();
 }
 
 
-function showTitleAndCategoryInAddTaskOverlay() {
+function showTitleCategorySeperatorInAddTaskOverlay() {
     document.getElementById('overlay_title').classList.add('show');
     document.getElementsByClassName('edit_category_container')[0].classList.add('show');
+    document.getElementById('overlay_seperator_add_task').classList.add('show');
+    document.getElementById('overlay_main_content').classList.add('show_seperator');
+    document.getElementById('overlay_content').classList.add('add_task_attributes');
+    stateWidthOverlay = true;
+}
+
+
+function removeTitleCategorySeperatorInAddTaskOverlay() {
+    document.getElementById('overlay_title').classList.remove('show');
+    document.getElementsByClassName('edit_category_container')[0].classList.remove('show');
+    document.getElementById('overlay_seperator_add_task').classList.remove('show');
+    document.getElementById('overlay_main_content').classList.remove('show_seperator');
+    document.getElementById('overlay_content').classList.remove('add_task_attributes');
+    stateWidthOverlay = false;
 }
