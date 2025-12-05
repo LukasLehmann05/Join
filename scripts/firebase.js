@@ -1,3 +1,4 @@
+const base_url = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
 //contacts and subtasks are arrays
 async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, all_contacts, all_subtasks) {
     const newTask = {
@@ -55,7 +56,7 @@ async function deleteTask(taskId) {
 }
 
 async function fetchAllData() {
-    let joinFetch = await fetch('https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join.json')
+    let joinFetch = await fetch(base_url + ".json")
     let joinData = await joinFetch.json()
     return joinData
 }
