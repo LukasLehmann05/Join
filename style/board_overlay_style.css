@@ -207,7 +207,7 @@
 }
 
 .overlay_content form label,
-.overlay_content form span{
+.overlay_content form p{
     color: #2A3647;
     font-family: "Inter";
     font-size: 20px;
