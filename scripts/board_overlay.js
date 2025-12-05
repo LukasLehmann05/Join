@@ -107,25 +107,38 @@ function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
-    editTaskTemplateWrapper(taskId);
+    upsertTaskTemplateHandler(taskId);
     renderSubtaskEditListItems(taskId);
 }
 
-// baue hieraus einen taskTemplateHandler mit add und edit funktion
-// dieser ruft entsprechenden template wrapper auf
-function editTaskTemplateWrapper(taskId){
+
+function upsertTaskTemplateHandler(taskId){
+    renderOverlayUpsertTaskDetailsContainer();
+    upsertTaskTemplatesWrapperContainer1(taskId);
+    upsertTaskTemplatesWrapperContainer2(taskId);
+}
+   
+
+function renderOverlayUpsertTaskDetailsContainer() {
+    let mainContent = document.getElementById('overlay_main_content');
+    let detailContainerHtml = overlayUpsertTaskDetailsContainerTemplate();
+    mainContent.innerHTML = detailContainerHtml;
+}
+
+
+function upsertTaskTemplatesWrapperContainer1(taskId){
     let task = checkTaskToAddOrEdit(taskId);
     let escapeTaskDescription = escapeTextareaContent(task.description);
-    let mainContent = document.getElementById('overlay_main_content');
-    let detailContainerHtml = overlayUpsertTaskDetailContainerTemplate();
-    mainContent.innerHTML = detailContainerHtml;
     let taskDetailsContainer1 = document.getElementById('task_details_container_1');
-    let taskDetailsContainer2 = document.getElementById('task_details_container_2');
     taskDetailsContainer1.innerHTML = `
     ${overlayUpsertTaskTitleTemplate(task.title)}
     ${overlayUpsertTaskDescriptionTemplate(escapeTaskDescription)}
     ${overlayUpsertTaskDueDateTemplate(task.due_date)}`; 
+}
 
+
+function upsertTaskTemplatesWrapperContainer2(taskId){
+    let taskDetailsContainer2 = document.getElementById('task_details_container_2');
     taskDetailsContainer2.innerHTML = `
     ${overlayUpsertTaskPriorityTemplate()}
     ${overlayUpsertTaskAssignedUsersTemplate()}
@@ -193,7 +206,7 @@ function renderOverlayAddTask(taskId) {
     // overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
-    editTaskTemplateWrapper(taskId);
+    upsertTaskTemplateHandler(taskId);
     showTitleAndCategoryInAddTaskOverlay();
 }
 
