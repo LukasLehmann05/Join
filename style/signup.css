@@ -223,3 +223,14 @@
 .hidden {
     display: none;
 }
+
+.input-error {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #FF3B3B;
+}
+
+.login-input.error {
+    border-color: #FF3B3B;
+}
