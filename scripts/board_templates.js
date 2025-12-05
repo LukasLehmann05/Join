@@ -162,13 +162,13 @@ function subtasksListItemTemplate(taskId, title, counter) {
 function overlayUpsertTaskTemplate(taskId) {
     return  `
             <header class="overlay_header edit_overlay_header">
-                <h1 class="overlay_title" id="overlay_title">Add Task</h1>
+                <h1 id="overlay_title">Add Task</h1>
                 <button class="close_overlay_button" onclick="removeShowClass()">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
             <section class="overlay_main_content" id="overlay_main_content"></section>
-            <footer class="overlay_header edit_overlay_header">
+            <footer class="overlay_header edit_overlay_footer">
                 <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
                     <p>Ok</p>
                     <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
@@ -295,8 +295,7 @@ function overlayUpsertCategoryOptionTemplate() {
 function overlayUpsertTaskDetailsContainerTemplate() {
     return  `
             <section class="task_details_container" id="task_details_container_1"></section>
-            <section class="seperator"></section>
+            <section class="overlay_seperator_add_task" id="overlay_seperator_add_task"></section>
             <section class="task_details_container" id="task_details_container_2"></section>
             `
-
 }
