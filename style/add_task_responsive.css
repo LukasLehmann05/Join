@@ -6,4 +6,18 @@
     .seperator {
         display: none;
     }
+
+    .header-nav {
+        padding-left: 48px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-nav p {
+        display: none;
+    }
+
+    .header-nav {
+        justify-content: flex-end;
+    }
 }
