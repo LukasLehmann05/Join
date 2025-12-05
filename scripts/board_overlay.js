@@ -76,7 +76,7 @@ function removeShowClass() {
          setTimeout(() => {
             overlay.classList.remove('show');
             if(stateWidthOverlay) {
-                removeTitleCategorySeperatorInAddTaskOverlay();
+                toggleTitleCategorySeperatorInAddTaskOverlay();
             }
         }, 500);
     }
@@ -211,25 +211,15 @@ function renderOverlayAddTask(taskId) {
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
-    showTitleCategorySeperatorInAddTaskOverlay();
+    toggleTitleCategorySeperatorInAddTaskOverlay();
 }
 
 
-function showTitleCategorySeperatorInAddTaskOverlay() {
-    document.getElementById('overlay_title').classList.add('show');
-    document.getElementsByClassName('edit_category_container')[0].classList.add('show');
-    document.getElementById('overlay_seperator_add_task').classList.add('show');
-    document.getElementById('overlay_main_content').classList.add('show_seperator');
-    document.getElementById('overlay_content').classList.add('add_task_attributes');
-    stateWidthOverlay = true;
-}
-
-
-function removeTitleCategorySeperatorInAddTaskOverlay() {
-    document.getElementById('overlay_title').classList.remove('show');
-    document.getElementsByClassName('edit_category_container')[0].classList.remove('show');
-    document.getElementById('overlay_seperator_add_task').classList.remove('show');
-    document.getElementById('overlay_main_content').classList.remove('show_seperator');
-    document.getElementById('overlay_content').classList.remove('add_task_attributes');
-    stateWidthOverlay = false;
+function toggleTitleCategorySeperatorInAddTaskOverlay() {
+    document.getElementById('overlay_title').classList.toggle('show');
+    document.getElementsByClassName('edit_category_container')[0].classList.toggle('show');
+    document.getElementById('overlay_seperator_add_task').classList.toggle('show');
+    document.getElementById('overlay_main_content').classList.toggle('show_seperator');
+    document.getElementById('overlay_content').classList.toggle('add_task_attributes');
+    stateWidthOverlay = !stateWidthOverlay;
 }
