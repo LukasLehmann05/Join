@@ -32,32 +32,37 @@
 
             <h1 class="login-title">Sign up</h1>
 
-            <form class="login-form">
+            <form class="login-form" id="signup-form" novalidate>
 
     <div class="input-wrapper">
         <input type="text" id="signup-name" class="login-input" placeholder="Name" required>
         <img src="../assets/icons/contacts/person.svg" alt="User icon" class="input-icon">
+        <span class="input-error" id="error-signup-name"></span>
     </div>
 
     <div class="input-wrapper">
         <input type="email" id="signup-email" class="login-input" placeholder="Email" required>
         <img src="../assets/icons/contacts/mail.svg" alt="Email icon" class="input-icon">
+        <span class="input-error" id="error-signup-email"></span>
     </div>
 
     <div class="input-wrapper">
         <input type="password" id="signup-password" class="login-input" placeholder="Password" required>
         <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+        <span class="input-error" id="error-signup-password"></span>
     </div>
 
     <div class="input-wrapper">
         <input type="password" id="signup-password-confirm" class="login-input" placeholder="Confirm Password" required>
         <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+        <span class="input-error" id="error-signup-password-confirm"></span>
     </div>
 
     <label class="privacy-check">
         <input type="checkbox" id="privacy-checkbox">
         <span> I accept the <a href="../html/privacyPolicy.html">Privacy policy</a></span>
     </label>
+    <span class="input-error" id="error-signup-privacy"></span>
 
     <div class="login-buttons">
         <button
@@ -69,6 +74,9 @@
             Sign up
         </button>
     </div>
+
+    <p class="login-error-message" id="signup-error-message"></p>
+
 </form>
 
         </main>

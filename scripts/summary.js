@@ -29,7 +29,7 @@ function requireAuth() {
     const user = getCurrentUserSafe();
 
     if (!user) {
-        // Kein gültiger User -> zurück zur Login-Seite
+
         window.location.href = '../html/login.html';
     }
 }
@@ -67,10 +67,8 @@ function renderGreeting() {
         greeting = 'Good evening';
     }
 
-    // Greeting mit Komma
     greetingTextEl.textContent = `${greeting},`;
 
-    // Volle Name als Begrüßung
     greetingNameEl.textContent = fullName;
 }
 
@@ -84,13 +82,12 @@ function setupAvatarMenu() {
 
     if (!avatarButton || !menu) return;
 
-    // Menü ein-/ausblenden beim Klick auf Avatar
+
     avatarButton.addEventListener('click', (event) => {
-        event.stopPropagation(); // verhindert, dass der Document-Klick es direkt wieder schließt
+        event.stopPropagation(); 
         menu.classList.toggle('hidden');
     });
 
-    // Klick außerhalb schließt das Menü
     document.addEventListener('click', (event) => {
         if (!menu.classList.contains('hidden')) {
             const clickedInsideMenu = menu.contains(event.target);
@@ -101,7 +98,6 @@ function setupAvatarMenu() {
         }
     });
 
-    // Menü-Aktionen
     if (legalBtn) {
         legalBtn.addEventListener('click', () => {
             window.location.href = '../html/legalNotice.html';

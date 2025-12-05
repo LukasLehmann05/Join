@@ -28,7 +28,7 @@
         <main class="login-card">
             <h1 class="login-title">Log in</h1>
             
-            <form class="login-form" id="login-form">
+            <form class="login-form" id="login-form" novalidate>
 
     <div class="input-wrapper">
         <input
@@ -71,6 +71,8 @@
     </div>
 </form>
 
+    <p class="login-error-message" id="login-error-message"></p>
+
         </main>
 
         <footer class="login-footer">
@@ -81,11 +83,8 @@
     </div>
 </div>
 
-
 <script src="../scripts/firebase.js"></script>
 <script src="../scripts/login.js" defer></script>
-</body>
 
 </body>
-
 </html>
