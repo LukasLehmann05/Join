@@ -1,26 +1,45 @@
-function openDialog() {
-    let element = document.getElementById("addContact");
-    element.open = true;
+function openAddContact() {
+    let dialog =  document.getElementById('addContact');
+    dialog.open = true;
+    setTimeout(() => {
+        document.getElementById('addContent').classList.add('show');
+    }, 10);
 };
 
 window.onclick = function (event) {
-    let element = document.getElementById("addContact");
-    if (event.target == element) {
-        element.open = false;
+    let dialog =  document.getElementById('addContact');
+    if (event.target == dialog) {
+        closeAddContact();
     }
 };
 
-function dialogClose() {
-    let element = document.getElementById("addContact");
-    element.open = false;
+function closeAddContact() {
+    let dialog =  document.getElementById('addContact');
+    document.getElementById('addContent').classList.remove('show');
+    setTimeout(() => {
+        dialog.open = false;
+    }, 500);
 };
 
-function displayInMain() {
-    let main = document.getElementById("mainView");
-    main.innerHTML = contactMain();
-}
+function openEditContact() {
+    let dialog =  document.getElementById('editContact');
+    dialog.open = true;
+    setTimeout(() => {
+        document.getElementById('editContent').classList.add('show');
+    }, 10);
+};
 
-function displayInList() {
-    let list = document.getElementById("test");
-    list.innerHTML = contactListsingle();
-}
+window.onclick = function (event) {
+    let dialog =  document.getElementById('editContact');
+    if (event.target == dialog) {
+        closeEditContact();
+    }
+};
+
+function closeEditContact() {
+    let dialog =  document.getElementById('editContact');
+    document.getElementById('editContent').classList.remove('show');
+    setTimeout(() => {
+        dialog.open = false;
+    }, 500);
+};
