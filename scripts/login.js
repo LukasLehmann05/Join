@@ -18,7 +18,7 @@ function showError(msg) {
 }
 
     if (!loginForm || !emailInput || !passwordInput) {
-        console.warn('Login-Formular oder Inputs nicht gefunden.');
+        console.warn('Login form or input fields not found');
         return;
     }
 
@@ -78,14 +78,14 @@ function setupGuestLogin() {
     }
 
     if (!guestLoginBtn) {
-        console.warn('Guest-Login-Button nicht gefunden (id="guest-login-btn").');
+        console.warn('Guest login button not found (id="guest-login-btn").');
         return;
     }
 
     guestLoginBtn.addEventListener('click', async () => {
         try {
             const guestUser = await getOrCreateGuestUser();
-            console.log('Guest-User aus Backend:', guestUser);
+            console.log('Guest user from backend:', guestUser);
 
             localStorage.setItem('currentUser', JSON.stringify(guestUser));
             localStorage.setItem('isGuest', 'true');
