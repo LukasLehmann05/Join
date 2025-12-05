@@ -181,8 +181,16 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
     return  `
              <section class="edit_title_container">
                 <form class="input-form">
-                    <label for="task_title">Title</label>
-                    <input id="task_title" class="task-input" type="text" value="${taskTitle}" placeholder="Enter task title">
+                    <label for="task_title">Title<span class="required">*</span></label>
+                    <input 
+                        id="task_title" 
+                        class="task-input" 
+                        type="text" 
+                        value="${taskTitle}" 
+                        placeholder="Enter a title" 
+                        required 
+                        onclick="removeIndicatorOnInput('title')">
+                    <p id="required_title" class="required-info">This field is required</p>
                 </form>
             </section>
             `
@@ -193,7 +201,11 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
             <section class="edit_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
-                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${taskDescription}</textarea>
+                    <textarea 
+                        id="task_description" 
+                        class="task-input" 
+                        placeholder="Enter a description">${taskDescription}
+                    </textarea>
                 </form>
             </section>
             `
@@ -203,8 +215,16 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
     return  `
             <section class="edit_due_date_container">
                 <form class="input-form">
-                    <label for="task_due_date">Due date</label>
-                    <input id="task_due_date" class="task-input" type="date" value="${taskDueDate}" placeholder="dd/mm/yyyy">
+                    <label for="task_due_date">Due date<span class="required">*</span></label>
+                    <input 
+                        id="task_due_date" 
+                        class="task-input" 
+                        type="date" 
+                        value="${taskDueDate}" 
+                        placeholder="dd/mm/yyyy" 
+                        required 
+                        onclick="removeIndicatorOnInput('due_date')">
+                    <p id="required_date" class="required-info">This field is required</p>
                 </form>
             </section>
             `
@@ -214,19 +234,31 @@ function overlayUpsertTaskPriorityTemplate() {
     return  `
             <section class="edit_priority_container">
                 <form class="input-form">
-                    <span class="priority_form_title">Priority</span>
+                    <p class="priority_form_title">Priority</p>
                     <section class="priority-section" id="priority_section">
-                       <button class="priority-button" id="button_prio_urgent" onclick="changePriority('urgent')" type="button">
-                            <p>Urgent</p>
-                            <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
+                        <button 
+                            class="priority-button" 
+                            id="button_prio_urgent" 
+                            onclick="changePriority('urgent')" 
+                            type="button">
+                                <p>Urgent</p>
+                                <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
                         </button>
-                        <button class="priority-button bg-yellow" id="button_prio_medium" onclick="changePriority('medium')" type="button">
-                            <p>Medium</p>
-                            <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
+                        <button 
+                            class="priority-button bg-yellow" 
+                            id="button_prio_medium" 
+                            onclick="changePriority('medium')" 
+                            type="button">
+                                <p>Medium</p>
+                                <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
                         </button>
-                        <button class="priority-button" id="button_prio_low" onclick="changePriority('low')" type="button">
-                            <p>Low</p>
-                            <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
+                        <button 
+                            class="priority-button" 
+                            id="button_prio_low" 
+                            onclick="changePriority('low')" 
+                            type="button">
+                                <p>Low</p>
+                                <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
                         </button>
                     </section>
                 </form>
