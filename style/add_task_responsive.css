@@ -1,0 +1,5 @@
+@media (max-width: 1000px) {
+    .task-details {
+        flex-direction: column;
+    }
+}
