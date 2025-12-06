@@ -50,11 +50,8 @@
     padding: 17px 36px;
 }
 
-.single-letter-section {
-    flex: none;
-    order: 1;
+.single-letter-section { 
     align-self: stretch;
-    flex-grow: 0;
 }
 
 .contact-display {
@@ -170,7 +167,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: orange;
     color: white;
     border-radius: 45px;
     width: 42px;
