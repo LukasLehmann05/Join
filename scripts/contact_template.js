@@ -1,17 +1,17 @@
-function contactListsingle() {
-    return `<p class="two-letter-name-small">AR</p>
+function contactListSingle(data, short) {
+    return `<p id="listShort${data}" class="two-letter-name-small">${short}</p>
             <div class="list-info">
-                <p class="font-size-20">Name Placeholder</p>
-                <span class="font-size-16 color-mail">yourmailhere@</span>
+                <p id="listName${data}" class="font-size-20">${data.name}</p>
+                <span id="listMail${data}" class="font-size-16 color-mail">${data.email}</span>
             </div>
     `
 }
 
 function contactMain() {
     return `<div class="main-name">
-                <div class="two-letter-name fullname">AR</div>
+                <div id="mainShort" class="two-letter-name fullname">AR</div>
                 <div class="name-field">
-                    <p class="fullname">Name Placeholder</p>
+                    <p id="mainName" class="fullname">Name Placeholder</p>
                     <div class="main-name-btns">
                         <button class="name-btn font-size-16"><img src="../assets/icons/contacts/edit.svg"
                             alt="edit contact">Edit</button>
@@ -23,10 +23,10 @@ function contactMain() {
             <span class="sub-header-information font-size-20">Contact Information</span>
             <div class="info-display">
                 <p class="info-text">Email</p>
-                <span class="color-mail">Placeholder Mail</span>
+                <span id="mainShort" class="color-mail">Placeholder Mail</span>
             </div>
             <div class="info-display">
                 <p class="info-text">Phone</p>
-                <span>Placeholder Number</span>
+                <span id="mainPhone">Placeholder Number</span>
             </div>`
 }

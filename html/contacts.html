@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="../style/mainframe.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
     <link rel="stylesheet" href="../style/board_style.css">
-    <link rel="stylesheet" href="../style/add_contact.css">
-    <link rel="stylesheet" href="/style/add_task.css">
-    <link rel="stylesheet" href="../style/board_overlay_style.css">
+
+    <script src="/scripts/contact_data.js"></script>
+    <script src="/scripts/contact_template.js"></script>
+    <script src="/scripts/firebase.js"></script>
+    
+    
 </head>
 
-<body class="body">
+<body onload="fetchContactList()" class="body">
     <aside class="sidebar">
         <div class="sidebar_upper_section">
             <section class="logo-section">
@@ -62,8 +65,8 @@
         </header>
         <main class="contact-main">
             <aside class="sidebar-contacts">
-                
-                    <button onclick="openDialog('addContact' , 'addContent')" class="button_add_task add-contact-btn">
+                <div>
+                    <button class="button_add_task add-contact-btn">
                         <p>Add new contact</p>
                         <img src="../assets/icons/contacts/person_add.svg" alt="add_person icon">
                     </button>
@@ -71,134 +74,133 @@
                 <div class="contact-list">
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">A</h2>
-                        <div class="separator-list"></div>
-                        <section id="test" onclick="displayInMain()" class="list-user">
-                        </section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="a" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">B</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="b" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">C</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="c" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">D</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="d" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">E</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="e" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">F</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="f" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">G</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="g" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">H</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="h" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">I</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="i" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">J</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="j" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">K</h2>
-                        <div class="separator"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="k" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">L</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="l" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">M</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="m" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">N</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="n" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">O</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="o" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">P</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="p" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">Q</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="q" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">R</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="r" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">S</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="s" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">T</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="t" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">U</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="u" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">V</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="v" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">W</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="w" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">X</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="x" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">Y</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="y" onclick="renderContactInMain()"></section>
                     </article>
                     <article class="single-letter-section">
                         <h2 class="single-letter font-size-20">Z</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
+                        <div class="seperator"></div>
+                        <section class="list-user" id="z" onclick="renderContactInMain()"></section>
                     </article>
                 </div>
             </aside>
@@ -293,7 +295,7 @@
         </main>
     </article>
     <script src="/scripts/contacts.js"></script>
-    <script src="/scripts/contact_template.js"></script>
+    
 </body>
 
 </html>
