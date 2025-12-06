@@ -14,14 +14,16 @@ async function fetchContactList() {
     let response = await fetch(base_url + ".json");
     let responseJson = await response.json();
     let contactData = responseJson.contacts;
-
+    let keys = Object.keys(contactData)
+    
+    
     for (var contact in contactData) {
         let name = contactData[contact].name;
         let email = contactData[contact].email;
         let letter = name.charAt(0);
-        console.log(letter);
         
-        await renderListLetter(letter);
+        
+        renderListLetter(letter);
         //renderContactList(contact, email, name);
         
     }
@@ -29,8 +31,21 @@ async function fetchContactList() {
     
 };
 
-async function renderListLetter(letter) {
-    document.getElementById('contactList').innerHTML += contactListLetterSection(letter);
+function renderListLetter(letter) {
+    let contactList = document.getElementById('contactList');
+    let child = document.getElementById(letter);
+    let status = contactList.contains(child);
+    console.log(status);
+    
+    if (contactList.contains(child) = false) {
+        console.log(1);
+        
+        contactList.innerHTML = contactListLetterSection(letter);
+    }
+    
+    
+    
+    //contactList.innerHTML += contactListLetterSection(letter);
 };
 
 function renderContactList(contactID, email, name) {
