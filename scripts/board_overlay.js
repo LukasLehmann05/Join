@@ -1,4 +1,6 @@
 let stateWidthOverlay = false;
+let subtask_list = {};
+let all_subtasks = [];
 
 
 function openTaskInOverlay(taskId) {
@@ -176,12 +178,12 @@ function createEmptyTask() {
 
 
 function renderSubtaskEditListItems(taskId) {
-    let containerId = 'subtasks_edit_list';
-    let subListContainer = document.getElementById(containerId);
+    subtask_list = document.getElementById('subtasks_edit_list');
     let task = getTaskByTaskId(taskId);
     for (let subtask of task.subtasks) {
         let subtaskHtml = returnSubtaskTemplate(subtask.title);
-        subListContainer.innerHTML += subtaskHtml;
+        subtask_list.innerHTML += subtaskHtml;
+        all_subtasks.push(subtask.title);
     }
 }
 

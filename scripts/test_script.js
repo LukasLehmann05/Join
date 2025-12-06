@@ -75,12 +75,11 @@ function hideSubtaskButtons() {
 
 
 function addSubtask() {
-    const subtask_list = document.getElementById("subtasks_edit_list");
     if (task_subtask.value != "") {
         let subtask = task_subtask.value
         let subtask_template = returnSubtaskTemplate(subtask)
         subtask_list.innerHTML += subtask_template
-        // all_subtasks.push(task_subtask.value)
+        all_subtasks.push(task_subtask.value)
         task_subtask.value = ""
         hideSubtaskButtons()
     }
