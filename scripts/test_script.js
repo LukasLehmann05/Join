@@ -1,4 +1,5 @@
 let current_priority = "medium"
+let subtask_buttons_active = false
 
 function changePriority(priority) {
     switch (priority) {
@@ -15,6 +16,7 @@ function changePriority(priority) {
             break;
     }
 }
+
 
 function removeOldBackground() {
     switch (current_priority) {
@@ -33,11 +35,13 @@ function removeOldBackground() {
     }
 }
 
+
 function changeToLowPrio() {
     removeOldBackground()
     current_priority = "low"
     low_prio_button.classList.add("bg-green")
 }
+
 
 function changeToMedPrio() {
     removeOldBackground()
@@ -46,8 +50,25 @@ function changeToMedPrio() {
     medium_prio_button.classList.remove("yellow-filter")
 }
 
+
 function changeToUrgentPrio() {
     removeOldBackground()
     current_priority = "urgent"
     urgent_prio_button.classList.add("bg-red")
+}
+
+
+function showSubtaskButtons() {
+    if (subtask_buttons_active == false) {
+        subtask_button_section.style.display = "flex"
+        subtask_buttons_active = true
+    }
+}
+
+
+function hideSubtaskButtons() {
+    if (subtask_buttons_active == true) {
+        subtask_button_section.style.display = "none"
+        subtask_buttons_active = false
+    }
 }
