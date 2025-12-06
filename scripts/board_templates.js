@@ -300,7 +300,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                             type="text" 
                             placeholder="Add new subtask">
                         <aside id="subtask_button_section">
-                            <button type="button" onclick="addSubtask()">
+                            <button type="button" onclick="addSubtask('${taskId}')">
                                 <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg"
                                     alt="add_icon">
                             </button>
@@ -312,16 +312,14 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                         </aside>
                     </section>
                 </form>
-                <div class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></div>
+                <ul class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></ul>
             </section>
             `
 }
 
 function overlayUpsertSubtaskListItemTemplate(taskId, title, counter) {
     return `
-           <ul class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">
-                <li>${title}</li>
-            </ul>
+            <li class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">${title}</li>
             `;
 }
 

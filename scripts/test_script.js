@@ -72,3 +72,21 @@ function hideSubtaskButtons() {
         subtask_buttons_active = false
     }
 }
+
+
+function addSubtask(taskId) {
+    const subtask_list = document.getElementById(taskId + "_subtasks_edit_list");
+    if (task_subtask.value != "") {
+        let subtask = task_subtask.value
+        let subtask_template = overlayUpsertSubtaskListItemTemplate(taskId=0, subtask, counter=0)
+        subtask_list.innerHTML += subtask_template
+        // all_subtasks.push(task_subtask.value)
+        task_subtask.value = ""
+        hideSubtaskButtons()
+    }
+}
+
+
+function returnSubtaskTemplate(subtask) {
+    return `<li>${subtask}</li>`
+}
