@@ -1,0 +1,132 @@
+dialog[open] {
+    display: flex;
+    z-index: 31;
+}
+
+.dialog-content.show{
+   transform: translateX(0);
+}
+
+.dialog-window {
+   position: fixed;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0, 0, 0, 0.4);
+   border: none;
+}
+
+.dialog-content {
+   margin: auto;
+   display: flex;
+   min-width: 950px;
+   width: 1200px;
+   min-height: 500px;
+   transform: translateX(200%);
+   transition: transform 0.5s ease-in-out;
+}
+
+.main-left {
+   background-color: #2A3647;
+   border-top-left-radius: 30px;
+   border-bottom-left-radius: 30px;
+   align-content: center;
+   padding-left: 30px;
+   padding-right: 30px;
+}
+
+.logo-dialog {
+   height: 66px;
+   width: 55px;
+   margin-bottom: 12px;
+}
+
+.main-right {
+   flex: 1;
+   background-color: white;
+   border-top-right-radius: 30px;
+   border-bottom-right-radius: 30px;
+   display: flex;
+   padding-right: 30px;
+   padding-bottom: 30px;
+   padding-top: 30px;
+   min-width: 400px;
+}
+
+.position {
+   margin-top: auto;
+   margin-bottom: auto;
+   margin-right: 50px;
+   margin-left: 50px;
+}
+
+.white {
+   color: white;
+}
+
+.margin {
+   margin-bottom: 12px;
+}
+
+.separator-horizontal {
+   width: 90px;
+   background-color: #29ABE2;
+   height: 3px;
+   border-radius: 3px;
+}
+
+.name::after {
+   content: "";
+   width: 24px;
+   background: url("../assets/icons/contacts/person.svg") center / contain no-repeat;
+}
+
+.mail::after {
+   content: "";
+   width: 24px;
+   background: url("../assets/icons/contacts/mail.svg") center / contain no-repeat;
+}
+
+.phone::after {
+   content: "";
+   width: 24px;
+   background: url("../assets/icons/contacts/call.svg") center / contain no-repeat;
+}
+
+.add-contact-info {
+   display: flex;
+   flex-direction: column;
+   gap: 32px;
+   min-width: 524px;
+}
+
+.close-btn {
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   display: flex;
+   justify-content: flex-end;
+   align-content: center;
+   margin-bottom: 16px;
+}
+
+.icon-close:hover {
+   background-color: #E7E7E7;
+   border-radius: 12px;
+}
+
+.icon-close {
+   width: 24px;
+   height: 24px;
+}
+
+.cancel-btn {
+   display: flex;
+   justify-content: flex-start;
+}
+
+.button-section-contact {
+   display: flex;
+   gap: 16px;
+}
