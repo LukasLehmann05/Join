@@ -312,16 +312,11 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                         </aside>
                     </section>
                 </form>
-                <ul class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></ul>
+                <ul class="subtasks_edit_list" id="subtasks_edit_list"></ul>
             </section>
             `
 }
 
-function overlayUpsertSubtaskListItemTemplate(taskId, title, counter) {
-    return `
-            <li class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">${title}</li>
-            `;
-}
 
 function overlayUpsertCategoryOptionTemplate() {
     return `

@@ -74,11 +74,11 @@ function hideSubtaskButtons() {
 }
 
 
-function addSubtask(taskId) {
-    const subtask_list = document.getElementById(taskId + "_subtasks_edit_list");
+function addSubtask() {
+    const subtask_list = document.getElementById("subtasks_edit_list");
     if (task_subtask.value != "") {
         let subtask = task_subtask.value
-        let subtask_template = overlayUpsertSubtaskListItemTemplate(taskId=0, subtask, counter=0)
+        let subtask_template = returnSubtaskTemplate(subtask)
         subtask_list.innerHTML += subtask_template
         // all_subtasks.push(task_subtask.value)
         task_subtask.value = ""
