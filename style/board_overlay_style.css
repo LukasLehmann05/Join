@@ -104,6 +104,7 @@
     flex-direction: column;
     gap: 16px;
     flex: 1;
+    font-family: "Inter";
 }
 
 .overlay_main_content .due_date_info .attribute,
@@ -239,13 +240,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-
-.overlay_content .edit_subtasks_container .subtasks_edit_list .subtask_edit_list_item{
-    list-style-type: disc;
-    font-size: 16px;
-    font-weight: 400;
-    font-family: "Inter";
 }
 
 .overlay_header h1{

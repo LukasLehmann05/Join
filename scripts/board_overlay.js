@@ -176,13 +176,11 @@ function createEmptyTask() {
 
 
 function renderSubtaskEditListItems(taskId) {
-    let containerId = taskId + '_subtasks_edit_list';
+    let containerId = 'subtasks_edit_list';
     let subListContainer = document.getElementById(containerId);
     let task = getTaskByTaskId(taskId);
-    let subtaskCounter = 0;
     for (let subtask of task.subtasks) {
-        subtaskCounter += 1;
-        let subtaskHtml = overlayUpsertSubtaskListItemTemplate(taskId, subtask.title, subtaskCounter);
+        let subtaskHtml = returnSubtaskTemplate(subtask.title);
         subListContainer.innerHTML += subtaskHtml;
     }
 }
