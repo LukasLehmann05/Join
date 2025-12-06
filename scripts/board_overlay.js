@@ -114,6 +114,7 @@ function openEditTaskOverlay(taskId) {
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
     renderSubtaskEditListItems(taskId);
+    loadButtonElements();
 }
 
 
@@ -230,4 +231,5 @@ function loadButtonElements() {
     low_prio_button = document.getElementById("button_prio_low");
     medium_prio_button = document.getElementById("button_prio_medium");
     urgent_prio_button = document.getElementById("button_prio_urgent");
+    const subtask_button_section = document.getElementById("subtask_button_section")
 }
