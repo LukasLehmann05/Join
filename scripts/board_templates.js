@@ -293,7 +293,24 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
             <section class="edit_subtasks_container">
                 <form class="input-form">
                     <label for="task_subtask">Subtasks</label>
-                    <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
+                    <section class="subtask-section">
+                        <input 
+                            onclick="showSubtaskButtons()" 
+                            id="task_subtask"
+                            type="text" 
+                            placeholder="Add new subtask">
+                        <aside id="subtask_button_section">
+                            <button type="button" onclick="addSubtask()">
+                                <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg"
+                                    alt="add_icon">
+                            </button>
+                            <div class="subtask-seperator"></div>
+                            <button type="button" onclick="clearSubtask()">
+                                <img class="subtask-img" src="../assets/icons/contacts/close.svg"
+                                    alt="close_icon">
+                            </button>
+                        </aside>
+                    </section>
                 </form>
                 <div class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></div>
             </section>
