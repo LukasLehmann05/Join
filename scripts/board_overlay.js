@@ -203,6 +203,7 @@ function openAddTaskOverlay() {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     renderOverlayAddTask(taskId);
+    loadButtonElements();
 }
 
 
@@ -222,4 +223,11 @@ function toggleTitleCategorySeperatorInAddTaskOverlay() {
     document.getElementById('overlay_main_content').classList.toggle('show_seperator');
     document.getElementById('overlay_content').classList.toggle('add_task_attributes');
     stateWidthOverlay = !stateWidthOverlay;
+}
+
+
+function loadButtonElements() {
+    low_prio_button = document.getElementById("button_prio_low");
+    medium_prio_button = document.getElementById("button_prio_medium");
+    urgent_prio_button = document.getElementById("button_prio_urgent");
 }
