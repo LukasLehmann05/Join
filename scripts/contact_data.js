@@ -150,6 +150,44 @@ async function addContactToDatabase() {
 
 
 /**
+ * edits contacts in firebase
+ */
+async function editContactInDatabase() {
+    let name = document.getElementById('nameInfo').value;
+    let phone = document.getElementById('phoneInfo').value;
+    let email = document.getElementById('emailInfo').value;
+    let userPath = "";
+    const editedUser = {
+        "email": email,
+        "name": name,
+        "phone": phone,
+    }
+
+    await fetch(base_url + "/contacts.json" , {
+        method: 'PUT',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editedUser),
+    })
+};
+
+
+/**
+ * deletes contacts in firebase
+ */
+async function addContactToDatabase() {
+    await fetch(base_url + "/contacts.json" , {
+        method: 'DELETE',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        
+    })
+};
+
+
+/**
  * emptys input fields if process of adding a user gets cancelled
  */
 function emptyInput() {
