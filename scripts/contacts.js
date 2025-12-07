@@ -1,8 +1,8 @@
 /**
  * opens dialog window.
  */
-function openDialog(id, id2){
-    let dialog =  document.getElementById(id);
+function openDialog(id, id2) {
+    let dialog = document.getElementById(id);
     dialog.open = true;
     setTimeout(() => {
         document.getElementById(id2).classList.add('show');
@@ -13,8 +13,8 @@ function openDialog(id, id2){
 /**
  * closes dialog window via button
  */
-function closeDialog(id, id2){
-    let dialog =  document.getElementById(id);
+function closeDialog(id, id2) {
+    let dialog = document.getElementById(id);
     document.getElementById(id2).classList.remove('show');
     setTimeout(() => {
         dialog.open = false;
@@ -26,13 +26,13 @@ function closeDialog(id, id2){
  * closes dialog window via window click
  */
 window.onclick = function (event) {
-    let dialog1 =  document.getElementById('addContact');
-    let dialog2 =  document.getElementById('editContact');
+    let dialog1 = document.getElementById('addContact');
+    let dialog2 = document.getElementById('editContact');
     if (event.target == dialog1) {
-        closeDialog('addContact' , 'addContent');
+        closeDialog('addContact', 'addContent');
     }
     if (event.target == dialog2) {
-        closeDialog('editContact' , 'editContent');
+        closeDialog('editContact', 'editContent');
     }
 };
 

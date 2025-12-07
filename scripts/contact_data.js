@@ -10,6 +10,12 @@ const colours = [
     '#992b97ff',
     '#8a6710ff',
     '#9077d4ff',
+    '#2a0394ff',
+    '#030303ff',
+    '#157402ff',
+    '#026269ff',
+    '#c73abbff',
+    '#17682fff',
     '#c93360ff'
 ];
 
@@ -48,13 +54,13 @@ async function renderListLetter(contactData) {
  * function for sorting headline letters alphabetically. Gets called in function: "renderListLetter()"
  */
 function sortAlphabetically(parent) {
-  let childrenArray = Array.from(parent.children);
-  childrenArray.sort((a, b) => {
-    return a.textContent.trim().localeCompare(b.textContent.trim());
-  });
-  childrenArray.forEach(child => {
-    parent.appendChild(child);
-  });
+    let childrenArray = Array.from(parent.children);
+    childrenArray.sort((a, b) => {
+        return a.textContent.trim().localeCompare(b.textContent.trim());
+    });
+    childrenArray.forEach(child => {
+        parent.appendChild(child);
+    });
 };
 
 
@@ -65,10 +71,11 @@ function renderContactList(contactData) {
     for (let contact in contactData) {
         let name = contactData[contact].name;
         let email = contactData[contact].email;
+        let phone = contactData[contact].phone;
         let contactID = contact;
         let acronym = getAcronym(name);
         let letter = name.charAt(0);
-        document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym);
+        document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
         colorAcronym(contactID)
     }
 };
@@ -88,16 +95,31 @@ function getAcronym(name) {
  * chooses backgroundcolor for user acronym randomly from colours array. Gets called in function: "renderContactList()"
  */
 function colorAcronym(data) {
-    let element = document.getElementById("listShort" + data);
+    let element = document.getElementById("short-" + data);
     let color = colours[Math.floor(Math.random() * colours.length)];
     element.style.backgroundColor = color;
 };
 
 
 /**
- * renders information from contact into the main display and adds the phone number"
+ * fetches contact data from firebase and renders data into main Display
  */
-function renderContactInMain() {
-
+async function displayInMain(id) {
+    let currentId = id.getAttribute('data-id');
+    let currentName = id.getAttribute('data-name');
+    let currentPhone = id.getAttribute('data-phone');
+    let currentMail = id.getAttribute('data-email');
+    renderMainDisplay(currentId, currentName, currentPhone, currentMail);
 };
 
+
+/**
+ * renders date into the main display. adds the phone number and background color
+ */
+function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
+    let mainDisplay = document.getElementById('mainView');
+    let acronym = document.getElementById("short-" + currentId).innerHTML;
+    let color = document.getElementById("short-" + currentId).style.backgroundColor;
+    mainDisplay.innerHTML = contactMain(currentId, currentName, currentPhone, currentMail, acronym);
+    document.getElementById("mainShort").style.backgroundColor = color;
+};
