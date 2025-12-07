@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
-    
+
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/mainframe.css">
     <link rel="stylesheet" href="../style/board_style.css">
@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="../style/contacts.css">
     <link rel="stylesheet" href="../style/add_contact.css">
     <link rel="stylesheet" href="../style/add_task.css">
-    
+
 
     <script src="/scripts/contact_data.js"></script>
     <script src="/scripts/contact_template.js"></script>
     <script src="/scripts/firebase.js"></script>
-    
-    
+
+
 </head>
 
 <body onload="fetchContactList()" class="body">
@@ -115,14 +115,18 @@
                                 <input type="tel" placeholder="Phone">
                             </label>
                             <section class="button-section-contact">
-                                <button onclick="closeDialog('addContact' , 'addContent')" class="action-buttons">
-                                    <p>Cancel</p>
-                                    <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                                </button>
-                                <button class="action-buttons create-button">
-                                    <p>Create contact</p>
-                                    <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
-                                </button>
+                                <div class="clear-button">
+                                    <button onclick="closeDialog('addContact' , 'addContent')" class="action-buttons">
+                                        <p>Cancel</p>
+                                        <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
+                                    </button>
+                                </div>
+                                <div class="create-task">
+                                    <button class="action-buttons create-button">
+                                        <p>Create contact</p>
+                                        <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
+                                    </button>
+                                </div>
                             </section>
                         </div>
                     </section>
@@ -170,7 +174,7 @@
         </main>
     </article>
     <script src="/scripts/contacts.js"></script>
-    
+
 </body>
 
 </html>
