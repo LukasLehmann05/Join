@@ -1,18 +1,22 @@
 function contactListSingle(contactID, name, email, acronym) {
-    return `<p id="listShort${contactID}" class="two-letter-name-small">${acronym}</p>
-            <div class="list-info">
-                <p id="listName${contactID}" class="font-size-20">${name}</p>
-                <span id="listMail${contactID}" class="font-size-16 color-mail">${email}</span>
+    return `<div>
+                <p id="listShort${contactID}" class="two-letter-name-small">${acronym}</p>
+                <div class="list-info">
+                  <p id="listName${contactID}" class="font-size-20">${name}</p>
+                  <span id="listMail${contactID}" class="font-size-16 color-mail">${email}</span>
+                </div>
             </div>`
 };
+
 
 function contactListLetterSection(letter) {
     return `<article class="single-letter-section">
                 <h2 class="single-letter font-size-20">${letter}</h2>
-                <div class="seperator"></div>
+                <div class="separator-list"></div>
                 <section class="list-user" id="${letter}" onclick="renderContactInMain()"></section>
             </article>`
 };
+
 
 function contactMain() {
     return `<div class="main-name">

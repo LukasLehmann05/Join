@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
-    <link rel="stylesheet" href="../style/contacts.css">
+    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+    
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/mainframe.css">
-    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
     <link rel="stylesheet" href="../style/board_style.css">
+    <link rel="stylesheet" href="../style/board_overlay_style.css">
+    <link rel="stylesheet" href="../style/contacts.css">
+    <link rel="stylesheet" href="../style/add_contact.css">
+    <link rel="stylesheet" href="../style/add_task.css">
+    
 
     <script src="/scripts/contact_data.js"></script>
     <script src="/scripts/contact_template.js"></script>
@@ -66,7 +71,7 @@
         <main class="contact-main">
             <aside class="sidebar-contacts">
                 <div>
-                    <button class="button_add_task add-contact-btn">
+                    <button onclick="openDialog('addContact' , 'addContent')" class="button_add_task add-contact-btn">
                         <p>Add new contact</p>
                         <img src="../assets/icons/contacts/person_add.svg" alt="add_person icon">
                     </button>
