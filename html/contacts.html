@@ -106,23 +106,23 @@
                                     alt="close overlay icon">
                             </button>
                             <label class="subtask-section name">
-                                <input type="text" placeholder="Name">
+                                <input id="nameInfo" type="text" placeholder="Name">
                             </label>
                             <label class="subtask-section mail">
-                                <input type="email" placeholder="Email">
+                                <input id="emailInfo" type="email" placeholder="Email">
                             </label>
                             <label class="subtask-section phone">
-                                <input type="tel" placeholder="Phone">
+                                <input id="phoneInfo" type="tel" placeholder="Phone">
                             </label>
                             <section class="button-section-contact">
                                 <div class="clear-button">
-                                    <button onclick="closeDialog('addContact' , 'addContent')" class="action-buttons">
+                                    <button onclick="closeDialog('addContact' , 'addContent') , emptyInput()" class="action-buttons">
                                         <p>Cancel</p>
                                         <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
                                     </button>
                                 </div>
                                 <div class="create-task">
-                                    <button class="action-buttons create-button">
+                                    <button onclick="addContactToDatabase()" class="action-buttons create-button">
                                         <p>Create contact</p>
                                         <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
                                     </button>
