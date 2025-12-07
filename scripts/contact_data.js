@@ -1,3 +1,6 @@
+/**
+ * array for colours to choose from for generating background colour in contact list
+ */
 const colours = [
     '#aaa827ff',
     '#dd711fff',
@@ -10,65 +13,91 @@ const colours = [
     '#c93360ff'
 ];
 
+/**
+ * fetches Contact Data from firebase database. Includes rendering functions for the contact list
+ * @async
+ * @global base_url
+ */
 async function fetchContactList() {
     let response = await fetch(base_url + ".json");
     let responseJson = await response.json();
     let contactData = responseJson.contacts;
-    let keys = Object.keys(contactData)
-    
-    
-    for (var contact in contactData) {
+    await renderListLetter(contactData);
+    renderContactList(contactData);
+};
+
+
+/**
+ * renders the letters in the contactlist that function as a headline. Sorts them alphabetically at the end
+ * @async
+ */
+async function renderListLetter(contactData) {
+    for (let contact in contactData) {
+        let contactList = document.getElementById('contactList');
+        let letter = contactData[contact].name.charAt(0);
+        let child = document.getElementById(letter);
+        if (child == null) {
+            contactList.innerHTML += contactListLetterSection(letter);
+        }
+        sortAlphabetically(contactList, child);
+    }
+};
+
+
+/**
+ * function for sorting headline letters alphabetically. Gets called in function: "renderListLetter()"
+ */
+function sortAlphabetically(parent) {
+  let childrenArray = Array.from(parent.children);
+  childrenArray.sort((a, b) => {
+    return a.textContent.trim().localeCompare(b.textContent.trim());
+  });
+  childrenArray.forEach(child => {
+    parent.appendChild(child);
+  });
+};
+
+
+/**
+ * renders contact into contact list. Gets called in function: "fetchContactList()"
+ */
+function renderContactList(contactData) {
+    for (let contact in contactData) {
         let name = contactData[contact].name;
         let email = contactData[contact].email;
+        let contactID = contact;
+        let acronym = getAcronym(name);
         let letter = name.charAt(0);
-        
-        
-        renderListLetter(letter);
-        //renderContactList(contact, email, name);
-        
+        document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym);
+        colorAcronym(contactID)
     }
-    
-    
 };
 
-function renderListLetter(letter) {
-    let contactList = document.getElementById('contactList');
-    let child = document.getElementById(letter);
-    let status = contactList.contains(child);
-    console.log(status);
-    
-    if (contactList.contains(child) = false) {
-        console.log(1);
-        
-        contactList.innerHTML = contactListLetterSection(letter);
-    }
-    
-    
-    
-    //contactList.innerHTML += contactListLetterSection(letter);
-};
 
-function renderContactList(contactID, email, name) {
-    let acronym = getAcronym(name);
-    let letter = name.charAt(0).toLowerCase();
-    document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym);
-    colorAcronym(contactID)
-};
-
+/**
+ * generates acronym from contact name. Gets called in function: "renderContactList()"
+ */
 function getAcronym(name) {
     let matches = name.match(/\b(\w)/g);
     let acronym = matches.join('');
     return acronym;
 };
 
+
+/**
+ * chooses backgroundcolor for user acronym randomly from colours array. Gets called in function: "renderContactList()"
+ */
 function colorAcronym(data) {
     let element = document.getElementById("listShort" + data);
     let color = colours[Math.floor(Math.random() * colours.length)];
     element.style.backgroundColor = color;
 };
 
+
+/**
+ * renders information from contact into the main display and adds the phone number"
+ */
 function renderContactInMain() {
 
 };
 
-//for key object loop to render in list
