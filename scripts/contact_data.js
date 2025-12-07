@@ -123,3 +123,38 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
     mainDisplay.innerHTML = contactMain(currentId, currentName, currentPhone, currentMail, acronym);
     document.getElementById("mainShort").style.backgroundColor = color;
 };
+
+
+/**
+ * adds new user to the database
+ */
+async function addContactToDatabase() {
+    let name = document.getElementById('nameInfo').value;
+    let phone = document.getElementById('phoneInfo').value;
+    let email = document.getElementById('emailInfo').value;
+    const newUser = {
+        "email": email,
+        "name": name,
+        "phone": phone,
+    }
+
+    await fetch(base_url + "/contacts.json" , {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser),
+    })
+    emptyInput();
+};
+
+
+/**
+ * emptys input fields if process of adding a user gets cancelled
+ */
+function emptyInput() {
+    document.getElementById('nameInfo').value = "";
+    document.getElementById('phoneInfo').value = "";
+    document.getElementById('emailInfo').value = "";
+};
+
