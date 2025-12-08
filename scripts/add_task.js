@@ -3,25 +3,25 @@ const task_description = document.getElementById("task_description")
 const task_due_date = document.getElementById("task_due_date")
 const task_assign = document.getElementById("task_assign")
 const task_category = document.getElementById("task_category")
-// const task_subtask = document.getElementById("task_subtask")
-let task_subtask = null;
 const req_title_text = document.getElementById("required_title")
 const req_due_date_text = document.getElementById("required_date")
 const req_category_text = document.getElementById("required_category")
+const contact_selector = document.getElementById("contact_selector")
+const rendered_contact_images = document.getElementById("rendered_contact_images")
 
+// const task_subtask = document.getElementById("task_subtask")
 // const low_prio_button = document.getElementById("button_prio_low")
 // const medium_prio_button = document.getElementById("button_prio_medium")
 // const urgent_prio_button = document.getElementById("button_prio_urgent")
+// const subtask_button_section = document.getElementById("subtask_button_section")
+// const subtask_list = document.getElementById("subtask_render")
+
+let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
 let urgent_prio_button = null;
-
-// const subtask_button_section = document.getElementById("subtask_button_section")
 let subtask_button_section = null;
-// const subtask_list = document.getElementById("subtask_render")
 let subtask_list = null;
-const contact_selector = document.getElementById("contact_selector")
-const rendered_contact_images = document.getElementById("rendered_contact_images")
 
 let subtask_buttons_active = false
 let contacts_shown = false
@@ -37,8 +37,18 @@ let all_contacts = []
 
 async function init() {
     let api_data = await loadDataFromAPI()
-    addContactsToAssign(api_data)
+    addContactsToAssign(api_data);
+    loadAllContentById();
 
+}
+
+function loadAllContentById() {
+    task_subtask = document.getElementById("task_subtask");
+    low_prio_button = document.getElementById("button_prio_low");
+    medium_prio_button = document.getElementById("button_prio_medium");
+    urgent_prio_button = document.getElementById("button_prio_urgent");
+    subtask_button_section = document.getElementById("subtask_button_section");
+    subtask_list = document.getElementById("subtask_render");
 }
 
 function loadDataFromAPI() {
