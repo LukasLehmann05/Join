@@ -1,128 +1,172 @@
-function getInitials(name) {
-    if (!name) return "?";
+function loadCurrentUserRaw() {
+    return localStorage.getItem("currentUser");
+}
 
-    const parts = name.trim().split(" ");
-
-    if (parts.length === 1) {
-        return parts[0][0].toUpperCase();
+function parseJsonSafe(json) {
+    try {
+        return JSON.parse(json);
+    } catch (e) {
+        console.warn("currentUser in localStorage ist kein gültiges JSON:", json);
+        return null;
     }
-
-    return (parts[0][0] + parts[1][0]).toUpperCase();
 }
 
 function getCurrentUserSafe() {
-    const raw = localStorage.getItem('currentUser');
+    const raw = loadCurrentUserRaw();
+    if (!raw) return null;
+    return parseJsonSafe(raw);
+}
 
-    if (!raw) {
-        return null;
-    }
-
-    try {
-        return JSON.parse(raw);
-    } catch (e) {
-        console.warn('currentUser in localStorage ist kein gültiges JSON:', raw);
-        return null;
-    }
+function redirectToLogin() {
+    window.location.href = "../html/login.html";
 }
 
 function requireAuth() {
     const user = getCurrentUserSafe();
-
-    if (!user) {
-
-        window.location.href = '../html/login.html';
-    }
+    if (!user) redirectToLogin();
 }
 
-function renderHeaderAvatar() {
-    const avatarElement = document.getElementById('header-avatar');
-    if (!avatarElement) return;
-
-    const user = getCurrentUserSafe();
-
-    let initials = "?";
-
-    if (user && user.name) {
-        initials = getInitials(user.name);
+function getInitialsFromParts(parts) {
+    if (parts.length === 0) return "?";
+    if (parts.length === 1) {
+        return parts[0][0].toUpperCase();
     }
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+}
 
+function getInitials(name) {
+    const cleanName = name ? name.trim() : "";
+    if (!cleanName) return "?";
+    const parts = cleanName.split(" ");
+    return getInitialsFromParts(parts);
+}
+
+function getUserInitials(user) {
+    if (!user || !user.name) return "?";
+    return getInitials(user.name);
+}
+
+function updateAvatarText(avatarElement, initials) {
     avatarElement.textContent = initials;
 }
 
-function renderGreeting() {
-    const greetingTextEl = document.querySelector('.greeting-text');
-    const greetingNameEl = document.querySelector('.greeting-name');
-
-    if (!greetingTextEl || !greetingNameEl) return;
-
+function renderHeaderAvatar() {
+    const avatarElement = document.getElementById("header-avatar");
+    if (!avatarElement) return;
     const user = getCurrentUserSafe();
-    const fullName = user?.name?.trim() || 'Guest';
+    const initials = getUserInitials(user);
+    updateAvatarText(avatarElement, initials);
+}
 
-    const hour = new Date().getHours();
-    let greeting = 'Good morning';
+function getGreetingElements() {
+    const greetingTextEl = document.querySelector(".greeting-text");
+    const greetingNameEl = document.querySelector(".greeting-name");
+    return { greetingTextEl, greetingNameEl };
+}
 
-    if (hour >= 12 && hour < 18) {
-        greeting = 'Good afternoon';
-    } else if (hour >= 18 || hour < 5) {
-        greeting = 'Good evening';
-    }
+function getSafeUserName(user) {
+    const name = user?.name?.trim();
+    return name || "Guest";
+}
 
+function calculateGreeting(hour) {
+    if (hour >= 12 && hour < 18) return "Good afternoon";
+    if (hour >= 18 || hour < 5) return "Good evening";
+    return "Good morning";
+}
+
+function showGreeting(greetingTextEl, greetingNameEl, greeting, fullName) {
     greetingTextEl.textContent = `${greeting},`;
-
     greetingNameEl.textContent = fullName;
 }
 
+function renderGreeting() {
+    const { greetingTextEl, greetingNameEl } = getGreetingElements();
+    if (!greetingTextEl || !greetingNameEl) return;
 
-function setupAvatarMenu() {
-    const avatarButton = document.getElementById('avatar-button');
-    const menu = document.getElementById('avatar-menu');
-    const legalBtn = document.getElementById('menu-legal');
-    const privacyBtn = document.getElementById('menu-privacy');
-    const logoutBtn = document.getElementById('menu-logout');
+    const user = getCurrentUserSafe();
+    const fullName = getSafeUserName(user);
+    const hour = new Date().getHours();
+    const greeting = calculateGreeting(hour);
 
-    if (!avatarButton || !menu) return;
+    showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
+}
 
+function getAvatarCoreElements() {
+    const avatarButton = document.getElementById("avatar-button");
+    const menu = document.getElementById("avatar-menu");
+    return { avatarButton, menu };
+}
 
-    avatarButton.addEventListener('click', (event) => {
-        event.stopPropagation(); 
-        menu.classList.toggle('hidden');
+function toggleMenuVisibility(event, menu) {
+    event.stopPropagation();
+    menu.classList.toggle("hidden");
+}
+
+function setupAvatarToggle(avatarButton, menu) {
+    avatarButton.addEventListener("click", (event) => {
+        toggleMenuVisibility(event, menu);
     });
+}
 
-    document.addEventListener('click', (event) => {
-        if (!menu.classList.contains('hidden')) {
-            const clickedInsideMenu = menu.contains(event.target);
-            const clickedAvatar = avatarButton.contains(event.target);
-            if (!clickedInsideMenu && !clickedAvatar) {
-                menu.classList.add('hidden');
-            }
-        }
-    });
-
-    if (legalBtn) {
-        legalBtn.addEventListener('click', () => {
-            window.location.href = '../html/legalNotice.html';
-        });
-    }
-
-    if (privacyBtn) {
-        privacyBtn.addEventListener('click', () => {
-            window.location.href = '../html/privacyPolicy.html';
-        });
-    }
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('isGuest');
-            window.location.href = '../html/login.html';
-        });
+function hideMenuIfClickedOutside(event, avatarButton, menu) {
+    if (menu.classList.contains("hidden")) return;
+    const inMenu = menu.contains(event.target);
+    const inAvatar = avatarButton.contains(event.target);
+    if (!inMenu && !inAvatar) {
+        menu.classList.add("hidden");
     }
 }
 
+function setupAvatarOutsideClick(avatarButton, menu) {
+    document.addEventListener("click", (event) => {
+        hideMenuIfClickedOutside(event, avatarButton, menu);
+    });
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+function handleLegalClick() {
+    window.location.href = "../html/legalNotice.html";
+}
+
+function handlePrivacyClick() {
+    window.location.href = "../html/privacyPolicy.html";
+}
+
+function handleLogoutClick() {
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("isGuest");
+    redirectToLogin();
+}
+
+function addClickIfPresent(element, handler) {
+    if (!element) return;
+    element.addEventListener("click", handler);
+}
+
+function setupAvatarMenuLinks() {
+    const legalBtn = document.getElementById("menu-legal");
+    const privacyBtn = document.getElementById("menu-privacy");
+    const logoutBtn = document.getElementById("menu-logout");
+
+    addClickIfPresent(legalBtn, handleLegalClick);
+    addClickIfPresent(privacyBtn, handlePrivacyClick);
+    addClickIfPresent(logoutBtn, handleLogoutClick);
+}
+
+function setupAvatarMenu() {
+    const { avatarButton, menu } = getAvatarCoreElements();
+    if (!avatarButton || !menu) return;
+
+    setupAvatarToggle(avatarButton, menu);
+    setupAvatarOutsideClick(avatarButton, menu);
+    setupAvatarMenuLinks();
+}
+
+function initHeader() {
     requireAuth();
     renderHeaderAvatar();
     setupAvatarMenu();
     renderGreeting();
-});
+}
+
+document.addEventListener("DOMContentLoaded", initHeader);
