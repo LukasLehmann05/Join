@@ -231,7 +231,8 @@ function loadButtonElements(taskId) {
     low_prio_button = document.getElementById("button_prio_low");
     medium_prio_button = document.getElementById("button_prio_medium");
     urgent_prio_button = document.getElementById("button_prio_urgent");
+    subtask_list = document.getElementById('subtasks_upsert_list');
     const subtask_button_section = document.getElementById("subtask_button_section");
-    const task_subtask = document.getElementById("task_subtask");
+    let task_subtask = document.getElementById("task_subtask");
     
 }

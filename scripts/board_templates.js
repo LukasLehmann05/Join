@@ -300,7 +300,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                             type="text" 
                             placeholder="Add new subtask">
                         <aside id="subtask_button_section">
-                            <button type="button" onclick="addSubtask('${taskId}')">
+                            <button type="button" onclick="addSubtask()">
                                 <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg"
                                     alt="add_icon">
                             </button>
