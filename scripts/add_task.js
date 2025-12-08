@@ -1,12 +1,10 @@
 const task_title = document.getElementById("task_title")
 const task_description = document.getElementById("task_description")
 const task_due_date = document.getElementById("task_due_date")
-const task_assign = document.getElementById("task_assign")
 const task_category = document.getElementById("task_category")
 const req_title_text = document.getElementById("required_title")
 const req_due_date_text = document.getElementById("required_date")
 const req_category_text = document.getElementById("required_category")
-const contact_selector = document.getElementById("contact_selector")
 const rendered_contact_images = document.getElementById("rendered_contact_images")
 
 // const task_subtask = document.getElementById("task_subtask")
@@ -22,6 +20,8 @@ let medium_prio_button = null;
 let urgent_prio_button = null;
 let subtask_button_section = null;
 let subtask_list = null;
+let task_assign = null;
+let contact_selector = null;
 
 let subtask_buttons_active = false
 let contacts_shown = false
@@ -37,18 +37,20 @@ let all_contacts = []
 
 async function init() {
     let api_data = await loadDataFromAPI()
+    loadPrioButtonsAndSubtaskSectionById();
     addContactsToAssign(api_data);
-    loadAllContentById();
 
 }
 
-function loadAllContentById() {
+function loadPrioButtonsAndSubtaskSectionById() {
     task_subtask = document.getElementById("task_subtask");
     low_prio_button = document.getElementById("button_prio_low");
     medium_prio_button = document.getElementById("button_prio_medium");
     urgent_prio_button = document.getElementById("button_prio_urgent");
     subtask_button_section = document.getElementById("subtask_button_section");
     subtask_list = document.getElementById("subtask_render");
+    task_assign = document.getElementById("task_assign");
+    contact_selector = document.getElementById("contact_selector")
 }
 
 function loadDataFromAPI() {
