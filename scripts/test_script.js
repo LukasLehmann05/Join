@@ -84,8 +84,3 @@ function addSubtask() {
         hideSubtaskButtons()
     }
 }
-
-
-function returnSubtaskTemplate(subtask) {
-    return `<li>${subtask}</li>`
-}

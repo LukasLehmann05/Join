@@ -1,6 +1,4 @@
 let stateWidthOverlay = false;
-let subtask_list = {};
-let all_subtasks = [];
 
 
 function openTaskInOverlay(taskId) {
@@ -196,15 +194,16 @@ function escapeTextareaContent(text) {
 }
 
 
-function openAddTaskOverlay() {
+async function openAddTaskOverlay() {
     // const taskId = generateNewTaskId(); // sollte von Firebase kommen
     const taskId = 'new_task_id_' + Date.now(); // temporär
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
-    renderOverlayAddTask(taskId);
-    loadButtonElements(taskId);
+    renderOverlayAddTask(taskId).then(() => {
+        loadButtonElements(taskId);
+    })
 }
 
 
@@ -214,6 +213,7 @@ function renderOverlayAddTask(taskId) {
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeperatorInAddTaskOverlay();
+    return Promise.resolve();
 }
 
 
@@ -232,7 +232,7 @@ function loadButtonElements(taskId) {
     medium_prio_button = document.getElementById("button_prio_medium");
     urgent_prio_button = document.getElementById("button_prio_urgent");
     subtask_list = document.getElementById('subtasks_upsert_list');
-    const subtask_button_section = document.getElementById("subtask_button_section");
-    let task_subtask = document.getElementById("task_subtask");
+    subtask_button_section = document.getElementById("subtask_button_section");
+    task_subtask = document.getElementById("task_subtask");
     
 }
