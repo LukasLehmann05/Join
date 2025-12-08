@@ -15,12 +15,11 @@
     <link rel="stylesheet" href="../style/add_contact.css">
     <link rel="stylesheet" href="../style/add_task.css">
 
-
+    <script src="/script.js"></script>
     <script src="/scripts/contact_data.js"></script>
     <script src="/scripts/contact_template.js"></script>
     <script src="/scripts/firebase.js"></script>
-
-
+    
 </head>
 
 <body onload="fetchContactList()" class="body">
@@ -116,7 +115,8 @@
                             </label>
                             <section class="button-section-contact">
                                 <div class="clear-button">
-                                    <button onclick="closeDialog('addContact' , 'addContent') , emptyInput()" class="action-buttons">
+                                    <button onclick="closeDialog('addContact' , 'addContent') , emptyInput()"
+                                        class="action-buttons">
                                         <p>Cancel</p>
                                         <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
                                     </button>
