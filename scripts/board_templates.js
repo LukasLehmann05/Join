@@ -341,8 +341,3 @@ function overlayUpsertTaskDetailsContainerTemplate() {
             <section class="task_details_container" id="task_details_container_2"></section>
             `
 }
-
-
-function returnSubtaskTemplate(subtask) {
-    return `<li>${subtask}</li>`
-}
