@@ -20,8 +20,6 @@ const colours = [
 ];
 
 
-
-
 /**
  * fetches Contact Data from firebase database. Includes rendering functions for the contact list
  * @async
@@ -33,8 +31,6 @@ async function fetchContactList() {
     colorUser(contactData);
     await renderListLetter(contactData);
     await renderContactList(contactData);
-    console.log(userColourProperty);
-    
 };
 
 
@@ -119,13 +115,10 @@ function colorAcronym(data) {
 function colorUser(contactData) {
     for (let contact in contactData) {
         let colorUser = colours[Math.floor(Math.random() * colours.length)];
-        // store a predictable object shape { id, color }
         userColourProperty.push(
             { id: contact, color: colorUser }
         )
     }
-    
-    //if (userColourProperty.some(e => e.data) === false) {}
 };
 
 
@@ -156,24 +149,31 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
 /**
  * adds new user to the database
  */
-async function addContactToDatabase() {
+
+async function addContactToBase() {
     let name = document.getElementById('nameInfo').value;
     let phone = document.getElementById('phoneInfo').value;
     let email = document.getElementById('emailInfo').value;
-    const newUser = {
+
+    let newUser = {
         "email": email,
         "name": name,
         "phone": phone,
     }
 
-    await fetch(base_url + "/contacts.json", {
-        method: 'POST',
-        header: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser),
-    })
-    emptyInput();
+    if (validateEmail(email) && validatePhoneByLength(phone) == true) {
+        await fetch(base_url + "/contacts.json", {
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUser),
+        })
+        emptyInput();
+    } else {
+        console.log(error);
+
+    }
 };
 
 
@@ -223,3 +223,25 @@ function emptyInput() {
     document.getElementById('emailInfo').value = "";
 };
 
+
+/**
+ * validates entered email
+ */
+function validateEmail(email) {
+    // Checks for: (anything not space/symbol) + @ + (anything not space/symbol) + . + (anything)
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};
+
+
+/**
+ * validates entered phone number
+ */
+function validatePhoneByLength(phone) {
+    // 1. Remove everything that is NOT a number (replace non-digits with empty string)
+    const cleanNumber = phone.replace(/\D/g, '');
+
+    // 2. Check length (International is usually 7-15 digits)
+    // Adjust these numbers based on your specific needs
+    return cleanNumber.length >= 10 && cleanNumber.length <= 15;
+}
