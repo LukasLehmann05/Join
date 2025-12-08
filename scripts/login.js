@@ -1,99 +1,113 @@
-document.addEventListener('DOMContentLoaded', () => {
-    setupNormalLogin();
-    setupGuestLogin();
-});
+document.addEventListener('DOMContentLoaded', initLogin);
+
+function initLogin() {
+  setupNormalLogin();
+  setupGuestLogin();
+}
 
 function setupNormalLogin() {
-    const loginForm = document.getElementById('login-form');
-    const emailInput = document.getElementById('login-email');
-    const passwordInput = document.getElementById('login-password');
-    const errorBox = document.getElementById('login-error-message');
-
-function showError(msg) {
-    if (errorBox) {
-        errorBox.textContent = msg;
-    } else {
-        alert(msg); 
-    }
-}
-
-    if (!loginForm || !emailInput || !passwordInput) {
-        console.warn('Login form or input fields not found');
-        return;
-    }
-
-    loginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-
-        if (!email || !password) {
-        showError('Please enter email and password.');
-        return;
-}
-
-        try {
-           const user = await getUserByEmail(email);
-
-    if (!user) {
-    showError('No account found with this email.');
+  const form = document.getElementById('login-form');
+  const email = document.getElementById('login-email');
+  const password = document.getElementById('login-password');
+  const errorBox = document.getElementById('login-error-message');
+  if (!form || !email || !password) {
+    console.warn('Login form or input fields not found');
     return;
-}
-
-if (!user.password) {
-    showError('This account has no password set.');
-    return;
-}
-
-if (user.password !== password) {
-    showError('Wrong password.');
-    return;
-}
-
-if (errorBox) errorBox.textContent = '';
-
-           
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            localStorage.setItem('isGuest', 'false');
-
-            window.location.href = '../html/summary.html';
-        } catch (error) {
-            console.error('Login failed:', error);
-            alert('Login failed: ' + error.message);
-        }
-    });
+  }
+  form.addEventListener('submit', (event) => {
+    onLoginSubmit(event, email, password, errorBox);
+  });
 }
 
 function setupGuestLogin() {
-    const guestLoginBtn = document.getElementById('guest-login-btn');
-    const errorBox = document.getElementById('login-error-message');
+  const guestBtn = document.getElementById('guest-login-btn');
+  const errorBox = document.getElementById('login-error-message');
+  if (!guestBtn) {
+    console.warn('Guest login button not found (id="guest-login-btn").');
+    return;
+  }
+  guestBtn.addEventListener('click', () => {
+    onGuestClick(errorBox);
+  });
+}
 
-    function showError(msg) {
-        if (errorBox) {
-            errorBox.textContent = msg;
-        } else {
-            alert(msg);
-        }
-    }
+function showError(errorBox, msg) {
+  if (errorBox) {
+    errorBox.textContent = msg;
+    return;
+  }
+  alert(msg);
+}
 
-    if (!guestLoginBtn) {
-        console.warn('Guest login button not found (id="guest-login-btn").');
-        return;
-    }
+function clearError(errorBox) {
+  if (errorBox) {
+    errorBox.textContent = '';
+  }
+}
 
-    guestLoginBtn.addEventListener('click', async () => {
-        try {
-            const guestUser = await getOrCreateGuestUser();
-            console.log('Guest user from backend:', guestUser);
+function validateLoginInputs(email, password, errorBox) {
+  if (!email || !password) {
+    showError(errorBox, 'Please enter email and password.');
+    return false;
+  }
+  return true;
+}
 
-            localStorage.setItem('currentUser', JSON.stringify(guestUser));
-            localStorage.setItem('isGuest', 'true');
+function onLoginSubmit(event, emailInput, passwordInput, errorBox) {
+  event.preventDefault();
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  if (!validateLoginInputs(email, password, errorBox)) {
+    return;
+  }
+  handleLogin(email, password, errorBox);
+}
 
-            window.location.href = '../html/summary.html';
-        } catch (error) {
-            console.error('Guest login failed:', error);
-            showError('Guest login failed: ' + error.message);
-        }
+function handleLogin(email, password, errorBox) {
+  loginUser(email, password)
+    .then((user) => {
+      handleLoginSuccess(user, false, errorBox);
+    })
+    .catch((error) => {
+      console.error('Login failed:', error);
+      showError(errorBox, 'Login failed: ' + error.message);
+    });
+}
+
+function loginUser(email, password) {
+  return getUserByEmail(email).then((user) => {
+    validateUserCredentials(user, password);
+    return user;
+  });
+}
+
+function validateUserCredentials(user, password) {
+  if (!user) {
+    throw new Error('No account found with this email.');
+  }
+  if (!user.password) {
+    throw new Error('This account has no password set.');
+  }
+  if (user.password !== password) {
+    throw new Error('Wrong password.');
+  }
+}
+
+function handleLoginSuccess(user, isGuest, errorBox) {
+  clearError(errorBox);
+  localStorage.setItem('currentUser', JSON.stringify(user));
+  localStorage.setItem('isGuest', String(isGuest));
+  window.location.href = '../html/summary.html';
+}
+
+function onGuestClick(errorBox) {
+  getOrCreateGuestUser()
+    .then((guestUser) => {
+      console.log('Guest user from backend:', guestUser);
+      handleLoginSuccess(guestUser, true, errorBox);
+    })
+    .catch((error) => {
+      console.error('Guest login failed:', error);
+      showError(errorBox, 'Guest login failed: ' + error.message);
     });
 }
