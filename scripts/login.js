@@ -11,7 +11,6 @@ function setupNormalLogin() {
   const password = document.getElementById('login-password');
   const errorBox = document.getElementById('login-error-message');
   if (!form || !email || !password) {
-    console.warn('Login form or input fields not found');
     return;
   }
   form.addEventListener('submit', (event) => {
@@ -23,7 +22,6 @@ function setupGuestLogin() {
   const guestBtn = document.getElementById('guest-login-btn');
   const errorBox = document.getElementById('login-error-message');
   if (!guestBtn) {
-    console.warn('Guest login button not found (id="guest-login-btn").');
     return;
   }
   guestBtn.addEventListener('click', () => {
@@ -69,7 +67,6 @@ function handleLogin(email, password, errorBox) {
       handleLoginSuccess(user, false, errorBox);
     })
     .catch((error) => {
-      console.error('Login failed:', error);
       showError(errorBox, 'Login failed: ' + error.message);
     });
 }
@@ -103,11 +100,9 @@ function handleLoginSuccess(user, isGuest, errorBox) {
 function onGuestClick(errorBox) {
   getOrCreateGuestUser()
     .then((guestUser) => {
-      console.log('Guest user from backend:', guestUser);
       handleLoginSuccess(guestUser, true, errorBox);
     })
     .catch((error) => {
-      console.error('Guest login failed:', error);
       showError(errorBox, 'Guest login failed: ' + error.message);
     });
 }

@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", initSignup);
 function initSignup() {
   const ui = getSignupElements();
   if (!ui.form) {
-    console.warn("Signup-Form nicht gefunden.");
     return;
   }
   attachPrivacyCheckboxHandler(ui);
@@ -25,15 +24,35 @@ function getSignupElements() {
 
 function attachPrivacyCheckboxHandler(ui) {
   if (!ui.checkbox || !ui.signupBtn) return;
+
   ui.checkbox.addEventListener("change", () => {
-    const privacyErr = document.getElementById("error-signup-privacy");
-    if (ui.checkbox.checked) {
-      enableButton(ui.signupBtn);
-      if (privacyErr) privacyErr.textContent = "";
-    } else {
-      disableButton(ui.signupBtn);
-    }
+    handleCheckboxChange(ui);
   });
+
+  ui.checkbox.addEventListener("keydown", (e) => {
+    handleCheckboxKeydown(e, ui);
+  });
+}
+
+function handleCheckboxChange(ui) {
+  const privacyErr = document.getElementById("error-signup-privacy");
+  if (ui.checkbox.checked) {
+    enableButton(ui.signupBtn);
+    if (privacyErr) {
+      privacyErr.textContent = "";
+    }
+  } else {
+    disableButton(ui.signupBtn);
+  }
+}
+
+function handleCheckboxKeydown(e, ui) {
+  if (e.key !== "Enter") {
+    return;
+  }
+  e.preventDefault();
+  ui.checkbox.checked = !ui.checkbox.checked;
+  ui.checkbox.dispatchEvent(new Event("change"));
 }
 
 function attachSignupHandler(ui) {
@@ -156,7 +175,9 @@ function showPasswordConfirmError(errors, ui) {
 function showPrivacyError(errors) {
   if (!errors.privacy) return;
   const privacyErr = document.getElementById("error-signup-privacy");
-  if (privacyErr) privacyErr.textContent = errors.privacy;
+  if (privacyErr) {
+    privacyErr.textContent = errors.privacy;
+  }
 }
 
 function showGlobalValidationMessage(ui) {
@@ -171,17 +192,25 @@ function clearFieldErrors(ui) {
   document
     .querySelectorAll(".login-input")
     .forEach((el) => el.classList.remove("error"));
-  if (ui.errorBox) ui.errorBox.textContent = "";
+  if (ui.errorBox) {
+    ui.errorBox.textContent = "";
+  }
 }
 
 function setFieldError(inputElement, errorElementId, message) {
   const errEl = document.getElementById(errorElementId);
-  if (errEl) errEl.textContent = message;
-  if (inputElement) inputElement.classList.add("error");
+  if (errEl) {
+    errEl.textContent = message;
+  }
+  if (inputElement) {
+    inputElement.classList.add("error");
+  }
 }
 
 async function submitSignup(data, ui) {
-  if (ui.signupBtn) setLoadingState(ui.signupBtn, true);
+  if (ui.signupBtn) {
+    setLoadingState(ui.signupBtn, true);
+  }
   try {
     const existingUser = await getUserByEmail(data.email);
     if (existingUser) {
@@ -195,9 +224,11 @@ async function submitSignup(data, ui) {
     );
     handleSignupSuccess(newUser);
   } catch (error) {
-    handleSignupError(error, ui);
+    handleSignupError(ui);
   } finally {
-    if (ui.signupBtn) setLoadingState(ui.signupBtn, false);
+    if (ui.signupBtn) {
+      setLoadingState(ui.signupBtn, false);
+    }
   }
 }
 
@@ -212,7 +243,6 @@ function handleExistingUser(ui) {
 }
 
 function handleSignupSuccess(newUser) {
-  console.log("New user created:", newUser);
   showSignupToast();
   setTimeout(() => {
     localStorage.setItem("currentUser", JSON.stringify(newUser));
@@ -221,8 +251,7 @@ function handleSignupSuccess(newUser) {
   }, 1200);
 }
 
-function handleSignupError(error, ui) {
-  console.error("Sign up failed:", error);
+function handleSignupError(ui) {
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Sign up failed. Please try again later.";
 }
