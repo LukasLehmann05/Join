@@ -19,15 +19,17 @@ const colours = [
     '#c93360ff'
 ];
 
+
+
+
 /**
  * fetches Contact Data from firebase database. Includes rendering functions for the contact list
  * @async
- * @global base_url
+ * @global AllData
  */
 async function fetchContactList() {
-    let response = await fetch(base_url + ".json");
-    let responseJson = await response.json();
-    let contactData = responseJson.contacts;
+    await fetchAllDataGlobal();
+    let contactData = AllData.data.contacts;
     await renderListLetter(contactData);
     renderContactList(contactData);
 };
@@ -182,7 +184,6 @@ async function addContactToDatabase() {
         header: {
             'Content-Type': 'application/json'
         },
-        
     })
 };
 
