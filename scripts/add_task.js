@@ -3,17 +3,23 @@ const task_description = document.getElementById("task_description")
 const task_due_date = document.getElementById("task_due_date")
 const task_assign = document.getElementById("task_assign")
 const task_category = document.getElementById("task_category")
-const task_subtask = document.getElementById("task_subtask")
+// const task_subtask = document.getElementById("task_subtask")
+let task_subtask = null;
 const req_title_text = document.getElementById("required_title")
 const req_due_date_text = document.getElementById("required_date")
 const req_category_text = document.getElementById("required_category")
 
-const low_prio_button = document.getElementById("button_prio_low")
-const medium_prio_button = document.getElementById("button_prio_medium")
-const urgent_prio_button = document.getElementById("button_prio_urgent")
+// const low_prio_button = document.getElementById("button_prio_low")
+// const medium_prio_button = document.getElementById("button_prio_medium")
+// const urgent_prio_button = document.getElementById("button_prio_urgent")
+let low_prio_button = null;
+let medium_prio_button = null;
+let urgent_prio_button = null;
 
-const subtask_button_section = document.getElementById("subtask_button_section")
-const subtask_list = document.getElementById("subtask_render")
+// const subtask_button_section = document.getElementById("subtask_button_section")
+let subtask_button_section = null;
+// const subtask_list = document.getElementById("subtask_render")
+let subtask_list = null;
 const contact_selector = document.getElementById("contact_selector")
 const rendered_contact_images = document.getElementById("rendered_contact_images")
 
@@ -201,18 +207,18 @@ function addSubtask() {
     }
 }
 
-let testUser = {
-    "user_id_1": {
-        "email": "max.mustermann@example.com",
-        "name": "Max Mustermann",
-        "password": "hashed_password_123"
-    },
-    "user_id_2": {
-        "email": "erika.musterfrau@example.com",
-        "name": "Erika Musterfrau",
-        "password": "hashed_password_456"
-    }
-}
+// let testUser = {
+//     "user_id_1": {
+//         "email": "max.mustermann@example.com",
+//         "name": "Max Mustermann",
+//         "password": "hashed_password_123"
+//     },
+//     "user_id_2": {
+//         "email": "erika.musterfrau@example.com",
+//         "name": "Erika Musterfrau",
+//         "password": "hashed_password_456"
+//     }
+// }
 
 function addContactsToAssign(join_data) {
     let contacts = join_data.contacts
