@@ -30,8 +30,11 @@ const colours = [
 async function fetchContactList() {
     await fetchAllDataGlobal();
     let contactData = AllData.data.contacts;
+    colorUser(contactData);
     await renderListLetter(contactData);
-    renderContactList(contactData);
+    await renderContactList(contactData);
+    console.log(userColourProperty);
+    
 };
 
 
@@ -69,16 +72,15 @@ function sortAlphabetically(parent) {
 /**
  * renders contact into contact list. Gets called in function: "fetchContactList()"
  */
-function renderContactList(contactData) {
+async function renderContactList(contactData) {
     for (let contact in contactData) {
         let name = contactData[contact].name;
         let email = contactData[contact].email;
         let phone = contactData[contact].phone;
-        let contactID = contact;
         let acronym = getAcronym(name);
         let letter = name.charAt(0);
-        document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
-        colorAcronym(contactID)
+        document.getElementById(letter).innerHTML += contactListSingle(contact, name, email, acronym, phone);
+        colorAcronym(contact);
     }
 };
 
@@ -88,18 +90,42 @@ function renderContactList(contactData) {
  */
 function getAcronym(name) {
     let matches = name.match(/\b(\w)/g);
-    let acronym = matches.join('');
+    let acronym = matches.join('').toUpperCase();
     return acronym;
 };
 
 
 /**
- * chooses backgroundcolor for user acronym randomly from colours array. Gets called in function: "renderContactList()"
+ * fetches color from array and assigns it as backgroundcolor for the user acronym
  */
 function colorAcronym(data) {
     let element = document.getElementById("short-" + data);
-    let color = colours[Math.floor(Math.random() * colours.length)];
-    element.style.backgroundColor = color;
+    if (!element) return; // guard if element not found
+    // find entry by id (not by dynamic key)
+    let position = userColourProperty.findIndex(item => item.id === data);
+    if (position === -1) {
+        console.warn('No color assigned for', data);
+        return;
+    }
+    element.style.backgroundColor = userColourProperty[position].color;
+};
+
+
+/**
+ * chooses color for user randomly from colours array. Gets called in function: "renderContactList()"
+ * assigns colors to user permanently in userColourProperty
+ * @const userColourProperty
+ */
+function colorUser(contactData) {
+    for (let contact in contactData) {
+        let colorUser = colours[Math.floor(Math.random() * colours.length)];
+        // store a predictable object shape { id, color }
+        userColourProperty.push(
+            { id: contact, color: colorUser }
+        )
+    }
+    
+    //if (userColourProperty.some(e => e.data) === false) {}
 };
 
 
@@ -140,7 +166,7 @@ async function addContactToDatabase() {
         "phone": phone,
     }
 
-    await fetch(base_url + "/contacts.json" , {
+    await fetch(base_url + "/contacts.json", {
         method: 'POST',
         header: {
             'Content-Type': 'application/json'
@@ -165,7 +191,7 @@ async function editContactInDatabase() {
         "phone": phone,
     }
 
-    await fetch(base_url + "/contacts.json" , {
+    await fetch(base_url + "/contacts.json", {
         method: 'PUT',
         header: {
             'Content-Type': 'application/json'
@@ -179,7 +205,7 @@ async function editContactInDatabase() {
  * deletes contacts in firebase
  */
 async function addContactToDatabase() {
-    await fetch(base_url + "/contacts.json" , {
+    await fetch(base_url + "/contacts.json", {
         method: 'DELETE',
         header: {
             'Content-Type': 'application/json'
