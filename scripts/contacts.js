@@ -6,6 +6,8 @@ function openDialog(id, id2) {
     dialog.open = true;
     setTimeout(() => {
         document.getElementById(id2).classList.add('show');
+        
+        
     }, 10)
 };
 
@@ -18,7 +20,7 @@ function closeDialog(id, id2) {
     document.getElementById(id2).classList.remove('show');
     setTimeout(() => {
         dialog.open = false;
-    }, 500)
+    }, 1000)
 };
 
 

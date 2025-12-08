@@ -162,14 +162,23 @@ async function addContactToBase() {
     }
 
     if (validateEmail(email) && validatePhoneByLength(phone) == true) {
-        await fetch(base_url + "/contacts.json", {
+        /* await fetch(base_url + "/contacts.json", {
             method: 'POST',
             header: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newUser),
-        })
+        }) */
         emptyInput();
+        closeDialog('addContact', 'addContent');
+        setTimeout(() => {
+            openDialog('responseDialog', 'responseDialog');
+        }, 500)
+        setTimeout(() => {
+            closeDialog('responseDialog', 'responseDialog');
+        }, 2000)
+        
+
     } else {
         console.log(error);
 
