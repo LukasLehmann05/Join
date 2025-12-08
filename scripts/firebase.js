@@ -1,106 +1,147 @@
-const FIREBASE_BASE_URL = 'https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app';
+const FIREBASE_BASE_URL =
+  'https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app';
 
-async function fetchAllData() {
-    const res = await fetch(`${FIREBASE_BASE_URL}/join.json`);
-    if (!res.ok) {
-        throw new Error('Fehler beim Laden der Daten: ' + res.status);
-    }
-    const data = await res.json();
-    return data || {};
+function getJoinUrl(path) {
+  return `${FIREBASE_BASE_URL}/join/${path}.json`;
 }
 
-function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, all_contacts, all_subtasks) {
-   
-    console.log('addTaskToDB noch nicht implementiert');
+async function fetchJson(url, errorMessage) {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(errorMessage + ': ' + res.status);
+  }
+  const data = await res.json();
+  return data || {};
+}
+
+async function postJson(url, payload, errorMessage) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(errorMessage + ': ' + res.status);
+  }
+  const data = await res.json();
+  return data;
+}
+
+async function saveToJoin(path, payload, errorMessage) {
+  const url = getJoinUrl(path);
+  const resData = await postJson(url, payload, errorMessage);
+  const id = resData.name;
+  return { id, ...payload };
+}
+
+async function fetchAllData() {
+  const url = `${FIREBASE_BASE_URL}/join.json`;
+  return await fetchJson(url, 'Fehler beim Laden der Daten');
 }
 
 async function getAllUsers() {
-    const res = await fetch(`${FIREBASE_BASE_URL}/join/users.json`);
-    if (!res.ok) {
-        throw new Error('Fehler beim Laden der User: ' + res.status);
-    }
-    const data = await res.json();
-    return data || {};
+  const url = getJoinUrl('users');
+  return await fetchJson(url, 'Fehler beim Laden der User');
 }
 
 async function getUserByEmail(email) {
-    const users = await getAllUsers();
-
-    for (const userId in users) {
-        const user = users[userId];
-        if (user && user.email && user.email.toLowerCase() === email.toLowerCase()) {
-            return { id: userId, ...user };
-        }
+  const users = await getAllUsers();
+  for (const userId in users) {
+    const user = users[userId];
+    if (!user || !user.email) {
+      continue;
     }
+    if (user.email.toLowerCase() === email.toLowerCase()) {
+      return { id: userId, ...user };
+    }
+  }
+  return null;
+}
 
-    return null;
+function buildUserPayload(name, email, password) {
+  return {
+    name,
+    email,
+    password,
+    role: 'user',
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function buildGuestPayload() {
+  return {
+    name: 'Guest',
+    email: 'guest@example.com',
+    role: 'guest',
+    createdAt: new Date().toISOString(),
+  };
+}
+
+function buildTaskPayload(title, description, dueDate,
+  priority, category, contacts, subtasks) {
+  return {
+    title,
+    description,
+    dueDate,
+    priority,
+    category,
+    contacts,
+    subtasks,
+    createdAt: new Date().toISOString(),
+  };
 }
 
 async function createUserInDB(name, email, password) {
-    const newUser = {
-        name,
-        email,
-        password, 
-        role: 'user',
-        createdAt: new Date().toISOString()
-    };
-
-    const res = await fetch(`${FIREBASE_BASE_URL}/join/users.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser)
-    });
-
-    if (!res.ok) {
-        throw new Error('Fehler beim Erstellen des Users: ' + res.status);
-    }
-
-    const resData = await res.json();
-    const id = resData.name;
-
-    return { id, ...newUser };
+  const newUser = buildUserPayload(name, email, password);
+  return await saveToJoin(
+    'users',
+    newUser,
+    'Fehler beim Erstellen des Users'
+  );
 }
 
 async function createGuestUserInDB() {
-    const guestUser = {
-        name: 'Guest',
-        email: 'guest@example.com',
-        role: 'guest',
-        createdAt: new Date().toISOString()
-    };
+  const guestUser = buildGuestPayload();
+  return await saveToJoin(
+    'users',
+    guestUser,
+    'Fehler beim Erstellen des Guest-Users'
+  );
+}
 
-    const res = await fetch(`${FIREBASE_BASE_URL}/join/users.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(guestUser)
-    });
-
-    if (!res.ok) {
-        throw new Error('Fehler beim Erstellen des Guest-Users: ' + res.status);
+function findGuestUser(users) {
+  for (const userId in users) {
+    const user = users[userId];
+    if (user && user.role === 'guest') {
+      return { id: userId, ...user };
     }
-
-    const resData = await res.json();
-    const id = resData.name; 
-
-    return { id, ...guestUser };
+  }
+  return null;
 }
 
 async function getOrCreateGuestUser() {
-    const users = await getAllUsers();
+  const users = await getAllUsers();
+  const guest = findGuestUser(users);
+  if (guest) {
+    return guest;
+  }
+  return await createGuestUserInDB();
+}
 
-    for (const userId in users) {
-        const user = users[userId];
-        if (user && user.role === 'guest') {
-            return {
-                id: userId,
-                ...user
-            };
-        }
-    }
-    
-    return await createGuestUserInDB();
+async function addTaskToDB(taskTitle, taskDescription, taskDueDate,
+  taskPriority, taskCategory, allContacts, allSubtasks) {
+  const task = buildTaskPayload(
+    taskTitle,
+    taskDescription,
+    taskDueDate,
+    taskPriority,
+    taskCategory,
+    allContacts,
+    allSubtasks
+  );
+  return await saveToJoin(
+    'tasks',
+    task,
+    'Fehler beim Erstellen der Aufgabe'
+  );
 }
