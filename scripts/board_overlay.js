@@ -123,7 +123,7 @@ function openEditTaskOverlay(taskId) {
 function upsertTaskTemplateHandler(taskId){
     renderOverlayUpsertTaskDetailsContainer();
     upsertTaskTemplatesWrapperContainer1(taskId);
-    upsertTaskTemplatesWrapperContainer2(taskId);
+    upsertTaskTemplatesWrapperContainer2(taskId); //anhand der id eine unterscheidung machen ob edit oder add task
 }
    
 
@@ -178,7 +178,7 @@ function createEmptyTask() {
 
 
 function renderSubtaskEditListItems(taskId) {
-    subtask_list = document.getElementById('subtasks_edit_list');
+    subtask_list = document.getElementById('subtasks_upsert_list');
     let task = getTaskByTaskId(taskId);
     for (let subtask of task.subtasks) {
         let subtaskHtml = returnSubtaskTemplate(subtask.title);
@@ -219,7 +219,7 @@ function renderOverlayAddTask(taskId) {
 
 function toggleTitleCategorySeperatorInAddTaskOverlay() {
     document.getElementById('overlay_title').classList.toggle('show');
-    document.getElementsByClassName('edit_category_container')[0].classList.toggle('show');
+    document.getElementsByClassName('upsert_category_container')[0].classList.toggle('show');
     document.getElementById('overlay_seperator_add_task').classList.toggle('show');
     document.getElementById('overlay_main_content').classList.toggle('show_seperator');
     document.getElementById('overlay_content').classList.toggle('add_task_attributes');
