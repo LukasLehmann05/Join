@@ -161,14 +161,14 @@ function subtasksListItemTemplate(taskId, title, counter) {
 
 function overlayUpsertTaskTemplate(taskId) {
     return  `
-            <header class="overlay_header edit_overlay_header">
+            <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
                 <button class="close_overlay_button" onclick="removeShowClass()">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
             <section class="overlay_main_content" id="overlay_main_content"></section>
-            <footer class="overlay_header edit_overlay_footer">
+            <footer class="overlay_header upsert_overlay_footer">
                 <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
                     <p>Ok</p>
                     <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
@@ -179,7 +179,7 @@ function overlayUpsertTaskTemplate(taskId) {
 
 function overlayUpsertTaskTitleTemplate(taskTitle) {
     return  `
-             <section class="edit_title_container">
+             <section class="upsert_title_container">
                 <form class="input-form">
                     <label for="task_title">Title<span class="required">*</span></label>
                     <input 
@@ -198,7 +198,7 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
 
 function overlayUpsertTaskDescriptionTemplate(taskDescription) {
     return  `
-            <section class="edit_description_container">
+            <section class="upsert_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
                     <textarea 
@@ -213,7 +213,7 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
 
 function overlayUpsertTaskDueDateTemplate(taskDueDate) {
     return  `
-            <section class="edit_due_date_container">
+            <section class="upsert_due_date_container">
                 <form class="input-form">
                     <label for="task_due_date">Due date<span class="required">*</span></label>
                     <input 
@@ -232,7 +232,7 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
 
 function overlayUpsertTaskPriorityTemplate() {
     return  `
-            <section class="edit_priority_container">
+            <section class="upsert_priority_container">
                 <form class="input-form">
                     <p class="priority_form_title">Priority</p>
                     <section class="priority-section" id="priority_section">
@@ -268,7 +268,7 @@ function overlayUpsertTaskPriorityTemplate() {
 
 function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
-            <section class="edit_assigned_users_container">
+            <section class="upsert_assigned_users_container">
                 <form class="input-form">
                     <label for="task_assign">Assigned to</label>
                     <button class="contact-button" type="button" onclick="showContacts()">
@@ -290,7 +290,7 @@ function overlayUpsertTaskAssignedUsersTemplate() {
 
 function overlayUpsertTaskSubtasksTemplate(taskId) {
     return  `
-            <section class="edit_subtasks_container">
+            <section class="upsert_subtasks_container">
                 <form class="input-form">
                     <label for="task_subtask">Subtasks</label>
                     <section class="subtask-section">
@@ -312,7 +312,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                         </aside>
                     </section>
                 </form>
-                <ul class="subtasks_edit_list" id="subtasks_edit_list"></ul>
+                <ul class="subtasks_upsert_list" id="subtasks_upsert_list"></ul>
             </section>
             `
 }
@@ -320,7 +320,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
 
 function overlayUpsertCategoryOptionTemplate() {
     return `
-            <section class="edit_category_container">
+            <section class="upsert_category_container">
                 <form class="input-form" category_template>
                     <label for="task_category">Category<span class="required">*</span></label>
                     <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">

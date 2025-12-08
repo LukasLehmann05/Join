@@ -203,7 +203,7 @@
     justify-content: center;
 }
 
-.overlay_content .edit_overlay_footer{
+.overlay_content .upsert_overlay_footer{
     justify-content: flex-end;
 }
 
@@ -214,16 +214,16 @@
     font-size: 20px;
 }
 
-.overlay_content .edit_priority_container .priority_form_title{
+.overlay_content .upsert_priority_container .priority_form_title{
     font-family: "Inter_Bold";
 }
 
-.overlay_content .edit_description_container form.input-form.description{
+.overlay_content .upsert_description_container form.input-form.description{
     flex: unset;
   
 }
 
-.overlay_content .edit_description_container form textarea{
+.overlay_content .upsert_description_container form textarea{
     height: calc( 120px - 24px );
     line-height: 120%;
     font-size: 20px;
@@ -235,7 +235,7 @@
     overflow-y: auto;
 }
 
-.overlay_content .edit_subtasks_container .subtasks_edit_list{
+.overlay_content .upsert_subtasks_container .subtasks_upsert_list{
     margin-top: 16px;
     display: flex;
     flex-direction: column;
@@ -256,7 +256,7 @@
     height: auto;
 }
 
-.overlay_content .edit_category_container{
+.overlay_content .upsert_category_container{
     visibility: hidden;
     opacity: 0;
     height: 0;
@@ -269,7 +269,7 @@
     display: none;
 }
 
-.overlay_content .edit_category_container.show{
+.overlay_content .upsert_category_container.show{
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
