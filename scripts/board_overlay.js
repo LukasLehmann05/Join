@@ -15,12 +15,12 @@ function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
-    renderAssignedUserInfos(taskId, 'assigned_users_overlay');
+    renderAssignedUserInfos(taskId, onlyId=false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId);
 }
 
 
-function renderAssignedUserInfos(taskId, containerIdSuffix) {
+function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
     let task = getTaskByTaskId(taskId);
     getAssigneesOfTask(task);
@@ -28,14 +28,7 @@ function renderAssignedUserInfos(taskId, containerIdSuffix) {
     
     for (let userId of allAssigneeArr) {
         const user = testUser[userId];
-        const userName = user.name;
-        let nameIconHTMLWrap =  `
-                                <div class="assigned_user_content">
-                                ${assignedUserIconTemplate(getInitialsFromUser(user))}
-                                ${assignedUserNameTemplate(userName)}
-                                </div>
-                                `;
-        container.innerHTML += nameIconHTMLWrap;
+        container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
     }
 }
 
@@ -44,6 +37,23 @@ function getAssigneesOfTask(task) {
     allAssigneeArr = [];
     for (let userId of task.assigned_to) {
         allAssigneeArr.push(userId);
+    }
+}
+
+
+function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
+    if(renderOnlyId) {
+        return  `   <div class="assigned_user_content">
+                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
+                    </div>
+                `;
+    }
+    else {
+        return  `   <div class="assigned_user_content">
+                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
+                    ${assignedUserNameTemplate(user.name)}
+                    </div>
+                `;
     }
 }
 
