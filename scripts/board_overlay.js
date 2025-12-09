@@ -138,6 +138,7 @@ function openEditTaskOverlay(taskId) {
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
+    renderAssignedUserInfos(taskId, onlyId=true, 'rendered_contact_images');
     renderSubtaskEditListItems(taskId);
     addTaskInit();
 }
