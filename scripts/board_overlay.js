@@ -136,7 +136,7 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate('Ok');
     upsertTaskTemplateHandler(taskId);
     renderAssignedUserInfos(taskId, onlyId=true, 'rendered_contact_images');
     renderSubtaskEditListItems(taskId);
@@ -236,7 +236,7 @@ async function openAddTaskOverlay() {
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate('Create Task');
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeperatorInAddTaskOverlay();
     return Promise.resolve();
@@ -249,5 +249,7 @@ function toggleTitleCategorySeperatorInAddTaskOverlay() {
     document.getElementById('overlay_seperator_add_task').classList.toggle('show');
     document.getElementById('overlay_main_content').classList.toggle('show_seperator');
     document.getElementById('overlay_content').classList.toggle('add_task_attributes');
+    document.getElementById('clear_button_container').classList.toggle('show');
+    document.getElementById('required_text_field_section').classList.toggle('show');
     stateWidthOverlay = !stateWidthOverlay;
 }
