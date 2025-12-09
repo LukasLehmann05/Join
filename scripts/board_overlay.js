@@ -114,7 +114,7 @@ function openEditTaskOverlay(taskId) {
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
     renderSubtaskEditListItems(taskId);
-    loadButtonElements(taskId);
+    add_task_init();
 }
 
 
@@ -202,7 +202,8 @@ async function openAddTaskOverlay() {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     renderOverlayAddTask(taskId).then(() => {
-        loadButtonElements(taskId);
+        // loadPrioButtonsAndSubtaskSectionById(taskId);
+        add_task_init();
     })
 }
 
@@ -227,12 +228,12 @@ function toggleTitleCategorySeperatorInAddTaskOverlay() {
 }
 
 
-function loadButtonElements(taskId) {
+function loadPrioButtonsAndSubtaskSectionById(taskId) {
     low_prio_button = document.getElementById("button_prio_low");
     medium_prio_button = document.getElementById("button_prio_medium");
     urgent_prio_button = document.getElementById("button_prio_urgent");
     subtask_list = document.getElementById('subtasks_upsert_list');
     subtask_button_section = document.getElementById("subtask_button_section");
     task_subtask = document.getElementById("task_subtask");
-    
+    task_assign = document.getElementById("task_assign");    
 }
