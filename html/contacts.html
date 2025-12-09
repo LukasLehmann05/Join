@@ -19,7 +19,7 @@
     <script src="/scripts/contact_data.js"></script>
     <script src="/scripts/contact_template.js"></script>
     <script src="/scripts/firebase.js"></script>
-    
+
 </head>
 
 <body onload="fetchContactList()" class="body">
@@ -105,14 +105,16 @@
                                     alt="close overlay icon">
                             </button>
                             <label class="subtask-section name">
-                                <input id="nameInfo" type="text" placeholder="Name">
+                                <input id="nameAdd" type="text" placeholder="Name">
                             </label>
                             <label class="subtask-section mail">
-                                <input id="emailInfo" type="email" placeholder="Email">
+                                <input id="emailAdd" type="email" placeholder="Email">
                             </label>
+                            <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email address.</p>
                             <label class="subtask-section phone">
-                                <input id="phoneInfo" type="tel" placeholder="Phone">
+                                <input id="phoneAdd" type="tel" placeholder="Phone">
                             </label>
+                            <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone number.</p>
                             <section class="button-section-contact">
                                 <div class="clear-button">
                                     <button onclick="closeDialog('addContact' , 'addContent') , emptyInput()"
