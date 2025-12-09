@@ -37,6 +37,45 @@ window.onclick = function (event) {
 };
 
 
+/**
+ * validates entered phone number
+ */
+function validatePhoneByLength(phone) {
+    const cleanNumber = phone.replace(/\D/g, '');
+    return cleanNumber.length >= 10 && cleanNumber.length <= 15;
+}
+
+
+/**
+ * validates entered email
+ */
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};
+
+
+/**
+ * displays hint if phone number or email are invalid. used in adding a new contact
+ */
+function displayHint(id) {
+    document.getElementById(id).style.opacity = 1;
+    setTimeout(() => {
+        document.getElementById(id).style.opacity = 0;
+    }, 3000)
+};
+
+
+/**
+ * emptys input fields if process of adding a user gets cancelled
+ */
+function emptyInput() {
+    document.getElementById('nameAdd').value = "";
+    document.getElementById('phoneAdd').value = "";
+    document.getElementById('emailAdd').value = "";
+};
+
+
 
 
 
