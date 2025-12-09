@@ -20,4 +20,27 @@
     .header-nav {
         justify-content: flex-end;
     }
+
+    .body {
+        flex-direction: column-reverse;
+    }
+
+    .logo-section {
+        display: none;
+    }
+
+    .sidebar-nav {
+        justify-content: space-evenly;
+        flex-direction: row;
+        gap: 0px;
+    }
+
+    .sidebar-nav-section {
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
 }
