@@ -37,13 +37,6 @@ window.onclick = function (event) {
 };
 
 
-/**
- * shows the user the outcome of the phone and email validation
- */
-function showHint(id) {
-    document.getElementById(id).style.opacity = "1";
-};
-
 
 
 
