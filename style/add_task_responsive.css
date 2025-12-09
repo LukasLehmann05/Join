@@ -18,7 +18,7 @@
     }
 
     .header-nav {
-        justify-content: flex-end;
+        justify-content: space-between;
     }
 
     .body {
@@ -55,6 +55,11 @@
 
     .main-content {
         padding: 16px 64px;
+    }
+
+    .logo-responsive {
+        display: block;
+        height: 56px;
     }
 
 }
