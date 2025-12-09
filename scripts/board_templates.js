@@ -312,7 +312,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                         </aside>
                     </section>
                 </form>
-                <ul class="subtasks_upsert_list" id="subtasks_upsert_list"></ul>
+                <ul class="subtasks_upsert_list" id="subtask_render"></ul>
             </section>
             `
 }

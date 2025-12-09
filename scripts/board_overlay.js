@@ -176,7 +176,7 @@ function createEmptyTask() {
 
 
 function renderSubtaskEditListItems(taskId) {
-    subtask_list = document.getElementById('subtasks_upsert_list');
+    subtask_list = document.getElementById('subtask_render');
     let task = getTaskByTaskId(taskId);
     for (let subtask of task.subtasks) {
         let subtaskHtml = returnSubtaskTemplate(subtask.title);
@@ -202,7 +202,6 @@ async function openAddTaskOverlay() {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     renderOverlayAddTask(taskId).then(() => {
-        // loadPrioButtonsAndSubtaskSectionById(taskId);
         add_task_init();
     })
 }
@@ -225,15 +224,4 @@ function toggleTitleCategorySeperatorInAddTaskOverlay() {
     document.getElementById('overlay_main_content').classList.toggle('show_seperator');
     document.getElementById('overlay_content').classList.toggle('add_task_attributes');
     stateWidthOverlay = !stateWidthOverlay;
-}
-
-
-function loadPrioButtonsAndSubtaskSectionById(taskId) {
-    low_prio_button = document.getElementById("button_prio_low");
-    medium_prio_button = document.getElementById("button_prio_medium");
-    urgent_prio_button = document.getElementById("button_prio_urgent");
-    subtask_list = document.getElementById('subtasks_upsert_list');
-    subtask_button_section = document.getElementById("subtask_button_section");
-    task_subtask = document.getElementById("task_subtask");
-    task_assign = document.getElementById("task_assign");    
 }

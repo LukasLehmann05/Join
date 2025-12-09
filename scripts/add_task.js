@@ -5,8 +5,8 @@ const task_category = document.getElementById("task_category")
 const req_title_text = document.getElementById("required_title")
 const req_due_date_text = document.getElementById("required_date")
 const req_category_text = document.getElementById("required_category")
-const rendered_contact_images = document.getElementById("rendered_contact_images")
 
+// const rendered_contact_images = document.getElementById("rendered_contact_images")
 // const task_subtask = document.getElementById("task_subtask")
 // const low_prio_button = document.getElementById("button_prio_low")
 // const medium_prio_button = document.getElementById("button_prio_medium")
@@ -21,6 +21,7 @@ let urgent_prio_button = null;
 let subtask_button_section = null;
 let subtask_list = null;
 let task_assign = null;
+let rendered_contact_images = null;
 
 let subtask_buttons_active = false
 let contacts_shown = false
@@ -34,8 +35,40 @@ let req_category = false
 let all_subtasks = []
 let all_contacts = []
 
+
+let api_data = {
+  contacts: {
+    "-Ofz-pyFqWTjH1-qKL0S": {
+      "email": "fly@gmx.de",
+      "name": "Hoodle McFly",
+      "phone": "88290192383"
+    },
+    "-Ofz0I0S-bi9XBqP1pJS": {
+      "email": "fly@gmx.de",
+      "name": "Mc Fly",
+      "phone": "03478573489"
+    },
+    "-OfzfFGx_dDbEPCLTKwV": {
+      "email": "hoodled@gmail.com",
+      "name": "Hoodel Doodle",
+      "phone": "0151226679"
+    },
+    "-OfzfUMTuza2bFhp_BNv": {
+      "email": "hoodled@gmail.com",
+      "name": "Hoodle Doodle",
+      "phone": "0151226679"
+    },
+    "contact_a": {
+      "email": "yhaoo@gmx.de",
+      "name": "Hoodle Doodle",
+      "phone": 18828222
+    }
+  }
+}
+
+
 async function add_task_init() {
-    let api_data = await loadDataFromAPI()
+    // let api_data = await loadDataFromAPI()
     loadPrioButtonsAndSubtaskSectionById();
     addContactsToAssign(api_data);
 
@@ -49,6 +82,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
     subtask_button_section = document.getElementById("subtask_button_section");
     subtask_list = document.getElementById("subtask_render");
     task_assign = document.getElementById("task_assign");
+    rendered_contact_images = document.getElementById("rendered_contact_images");
 }
 
 function loadDataFromAPI() {
