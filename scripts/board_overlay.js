@@ -21,14 +21,29 @@ function renderOverlayContent(task, taskId) {
 
 
 function renderAssignedUserInfos(taskId, containerIdSuffix) {
-    let container = document.getElementById(taskId + '_' + containerIdSuffix);
+    let container = document.getElementById(containerIdSuffix);
     let task = getTaskByTaskId(taskId);
-    for (let userId of task.assigned_to) {
+    getAssigneesOfTask(task);
+    console.log("Array Of Assigness: " + allAssigneeArr);
+    
+    for (let userId of allAssigneeArr) {
         const user = testUser[userId];
-        const initials = getInitialsFromUser(user);
         const userName = user.name;
-        let userInfoHtml = assignedUserInfoTemplate(userName, initials);
-        container.innerHTML += userInfoHtml;
+        let nameIconHTMLWrap =  `
+                                <div class="assigned_user_content">
+                                ${assignedUserIconTemplate(getInitialsFromUser(user))}
+                                ${assignedUserNameTemplate(userName)}
+                                </div>
+                                `;
+        container.innerHTML += nameIconHTMLWrap;
+    }
+}
+
+
+function getAssigneesOfTask(task) {
+    allAssigneeArr = [];
+    for (let userId of task.assigned_to) {
+        allAssigneeArr.push(userId);
     }
 }
 
@@ -114,7 +129,7 @@ function openEditTaskOverlay(taskId) {
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId);
     upsertTaskTemplateHandler(taskId);
     renderSubtaskEditListItems(taskId);
-    add_task_init();
+    addTaskInit();
 }
 
 
@@ -202,7 +217,7 @@ async function openAddTaskOverlay() {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     renderOverlayAddTask(taskId).then(() => {
-        add_task_init();
+        addTaskInit();
     })
 }
 
