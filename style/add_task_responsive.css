@@ -33,14 +33,23 @@
         justify-content: space-evenly;
         flex-direction: row;
         gap: 0px;
+        padding: 0px;
     }
 
     .sidebar-nav-section {
         flex-direction: column;
         flex: 1;
+        padding: 8px 0px;
     }
 
     .sidebar-footer {
         display: none;
     }
+
+    .sidebar {
+        position: sticky;
+        bottom: 0px;
+        min-height: 0px;
+    }
+
 }
