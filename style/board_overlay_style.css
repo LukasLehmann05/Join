@@ -295,3 +295,18 @@
     opacity: 1;
     transition-delay: 0s;
 }
+
+.overlay_content .action-button-section{
+    margin-top: 12px
+}
+
+.overlay_content .action-button-section .required-text,
+.overlay_content .action-button-section .button-section .clear-button{
+    visibility: hidden;
+}
+
+.overlay_content .action-button-section .required-text.show,
+.overlay_content .action-button-section .button-section .clear-button.show{
+    visibility: visible;
+
+}
