@@ -41,12 +41,12 @@ async function fetchContactList() {
 async function renderListLetter(contactData) {
     for (let contact in contactData) {
         let contactList = document.getElementById('contactList');
-        let letter = contactData[contact].name.charAt(0);
+        let letter = contactData[contact].name.charAt(0).toUpperCase();
         let child = document.getElementById(letter);
         if (child == null) {
             contactList.innerHTML += contactListLetterSection(letter);
         }
-        sortAlphabetically(contactList, child);
+        sortAlphabetically(contactList);
     }
 };
 
@@ -74,7 +74,7 @@ async function renderContactList(contactData) {
         let email = contactData[contact].email;
         let phone = contactData[contact].phone;
         let acronym = getAcronym(name);
-        let letter = name.charAt(0);
+        let letter = name.charAt(0).toUpperCase();
         document.getElementById(letter).innerHTML += contactListSingle(contact, name, email, acronym, phone);
         colorAcronym(contact);
     }
@@ -149,7 +149,6 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
 /**
  * adds new user to the database
  */
-
 async function addContactToBase() {
     let name = document.getElementById('nameAdd').value;
     let phone = document.getElementById('phoneAdd').value;
@@ -182,11 +181,21 @@ async function addContactToBase() {
 
 
 /**
+ * gest last contact that was added
+ */
+async function getLastContact() {
+    let joinFetch = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/contacts/.json`)
+    let joinData = await joinFetch.json();
+    return Object.keys(joinData).at(-1);
+};
+
+
+/**
  * emptys certain html elements before refilling them with content -> prevent overlaps
  */
 function emptyBeforeFilling() {
     document.getElementById('contactList').innerHTML = "";
-    userColourProperty = [];
+    //userColourProperty = [];
 };
 
 
@@ -243,40 +252,9 @@ async function addContactToDatabase() {
 };
 
 
-/**
- * emptys input fields if process of adding a user gets cancelled
- */
-function emptyInput() {
-    document.getElementById('nameAdd').value = "";
-    document.getElementById('phoneAdd').value = "";
-    document.getElementById('emailAdd').value = "";
-};
 
 
-/**
- * validates entered email
- */
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-};
 
 
-/**
- * validates entered phone number
- */
-function validatePhoneByLength(phone) {
-    const cleanNumber = phone.replace(/\D/g, '');
-    return cleanNumber.length >= 10 && cleanNumber.length <= 15;
-}
 
 
-/**
- * displays hint if phone number or email are invalid. used in adding a new contact
- */
-function displayHint(id) {
-    document.getElementById(id).style.opacity = 1;
-    setTimeout(() => {
-        document.getElementById(id).style.opacity = 0;
-    }, 3000)
-}
