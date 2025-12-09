@@ -1,4 +1,4 @@
-let userColourProperty = [];
+const userColourProperty = [];
 
 const AllData = {};
 
