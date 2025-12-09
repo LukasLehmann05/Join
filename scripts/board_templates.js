@@ -270,7 +270,7 @@ function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
             <section class="upsert_assigned_users_container">
                 <form class="input-form">
-                    <label for="task_assign">Assigned to</label>
+                    <p for="task_assign">Assigned to</p>
                     <button class="contact-button" type="button" onclick="showContacts()">
                         <p>Select contacts to assign</p>
                         <img src="../assets/icons/addTask/dropdown.svg" alt="dropdown_icon">

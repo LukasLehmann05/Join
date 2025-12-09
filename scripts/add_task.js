@@ -21,7 +21,6 @@ let urgent_prio_button = null;
 let subtask_button_section = null;
 let subtask_list = null;
 let task_assign = null;
-let contact_selector = null;
 
 let subtask_buttons_active = false
 let contacts_shown = false
@@ -35,7 +34,7 @@ let req_category = false
 let all_subtasks = []
 let all_contacts = []
 
-async function init() {
+async function add_task_init() {
     let api_data = await loadDataFromAPI()
     loadPrioButtonsAndSubtaskSectionById();
     addContactsToAssign(api_data);
@@ -43,14 +42,13 @@ async function init() {
 }
 
 function loadPrioButtonsAndSubtaskSectionById() {
-    task_subtask = document.getElementById("task_subtask");
     low_prio_button = document.getElementById("button_prio_low");
     medium_prio_button = document.getElementById("button_prio_medium");
     urgent_prio_button = document.getElementById("button_prio_urgent");
+    task_subtask = document.getElementById("task_subtask");
     subtask_button_section = document.getElementById("subtask_button_section");
     subtask_list = document.getElementById("subtask_render");
     task_assign = document.getElementById("task_assign");
-    contact_selector = document.getElementById("contact_selector")
 }
 
 function loadDataFromAPI() {
@@ -242,6 +240,7 @@ function addContactsToAssign(join_data) {
 }
 
 function showContacts() {
+    let contact_selector = document.getElementById("contact_selector");
     if (contacts_shown == false) {
         contact_selector.style.display = "block"
         contacts_shown = true
