@@ -136,6 +136,7 @@ textarea.task-input {
     border: solid 1px;
     border-color: #2A3647;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .action-button-section {

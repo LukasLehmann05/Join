@@ -163,11 +163,24 @@ function overlayUpsertTaskTemplate(taskId) {
                 </button>
             </header>
             <section class="overlay_main_content" id="overlay_main_content"></section>
-            <footer class="overlay_header upsert_overlay_footer">
-                <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
-                    <p>Ok</p>
-                    <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
-                </button>
+            <footer class="action-button-section">
+                <section>
+                    <p class="required-text"><span class="required">*</span>This field is required</p>
+                </section>
+                <section class="button-section">
+                    <div class="clear-button">
+                        <button class="action-buttons" onclick="clearAllInputs()">
+                            <p>Cancel</p>
+                            <img src="../assets/icons/contacts/close.svg" alt="clear icon">
+                        </button>
+                    </div>
+                    <div class="create-task">
+                        <button class="action-buttons create-button" onclick="createTask()">
+                            <p>Create Task</p>
+                            <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
+                        </button>
+                    </div>
+                </section>
             </footer>
             `
 }
