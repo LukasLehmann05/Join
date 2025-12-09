@@ -154,7 +154,7 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
-function overlayUpsertTaskTemplate(taskId) {
+function overlayUpsertTaskTemplate(confirmButtonText) {
     return  `
             <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
@@ -165,10 +165,10 @@ function overlayUpsertTaskTemplate(taskId) {
             <section class="overlay_main_content" id="overlay_main_content"></section>
             <footer class="action-button-section">
                 <section>
-                    <p class="required-text"><span class="required">*</span>This field is required</p>
+                    <p class="required-text" id="required_text_field_section"><span class="required">*</span>This field is required</p>
                 </section>
                 <section class="button-section">
-                    <div class="clear-button">
+                    <div class="clear-button" id="clear_button_container">
                         <button class="action-buttons" onclick="clearAllInputs()">
                             <p>Cancel</p>
                             <img src="../assets/icons/contacts/close.svg" alt="clear icon">
@@ -176,7 +176,7 @@ function overlayUpsertTaskTemplate(taskId) {
                     </div>
                     <div class="create-task">
                         <button class="action-buttons create-button" onclick="createTask()">
-                            <p>Create Task</p>
+                            <p>${confirmButtonText}</p>
                             <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
                         </button>
                     </div>
