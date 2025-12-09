@@ -37,6 +37,7 @@
         position: sticky;
         bottom: 0px;
         min-height: 0px;
+        line-height: 100%;
     }
 
     .main-content {
