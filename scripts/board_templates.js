@@ -137,9 +137,7 @@ function overlayContentTemplate(task, taskId) {
 
 function assignedUserNameTemplate(userName) {
     return  `
-            <div class="assigned_user_content">
                 <p>${userName}</p>
-            </div>
             `;
 }
 
