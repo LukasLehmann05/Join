@@ -344,6 +344,10 @@ textarea.task-input {
     justify-content: flex-start;
 }
 
+.rendered-contacts img {
+    height: 42px;
+}
+
 .checkbox-filter {
     filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(9deg) brightness(107%) contrast(101%);
 }
