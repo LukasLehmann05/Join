@@ -33,10 +33,10 @@ let req_due_date = false
 let req_category = false
 
 let all_subtasks = []
-let all_contacts = []
+let allAssigneeArr = []
 
 
-let api_data = {
+let apiData = {
   contacts: {
     "-Ofz-pyFqWTjH1-qKL0S": {
       "email": "fly@gmx.de",
@@ -67,10 +67,10 @@ let api_data = {
 }
 
 
-async function add_task_init() {
+async function addTaskInit() {
     // let api_data = await loadDataFromAPI()
     loadPrioButtonsAndSubtaskSectionById();
-    addContactsToAssign(api_data);
+    addContactsToAssign(apiData);
 
 }
 
@@ -103,7 +103,7 @@ function createTask() {
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, all_contacts, all_subtasks)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, allAssigneeArr, all_subtasks)
 }
 
 
@@ -227,16 +227,16 @@ function clearSubtask() {
 }
 
 function clearContacts() {
-    console.log(all_contacts);
+    console.log(allAssigneeArr);
 
-    for (let index = 0; index < all_contacts.length; index++) {
-        const contact_element = document.getElementById(all_contacts[index]);
+    for (let index = 0; index < allAssigneeArr.length; index++) {
+        const contact_element = document.getElementById(allAssigneeArr[index]);
         contact_element.classList.remove("assigned-contact")
-        const checkbox_icon = document.getElementById("checkbox_" + all_contacts[index])
+        const checkbox_icon = document.getElementById("checkbox_" + allAssigneeArr[index])
         checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
         checkbox_icon.classList.remove("checkbox-filter")
     }
-    all_contacts = []
+    allAssigneeArr = []
     rendered_contact_images.innerHTML = ""
 }
 
@@ -285,10 +285,10 @@ function showContacts() {
 }
 
 function assignContact(contact_id) {
-    if (all_contacts.includes(contact_id)) {
+    if (allAssigneeArr.includes(contact_id)) {
         unassignContact(contact_id)
     } else {
-        all_contacts.push(contact_id)
+        allAssigneeArr.push(contact_id)
         const contact_element = document.getElementById(contact_id)
         const checkbox_icon = document.getElementById("checkbox_" + contact_id)
         checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
@@ -299,8 +299,8 @@ function assignContact(contact_id) {
 }
 
 function unassignContact(contact_id) {
-    let contact_index = all_contacts.indexOf(contact_id)
-    all_contacts.splice(contact_index, 1)
+    let contact_index = allAssigneeArr.indexOf(contact_id)
+    allAssigneeArr.splice(contact_index, 1)
     const contact_element = document.getElementById(contact_id)
     const checkbox_icon = document.getElementById("checkbox_" + contact_id)
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"

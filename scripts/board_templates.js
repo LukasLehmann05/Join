@@ -102,7 +102,7 @@ function overlayContentTemplate(task, taskId) {
                 </div>
                 <div class="assigned_users_info">
                     <p class="attribute">Assigned to:</p>
-                    <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
+                    <div class="assigned_users" id="assigned_users_overlay"></div>
                 </div>
                 <div class="subtasks_info">
                     <p class="attribute">Subtasks</p>
@@ -135,14 +135,11 @@ function overlayContentTemplate(task, taskId) {
             `
 }
 
-function assignedUserInfoTemplate(userName, initials) {
-    let userHtmnl = assignedUserIconTemplate(initials);
+function assignedUserNameTemplate(userName) {
     return  `
             <div class="assigned_user_content">
-                ${userHtmnl}
                 <p>${userName}</p>
             </div>
-
             `;
 }
 
