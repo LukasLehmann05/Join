@@ -6,8 +6,6 @@ function openDialog(id, id2) {
     dialog.open = true;
     setTimeout(() => {
         document.getElementById(id2).classList.add('show');
-        
-        
     }, 10)
 };
 
@@ -36,6 +34,14 @@ window.onclick = function (event) {
     if (event.target == dialog2) {
         closeDialog('editContact', 'editContent');
     }
+};
+
+
+/**
+ * shows the user the outcome of the phone and email validation
+ */
+function showHint(id) {
+    document.getElementById(id).style.opacity = "1";
 };
 
 

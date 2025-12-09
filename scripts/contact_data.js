@@ -151,38 +151,58 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
  */
 
 async function addContactToBase() {
-    let name = document.getElementById('nameInfo').value;
-    let phone = document.getElementById('phoneInfo').value;
-    let email = document.getElementById('emailInfo').value;
-
+    let name = document.getElementById('nameAdd').value;
+    let phone = document.getElementById('phoneAdd').value;
+    let email = document.getElementById('emailAdd').value;
     let newUser = {
         "email": email,
         "name": name,
         "phone": phone,
     }
-
-    if (validateEmail(email) && validatePhoneByLength(phone) == true) {
-        /* await fetch(base_url + "/contacts.json", {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser),
-        }) */
-        emptyInput();
-        closeDialog('addContact', 'addContent');
-        setTimeout(() => {
-            openDialog('responseDialog', 'responseDialog');
-        }, 500)
-        setTimeout(() => {
-            closeDialog('responseDialog', 'responseDialog');
-        }, 2000)
-        
-
+    if (validateEmail(email) == true && email != "") {
+        if (validatePhoneByLength(phone) == true && phone != "") {
+            await fetch(base_url + "/contacts.json", {
+                method: 'POST',
+                header: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser),
+            });
+            emptyBeforeFilling();
+            await fetchContactList();
+            emptyInput();
+            dialogAppearences();
+        } else {
+            displayHint('required_phone');
+        }
     } else {
-        console.log(error);
-
+        displayHint('required_email');
     }
+};
+
+
+/**
+ * emptys certain html elements before refilling them with content -> prevent overlaps
+ */
+function emptyBeforeFilling() {
+    document.getElementById('contactList').innerHTML = "";
+    userColourProperty = [];
+};
+
+
+/**
+ * handles the appearing/disappearing of the dialogs during the process of adding a new contact
+ */
+function dialogAppearences() {
+    closeDialog('addContact', 'addContent');
+    setTimeout(() => {
+        document.getElementsByTagName("body")[0].style.overflow = "hidden";
+        openDialog('responseDialog', 'responseDialog');
+    }, 1500)
+    document.getElementsByTagName("body")[0].style.overflow = "auto";
+    setTimeout(() => {
+        closeDialog('responseDialog', 'responseDialog');
+    }, 3500)
 };
 
 
@@ -227,9 +247,9 @@ async function addContactToDatabase() {
  * emptys input fields if process of adding a user gets cancelled
  */
 function emptyInput() {
-    document.getElementById('nameInfo').value = "";
-    document.getElementById('phoneInfo').value = "";
-    document.getElementById('emailInfo').value = "";
+    document.getElementById('nameAdd').value = "";
+    document.getElementById('phoneAdd').value = "";
+    document.getElementById('emailAdd').value = "";
 };
 
 
@@ -237,7 +257,6 @@ function emptyInput() {
  * validates entered email
  */
 function validateEmail(email) {
-    // Checks for: (anything not space/symbol) + @ + (anything not space/symbol) + . + (anything)
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 };
@@ -247,10 +266,17 @@ function validateEmail(email) {
  * validates entered phone number
  */
 function validatePhoneByLength(phone) {
-    // 1. Remove everything that is NOT a number (replace non-digits with empty string)
     const cleanNumber = phone.replace(/\D/g, '');
-
-    // 2. Check length (International is usually 7-15 digits)
-    // Adjust these numbers based on your specific needs
     return cleanNumber.length >= 10 && cleanNumber.length <= 15;
+}
+
+
+/**
+ * displays hint if phone number or email are invalid. used in adding a new contact
+ */
+function displayHint(id) {
+    document.getElementById(id).style.opacity = 1;
+    setTimeout(() => {
+        document.getElementById(id).style.opacity = 0;
+    }, 3000)
 }
