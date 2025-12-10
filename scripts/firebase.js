@@ -37,7 +37,7 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
 async function updateTask(taskId, fieldsToUpdate) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-            method: 'PATCH',
+            method: 'PUT', // Firebase "update" entspricht HTTP PUT
             body: JSON.stringify(fieldsToUpdate),
             headers: {
                 'Content-Type': 'application/json'

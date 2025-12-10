@@ -23,7 +23,12 @@ function sendUpdatedTaskToDB(taskId) {
     let fieldsToUpdate = getFieldsToUpdateForTask();
     console.log("Fields to update:");
     console.table(fieldsToUpdate);
-    updateTask(taskId, fieldsToUpdate);
+    if (Object.keys(fieldsToUpdate).length !== 0) {
+        updateTask(taskId, fieldsToUpdate);
+    }
+    else {
+        console.log("No fields to update.");
+    }
 }
 
 
@@ -76,7 +81,6 @@ function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
     let task = getTaskByTaskId(taskId);
     getAssigneesOfTask(task);
-    console.log("Array Of Assigness: " + allAssigneesArr);
     
     for (let userId of allAssigneesArr) {
         const user = testUser[userId];
@@ -144,8 +148,8 @@ function closeOverlay(event) {
 }
 
 
-function removeShowClass() {
-    sendUpdatedTaskToDB();
+function removeShowClass(taskId) {
+    sendUpdatedTaskToDB(taskId);
     const overlay = document.getElementById('overlay');
     const contentContent = document.getElementById('overlay_content');
 
@@ -191,7 +195,7 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate('Ok');
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok');
     upsertTaskTemplateHandler(taskId);
     renderAssignedUserInfos(taskId, onlyId=true, 'rendered_contact_images');
     renderSubtaskEditListItems(taskId);
@@ -291,7 +295,7 @@ async function openAddTaskOverlay() {
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate('Create Task');
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task');
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeperatorInAddTaskOverlay();
     return Promise.resolve();
