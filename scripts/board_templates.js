@@ -154,7 +154,7 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
-function overlayUpsertTaskTemplate(taskId, confirmButtonText) {
+function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFunction) {
     return  `
             <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
@@ -175,7 +175,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText) {
                         </button>
                     </div>
                     <div class="create-task">
-                        <button class="action-buttons create-button" onclick="createTask()">
+                        <button class="action-buttons create-button" onclick="${selectedTaskFunction}">
                             <p>${confirmButtonText}</p>
                             <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
                         </button>

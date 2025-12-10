@@ -45,10 +45,23 @@ function getFieldsToUpdateForTask() {
 }
 
 
+function getAllFieldValuesOfEditTaskWhenUpdated() {
+    let taskToEdit = {};
+    taskToEdit.title = document.getElementById('task_title').value;
+    taskToEdit.description = document.getElementById('task_description').value;
+    taskToEdit.due_date = document.getElementById('task_due_date').value;
+    taskToEdit.priority = current_priority;
+    taskToEdit.assigned_to = allAssigneesArr;
+    taskToEdit.subtasks = allSubtasksArr;
+    console.table(taskToEdit);
+    
+    return taskToEdit;
+}
+
+
 function openTaskInOverlay(taskId) {
     clearElementsOfNewTask();
     let task = getTaskByTaskId(taskId);
-    console.table(task);
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
@@ -195,11 +208,40 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok');
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements('${taskId}')`);
     upsertTaskTemplateHandler(taskId);
     renderAssignedUserInfos(taskId, onlyId=true, 'rendered_contact_images');
     renderSubtaskEditListItems(taskId);
     addTaskInit();
+}
+
+
+function updateTaskElements(taskId) {
+    let taskToEdit = getAllFieldValuesOfEditTaskWhenUpdated();
+    getOnlyUpdatedFieldsForEditedTask(taskId, taskToEdit);
+    removeShowClass(taskId);
+}
+
+
+function getOnlyUpdatedFieldsForEditedTask(taskId, taskToEdit) {
+    if (taskToEdit.title !== getTaskByTaskId(taskId).title) {
+        newTitle = taskToEdit.title;
+    }
+    if (taskToEdit.description !== getTaskByTaskId(taskId).description) {
+        newDescription = taskToEdit.description;
+    }
+    if (taskToEdit.due_date !== getTaskByTaskId(taskId).due_date) {
+        newDueDate = taskToEdit.due_date;
+    }
+    if (taskToEdit.priority !== getTaskByTaskId(taskId).priority) {
+        newPriority = taskToEdit.priority;
+    }
+    if (JSON.stringify(taskToEdit.assigned_to) !== JSON.stringify(getTaskByTaskId(taskId).assigned_to)) {
+        newAssigneesArr = taskToEdit.assigned_to;
+    }
+    if (JSON.stringify(taskToEdit.subtasks) !== JSON.stringify(getTaskByTaskId(taskId).subtasks)) {
+        newSubtasksArr = taskToEdit.subtasks;
+    }
 }
 
 
@@ -295,7 +337,7 @@ async function openAddTaskOverlay() {
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task');
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', `createTask('${taskId}')`);
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeperatorInAddTaskOverlay();
     return Promise.resolve();
