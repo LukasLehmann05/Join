@@ -28,26 +28,36 @@ const colours = [
 async function fetchContactList() {
     await fetchAllDataGlobal();
     let contactData = AllData.data.contacts;
-    colorUser(contactData);
-    await renderListLetter(contactData);
-    await renderContactList(contactData);
+    for (let contactID in contactData) {
+        colorUser(contactID);
+        let name = contactData[contactID].name;
+        let singleContactData = contactData[contactID];
+        renderHtmlElements(singleContactData, contactID, name);
+    }
 };
 
+
+/**
+ * vehicle for better structure
+ * @async
+ */
+async function renderHtmlElements(singleContactData, contactID, name) {
+    await renderListLetter(name);
+    await renderContactList(singleContactData, contactID);
+}
 
 /**
  * renders the letters in the contactlist that function as a headline. Sorts them alphabetically at the end
  * @async
  */
-async function renderListLetter(contactData) {
-    for (let contact in contactData) {
-        let contactList = document.getElementById('contactList');
-        let letter = contactData[contact].name.charAt(0).toUpperCase();
-        let child = document.getElementById(letter);
-        if (child == null) {
-            contactList.innerHTML += contactListLetterSection(letter);
-        }
-        sortAlphabetically(contactList);
+async function renderListLetter(name) {
+    let contactList = document.getElementById('contactList');
+    let letter = name.charAt(0).toUpperCase();
+    let child = document.getElementById(letter);
+    if (child == null) {
+        contactList.innerHTML += contactListLetterSection(letter);
     }
+    sortAlphabetically(contactList);
 };
 
 
@@ -68,16 +78,14 @@ function sortAlphabetically(parent) {
 /**
  * renders contact into contact list. Gets called in function: "fetchContactList()"
  */
-async function renderContactList(contactData) {
-    for (let contact in contactData) {
-        let name = contactData[contact].name;
-        let email = contactData[contact].email;
-        let phone = contactData[contact].phone;
-        let acronym = getAcronym(name);
-        let letter = name.charAt(0).toUpperCase();
-        document.getElementById(letter).innerHTML += contactListSingle(contact, name, email, acronym, phone);
-        colorAcronym(contact);
-    }
+async function renderContactList(singleContactData, contactID) {
+    let name = singleContactData.name;
+    let email = singleContactData.email;
+    let phone = singleContactData.phone;
+    let acronym = getAcronym(name);
+    let letter = name.charAt(0).toUpperCase();
+    document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
+    colorAcronym(contactID);
 };
 
 
@@ -94,15 +102,10 @@ function getAcronym(name) {
 /**
  * fetches color from array and assigns it as backgroundcolor for the user acronym
  */
-function colorAcronym(data) {
-    let element = document.getElementById("short-" + data);
+function colorAcronym(contact) {
+    let element = document.getElementById("short-" + contact);
     if (!element) return; // guard if element not found
-    // find entry by id (not by dynamic key)
-    let position = userColourProperty.findIndex(item => item.id === data);
-    if (position === -1) {
-        console.warn('No color assigned for', data);
-        return;
-    }
+    let position = userColourProperty.findIndex(item => item.id === contact);
     element.style.backgroundColor = userColourProperty[position].color;
 };
 
@@ -112,13 +115,11 @@ function colorAcronym(data) {
  * assigns colors to user permanently in userColourProperty
  * @const userColourProperty
  */
-function colorUser(contactData) {
-    for (let contact in contactData) {
-        let colorUser = colours[Math.floor(Math.random() * colours.length)];
-        userColourProperty.push(
-            { id: contact, color: colorUser }
-        )
-    }
+function colorUser(contact) {
+    let colorUser = colours[Math.floor(Math.random() * colours.length)];
+    userColourProperty.push(
+        { id: contact, color: colorUser }
+    )
 };
 
 
@@ -147,30 +148,31 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
 
 
 /**
- * adds new user to the database
+ * fetches data from input fields and returns them as an object
  */
-async function addContactToBase() {
-    let name = document.getElementById('nameAdd').value;
-    let phone = document.getElementById('phoneAdd').value;
-    let email = document.getElementById('emailAdd').value;
+function getContactInputData(nameInput, phoneInput, emailInput) {
+    let name = document.getElementById(nameInput).value;
+    let phone = document.getElementById(phoneInput).value;
+    let email = document.getElementById(emailInput).value;        
     let newUser = {
         "email": email,
         "name": name,
         "phone": phone,
-    }
-    if (validateEmail(email) == true && email != "") {
-        if (validatePhoneByLength(phone) == true && phone != "") {
-            await fetch(base_url + "/contacts.json", {
-                method: 'POST',
-                header: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUser),
-            });
-            emptyBeforeFilling();
-            await fetchContactList();
-            emptyInput();
-            dialogAppearences();
+    };
+    return newUser;
+}
+
+
+/**
+ * shell for handling the whole process of adding a new contact including validation, posting data to base, restructuring html list and confirmation for user
+ * @async
+ */
+async function addContactToBase() {
+    let newUser = getContactInputData("nameAdd" , "phoneAdd"  , "emailAdd");
+    if (validateEmail(newUser.email) == true && newUser.email != "") {
+        if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
+            await postDatatoBase(newUser);
+            await trimDown(newUser, newUser.name);
         } else {
             displayHint('required_phone');
         }
@@ -181,21 +183,38 @@ async function addContactToBase() {
 
 
 /**
+ * post new Contact that got add to database
+ */
+async function postDatatoBase(newUser) {
+    await fetch(base_url + "/contacts.json", {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser),
+    });
+};
+
+
+/**
+ * shell for restructuring html templates and dialog appearences
+ */
+async function trimDown(newUser, name) {
+    let contactID = await getLastContact();
+    colorUser(contactID);
+    await renderHtmlElements(newUser, contactID, name);
+    emptyInput();
+    dialogAppearences();
+};
+
+
+/**
  * gest last contact that was added
  */
 async function getLastContact() {
     let joinFetch = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/contacts/.json`)
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
-};
-
-
-/**
- * emptys certain html elements before refilling them with content -> prevent overlaps
- */
-function emptyBeforeFilling() {
-    document.getElementById('contactList').innerHTML = "";
-    //userColourProperty = [];
 };
 
 
@@ -215,6 +234,29 @@ function dialogAppearences() {
 };
 
 
+
+/**
+ * handles the process of deleting a contact
+ */
+async function deleteUser(id) {
+    let currentId = id.getAttribute('data-id');
+    await deleteDatafromBase(currentId);
+};
+
+
+/**
+ * deletes single contact in firebase
+ */
+async function deleteDatafromBase(contactID) {
+    await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/contacts/${contactID}.json`, {
+        method: 'DELETE',
+        header: {
+            'Content-Type': 'application/json'
+        },
+    })
+};
+
+
 /**
  * edits contacts in firebase
  */
@@ -222,13 +264,11 @@ async function editContactInDatabase() {
     let name = document.getElementById('nameInfo').value;
     let phone = document.getElementById('phoneInfo').value;
     let email = document.getElementById('emailInfo').value;
-    let userPath = "";
     const editedUser = {
         "email": email,
         "name": name,
         "phone": phone,
     }
-
     await fetch(base_url + "/contacts.json", {
         method: 'PUT',
         header: {
@@ -239,17 +279,7 @@ async function editContactInDatabase() {
 };
 
 
-/**
- * deletes contacts in firebase
- */
-async function addContactToDatabase() {
-    await fetch(base_url + "/contacts.json", {
-        method: 'DELETE',
-        header: {
-            'Content-Type': 'application/json'
-        },
-    })
-};
+
 
 
 
