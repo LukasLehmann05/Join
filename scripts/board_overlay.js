@@ -7,7 +7,6 @@ let newDueDate = "";
 let newPriority = "";
 let newAssigneesArr = [];
 let newSubtasksArr = [];
-let fieldsToUpdate = {};
 
 let newTask = {
     assigned_to: newAssigneesArr,
@@ -17,11 +16,27 @@ let newTask = {
     priority: newPriority,
     subtasks: newSubtasksArr,
     title: newTitle
-    };
+};
 
 
-function sendUpdatedTaskToDB(taskId, fieldsToUpdate) {
+function sendUpdatedTaskToDB(taskId) {
+    let fieldsToUpdate = getFieldsToUpdateForTask();
+    console.log("Fields to update:");
+    console.table(fieldsToUpdate);
     updateTask(taskId, fieldsToUpdate);
+}
+
+
+function getFieldsToUpdateForTask() {
+    fieldsToUpdate = {};
+    if (newTitle !== "") fieldsToUpdate.title = newTitle;
+    if (newCategory !== "") fieldsToUpdate.category = newCategory;
+    if (newDescription !== "") fieldsToUpdate.description = newDescription;
+    if (newDueDate !== "") fieldsToUpdate.due_date = newDueDate;
+    if (newPriority !== "") fieldsToUpdate.priority = newPriority;
+    if (newAssigneesArr.length > 0) fieldsToUpdate.assigned_to = newAssigneesArr;
+    if (newSubtasksArr.length > 0) fieldsToUpdate.subtasks = newSubtasksArr;
+    return fieldsToUpdate;
 }
 
 
@@ -51,7 +66,7 @@ function clearElementsOfNewTask() {
 function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
-    renderPriorityIndicator(testTasks.task_id_0123, 'priority_overlay');
+    renderPriorityIndicator(taskId, 'priority_overlay');
     renderAssignedUserInfos(taskId, onlyId=false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId);
 }
@@ -130,7 +145,7 @@ function closeOverlay(event) {
 
 
 function removeShowClass() {
-    // Aufruf Speicherfunktion der veränderten Taskdaten hier einfügen
+    sendUpdatedTaskToDB();
     const overlay = document.getElementById('overlay');
     const contentContent = document.getElementById('overlay_content');
 
@@ -167,7 +182,7 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     let subtaskIndex = subtaskCounter - 1; 
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
-    renderSubtaskProgress(task);
+    renderSubtaskProgress(taskId);
     newSubtasksArr = task.subtasks;
     console.table(newSubtasksArr);
 }
