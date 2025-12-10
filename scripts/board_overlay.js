@@ -8,23 +8,11 @@ let newPriority = "";
 let newAssigneesArr = [];
 let newSubtasksArr = [];
 
-let newTask = {
-    assigned_to: newAssigneesArr,
-    category: newCategory,
-    description: newDescription,
-    due_date: newDueDate,
-    priority: newPriority,
-    subtasks: newSubtasksArr,
-    title: newTitle
-};
-
 
 function sendUpdatedTaskToDB(taskId) {
-    let fieldsToUpdate = getFieldsToUpdateForTask();
-    console.log("Fields to update:");
-    console.table(fieldsToUpdate);
-    if (Object.keys(fieldsToUpdate).length !== 0) {
-        updateTask(taskId, fieldsToUpdate);
+    let taskToUpdate = getTaskToUpdate(taskId);
+    if (Object.keys(taskToUpdate).length !== 0) {
+        updateTask(taskId, taskToUpdate);
     }
     else {
         console.log("No fields to update.");
@@ -32,30 +20,26 @@ function sendUpdatedTaskToDB(taskId) {
 }
 
 
-function getFieldsToUpdateForTask() {
-    fieldsToUpdate = {};
-    if (newTitle !== "") fieldsToUpdate.title = newTitle;
-    if (newCategory !== "") fieldsToUpdate.category = newCategory;
-    if (newDescription !== "") fieldsToUpdate.description = newDescription;
-    if (newDueDate !== "") fieldsToUpdate.due_date = newDueDate;
-    if (newPriority !== "") fieldsToUpdate.priority = newPriority;
-    if (newAssigneesArr.length > 0) fieldsToUpdate.assigned_to = newAssigneesArr;
-    if (newSubtasksArr.length > 0) fieldsToUpdate.subtasks = newSubtasksArr;
-    return fieldsToUpdate;
+function getTaskToUpdate(taskId) {
+    let taskToUpdate = getTaskByTaskId(taskId);
+    if (newTitle !== "") taskToUpdate.title = newTitle;
+    if (newCategory !== "") taskToUpdate.category = newCategory;
+    if (newDescription !== "") taskToUpdate.description = newDescription;
+    if (newDueDate !== "") taskToUpdate.due_date = newDueDate;
+    if (newPriority !== "") taskToUpdate.priority = newPriority;
+    if (newAssigneesArr.length > 0) taskToUpdate.assigned_to = newAssigneesArr;
+    if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
+    return taskToUpdate;
 }
 
 
 function getAllFieldValuesOfEditTaskWhenUpdated() {
-    let taskToEdit = {};
-    taskToEdit.title = document.getElementById('task_title').value;
-    taskToEdit.description = document.getElementById('task_description').value;
-    taskToEdit.due_date = document.getElementById('task_due_date').value;
-    taskToEdit.priority = current_priority;
-    taskToEdit.assigned_to = allAssigneesArr;
-    taskToEdit.subtasks = allSubtasksArr;
-    console.table(taskToEdit);
-    
-    return taskToEdit;
+    newTitle = document.getElementById('task_title').value;
+    newDescription = document.getElementById('task_description').value;
+    newDueDate = document.getElementById('task_due_date').value;
+    newPriority = current_priority;
+    newAssigneesArr = allAssigneesArr;
+    newSubtasksArr = allSubtasksArr;
 }
 
 
@@ -201,7 +185,6 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
     renderSubtaskProgress(taskId);
     newSubtasksArr = task.subtasks;
-    console.table(newSubtasksArr);
 }
 
 
@@ -217,31 +200,8 @@ function openEditTaskOverlay(taskId) {
 
 
 function updateTaskElements(taskId) {
-    let taskToEdit = getAllFieldValuesOfEditTaskWhenUpdated();
-    getOnlyUpdatedFieldsForEditedTask(taskId, taskToEdit);
+    getAllFieldValuesOfEditTaskWhenUpdated();
     removeShowClass(taskId);
-}
-
-
-function getOnlyUpdatedFieldsForEditedTask(taskId, taskToEdit) {
-    if (taskToEdit.title !== getTaskByTaskId(taskId).title) {
-        newTitle = taskToEdit.title;
-    }
-    if (taskToEdit.description !== getTaskByTaskId(taskId).description) {
-        newDescription = taskToEdit.description;
-    }
-    if (taskToEdit.due_date !== getTaskByTaskId(taskId).due_date) {
-        newDueDate = taskToEdit.due_date;
-    }
-    if (taskToEdit.priority !== getTaskByTaskId(taskId).priority) {
-        newPriority = taskToEdit.priority;
-    }
-    if (JSON.stringify(taskToEdit.assigned_to) !== JSON.stringify(getTaskByTaskId(taskId).assigned_to)) {
-        newAssigneesArr = taskToEdit.assigned_to;
-    }
-    if (JSON.stringify(taskToEdit.subtasks) !== JSON.stringify(getTaskByTaskId(taskId).subtasks)) {
-        newSubtasksArr = taskToEdit.subtasks;
-    }
 }
 
 
