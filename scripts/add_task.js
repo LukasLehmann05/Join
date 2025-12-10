@@ -32,8 +32,8 @@ let req_title = false
 let req_due_date = false
 let req_category = false
 
-let all_subtasks = []
-let allAssigneeArr = []
+let allSubtasksArr = []
+let allAssigneesArr = []
 
 
 let apiData = {
@@ -103,7 +103,7 @@ function createTask() {
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, allAssigneeArr, all_subtasks)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, allAssigneesArr, allSubtasksArr)
 }
 
 
@@ -131,7 +131,7 @@ function clearAllInputs() {
     req_title = false
     req_due_date = false
     req_category = false
-    all_subtasks = []
+    allSubtasksArr = []
     changePriority("medium")
     clearRequiredIndicators()
     clearContacts()
@@ -221,22 +221,22 @@ function hideSubtaskButtons() {
 
 function clearSubtask() {
     task_subtask.value = ""
-    all_subtasks = []
+    allSubtasksArr = []
     document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
 }
 
 function clearContacts() {
-    console.log(allAssigneeArr);
+    console.log(allAssigneesArr);
 
-    for (let index = 0; index < allAssigneeArr.length; index++) {
-        const contact_element = document.getElementById(allAssigneeArr[index]);
+    for (let index = 0; index < allAssigneesArr.length; index++) {
+        const contact_element = document.getElementById(allAssigneesArr[index]);
         contact_element.classList.remove("assigned-contact")
-        const checkbox_icon = document.getElementById("checkbox_" + allAssigneeArr[index])
+        const checkbox_icon = document.getElementById("checkbox_" + allAssigneesArr[index])
         checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
         checkbox_icon.classList.remove("checkbox-filter")
     }
-    allAssigneeArr = []
+    allAssigneesArr = []
     rendered_contact_images.innerHTML = ""
 }
 
@@ -245,7 +245,7 @@ function addSubtask() {
         let subtask = task_subtask.value
         let subtask_template = returnSubtaskTemplate(subtask)
         subtask_list.innerHTML += subtask_template
-        all_subtasks.push(task_subtask.value)
+        allSubtasksArr.push(task_subtask.value)
         task_subtask.value = ""
         hideSubtaskButtons()
     }
@@ -285,10 +285,10 @@ function showContacts() {
 }
 
 function assignContact(contact_id) {
-    if (allAssigneeArr.includes(contact_id)) {
+    if (allAssigneesArr.includes(contact_id)) {
         unassignContact(contact_id)
     } else {
-        allAssigneeArr.push(contact_id)
+        allAssigneesArr.push(contact_id)
         const contact_element = document.getElementById(contact_id)
         const checkbox_icon = document.getElementById("checkbox_" + contact_id)
         checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
@@ -299,8 +299,8 @@ function assignContact(contact_id) {
 }
 
 function unassignContact(contact_id) {
-    let contact_index = allAssigneeArr.indexOf(contact_id)
-    allAssigneeArr.splice(contact_index, 1)
+    let contact_index = allAssigneesArr.indexOf(contact_id)
+    allAssigneesArr.splice(contact_index, 1)
     const contact_element = document.getElementById(contact_id)
     const checkbox_icon = document.getElementById("checkbox_" + contact_id)
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
