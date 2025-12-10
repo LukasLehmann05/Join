@@ -1,4 +1,4 @@
-const base_url = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
+const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
 //contacts and subtasks are arrays
 async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, allAssigneeArr, all_subtasks) {
     const newTask = {
@@ -11,10 +11,10 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
         "subtasks": all_subtasks,
     }
 
-    let response = await fetch('https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks.json', {
+    let response = await fetch(`${BASE_URL}/tasks.json`, {
         method: 'POST',
         body: JSON.stringify(newTask),
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         }
     })
@@ -23,7 +23,7 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
 //fieldstoupdate == object with key value pairs (title : "new title")
 async function updateTask(taskId, fieldsToUpdate) {
     try {
-        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
+        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
             method: 'PATCH',
             body: JSON.stringify(fieldsToUpdate),
             headers: {
@@ -42,7 +42,7 @@ async function updateTask(taskId, fieldsToUpdate) {
 
 async function deleteTask(taskId) {
     try {
-        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
+        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
             method: 'DELETE'
         })
         if (response.ok) {
@@ -56,7 +56,22 @@ async function deleteTask(taskId) {
 }
 
 async function fetchAllData() {
-    let joinFetch = await fetch(base_url + ".json")
+    let joinFetch = await fetch(BASE_URL + ".json")
     let joinData = await joinFetch.json()
     return joinData
+}
+
+// fetches data of a single task e.g. to fetch all tasks assigned to a user
+async function fetchTaskById(taskId) {
+    try {
+        const response = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
+        if (!response.ok) {
+            throw new Error(`Error fetching task: ${response.status}`);
+        }
+        const task = await response.json();
+        return task;
+    } catch (error) {
+        console.error('Error fetching task by ID:', error);
+        return null;
+    }
 }
