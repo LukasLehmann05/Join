@@ -1,13 +1,50 @@
 let stateWidthOverlay = false;
 
+let newTitle = "";
+let newCategory = "";
+let newDescription = "";
+let newDueDate = "";
+let newPriority = "";
+let newAssigneesArr = [];
+let newSubtasksArr = [];
+let fieldsToUpdate = {};
+
+let newTask = {
+    assigned_to: newAssigneesArr,
+    category: newCategory,
+    description: newDescription,
+    due_date: newDueDate,
+    priority: newPriority,
+    subtasks: newSubtasksArr,
+    title: newTitle
+    };
+
+
+function sendUpdatedTaskToDB(taskId, fieldsToUpdate) {
+    updateTask(taskId, fieldsToUpdate);
+}
+
 
 function openTaskInOverlay(taskId) {
+    clearElementsOfNewTask();
     let task = getTaskByTaskId(taskId);
+    console.table(task);
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     renderOverlayContent(task, taskId);
+}
+
+
+function clearElementsOfNewTask() {
+    newTitle = "";
+    newCategory = "";
+    newDescription = "";
+    newDueDate = "";
+    newPriority = "";
+    newAssigneesArr = [];
+    newSubtasksArr = [];
 }
 
 
@@ -24,9 +61,9 @@ function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
     let task = getTaskByTaskId(taskId);
     getAssigneesOfTask(task);
-    console.log("Array Of Assigness: " + allAssigneeArr);
+    console.log("Array Of Assigness: " + allAssigneesArr);
     
-    for (let userId of allAssigneeArr) {
+    for (let userId of allAssigneesArr) {
         const user = testUser[userId];
         container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
     }
@@ -34,9 +71,9 @@ function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
 
 
 function getAssigneesOfTask(task) {
-    allAssigneeArr = [];
+    allAssigneesArr = [];
     for (let userId of task.assigned_to) {
-        allAssigneeArr.push(userId);
+        allAssigneesArr.push(userId);
     }
 }
 
@@ -93,6 +130,7 @@ function closeOverlay(event) {
 
 
 function removeShowClass() {
+    // Aufruf Speicherfunktion der veränderten Taskdaten hier einfügen
     const overlay = document.getElementById('overlay');
     const contentContent = document.getElementById('overlay_content');
 
@@ -130,6 +168,8 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
     renderSubtaskProgress(task);
+    newSubtasksArr = task.subtasks;
+    console.table(newSubtasksArr);
 }
 
 
@@ -207,7 +247,7 @@ function renderSubtaskEditListItems(taskId) {
     for (let subtask of task.subtasks) {
         let subtaskHtml = returnSubtaskTemplate(subtask.title);
         subtask_list.innerHTML += subtaskHtml;
-        all_subtasks.push(subtask.title);
+        allSubtasksArr.push(subtask.title);
     }
 }
 
@@ -221,7 +261,7 @@ function escapeTextareaContent(text) {
 
 
 async function openAddTaskOverlay() {
-    // const taskId = generateNewTaskId(); // sollte von Firebase kommen
+    clearElementsOfNewTask();
     const taskId = 'new_task_id_' + Date.now(); // temporär
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
