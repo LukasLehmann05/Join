@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/summary.css">
     <link rel="stylesheet" href="../style/mainframe.css">
+    <link rel="stylesheet" href="../style/header.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 </head>
 
@@ -70,7 +71,7 @@
                 </section>
             </nav>
         </header>
-        <main class="main-content">
+            <main class="main-content">
 
     <section class="summary-title-wrapper">
         <h1 class="summary-title">Join 360</h1>
@@ -86,14 +87,14 @@
                 <div class="summary-card todo-card">
                     <img class="todo-icon" src="../assets/icons/summary/toDo.svg" alt="To-Do icon">
                     <div class="todo-info">
-                        <div class="todo-number">1</div>
+                        <div class="todo-number">0</div>
                         <div class="todo-label">To-Do</div>
                     </div>
                 </div>
                 <div class="summary-card done-card">
                     <img class="done-icon" src="../assets/icons/summary/done.svg" alt="Done icon">
                     <div class="done-info">
-                        <div class="done-number">1</div>
+                        <div class="done-number">0</div>
                         <div class="done-label">Done</div>
                     </div>
                 </div>
@@ -106,13 +107,13 @@
                             <img class="urgent-icon" src="../assets/icons/summary/urgent.svg" alt="Urgent icon">
                         </div>
                         <div class="urgent-info">
-                            <div class="urgent-number">1</div>
+                            <div class="urgent-number">0</div>
                             <div class="urgent-label">Urgent</div>
                         </div>
                     </div>
                     <div class="urgent-divider"></div>
                     <div class="urgent-right">
-                        <div class="urgent-date">December 13, 2025</div>
+                        <div class="urgent-date">No deadline</div>
                         <div class="urgent-deadline">Upcoming Deadline</div>
                     </div>
                 </div>
@@ -131,19 +132,19 @@
         <div class="summary-row summary-row-stats">
             <div class="summary-stat-card board-card">
                 <div class="board-info">
-                    <div class="board-number">5</div>
+                    <div class="board-number">0</div>
                     <div class="board-label">Tasks in Board</div>
                 </div>
             </div>
             <div class="summary-stat-card progress-card">
                 <div class="progress-info">
-                    <div class="progress-number">2</div>
+                    <div class="progress-number">0</div>
                     <div class="progress-label">Tasks in Progress</div>
                 </div>
             </div>
             <div class="summary-stat-card feedback-card">
                 <div class="feedback-info">
-                    <div class="feedback-number">2</div>
+                    <div class="feedback-number">0</div>
                     <div class="feedback-label">Awaiting Feedback</div>
                 </div>
             </div>
@@ -154,6 +155,9 @@
 
     </article>
 
+    <!-- neu: firebase vor summary laden -->
+    <script src="../scripts/firebase.js" defer></script>
+    <script src="../scripts/header.js" defer></script>
     <script src="../scripts/summary.js" defer></script>
 </body>
 

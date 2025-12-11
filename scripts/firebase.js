@@ -192,3 +192,35 @@ async function getOrCreateGuestUser() {
   return await createGuestUserInDB();
 }
 
+async function createTaskForUser(
+  userId,
+  title,
+  description,
+  dueDate,
+  priority,
+  category,
+  contacts,
+  subtasks
+) {
+
+  const payload = buildTaskPayload(
+    title,
+    description,
+    dueDate,
+    priority,
+    category,
+    contacts,
+    subtasks
+  );
+
+  return await saveToJoin(
+    `users/${userId}/tasks`,
+    payload,
+    "Error creating task for user"
+  );
+}
+
+async function fetchTasksForUser(userId) {
+  const url = getJoinUrl(`users/${userId}/tasks`);
+  return await fetchJson(url, "Error loading tasks for user");
+}

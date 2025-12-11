@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 40px; 
-    margin-top: 0; 
+    margin-bottom: 40px;
+    margin-top: 0;
 }
 
 .summary-title {
@@ -26,7 +26,7 @@
 
 .summary-content-layout {
     display: flex;
-    gap: 120px; 
+    gap: 120px;
     align-items: flex-start;
 }
 
@@ -35,8 +35,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    height: 168px; 
-    margin-top: 190px; 
+    height: 168px;
+    margin-top: 190px;
 }
 
 .summary-stats-bottom {
@@ -63,7 +63,6 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.08);
 }
 
-
 .summary-card-icon {
     width: 40px;
     height: 40px;
@@ -89,18 +88,6 @@
     font-size: 14px;
     opacity: 0.5;
     margin-top: 4px;
-}
-
-.summary-row-urgent .urgent-card {
-    width: 560px;
-}
-
-.summary-row-stats {
-    gap: 32px;
-}
-.board-card, .progress-card, .feedback-card {
-    width: 168px; 
-    height: 168px;
 }
 
 .todo-card {
@@ -131,7 +118,7 @@
 
 .todo-number {
     font-family: Inter, sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 64px;
     line-height: 120%;
     text-align: center;
@@ -142,7 +129,7 @@
 
 .todo-label {
     font-family: Inter, sans-serif;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 20px;
     line-height: 120%;
     text-align: center;
@@ -155,8 +142,8 @@
     width: 264px;
     height: 168px;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     gap: 18px;
     padding: 38px 19px;
     background: #FFFFFF;
@@ -175,12 +162,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .done-number {
     font-family: Inter, sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 64px;
     line-height: 120%;
     text-align: center;
@@ -191,7 +178,7 @@
 
 .done-label {
     font-family: Inter, sans-serif;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 20px;
     line-height: 120%;
     text-align: center;
@@ -205,8 +192,8 @@
     height: 168px;
     display: flex;
     align-items: center;
-    gap: 61px; 
-    padding: 28px 48px; 
+    gap: 61px;
+    padding: 28px 48px;
     background: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -217,7 +204,7 @@
     height: 96px;
     display: flex;
     align-items: center;
-    gap: 18px; 
+    gap: 18px;
 }
 
 .urgent-icon-wrapper {
@@ -234,7 +221,7 @@
     background-color: #FF3D00;
     padding: 8px;
     border-radius: 50%;
-    width: 69px; 
+    width: 69px;
     height: 69px;
 }
 
@@ -251,7 +238,7 @@
     width: 50px;
     height: 77px;
     font-family: Inter, sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 64px;
     line-height: 120%;
     text-align: center;
@@ -261,17 +248,17 @@
     width: 52px;
     height: 19px;
     font-family: Inter, sans-serif;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 16px;
     line-height: 120%;
     text-align: center;
 }
 
 .urgent-divider {
-    width: 0px; 
-    height: 102px; 
-    border-left: 2px solid #d1d1d1; 
-    border-radius: 100px; 
+    width: 0;
+    height: 102px;
+    border-left: 2px solid #d1d1d1;
+    border-radius: 100px;
 }
 
 .urgent-right {
@@ -279,7 +266,7 @@
     height: 57px;
     display: flex;
     flex-direction: column;
-    gap: 13px; 
+    gap: 13px;
 }
 
 .urgent-date {
@@ -287,7 +274,7 @@
     height: 25px;
     white-space: nowrap;
     font-family: Inter, sans-serif;
-    font-weight: 700; 
+    font-weight: 700;
     font-size: 21px;
     line-height: 120%;
 }
@@ -300,6 +287,10 @@
     font-size: 16px;
     line-height: 120%;
     opacity: 0.8;
+}
+
+.summary-row-stats {
+    gap: 32px;
 }
 
 .board-card {
@@ -322,14 +313,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 13px; 
+    gap: 13px;
 }
 
 .board-number {
     width: 41px;
     height: 77px;
     font-family: Inter, sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 64px;
     line-height: 120%;
     text-align: center;
@@ -352,8 +343,8 @@
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     padding-top: 25px;
     padding-bottom: 25px;
 }
@@ -372,7 +363,7 @@
     width: 40px;
     height: 77px;
     font-family: Inter, sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 64px;
     line-height: 120%;
     text-align: center;
@@ -381,9 +372,9 @@
 .progress-label {
     width: 86px;
     height: 50px;
-    font-family: Inter, sans-serif; 
+    font-family: Inter, sans-serif;
     font-weight: 400;
-    font-size: 20px; 
+    font-size: 20px;
     line-height: 120%;
     text-align: center;
 }
@@ -395,8 +386,8 @@
     border-radius: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     padding-top: 25px;
     padding-bottom: 25px;
 }
@@ -408,17 +399,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 13px; 
+    gap: 13px;
 }
 
 .feedback-number {
     width: 40px;
     height: 77px;
     font-family: Inter, sans-serif;
-    font-weight: 600; 
+    font-weight: 600;
     font-size: 64px;
     line-height: 120%;
-
     text-align: center;
 }
 
@@ -426,7 +416,7 @@
     width: 93px;
     height: 48px;
     font-family: Inter, sans-serif;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 20px;
     line-height: 120%;
     text-align: center;
@@ -441,78 +431,13 @@
 .greeting-name {
     font-size: 61px;
     font-weight: 700;
-    color: #29ABE2; 
+    color: #29ABE2;
 }
 
 .main-content {
-    margin-top: 110px; 
+    margin-top: 110px;
 }
-
-.header {
-    background-color: #FFFFFF;
-}    
 
 .sidebar-nav-section.current-selection {
     background-color: #091931;
-}
-
-.header-avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: #FFFFFF;            
-    border: 3px solid #2A3647;          
-    color: #29ABE2;                     
-    font-size: 22px;                     
-    font-weight: 700;                     
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;                    
-    box-sizing: border-box;
-}
-
-.avatar-wrapper {
-    position: relative;
-    border: none;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-/* Menü-Grundstruktur */
-.avatar-menu {
-    position: absolute;
-    top: 55px;                  
-    right: 327px;              
-    background-color: #2A3647;  
-    border-radius: 20px 0 20px 20px;
-    padding: 12px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    z-index: 1000;
-}
-
-.hidden {
-    display: none;
-}
-
-.avatar-menu-item {
-    background: transparent;
-    border: none;
-    color: #FFFFFF;
-    font-size: 16px;
-    font-family: Inter, sans-serif;
-    text-align: left;
-    cursor: pointer;
-    padding: 4px 0;
-}
-
-.avatar-menu-item:hover {
-    text-decoration: underline;
 }
