@@ -114,3 +114,13 @@ async function editContactInDatabase(editedUser) {
         body: JSON.stringify(editedUser),
     });
 };
+
+
+/**
+ *department contacts: get last contact that was added
+ */
+async function getLastContactAddedFromDatabase() {
+    let joinFetch = await fetch(BASE_URL + `/contacts.json`)
+    let joinData = await joinFetch.json();
+    return Object.keys(joinData).at(-1);
+};
