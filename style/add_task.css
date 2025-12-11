@@ -54,6 +54,7 @@
     background-color: white;
     flex: 1;
     cursor: pointer;
+    font-family: "Inter";
 }
 
 .priority-button:hover {

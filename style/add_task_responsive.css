@@ -12,3 +12,19 @@
     }
 }
 
+@media (max-width: 500px) {
+    .main-content {
+        padding: 16px !important;
+    }
+
+    .priority-button {
+        font-size: 16px;
+        padding: 12px 4px;
+    }
+}
+
+@media (max-width: 380px) {
+    .priority-section {
+        gap: 8px;
+    }
+}
