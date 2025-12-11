@@ -7,6 +7,7 @@ let newDueDate = "";
 let newPriority = "";
 let newAssigneesArr = [];
 let newSubtasksArr = [];
+let newState = "";
 
 
 function sendUpdatedTaskToDB(taskId) {
@@ -29,6 +30,7 @@ function getTaskToUpdate(taskId) {
     if (newPriority !== "") taskToUpdate.priority = newPriority;
     if (newAssigneesArr.length > 0) taskToUpdate.assigned_to = newAssigneesArr;
     if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
+    if (newState !== "") taskToUpdate.state = newState;
     return taskToUpdate;
 }
 
@@ -62,6 +64,7 @@ function clearElementsOfNewTask() {
     newPriority = "";
     newAssigneesArr = [];
     newSubtasksArr = [];
+    newState = "";
 }
 
 
@@ -257,7 +260,8 @@ function createEmptyTask() {
         due_date: "",
         priority: "low",
         subtasks: [],
-        title: ""
+        title: "",
+        state: "todo"
     };
 }
 

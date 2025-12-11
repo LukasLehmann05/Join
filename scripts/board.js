@@ -2,41 +2,60 @@
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
+const taskStateArr = ['todo', 'in progress', 'awaiting feedback', 'done'];
+const boardColumnNameArr = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
+
+
+function getColumnByTaskState(state) {
+    switch(state) {
+        case taskStateArr[0]:
+            return boardColumnNameArr[0];
+        case taskStateArr[1]:
+            return boardColumnNameArr[1];
+        case taskStateArr[2]:
+            return boardColumnNameArr[2];
+        case taskStateArr[3]:
+            return boardColumnNameArr[3];
+    }   
+}
+
 
 let testTasks = {
   "task_id_x": 
     {
-      "category": "Development",
-      "title": "Implementiere Login-Funktion",
-      "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-      "due_date": "2025-12-10",
-      "priority": "Urgent",
-      "assigned_to": [
-        "user_id_1",
-        "user_id_2"
-      ],
-      "subtasks": [
-        {
-          "title": "UI-Mockup erstellen",
-          "done": true
-        },
-        {
-          "title": "Validierung implementieren",
-          "done": false
-        }
-      ]
+        "category": "Development",
+        "title": "Implementiere Login-Funktion",
+        "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
+        "due_date": "2025-12-10",
+        "priority": "Urgent",
+        "state": "in progress",
+        "assigned_to": [
+            "user_id_1",
+            "user_id_2"
+        ],
+        "subtasks": [
+            {
+            "title": "UI-Mockup erstellen",
+            "done": true
+            },
+            {
+            "title": "Validierung implementieren",
+            "done": false
+            }
+        ]
     },
     "task_id_4567":
     {
-      "category": "Marketing",
-      "title": "Social Media Post erstellen",
-      "description": "Post für die Vorstellung des neuen Features planen.",
-      "due_date": "01/12/2025",
-      "priority": "Medium",
-      "assigned_to": [
-        "user_id_2"
-      ],
-      "subtasks": []
+        "category": "Marketing",
+        "title": "Social Media Post erstellen",
+        "description": "Post für die Vorstellung des neuen Features planen.",
+        "due_date": "01/12/2025",
+        "priority": "Medium",
+        "state": "to_do",
+        "assigned_to": [
+            "user_id_2"
+        ],
+        "subtasks": []
     }
   }
 
@@ -57,16 +76,16 @@ let testUser = {
 function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
     switch(columnId) {
-        case 'toDoColumn':
+        case boardColumnNameArr[0]:
             container.innerHTML = noTasksDoToTemplate();
             break;
-        case 'inProgressColumn':
+        case boardColumnNameArr[1]:
             container.innerHTML = noTaskInProgressTemplate();
             break;
-        case 'awaitFeedbackColumn':
+        case boardColumnNameArr[2]:
             container.innerHTML = noTaskInFeedbackTemplate();
             break;
-        case 'doneColumn':
+        case boardColumnNameArr[3]:
             container.innerHTML = noTaskDoneTemplate();
             break;
     }
@@ -101,8 +120,9 @@ function renderSubtaskStatusBar(taskId) {
 }
 
 
-function renderTaskCard(taskId, containerId) {
-    let task = getTaskByTaskId(taskId);
+function renderTaskCard(taskId) {
+    let task = getTaskByTaskId(taskId);    
+    let containerId = getColumnByTaskState(task.state);    
     const container = document.getElementById(containerId);
     container.innerHTML = taskCardTemplate(task, taskId);
 }
@@ -250,8 +270,7 @@ function removeDropAcceptanceFieldByColumnId(columnId) {
 
 
 function renderNoTaskInfoOnDOMLoad(){
-    const columns = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
-    columns.forEach(columnId => {
+    boardColumnNameArr.forEach(columnId => {
         checkIfNoTasksInColumn(columnId);
     });
 }
@@ -279,15 +298,15 @@ function observeColumnEmpty(columnId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    observeColumnEmpty('toDoColumn');
-    observeColumnEmpty('inProgressColumn');
-    observeColumnEmpty('awaitFeedbackColumn');
-    observeColumnEmpty('doneColumn');
+    observeColumnEmpty(boardColumnNameArr[0]);
+    observeColumnEmpty(boardColumnNameArr[1]);
+    observeColumnEmpty(boardColumnNameArr[2]);
+    observeColumnEmpty(boardColumnNameArr[3]);
     renderNoTaskInfoOnDOMLoad();
 });
 
-renderNoTaskInfo('toDoColumn');
-renderTaskCard('task_id_x', 'inProgressColumn');
+// renderNoTaskInfo('toDoColumn');
+renderTaskCard('task_id_x');
 renderSubtaskProgress('task_id_x');
 renderAssignedUserIcons('task_id_x');
 renderPriorityIndicator('task_id_x', 'priority');
