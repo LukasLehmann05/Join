@@ -164,16 +164,25 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
 
 
 /**
- * post new Contact that got add to database
+ * shell for handling the whole process of adding a new contact including validation, posting data to base, restructuring html list and confirmation for user
+ * @async
  */
-async function postNewContactToDatabase(newUser) {
-    await fetch(base_url + "/contacts.json", {
-        method: 'POST',
-        header: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser),
-    });
+async function addNewContactToDatabase() {
+    let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
+    if (newUser.name.length <= 0 == false) {
+        if (validateEmail(newUser.email) == true && newUser.email != "") {
+            if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
+                /* await postDatatoBase(newUser); */
+                await trimDown(newUser, newUser.name);
+            } else {
+                displayHint('required_phone');
+            }
+        } else {
+            displayHint('required_email');
+        }
+    } else {
+        displayHint('required_name');
+    }
 };
 
 
@@ -219,22 +228,9 @@ function dialogAppearences() {
 /**
  * handles the process of deleting a contact
  */
-async function deleteUser(id) {
+async function deleteThisUser(id) {
     let currentId = id.getAttribute('data-id');
     await deleteDatafromBase(currentId);
-};
-
-
-/**
- * deletes single contact in firebase
- */
-async function deleteDatafromBase(contactID) {
-    await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/contacts/${contactID}.json`, {
-        method: 'DELETE',
-        header: {
-            'Content-Type': 'application/json'
-        },
-    })
 };
 
 

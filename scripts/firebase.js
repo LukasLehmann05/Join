@@ -63,23 +63,27 @@ async function fetchAllData() {
 
 
 /**
- *department contacts: shell for handling the whole process of adding a new contact including validation, posting data to base, restructuring html list and confirmation for user
- * @async
+ *department contacts: post new Contact that got add to database
  */
-async function addNewContactToDatabase() {
-    let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
-    if (newUser.name.length <= 0 == false) {
-        if (validateEmail(newUser.email) == true && newUser.email != "") {
-            if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
-                /* await postDatatoBase(newUser); */
-                await trimDown(newUser, newUser.name);
-            } else {
-                displayHint('required_phone');
-            }
-        } else {
-            displayHint('required_email');
-        }
-    } else {
-        displayHint('required_name');
-    }
+async function postNewContactToDatabase(newUser) {
+    await fetch(base_url + `/contacts.json`, {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser),
+    });
+};
+
+
+/**
+ *department contacts: deletes this single contact in firebase
+ */
+async function deleteThisContactFromDatabaseById(contactID) {
+    await fetch(base_url + `/contacts/${contactID}.json`, {
+        method: 'DELETE',
+        header: {
+            'Content-Type': 'application/json'
+        },
+    })
 };
