@@ -87,3 +87,17 @@ async function deleteThisContactFromDatabaseById(contactID) {
         },
     })
 };
+
+
+/**
+ *department contacts: post edited contact information in firebase
+ */
+async function editContactInDatabase(editedUser) {
+    await fetch(base_url + `/contacts/${contactID}.json`, {
+        method: 'PUT',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editedUser),
+    });
+};
