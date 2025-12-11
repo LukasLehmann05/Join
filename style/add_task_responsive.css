@@ -52,4 +52,8 @@
     .priority-section {
         gap: 8px;
     }
+
+    .contact-button {
+        padding: 12px 4px;
+    }
 }
