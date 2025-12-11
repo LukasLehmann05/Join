@@ -60,3 +60,26 @@ async function fetchAllData() {
     let joinData = await joinFetch.json()
     return joinData
 }
+
+
+/**
+ *department contacts: shell for handling the whole process of adding a new contact including validation, posting data to base, restructuring html list and confirmation for user
+ * @async
+ */
+async function addNewContactToDatabase() {
+    let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
+    if (newUser.name.length <= 0 == false) {
+        if (validateEmail(newUser.email) == true && newUser.email != "") {
+            if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
+                /* await postDatatoBase(newUser); */
+                await trimDown(newUser, newUser.name);
+            } else {
+                displayHint('required_phone');
+            }
+        } else {
+            displayHint('required_email');
+        }
+    } else {
+        displayHint('required_name');
+    }
+};

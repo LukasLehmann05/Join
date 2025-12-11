@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="../style/add_task.css">
 
     <script src="/script.js"></script>
+    <script src="/scripts/firebase.js"></script>
     <script src="/scripts/contact_data.js"></script>
     <script src="/scripts/contact_template.js"></script>
-    <script src="/scripts/firebase.js"></script>
+    
 
 </head>
 
@@ -107,6 +108,7 @@
                             <label class="subtask-section name">
                                 <input id="nameAdd" type="text" placeholder="Name">
                             </label>
+                            <p id="required_name" class="required-info margin-add-dialog">Please enter a name.</p>
                             <label class="subtask-section mail">
                                 <input id="emailAdd" type="email" placeholder="Email">
                             </label>
@@ -124,7 +126,7 @@
                                     </button>
                                 </div>
                                 <div class="create-task">
-                                    <button onclick="addContactToBase()" class="action-buttons create-button">
+                                    <button onclick="addNewContactToDatabase()" class="action-buttons create-button">
                                         <p>Create contact</p>
                                         <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
                                     </button>

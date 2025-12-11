@@ -160,32 +160,13 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
         "phone": phone,
     };
     return newUser;
-}
-
-
-/**
- * shell for handling the whole process of adding a new contact including validation, posting data to base, restructuring html list and confirmation for user
- * @async
- */
-async function addContactToBase() {
-    let newUser = getContactInputData("nameAdd" , "phoneAdd"  , "emailAdd");
-    if (validateEmail(newUser.email) == true && newUser.email != "") {
-        if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
-            /* await postDatatoBase(newUser); */
-            await trimDown(newUser, newUser.name);
-        } else {
-            displayHint('required_phone');
-        }
-    } else {
-        displayHint('required_email');
-    }
 };
 
 
 /**
  * post new Contact that got add to database
  */
-async function postDatatoBase(newUser) {
+async function postNewContactToDatabase(newUser) {
     await fetch(base_url + "/contacts.json", {
         method: 'POST',
         header: {
