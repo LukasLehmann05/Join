@@ -1,4 +1,4 @@
-const base_url = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
+const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
 
 
 /**
@@ -6,7 +6,7 @@ const base_url = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebase
  * @async @global
  */
 async function fetchAllDataGlobal() {
-    let joinFetch = await fetch(base_url + ".json");
+    let joinFetch = await fetch(BASE_URL + ".json");
     let joinData = await joinFetch.json();
     return AllData.data = joinData;
 };
@@ -69,7 +69,7 @@ async function deleteTask(taskId) {
 }
 
 async function fetchAllData() {
-    let joinFetch = await fetch(base_url + ".json")
+    let joinFetch = await fetch(BASE_URL + ".json")
     let joinData = await joinFetch.json()
     return joinData
 }
@@ -79,7 +79,7 @@ async function fetchAllData() {
  *department contacts: post new Contact that got add to database
  */
 async function postNewContactToDatabase(newUser) {
-    await fetch(base_url + `/contacts.json`, {
+    await fetch(BASE_URL + `/contacts.json`, {
         method: 'POST',
         header: {
             'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ async function postNewContactToDatabase(newUser) {
  *department contacts: deletes this single contact in firebase
  */
 async function deleteThisContactFromDatabaseById(contactID) {
-    await fetch(base_url + `/contacts/${contactID}.json`, {
+    await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'DELETE',
         header: {
             'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ async function deleteThisContactFromDatabaseById(contactID) {
  *department contacts: post edited contact information in firebase
  */
 async function editContactInDatabase(editedUser) {
-    await fetch(base_url + `/contacts/${contactID}.json`, {
+    await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'PUT',
         header: {
             'Content-Type': 'application/json'
