@@ -226,7 +226,7 @@ function dialogAppearences() {
 
 
 /**
- * handles the process of deleting a contact
+ * shell for handling the deleting process of a contact
  */
 async function deleteThisUser(id) {
     let currentId = id.getAttribute('data-id');
@@ -235,24 +235,11 @@ async function deleteThisUser(id) {
 
 
 /**
- * edits contacts in firebase
+ * shell for handling the editing process of a contact
  */
 async function editContactInDatabase() {
-    let name = document.getElementById('nameInfo').value;
-    let phone = document.getElementById('phoneInfo').value;
-    let email = document.getElementById('emailInfo').value;
-    const editedUser = {
-        "email": email,
-        "name": name,
-        "phone": phone,
-    }
-    await fetch(base_url + "/contacts.json", {
-        method: 'PUT',
-        header: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(editedUser),
-    })
+    let editedUser  = getContactInputData("nameEdit", "phoneEdit", "emailEdit");
+    await editContactInDatabase(editedUser)
 };
 
 
