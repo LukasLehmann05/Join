@@ -105,7 +105,7 @@ async function deleteThisContactFromDatabaseById(contactID) {
 /**
  *department contacts: post edited contact information in firebase
  */
-async function editContactInDatabase(editedUser) {
+async function editContactInDatabase(editedUser, contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'PUT',
         header: {
