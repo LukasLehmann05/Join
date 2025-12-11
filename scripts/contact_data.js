@@ -190,10 +190,10 @@ async function trimDown(newUser, name) {
 
 
 /**
- * gest last contact that was added
+ * get last contact that was added
  */
 async function getLastContact() {
-    let joinFetch = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/contacts/.json`)
+    let joinFetch = await fetch(base_url + `/contacts.json`)
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
 };
