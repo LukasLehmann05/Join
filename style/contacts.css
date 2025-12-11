@@ -189,3 +189,8 @@
     font-weight: 400;
     font-size: 20px;
 }
+
+.single-User{
+    display: flex;
+    gap: 35px;
+}
