@@ -154,6 +154,7 @@ textarea.task-input {
 .create-button {
     background-color: #2A3647;
     color: white;
+    font-weight: 700;
 }
 
 .create-task :hover {
