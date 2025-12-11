@@ -148,8 +148,12 @@ function closeOverlay(event) {
 }
 
 
-function removeShowClass(taskId) {
-    sendUpdatedTaskToDB(taskId);
+function removeShowClass(buttonElement, taskId) {
+    const isEditTaskOverlay = buttonElement ? buttonElement.getAttribute('data-edit-task-overlay') === 'true' : false;
+    if (!isEditTaskOverlay) {
+        sendUpdatedTaskToDB(taskId);        
+    }
+
     const overlay = document.getElementById('overlay');
     const contentContent = document.getElementById('overlay_content');
 

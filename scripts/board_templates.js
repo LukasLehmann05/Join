@@ -82,7 +82,7 @@ function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
                 <p class="category_overlay">${task.category}</p>
-                <button class="close_overlay_button" onclick="removeShowClass('${taskId}')">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-edit-task-overlay="false">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
@@ -158,7 +158,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFuncti
     return  `
             <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
-                <button class="close_overlay_button" onclick="removeShowClass('${taskId}')">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-edit-task-overlay="true">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
