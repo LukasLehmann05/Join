@@ -1,5 +1,5 @@
 function contactListSingle(contactID, name, email, acronym, phone) {
-    return `<div class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
+    return `<div id="${contactID}" class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
                 <p id="short-${contactID}" class="two-letter-name-small">${acronym}</p>
                 <div class="list-info">
                   <p class="font-size-20">${name}</p>
