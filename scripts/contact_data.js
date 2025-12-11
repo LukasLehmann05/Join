@@ -93,8 +93,12 @@ async function renderContactList(singleContactData, contactID) {
  * generates acronym from contact name. Gets called in function: "renderContactList()"
  */
 function getAcronym(name) {
-    let matches = name.match(/\b(\w)/g);
-    let acronym = matches.join('').toUpperCase();
+    if (!name || typeof name !== 'string') return '';
+    let names = name.trim().split(/\s+/);
+    let firstTwoNames = names.slice(0, 2);
+    let acronym = firstTwoNames
+        .map(word => word.charAt(0).toUpperCase())
+        .join('');
     return acronym;
 };
 
@@ -153,7 +157,7 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
 function getContactInputData(nameInput, phoneInput, emailInput) {
     let name = document.getElementById(nameInput).value;
     let phone = document.getElementById(phoneInput).value;
-    let email = document.getElementById(emailInput).value;        
+    let email = document.getElementById(emailInput).value;
     let newUser = {
         "email": email,
         "name": name,
@@ -172,7 +176,7 @@ async function addNewContactToDatabase() {
     if (newUser.name.length <= 0 == false) {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
-                /* await postDatatoBase(newUser); */
+                await postNewContactToDatabase(newUser);
                 await trimDown(newUser, newUser.name);
             } else {
                 displayHint('required_phone');
@@ -230,7 +234,7 @@ function dialogAppearences() {
  */
 async function deleteThisUser(id) {
     let currentId = id.getAttribute('data-id');
-    await deleteDatafromBase(currentId);
+    await deleteThisContactFromDatabaseById(currentId);
 };
 
 
@@ -238,7 +242,7 @@ async function deleteThisUser(id) {
  * shell for handling the editing process of a contact
  */
 async function editContactInDatabase() {
-    let editedUser  = getContactInputData("nameEdit", "phoneEdit", "emailEdit");
+    let editedUser = getContactInputData("nameEdit", "phoneEdit", "emailEdit");
     await editContactInDatabase(editedUser)
 };
 
