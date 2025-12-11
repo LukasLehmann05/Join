@@ -44,7 +44,8 @@ async function fetchContactList() {
 async function renderHtmlElements(singleContactData, contactID, name) {
     await renderListLetter(name);
     await renderContactList(singleContactData, contactID);
-}
+};
+
 
 /**
  * renders the letters in the contactlist that function as a headline. Sorts them alphabetically at the end
@@ -230,10 +231,34 @@ function responseMessageAppearance() {
 
 
 /**
+ * remove contact from contact list
+ */
+function removeThisContactFromList(id) {
+    let deletedContact = document.getElementById(id);
+    deletedContact.remove();
+};
+
+
+/**
+ * checks if the letter section is empty after deleting a contact and removes said section if empty
+ */
+function removeLetterSectionIfEmpty(letter) {
+    let deletedContact = document.getElementById(letter);
+    if (deletedContact.children.length <= 0) {
+        deletedContact.parentElement.remove();
+    }
+    else return;
+};
+
+
+/**
  * shell for handling the deleting process of a contact
  */
 async function deleteThisUser(id) {
     let currentId = id.getAttribute('data-id');
+    removeThisContactFromList(currentId);
+    let letter = document.getElementById("mainName").innerHTML.charAt(0).toUpperCase();
+    removeLetterSectionIfEmpty(letter);
     document.getElementById('mainView').innerHTML = "";
     document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
     responseMessageAppearance();
