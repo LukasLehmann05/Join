@@ -2,8 +2,8 @@ function contactListSingle(contactID, name, email, acronym, phone) {
     return `<div id="${contactID}" class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
                 <p id="short-${contactID}" class="two-letter-name-small">${acronym}</p>
                 <div class="list-info">
-                  <p class="font-size-20">${name}</p>
-                  <span class="font-size-16 color-mail">${email}</span>
+                  <p id="name-${contactID}" class="font-size-20">${name}</p>
+                  <span id="email-${contactID}" class="font-size-16 color-mail">${email}</span>
                 </div>
             </div>`
 };
@@ -24,7 +24,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <div class="name-field">
                     <p id="mainName" class="fullname">${currentName}</p>
                     <div class="main-name-btns">
-                        <button id="editUser" data-id="${currentId}" onclick="openDialog('editContact' , 'editContent', this)" class="name-btn font-size-16"><img src="../assets/icons/contacts/edit.svg"
+                        <button id="editUser" data-id="${currentId}" onclick="openDialog('editContact' , 'editContent', this) , displayMainDataInEditDialog()" class="name-btn font-size-16"><img src="../assets/icons/contacts/edit.svg"
                             alt="edit contact">Edit</button>
                         <button onclick="deleteThisUser(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16"><img src="../assets/icons/contacts/delete.svg"
                             alt="delete Contact">Delete</button>
@@ -34,7 +34,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
             <span class="sub-header-information font-size-20">Contact Information</span>
             <div class="info-display">
                 <p class="info-text">Email</p>
-                <span id="mainShort" class="color-mail">${currentMail}</span>
+                <span id="mainMail" class="color-mail">${currentMail}</span>
             </div>
             <div class="info-display">
                 <p class="info-text">Phone</p>

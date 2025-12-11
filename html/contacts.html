@@ -153,14 +153,17 @@
                                     alt="close overlay icon">
                             </button>
                             <label class="subtask-section name">
-                                <input type="text" placeholder="Name">
+                                <input id="nameEdit" type="text" placeholder="Name">
                             </label>
+                            <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name.</p>
                             <label class="subtask-section mail">
-                                <input type="email" placeholder="Email">
+                                <input id="emailEdit" type="email" placeholder="Email">
                             </label>
+                            <p id="required_edit_email" class="required-info margin-add-dialog">Please enter a valid email address.</p>
                             <label class="subtask-section phone">
-                                <input type="tel" placeholder="Phone">
+                                <input id="phoneEdit" type="tel" placeholder="Phone">
                             </label>
+                            <p id="required_edit_phone" class="required-info margin-add-dialog">Please enter a valid phone number.</p>
                             <section class="button-section-contact">
                                 <button onclick="closeDialog('editContact' , 'editContent')" class="action-buttons">
                                     <p>Delete</p>

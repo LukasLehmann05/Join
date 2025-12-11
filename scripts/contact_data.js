@@ -270,10 +270,80 @@ async function deleteThisUser(id) {
  * shell for handling the editing process of a contact
  */
 async function editContactInDatabase() {
-    let editedUser = getContactInputData("nameEdit", "phoneEdit", "emailEdit");
+    let editID = document.getElementById('editUser').getAttribute('data-id');
+    console.log(editID);
+    let editedContact = getEditedContactData();
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     responseMessageAppearance();
-    await editContactInDatabase(editedUser)
+    //await editContactInDatabase(editedUser, editID);
+    displayEditedContactDataInList(editID, editedContact.email, editedContact.name)
+    displayEditedContactDataInMainDisplay(editID, editedContact.email, editedContact.name)
+};
+
+
+/**
+ * updates data in main display for the edited user
+ */
+function displayEditedContactDataInMainDisplay(editID, email, name, phone) {
+    
+    document.getElementById('email-' + editID).innerText = email;
+    document.getElementById('name-'+ editID).innerText = name;
+    document.getElementById('name-'+ editID).innerText = name;
+    document.getElementById('name-'+ editID).innerText = name;
+};
+
+
+/**
+ * updates data in contact list for the edited user
+ */
+function displayEditedContactDataInList(editID, email, name) {
+    let acronym = getAcronym(name);
+    document.getElementById('short-' + editID).innerText = acronym;
+    document.getElementById('email-' + editID).innerText = email;
+    document.getElementById('name-'+ editID).innerText = name;
+};
+
+
+/**
+ * get edited contact data
+ */
+function getEditedContactData() {
+    let email = document.getElementById('emailEdit').value;
+    let name = document.getElementById('nameEdit').value;
+    let phone = document.getElementById('phoneEdit').value;
+    let editedContact = {
+        "email": email,
+        "name": name,
+        "phone": phone,
+    };
+    return editedContact;
+};
+
+
+/**
+ * get contact Data from Main Display to edit dialog window
+ */
+function displayMainDataInEditDialog() {
+    let currentContact = getDataFromMain();
+    document.getElementById('emailEdit').value = currentContact.email
+    document.getElementById('nameEdit').value = currentContact.name
+    document.getElementById('phoneEdit').value = currentContact.phone
+};
+
+
+/**
+ * get contact Data from Main Display to edit dialog window
+ */
+function getDataFromMain() {
+    let email = document.getElementById('mainMail').innerText;
+    let name = document.getElementById('mainName').innerText;
+    let phone = document.getElementById('mainPhone').innerText;
+    let currentContact = {
+        "email": email,
+        "name": name,
+        "phone": phone,
+    };
+    return currentContact;
 };
 
 
