@@ -171,7 +171,7 @@ async function addContactToBase() {
     let newUser = getContactInputData("nameAdd" , "phoneAdd"  , "emailAdd");
     if (validateEmail(newUser.email) == true && newUser.email != "") {
         if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
-            await postDatatoBase(newUser);
+            /* await postDatatoBase(newUser); */
             await trimDown(newUser, newUser.name);
         } else {
             displayHint('required_phone');

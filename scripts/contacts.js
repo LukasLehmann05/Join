@@ -41,9 +41,9 @@ window.onclick = function (event) {
  * validates entered phone number
  */
 function validatePhoneByLength(phone) {
-    const cleanNumber = phone.replace(/\D/g, '');
-    return cleanNumber.length >= 10 && cleanNumber.length <= 15;
-}
+    let validation = /^\d{5,15}$/;
+    return validation.test(phone);
+};
 
 
 /**
