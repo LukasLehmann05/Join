@@ -1,12 +1,13 @@
 const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, allAssigneeArr, all_subtasks) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneeArr, all_subtasks) {
     const newTask = {
         "category": task_category,
         "title": task_title,
         "description": task_description,
         "due_date": task_due_date,
         "priority": task_priority,
+        "state": task_state,
         "assigned_to": allAssigneeArr,
         "subtasks": all_subtasks,
     }

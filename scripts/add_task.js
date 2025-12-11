@@ -1,19 +1,3 @@
-const task_title = document.getElementById("task_title")
-const task_description = document.getElementById("task_description")
-const task_due_date = document.getElementById("task_due_date")
-const task_category = document.getElementById("task_category")
-const req_title_text = document.getElementById("required_title")
-const req_due_date_text = document.getElementById("required_date")
-const req_category_text = document.getElementById("required_category")
-
-// const rendered_contact_images = document.getElementById("rendered_contact_images")
-// const task_subtask = document.getElementById("task_subtask")
-// const low_prio_button = document.getElementById("button_prio_low")
-// const medium_prio_button = document.getElementById("button_prio_medium")
-// const urgent_prio_button = document.getElementById("button_prio_urgent")
-// const subtask_button_section = document.getElementById("subtask_button_section")
-// const subtask_list = document.getElementById("subtask_render")
-
 let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
@@ -22,11 +6,19 @@ let subtask_button_section = null;
 let subtask_list = null;
 let task_assign = null;
 let rendered_contact_images = null;
+let task_title = null;
+let task_description = null;
+let task_due_date = null;
+let task_category = null;
+let req_title_text = null;
+let req_due_date_text = null;
+let req_category_text = null;
 
 let subtask_buttons_active = false
 let contacts_shown = false
 
 let current_priority = "medium"
+let stateOfNewTask = "to do"
 
 let req_title = false
 let req_due_date = false
@@ -36,39 +28,8 @@ let allSubtasksArr = []
 let allAssigneesArr = []
 
 
-let apiData = {
-  contacts: {
-    "-Ofz-pyFqWTjH1-qKL0S": {
-      "email": "fly@gmx.de",
-      "name": "Hoodle McFly",
-      "phone": "88290192383"
-    },
-    "-Ofz0I0S-bi9XBqP1pJS": {
-      "email": "fly@gmx.de",
-      "name": "Mc Fly",
-      "phone": "03478573489"
-    },
-    "-OfzfFGx_dDbEPCLTKwV": {
-      "email": "hoodled@gmail.com",
-      "name": "Hoodel Doodle",
-      "phone": "0151226679"
-    },
-    "-OfzfUMTuza2bFhp_BNv": {
-      "email": "hoodled@gmail.com",
-      "name": "Hoodle Doodle",
-      "phone": "0151226679"
-    },
-    "contact_a": {
-      "email": "yhaoo@gmx.de",
-      "name": "Hoodle Doodle",
-      "phone": 18828222
-    }
-  }
-}
-
-
 async function addTaskInit() {
-    // let api_data = await loadDataFromAPI()
+    let apiData = await loadDataFromAPI()
     loadPrioButtonsAndSubtaskSectionById();
     addContactsToAssign(apiData);
 
@@ -83,6 +44,13 @@ function loadPrioButtonsAndSubtaskSectionById() {
     subtask_list = document.getElementById("subtask_render");
     task_assign = document.getElementById("task_assign");
     rendered_contact_images = document.getElementById("rendered_contact_images");
+    task_title = document.getElementById("task_title");
+    task_description = document.getElementById("task_description");
+    task_due_date = document.getElementById("task_due_date");
+    task_category = document.getElementById("task_category");
+    req_title_text = document.getElementById("required_title");
+    req_due_date_text = document.getElementById("required_date");
+    req_category_text = document.getElementById("required_category")
 }
 
 function loadDataFromAPI() {
@@ -103,7 +71,7 @@ function createTask() {
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, allAssigneesArr, allSubtasksArr)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr)
 }
 
 
@@ -251,18 +219,6 @@ function addSubtask() {
     }
 }
 
-// let testUser = {
-//     "user_id_1": {
-//         "email": "max.mustermann@example.com",
-//         "name": "Max Mustermann",
-//         "password": "hashed_password_123"
-//     },
-//     "user_id_2": {
-//         "email": "erika.musterfrau@example.com",
-//         "name": "Erika Musterfrau",
-//         "password": "hashed_password_456"
-//     }
-// }
 
 function addContactsToAssign(join_data) {
     let contacts = join_data.contacts
