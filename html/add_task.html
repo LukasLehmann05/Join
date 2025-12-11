@@ -44,6 +44,22 @@
             <a href="./legalNotice.html">Legal notice</a>
         </footer>
     </aside>
+    <section class="action-button-section show-767">
+        <section class="button-section">
+            <div class="clear-button">
+                <button class="action-buttons" onclick="clearAllInputs()">
+                    <p>Clear</p>
+                    <img src="../assets/icons/contacts/close.svg" alt="clear icon">
+                </button>
+            </div>
+            <div class="create-task">
+                <button class="action-buttons create-button" onclick="createTask()">
+                    <p>Create Task</p>
+                    <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
+                </button>
+            </div>
+        </section>
+    </section>
     <article class="article-bg">
         <header class="header">
             <nav class="header-nav">
@@ -68,7 +84,8 @@
                     <section class="task-detail-container">
                         <form class="input-form">
                             <label for="task_title">Title<span class="required">*</span></label>
-                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title" required onclick="removeIndicatorOnInput('title')">
+                            <input id="task_title" class="task-input" type="text" placeholder="Enter a title" required
+                                onclick="removeIndicatorOnInput('title')">
                             <p id="required_title" class="required-info">This field is required</p>
                         </form>
                         <form class="input-form description">
@@ -78,7 +95,8 @@
                         </form>
                         <form class="input-form">
                             <label for="task_due_date">Due date<span class="required">*</span></label>
-                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy" required onclick="removeIndicatorOnInput('due_date')">
+                            <input id="task_due_date" class="task-input" type="date" placeholder="dd/mm/yyyy" required
+                                onclick="removeIndicatorOnInput('due_date')">
                             <p id="required_date" class="required-info">This field is required</p>
                         </form>
                     </section>
@@ -112,16 +130,17 @@
                             </button>
                             <div class="contact-selector" id="contact_selector">
                                 <ul id="task_assign">
-                                    
+
                                 </ul>
                             </div>
                             <aside id="rendered_contact_images" class="rendered-contacts">
-                                
+
                             </aside>
                         </form>
                         <form class="input-form">
                             <label for="task_category">Category<span class="required">*</span></label>
-                            <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
+                            <select class="select-input" name="category" id="task_category" required
+                                onclick="removeIndicatorOnInput('category')">
                                 <option value="">Select task category</option>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
@@ -153,10 +172,7 @@
                         </form>
                     </section>
                 </main>
-                <aside class="action-button-section">
-                    <section>
-                        <p class="required-text"><span class="required">*</span>This field is required</p>
-                    </section>
+                <aside class="action-button-section hide-767">
                     <section class="button-section">
                         <div class="clear-button">
                             <button class="action-buttons" onclick="clearAllInputs()">

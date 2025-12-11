@@ -12,6 +12,23 @@
     }
 }
 
+@media (max-width: 767px) {
+
+    .show-767 {
+        display: flex;
+        position: sticky;
+        bottom: 72px;
+        background-color: #F6F7F8;
+        margin: 0px;
+        padding: 20px 0px;
+        justify-content: flex-end;
+    }
+
+    .hide-767 {
+        display: none;
+    }
+}
+
 @media (max-width: 500px) {
     .main-content {
         padding: 16px !important;

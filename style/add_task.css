@@ -360,3 +360,7 @@ textarea.task-input {
 .logo-responsive {
     display: none;
 }
+
+.show-767 {
+    display: none;
+}
