@@ -364,3 +364,11 @@ textarea.task-input {
 .show-767 {
     display: none;
 }
+
+.show-req-text-767 {
+    display: none;
+}
+
+.hide-req-text-767 {
+    display: block;
+}

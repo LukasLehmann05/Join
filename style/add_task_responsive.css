@@ -20,11 +20,19 @@
         bottom: 72px;
         background-color: #F6F7F8;
         margin: 0px;
-        padding: 20px 0px;
+        padding: 20px 16px 20px 0px;
         justify-content: flex-end;
     }
 
     .hide-767 {
+        display: none;
+    }
+
+    .show-req-text-767 {
+        display: block;
+    }
+
+    .hide-req-text-767 {
         display: none;
     }
 }
