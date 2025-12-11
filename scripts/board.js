@@ -2,20 +2,20 @@
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
-const taskStateArr = ['todo', 'in progress', 'awaiting feedback', 'done'];
-const boardColumnNameArr = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
+const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
+const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
 
-function getColumnByTaskState(state) {
+function getColumnIdByTaskState(state) {
     switch(state) {
-        case taskStateArr[0]:
-            return boardColumnNameArr[0];
-        case taskStateArr[1]:
-            return boardColumnNameArr[1];
-        case taskStateArr[2]:
-            return boardColumnNameArr[2];
-        case taskStateArr[3]:
-            return boardColumnNameArr[3];
+        case TASK_STATE_ARR[0]:
+            return BOARD_COLUMN_ID_ARR[0];
+        case TASK_STATE_ARR[1]:
+            return BOARD_COLUMN_ID_ARR[1];
+        case TASK_STATE_ARR[2]:
+            return BOARD_COLUMN_ID_ARR[2];
+        case TASK_STATE_ARR[3]:
+            return BOARD_COLUMN_ID_ARR[3];
     }   
 }
 
@@ -76,16 +76,16 @@ let testUser = {
 function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
     switch(columnId) {
-        case boardColumnNameArr[0]:
+        case BOARD_COLUMN_ID_ARR[0]:
             container.innerHTML = noTasksDoToTemplate();
             break;
-        case boardColumnNameArr[1]:
+        case BOARD_COLUMN_ID_ARR[1]:
             container.innerHTML = noTaskInProgressTemplate();
             break;
-        case boardColumnNameArr[2]:
+        case BOARD_COLUMN_ID_ARR[2]:
             container.innerHTML = noTaskInFeedbackTemplate();
             break;
-        case boardColumnNameArr[3]:
+        case BOARD_COLUMN_ID_ARR[3]:
             container.innerHTML = noTaskDoneTemplate();
             break;
     }
@@ -122,7 +122,7 @@ function renderSubtaskStatusBar(taskId) {
 
 function renderTaskCard(taskId) {
     let task = getTaskByTaskId(taskId);    
-    let containerId = getColumnByTaskState(task.state);    
+    let containerId = getColumnIdByTaskState(task.state);    
     const container = document.getElementById(containerId);
     container.innerHTML = taskCardTemplate(task, taskId);
 }
@@ -270,7 +270,7 @@ function removeDropAcceptanceFieldByColumnId(columnId) {
 
 
 function renderNoTaskInfoOnDOMLoad(){
-    boardColumnNameArr.forEach(columnId => {
+    BOARD_COLUMN_ID_ARR.forEach(columnId => {
         checkIfNoTasksInColumn(columnId);
     });
 }
@@ -298,10 +298,10 @@ function observeColumnEmpty(columnId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    observeColumnEmpty(boardColumnNameArr[0]);
-    observeColumnEmpty(boardColumnNameArr[1]);
-    observeColumnEmpty(boardColumnNameArr[2]);
-    observeColumnEmpty(boardColumnNameArr[3]);
+    observeColumnEmpty(BOARD_COLUMN_ID_ARR[0]);
+    observeColumnEmpty(BOARD_COLUMN_ID_ARR[1]);
+    observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
+    observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
     renderNoTaskInfoOnDOMLoad();
 });
 
