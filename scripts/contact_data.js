@@ -198,7 +198,7 @@ async function trimDown(newUser, name) {
     colorUser(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
-    dialogAppearences();
+    dialogAppearences('addContact', 'addContent');
 };
 
 
@@ -215,8 +215,16 @@ async function getLastContact() {
 /**
  * handles the appearing/disappearing of the dialogs during the process of adding a new contact
  */
-function dialogAppearences() {
-    closeDialog('addContact', 'addContent');
+function dialogAppearences(id, idContent) {
+    closeDialog(id, idContent);
+    responseMessageAppearance();
+};
+
+
+/**
+ * shows response Message
+ */
+function responseMessageAppearance() {
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
         openDialog('responseDialog', 'responseDialog');
@@ -225,8 +233,10 @@ function dialogAppearences() {
     setTimeout(() => {
         closeDialog('responseDialog', 'responseDialog');
     }, 3500)
+    setTimeout(() => {
+        document.getElementById('responseMessage').innerHTML = "Contact successfully created.";
+    }, 4000)
 };
-
 
 
 /**
@@ -234,6 +244,9 @@ function dialogAppearences() {
  */
 async function deleteThisUser(id) {
     let currentId = id.getAttribute('data-id');
+    document.getElementById('mainView').innerHTML = "";
+    document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
+    responseMessageAppearance();
     await deleteThisContactFromDatabaseById(currentId);
 };
 
@@ -243,6 +256,8 @@ async function deleteThisUser(id) {
  */
 async function editContactInDatabase() {
     let editedUser = getContactInputData("nameEdit", "phoneEdit", "emailEdit");
+    document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
+    responseMessageAppearance();
     await editContactInDatabase(editedUser)
 };
 
