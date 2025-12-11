@@ -194,21 +194,11 @@ async function addNewContactToDatabase() {
  * shell for restructuring html templates and dialog appearences
  */
 async function trimDown(newUser, name) {
-    let contactID = await getLastContact();
+    let contactID = await getLastContactAddedFromDatabase();
     colorUser(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
     dialogAppearences('addContact', 'addContent');
-};
-
-
-/**
- * get last contact that was added
- */
-async function getLastContact() {
-    let joinFetch = await fetch(base_url + `/contacts.json`)
-    let joinData = await joinFetch.json();
-    return Object.keys(joinData).at(-1);
 };
 
 
