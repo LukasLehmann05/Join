@@ -189,7 +189,7 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
     return  `
              <section class="upsert_title_container">
                 <form class="input-form">
-                    <label for="task_title">Title<span class="required">*</span></label>
+                    <label for="task_title" class="task_field_title">Title<span class="required">*</span></label>
                     <input 
                         id="task_title" 
                         class="task-input" 
@@ -208,7 +208,7 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
     return  `
             <section class="upsert_description_container">
                 <form class="input-form description">
-                    <label for="task_description">Description</label>
+                    <label for="task_description" class="task_field_title">Description</label>
                     <textarea 
                         id="task_description" 
                         class="task-input" 
@@ -223,7 +223,7 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
     return  `
             <section class="upsert_due_date_container">
                 <form class="input-form">
-                    <label for="task_due_date">Due date<span class="required">*</span></label>
+                    <label for="task_due_date" class="task_field_title">Due date<span class="required">*</span></label>
                     <input 
                         id="task_due_date" 
                         class="task-input" 
@@ -242,7 +242,7 @@ function overlayUpsertTaskPriorityTemplate() {
     return  `
             <section class="upsert_priority_container">
                 <form class="input-form">
-                    <p class="priority_form_title">Priority</p>
+                    <p class="task_field_title">Priority</p>
                     <section class="priority-section" id="priority_section">
                         <button 
                             class="priority-button" 
@@ -278,7 +278,7 @@ function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
             <section class="upsert_assigned_users_container">
                 <form class="input-form">
-                    <p>Assigned to</p>
+                    <p class="task_field_title">Assigned to</p>
                     <button class="contact-button" type="button" onclick="showContacts()">
                         <p>Select contacts to assign</p>
                         <img src="../assets/icons/addTask/dropdown.svg" alt="dropdown_icon">
@@ -300,7 +300,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
     return  `
             <section class="upsert_subtasks_container">
                 <form class="input-form">
-                    <label for="task_subtask">Subtasks</label>
+                    <label for="task_subtask" class="task_field_title">Subtasks</label>
                     <section class="subtask-section">
                         <input 
                             onclick="showSubtaskButtons()" 
@@ -330,7 +330,7 @@ function overlayUpsertCategoryOptionTemplate() {
     return `
             <section class="upsert_category_container">
                 <form class="input-form" category_template>
-                    <label for="task_category">Category<span class="required">*</span></label>
+                    <label for="task_category" class="task_field_title">Category<span class="required">*</span></label>
                     <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
                         <option value="">Select task category</option>
                         <option value="Technical Task">Technical Task</option>
