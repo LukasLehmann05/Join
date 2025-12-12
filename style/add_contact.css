@@ -1,9 +1,9 @@
 dialog[open] {
-    display: flex;
-    z-index: 31;
+   display: flex;
+   z-index: 31;
 }
 
-.dialog-content.show{
+.dialog-content.show {
    transform: translateX(0);
 }
 
@@ -12,7 +12,6 @@ dialog[open] {
    top: 0;
    width: 100%;
    height: 100%;
-   overflow: auto;
    background-color: rgba(0, 0, 0, 0.4);
    border: none;
 }
@@ -24,7 +23,8 @@ dialog[open] {
    width: 1200px;
    min-height: 500px;
    transform: translateX(200%);
-   transition: transform 0.5s ease-in-out;
+
+   transition: transform 1s ease-in-out;
 }
 
 .main-left {
@@ -129,4 +129,26 @@ dialog[open] {
 .button-section-contact {
    display: flex;
    gap: 16px;
+}
+
+.dialog-message {
+   position: absolute;
+   background-color: #2A3647;
+   border: none;
+   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+   border-radius: 20px;
+   padding: 20px;
+   transform: translateX(400%);
+   transition: transform 1.2s ease-in-out;
+   top: 760px;
+   left: 750px;
+}
+
+.dialog-message.show {
+   transform: translateX(0);
+}
+
+.margin-add-dialog{
+   margin-top: -30px;
+   height: 0px;
 }
