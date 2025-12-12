@@ -32,6 +32,11 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
             'Content-Type': 'application/json'
         }
     })
+    if (response.ok) {
+        console.log('Task added successfully')
+    } else {
+        console.error('Error adding task:', response.status)
+    }
 }
 
 //fieldstoupdate == object with key value pairs (title : "new title")
