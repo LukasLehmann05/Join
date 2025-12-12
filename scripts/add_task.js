@@ -1,3 +1,4 @@
+const PRIORITY_ARR = ["low", "medium", "urgent"]
 let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
@@ -17,7 +18,7 @@ let req_category_text = null;
 let subtask_buttons_active = false
 let contacts_shown = false
 
-let current_priority = "medium"
+let current_priority = PRIORITY_ARR[1]  // default medium priority
 let stateOfNewTask = "to do"
 
 let req_title = false
@@ -26,6 +27,7 @@ let req_category = false
 
 let allSubtasksArr = []
 let allAssigneesArr = []
+
 
 
 function addTaskInit() {
@@ -99,7 +101,7 @@ function clearAllInputs() {
     req_due_date = false
     req_category = false
     allSubtasksArr = []
-    changePriority("medium")
+    changePriority(PRIORITY_ARR[1]) // reset to medium priority
     clearRequiredIndicators()
     clearContacts()
     clearSubtask()
@@ -107,13 +109,13 @@ function clearAllInputs() {
 
 function changePriority(priority) {
     switch (priority) {
-        case "low":
+        case PRIORITY_ARR[0]:
             changeToLowPrio()
             break;
-        case "medium":
+        case PRIORITY_ARR[1]:
             changeToMedPrio()
             break
-        case "urgent":
+        case PRIORITY_ARR[2]:
             changeToUrgentPrio()
             break
         default:
@@ -123,14 +125,14 @@ function changePriority(priority) {
 
 function removeOldBackground() {
     switch (current_priority) {
-        case "low":
+        case PRIORITY_ARR[0]:
             low_prio_button.classList.remove("bg-green")
             break;
-        case "medium":
+        case PRIORITY_ARR[1]:
             medium_prio_button.classList.remove("bg-yellow")
             medium_prio_button.classList.add("yellow-filter")
             break;
-        case "urgent":
+        case PRIORITY_ARR[2]:
             urgent_prio_button.classList.remove("bg-red")
             break;
         default:
@@ -140,20 +142,20 @@ function removeOldBackground() {
 
 function changeToLowPrio() {
     removeOldBackground()
-    current_priority = "low"
+    current_priority = PRIORITY_ARR[0]
     low_prio_button.classList.add("bg-green")
 }
 
 function changeToMedPrio() {
     removeOldBackground()
-    current_priority = "medium"
+    current_priority = PRIORITY_ARR[1]
     medium_prio_button.classList.add("bg-yellow")
     medium_prio_button.classList.remove("yellow-filter")
 }
 
 function changeToUrgentPrio() {
     removeOldBackground()
-    current_priority = "urgent"
+    current_priority = PRIORITY_ARR[2]
     urgent_prio_button.classList.add("bg-red")
 }
 
