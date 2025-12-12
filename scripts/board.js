@@ -16,6 +16,8 @@ function getColumnIdByTaskState(state) {
             return BOARD_COLUMN_ID_ARR[2];
         case TASK_STATE_ARR[3]:
             return BOARD_COLUMN_ID_ARR[3];
+        default:
+            return BOARD_COLUMN_ID_ARR[0];
     }   
 }
 
@@ -51,7 +53,7 @@ let testTasks = {
         "description": "Post für die Vorstellung des neuen Features planen.",
         "due_date": "01/12/2025",
         "priority": "Medium",
-        "state": "to_do",
+        "state": "to do",
         "assigned_to": [
             "user_id_2"
         ],
