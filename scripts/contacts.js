@@ -159,6 +159,9 @@ function dialogAppearences(id, idContent) {
 };
 
 
+/**
+ * displays current edited contact in editing dialog
+ */
 function displayAvatarInEdit(id) {
     let avatar = document.getElementById('editedAvatar');
     let color = document.getElementById('short-' + id).style.backgroundColor;
