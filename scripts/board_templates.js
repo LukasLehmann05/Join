@@ -164,7 +164,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFuncti
             </header>
             <section class="overlay_main_content" id="overlay_main_content"></section>
             <footer class="action-button-section">
-                <section>
+                <section class="required-field-section">
                     <p class="required-text" id="required_text_field_section"><span class="required">*</span>This field is required</p>
                 </section>
                 <section class="button-section">

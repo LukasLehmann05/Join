@@ -84,6 +84,11 @@
     font-family: "Inter";
 }
 
+.overlay_content .overlay_main_content .required-info{
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .overlay_main_content{
     display: flex;
     gap: 8px;
@@ -295,7 +300,10 @@
     margin-top: 12px;
 }
 
-.overlay_content .action-button-section .required-text,
+.overlay_content .action-button-section .required-text{
+    visibility: hidden;
+    font-size: 16px;
+}
 .overlay_content .action-button-section .button-section .clear-button{
     visibility: hidden;
 }
@@ -303,5 +311,9 @@
 .overlay_content .action-button-section .required-text.show,
 .overlay_content .action-button-section .button-section .clear-button.show{
     visibility: visible;
+}
 
+.overlay_content footer .required-field-section{
+    display: flex;
+    align-items: flex-end;
 }
