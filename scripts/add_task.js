@@ -32,8 +32,8 @@ async function addTaskInit() {
     let apiData = await loadDataFromAPI()
     loadPrioButtonsAndSubtaskSectionById();
     addContactsToAssign(apiData);
-
 }
+
 
 function loadPrioButtonsAndSubtaskSectionById() {
     low_prio_button = document.getElementById("button_prio_low");
@@ -302,3 +302,6 @@ function removeIndicatorOnInput(field) {
             break;
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", addTaskInit);
