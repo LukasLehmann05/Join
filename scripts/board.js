@@ -307,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderNoTaskInfoOnDOMLoad();
 });
 
-// renderNoTaskInfo('toDoColumn');
 renderTaskCard('task_id_x');
 renderSubtaskProgress('task_id_x');
 renderAssignedUserIcons('task_id_x');
