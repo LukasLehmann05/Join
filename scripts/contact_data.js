@@ -204,48 +204,41 @@ async function trimDownAddingContact(newUser, name) {
 
 
 /**
- * shell for handling the deleting process of a contact from the main display
+ * shell for handling the whole process of editing a new contact including validation, editing data in firebase, restructuring html list and confirmation for user
+ * @async
  */
-async function deleteThisContactFromMain(id) {
-    let currentId = id.getAttribute('data-id');
-    deleteThisUser(currentId)
-    dialogAppearences('editContact', 'editContent');
-    responseMessageAppearance();
-};
-
-
-/**
- * shell for handling the deleting process of a contact in the editing dialog 
- */
-async function deleteThisContactFromDialog() {
+async function editContactInDatabase() {
+    let editedUser = getEditedContactData();
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
-    deleteThisUser(currentId)
-    dialogAppearences('editContact', 'editContent');
-    responseMessageAppearance();
-};
-
-
-/**
- * calls functions deleting a contact from the database, emptying the main display and checking the contact list
- */
-async function deleteThisUser(currentId) {
-    removeThisContactFromList(currentId);
-    let letter = document.getElementById("mainName").innerHTML.charAt(0).toUpperCase();
-    removeLetterSectionIfEmpty(letter);
-    document.getElementById('mainView').innerHTML = "";
-    document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
-    //await deleteThisContactFromDatabaseById(currentId);
+    if (editedUser.name.length <= 0 == false) {
+        if (validateEmail(editedUser.email) == true && editedUser.email != "") {
+            if (validatePhoneByLength(editedUser.phone) == true && editedUser.phone != "") {
+                await editContactDataInDatabase(editedUser, currentId)
+                trimDownEditingUser(currentId, editedUser)
+            } else {
+                displayHint('required_edit_phone');
+            }
+        } else {
+            displayHint('required_edit_email');
+        }
+    } else {
+        displayHint('required_edit_name');
+    }
 };
 
 
 /**
  * trim down for editing a user to improve readability and overview
  */
-function trimDownEditingUser(editID, email, name, phone) {
+async function trimDownEditingUser(editID, editedUser) {
+    removeThisContactFromList(editID);
+    let letter = document.getElementById('mainName').innerText.charAt(0).toUpperCase();
+    removeLetterSectionIfEmpty(letter);
+    await renderHtmlElements(editedUser, editID, editedUser.name);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     dialogAppearences('editContact', 'editContent');
-    displayEditedContactDataInList(editID, email, name)
-    displayEditedContactDataInMainDisplay(editID, email, name, phone)
+    displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
+    displayEditedContactDataInMainDisplay(editID, editedUser.email, editedUser.name, editedUser.phone)
 };
 
 
@@ -278,6 +271,41 @@ function getDataFromMain() {
         "phone": phone,
     };
     return currentContact;
+};
+
+
+/**
+ * shell for handling the deleting process of a contact from the main display
+ */
+async function deleteThisContactFromMain(id) {
+    let currentId = id.getAttribute('data-id');
+    deleteThisUser(currentId)
+    dialogAppearences('editContact', 'editContent');
+    responseMessageAppearance();
+};
+
+
+/**
+ * shell for handling the deleting process of a contact in the editing dialog 
+ */
+async function deleteThisContactFromDialog() {
+    let currentId = document.getElementById('deleteUser').getAttribute('data-id');
+    deleteThisUser(currentId)
+    dialogAppearences('editContact', 'editContent');
+    responseMessageAppearance();
+};
+
+
+/**
+ * calls functions deleting a contact from the database, emptying the main display and checking the contact list
+ */
+async function deleteThisUser(currentId) {
+    removeThisContactFromList(currentId);
+    let letter = document.getElementById("mainName").innerHTML.charAt(0).toUpperCase();
+    removeLetterSectionIfEmpty(letter);
+    document.getElementById('mainView').innerHTML = "";
+    document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
+    await deleteThisContactFromDatabaseById(currentId);
 };
 
 
