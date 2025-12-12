@@ -84,6 +84,7 @@ function displayMainDataInEditDialog() {
     document.getElementById('emailEdit').value = currentContact.email
     document.getElementById('nameEdit').value = currentContact.name
     document.getElementById('phoneEdit').value = currentContact.phone
+    displayAvatarInEdit(currentContact.id);
 };
 
 
@@ -94,7 +95,7 @@ function displayEditedContactDataInList(editID, email, name) {
     let acronym = getAcronym(name);
     document.getElementById('short-' + editID).innerText = acronym;
     document.getElementById('email-' + editID).innerText = email;
-    document.getElementById('name-'+ editID).innerText = name;
+    document.getElementById('name-' + editID).innerText = name;
 };
 
 
@@ -157,6 +158,15 @@ function dialogAppearences(id, idContent) {
     responseMessageAppearance();
 };
 
+
+function displayAvatarInEdit(id) {
+    let avatar = document.getElementById('editedAvatar');
+    let color = document.getElementById('short-' + id).style.backgroundColor;
+    let acronym = document.getElementById('short-' + id).innerText;
+    avatar.classList.add('fullname');
+    avatar.innerText = acronym
+    avatar.style.backgroundColor = color;
+};
 
 
 

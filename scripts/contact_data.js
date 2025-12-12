@@ -265,10 +265,12 @@ function getDataFromMain() {
     let email = document.getElementById('mainMail').innerText;
     let name = document.getElementById('mainName').innerText;
     let phone = document.getElementById('mainPhone').innerText;
+    let currentId = document.getElementById('deleteUser').getAttribute('data-id');
     let currentContact = {
         "email": email,
         "name": name,
         "phone": phone,
+        "id": currentId
     };
     return currentContact;
 };
