@@ -178,7 +178,7 @@ async function addNewContactToDatabase() {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
                 await postNewContactToDatabase(newUser);
-                await trimDown(newUser, newUser.name);
+                await trimDownAddingContact(newUser, newUser.name);
             } else {
                 displayHint('required_phone');
             }
@@ -194,60 +194,12 @@ async function addNewContactToDatabase() {
 /**
  * shell for restructuring html templates and dialog appearences
  */
-async function trimDown(newUser, name) {
+async function trimDownAddingContact(newUser, name) {
     let contactID = await getLastContactAddedFromDatabase();
     colorUser(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
     dialogAppearences('addContact', 'addContent');
-};
-
-
-/**
- * handles the appearing/disappearing of the dialogs during the process of adding a new contact
- */
-function dialogAppearences(id, idContent) {
-    closeDialog(id, idContent);
-    responseMessageAppearance();
-};
-
-
-/**
- * shows response Message
- */
-function responseMessageAppearance() {
-    setTimeout(() => {
-        document.getElementsByTagName("body")[0].style.overflow = "hidden";
-        openDialog('responseDialog', 'responseDialog');
-    }, 1500)
-    document.getElementsByTagName("body")[0].style.overflow = "auto";
-    setTimeout(() => {
-        closeDialog('responseDialog', 'responseDialog');
-    }, 3500)
-    setTimeout(() => {
-        document.getElementById('responseMessage').innerHTML = "Contact successfully created.";
-    }, 4000)
-};
-
-
-/**
- * remove contact from contact list
- */
-function removeThisContactFromList(id) {
-    let deletedContact = document.getElementById(id);
-    deletedContact.remove();
-};
-
-
-/**
- * checks if the letter section is empty after deleting a contact and removes said section if empty
- */
-function removeLetterSectionIfEmpty(letter) {
-    let deletedContact = document.getElementById(letter);
-    if (deletedContact.children.length <= 0) {
-        deletedContact.parentElement.remove();
-    }
-    else return;
 };
 
 
@@ -271,36 +223,32 @@ async function deleteThisUser(id) {
  */
 async function editContactInDatabase() {
     let editID = document.getElementById('editUser').getAttribute('data-id');
-    console.log(editID);
     let editedContact = getEditedContactData();
+    if (editedContact.name.length <= 0 == false) {
+        if (validateEmail(editedContact.email) == true && editedContact.email != "") {
+            if (validatePhoneByLength(editedContact.phone) == true && editedContact.phone != "") {
+                //await editContactInDatabase(editedContact, editID);
+                trimDownEditingUser(editID, editedContact.email, editedContact.name, editedContact.phone);
+            } else {
+                displayHint('required_edit_phone');
+            }
+        } else {
+            displayHint('required_edit_email');
+        }
+    } else {
+        displayHint('required_edit_name');
+    }
+};
+
+
+/**
+ * trim down for editing a user to improve readability and overview
+ */
+function trimDownEditingUser(editID, email, name, phone) {
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
-    responseMessageAppearance();
-    //await editContactInDatabase(editedUser, editID);
-    displayEditedContactDataInList(editID, editedContact.email, editedContact.name)
-    displayEditedContactDataInMainDisplay(editID, editedContact.email, editedContact.name)
-};
-
-
-/**
- * updates data in main display for the edited user
- */
-function displayEditedContactDataInMainDisplay(editID, email, name, phone) {
-    
-    document.getElementById('email-' + editID).innerText = email;
-    document.getElementById('name-'+ editID).innerText = name;
-    document.getElementById('name-'+ editID).innerText = name;
-    document.getElementById('name-'+ editID).innerText = name;
-};
-
-
-/**
- * updates data in contact list for the edited user
- */
-function displayEditedContactDataInList(editID, email, name) {
-    let acronym = getAcronym(name);
-    document.getElementById('short-' + editID).innerText = acronym;
-    document.getElementById('email-' + editID).innerText = email;
-    document.getElementById('name-'+ editID).innerText = name;
+    dialogAppearences('editContact', 'editContent');
+    displayEditedContactDataInList(editID, email, name)
+    displayEditedContactDataInMainDisplay(editID, email, name, phone)
 };
 
 
@@ -323,17 +271,6 @@ function getEditedContactData() {
 /**
  * get contact Data from Main Display to edit dialog window
  */
-function displayMainDataInEditDialog() {
-    let currentContact = getDataFromMain();
-    document.getElementById('emailEdit').value = currentContact.email
-    document.getElementById('nameEdit').value = currentContact.name
-    document.getElementById('phoneEdit').value = currentContact.phone
-};
-
-
-/**
- * get contact Data from Main Display to edit dialog window
- */
 function getDataFromMain() {
     let email = document.getElementById('mainMail').innerText;
     let name = document.getElementById('mainName').innerText;
@@ -345,6 +282,7 @@ function getDataFromMain() {
     };
     return currentContact;
 };
+
 
 
 
