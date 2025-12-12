@@ -204,40 +204,37 @@ async function trimDownAddingContact(newUser, name) {
 
 
 /**
- * shell for handling the deleting process of a contact
+ * shell for handling the deleting process of a contact from the main display
  */
-async function deleteThisUser(id) {
+async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
+    deleteThisUser(currentId)
+    dialogAppearences('editContact', 'editContent');
+    responseMessageAppearance();
+};
+
+
+/**
+ * shell for handling the deleting process of a contact in the editing dialog 
+ */
+async function deleteThisContactFromDialog() {
+    let currentId = document.getElementById('deleteUser').getAttribute('data-id');
+    deleteThisUser(currentId)
+    dialogAppearences('editContact', 'editContent');
+    responseMessageAppearance();
+};
+
+
+/**
+ * calls functions deleting a contact from the database, emptying the main display and checking the contact list
+ */
+async function deleteThisUser(currentId) {
     removeThisContactFromList(currentId);
     let letter = document.getElementById("mainName").innerHTML.charAt(0).toUpperCase();
     removeLetterSectionIfEmpty(letter);
     document.getElementById('mainView').innerHTML = "";
     document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
-    responseMessageAppearance();
-    await deleteThisContactFromDatabaseById(currentId);
-};
-
-
-/**
- * shell for handling the editing process of a contact
- */
-async function editContactInDatabase() {
-    let editID = document.getElementById('editUser').getAttribute('data-id');
-    let editedContact = getEditedContactData();
-    if (editedContact.name.length <= 0 == false) {
-        if (validateEmail(editedContact.email) == true && editedContact.email != "") {
-            if (validatePhoneByLength(editedContact.phone) == true && editedContact.phone != "") {
-                //await editContactInDatabase(editedContact, editID);
-                trimDownEditingUser(editID, editedContact.email, editedContact.name, editedContact.phone);
-            } else {
-                displayHint('required_edit_phone');
-            }
-        } else {
-            displayHint('required_edit_email');
-        }
-    } else {
-        displayHint('required_edit_name');
-    }
+    //await deleteThisContactFromDatabaseById(currentId);
 };
 
 
