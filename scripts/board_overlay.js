@@ -149,8 +149,8 @@ function closeOverlay(event) {
 
 
 function removeShowClass(buttonElement, taskId) {
-    const isEditTaskOverlay = buttonElement ? buttonElement.getAttribute('data-edit-task-overlay') === 'true' : false;
-    if (!isEditTaskOverlay) {
+    const buttonSaveOverlayWhenClosed = buttonElement ? buttonElement.getAttribute('data-save-task-when-close-overlay') === 'true' : false;
+    if (buttonSaveOverlayWhenClosed) {
         sendUpdatedTaskToDB(taskId);        
     }
 
@@ -162,7 +162,7 @@ function removeShowClass(buttonElement, taskId) {
          setTimeout(() => {
             overlay.classList.remove('show');
             if(stateWidthOverlay) {
-                toggleTitleCategorySeperatorInAddTaskOverlay();
+                toggleTitleCategorySeparatorInAddTaskOverlay();
             }
         }, 500);
     }
@@ -198,24 +198,24 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements('${taskId}')`);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements(this, '${taskId}')`);
     upsertTaskTemplateHandler(taskId);
-    renderAssignedUserInfos(taskId, onlyId=true, 'rendered_contact_images');
+    renderAssignedUserInfos(taskId, true, 'rendered_contact_images');
     renderSubtaskEditListItems(taskId);
     addTaskInit();
 }
 
 
-function updateTaskElements(taskId) {
+function updateTaskElements(button, taskId) {
     getAllFieldValuesOfEditTaskWhenUpdated();
-    removeShowClass(taskId);
+    removeShowClass(button, taskId);
 }
 
 
 function upsertTaskTemplateHandler(taskId){
     renderOverlayUpsertTaskDetailsContainer();
     upsertTaskTemplatesWrapperContainer1(taskId);
-    upsertTaskTemplatesWrapperContainer2(taskId); //anhand der id eine unterscheidung machen ob edit oder add task
+    upsertTaskTemplatesWrapperContainer2(taskId);
 }
    
 
@@ -291,7 +291,7 @@ function escapeTextareaContent(text) {
 
 async function openAddTaskOverlay() {
     clearElementsOfNewTask();
-    const taskId = 'new_task_id_' + Date.now(); // temporär
+    const taskId = 'new_task_id_' + Date.now();
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
@@ -307,16 +307,16 @@ function renderOverlayAddTask(taskId) {
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', `createTask('${taskId}')`);
     upsertTaskTemplateHandler(taskId);
-    toggleTitleCategorySeperatorInAddTaskOverlay();
+    toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();
 }
 
 
-function toggleTitleCategorySeperatorInAddTaskOverlay() {
+function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('overlay_title').classList.toggle('show');
     document.getElementsByClassName('upsert_category_container')[0].classList.toggle('show');
-    document.getElementById('overlay_seperator_add_task').classList.toggle('show');
-    document.getElementById('overlay_main_content').classList.toggle('show_seperator');
+    document.getElementById('overlay_separator_add_task').classList.toggle('show');
+    document.getElementById('overlay_main_content').classList.toggle('show_separator');
     document.getElementById('overlay_content').classList.toggle('add_task_attributes');
     document.getElementById('clear_button_container').classList.toggle('show');
     document.getElementById('required_text_field_section').classList.toggle('show');
