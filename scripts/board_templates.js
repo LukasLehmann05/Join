@@ -82,7 +82,7 @@ function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
                 <p class="category_overlay">${task.category}</p>
-                <button class="close_overlay_button" onclick="removeShowClass()">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-save-task-when-close-overlay="true">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
@@ -102,7 +102,7 @@ function overlayContentTemplate(task, taskId) {
                 </div>
                 <div class="assigned_users_info">
                     <p class="attribute">Assigned to:</p>
-                    <div class="assigned_users" id="${taskId}_assigned_users_overlay"></div>
+                    <div class="assigned_users" id="assigned_users_overlay"></div>
                 </div>
                 <div class="subtasks_info">
                     <p class="attribute">Subtasks</p>
@@ -111,7 +111,7 @@ function overlayContentTemplate(task, taskId) {
             </section>
             <aside class="edit_overlay_button_container">
                 <button 
-                    class="edit_overlay_button seperator_overlay" 
+                    class="edit_overlay_button separator_overlay" 
                     onclick="deleteTaskOverlay('${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
@@ -135,14 +135,9 @@ function overlayContentTemplate(task, taskId) {
             `
 }
 
-function assignedUserInfoTemplate(userName, initials) {
-    let userHtmnl = assignedUserIconTemplate(initials);
+function assignedUserNameTemplate(userName) {
     return  `
-            <div class="assigned_user_content">
-                ${userHtmnl}
                 <p>${userName}</p>
-            </div>
-
             `;
 }
 
@@ -159,30 +154,51 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
-function overlayUpsertTaskTemplate(taskId) {
+function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFunction) {
     return  `
-            <header class="overlay_header edit_overlay_header">
-                <h1 class="overlay_title">Add Task</h1>
-                <button class="close_overlay_button" onclick="removeShowClass()">
+            <header class="overlay_header upsert_overlay_header">
+                <h1 id="overlay_title">Add Task</h1>
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-save-task-when-close-overlay="false">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
             <section class="overlay_main_content" id="overlay_main_content"></section>
-            <footer class="overlay_header edit_overlay_header">
-                <button class="button_add_task" type="button" onclick="saveEditedTask('${taskId}')">
-                    <p>Ok</p>
-                    <img src="../assets/icons/board/button_check_icon.svg" alt="add_task icon">
-                </button>
+            <footer class="action-button-section">
+                <section>
+                    <p class="required-text" id="required_text_field_section"><span class="required">*</span>This field is required</p>
+                </section>
+                <section class="button-section">
+                    <div class="clear-button" id="clear_button_container">
+                        <button class="action-buttons" onclick="clearAllInputs()">
+                            <p>Cancel</p>
+                            <img src="../assets/icons/contacts/close.svg" alt="clear icon">
+                        </button>
+                    </div>
+                    <div class="create-task">
+                        <button class="action-buttons create-button" onclick="${selectedTaskFunction}" data-save-task-when-close-overlay="true">
+                            <p>${confirmButtonText}</p>
+                            <img src="../assets/icons/contacts/check.svg" alt="submit icon">
+                        </button>
+                    </div>
+                </section>
             </footer>
             `
 }
 
 function overlayUpsertTaskTitleTemplate(taskTitle) {
     return  `
-             <section class="edit_title_container">
+             <section class="upsert_title_container">
                 <form class="input-form">
-                    <label for="task_title">Title</label>
-                    <input id="task_title" class="task-input" type="text" value="${taskTitle}" placeholder="Enter task title">
+                    <label for="task_title">Title<span class="required">*</span></label>
+                    <input 
+                        id="task_title" 
+                        class="task-input" 
+                        type="text" 
+                        value="${taskTitle}" 
+                        placeholder="Enter a title" 
+                        required 
+                        onclick="removeIndicatorOnInput('title')">
+                    <p id="required_title" class="required-info">This field is required</p>
                 </form>
             </section>
             `
@@ -190,10 +206,14 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
 
 function overlayUpsertTaskDescriptionTemplate(taskDescription) {
     return  `
-            <section class="edit_description_container">
+            <section class="upsert_description_container">
                 <form class="input-form description">
                     <label for="task_description">Description</label>
-                    <textarea id="task_description" class="task-input" placeholder="Enter a description">${taskDescription}</textarea>
+                    <textarea 
+                        id="task_description" 
+                        class="task-input" 
+                        placeholder="Enter a description">${taskDescription}
+                    </textarea>
                 </form>
             </section>
             `
@@ -201,10 +221,18 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
 
 function overlayUpsertTaskDueDateTemplate(taskDueDate) {
     return  `
-            <section class="edit_due_date_container">
+            <section class="upsert_due_date_container">
                 <form class="input-form">
-                    <label for="task_due_date">Due date</label>
-                    <input id="task_due_date" class="task-input" type="date" value="${taskDueDate}" placeholder="dd/mm/yyyy">
+                    <label for="task_due_date">Due date<span class="required">*</span></label>
+                    <input 
+                        id="task_due_date" 
+                        class="task-input" 
+                        type="date" 
+                        value="${taskDueDate}" 
+                        placeholder="dd/mm/yyyy" 
+                        required 
+                        onclick="removeIndicatorOnInput('due_date')">
+                    <p id="required_date" class="required-info">This field is required</p>
                 </form>
             </section>
             `
@@ -212,21 +240,33 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
 
 function overlayUpsertTaskPriorityTemplate() {
     return  `
-            <section class="edit_priority_container">
+            <section class="upsert_priority_container">
                 <form class="input-form">
-                    <span class="priority_form_title">Priority</span>
+                    <p class="priority_form_title">Priority</p>
                     <section class="priority-section" id="priority_section">
-                       <button class="priority-button" id="button_prio_urgent" onclick="changePriority('urgent')" type="button">
-                            <p>Urgent</p>
-                            <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
+                        <button 
+                            class="priority-button" 
+                            id="button_prio_urgent" 
+                            onclick="changePriority('urgent')" 
+                            type="button">
+                                <p>Urgent</p>
+                                <img src="../assets/icons/addTask/urgentTask.svg" alt="urgent prio icon">
                         </button>
-                        <button class="priority-button bg-yellow" id="button_prio_medium" onclick="changePriority('medium')" type="button">
-                            <p>Medium</p>
-                            <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
+                        <button 
+                            class="priority-button bg-yellow" 
+                            id="button_prio_medium" 
+                            onclick="changePriority('medium')" 
+                            type="button">
+                                <p>Medium</p>
+                                <img src="../assets/icons/addTask/medTask.svg" alt="medium prio icon">
                         </button>
-                        <button class="priority-button" id="button_prio_low" onclick="changePriority('low')" type="button">
-                            <p>Low</p>
-                            <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
+                        <button 
+                            class="priority-button" 
+                            id="button_prio_low" 
+                            onclick="changePriority('low')" 
+                            type="button">
+                                <p>Low</p>
+                                <img src="../assets/icons/addTask/lowTask.svg" alt="low prio icon">
                         </button>
                     </section>
                 </form>
@@ -236,9 +276,9 @@ function overlayUpsertTaskPriorityTemplate() {
 
 function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
-            <section class="edit_assigned_users_container">
+            <section class="upsert_assigned_users_container">
                 <form class="input-form">
-                    <label for="task_assign">Assigned to</label>
+                    <p>Assigned to</p>
                     <button class="contact-button" type="button" onclick="showContacts()">
                         <p>Select contacts to assign</p>
                         <img src="../assets/icons/addTask/dropdown.svg" alt="dropdown_icon">
@@ -258,34 +298,54 @@ function overlayUpsertTaskAssignedUsersTemplate() {
 
 function overlayUpsertTaskSubtasksTemplate(taskId) {
     return  `
-            <section class="edit_subtasks_container">
+            <section class="upsert_subtasks_container">
                 <form class="input-form">
                     <label for="task_subtask">Subtasks</label>
-                    <input id="task_subtask" class="task-input" type="text" placeholder="Add new subtask">
+                    <section class="subtask-section">
+                        <input 
+                            onclick="showSubtaskButtons()" 
+                            id="task_subtask"
+                            type="text" 
+                            placeholder="Add new subtask">
+                        <aside id="subtask_button_section">
+                            <button type="button" onclick="addSubtask()">
+                                <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg"
+                                    alt="add_icon">
+                            </button>
+                            <div class="subtask-separator"></div>
+                            <button type="button" onclick="clearSubtask()">
+                                <img class="subtask-img" src="../assets/icons/contacts/close.svg"
+                                    alt="close_icon">
+                            </button>
+                        </aside>
+                    </section>
                 </form>
-                <div class="subtasks_edit_list" id="${taskId}_subtasks_edit_list"></div>
+                <ul class="subtasks_upsert_list" id="subtask_render"></ul>
             </section>
             `
 }
 
-function overlayUpsertSubtaskListItemTemplate(taskId, title, counter) {
-    return `
-           <ul class="subtask_edit_list_item" id="${taskId}_subtask_edit_list_item_${counter}">
-                <li>${title}</li>
-            </ul>
-            `;
-}
 
 function overlayUpsertCategoryOptionTemplate() {
     return `
-            <form class="input-form" category_template>
-                <label for="task_category">Category<span class="required">*</span></label>
-                <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
-                    <option value="">Select task category</option>
-                    <option value="Technical Task">Technical Task</option>
-                    <option value="User Story">User Story</option>
-                </select>
-                <p id="required_category" class="required-info">This field is required</p>
-            </form>
+            <section class="upsert_category_container">
+                <form class="input-form" category_template>
+                    <label for="task_category">Category<span class="required">*</span></label>
+                    <select class="select-input" name="category" id="task_category" required onclick="removeIndicatorOnInput('category')">
+                        <option value="">Select task category</option>
+                        <option value="Technical Task">Technical Task</option>
+                        <option value="User Story">User Story</option>
+                    </select>
+                    <p id="required_category" class="required-info">This field is required</p>
+                </form>
+            </section>
+            `
+}
+
+function overlayUpsertTaskDetailsContainerTemplate() {
+    return  `
+            <section class="task_details_container" id="task_details_container_1"></section>
+            <section class="overlay_separator_add_task" id="overlay_separator_add_task"></section>
+            <section class="task_details_container" id="task_details_container_2"></section>
             `
 }
