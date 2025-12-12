@@ -1,4 +1,4 @@
-const PRIORITY_ARR = ["low", "medium", "urgent"]
+const PRIORITY_ARR = ["low", "medium", "urgent"];
 let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
@@ -214,7 +214,8 @@ function addSubtask() {
         let subtask = task_subtask.value
         let subtask_template = returnSubtaskTemplate(subtask)
         subtask_list.innerHTML += subtask_template
-        allSubtasksArr.push(task_subtask.value)
+        let subtaskObj = { title: task_subtask.value, done: false };
+        allSubtasksArr.push(subtaskObj)
         task_subtask.value = ""
         hideSubtaskButtons()
     }
