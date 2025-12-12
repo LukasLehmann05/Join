@@ -28,10 +28,9 @@ let allSubtasksArr = []
 let allAssigneesArr = []
 
 
-async function addTaskInit() {
-    let apiData = await loadDataFromAPI()
+function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
-    addContactsToAssign(apiData);
+    
 }
 
 
@@ -229,7 +228,10 @@ function addContactsToAssign(join_data) {
     }
 }
 
-function showContacts() {
+async function showContacts() {
+    let apiData = await loadDataFromAPI()
+    addContactsToAssign(apiData);
+
     let contact_selector = document.getElementById("contact_selector");
     if (contacts_shown == false) {
         contact_selector.style.display = "block"
