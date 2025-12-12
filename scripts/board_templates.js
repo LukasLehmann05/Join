@@ -82,7 +82,7 @@ function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
                 <p class="category_overlay">${task.category}</p>
-                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-edit-task-overlay="false">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-save-task-when-close-overlay="true">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
@@ -111,7 +111,7 @@ function overlayContentTemplate(task, taskId) {
             </section>
             <aside class="edit_overlay_button_container">
                 <button 
-                    class="edit_overlay_button seperator_overlay" 
+                    class="edit_overlay_button separator_overlay" 
                     onclick="deleteTaskOverlay('${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
@@ -158,7 +158,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFuncti
     return  `
             <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
-                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-edit-task-overlay="true">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-save-task-when-close-overlay="false">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
@@ -175,9 +175,9 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFuncti
                         </button>
                     </div>
                     <div class="create-task">
-                        <button class="action-buttons create-button" onclick="${selectedTaskFunction}">
+                        <button class="action-buttons create-button" onclick="${selectedTaskFunction}" data-save-task-when-close-overlay="true">
                             <p>${confirmButtonText}</p>
-                            <img src="../assets/icons/contacts/check.svg" alt="sumbit icon">
+                            <img src="../assets/icons/contacts/check.svg" alt="submit icon">
                         </button>
                     </div>
                 </section>
@@ -278,7 +278,7 @@ function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
             <section class="upsert_assigned_users_container">
                 <form class="input-form">
-                    <p for="task_assign">Assigned to</p>
+                    <p>Assigned to</p>
                     <button class="contact-button" type="button" onclick="showContacts()">
                         <p>Select contacts to assign</p>
                         <img src="../assets/icons/addTask/dropdown.svg" alt="dropdown_icon">
@@ -312,7 +312,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                                 <img class="subtask-img filter-check" src="../assets/icons/contacts/check.svg"
                                     alt="add_icon">
                             </button>
-                            <div class="subtask-seperator"></div>
+                            <div class="subtask-separator"></div>
                             <button type="button" onclick="clearSubtask()">
                                 <img class="subtask-img" src="../assets/icons/contacts/close.svg"
                                     alt="close_icon">
@@ -345,7 +345,7 @@ function overlayUpsertCategoryOptionTemplate() {
 function overlayUpsertTaskDetailsContainerTemplate() {
     return  `
             <section class="task_details_container" id="task_details_container_1"></section>
-            <section class="overlay_seperator_add_task" id="overlay_seperator_add_task"></section>
+            <section class="overlay_separator_add_task" id="overlay_separator_add_task"></section>
             <section class="task_details_container" id="task_details_container_2"></section>
             `
 }
