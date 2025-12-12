@@ -50,7 +50,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
     task_category = document.getElementById("task_category");
     req_title_text = document.getElementById("required_title");
     req_due_date_text = document.getElementById("required_date");
-    req_category_text = document.getElementById("required_category")
+    req_category_text = document.getElementById("required_category");
 }
 
 function loadDataFromAPI() {
