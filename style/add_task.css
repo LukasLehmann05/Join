@@ -54,6 +54,7 @@
     background-color: white;
     flex: 1;
     cursor: pointer;
+    font-family: "Inter";
 }
 
 .priority-button:hover {
@@ -153,6 +154,7 @@ textarea.task-input {
 .create-button {
     background-color: #2A3647;
     color: white;
+    font-weight: 700;
 }
 
 .create-task :hover {
@@ -344,10 +346,30 @@ textarea.task-input {
     justify-content: flex-start;
 }
 
+.rendered-contacts img {
+    height: 42px;
+}
+
 .checkbox-filter {
     filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(9deg) brightness(107%) contrast(101%);
 }
 
 .article-bg {
         background-color: #F6F7F8;
+}
+
+.logo-responsive {
+    display: none;
+}
+
+.show-767 {
+    display: none;
+}
+
+.show-req-text-767 {
+    display: none;
+}
+
+.hide-req-text-767 {
+    display: block;
 }
