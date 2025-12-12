@@ -117,7 +117,7 @@ async function editContactInDatabase(editedUser, contactID) {
 
 
 /**
- *department contacts: get last contact that was added
+ *department contacts: get last contact id that was added to the database
  */
 async function getLastContactAddedFromDatabase() {
     let joinFetch = await fetch(BASE_URL + `/contacts.json`)
