@@ -29,7 +29,7 @@ let testTasks = {
         "title": "Implementiere Login-Funktion",
         "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
         "due_date": "2025-12-10",
-        "priority": "Urgent",
+        "priority": "urgent",
         "state": "in progress",
         "assigned_to": [
             "user_id_1",
@@ -52,7 +52,7 @@ let testTasks = {
         "title": "Social Media Post erstellen",
         "description": "Post für die Vorstellung des neuen Features planen.",
         "due_date": "01/12/2025",
-        "priority": "Medium",
+        "priority": "medium",
         "state": "to do",
         "assigned_to": [
             "user_id_2"
@@ -157,11 +157,11 @@ function renderAssignedUserIcons(taskId) {
 function getIconForPriority(priority) {
     const iconfolderpath = "../assets/icons/addTask/";
     switch(priority) {
-        case 'Urgent':
+        case PRIORITY_ARR[2]:
             return iconfolderpath + "urgentTask.svg";
-        case 'Medium':
+        case PRIORITY_ARR[1]:
             return iconfolderpath + "medTask.svg";
-        case 'Low':
+        case PRIORITY_ARR[0]:
             return iconfolderpath + "lowTask.svg";
     }
 }
