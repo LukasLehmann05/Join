@@ -207,15 +207,10 @@
     justify-content: flex-end;
 }
 
-.overlay_content form label,
-.overlay_content form p{
-    color: #2A3647;
+.overlay_content .task_field_title{
     font-family: "Inter";
     font-size: 20px;
-}
-
-.overlay_content .upsert_priority_container .priority_form_title{
-    font-family: "Inter_Bold";
+    color: #2A3647;
 }
 
 .overlay_content .upsert_description_container form.input-form.description{
