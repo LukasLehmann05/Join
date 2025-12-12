@@ -1,4 +1,4 @@
-let stateWidthOverlay = false;
+let showWideOverlay = false;
 
 let newTitle = "";
 let newCategory = "";
@@ -72,7 +72,7 @@ function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, 'priority_overlay');
-    renderAssignedUserInfos(taskId, onlyId=false, 'assigned_users_overlay');
+    renderAssignedUserInfos(taskId, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId);
 }
 
@@ -155,13 +155,13 @@ function removeShowClass(buttonElement, taskId) {
     }
 
     const overlay = document.getElementById('overlay');
-    const contentContent = document.getElementById('overlay_content');
+    const overlayContent = document.getElementById('overlay_content');
 
     if (overlay.classList.contains('show')) {
-        contentContent.classList.remove('show');
+        overlayContent.classList.remove('show');
          setTimeout(() => {
             overlay.classList.remove('show');
-            if(stateWidthOverlay) {
+            if(showWideOverlay) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
         }, 500);
@@ -320,5 +320,5 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('overlay_content').classList.toggle('add_task_attributes');
     document.getElementById('clear_button_container').classList.toggle('show');
     document.getElementById('required_text_field_section').classList.toggle('show');
-    stateWidthOverlay = !stateWidthOverlay;
+    showWideOverlay = !showWideOverlay;
 }
