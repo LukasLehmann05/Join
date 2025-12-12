@@ -13,7 +13,7 @@ async function fetchAllDataGlobal() {
 
 
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneeArr, all_subtasks) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr) {
     const newTask = {
         "category": task_category,
         "title": task_title,
@@ -21,8 +21,8 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
         "due_date": task_due_date,
         "priority": task_priority,
         "state": task_state,
-        "assigned_to": allAssigneeArr,
-        "subtasks": all_subtasks,
+        "assigned_to": allAssigneesArr,
+        "subtasks": allSubtasksArr,
     }
 
     let response = await fetch(`${BASE_URL}/tasks.json`, {
