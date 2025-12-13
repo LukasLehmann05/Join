@@ -417,5 +417,11 @@ textarea.task-input {
 .subtask-edit-section {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 4px;
+}
+
+.subtask-edit-section img {
+    height: 16px;
+    cursor: pointer;
 }
