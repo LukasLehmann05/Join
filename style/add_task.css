@@ -377,6 +377,7 @@ textarea.task-input {
 
 .subtask-render-section {
     padding: 0px;
+    list-style-type: none;
 }
 
 .subtask-list-element {
