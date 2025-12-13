@@ -356,7 +356,7 @@ textarea.task-input {
 }
 
 .article-bg {
-        background-color: #F6F7F8;
+    background-color: #F6F7F8;
 }
 
 .logo-responsive {
@@ -373,4 +373,31 @@ textarea.task-input {
 
 .hide-req-text-767 {
     display: block;
+}
+
+.subtask-render-section {
+    padding: 0px;
+}
+
+.subtask-list-element {
+    display: flex;
+}
+
+.subtask-button {
+    flex: 1;
+    border: none;
+    cursor: pointer;
+    background-color: #F6F7F8;
+    border-radius: 10px;
+}
+
+.subtask-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    line-height: 120%;
+    font-family: "Inter";
+    padding: 4px 0px;
 }
