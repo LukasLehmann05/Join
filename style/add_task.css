@@ -448,3 +448,9 @@ textarea.task-input {
     background-color: #D1D1D1;
     height: 100%;
 }
+
+.subtask-underline-blue {
+    height: 2px;
+    width: 100%;
+    background-color: #29ABE2;
+}
