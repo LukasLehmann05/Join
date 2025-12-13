@@ -405,3 +405,15 @@ textarea.task-input {
 .subtask-button:hover {
     background-color: #E0E0E0;
 }
+
+.subtask-action-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.subtask-edit-section {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
