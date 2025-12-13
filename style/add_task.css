@@ -389,6 +389,8 @@ textarea.task-input {
     cursor: pointer;
     background-color: #F6F7F8;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .subtask-text {
