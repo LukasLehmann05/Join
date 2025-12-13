@@ -13,32 +13,38 @@ async function fetchAllDataGlobal() {
 
 
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, all_contacts, all_subtasks) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr) {
     const newTask = {
         "category": task_category,
         "title": task_title,
         "description": task_description,
         "due_date": task_due_date,
         "priority": task_priority,
-        "assigned_to": all_contacts,
-        "subtasks": all_subtasks,
+        "state": task_state,
+        "assigned_to": allAssigneesArr,
+        "subtasks": allSubtasksArr,
     }
 
-    let response = await fetch('https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks.json', {
+    let response = await fetch(`${BASE_URL}/tasks.json`, {
         method: 'POST',
         body: JSON.stringify(newTask),
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         }
     })
+    if (response.ok) {
+        console.log('Task added successfully')
+    } else {
+        console.error('Error adding task:', response.status)
+    }
 }
 
 //fieldstoupdate == object with key value pairs (title : "new title")
-async function updateTask(taskId, fieldsToUpdate) {
+async function updateTask(taskId, taskToUpdate) {
     try {
-        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
-            method: 'PATCH',
-            body: JSON.stringify(fieldsToUpdate),
+        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(taskToUpdate),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -55,7 +61,7 @@ async function updateTask(taskId, fieldsToUpdate) {
 
 async function deleteTask(taskId) {
     try {
-        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
+        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
             method: 'DELETE'
         })
         if (response.ok) {
