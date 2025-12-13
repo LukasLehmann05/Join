@@ -401,3 +401,7 @@ textarea.task-input {
     font-family: "Inter";
     padding: 4px 0px;
 }
+
+.subtask-button:hover {
+    background-color: #E0E0E0;
+}
