@@ -425,3 +425,20 @@ textarea.task-input {
     height: 16px;
     cursor: pointer;
 }
+
+.subtask-edit {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.subtask-edit input {
+    flex: 1;
+}
+
+.subtask-edit-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
