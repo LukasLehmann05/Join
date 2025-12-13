@@ -1,5 +1,5 @@
 function returnSubtaskTemplate(subtask) {
-    return `<li>${subtask}</li>`
+    return `<li class="subtask-list-element"><button class="subtask-button">${subtask}</button></li>`
 }
 
 function returnContactTemplate(contact_name,user_id) {
