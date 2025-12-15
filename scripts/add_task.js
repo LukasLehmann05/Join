@@ -19,7 +19,7 @@ let subtask_buttons_active = false
 let contacts_shown = false
 
 let current_priority = PRIORITY_ARR[1]  // default medium priority
-let stateOfNewTask = "to do"
+let stateOfNewTask = STATE_TASK_ARR[0] // default "todo" state
 
 let req_title = false
 let req_due_date = false
