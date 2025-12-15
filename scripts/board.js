@@ -101,16 +101,16 @@ function formatSubtaskProgress(subtasks) {
 }
 
 
-function renderSubtaskProgress(taskId, task) {
+function renderSubtaskProgress(taskId, subtasksArr) {
   let elementId = taskId + '_subtasks_done';
   const element = document.getElementById(elementId);
-  element.innerHTML = formatSubtaskProgress(task.subtasks);
-  renderSubtaskStatusBar(taskId, task);
+  element.innerHTML = formatSubtaskProgress(subtasksArr);
+  renderSubtaskStatusBar(taskId, subtasksArr);
 }
 
 
-function renderSubtaskStatusBar(taskId, task) {
-    let relationOfDoneSubtasks = formatSubtaskProgress(task.subtasks).split('/');
+function renderSubtaskStatusBar(taskId, subtasksArr) {
+    let relationOfDoneSubtasks = formatSubtaskProgress(subtasksArr).split('/');
     let percentage = 0;
     if (relationOfDoneSubtasks[1] > 0) {
         percentage = (relationOfDoneSubtasks[0] / relationOfDoneSubtasks[1]) * 100;
@@ -127,10 +127,10 @@ async function renderTaskCard(taskId, task) {
 }
 
 
-async function renderAssignedUserIcons(taskId, task) {
+async function renderAssignedUserIcons(taskId, taskAssignees) {
     let containerIdSuffix = 'assigned_users';
     
-    for (let contactId of task.assigned_to) {        
+    for (let contactId of taskAssignees) {        
         const user = await getContactById(contactId);
         const initials = getInitialsFromUser(user);
         const iconHTML = assignedUserIconTemplate(initials);
@@ -163,11 +163,11 @@ function getIconForPriority(priority) {
 }
 
 
-function renderPriorityIndicator(taskId, task, prioritySuffix) {
-    let iconPath = getIconForPriority(task.priority);
+function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
+    let iconPath = getIconForPriority(taskPriority);
     let element = document.getElementById(taskId + '_' + prioritySuffix);
     element.innerHTML = priorityIndicatorTemplate(iconPath);
-    colorPriorityIcon(task.priority, element);
+    colorPriorityIcon(taskPriority, element);
 }
 
 
@@ -326,9 +326,9 @@ async function initializeBoard(userId) {
         let taskId = Object.keys(allTasksOfUserArr[taskIndex])[0];        
         let task = await getTaskById(taskId);
         renderTaskCard(taskId, task);
-        renderSubtaskProgress(taskId, task);
-        renderAssignedUserIcons(taskId, task);
-        renderPriorityIndicator(taskId, task, 'priority');
+        renderSubtaskProgress(taskId, task.subtasks);
+        renderAssignedUserIcons(taskId, task.assigned_to);
+        renderPriorityIndicator(taskId, task.priority, 'priority');
     }
 
     renderNoTaskInfoOnDOMLoad();
