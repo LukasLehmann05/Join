@@ -32,10 +32,8 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
             'Content-Type': 'application/json'
         }
     })
-    if (response.ok) {
-        console.log('Task added successfully')
-    } else {
-        console.error('Error adding task:', response.status)
+    if (!response.ok) {
+        throw new Error('Error adding task: ' + response.status);
     }
 }
 
@@ -49,11 +47,9 @@ async function updateTask(taskId, taskToUpdate) {
                 'Content-Type': 'application/json'
             }
         })
-        if (response.ok) {
-            console.log('Task updated successfully')
-        } else {
-            console.error('Error updating task:', response.status)
-        }
+        if (!response.ok) {
+            throw new Error('Error updating task: ' + response.status);
+            }
     } catch (error) {
         console.error('Error updating task:', error)
     }
@@ -64,10 +60,8 @@ async function deleteTask(taskId) {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
             method: 'DELETE'
         })
-        if (response.ok) {
-            console.log('Task deleted successfully')
-        } else {
-            console.error('Error deleting task:', response.status)
+        if (!response.ok) {
+            throw new Error('Error deleting task: ' + response.status);
         }
     } catch (error) {
         console.error('Error deleting task:', error)

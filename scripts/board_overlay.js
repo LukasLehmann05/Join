@@ -15,9 +15,6 @@ function sendUpdatedTaskToDB(taskId) {
     if (Object.keys(taskToUpdate).length !== 0) {
         updateTask(taskId, taskToUpdate);
     }
-    else {
-        console.log("No fields to update.");
-    }
 }
 
 
