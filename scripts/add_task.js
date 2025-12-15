@@ -310,4 +310,11 @@ function removeIndicatorOnInput(field) {
 }
 
 
+function assignTaskToUserById(userId, taskId) {
+    let allTasksOfUser = [];
+    allTasksOfUser += taskId;
+    updateUserTasksInDB(userId, allTasksOfUser);
+}
+
+
 document.addEventListener("DOMContentLoaded", addTaskInit);
