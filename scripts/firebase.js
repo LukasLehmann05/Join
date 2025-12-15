@@ -81,7 +81,7 @@ async function fetchAllData() {
 async function postNewContactToDatabase(newUser) {
     await fetch(BASE_URL + `/contacts.json`, {
         method: 'POST',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newUser),
@@ -95,7 +95,7 @@ async function postNewContactToDatabase(newUser) {
 async function deleteThisContactFromDatabaseById(contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'DELETE',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
     })
@@ -108,7 +108,7 @@ async function deleteThisContactFromDatabaseById(contactID) {
 async function editContactDataInDatabase(editedUser, contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'PUT',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(editedUser),
