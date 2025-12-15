@@ -68,6 +68,12 @@ async function deleteTask(taskId) {
     }
 }
 
+async function getTaskById(taskId) {
+    let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
+    let taskData = await taskFetch.json();
+    return taskData;
+}
+
 async function fetchAllData() {
     let joinFetch = await fetch(BASE_URL + ".json")
     let joinData = await joinFetch.json()
@@ -124,6 +130,13 @@ async function getLastContactAddedFromDatabase() {
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
 };
+
+
+async function getContactById(contactID) {
+    let contactFetch = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
+    let contactData = await contactFetch.json();
+    return contactData;
+}
 
 
 async function getAllTaskIdByUserId(userId) {
