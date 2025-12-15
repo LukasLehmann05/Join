@@ -29,6 +29,8 @@ let allSubtasksArr = []
 let allAssigneesArr = []
 
 let subtask_amount = 0
+let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
+
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
