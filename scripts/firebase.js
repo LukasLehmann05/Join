@@ -135,3 +135,14 @@ async function getAllTaskIdByUserId(userId) {
     }
     return taskIdsByUser;
 }
+
+
+async function updateUserTasksInDB(userId, allTasksOfUser) {
+    await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
+        method: 'PUT',
+        body: JSON.stringify(allTasksOfUser),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}

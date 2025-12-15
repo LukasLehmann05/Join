@@ -315,6 +315,13 @@ function removeIndicatorOnInput(field) {
     }
 }
 
+
+function assignTaskToUserById(userId, taskId) {
+    let allTasksOfUser = [];
+    allTasksOfUser += taskId;
+    updateUserTasksInDB(userId, allTasksOfUser);
+}
+
 function showSubtaskEdit(subtask_id) {
     let subtask_to_edit = document.getElementById(subtask_id);
     let original_subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
