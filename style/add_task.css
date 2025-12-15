@@ -419,11 +419,13 @@ textarea.task-input {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
 .subtask-edit-section img {
-    height: 16px;
+    height: 18px;
+    aspect-ratio: 1;
+    object-fit: contain;
     cursor: pointer;
 }
 
@@ -446,7 +448,7 @@ textarea.task-input {
 
 .subtask-edit-buttons {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
     align-items: center;
     margin-right: 8px;
