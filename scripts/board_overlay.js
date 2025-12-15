@@ -19,7 +19,7 @@ function sendUpdatedTaskToDB(taskId) {
 
 
 function getTaskToUpdate(taskId) {
-    let taskToUpdate = getTaskByTaskId(taskId);
+    let taskToUpdate = getTaskById(taskId);
     if (newTitle !== "") taskToUpdate.title = newTitle;
     if (newCategory !== "") taskToUpdate.category = newCategory;
     if (newDescription !== "") taskToUpdate.description = newDescription;
@@ -44,7 +44,7 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
 
 function openTaskInOverlay(taskId) {
     clearElementsOfNewTask();
-    let task = getTaskByTaskId(taskId);
+    let task = getTaskById(taskId);
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
@@ -76,7 +76,7 @@ function renderOverlayContent(task, taskId) {
 
 function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
-    let task = getTaskByTaskId(taskId);
+    let task = getTaskById(taskId);
     getAssigneesOfTask(task);
     
     for (let userId of allAssigneesArr) {
@@ -114,7 +114,7 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
 function renderSubtasksListItems(taskId) {
     let containerId = taskId + '_subtasks_list';
     let container = document.getElementById(containerId);
-    let task = getTaskByTaskId(taskId);
+    let task = getTaskById(taskId);
     let subtaskCounter = 0;
     for (let subtask of task.subtasks) {
         subtaskCounter += 1;
@@ -183,7 +183,7 @@ function swapImage(button, isHover) {
 
 
 function toggleSubtaskDone(taskId, subtaskCounter) {
-    let task = getTaskByTaskId(taskId);
+    let task = getTaskById(taskId);
     let subtaskIndex = subtaskCounter - 1; 
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
@@ -248,7 +248,7 @@ function checkTaskToAddOrEdit(taskId) {
     if (taskId.startsWith('new_task_id_')) {
         return createEmptyTask();
     } else {
-        return getTaskByTaskId(taskId);
+        return getTaskById(taskId);
     }
 }
 
@@ -269,7 +269,7 @@ function createEmptyTask() {
 
 function renderSubtaskEditListItems(taskId) {
     subtask_list = document.getElementById('subtask_render');
-    let task = getTaskByTaskId(taskId);
+    let task = getTaskById(taskId);
     for (let subtask of task.subtasks) {
         let subtaskTitleHtml = returnSubtaskTemplate(subtask.title);
         subtask_list.innerHTML += subtaskTitleHtml;

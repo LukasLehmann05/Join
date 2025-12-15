@@ -101,17 +101,15 @@ function formatSubtaskProgress(subtasks) {
 }
 
 
-function renderSubtaskProgress(taskId) {
+function renderSubtaskProgress(taskId, task) {
   let elementId = taskId + '_subtasks_done';
   const element = document.getElementById(elementId);
-  let task = getTaskByTaskId(taskId);
   element.innerHTML = formatSubtaskProgress(task.subtasks);
-  renderSubtaskStatusBar(taskId);
+  renderSubtaskStatusBar(taskId, task);
 }
 
 
-function renderSubtaskStatusBar(taskId) {
-    let task = getTaskByTaskId(taskId);
+function renderSubtaskStatusBar(taskId, task) {
     let relationOfDoneSubtasks = formatSubtaskProgress(task.subtasks).split('/');
     let percentage = 0;
     if (relationOfDoneSubtasks[1] > 0) {
@@ -122,13 +120,23 @@ function renderSubtaskStatusBar(taskId) {
 }
 
 
-function renderTaskCard(taskId) {
-    let task = getTaskByTaskId(taskId);
-    console.log(task);
-     
+async function renderTaskCard(taskId, task) {
     let containerId = getColumnIdByTaskState(task.state);    
     const container = document.getElementById(containerId);
     container.innerHTML = taskCardTemplate(task, taskId);
+}
+
+
+async function renderAssignedUserIcons(taskId, task) {
+    let containerIdSuffix = 'assigned_users';
+    
+    for (let contactId of task.assigned_to) {        
+        const user = await getContactById(contactId);
+        const initials = getInitialsFromUser(user);
+        const iconHTML = assignedUserIconTemplate(initials);
+        const container = document.getElementById(taskId + '_' + containerIdSuffix);
+        container.innerHTML += iconHTML;
+    }
 }
 
 
@@ -139,20 +147,6 @@ function getInitialsFromUser(user) {
         .join('')
         .toUpperCase();
     return initials;
-}
-
-
-function renderAssignedUserIcons(taskId) {
-    let task = getTaskByTaskId(taskId);
-    let containerIdSuffix = 'assigned_users';
-    
-    for (let userId of task.assigned_to) {
-        const user = testUser[userId];
-        const initials = getInitialsFromUser(user);
-        const iconHTML = assignedUserIconTemplate(initials);
-        const container = document.getElementById(taskId + '_' + containerIdSuffix);
-        container.innerHTML += iconHTML;
-    }
 }
 
 
@@ -169,16 +163,10 @@ function getIconForPriority(priority) {
 }
 
 
-function renderPriorityIndicator(taskId) {
-    let task = getTaskByTaskId(taskId);
+function renderPriorityIndicator(taskId, task) {
     let iconPath = getIconForPriority(task.priority);
     let element = document.getElementById(taskId + '_priority');
     element.innerHTML = priorityIndicatorTemplate(iconPath);
-}
-
-
-function getTaskByTaskId(taskId) {
-    return testTasks[taskId];
 }
 
 
@@ -317,14 +305,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function initializeBoard(userId) {
-    let allTasksOfUserObj = await getAllTaskIdByUserId(userId);
-    console.log("All Task of user: " + JSON.stringify(allTasksOfUserObj));
+    let allTasksOfUserArr = await getAllTaskIdByUserId(userId);
     
-    for (let taskId in allTasksOfUserObj) {
-        renderTaskCard(taskId);
-        renderSubtaskProgress(taskId);
-        renderAssignedUserIcons(taskId);
-        renderPriorityIndicator(taskId);
+    for (let taskIndex in allTasksOfUserArr) {
+        let taskId = Object.keys(allTasksOfUserArr[taskIndex])[0];        
+        let task = await getTaskById(taskId);
+        renderTaskCard(taskId, task);
+        renderSubtaskProgress(taskId, task);
+        renderAssignedUserIcons(taskId, task);
+        renderPriorityIndicator(taskId, task);
     }
 }
 
