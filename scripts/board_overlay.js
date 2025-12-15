@@ -301,7 +301,7 @@ async function openAddTaskOverlay() {
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', `createTask('${taskId}')`);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', `createTask()`);
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();
