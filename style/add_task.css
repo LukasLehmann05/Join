@@ -452,6 +452,13 @@ textarea.task-input {
     margin-right: 8px;
 }
 
+.subtask-edit-buttons img {
+    height: 18px;
+    cursor: pointer;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
 .subtask-edit-seperator {
     width: 1px;
     background-color: #D1D1D1;
