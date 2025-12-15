@@ -181,11 +181,11 @@ function swapImage(button, isHover) {
 
 
 function toggleSubtaskDone(taskId, subtaskCounter) {
-    let task = getTaskById(taskId);
-    let subtaskIndex = subtaskCounter - 1; 
+    let task = allTasksOfSingleUserObj[taskId];
+    let subtaskIndex = subtaskCounter - 1;
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
-    renderSubtaskProgress(task.subtasks);
+    renderSubtaskProgress(taskId, task.subtasks);
     newSubtasksArr = task.subtasks;
 }
 
@@ -223,7 +223,7 @@ function renderOverlayUpsertTaskDetailsContainer() {
 
 
 function upsertTaskTemplatesWrapperContainer1(taskId){
-    let task = allTasksOfSingleUserObj[taskId];
+    let task = checkTaskToAddOrEdit(taskId);
     let escapeTaskDescription = escapeTextareaContent(task.description);
     let taskDetailsContainer1 = document.getElementById('task_details_container_1');
     taskDetailsContainer1.innerHTML = `
@@ -247,7 +247,7 @@ function checkTaskToAddOrEdit(taskId) {
     if (taskId.startsWith('new_task_id_')) {
         return createEmptyTask();
     } else {
-        return getTaskById(taskId);
+        return allTasksOfSingleUserObj[taskId];
     }
 }
 
