@@ -163,9 +163,9 @@ function getIconForPriority(priority) {
 }
 
 
-function renderPriorityIndicator(taskId, task) {
+function renderPriorityIndicator(taskId, task, prioritySuffix) {
     let iconPath = getIconForPriority(task.priority);
-    let element = document.getElementById(taskId + '_priority');
+    let element = document.getElementById(taskId + '_' + prioritySuffix);
     element.innerHTML = priorityIndicatorTemplate(iconPath);
     colorPriorityIcon(task.priority, element);
 }
@@ -328,9 +328,9 @@ async function initializeBoard(userId) {
         renderTaskCard(taskId, task);
         renderSubtaskProgress(taskId, task);
         renderAssignedUserIcons(taskId, task);
-        renderPriorityIndicator(taskId, task);
+        renderPriorityIndicator(taskId, task, 'priority');
     }
-    
+
     renderNoTaskInfoOnDOMLoad();
 }
 
