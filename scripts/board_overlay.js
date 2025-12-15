@@ -69,9 +69,9 @@ function clearElementsOfNewTask() {
 function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
-    renderPriorityIndicator(taskId, task, 'priority_overlay');
+    renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
     renderAssignedUserInfos(task, false, 'assigned_users_overlay');
-    renderSubtasksListItems(taskId);
+    renderSubtasksListItems(taskId, task.subtasks);
 }
 
 
@@ -111,12 +111,11 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
 }
 
 
-function renderSubtasksListItems(taskId) {
+function renderSubtasksListItems(taskId, subtasksArr) {
     let containerId = taskId + '_subtasks_list';
     let container = document.getElementById(containerId);
-    let task = getTaskById(taskId);
     let subtaskCounter = 0;
-    for (let subtask of task.subtasks) {
+    for (let subtask of subtasksArr) {
         subtaskCounter += 1;
         let subtaskHtml = subtasksListItemTemplate(taskId, subtask.title, subtaskCounter);
         container.innerHTML += subtaskHtml;
@@ -187,7 +186,7 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     let subtaskIndex = subtaskCounter - 1; 
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
-    renderSubtaskProgress(taskId);
+    renderSubtaskProgress(task.subtasks);
     newSubtasksArr = task.subtasks;
 }
 
