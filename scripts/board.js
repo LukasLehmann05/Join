@@ -167,6 +167,22 @@ function renderPriorityIndicator(taskId, task) {
     let iconPath = getIconForPriority(task.priority);
     let element = document.getElementById(taskId + '_priority');
     element.innerHTML = priorityIndicatorTemplate(iconPath);
+    colorPriorityIcon(task.priority, element);
+}
+
+
+function colorPriorityIcon(priority, element) {
+    switch(priority) {
+        case PRIORITY_ARR[2]:
+            element.classList.add('bg-red');
+            break;
+        case PRIORITY_ARR[1]:
+            element.classList.add('yellow-filter');
+            break;
+        case PRIORITY_ARR[0]:
+            element.classList.add('bg-green');
+            break;
+    }
 }
 
 
