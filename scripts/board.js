@@ -2,6 +2,7 @@
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
+let allTasksOfSingleUserObj = {};
 
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
@@ -320,11 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function initializeBoard(userId) {
-    let allTasksOfUserArr = await getAllTaskIdByUserId(userId);
+    let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
     
-    for (let taskIndex in allTasksOfUserArr) {
-        let taskId = Object.keys(allTasksOfUserArr[taskIndex])[0];        
+    for (let taskIndex in allTasksByIdOfSingleUserArr) {
+        let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
         let task = await getTaskById(taskId);
+        allTasksOfSingleUserObj[taskId] = task;
         renderTaskCard(taskId, task);
         renderSubtaskProgress(taskId, task.subtasks);
         renderAssignedUserIcons(taskId, task.assigned_to);
