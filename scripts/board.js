@@ -2,7 +2,7 @@
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
-const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
+
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
 
@@ -123,7 +123,9 @@ function renderSubtaskStatusBar(taskId) {
 
 
 function renderTaskCard(taskId) {
-    let task = getTaskByTaskId(taskId);    
+    let task = getTaskByTaskId(taskId);
+    console.log(task);
+     
     let containerId = getColumnIdByTaskState(task.state);    
     const container = document.getElementById(containerId);
     container.innerHTML = taskCardTemplate(task, taskId);
@@ -167,10 +169,10 @@ function getIconForPriority(priority) {
 }
 
 
-function renderPriorityIndicator(taskId, prioritySuffix) {
+function renderPriorityIndicator(taskId) {
     let task = getTaskByTaskId(taskId);
     let iconPath = getIconForPriority(task.priority);
-    let element = document.getElementById(taskId + '_' + prioritySuffix);
+    let element = document.getElementById(taskId + '_priority');
     element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
 
@@ -305,9 +307,29 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
     renderNoTaskInfoOnDOMLoad();
+    initializeBoard(testUserId);
 });
 
-renderTaskCard('task_id_x');
-renderSubtaskProgress('task_id_x');
-renderAssignedUserIcons('task_id_x');
-renderPriorityIndicator('task_id_x', 'priority');
+// renderTaskCard('task_id_x');
+// renderSubtaskProgress('task_id_x');
+// renderAssignedUserIcons('task_id_x');
+// renderPriorityIndicator('task_id_x');
+
+
+async function initializeBoard(userId) {
+    let allTasksOfUserObj = await getAllTaskIdByUserId(userId);
+    console.log("All Task of user: " + JSON.stringify(allTasksOfUserObj));
+    
+    for (let taskId in allTasksOfUserObj) {
+        renderTaskCard(taskId);
+        renderSubtaskProgress(taskId);
+        renderAssignedUserIcons(taskId);
+        renderPriorityIndicator(taskId);
+    }
+}
+
+
+function createTasksByUserObjExample() {
+    let tasks_by_user = {"-OfhU5mv5Jc_R3Ybzq8T": [{"-OgVOFImFYhl08hbX_G0": true}, {"-OgVP8F6Ee7L2UHtEKTx": true}]};
+    updateUserTasksInDB("-OfhU5mv5Jc_R3Ybzq8T", tasks_by_user["-OfhU5mv5Jc_R3Ybzq8T"]);
+}
