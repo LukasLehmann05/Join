@@ -28,6 +28,7 @@ let req_category = false
 let allSubtasksArr = []
 let allAssigneesArr = []
 
+let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
 
 
 function addTaskInit() {

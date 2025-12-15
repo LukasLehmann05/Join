@@ -124,3 +124,14 @@ async function getLastContactAddedFromDatabase() {
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
 };
+
+
+async function getAllTaskIdByUserId(userId) {
+    let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
+    let joinDataAllTasksByUser = await joinFetchAllTasks.json();
+    let taskIdsByUser = [];
+    for (let taskId in joinDataAllTasksByUser) {
+        taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
+    }
+    return taskIdsByUser;
+}
