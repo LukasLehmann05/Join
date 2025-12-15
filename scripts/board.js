@@ -123,7 +123,7 @@ function renderSubtaskStatusBar(taskId, task) {
 async function renderTaskCard(taskId, task) {
     let containerId = getColumnIdByTaskState(task.state);    
     const container = document.getElementById(containerId);
-    container.innerHTML = taskCardTemplate(task, taskId);
+    container.innerHTML += taskCardTemplate(task, taskId);
 }
 
 
@@ -286,7 +286,7 @@ function renderNoTaskInfoOnDOMLoad(){
 
 function checkIfNoTasksInColumn(columnId) {
     const container = document.getElementById(columnId);
-    if (container.innerHTML.trim() === '') {
+    if (container.innerHTML == '') {
         renderNoTaskInfo(columnId);
     }
     container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
@@ -310,7 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[1]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
-    renderNoTaskInfoOnDOMLoad();
     initializeBoard(testUserId);
 });
 
@@ -331,6 +330,8 @@ async function initializeBoard(userId) {
         renderAssignedUserIcons(taskId, task);
         renderPriorityIndicator(taskId, task);
     }
+    
+    renderNoTaskInfoOnDOMLoad();
 }
 
 
