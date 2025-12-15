@@ -53,7 +53,7 @@ let testTasks = {
         "description": "Post für die Vorstellung des neuen Features planen.",
         "due_date": "01/12/2025",
         "priority": "medium",
-        "state": "to do",
+        "state": "todo",
         "assigned_to": [
             "user_id_2"
         ],
