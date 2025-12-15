@@ -42,9 +42,10 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
 }
 
 
-function openTaskInOverlay(taskId) {
+async function openTaskInOverlay(taskId) {
     clearElementsOfNewTask();
-    let task = getTaskById(taskId);
+    let task = await getTaskById(taskId);
+
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
@@ -68,19 +69,18 @@ function clearElementsOfNewTask() {
 function renderOverlayContent(task, taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
-    renderPriorityIndicator(taskId, 'priority_overlay');
-    renderAssignedUserInfos(taskId, false, 'assigned_users_overlay');
+    renderPriorityIndicator(taskId, task, 'priority_overlay');
+    renderAssignedUserInfos(task, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId);
 }
 
 
-function renderAssignedUserInfos(taskId, onlyId, containerIdSuffix) {
+async function renderAssignedUserInfos(task, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
-    let task = getTaskById(taskId);
     getAssigneesOfTask(task);
     
-    for (let userId of allAssigneesArr) {
-        const user = testUser[userId];
+    for (let contactId of allAssigneesArr) {
+        const user = await getContactById(contactId);
         container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
     }
 }
@@ -192,12 +192,13 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 }
 
 
-function openEditTaskOverlay(taskId) {
+function openEditTaskOverlay(taskId) { // Anpassungen hinsichtlich task anstatt taskId
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements(this, '${taskId}')`);
+    let task = getTaskById(taskId);
     upsertTaskTemplateHandler(taskId);
-    renderAssignedUserInfos(taskId, true, 'rendered_contact_images');
+    renderAssignedUserInfos(task, true, 'rendered_contact_images');
     renderSubtaskEditListItems(taskId);
     addTaskInit();
 }
