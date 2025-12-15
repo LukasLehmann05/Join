@@ -42,15 +42,13 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
 }
 
 
-async function openTaskInOverlay(taskId) {
+function openTaskInOverlay(taskId) {
     clearElementsOfNewTask();
-    let task = await getTaskById(taskId);
-
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
-    renderOverlayContent(task, taskId);
+    renderOverlayContent(taskId);
 }
 
 
@@ -66,18 +64,19 @@ function clearElementsOfNewTask() {
 }
 
 
-function renderOverlayContent(task, taskId) {
+function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
+    let task = allTasksOfSingleUserObj[taskId];
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
-    renderAssignedUserInfos(task, false, 'assigned_users_overlay');
+    renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId, task.subtasks);
 }
 
 
-async function renderAssignedUserInfos(task, onlyId, containerIdSuffix) {
+async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
-    getAssigneesOfTask(task);
+    getAssigneesOfTask(taskAssignees);
     
     for (let contactId of allAssigneesArr) {
         const user = await getContactById(contactId);
@@ -86,10 +85,10 @@ async function renderAssignedUserInfos(task, onlyId, containerIdSuffix) {
 }
 
 
-function getAssigneesOfTask(task) {
+function getAssigneesOfTask(taskAssignees) {
     allAssigneesArr = [];
-    for (let userId of task.assigned_to) {
-        allAssigneesArr.push(userId);
+    for (let contactId of taskAssignees) {
+        allAssigneesArr.push(contactId);
     }
 }
 
@@ -191,14 +190,14 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 }
 
 
-function openEditTaskOverlay(taskId) { // Anpassungen hinsichtlich task anstatt taskId
+function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements(this, '${taskId}')`);
-    let task = getTaskById(taskId);
+    let task = allTasksOfSingleUserObj[taskId];
     upsertTaskTemplateHandler(taskId);
-    renderAssignedUserInfos(task, true, 'rendered_contact_images');
-    renderSubtaskEditListItems(taskId);
+    renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
+    renderSubtaskEditListItems(task.subtasks);
     addTaskInit();
 }
 
@@ -224,7 +223,7 @@ function renderOverlayUpsertTaskDetailsContainer() {
 
 
 function upsertTaskTemplatesWrapperContainer1(taskId){
-    let task = checkTaskToAddOrEdit(taskId);
+    let task = allTasksOfSingleUserObj[taskId];
     let escapeTaskDescription = escapeTextareaContent(task.description);
     let taskDetailsContainer1 = document.getElementById('task_details_container_1');
     taskDetailsContainer1.innerHTML = `
@@ -267,10 +266,9 @@ function createEmptyTask() {
 }
 
 
-function renderSubtaskEditListItems(taskId) {
+function renderSubtaskEditListItems(subtasksArr) {
     subtask_list = document.getElementById('subtask_render');
-    let task = getTaskById(taskId);
-    for (let subtask of task.subtasks) {
+    for (let subtask of subtasksArr) {
         let subtaskTitleHtml = returnSubtaskTemplate(subtask.title);
         subtask_list.innerHTML += subtaskTitleHtml;
         let subtaskObj = { title: subtask.title, done: subtask.done };
