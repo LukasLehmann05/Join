@@ -74,12 +74,6 @@ async function deleteTask(taskId) {
     }
 }
 
-async function fetchAllData() {
-    let joinFetch = await fetch(BASE_URL + ".json")
-    let joinData = await joinFetch.json()
-    return joinData
-}
-
 
 /**
  *department contacts: post new Contact that got add to database
