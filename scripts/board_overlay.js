@@ -18,8 +18,8 @@ function sendUpdatedTaskToDB(taskId) {
 }
 
 
-function getTaskToUpdate(taskId) {
-    let taskToUpdate = getTaskById(taskId);
+async function getTaskToUpdate(taskId) {
+    let taskToUpdate = await getTaskById(taskId);
     if (newTitle !== "") taskToUpdate.title = newTitle;
     if (newCategory !== "") taskToUpdate.category = newCategory;
     if (newDescription !== "") taskToUpdate.description = newDescription;
@@ -80,7 +80,9 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
     
     for (let contactId of allAssigneesArr) {
         const user = await getContactById(contactId);
-        container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
+        if (user) {
+            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
+        }
     }
 }
 
