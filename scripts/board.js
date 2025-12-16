@@ -157,7 +157,7 @@ function getIconForPriority(priority) {
         case PRIORITY_ARR[2]:
             return iconfolderpath + "urgentTask.svg";
         case PRIORITY_ARR[1]:
-            return iconfolderpath + "medTask.svg";
+            return iconfolderpath + "medTaskorange.svg";
         case PRIORITY_ARR[0]:
             return iconfolderpath + "lowTask.svg";
     }
@@ -168,22 +168,6 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
     let iconPath = getIconForPriority(taskPriority);
     let element = document.getElementById(taskId + '_' + prioritySuffix);
     element.innerHTML = priorityIndicatorTemplate(iconPath);
-    colorPriorityIcon(taskPriority, element);
-}
-
-
-function colorPriorityIcon(priority, element) {
-    switch(priority) {
-        case PRIORITY_ARR[2]:
-            element.classList.add('bg-red');
-            break;
-        case PRIORITY_ARR[1]:
-            element.classList.add('yellow-filter');
-            break;
-        case PRIORITY_ARR[0]:
-            element.classList.add('bg-green');
-            break;
-    }
 }
 
 
