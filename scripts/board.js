@@ -58,18 +58,18 @@ function renderNoTaskInfo(columnId) {
 }
 
 
+function renderSubtaskProgress(taskId, subtasksArr) {
+    let elementId = taskId + '_subtasks_done';
+    const element = document.getElementById(elementId);
+    element.innerHTML = formatSubtaskProgress(subtasksArr);
+    renderSubtaskStatusBar(taskId, subtasksArr);
+}
+
+
 function formatSubtaskProgress(subtasks) {
     const completed = subtasks.filter(subtask => subtask.done).length;
     const total = subtasks.length;
     return `${completed}/${total}`;
-}
-
-
-function renderSubtaskProgress(taskId, subtasksArr) {
-  let elementId = taskId + '_subtasks_done';
-  const element = document.getElementById(elementId);
-  element.innerHTML = formatSubtaskProgress(subtasksArr);
-  renderSubtaskStatusBar(taskId, subtasksArr);
 }
 
 
@@ -227,6 +227,15 @@ function updateStateOfDroppedTask(taskId, newColumnId) {
 }
 
 
+function displayNewTaskOnBoard(newTaskId, newTask) {
+    allTasksOfSingleUserObj[newTaskId] = newTask;
+    renderTaskCard(newTaskId, newTask);
+    renderSubtaskProgress(newTaskId, newTask.subtasks || []);
+    renderAssignedUserIcons(newTaskId, newTask.assigned_to || []);
+    renderPriorityIndicator(newTaskId, newTask.priority, 'priority');
+}
+
+
 function removeDropAcceptanceFieldByColumnId(columnId) {
     const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
     columnOfDrop.forEach(drop => drop.remove());
@@ -277,10 +286,10 @@ async function initializeBoard(userId) {
         if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
         let task = await getTaskById(taskId);
-        allTasksOfSingleUserObj[taskId] = task;
+        allTasksOfSingleUserObj[taskId] = task; // hier check function für leere oder undefinied elemente
         renderTaskCard(taskId, task);
-        renderSubtaskProgress(taskId, task.subtasks);
-        renderAssignedUserIcons(taskId, task.assigned_to);
+        renderSubtaskProgress(taskId, task.subtasks || []);
+        renderAssignedUserIcons(taskId, task.assigned_to || []);
         renderPriorityIndicator(taskId, task.priority, 'priority');
     }
 

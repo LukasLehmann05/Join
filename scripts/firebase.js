@@ -39,6 +39,7 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
         let responseData = await response.json();
         let newTaskId = responseData.name; // Firebase returns the new task ID in the 'name' field
         await assignNewTaskToUserById(newTaskId, userId); // Assign task to users
+        displayNewTaskOnBoard(newTaskId, newTask);
     }
 }
 
