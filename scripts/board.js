@@ -96,6 +96,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
     
     for (let contactId of taskAssignees) {        
         const user = await getContactById(contactId);
+        if (!user) continue;
         const initials = getInitialsFromUser(user);
         const iconHTML = assignedUserIconTemplate(initials);
         const container = document.getElementById(taskId + '_' + containerIdSuffix);
@@ -252,7 +253,7 @@ function renderNoTaskInfoOnDOMLoad(){
 
 function checkIfNoTasksInColumn(columnId) {
     const container = document.getElementById(columnId);
-    if (container.innerHTML == '') {
+    if (container.innerHTML.trim() === '') {
         renderNoTaskInfo(columnId);
     }
     container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
@@ -287,7 +288,8 @@ async function initializeBoard(userId) {
         if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
         let task = await getTaskById(taskId);
-        allTasksOfSingleUserObj[taskId] = task; // hier check function für leere oder undefinied elemente
+        if (!task) continue;
+        allTasksOfSingleUserObj[taskId] = task;
         renderTaskCard(taskId, task);
         renderSubtaskProgress(taskId, task.subtasks || []);
         renderAssignedUserIcons(taskId, task.assigned_to || []);
