@@ -23,6 +23,22 @@ function getColumnIdByTaskState(state) {
 }
 
 
+function getTaskStateByColumnId(columnId) {
+    switch(columnId) {
+        case BOARD_COLUMN_ID_ARR[0]:
+            return TASK_STATE_ARR[0];
+        case BOARD_COLUMN_ID_ARR[1]:
+            return TASK_STATE_ARR[1];
+        case BOARD_COLUMN_ID_ARR[2]:
+            return TASK_STATE_ARR[2];
+        case BOARD_COLUMN_ID_ARR[3]:
+            return TASK_STATE_ARR[3];
+        default:
+            return TASK_STATE_ARR[0];
+    }
+}
+
+
 function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
     switch(columnId) {
@@ -198,8 +214,16 @@ function dropHandler(event) {
     event.currentTarget.appendChild(taskElement);
     taskElement.classList.remove('drag-tilt');
     removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
+    updateStateOfDroppedTask(taskId, event.currentTarget.id);
     startDropAcceptanceColumnId = null;
     dragOverCounter = 0;
+}
+
+
+function updateStateOfDroppedTask(taskId, newColumnId) {
+    const newState = getTaskStateByColumnId(newColumnId);
+    allTasksOfSingleUserObj[taskId].state = newState;
+    updateTask(taskId, allTasksOfSingleUserObj[taskId]);
 }
 
 
