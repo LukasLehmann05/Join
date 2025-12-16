@@ -320,7 +320,7 @@ async function initializeBoard(userId) {
     renderNoTaskInfoOnDOMLoad();
 }
 
-
+// Example function to create tasks_by_user object for testing
 function createTasksByUserObjExample() {
     let tasks_by_user = {"-OfhU5mv5Jc_R3Ybzq8T": [{"-OgVOFImFYhl08hbX_G0": true}, {"-OgVP8F6Ee7L2UHtEKTx": true}]};
     updateUserTasksInDB("-OfhU5mv5Jc_R3Ybzq8T", tasks_by_user["-OfhU5mv5Jc_R3Ybzq8T"]);
