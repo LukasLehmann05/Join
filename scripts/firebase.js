@@ -149,9 +149,20 @@ async function getLastContactAddedFromDatabase() {
 
 
 async function getContactById(contactID) {
+    try {
     let contactFetch = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
+    if (!contactFetch.ok) {
+        throw new Error('Network response was not ok');
+    }
     let contactData = await contactFetch.json();
+    if (contactData === null) {
+        return null;
+    }
     return contactData;
+    } catch (error) {
+        console.error('Error fetching contact by ID:', error)
+        return null;
+    }
 }
 
 
@@ -182,20 +193,11 @@ async function assignNewTaskToUserById(taskId, userId) {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        });
+        if (!response.ok) {
+            throw new Error('Error assigning task to user: ' + response.status);
+        }
     } catch (error) {
         console.error('Error assigning task to user:', error)
     }
-}
-
-
-// Example function to create tasks_by_user object for testing
-async function updateUserTasksInDB(userId, userTasksArr) {
-    await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
-        method: 'PUT',
-        body: JSON.stringify(userTasksArr),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
 }
