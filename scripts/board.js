@@ -23,59 +23,6 @@ function getColumnIdByTaskState(state) {
 }
 
 
-let testTasks = {
-  "task_id_x": 
-    {
-        "category": "Development",
-        "title": "Implementiere Login-Funktion",
-        "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-        "due_date": "2025-12-10",
-        "priority": "urgent",
-        "state": "in progress",
-        "assigned_to": [
-            "user_id_1",
-            "user_id_2"
-        ],
-        "subtasks": [
-            {
-            "title": "UI-Mockup erstellen",
-            "done": true
-            },
-            {
-            "title": "Validierung implementieren",
-            "done": false
-            }
-        ]
-    },
-    "task_id_4567":
-    {
-        "category": "Marketing",
-        "title": "Social Media Post erstellen",
-        "description": "Post für die Vorstellung des neuen Features planen.",
-        "due_date": "01/12/2025",
-        "priority": "medium",
-        "state": "todo",
-        "assigned_to": [
-            "user_id_2"
-        ],
-        "subtasks": []
-    }
-  }
-
-let testUser = {
-    "user_id_1": {
-      "email": "max.mustermann@example.com",
-      "name": "Max Mustermann",
-      "password": "hashed_password_123"
-    },
-    "user_id_2": {
-      "email": "erika.musterfrau@example.com",
-      "name": "Erika Musterfrau",
-      "password": "hashed_password_456"
-    }
-	
-  }
-
 function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
     switch(columnId) {
@@ -297,11 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
     initializeBoard(testUserId);
 });
-
-// renderTaskCard('task_id_x');
-// renderSubtaskProgress('task_id_x');
-// renderAssignedUserIcons('task_id_x');
-// renderPriorityIndicator('task_id_x');
 
 
 async function initializeBoard(userId) {
