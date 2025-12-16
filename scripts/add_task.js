@@ -66,8 +66,8 @@ function loadDataFromAPI() {
 function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
-        sendTaskToDB()
-        clearAllInputs()
+        sendTaskToDB();
+        clearAllInputs();
     } else {
         missingInputs()
 
