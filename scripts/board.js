@@ -233,6 +233,7 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
     renderSubtaskProgress(newTaskId, newTask.subtasks || []);
     renderAssignedUserIcons(newTaskId, newTask.assigned_to || []);
     renderPriorityIndicator(newTaskId, newTask.priority, 'priority');
+    removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
 }
 
 
