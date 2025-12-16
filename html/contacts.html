@@ -20,7 +20,7 @@
     <script src="/scripts/firebase.js"></script>
     <script src="/scripts/contact_data.js"></script>
     <script src="/scripts/contact_template.js"></script>
-    
+
 
 </head>
 
@@ -113,11 +113,13 @@
                             <label class="subtask-section mail">
                                 <input id="emailAdd" type="email" placeholder="Email">
                             </label>
-                            <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email address.</p>
+                            <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email
+                                address.</p>
                             <label class="subtask-section phone">
                                 <input id="phoneAdd" type="tel" placeholder="Phone">
                             </label>
-                            <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone number.</p>
+                            <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone
+                                number.</p>
                             <section class="button-section-contact">
                                 <div class="clear-button">
                                     <button onclick="closeDialog('addContact' , 'addContent') , emptyInput()"
@@ -146,7 +148,7 @@
                     </section>
                     <section class="main-right">
                         <div id="editedAvatar" class="two-letter-name position">
-                            
+
                         </div>
                         <div class="add-contact-info">
                             <button class="close-btn" onclick="closeDialog('editContact' , 'editContent')">
@@ -160,20 +162,26 @@
                             <label class="subtask-section mail">
                                 <input id="emailEdit" type="email" placeholder="Email">
                             </label>
-                            <p id="required_edit_email" class="required-info margin-add-dialog">Please enter a valid email address.</p>
+                            <p id="required_edit_email" class="required-info margin-add-dialog">Please enter a valid
+                                email address.</p>
                             <label class="subtask-section phone">
                                 <input id="phoneEdit" type="tel" placeholder="Phone">
                             </label>
-                            <p id="required_edit_phone" class="required-info margin-add-dialog">Please enter a valid phone number.</p>
+                            <p id="required_edit_phone" class="required-info margin-add-dialog">Please enter a valid
+                                phone number.</p>
                             <section class="button-section-contact">
-                                <button onclick="deleteThisContactFromDialog()" class="action-buttons">
-                                    <p>Delete</p>
-                                    <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                                </button>
-                                <button onclick="editContactInDatabase()" class="action-buttons create-button">
-                                    <p>Save</p>
-                                    <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
-                                </button>
+                                <div class="clear-button">
+                                    <button onclick="deleteThisContactFromDialog()" class="action-buttons">
+                                        <p>Delete</p>
+                                        <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
+                                    </button>
+                                </div>
+                                <div class="create-task"><button onclick="editContactInDatabase()"
+                                        class="action-buttons create-button">
+                                        <p>Save</p>
+                                        <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
+                                    </button>
+                                </div>
                             </section>
                         </div>
                     </section>
