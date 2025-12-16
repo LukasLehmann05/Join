@@ -171,7 +171,8 @@ async function getAllTaskIdByUserId(userId) {
 async function assignNewTaskToUserById(taskId, userId) {
     try {
         let userTasksArr = await getAllTaskIdByUserId(userId);
-        userTasksArr.push(taskId);
+        let taskObj = {[taskId]: true};
+        userTasksArr.push(taskObj);
         await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
             method: 'PUT',
             body: JSON.stringify(userTasksArr),
