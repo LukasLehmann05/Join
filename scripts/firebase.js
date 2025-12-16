@@ -13,7 +13,7 @@ async function fetchAllDataGlobal() {
 
 
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr, userId) {
     const newTask = {
         "category": task_category,
         "title": task_title,
@@ -35,9 +35,14 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
     if (!response.ok) {
         throw new Error('Error adding task: ' + response.status);
     }
+    else {
+        let responseData = await response.json();
+        let newTaskId = responseData.name; // Firebase returns the new task ID in the 'name' field
+        await assignNewTaskToUserById(newTaskId, userId); // Assign task to users
+    }
 }
 
-//fieldstoupdate == object with key value pairs (title : "new title")
+
 async function updateTask(taskId, taskToUpdate) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
@@ -55,6 +60,7 @@ async function updateTask(taskId, taskToUpdate) {
     }
 }
 
+
 async function deleteTask(taskId) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
@@ -68,11 +74,18 @@ async function deleteTask(taskId) {
     }
 }
 
+
 async function getTaskById(taskId) {
+    try {
     let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
     let taskData = await taskFetch.json();
     return taskData;
+    } catch (error) {
+        console.error('Error fetching task by ID:', error)
+        return null;
+    }
 }
+
 
 async function fetchAllData() {
     let joinFetch = await fetch(BASE_URL + ".json")
@@ -140,16 +153,39 @@ async function getContactById(contactID) {
 
 
 async function getAllTaskIdByUserId(userId) {
-    let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
-    let joinDataAllTasksByUser = await joinFetchAllTasks.json();
-    let taskIdsByUser = [];
-    for (let taskId in joinDataAllTasksByUser) {
-        taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
+    try {
+        let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
+        let joinDataAllTasksByUser = await joinFetchAllTasks.json();
+        let taskIdsByUser = [];
+        for (let taskId in joinDataAllTasksByUser) {
+            taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
+        }
+        return taskIdsByUser;
+    } catch (error) {
+        console.error('Error fetching tasks by user ID:', error)
+        return [];
     }
-    return taskIdsByUser;
 }
 
 
+async function assignNewTaskToUserById(taskId, userId) {
+    try {
+        let userTasksArr = await getAllTaskIdByUserId(userId);
+        userTasksArr.push(taskId);
+        await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(userTasksArr),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    } catch (error) {
+        console.error('Error assigning task to user:', error)
+    }
+}
+
+
+// Example function to create tasks_by_user object for testing
 async function updateUserTasksInDB(userId, userTasksArr) {
     await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
         method: 'PUT',
