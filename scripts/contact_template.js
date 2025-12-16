@@ -24,10 +24,8 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <div class="name-field">
                     <p id="mainName" class="fullname">${currentName}</p>
                     <div class="main-name-btns">
-                        <button id="editUser" data-id="${currentId}" onclick="openDialog('editContact' , 'editContent', this) , displayMainDataInEditDialog()" class="name-btn font-size-16"><img src="../assets/icons/contacts/edit.svg"
-                            alt="edit contact">Edit</button>
-                        <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16"><img src="../assets/icons/contacts/delete.svg"
-                            alt="delete Contact">Delete</button>
+                        <button id="editUser" data-id="${currentId}" onclick="openDialog('editContact' , 'editContent', this) , displayMainDataInEditDialog()" class="name-btn font-size-16">Edit</button>
+                        <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                     </div>
                 </div>
             </div>
