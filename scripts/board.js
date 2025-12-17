@@ -297,21 +297,15 @@ async function initializeBoard(userId) {
 }
 
 
-function refreshTaskOnBoard(taskId, taskToUpdate) {
+async function refreshTaskOnBoard(taskId, taskToUpdate) {
     let taskCardElementId = taskId + '_task_card';
     const columnContainer = document.getElementById(taskCardElementId).parentElement;
     document.getElementById(taskCardElementId).remove();
     if (columnContainer) {
         columnContainer.innerHTML += taskCardTemplate(taskToUpdate, taskId);
         renderSubtaskProgress(taskId, taskToUpdate.subtasks || []);
-        renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
+        await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
     }
     
-}
-
-// Example function to create tasks_by_user object for testing
-function createTasksByUserObjExample() {
-    let tasks_by_user = {"-OfhU5mv5Jc_R3Ybzq8T": [{"-OgVOFImFYhl08hbX_G0": true}, {"-OgVP8F6Ee7L2UHtEKTx": true}]};
-    updateUserTasksInDB("-OfhU5mv5Jc_R3Ybzq8T", tasks_by_user["-OfhU5mv5Jc_R3Ybzq8T"]);
 }

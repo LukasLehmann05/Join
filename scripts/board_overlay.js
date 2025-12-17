@@ -17,7 +17,7 @@ async function sendUpdatedTaskToDB(taskId) {
     if (Object.keys(taskToUpdate).length !== 0) {
         await updateTask(taskId, taskToUpdate);
     }
-    refreshTaskOnBoard(taskId, taskToUpdate);
+    await refreshTaskOnBoard(taskId, taskToUpdate);
 }
 
 
