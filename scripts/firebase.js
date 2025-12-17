@@ -38,8 +38,8 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
     }
     else {
         let responseData = await response.json();
-        let newTaskId = responseData.name; // Firebase returns the new task ID in the 'name' field
-        await assignNewTaskToUserById(newTaskId, userId); // Assign task to users
+        let newTaskId = responseData.name;
+        await assignNewTaskToUserById(newTaskId, userId);
         if (window.location.pathname.endsWith('board.html')) {
             displayNewTaskOnBoard(newTaskId, newTask);
         }
@@ -175,10 +175,12 @@ async function getAllTaskIdByUserId(userId) {
         for (let taskId in joinDataAllTasksByUser) {
             taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
         }
+        if (!joinFetchAllTasks.ok) {
+            throw new Error('Network response was not ok');
+        }
         return taskIdsByUser;
     } catch (error) {
-        console.error('Error fetching tasks by user ID:', error)
-        return [];
+        console.error('Error fetching tasks by user ID:', error);
     }
 }
 
@@ -187,6 +189,9 @@ async function assignNewTaskToUserById(taskId, userId) {
     try {
         let userTasksArr = await getAllTaskIdByUserId(userId);
         let taskObj = {[taskId]: true};
+        if (!userTasksArr) {
+            userTasksArr = [];
+        }
         userTasksArr.push(taskObj);
         let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
             method: 'PUT',
