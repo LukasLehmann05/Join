@@ -7,7 +7,7 @@ function returnSubtaskTemplate(subtask, subtask_id) {
                     </section>
                     <section class="subtask-edit-section">
                         <img src="../assets/icons/board/edit_button.svg" alt="edit button">
-                        <div class="subtask-edit-seperator"></div>
+                        <div class="subtask-edit-separator"></div>
                         <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask(event,'${subtask_id}')">
                     </section>
                 </button>
@@ -22,7 +22,7 @@ function returnEditedSubtaskTemplate(subtask_id, subtask_text) {
                     </section>
                     <section class="subtask-edit-section">
                         <img src="../assets/icons/board/edit_button.svg" alt="edit button">
-                        <div class="subtask-edit-seperator"></div>
+                        <div class="subtask-edit-separator"></div>
                         <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask(event,'${subtask_id}')">
                     </section>
                 </button>`
@@ -49,7 +49,7 @@ function returnSubtaskEditTemplate(subtask_id, subtask_text) {
                             <input type="text" value="${subtask_text}" id="subtask_edit_input_${subtask_id}">
                             <section class="subtask-edit-buttons">
                                 <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask(event,'${subtask_id}')">
-                                <div class="subtask-edit-seperator"></div>
+                                <div class="subtask-edit-separator"></div>
                                 <img src="../assets/icons/contacts/check.svg" alt="edit button" class="subtask-check" onclick="confirmSubtaskEdit('${subtask_id}')">
                             </section>
                         </article>
