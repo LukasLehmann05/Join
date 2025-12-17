@@ -12,9 +12,12 @@ let newState = "";
 
 async function sendUpdatedTaskToDB(taskId) {
     let taskToUpdate = await getTaskToUpdate(taskId);
+    allTasksOfSingleUserObj[taskId] = taskToUpdate;
+    clearElementsOfNewTask();
     if (Object.keys(taskToUpdate).length !== 0) {
         await updateTask(taskId, taskToUpdate);
     }
+    refreshTaskOnBoard(taskId, taskToUpdate);
 }
 
 
@@ -116,11 +119,21 @@ function renderSubtasksListItems(taskId, subtasksArr) {
     let containerId = taskId + '_subtasks_list';
     let container = document.getElementById(containerId);
     let subtaskCounter = 0;
-    for (let subtask of subtasksArr) {
+    getSubtasksOfTask(subtasksArr);
+    for (let subtask of allSubtasksArr) {
         subtaskCounter += 1;
         let subtaskHtml = subtasksListItemTemplate(taskId, subtask.title, subtaskCounter);
         container.innerHTML += subtaskHtml;
         renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtask.done);
+    }
+}
+
+
+function getSubtasksOfTask(subtasksArr) {
+    allSubtasksArr = [];
+    for (let subtask of subtasksArr) {
+        let subtaskObj = { title: subtask.title, done: subtask.done };
+        allSubtasksArr.push(subtaskObj);
     }
 }
 
@@ -205,8 +218,8 @@ function openEditTaskOverlay(taskId) {
 
 
 function updateTaskElements(button, taskId) {
+    clearElementsOfNewTask();
     getAllFieldValuesOfEditTaskWhenUpdated();
-    sendUpdatedTaskToDB(taskId);
     removeShowClass(button, taskId);
 }
 
@@ -270,6 +283,7 @@ function createEmptyTask() {
 
 
 function renderSubtaskEditListItems(subtasksArr) {
+    allSubtasksArr = [];
     subtask_list = document.getElementById('subtask_render');
     for (let subtask of subtasksArr) {
         let subtaskTitleHtml = returnSubtaskTemplate(subtask.title);
