@@ -312,7 +312,6 @@ function removeIndicatorOnInput(field) {
 }
 
 function showSubtaskEdit(subtask_id) {
-    console.log(subtask_id);
     let subtask_to_edit = document.getElementById(subtask_id);
     let original_subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
     removeSubtaskFromArray(original_subtask_text);
@@ -320,7 +319,8 @@ function showSubtaskEdit(subtask_id) {
     subtask_to_edit.innerHTML = subtask_edit_template
 }
 
-function deleteSubtask(subtask_id) {
+function deleteSubtask(event,subtask_id) {
+    event.stopPropagation()
     let subtask_to_delete = document.getElementById(subtask_id)
     subtask_to_delete.remove()
 }
