@@ -303,6 +303,8 @@ function escapeTextareaContent(text) {
 
 
 async function openAddTaskOverlay() {
+    allAssigneesArr = [];
+    allSubtasksArr = [];
     clearElementsOfNewTask();
     const taskId = 'new_task_id_' + Date.now();
     document.getElementById('overlay').classList.add('show');
