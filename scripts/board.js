@@ -1,4 +1,3 @@
-
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
@@ -6,36 +5,26 @@ let allTasksOfSingleUserObj = {};
 
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
+// Define the mapping from state to column ID
+const STATE_TO_COLUMN_ID = {
+    [TASK_STATE_ARR[0]]: BOARD_COLUMN_ID_ARR[0],
+    [TASK_STATE_ARR[1]]: BOARD_COLUMN_ID_ARR[1],
+    [TASK_STATE_ARR[2]]: BOARD_COLUMN_ID_ARR[2],
+    [TASK_STATE_ARR[3]]: BOARD_COLUMN_ID_ARR[3],
+};
+
+// Generate the reverse mapping
+const COLUMN_ID_TO_STATE = Object.fromEntries(
+    Object.entries(STATE_TO_COLUMN_ID).map(([state, columnId]) => [columnId, state])
+);
+
 
 function getColumnIdByTaskState(state) {
-    switch(state) {
-        case TASK_STATE_ARR[0]:
-            return BOARD_COLUMN_ID_ARR[0];
-        case TASK_STATE_ARR[1]:
-            return BOARD_COLUMN_ID_ARR[1];
-        case TASK_STATE_ARR[2]:
-            return BOARD_COLUMN_ID_ARR[2];
-        case TASK_STATE_ARR[3]:
-            return BOARD_COLUMN_ID_ARR[3];
-        default:
-            return BOARD_COLUMN_ID_ARR[0];
-    }   
+    return STATE_TO_COLUMN_ID[state] || BOARD_COLUMN_ID_ARR[0];
 }
 
-
 function getTaskStateByColumnId(columnId) {
-    switch(columnId) {
-        case BOARD_COLUMN_ID_ARR[0]:
-            return TASK_STATE_ARR[0];
-        case BOARD_COLUMN_ID_ARR[1]:
-            return TASK_STATE_ARR[1];
-        case BOARD_COLUMN_ID_ARR[2]:
-            return TASK_STATE_ARR[2];
-        case BOARD_COLUMN_ID_ARR[3]:
-            return TASK_STATE_ARR[3];
-        default:
-            return TASK_STATE_ARR[0];
-    }
+    return COLUMN_ID_TO_STATE[columnId] || TASK_STATE_ARR[0];
 }
 
 
