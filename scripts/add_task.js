@@ -58,7 +58,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
 }
 
 function loadDataFromAPI() {
-    //let joinData = fetchAllData()
+    let joinData = fetchAllData()
     return joinData
 }
 
