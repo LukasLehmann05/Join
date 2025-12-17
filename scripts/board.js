@@ -88,6 +88,9 @@ async function renderTaskCard(taskId, task) {
     let containerId = getColumnIdByTaskState(task.state);    
     const container = document.getElementById(containerId);
     container.innerHTML += taskCardTemplate(task, taskId);
+    renderSubtaskProgress(taskId, task.subtasks || []);
+    renderAssignedUserIcons(taskId, task.assigned_to || []);
+    renderPriorityIndicator(taskId, task.priority, 'priority');
 }
 
 
@@ -210,8 +213,9 @@ function findChildAndRemoveNoTaskElement(parentElement) {
 
 function dropHandler(event) {
     event.preventDefault();
-    const taskId = event.dataTransfer.getData("text/plain");
-    const taskElement = document.getElementById(taskId);
+    const taskCardContainer = event.dataTransfer.getData("text/plain");
+    const taskElement = document.getElementById(taskCardContainer);
+    const taskId = taskCardContainer.replace('_task_card', '');
     event.currentTarget.appendChild(taskElement);
     taskElement.classList.remove('drag-tilt');
     removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
@@ -225,15 +229,13 @@ function updateStateOfDroppedTask(taskId, newColumnId) {
     const newState = getTaskStateByColumnId(newColumnId);
     allTasksOfSingleUserObj[taskId].state = newState;
     updateTask(taskId, allTasksOfSingleUserObj[taskId]);
+    refreshTaskOnBoard(taskId, taskToUpdate);
 }
 
 
 function displayNewTaskOnBoard(newTaskId, newTask) {
     allTasksOfSingleUserObj[newTaskId] = newTask;
     renderTaskCard(newTaskId, newTask);
-    renderSubtaskProgress(newTaskId, newTask.subtasks || []);
-    renderAssignedUserIcons(newTaskId, newTask.assigned_to || []);
-    renderPriorityIndicator(newTaskId, newTask.priority, 'priority');
     removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
 }
 
@@ -291,12 +293,22 @@ async function initializeBoard(userId) {
         if (!task) continue;
         allTasksOfSingleUserObj[taskId] = task;
         renderTaskCard(taskId, task);
-        renderSubtaskProgress(taskId, task.subtasks || []);
-        renderAssignedUserIcons(taskId, task.assigned_to || []);
-        renderPriorityIndicator(taskId, task.priority, 'priority');
     }
 
     renderNoTaskInfoOnDOMLoad();
+}
+
+
+function refreshTaskOnBoard(taskId, taskToUpdate) {
+    let taskCardElementId = taskId + '_task_card';
+    const taskCardElement = document.getElementById(taskCardElementId);
+    if (taskCardElement) {
+        taskCardElement.innerHTML = taskCardTemplate(taskToUpdate, taskId);
+        renderSubtaskProgress(taskId, taskToUpdate.subtasks || []);
+        renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
+        renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
+    }
+    
 }
 
 // Example function to create tasks_by_user object for testing
