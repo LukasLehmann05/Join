@@ -1,6 +1,8 @@
 const PRIORITY_ARR = ["low", "medium", "urgent"];
 const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
 
+const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
+
 let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
@@ -21,6 +23,7 @@ let subtask_buttons_active = false
 let contacts_shown = false
 
 let current_priority = PRIORITY_ARR[1]  // default medium priority
+let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 
 let req_title = false
@@ -67,6 +70,8 @@ function createTask() {
     if (can_create == true) {
         sendTaskToDB();
         clearAllInputs();
+        sendTaskToDB();
+        clearAllInputs();
     } else {
         missingInputs()
 
@@ -74,6 +79,7 @@ function createTask() {
 }
 
 function sendTaskToDB() {
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
     addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
