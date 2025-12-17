@@ -28,13 +28,12 @@ let req_category = false
 let allSubtasksArr = []
 let allAssigneesArr = []
 
-
+let subtask_amount = 0
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
     
 }
-
 
 function loadPrioButtonsAndSubtaskSectionById() {
     low_prio_button = document.getElementById("button_prio_low");
@@ -56,7 +55,6 @@ function loadPrioButtonsAndSubtaskSectionById() {
 
 function loadDataFromAPI() {
     //let joinData = fetchAllData()
-    console.log(joinData)
     return joinData
 }
 
@@ -105,6 +103,7 @@ function clearAllInputs() {
     clearRequiredIndicators()
     clearContacts()
     clearSubtask()
+    subtask_amount = 0
 }
 
 function changePriority(priority) {
@@ -196,8 +195,6 @@ function clearSubtask() {
 }
 
 function clearContacts() {
-    console.log(allAssigneesArr);
-
     for (let index = 0; index < allAssigneesArr.length; index++) {
         const contact_element = document.getElementById(allAssigneesArr[index]);
         contact_element.classList.remove("assigned-contact")
@@ -212,13 +209,19 @@ function clearContacts() {
 function addSubtask() {
     if (task_subtask.value != "") {
         let subtask = task_subtask.value
-        let subtask_template = returnSubtaskTemplate(subtask)
+        let subtask_id = returnSubtaskId()
+        let subtask_template = returnSubtaskTemplate(subtask,subtask_id)
         subtask_list.innerHTML += subtask_template
         let subtaskObj = { title: task_subtask.value, done: false };
         allSubtasksArr.push(subtaskObj)
         task_subtask.value = ""
         hideSubtaskButtons()
     }
+}
+
+function returnSubtaskId() {
+    subtask_amount += 1
+    return "subtask_" + subtask_amount
 }
 
 
@@ -306,6 +309,13 @@ function removeIndicatorOnInput(field) {
         default:
             break;
     }
+}
+
+async function showSubtaskEdit(subtask_id) {
+    console.log(subtask_id);
+    let subtask_to_edit = document.getElementById(subtask_id);
+    let subtask_edit_template = returnSubtaskEditTemplate(subtask_id)
+    subtask_to_edit.innerHTML = subtask_edit_template
 }
 
 
