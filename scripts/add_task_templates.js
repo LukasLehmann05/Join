@@ -18,7 +18,7 @@ function returnEditedSubtaskTemplate(subtask_id, subtask_text) {
     return `<button type="button" class="subtask-button" role="button" onclick="showSubtaskEdit('${subtask_id}')">
                     <section class="subtask-text">
                         <p>•</p>
-                        <span id="subtask_text_${subtask_id}">${subtask}</span>
+                        <span id="subtask_text_${subtask_id}">${subtask_text}</span>
                     </section>
                     <section class="subtask-edit-section">
                         <img src="../assets/icons/board/edit_button.svg" alt="edit button">

@@ -340,7 +340,7 @@ function confirmSubtaskEdit(subtask_id) {
     addSubtaskEditToArray(subtask_id)
     let subtask_to_confirm = document.getElementById(subtask_id)
     let edited_subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value
-    let subtask_template = returnSubtaskTemplate(edited_subtask_text, subtask_id)
+    let subtask_template = returnEditedSubtaskTemplate(subtask_id, edited_subtask_text)
     subtask_to_confirm.innerHTML = subtask_template
 }
 
