@@ -3,7 +3,7 @@ function contactListSingle(contactID, name, email, acronym, phone) {
                 <p id="short-${contactID}" class="two-letter-name-small">${acronym}</p>
                 <div class="list-info">
                   <p id="name-${contactID}" class="font-size-20">${name}</p>
-                  <span id="email-${contactID}" class="font-size-16 color-mail">${email}</span>
+                  <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
                 </div>
             </div>`
 };
@@ -32,7 +32,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
             <span class="sub-header-information font-size-20">Contact Information</span>
             <div class="info-display">
                 <p class="info-text">Email</p>
-                <span id="mainMail" class="color-mail">${currentMail}</span>
+                <a href="mailto:${currentMail}" id="mainMail" class="color-mail">${currentMail}</a>
             </div>
             <div class="info-display">
                 <p class="info-text">Phone</p>
