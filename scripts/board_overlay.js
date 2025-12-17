@@ -45,13 +45,13 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
 }
 
 
-function openTaskInOverlay(taskId) {
+async function openTaskInOverlay(taskId) {
     clearElementsOfNewTask();
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
-    renderOverlayContent(taskId);
+    await renderOverlayContent(taskId);
 }
 
 
@@ -67,12 +67,13 @@ function clearElementsOfNewTask() {
 }
 
 
-function renderOverlayContent(taskId) {
+async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     let task = allTasksOfSingleUserObj[taskId];
+    if (!task) return;
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
-    renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
+    await renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId, task.subtasks || []);
 }
 
@@ -205,13 +206,13 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 }
 
 
-function openEditTaskOverlay(taskId) {
+async function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements(this, '${taskId}')`);
     let task = allTasksOfSingleUserObj[taskId];
     upsertTaskTemplateHandler(taskId);
-    renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
+    await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
     renderSubtaskEditListItems(task.subtasks || []);
     addTaskInit();
 }
