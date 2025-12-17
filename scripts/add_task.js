@@ -1,8 +1,6 @@
 const PRIORITY_ARR = ["low", "medium", "urgent"];
 const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
 
-const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
-
 let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
@@ -23,7 +21,6 @@ let subtask_buttons_active = false
 let contacts_shown = false
 
 let current_priority = PRIORITY_ARR[1]  // default medium priority
-let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 
 let req_title = false
