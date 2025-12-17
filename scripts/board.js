@@ -214,10 +214,20 @@ function dropHandler(event) {
 }
 
 
-function updateStateOfDroppedTask(taskId, newColumnId) {
+async function updateStateOfDroppedTask(taskId, newColumnId) {
+    const task = allTasksOfSingleUserObj[taskId];
+    if (!task) {
+        console.error(`Task with ID ${taskId} not found.`);
+        return;
+    };
     const newState = getTaskStateByColumnId(newColumnId);
-    allTasksOfSingleUserObj[taskId].state = newState;
-    updateTask(taskId, allTasksOfSingleUserObj[taskId]);
+    task.state = newState;
+    try{
+        await updateTask(taskId, task);
+    }
+    catch(error){
+        console.error('Error updating task in database:', error);
+    }
 }
 
 
