@@ -33,7 +33,7 @@
     font-weight: 400;
 }
 
-.seperator {
+.separator {
     width: 1px;
     background-color: #D1D1D1;
     margin: 0px 5%;
@@ -257,7 +257,7 @@ textarea.task-input {
     align-items: center;
 }
 
-.subtask-seperator {
+.subtask-separator {
     width: 1px;
     background-color: #D1D1D1;
     height: 100%;
@@ -356,7 +356,7 @@ textarea.task-input {
 }
 
 .article-bg {
-        background-color: #F6F7F8;
+    background-color: #F6F7F8;
 }
 
 .logo-responsive {
@@ -373,4 +373,127 @@ textarea.task-input {
 
 .hide-req-text-767 {
     display: block;
+}
+
+.subtask-render-section {
+    padding: 0px;
+    list-style-type: none;
+}
+
+.subtask-list-element {
+    display: flex;
+}
+
+.subtask-button {
+    flex: 1;
+    border: none;
+    cursor: pointer;
+    background-color: #F6F7F8;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtask-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    line-height: 120%;
+    font-family: "Inter";
+    padding: 4px 0px;
+}
+
+.subtask-button:hover {
+    background-color: #E0E0E0;
+}
+
+.subtask-button:hover .subtask-edit-section,
+.subtask-button:focus .subtask-edit-section,
+.subtask-button:focus-visible .subtask-edit-section {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.subtask-action-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.subtask-edit-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, visibility 0.15s;
+}
+
+.subtask-edit-section img {
+    height: 18px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.subtask-edit {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: #F6F7F8;
+}
+
+.subtask-edit-container {
+    flex: 1;
+}
+
+.subtask-edit input {
+    flex: 1;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-family: "Inter";
+    font-size: 16px;
+    padding: 4px;
+}
+
+.subtask-edit-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.subtask-edit-buttons img {
+    height: 18px;
+    cursor: pointer;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.subtask-edit-separator {
+    width: 1px;
+    background-color: #D1D1D1;
+    height: 100%;
+}
+
+.subtask-underline-blue {
+    height: 2px;
+    width: 100%;
+    background-color: #29ABE2;
+}
+
+.d_none {
+    display: none;
+}
+
+.subtask-check {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(6%) saturate(2981%) hue-rotate(177deg) brightness(93%) contrast(92%);
+    height: 24px !important;
 }

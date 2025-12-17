@@ -28,13 +28,12 @@ let req_category = false
 let allSubtasksArr = []
 let allAssigneesArr = []
 
-
+let subtask_amount = 0
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
     
 }
-
 
 function loadPrioButtonsAndSubtaskSectionById() {
     low_prio_button = document.getElementById("button_prio_low");
@@ -55,8 +54,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
 }
 
 function loadDataFromAPI() {
-    let joinData = fetchAllData()
-    console.log(joinData)
+    //let joinData = fetchAllData()
     return joinData
 }
 
@@ -105,6 +103,7 @@ function clearAllInputs() {
     clearRequiredIndicators()
     clearContacts()
     clearSubtask()
+    subtask_amount = 0
 }
 
 function changePriority(priority) {
@@ -196,8 +195,6 @@ function clearSubtask() {
 }
 
 function clearContacts() {
-    console.log(allAssigneesArr);
-
     for (let index = 0; index < allAssigneesArr.length; index++) {
         const contact_element = document.getElementById(allAssigneesArr[index]);
         contact_element.classList.remove("assigned-contact")
@@ -212,13 +209,21 @@ function clearContacts() {
 function addSubtask() {
     if (task_subtask.value != "") {
         let subtask = task_subtask.value
-        let subtask_template = returnSubtaskTemplate(subtask)
+        let subtask_id = returnSubtaskId()
+        let subtask_template = returnSubtaskTemplate(subtask,subtask_id)
         subtask_list.innerHTML += subtask_template
         let subtaskObj = { title: task_subtask.value, done: false };
         allSubtasksArr.push(subtaskObj)
         task_subtask.value = ""
         hideSubtaskButtons()
     }
+    console.log(allSubtasksArr);
+    
+}
+
+function returnSubtaskId() {
+    subtask_amount += 1
+    return "subtask_" + subtask_amount
 }
 
 
@@ -308,5 +313,50 @@ function removeIndicatorOnInput(field) {
     }
 }
 
+function showSubtaskEdit(subtask_id) {
+    let subtask_to_edit = document.getElementById(subtask_id);
+    let original_subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    removeSubtaskFromArray(original_subtask_text);
+    let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
+    subtask_to_edit.innerHTML = subtask_edit_template
+}
 
-document.addEventListener("DOMContentLoaded", addTaskInit);
+function deleteSubtask(event,subtask_id) {
+    event.stopPropagation()
+    let subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    removeSubtaskFromArray(subtask_text);
+    let subtask_to_delete = document.getElementById(subtask_id)
+    subtask_to_delete.remove()
+}
+
+function deleteSubtaskEdit(event,subtask_id) {
+    event.stopPropagation()
+    let subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value;
+    removeSubtaskFromArray(subtask_text);
+    let subtask_to_delete = document.getElementById(subtask_id)
+    subtask_to_delete.remove()
+}
+
+function removeSubtaskFromArray(subtask_text) {
+    let subtask_index = allSubtasksArr.findIndex(subtask => subtask.title === subtask_text)
+    if (subtask_index !== -1) {
+        allSubtasksArr.splice(subtask_index, 1)
+    }
+}
+
+function addSubtaskEditToArray(subtask_id) {
+    let subtask_input_field = document.getElementById("subtask_edit_input_" + subtask_id)
+    let edited_subtask_text = subtask_input_field.value
+    let subtaskObj = { title: edited_subtask_text, done: false }
+    allSubtasksArr.push(subtaskObj)
+}
+
+function confirmSubtaskEdit(subtask_id) {
+    addSubtaskEditToArray(subtask_id)
+    let subtask_to_confirm = document.getElementById(subtask_id)
+    let edited_subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value
+    let subtask_template = returnEditedSubtaskTemplate(subtask_id, edited_subtask_text)
+    subtask_to_confirm.innerHTML = subtask_template
+}
+
+document.addEventListener("DOMContentLoaded", addTaskInit)
