@@ -315,6 +315,7 @@ function showSubtaskEdit(subtask_id) {
     console.log(subtask_id);
     let subtask_to_edit = document.getElementById(subtask_id);
     let original_subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    removeSubtaskFromArray(original_subtask_text);
     let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
     subtask_to_edit.innerHTML = subtask_edit_template
 }
@@ -324,5 +325,23 @@ function deleteSubtask(subtask_id) {
     subtask_to_delete.remove()
 }
 
+function removeSubtaskFromArray(subtask_text) {
+    let subtask_index = allSubtasksArr.indexOf(subtask_text)
+    allSubtasksArr.splice(subtask_index, 1)
+}
+
+function addSubtaskEditToArray(subtask_id) {
+    let subtask_input_field = document.getElementById("subtask_edit_input_" + subtask_id)
+    let edited_subtask_text = subtask_input_field.value
+    allSubtasksArr.push(edited_subtask_text)
+}
+
+function confirmSubtaskEdit(subtask_id) {
+    addSubtaskEditToArray(subtask_id)
+    let subtask_to_confirm = document.getElementById(subtask_id)
+    let edited_subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value
+    let subtask_template = returnSubtaskTemplate(edited_subtask_text, subtask_id)
+    subtask_to_confirm.innerHTML = subtask_template
+}
 
 document.addEventListener("DOMContentLoaded", addTaskInit)
