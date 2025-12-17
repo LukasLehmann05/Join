@@ -6,6 +6,7 @@ const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebase
  * @async @global
  */
 async function fetchAllDataGlobal() {
+    let AllData = {};
     let joinFetch = await fetch(BASE_URL + ".json");
     let joinData = await joinFetch.json();
     return AllData.data = joinData;

@@ -283,16 +283,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function initializeBoard(userId) {
     let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
-    
+    const allTaskData = await fetchAllDataGlobal();
+
     for (let taskIndex in allTasksByIdOfSingleUserArr) {
         if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
-        let task = await getTaskById(taskId);
+        let task = allTaskData.tasks[taskId];
         if (!task) continue;
         allTasksOfSingleUserObj[taskId] = task;
         renderTaskCard(taskId, task);
     }
-
     renderNoTaskInfoOnDOMLoad();
 }
 
