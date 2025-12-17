@@ -323,19 +323,32 @@ function showSubtaskEdit(subtask_id) {
 
 function deleteSubtask(event,subtask_id) {
     event.stopPropagation()
+    let subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    removeSubtaskFromArray(subtask_text);
+    let subtask_to_delete = document.getElementById(subtask_id)
+    subtask_to_delete.remove()
+}
+
+function deleteSubtaskEdit(event,subtask_id) {
+    event.stopPropagation()
+    let subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value;
+    removeSubtaskFromArray(subtask_text);
     let subtask_to_delete = document.getElementById(subtask_id)
     subtask_to_delete.remove()
 }
 
 function removeSubtaskFromArray(subtask_text) {
-    let subtask_index = allSubtasksArr.indexOf(subtask_text)
-    allSubtasksArr.splice(subtask_index, 1)
+    let subtask_index = allSubtasksArr.findIndex(subtask => subtask.title === subtask_text)
+    if (subtask_index !== -1) {
+        allSubtasksArr.splice(subtask_index, 1)
+    }
 }
 
 function addSubtaskEditToArray(subtask_id) {
     let subtask_input_field = document.getElementById("subtask_edit_input_" + subtask_id)
     let edited_subtask_text = subtask_input_field.value
-    allSubtasksArr.push(edited_subtask_text)
+    let subtaskObj = { title: edited_subtask_text, done: false }
+    allSubtasksArr.push(subtaskObj)
 }
 
 function confirmSubtaskEdit(subtask_id) {

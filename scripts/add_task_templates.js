@@ -48,7 +48,7 @@ function returnSubtaskEditTemplate(subtask_id, subtask_text) {
                         <article class="subtask-edit">
                             <input type="text" value="${subtask_text}" id="subtask_edit_input_${subtask_id}">
                             <section class="subtask-edit-buttons">
-                                <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask(event,'${subtask_id}')">
+                                <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtaskEdit(event,'${subtask_id}')">
                                 <div class="subtask-edit-separator"></div>
                                 <img src="../assets/icons/contacts/check.svg" alt="edit button" class="subtask-check" onclick="confirmSubtaskEdit('${subtask_id}')">
                             </section>
