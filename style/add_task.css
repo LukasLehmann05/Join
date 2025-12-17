@@ -492,3 +492,8 @@ textarea.task-input {
 .d_none {
     display: none;
 }
+
+.subtask-check {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(6%) saturate(2981%) hue-rotate(177deg) brightness(93%) contrast(92%);
+    height: 24px !important;
+}

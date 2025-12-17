@@ -3,12 +3,12 @@ function returnSubtaskTemplate(subtask, subtask_id) {
                 <button type="button" class="subtask-button" role="button" onclick="showSubtaskEdit('${subtask_id}')">
                     <section class="subtask-text">
                         <p>•</p>
-                        <span>${subtask}</span>
+                        <span id="subtask_text_${subtask_id}">${subtask}</span>
                     </section>
                     <section class="subtask-edit-section">
                         <img src="../assets/icons/board/edit_button.svg" alt="edit button">
                         <div class="subtask-edit-seperator"></div>
-                        <img src="../assets/icons/board/delete_button.svg" alt="delete button">
+                        <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask('${subtask_id}')">
                     </section>
                 </button>
             </li>`
@@ -28,15 +28,15 @@ function returnSmallContactTemplate(user_id) {
     return `<img src="../assets/icons/header/user_placeholder.svg" alt="contact_icon" id="small_contact_${user_id}">`
 }
 
-function returnSubtaskEditTemplate(subtask_id) {
+function returnSubtaskEditTemplate(subtask_id, subtask_text) {
     return `
                     <div class="subtask-edit-container">
                         <article class="subtask-edit">
-                            <input type="text">
+                            <input type="text" value="${subtask_text}" id="subtask_edit_input_${subtask_id}">
                             <section class="subtask-edit-buttons">
-                                <img src="../assets/icons/board/delete_button.svg" alt="delete button">
+                                <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask('${subtask_id}')">
                                 <div class="subtask-edit-seperator"></div>
-                                <img src="../assets/icons/contacts/check.svg" alt="edit button">
+                                <img src="../assets/icons/contacts/check.svg" alt="edit button" class="subtask-check">
                             </section>
                         </article>
                         <aside class="subtask-underline-blue"></aside>
