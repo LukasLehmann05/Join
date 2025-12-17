@@ -10,10 +10,10 @@ let newSubtasksArr = [];
 let newState = "";
 
 
-function sendUpdatedTaskToDB(taskId) {
-    let taskToUpdate = getTaskToUpdate(taskId);
+async function sendUpdatedTaskToDB(taskId) {
+    let taskToUpdate = await getTaskToUpdate(taskId);
     if (Object.keys(taskToUpdate).length !== 0) {
-        updateTask(taskId, taskToUpdate);
+        await updateTask(taskId, taskToUpdate);
     }
 }
 
@@ -70,7 +70,7 @@ function renderOverlayContent(taskId) {
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
     renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
-    renderSubtasksListItems(taskId, task.subtasks);
+    renderSubtasksListItems(taskId, task.subtasks || []);
 }
 
 
@@ -199,13 +199,14 @@ function openEditTaskOverlay(taskId) {
     let task = allTasksOfSingleUserObj[taskId];
     upsertTaskTemplateHandler(taskId);
     renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
-    renderSubtaskEditListItems(task.subtasks);
+    renderSubtaskEditListItems(task.subtasks || []);
     addTaskInit();
 }
 
 
 function updateTaskElements(button, taskId) {
     getAllFieldValuesOfEditTaskWhenUpdated();
+    sendUpdatedTaskToDB(taskId);
     removeShowClass(button, taskId);
 }
 

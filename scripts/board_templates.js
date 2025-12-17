@@ -42,7 +42,7 @@ function taskCardTemplate(task, taskId) {
                 draggable="true" 
                 ondragstart="dragStartHandler(event); this.classList.add('drag-tilt');" 
                 ondragend="this.classList.remove('drag-tilt');"
-                id="${taskId}" 
+                id="${taskId}_task_card" 
                 onclick="openTaskInOverlay('${taskId}')">
                 <p class="category">${task.category}</p>
                 <h3>${task.title}</h3>
