@@ -229,7 +229,6 @@ function updateStateOfDroppedTask(taskId, newColumnId) {
     const newState = getTaskStateByColumnId(newColumnId);
     allTasksOfSingleUserObj[taskId].state = newState;
     updateTask(taskId, allTasksOfSingleUserObj[taskId]);
-    refreshTaskOnBoard(taskId, taskToUpdate);
 }
 
 
@@ -301,9 +300,10 @@ async function initializeBoard(userId) {
 
 function refreshTaskOnBoard(taskId, taskToUpdate) {
     let taskCardElementId = taskId + '_task_card';
-    const taskCardElement = document.getElementById(taskCardElementId);
-    if (taskCardElement) {
-        taskCardElement.innerHTML = taskCardTemplate(taskToUpdate, taskId);
+    const columnContainer = document.getElementById(taskCardElementId).parentElement;
+    document.getElementById(taskCardElementId).remove();
+    if (columnContainer) {
+        columnContainer.innerHTML += taskCardTemplate(taskToUpdate, taskId);
         renderSubtaskProgress(taskId, taskToUpdate.subtasks || []);
         renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
