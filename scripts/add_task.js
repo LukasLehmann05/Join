@@ -311,12 +311,18 @@ function removeIndicatorOnInput(field) {
     }
 }
 
-async function showSubtaskEdit(subtask_id) {
+function showSubtaskEdit(subtask_id) {
     console.log(subtask_id);
     let subtask_to_edit = document.getElementById(subtask_id);
-    let subtask_edit_template = returnSubtaskEditTemplate(subtask_id)
+    let original_subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
     subtask_to_edit.innerHTML = subtask_edit_template
 }
 
+function deleteSubtask(subtask_id) {
+    let subtask_to_delete = document.getElementById(subtask_id)
+    subtask_to_delete.remove()
+}
 
-document.addEventListener("DOMContentLoaded", addTaskInit);
+
+document.addEventListener("DOMContentLoaded", addTaskInit)
