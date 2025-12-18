@@ -124,7 +124,7 @@ function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
                 <p class="category_overlay">${task.category}</p>
-                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-save-task-when-close-overlay="true">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" ${DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY}="true">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
@@ -212,14 +212,13 @@ function subtasksListItemTemplate(taskId, title, counter) {
  * This function returns the HTML template for the upsert task overlay.
  * @param {string} taskId The ID of the task.
  * @param {string} confirmButtonText The text for the confirm button.
- * @param {string} selectedTaskFunction The function to call on confirm.
  * @returns {string} The HTML string for the upsert task overlay.
  */
-function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFunction) {
+function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribute) {
     return  `
             <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
-                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" data-save-task-when-close-overlay="false">
+                <button class="close_overlay_button" onclick="removeShowClass(this, '${taskId}')" ${DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY}="false">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
             </header>
@@ -236,7 +235,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFuncti
                         </button>
                     </div>
                     <div class="create-task">
-                        <button class="action-buttons create-button" onclick="${selectedTaskFunction}" data-save-task-when-close-overlay="true">
+                        <button class="action-buttons create-button" onclick="removeShowClass(this, '${taskId}')" ${buttonDataAttribute}="true">
                             <p>${confirmButtonText}</p>
                             <img src="../assets/icons/contacts/check.svg" alt="submit icon">
                         </button>

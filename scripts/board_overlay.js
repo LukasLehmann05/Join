@@ -8,7 +8,9 @@ let newPriority = "";
 let newAssigneesArr = [];
 let newSubtasksArr = [];
 let newState = "";
-
+const DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY = 'data-save-task-when-close-overlay';
+const DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY = 'data-create-task-and-close-overlay';
+const DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY = 'data-edit-task-and-close-overlay';
 
 /**
  * This function sends the updated task to the database and refreshes the board.
@@ -181,11 +183,22 @@ function closeOverlay(event) {
  * @param {string} taskId The ID of the task to save (optional).
  */
 function removeShowClass(buttonElement, taskId) {
-    const buttonSaveOverlayWhenClosed = buttonElement ? buttonElement.getAttribute('data-save-task-when-close-overlay') === 'true' : false;
-    if (buttonSaveOverlayWhenClosed) {
+    const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonSaveStateOfSubtasksAndCloseOverlay) {
         sendUpdatedTaskToDB(taskId);        
     }
 
+    const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonEditTaskAndCloseOverlay) {
+        clearElementsOfNewTask();
+        getAllFieldValuesOfEditTaskWhenUpdated();
+        sendUpdatedTaskToDB(taskId);        
+    }
+
+    const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonCreateTaskAndCloseOverlay) {
+        createTask();
+    }
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
 
@@ -231,7 +244,7 @@ function swapImage(button, isHover) {
 async function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', `updateTaskElements(this, '${taskId}')`);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY);
     let task = allTasksOfSingleUserObj[taskId];
     upsertTaskTemplateHandler(taskId);
     await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
@@ -381,7 +394,7 @@ async function openAddTaskOverlay() {
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', `createTask()`);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY);
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();
