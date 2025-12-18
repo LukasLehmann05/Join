@@ -1,80 +1,48 @@
-
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
-const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
+let allTasksOfSingleUserObj = {};
+
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
+// Define the mapping from state to column ID
+const STATE_TO_COLUMN_ID = {
+    [TASK_STATE_ARR[0]]: BOARD_COLUMN_ID_ARR[0],
+    [TASK_STATE_ARR[1]]: BOARD_COLUMN_ID_ARR[1],
+    [TASK_STATE_ARR[2]]: BOARD_COLUMN_ID_ARR[2],
+    [TASK_STATE_ARR[3]]: BOARD_COLUMN_ID_ARR[3],
+};
 
+// Generate the reverse mapping
+const COLUMN_ID_TO_STATE = Object.fromEntries(
+    Object.entries(STATE_TO_COLUMN_ID).map(([state, columnId]) => [columnId, state])
+);
+
+/**
+ * This function returns the column ID corresponding to a given task state.
+ * 
+ * @param {string} state The state of the task.
+ * @returns {string} The column ID associated with the given task state.
+ */
 function getColumnIdByTaskState(state) {
-    switch(state) {
-        case TASK_STATE_ARR[0]:
-            return BOARD_COLUMN_ID_ARR[0];
-        case TASK_STATE_ARR[1]:
-            return BOARD_COLUMN_ID_ARR[1];
-        case TASK_STATE_ARR[2]:
-            return BOARD_COLUMN_ID_ARR[2];
-        case TASK_STATE_ARR[3]:
-            return BOARD_COLUMN_ID_ARR[3];
-        default:
-            return BOARD_COLUMN_ID_ARR[0];
-    }   
+    return STATE_TO_COLUMN_ID[state] || BOARD_COLUMN_ID_ARR[0];
 }
 
+/**
+ * This function returns the task state corresponding to a given column ID.
+ * 
+ * @param {string} columnId The ID of the column.
+ * @returns {string} The task state associated with the given column ID.
+ */
+function getTaskStateByColumnId(columnId) {
+    return COLUMN_ID_TO_STATE[columnId] || TASK_STATE_ARR[0];
+}
 
-let testTasks = {
-  "task_id_x": 
-    {
-        "category": "Development",
-        "title": "Implementiere Login-Funktion",
-        "description": "Erstelle das Frontend und Backend für die Nutzeranmeldung.",
-        "due_date": "2025-12-10",
-        "priority": "urgent",
-        "state": "in progress",
-        "assigned_to": [
-            "user_id_1",
-            "user_id_2"
-        ],
-        "subtasks": [
-            {
-            "title": "UI-Mockup erstellen",
-            "done": true
-            },
-            {
-            "title": "Validierung implementieren",
-            "done": false
-            }
-        ]
-    },
-    "task_id_4567":
-    {
-        "category": "Marketing",
-        "title": "Social Media Post erstellen",
-        "description": "Post für die Vorstellung des neuen Features planen.",
-        "due_date": "01/12/2025",
-        "priority": "medium",
-        "state": "to do",
-        "assigned_to": [
-            "user_id_2"
-        ],
-        "subtasks": []
-    }
-  }
-
-let testUser = {
-    "user_id_1": {
-      "email": "max.mustermann@example.com",
-      "name": "Max Mustermann",
-      "password": "hashed_password_123"
-    },
-    "user_id_2": {
-      "email": "erika.musterfrau@example.com",
-      "name": "Erika Musterfrau",
-      "password": "hashed_password_456"
-    }
-	
-  }
-
+/**
+ * This function renders the "no task" info template for a given column.
+ * 
+ * @param {string} columnId The ID of the column to render the info in.
+ */
 function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
     switch(columnId) {
@@ -93,26 +61,39 @@ function renderNoTaskInfo(columnId) {
     }
 }
 
+/**
+ * This function renders the subtask progress for a task.
+ * 
+ * @param {string} taskId The ID of the task.
+ * @param {Array} subtasksArr Array of subtasks for the task.
+ */
+function renderSubtaskProgress(taskId, subtasksArr) {
+    let elementId = taskId + '_subtasks_done';
+    const element = document.getElementById(elementId);
+    element.innerHTML = formatSubtaskProgress(subtasksArr);
+    renderSubtaskStatusBar(taskId, subtasksArr);
+}
 
+/**
+ * This function formats the subtask progress as a string "completed/total".
+ * 
+ * @param {Array} subtasks Array of subtask objects.
+ * @returns {string} A string representing completed and total subtasks.
+ */
 function formatSubtaskProgress(subtasks) {
     const completed = subtasks.filter(subtask => subtask.done).length;
     const total = subtasks.length;
     return `${completed}/${total}`;
 }
 
-
-function renderSubtaskProgress(taskId) {
-  let elementId = taskId + '_subtasks_done';
-  const element = document.getElementById(elementId);
-  let task = getTaskByTaskId(taskId);
-  element.innerHTML = formatSubtaskProgress(task.subtasks);
-  renderSubtaskStatusBar(taskId);
-}
-
-
-function renderSubtaskStatusBar(taskId) {
-    let task = getTaskByTaskId(taskId);
-    let relationOfDoneSubtasks = formatSubtaskProgress(task.subtasks).split('/');
+/**
+ * This function renders the subtask status bar for a task.
+ * 
+ * @param {string} taskId The ID of the task.
+ * @param {Array} subtasksArr Array of subtasks for the task.
+ */
+function renderSubtaskStatusBar(taskId, subtasksArr) {
+    let relationOfDoneSubtasks = formatSubtaskProgress(subtasksArr).split('/');
     let percentage = 0;
     if (relationOfDoneSubtasks[1] > 0) {
         percentage = (relationOfDoneSubtasks[0] / relationOfDoneSubtasks[1]) * 100;
@@ -122,14 +103,46 @@ function renderSubtaskStatusBar(taskId) {
 }
 
 
-function renderTaskCard(taskId) {
-    let task = getTaskByTaskId(taskId);    
+/**
+ * This function renders a task card in the appropriate column.
+ * 
+ * @param {string} taskId The ID of the task.
+ * @param {Object} task The task object to render.
+ */
+async function renderTaskCard(taskId, task) {
     let containerId = getColumnIdByTaskState(task.state);    
     const container = document.getElementById(containerId);
-    container.innerHTML = taskCardTemplate(task, taskId);
+    container.innerHTML += taskCardTemplate(task, taskId);
+    renderSubtaskProgress(taskId, task.subtasks || []);
+    await renderAssignedUserIcons(taskId, task.assigned_to || []);
+    renderPriorityIndicator(taskId, task.priority, 'priority');
 }
 
+/**
+ * This function renders the assigned user icons for a task.
+ * 
+ * @param {string} taskId The ID of the task.
+ * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
+ */
+async function renderAssignedUserIcons(taskId, taskAssignees) {
+    let containerIdSuffix = 'assigned_users';
+    
+    for (let contactId of taskAssignees) {        
+        const user = await getContactById(contactId);
+        if (!user) continue;
+        const initials = getInitialsFromUser(user);
+        const iconHTML = assignedUserIconTemplate(initials);
+        const container = document.getElementById(taskId + '_' + containerIdSuffix);
+        container.innerHTML += iconHTML;
+    }
+}
 
+/**
+ * This function returns the initials from a user object.
+ * 
+ * @param {Object} user The user object.
+ * @returns {string} The initials of the user.
+ */
 function getInitialsFromUser(user) {
     const initials = user.name  
         .split(' ')
@@ -139,145 +152,63 @@ function getInitialsFromUser(user) {
     return initials;
 }
 
-
-function renderAssignedUserIcons(taskId) {
-    let task = getTaskByTaskId(taskId);
-    let containerIdSuffix = 'assigned_users';
-    
-    for (let userId of task.assigned_to) {
-        const user = testUser[userId];
-        const initials = getInitialsFromUser(user);
-        const iconHTML = assignedUserIconTemplate(initials);
-        const container = document.getElementById(taskId + '_' + containerIdSuffix);
-        container.innerHTML += iconHTML;
-    }
-}
-
-
+/**
+ * This function returns the icon path for a given priority.
+ * 
+ * @param {string} priority The priority level of the task.
+ * @returns {string} The file path to the priority icon.
+ */
 function getIconForPriority(priority) {
     const iconfolderpath = "../assets/icons/addTask/";
     switch(priority) {
         case PRIORITY_ARR[2]:
             return iconfolderpath + "urgentTask.svg";
         case PRIORITY_ARR[1]:
-            return iconfolderpath + "medTask.svg";
+            return iconfolderpath + "medTaskorange.svg";
         case PRIORITY_ARR[0]:
             return iconfolderpath + "lowTask.svg";
     }
 }
 
-
-function renderPriorityIndicator(taskId, prioritySuffix) {
-    let task = getTaskByTaskId(taskId);
-    let iconPath = getIconForPriority(task.priority);
+/**
+ * This function renders the priority indicator for a task.
+ * 
+ * @param {string} taskId The ID of the task.
+ * @param {string} taskPriority The priority of the task.
+ * @param {string} prioritySuffix The suffix for the element ID.
+ */
+function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
+    let iconPath = getIconForPriority(taskPriority);
     let element = document.getElementById(taskId + '_' + prioritySuffix);
     element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
 
-
-function getTaskByTaskId(taskId) {
-    return testTasks[taskId];
+/**
+ * This function displays a new task on the board.
+ * 
+ * @param {string} newTaskId The ID of the new task.
+ * @param {Object} newTask The new task object.
+ */
+function displayNewTaskOnBoard(newTaskId, newTask) {
+    allTasksOfSingleUserObj[newTaskId] = newTask;
+    renderTaskCard(newTaskId, newTask);
+    removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
 }
 
-
-function dragStartHandler(event) {
-    event.dataTransfer.setData("text/plain", event.target.id);
-}
-
-
-function dragOverHandler(event) {
-    startDropAcceptanceColumnId = getCurrentColumnId(event)[0];
-    let currentColumnId = getCurrentColumnId(event)[1];
-    clearLastDropAcceptanceIfChangedColumn(currentColumnId);
-    setDropAcceptanceInCurrentColumn(currentColumnId);
-    event.preventDefault();
-}
-
-
-function getCurrentColumnId(event) {
-    let currentColumnId = null;
-
-    if (dragOverCounter < 1) {
-        startDropAcceptanceColumnId = getIdOfCurrentColumn(event);        
-        currentColumnId = startDropAcceptanceColumnId;
-        dragOverCounter++;
-    }
-    else {
-        currentColumnId = getIdOfCurrentColumn(event);
-    }
-    return [startDropAcceptanceColumnId, currentColumnId];
-}
-
-
-function clearLastDropAcceptanceIfChangedColumn(currentColumnId) {
-     if (lastDropAcceptanceColumnId && lastDropAcceptanceColumnId !== currentColumnId) {
-        removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
-    }    
-    lastDropAcceptanceColumnId = currentColumnId;
-}
-
-
-function setDropAcceptanceInCurrentColumn(currentColumnId) {
-    if(startDropAcceptanceColumnId !== currentColumnId && currentColumnId !== null) {
-        renderDropAcceptanceInColumn(currentColumnId);
-    }
-}
-
-
-function getIdOfCurrentColumn(event) {
-    return event.currentTarget.id;
-}
-
-
-function renderDropAcceptanceInColumn(columnId) {
-    const columnContent = document.getElementById(columnId);  
-    if (!columnContent.querySelector('.drop_acceptance')) {
-        columnContent.innerHTML += showDropAcceptanceTemplate();
-    }
-    removeNoTaskInfoElement(columnId);
-}
-
-
-function removeNoTaskInfoElement(columnId) {
-    const columnContent = document.getElementById(columnId);
-    findChildAndRemoveNoTaskElement(columnContent);
-}
-
-
-function findChildAndRemoveNoTaskElement(parentElement) {
-    const noTaskClassName = 'no_task_yet';
-    const noTaskElement = parentElement.querySelector(`.${noTaskClassName}`);
-    if (noTaskElement) {
-        noTaskElement.remove();
-    }
-}
-
-
-function dropHandler(event) {
-    event.preventDefault();
-    const taskId = event.dataTransfer.getData("text/plain");
-    const taskElement = document.getElementById(taskId);
-    event.currentTarget.appendChild(taskElement);
-    taskElement.classList.remove('drag-tilt');
-    removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
-    startDropAcceptanceColumnId = null;
-    dragOverCounter = 0;
-}
-
-
-function removeDropAcceptanceFieldByColumnId(columnId) {
-    const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
-    columnOfDrop.forEach(drop => drop.remove());
-}
-
-
+/**
+ * This function renders "no task" info for all columns on DOM load.
+ */
 function renderNoTaskInfoOnDOMLoad(){
     BOARD_COLUMN_ID_ARR.forEach(columnId => {
         checkIfNoTasksInColumn(columnId);
     });
 }
 
-
+/**
+ * This function checks if a column has no tasks and renders "no task" info if needed.
+ * 
+ * @param {string} columnId The ID of the column to check.
+ */
 function checkIfNoTasksInColumn(columnId) {
     const container = document.getElementById(columnId);
     if (container.innerHTML.trim() === '') {
@@ -287,7 +218,11 @@ function checkIfNoTasksInColumn(columnId) {
     });
 }
 
-
+/**
+ * This function observes a column for becoming empty and renders "no task" info.
+ * 
+ * @param {string} columnId The ID of the column to observe.
+ */
 function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
     if (!container) return;
@@ -304,10 +239,46 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[1]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
-    renderNoTaskInfoOnDOMLoad();
+    initializeBoard(testUserId);
 });
 
-renderTaskCard('task_id_x');
-renderSubtaskProgress('task_id_x');
-renderAssignedUserIcons('task_id_x');
-renderPriorityIndicator('task_id_x', 'priority');
+
+/**
+ * This function initializes the board for a user.
+ * 
+ * @param {string} userId The ID of the user whose board is initialized.
+ */
+async function initializeBoard(userId) {
+    let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
+    const allTaskData = await fetchAllDataGlobal();
+
+    for (let taskIndex in allTasksByIdOfSingleUserArr) {
+        if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
+        let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
+        let task = allTaskData.tasks[taskId];
+        if (!task) continue;
+        allTasksOfSingleUserObj[taskId] = task;
+        renderTaskCard(taskId, task);
+    }
+    renderNoTaskInfoOnDOMLoad();
+}
+
+
+/**
+ * This function refreshes a task card on the board after an update.
+ * 
+ * @param {string} taskId The ID of the task to refresh.
+ * @param {Object} taskToUpdate The updated task object.
+ */
+async function refreshTaskOnBoard(taskId, taskToUpdate) {
+    let taskCardElementId = taskId + '_task_card';
+    const columnContainer = document.getElementById(taskCardElementId).parentElement;
+    document.getElementById(taskCardElementId).remove();
+    if (columnContainer) {
+        columnContainer.innerHTML += taskCardTemplate(taskToUpdate, taskId);
+        renderSubtaskProgress(taskId, taskToUpdate.subtasks || []);
+        await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
+        renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
+    }
+    
+}

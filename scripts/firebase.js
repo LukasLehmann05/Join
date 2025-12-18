@@ -6,6 +6,7 @@ const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebase
  * @async @global
  */
 async function fetchAllDataGlobal() {
+    let AllData = {};
     let joinFetch = await fetch(BASE_URL + ".json");
     let joinData = await joinFetch.json();
     return AllData.data = joinData;
@@ -13,7 +14,7 @@ async function fetchAllDataGlobal() {
 
 
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr, userId) {
     const newTask = {
         "category": task_category,
         "title": task_title,
@@ -32,14 +33,20 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
             'Content-Type': 'application/json'
         }
     })
-    if (response.ok) {
-        console.log('Task added successfully')
-    } else {
-        console.error('Error adding task:', response.status)
+    if (!response.ok) {
+        throw new Error('Error adding task: ' + response.status);
+    }
+    else {
+        let responseData = await response.json();
+        let newTaskId = responseData.name;
+        await assignNewTaskToUserById(newTaskId, userId);
+        if (window.location.pathname.endsWith('board.html')) {
+            displayNewTaskOnBoard(newTaskId, newTask);
+        }
     }
 }
 
-//fieldstoupdate == object with key value pairs (title : "new title")
+
 async function updateTask(taskId, taskToUpdate) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
@@ -49,30 +56,40 @@ async function updateTask(taskId, taskToUpdate) {
                 'Content-Type': 'application/json'
             }
         })
-        if (response.ok) {
-            console.log('Task updated successfully')
-        } else {
-            console.error('Error updating task:', response.status)
-        }
+        if (!response.ok) {
+            throw new Error('Error updating task: ' + response.status);
+            }
     } catch (error) {
         console.error('Error updating task:', error)
     }
 }
+
 
 async function deleteTask(taskId) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
             method: 'DELETE'
         })
-        if (response.ok) {
-            console.log('Task deleted successfully')
-        } else {
-            console.error('Error deleting task:', response.status)
+        if (!response.ok) {
+            throw new Error('Error deleting task: ' + response.status);
         }
     } catch (error) {
         console.error('Error deleting task:', error)
     }
 }
+
+
+async function getTaskById(taskId) {
+    try {
+    let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
+    let taskData = await taskFetch.json();
+    return taskData;
+    } catch (error) {
+        console.error('Error fetching task by ID:', error)
+        return null;
+    }
+}
+
 
 async function fetchAllData() {
     let joinFetch = await fetch(BASE_URL + ".json")
@@ -87,7 +104,7 @@ async function fetchAllData() {
 async function postNewContactToDatabase(newUser) {
     await fetch(BASE_URL + `/contacts.json`, {
         method: 'POST',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newUser),
@@ -101,7 +118,7 @@ async function postNewContactToDatabase(newUser) {
 async function deleteThisContactFromDatabaseById(contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'DELETE',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
     })
@@ -114,7 +131,7 @@ async function deleteThisContactFromDatabaseById(contactID) {
 async function editContactDataInDatabase(editedUser, contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'PUT',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(editedUser),
@@ -130,3 +147,63 @@ async function getLastContactAddedFromDatabase() {
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
 };
+
+
+async function getContactById(contactID) {
+    try {
+    let contactFetch = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
+    if (!contactFetch.ok) {
+        throw new Error('Network response was not ok');
+    }
+    let contactData = await contactFetch.json();
+    if (contactData === null) {
+        return null;
+    }
+    return contactData;
+    } catch (error) {
+        console.error('Error fetching contact by ID:', error)
+        return null;
+    }
+}
+
+
+async function getAllTaskIdByUserId(userId) {
+    try {
+        let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
+        let joinDataAllTasksByUser = await joinFetchAllTasks.json();
+        let taskIdsByUser = [];
+        for (let taskId in joinDataAllTasksByUser) {
+            taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
+        }
+        if (!joinFetchAllTasks.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return taskIdsByUser;
+    } catch (error) {
+        console.error('Error fetching tasks by user ID:', error);
+    }
+}
+
+
+async function assignNewTaskToUserById(taskId, userId) {
+    try {
+        let userTasksArr = await getAllTaskIdByUserId(userId);
+        let taskObj = {[taskId]: true};
+        if (!userTasksArr) {
+            userTasksArr = [];
+        }
+        userTasksArr.push(taskObj);
+        let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(userTasksArr),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Error assigning task to user: ' + response.status);
+        }
+    } catch (error) {
+        console.error('Error assigning task to user:', error)
+    }
+}

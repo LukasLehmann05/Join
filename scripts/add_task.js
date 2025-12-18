@@ -1,4 +1,6 @@
 const PRIORITY_ARR = ["low", "medium", "urgent"];
+const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
+
 let task_subtask = null;
 let low_prio_button = null;
 let medium_prio_button = null;
@@ -19,7 +21,7 @@ let subtask_buttons_active = false
 let contacts_shown = false
 
 let current_priority = PRIORITY_ARR[1]  // default medium priority
-let stateOfNewTask = "to do"
+let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 
 let req_title = false
 let req_due_date = false
@@ -29,6 +31,8 @@ let allSubtasksArr = []
 let allAssigneesArr = []
 
 let subtask_amount = 0
+let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
+
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
@@ -54,15 +58,15 @@ function loadPrioButtonsAndSubtaskSectionById() {
 }
 
 function loadDataFromAPI() {
-    //let joinData = fetchAllData()
+    let joinData = fetchAllData()
     return joinData
 }
 
 function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
-        sendTaskToDB()
-        clearAllInputs()
+        sendTaskToDB();
+        clearAllInputs();
     } else {
         missingInputs()
 
@@ -70,7 +74,7 @@ function createTask() {
 }
 
 function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr)
+    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
 
@@ -311,6 +315,13 @@ function removeIndicatorOnInput(field) {
         default:
             break;
     }
+}
+
+
+function assignTaskToUserById(userId, taskId) {
+    let allTasksOfUser = [];
+    allTasksOfUser += taskId;
+    updateUserTasksInDB(userId, allTasksOfUser);
 }
 
 function showSubtaskEdit(subtask_id) {
