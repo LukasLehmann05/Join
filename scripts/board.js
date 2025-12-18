@@ -114,7 +114,7 @@ async function renderTaskCard(taskId, task) {
     const container = document.getElementById(containerId);
     container.innerHTML += taskCardTemplate(task, taskId);
     renderSubtaskProgress(taskId, task.subtasks || []);
-    renderAssignedUserIcons(taskId, task.assigned_to || []);
+    await renderAssignedUserIcons(taskId, task.assigned_to || []);
     renderPriorityIndicator(taskId, task.priority, 'priority');
 }
 
