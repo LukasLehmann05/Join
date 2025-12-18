@@ -1,5 +1,5 @@
 /**
- * Handles the drag start event for a task card.
+ * This function handles the drag start event for a task card.
  * 
  * @param {DragEvent} event The drag event object.
  */
@@ -8,7 +8,7 @@ function dragStartHandler(event) {
 }
 
 /**
- * Handles the drag over event for a column.
+ * This function handles the drag over event for a column.
  * 
  * @param {DragEvent} event The drag event object.
  */
@@ -21,7 +21,7 @@ function dragOverHandler(event) {
 }
 
 /**
- * Gets the start and current column IDs during drag over.
+ * This function gets the start and current column IDs during drag over.
  * 
  * @param {DragEvent} event The drag event object.
  * @returns {[string, string]} An array with start and current column IDs.
@@ -41,7 +41,7 @@ function getCurrentColumnId(event) {
 }
 
 /**
- * Clears the last drop acceptance field if the column has changed.
+ * This function clears the last drop acceptance field if the column has changed.
  * 
  * @param {string} currentColumnId The ID of the current column.
  */
@@ -53,7 +53,7 @@ function clearLastDropAcceptanceIfChangedColumn(currentColumnId) {
 }
 
 /**
- * Sets the drop acceptance field in the current column.
+ * This function sets the drop acceptance field in the current column.
  * 
  * @param {string} currentColumnId The ID of the current column.
  */
@@ -64,7 +64,7 @@ function setDropAcceptanceInCurrentColumn(currentColumnId) {
 }
 
 /**
- * Gets the ID of the current column from the event.
+ * This function gets the ID of the current column from the event.
  * 
  * @param {Event} event The event object.
  * @returns {string} The ID of the current column.
@@ -74,7 +74,7 @@ function getIdOfCurrentColumn(event) {
 }
 
 /**
- * Renders the drop acceptance field in a column.
+ * This function renders the drop acceptance field in a column.
  * 
  * @param {string} columnId The ID of the column.
  */
@@ -87,7 +87,7 @@ function renderDropAcceptanceInColumn(columnId) {
 }
 
 /**
- * Removes the "no task" info element from a column.
+ * This function removes the "no task" info element from a column.
  * 
  * @param {string} columnId The ID of the column.
  */
@@ -97,7 +97,7 @@ function removeNoTaskInfoElement(columnId) {
 }
 
 /**
- * Finds and removes the "no task" element from a parent element.
+ * This function finds and removes the "no task" element from a parent element.
  * 
  * @param {HTMLElement} parentElement The parent element to search in.
  */
@@ -110,7 +110,7 @@ function findChildAndRemoveNoTaskElement(parentElement) {
 }
 
 /**
- * Handles the drop event for a task card.
+ * This function handles the drop event for a task card.
  * 
  * @param {DragEvent} event The drop event object.
  */
@@ -128,7 +128,7 @@ function dropHandler(event) {
 }
 
 /**
- * Updates the state of a dropped task and persists the change.
+ * This function updates the state of a dropped task and persists the change.
  * 
  * @param {string} taskId The ID of the task to update.
  * @param {string} newColumnId The ID of the new column.
@@ -150,7 +150,7 @@ async function updateStateOfDroppedTask(taskId, newColumnId) {
 }
 
 /**
- * Removes the drop acceptance field from a column by its ID.
+ * This function removes the drop acceptance field from a column by its ID.
  * 
  * @param {string} columnId The ID of the column.
  */

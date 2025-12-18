@@ -19,7 +19,7 @@ const COLUMN_ID_TO_STATE = Object.fromEntries(
 );
 
 /**
- * Returns the column ID corresponding to a given task state.
+ * This function returns the column ID corresponding to a given task state.
  * 
  * @param {string} state The state of the task.
  * @returns {string} The column ID associated with the given task state.
@@ -29,7 +29,7 @@ function getColumnIdByTaskState(state) {
 }
 
 /**
- * Returns the task state corresponding to a given column ID.
+ * This function returns the task state corresponding to a given column ID.
  * 
  * @param {string} columnId The ID of the column.
  * @returns {string} The task state associated with the given column ID.
@@ -39,7 +39,7 @@ function getTaskStateByColumnId(columnId) {
 }
 
 /**
- * Renders the "no task" info template for a given column.
+ * This function renders the "no task" info template for a given column.
  * 
  * @param {string} columnId The ID of the column to render the info in.
  */
@@ -62,7 +62,7 @@ function renderNoTaskInfo(columnId) {
 }
 
 /**
- * Renders the subtask progress for a task.
+ * This function renders the subtask progress for a task.
  * 
  * @param {string} taskId The ID of the task.
  * @param {Array} subtasksArr Array of subtasks for the task.
@@ -75,7 +75,7 @@ function renderSubtaskProgress(taskId, subtasksArr) {
 }
 
 /**
- * Formats the subtask progress as a string "completed/total".
+ * This function formats the subtask progress as a string "completed/total".
  * 
  * @param {Array} subtasks Array of subtask objects.
  * @returns {string} A string representing completed and total subtasks.
@@ -87,7 +87,7 @@ function formatSubtaskProgress(subtasks) {
 }
 
 /**
- * Renders the subtask status bar for a task.
+ * This function renders the subtask status bar for a task.
  * 
  * @param {string} taskId The ID of the task.
  * @param {Array} subtasksArr Array of subtasks for the task.
@@ -104,7 +104,7 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
 
 
 /**
- * Renders a task card in the appropriate column.
+ * This function renders a task card in the appropriate column.
  * 
  * @param {string} taskId The ID of the task.
  * @param {Object} task The task object to render.
@@ -119,7 +119,7 @@ async function renderTaskCard(taskId, task) {
 }
 
 /**
- * Renders the assigned user icons for a task.
+ * This function renders the assigned user icons for a task.
  * 
  * @param {string} taskId The ID of the task.
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
@@ -138,7 +138,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
 }
 
 /**
- * Returns the initials from a user object.
+ * This function returns the initials from a user object.
  * 
  * @param {Object} user The user object.
  * @returns {string} The initials of the user.
@@ -153,7 +153,7 @@ function getInitialsFromUser(user) {
 }
 
 /**
- * Returns the icon path for a given priority.
+ * This function returns the icon path for a given priority.
  * 
  * @param {string} priority The priority level of the task.
  * @returns {string} The file path to the priority icon.
@@ -171,7 +171,7 @@ function getIconForPriority(priority) {
 }
 
 /**
- * Renders the priority indicator for a task.
+ * This function renders the priority indicator for a task.
  * 
  * @param {string} taskId The ID of the task.
  * @param {string} taskPriority The priority of the task.
@@ -184,7 +184,7 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
 }
 
 /**
- * Displays a new task on the board.
+ * This function displays a new task on the board.
  * 
  * @param {string} newTaskId The ID of the new task.
  * @param {Object} newTask The new task object.
@@ -196,7 +196,7 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
 }
 
 /**
- * Renders "no task" info for all columns on DOM load.
+ * This function renders "no task" info for all columns on DOM load.
  */
 function renderNoTaskInfoOnDOMLoad(){
     BOARD_COLUMN_ID_ARR.forEach(columnId => {
@@ -205,7 +205,7 @@ function renderNoTaskInfoOnDOMLoad(){
 }
 
 /**
- * Checks if a column has no tasks and renders "no task" info if needed.
+ * This function checks if a column has no tasks and renders "no task" info if needed.
  * 
  * @param {string} columnId The ID of the column to check.
  */
@@ -219,7 +219,7 @@ function checkIfNoTasksInColumn(columnId) {
 }
 
 /**
- * Observes a column for becoming empty and renders "no task" info.
+ * This function observes a column for becoming empty and renders "no task" info.
  * 
  * @param {string} columnId The ID of the column to observe.
  */
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /**
- * Initializes the board for a user.
+ * This function initializes the board for a user.
  * 
  * @param {string} userId The ID of the user whose board is initialized.
  */
@@ -265,7 +265,7 @@ async function initializeBoard(userId) {
 
 
 /**
- * Refreshes a task card on the board after an update.
+ * This function refreshes a task card on the board after an update.
  * 
  * @param {string} taskId The ID of the task to refresh.
  * @param {Object} taskToUpdate The updated task object.
