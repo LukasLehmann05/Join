@@ -26,8 +26,8 @@ const colours = [
  * @global AllData
  */
 async function fetchContactList() {
-    await fetchAllDataGlobal();
-    let contactData = AllData.data.contacts;
+    let data = await fetchAllDataGlobal();
+    let contactData = data.contacts
     for (let contactID in contactData) {
         colorUser(contactID);
         let name = contactData[contactID].name;
