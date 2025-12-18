@@ -177,28 +177,17 @@ function closeOverlay(event) {
 
 
 /**
- * This function removes the 'show' class from overlay elements and optionally saves changes.
+ * This function removes the 'show' class from overlay elements and optionally triggers actions
+ * such as saving, editing, or creating a task, depending on the data attributes of the button element.
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
- * @param {string} taskId The ID of the task to save (optional).
+ * @param {string} taskId The ID of the task to save or edit (optional).
  */
 function removeShowClass(buttonElement, taskId) {
-    const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonSaveStateOfSubtasksAndCloseOverlay) {
-        sendUpdatedTaskToDB(taskId);        
-    }
-
-    const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonEditTaskAndCloseOverlay) {
-        clearElementsOfNewTask();
-        getAllFieldValuesOfEditTaskWhenUpdated();
-        sendUpdatedTaskToDB(taskId);        
-    }
-
-    const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonCreateTaskAndCloseOverlay) {
-        createTask();
-    }
+    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
+    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+    handleButtonAddActionAndCloseOverlay(buttonElement);
+   
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
 
@@ -210,6 +199,52 @@ function removeShowClass(buttonElement, taskId) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
         }, 500);
+    }
+}
+
+
+/**
+ * This function checks if the button has the data attribute for saving the task and closing the overlay,
+ * and if so, saves the updated task to the database.
+ * 
+ * @param {HTMLElement} buttonElement The button element that triggered the action.
+ * @param {string} taskId The ID of the task to save.
+ */
+function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
+    const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonSaveStateOfSubtasksAndCloseOverlay) {
+        sendUpdatedTaskToDB(taskId);        
+    }
+}
+
+
+/**
+ * This function checks if the button has the data attribute for editing the task and closing the overlay,
+ * and if so, collects the updated field values and saves the task to the database.
+ * 
+ * @param {HTMLElement} buttonElement The button element that triggered the action.
+ * @param {string} taskId The ID of the task to edit.
+ */
+function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
+     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonEditTaskAndCloseOverlay) {
+        clearElementsOfNewTask();
+        getAllFieldValuesOfEditTaskWhenUpdated();
+        sendUpdatedTaskToDB(taskId);        
+    }
+}
+
+
+/**
+ * This function checks if the button has the data attribute for creating a new task and closing the overlay,
+ * and if so, triggers the creation of a new task.
+ * 
+ * @param {HTMLElement} buttonElement The button element that triggered the action.
+ */
+function handleButtonAddActionAndCloseOverlay(buttonElement) {
+     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonCreateTaskAndCloseOverlay) {
+        createTask();
     }
 }
 
