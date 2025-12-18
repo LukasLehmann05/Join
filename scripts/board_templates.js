@@ -1,3 +1,7 @@
+/**
+ * This function returns the HTML template for the "No tasks to do" info.
+ * @returns {string} The HTML string for the info template.
+ */
 function noTasksDoToTemplate() {
     return  ` 
             <div class="no_task_yet">
@@ -6,6 +10,10 @@ function noTasksDoToTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the "No tasks in progress" info.
+ * @returns {string} The HTML string for the info template.
+ */
 function noTaskInProgressTemplate() {
     return  ` 
             <div class="no_task_yet">
@@ -14,6 +22,10 @@ function noTaskInProgressTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the "No tasks for feedback" info.
+ * @returns {string} The HTML string for the info template.
+ */
 function noTaskInFeedbackTemplate() {
     return  ` 
             <div class="no_task_yet">
@@ -22,6 +34,10 @@ function noTaskInFeedbackTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the "No tasks done" info.
+ * @returns {string} The HTML string for the info template.
+ */
 function noTaskDoneTemplate() {
     return  ` 
             <div class="no_task_yet">
@@ -30,12 +46,22 @@ function noTaskDoneTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the drop acceptance field.
+ * @returns {string} The HTML string for the drop acceptance field.
+ */
 function showDropAcceptanceTemplate() {
     return  `
             <div class="drop_acceptance"></div>
             `
 }
 
+/**
+ * This function returns the HTML template for a task card.
+ * @param {Object} task The task object.
+ * @param {string} taskId The ID of the task.
+ * @returns {string} The HTML string for the task card.
+ */
 function taskCardTemplate(task, taskId) {
     return  `
             <div class="single_task_content" 
@@ -64,6 +90,11 @@ function taskCardTemplate(task, taskId) {
             `
 }
 
+/**
+ * This function returns the HTML template for an assigned user icon.
+ * @param {string} initials The initials of the user.
+ * @returns {string} The HTML string for the user icon.
+ */
 function assignedUserIconTemplate(initials) {
      return `
             <div class="assigned_user_avatar" style="background-color: #${Math.floor(Math.random()*16777215).toString(16)};">
@@ -72,12 +103,23 @@ function assignedUserIconTemplate(initials) {
             `
 }
 
-function priorityIndicatorTemplate( iconPath) {
+/**
+ * This function returns the HTML template for the priority indicator.
+ * @param {string} iconPath The file path to the priority icon.
+ * @returns {string} The HTML string for the priority indicator.
+ */
+function priorityIndicatorTemplate(iconPath) {
     return `
             <img src="${iconPath}" alt="Priority Icon" />
             `
 }
 
+/**
+ * This function returns the HTML template for the overlay content of a task.
+ * @param {Object} task The task object.
+ * @param {string} taskId The ID of the task.
+ * @returns {string} The HTML string for the overlay content.
+ */
 function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
@@ -135,12 +177,24 @@ function overlayContentTemplate(task, taskId) {
             `
 }
 
+/**
+ * This function returns the HTML template for an assigned user's name.
+ * @param {string} userName The name of the user.
+ * @returns {string} The HTML string for the user's name.
+ */
 function assignedUserNameTemplate(userName) {
     return  `
                 <p>${userName}</p>
             `;
 }
 
+/**
+ * This function returns the HTML template for a subtask list item.
+ * @param {string} taskId The ID of the task.
+ * @param {string} title The title of the subtask.
+ * @param {number} counter The index of the subtask.
+ * @returns {string} The HTML string for the subtask list item.
+ */
 function subtasksListItemTemplate(taskId, title, counter) {
     return `
             <div class="subtask_list_item">
@@ -154,6 +208,13 @@ function subtasksListItemTemplate(taskId, title, counter) {
             `;
 }
 
+/**
+ * This function returns the HTML template for the upsert task overlay.
+ * @param {string} taskId The ID of the task.
+ * @param {string} confirmButtonText The text for the confirm button.
+ * @param {string} selectedTaskFunction The function to call on confirm.
+ * @returns {string} The HTML string for the upsert task overlay.
+ */
 function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFunction) {
     return  `
             <header class="overlay_header upsert_overlay_header">
@@ -185,6 +246,11 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, selectedTaskFuncti
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert task title input.
+ * @param {string} taskTitle The title of the task.
+ * @returns {string} The HTML string for the title input.
+ */
 function overlayUpsertTaskTitleTemplate(taskTitle) {
     return  `
              <section class="upsert_title_container">
@@ -204,6 +270,11 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert task description input.
+ * @param {string} taskDescription The description of the task.
+ * @returns {string} The HTML string for the description input.
+ */
 function overlayUpsertTaskDescriptionTemplate(taskDescription) {
     return  `
             <section class="upsert_description_container">
@@ -219,6 +290,11 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert task due date input.
+ * @param {string} taskDueDate The due date of the task.
+ * @returns {string} The HTML string for the due date input.
+ */
 function overlayUpsertTaskDueDateTemplate(taskDueDate) {
     return  `
             <section class="upsert_due_date_container">
@@ -238,6 +314,10 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert task priority selection.
+ * @returns {string} The HTML string for the priority selection.
+ */
 function overlayUpsertTaskPriorityTemplate() {
     return  `
             <section class="upsert_priority_container">
@@ -274,6 +354,10 @@ function overlayUpsertTaskPriorityTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert assigned users section.
+ * @returns {string} The HTML string for the assigned users section.
+ */
 function overlayUpsertTaskAssignedUsersTemplate() {
     return  `
             <section class="upsert_assigned_users_container">
@@ -296,6 +380,11 @@ function overlayUpsertTaskAssignedUsersTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert subtasks section.
+ * @param {string} taskId The ID of the task.
+ * @returns {string} The HTML string for the subtasks section.
+ */
 function overlayUpsertTaskSubtasksTemplate(taskId) {
     return  `
             <section class="upsert_subtasks_container">
@@ -325,7 +414,10 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
             `
 }
 
-
+/**
+ * This function returns the HTML template for the upsert category option selection.
+ * @returns {string} The HTML string for the category option selection.
+ */
 function overlayUpsertCategoryOptionTemplate() {
     return `
             <section class="upsert_category_container">
@@ -342,6 +434,10 @@ function overlayUpsertCategoryOptionTemplate() {
             `
 }
 
+/**
+ * This function returns the HTML template for the upsert task details container.
+ * @returns {string} The HTML string for the task details container.
+ */
 function overlayUpsertTaskDetailsContainerTemplate() {
     return  `
             <section class="task_details_container" id="task_details_container_1"></section>
