@@ -148,7 +148,8 @@ dialog[open] {
    transform: translateX(0);
 }
 
-.margin-add-dialog{
+.margin-add-dialog {
    margin-top: -30px;
    height: 0px;
 }
+

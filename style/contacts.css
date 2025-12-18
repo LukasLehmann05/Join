@@ -30,11 +30,27 @@
 }
 
 .add-contact-btn {
-    padding-top: 20px;
+    display: flex;
+    align-items: center;
     margin-top: 20px;
     padding: 8px 80px !important;
     margin-right: auto;
     margin-left: auto;
+    gap: 10px;
+    cursor: pointer;
+    color: white;
+    font-family: "Inter_bold";
+    font-size: 21px;
+    background-color: #2A3647;
+    border: none;
+    border-radius: 10px;
+    position: sticky;
+    top: 0px;
+}
+
+.add-contact-btn:hover{
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .separator-list {
@@ -233,25 +249,3 @@
     background: url("../assets/icons/board/edit_button_hover.svg") center / contain no-repeat;
 }
 
-@media (max-width: 767px) {
-    .contact-display {
-        display: none;
-    }
-
-    .sidebar-contacts {
-        width: 100%;
-    }
-
-    .add-contact-btn {
-        
-       padding: 0;
-        border-radius: 50px;
-        width: 32px;
-        height: 32px;
-        font-size: 0;
-        align-items: center;
-        align-content: center;
-    }
-
-
-}
