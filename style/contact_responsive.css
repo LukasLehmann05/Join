@@ -1,0 +1,23 @@
+@media (max-width: 767px) {
+    .contact-display {
+        display: none;
+    }
+
+    .sidebar-contacts {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .add-contact-btn {
+        width: 32px;
+        border-radius: 50px;
+        font-size: 0;
+        justify-content: center;
+        bottom: 80px;
+        padding: 0;
+    }
+
+    
+
+}
