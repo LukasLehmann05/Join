@@ -10,6 +10,11 @@ let newSubtasksArr = [];
 let newState = "";
 
 
+/**
+ * This function sends the updated task to the database and refreshes the board.
+ * 
+ * @param {string} taskId The ID of the task to update.
+ */
 async function sendUpdatedTaskToDB(taskId) {
     let taskToUpdate = await getTaskToUpdate(taskId);
     allTasksOfSingleUserObj[taskId] = taskToUpdate;
@@ -21,6 +26,12 @@ async function sendUpdatedTaskToDB(taskId) {
 }
 
 
+/**
+ * This function retrieves the updated task object with new field values.
+ * 
+ * @param {string} taskId The ID of the task to update.
+ * @returns {Promise<Object>} The updated task object.
+ */
 async function getTaskToUpdate(taskId) {
     let taskToUpdate = await getTaskById(taskId);
     if (newTitle !== "") taskToUpdate.title = newTitle;
@@ -35,6 +46,9 @@ async function getTaskToUpdate(taskId) {
 }
 
 
+/**
+ * This function collects all field values from the edit task form when updated.
+ */
 function getAllFieldValuesOfEditTaskWhenUpdated() {
     newTitle = document.getElementById('task_title').value;
     newDescription = document.getElementById('task_description').value;
@@ -45,6 +59,11 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
 }
 
 
+/**
+ * This function opens a task in the overlay and renders its content.
+ * 
+ * @param {string} taskId The ID of the task to open.
+ */
 async function openTaskInOverlay(taskId) {
     clearElementsOfNewTask();
     document.getElementById('overlay').classList.add('show');
@@ -55,6 +74,9 @@ async function openTaskInOverlay(taskId) {
 }
 
 
+/**
+ * This function clears all temporary variables for a new or edited task.
+ */
 function clearElementsOfNewTask() {
     newTitle = "";
     newCategory = "";
@@ -67,6 +89,11 @@ function clearElementsOfNewTask() {
 }
 
 
+/**
+ * This function renders the overlay content for a given task.
+ * 
+ * @param {string} taskId The ID of the task to render in the overlay.
+ */
 async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     let task = allTasksOfSingleUserObj[taskId];
@@ -78,6 +105,13 @@ async function renderOverlayContent(taskId) {
 }
 
 
+/**
+ * This function renders the assigned user infos in the overlay.
+ * 
+ * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
+ * @param {boolean} onlyId Whether to render only the ID/icon or also the name.
+ * @param {string} containerIdSuffix The ID of the container to render into.
+ */
 async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix) {
     let container = document.getElementById(containerIdSuffix);
     getAssigneesOfTask(taskAssignees);
@@ -91,6 +125,11 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
 }
 
 
+/**
+ * This function updates the global assignees array for the current task.
+ * 
+ * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
+ */
 function getAssigneesOfTask(taskAssignees) {
     allAssigneesArr = [];
     for (let contactId of taskAssignees) {
@@ -99,6 +138,13 @@ function getAssigneesOfTask(taskAssignees) {
 }
 
 
+/**
+ * This function returns the HTML content to render assigned user infos.
+ * 
+ * @param {boolean} renderOnlyId Whether to render only the ID/icon or also the name.
+ * @param {Object} user The user object.
+ * @returns {string} The HTML string for the assigned user info.
+ */
 function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
     if(renderOnlyId) {
         return  `   <div class="assigned_user_content">
@@ -116,42 +162,11 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
 }
 
 
-function renderSubtasksListItems(taskId, subtasksArr) {
-    let containerId = taskId + '_subtasks_list';
-    let container = document.getElementById(containerId);
-    let subtaskCounter = 0;
-    getSubtasksOfTask(subtasksArr);
-    for (let subtask of allSubtasksArr) {
-        subtaskCounter += 1;
-        let subtaskHtml = subtasksListItemTemplate(taskId, subtask.title, subtaskCounter);
-        container.innerHTML += subtaskHtml;
-        renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtask.done);
-    }
-}
-
-
-function getSubtasksOfTask(subtasksArr) {
-    allSubtasksArr = [];
-    for (let subtask of subtasksArr) {
-        let subtaskObj = { title: subtask.title, done: subtask.done };
-        allSubtasksArr.push(subtaskObj);
-    }
-}
-
-
-function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
-    const doneImgPath ="../assets/icons/board/checkbox_done.svg"; 
-    const undoneImgPath ="../assets/icons/board/checkbox_undone.svg";
-    let checkboxCustomId = taskId + '_subtask_checkbox_custom_' + subtaskCounter;
-    let checkboxCustomElement = document.getElementById(checkboxCustomId);
-    if (subtaskDone) {
-        checkboxCustomElement.innerHTML = `<img src="${doneImgPath}" alt="checkbox done icon">`;
-    } else {
-        checkboxCustomElement.innerHTML = `<img src="${undoneImgPath}" alt="checkbox undone icon">`;
-    }
-}
-
-
+/**
+ * This function closes the overlay if the background is clicked.
+ * 
+ * @param {Event} event The click event object.
+ */
 function closeOverlay(event) {
     if(event.target === event.currentTarget) {
         removeShowClass();
@@ -159,6 +174,12 @@ function closeOverlay(event) {
 }
 
 
+/**
+ * This function removes the 'show' class from overlay elements and optionally saves changes.
+ * 
+ * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
+ * @param {string} taskId The ID of the task to save (optional).
+ */
 function removeShowClass(buttonElement, taskId) {
     const buttonSaveOverlayWhenClosed = buttonElement ? buttonElement.getAttribute('data-save-task-when-close-overlay') === 'true' : false;
     if (buttonSaveOverlayWhenClosed) {
@@ -180,6 +201,12 @@ function removeShowClass(buttonElement, taskId) {
 }
 
 
+/**
+ * This function swaps the image and text style on hover for a button.
+ * 
+ * @param {HTMLElement} button The button element.
+ * @param {boolean} isHover Whether the button is being hovered.
+ */
 function swapImage(button, isHover) {
     const img = button.querySelector('img');
     const normalSrc = button.getAttribute('data-normal-src');
@@ -196,16 +223,11 @@ function swapImage(button, isHover) {
 }
 
 
-function toggleSubtaskDone(taskId, subtaskCounter) {
-    let task = allTasksOfSingleUserObj[taskId];
-    let subtaskIndex = subtaskCounter - 1;
-    task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
-    renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
-    renderSubtaskProgress(taskId, task.subtasks);
-    newSubtasksArr = task.subtasks;
-}
-
-
+/**
+ * This function opens the edit overlay for a task and renders its content.
+ * 
+ * @param {string} taskId The ID of the task to edit.
+ */
 async function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
@@ -218,6 +240,12 @@ async function openEditTaskOverlay(taskId) {
 }
 
 
+/**
+ * This function updates the task elements with new values and closes the overlay.
+ * 
+ * @param {HTMLElement} button The button element that triggered the update.
+ * @param {string} taskId The ID of the task to update.
+ */
 function updateTaskElements(button, taskId) {
     clearElementsOfNewTask();
     getAllFieldValuesOfEditTaskWhenUpdated();
@@ -225,6 +253,11 @@ function updateTaskElements(button, taskId) {
 }
 
 
+/**
+ * This function handles rendering the upsert task template containers.
+ * 
+ * @param {string} taskId The ID of the task to add or edit.
+ */
 function upsertTaskTemplateHandler(taskId){
     renderOverlayUpsertTaskDetailsContainer();
     upsertTaskTemplatesWrapperContainer1(taskId);
@@ -232,6 +265,9 @@ function upsertTaskTemplateHandler(taskId){
 }
    
 
+/**
+ * This function renders the main details container for the upsert task overlay.
+ */
 function renderOverlayUpsertTaskDetailsContainer() {
     let mainContent = document.getElementById('overlay_main_content');
     let detailContainerHtml = overlayUpsertTaskDetailsContainerTemplate();
@@ -239,6 +275,11 @@ function renderOverlayUpsertTaskDetailsContainer() {
 }
 
 
+/**
+ * This function renders the first wrapper container for the upsert task overlay.
+ * 
+ * @param {string} taskId The ID of the task to add or edit.
+ */
 function upsertTaskTemplatesWrapperContainer1(taskId){
     let task = checkTaskToAddOrEdit(taskId);
     let escapeTaskDescription = escapeTextareaContent(task.description);
@@ -250,6 +291,11 @@ function upsertTaskTemplatesWrapperContainer1(taskId){
 }
 
 
+/**
+ * This function renders the second wrapper container for the upsert task overlay.
+ * 
+ * @param {string} taskId The ID of the task to add or edit.
+ */
 function upsertTaskTemplatesWrapperContainer2(taskId){
     let taskDetailsContainer2 = document.getElementById('task_details_container_2');
     taskDetailsContainer2.innerHTML = `
@@ -260,6 +306,12 @@ function upsertTaskTemplatesWrapperContainer2(taskId){
 }
 
 
+/**
+ * This function checks if a task is being added or edited and returns the appropriate object.
+ * 
+ * @param {string} taskId The ID of the task.
+ * @returns {Object} The task object to add or edit.
+ */
 function checkTaskToAddOrEdit(taskId) {
     if (taskId.startsWith('new_task_id_')) {
         return createEmptyTask();
@@ -269,6 +321,11 @@ function checkTaskToAddOrEdit(taskId) {
 }
 
 
+/**
+ * This function creates and returns an empty task object.
+ * 
+ * @returns {Object} An empty task object.
+ */
 function createEmptyTask() {
     return {
         assigned_to: [],
@@ -283,18 +340,12 @@ function createEmptyTask() {
 }
 
 
-function renderSubtaskEditListItems(subtasksArr) {
-    allSubtasksArr = [];
-    subtask_list = document.getElementById('subtask_render');
-    for (let subtask of subtasksArr) {
-        let subtaskTitleHtml = returnSubtaskTemplate(subtask.title);
-        subtask_list.innerHTML += subtaskTitleHtml;
-        let subtaskObj = { title: subtask.title, done: subtask.done };
-        allSubtasksArr.push(subtaskObj);
-    }
-}
-
-
+/**
+ * This function escapes special characters in textarea content for safe HTML rendering.
+ * 
+ * @param {string} text The text to escape.
+ * @returns {string} The escaped text.
+ */
 function escapeTextareaContent(text) {
     return text
         .replace(/&/g, "&amp;")
@@ -303,6 +354,9 @@ function escapeTextareaContent(text) {
 }
 
 
+/**
+ * This function opens the overlay for adding a new task and initializes the form.
+ */
 async function openAddTaskOverlay() {
     allAssigneesArr = [];
     allSubtasksArr = [];
@@ -318,6 +372,12 @@ async function openAddTaskOverlay() {
 }
 
 
+/**
+ * This function renders the overlay content for adding a new task.
+ * 
+ * @param {string} taskId The ID of the new task.
+ * @returns {Promise<void>} A promise that resolves when rendering is complete.
+ */
 function renderOverlayAddTask(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
@@ -328,6 +388,9 @@ function renderOverlayAddTask(taskId) {
 }
 
 
+/**
+ * This function toggles the visibility of the title/category separator and related elements in the add task overlay.
+ */
 function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('overlay_title').classList.toggle('show');
     document.getElementsByClassName('upsert_category_container')[0].classList.toggle('show');
