@@ -54,30 +54,30 @@ function addDialogHTML() {
                    </div>
                    <div class="add-contact-info">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'addContent')">
-                           <img class="icon-close" src="../assets/icons/contacts/close.svg"
+                             <picture>
+                               <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">
+                               <img class="icon-close" src="../assets/icons/contacts/close.svg"
                                alt="close overlay icon">
+                             </picture>
                        </button>
-                       <label class="subtask-section name">
+                       <label class="subtask-section name label-responsiv">
                            <input id="nameAdd" type="text" placeholder="Name">
                        </label>
                        <p id="required_name" class="required-info margin-add-dialog">Please enter a name.</p>
-                       <label class="subtask-section mail">
+                       <label class="subtask-section mail label-responsiv">
                            <input id="emailAdd" type="email" placeholder="Email">
                        </label>
                        <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email
                            address.</p>
-                       <label class="subtask-section phone">
+                       <label class="subtask-section phone label-responsiv">
                            <input id="phoneAdd" type="tel" placeholder="Phone">
                        </label>
                        <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone
                            number.</p>
                        <section class="button-section-contact">
-                           <div class="clear-button">
+                           <div class="cancel-add-btn">
                                <button onclick="closeDialog('dialogWindow' ,'addContent') , emptyInput()"
-                                   class="action-buttons">
-                                   <p>Cancel</p>
-                                   <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                               </button>
+                                   class="action-buttons">Cancel</button>
                            </div>
                            <div class="create-task">
                                <button onclick="addNewContactToDatabase()" class="action-buttons create-button">
