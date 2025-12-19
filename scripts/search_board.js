@@ -1,4 +1,4 @@
-let search_event=false;
+let searchEvent=false;
 /**
  * This function initializes the input field event listener for task filtering.
  * It adds a debounced input event listener to the input field with ID 'task_filter_input_field'.
@@ -22,7 +22,6 @@ function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
  */
 function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
     let inputText = event.target.value.toLowerCase();
-    event.preventDefault();
     handleInputSubmit(inputText, allTasksByIdOfSingleUserArr);
 }
 
@@ -34,12 +33,12 @@ function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
  */
 async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
     if (inputText.length > 2) {
-        search_event=true;
+        searchEvent = true;
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
         searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription);
     } else {
-        search_event=false;
+        searchEvent = false;
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
         renderNoTaskInfoOnDOMLoad();
@@ -59,6 +58,10 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
     } else if (filteredByDescription.length > 0) {
         clearBoard();
         renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
+    } else if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
+        clearBoard();
+        let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
+        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksOfSingleUserObj());
     } else {
         clearBoard();
         renderNoSearchResultOnBoardOverlay();
@@ -92,11 +95,11 @@ function renderNoSearchResultOnBoardOverlay() {
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
         document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
-        toggleDialog(id);
+        toggleSearchConflictDialog(id);
     }, 100)
     document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
-        toggleDialog(id);
+        toggleSearchConflictDialog(id);
     }, 3100)
 }
 
@@ -105,7 +108,7 @@ function renderNoSearchResultOnBoardOverlay() {
  * 
  * @param {string} id The ID of the dialog element to toggle.
  */
-function toggleDialog(id) {
+function toggleSearchConflictDialog(id) {
     let dialog = document.getElementById(id);
     dialog.open = true;
     setTimeout(() => {
