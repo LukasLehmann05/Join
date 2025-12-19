@@ -2,7 +2,6 @@ let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
 let allTasksOfSingleUserObj = {};
-let filterdTasksOfSingleUserObj = {};
 
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
@@ -217,6 +216,15 @@ function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
 }
 
 /**
+ * This function returns all tasks of the single user object.
+ * 
+ * @returns {Object} The allTasksOfSingleUserObj object.
+ */
+function getAllTasksOfSingleUserObj() {
+    return allTasksOfSingleUserObj;
+}
+
+/**
  * This function renders "no task" info for all columns on DOM load.
  */
 function renderNoTaskInfoOnDOMLoad(){
@@ -313,18 +321,45 @@ async function refreshTaskOnBoard(taskId, taskToUpdate) {
     }
 }
 
-
+/**
+ * This function handles the input submission for task filtering.
+ * 
+ * @param {string} inputText The text input for filtering tasks.
+ */
 function handleInputSubmit(inputText) {
-    filterdTasksOfSingleUserObj = {};
     if (inputText.length > 2) {
-        filterTasksByTitle(inputText);
-        filterTaskByDescription(inputText);
-        if(Object.keys(filterdTasksOfSingleUserObj).length === 0){
-            renderNoSearchResultOnBoard();
+        let filteredByTitle = filterTaskIdsByField(inputText, 'title');
+        let filteredByDescription = filterTaskIdsByField(inputText, 'description');
+        if (filteredByTitle.length > 0) {
+            renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
+        } else if (filteredByDescription.length > 0) {
+            renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
         } else {
-            renderFilteredTasksOnBoard();
+            renderNoSearchResultOnBoardOverlay();
         }
     } else {
-        renderNoSearchResultOnBoard();
+        renderNoSearchResultOnBoardOverlay();
     }
+}
+
+/**
+ * Filters task IDs by a given field and input text.
+ * @param {string} inputText The text to search for.
+ * @param {string} field The field to search in ('title' or 'description').
+ * @returns {Array} Array of filtered task ID objects.
+ */
+function filterTaskIdsByField(inputText, field) {
+    let filteredTaskIdsArr = [];
+    for (let taskId in allTasksOfSingleUserObj) {
+        let task = allTasksOfSingleUserObj[taskId];
+        if (task[field] && task[field].toLowerCase().includes(inputText.toLowerCase())) {
+            let taskIdObj = {};
+            taskIdObj[taskId] = true;
+            filteredTaskIdsArr.push(taskIdObj);
+        }
+    }
+    return filteredTaskIdsArr;
+}
+
+function renderNoSearchResultOnBoardOverlay() {
 }
