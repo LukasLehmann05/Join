@@ -418,16 +418,14 @@ function filterTaskIdsByField(inputText, field) {
 
 function renderNoSearchResultOnBoardOverlay() {
     setTimeout(() => {
-        // document.getElementsByTagName("body")[0].style.overflow = "hidden";
+        document.getElementsByTagName("body")[0].style.overflow = "hidden";
+        document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
         openDialog('responseDialog', 'responseDialog');
-    }, 1500)
-    // document.getElementsByTagName("body")[0].style.overflow = "auto";
+    }, 100)
+    document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
         closeDialog('responseDialog', 'responseDialog');
     }, 3500)
-    setTimeout(() => {
-        document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
-    }, 4000)
 }
 
 
