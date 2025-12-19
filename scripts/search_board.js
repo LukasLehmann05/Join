@@ -1,3 +1,4 @@
+let search_event=false;
 /**
  * This function initializes the input field event listener for task filtering.
  * It adds a debounced input event listener to the input field with ID 'task_filter_input_field'.
@@ -10,7 +11,7 @@ function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
         clearTimeout(debounceTimeout);
         debounceTimeout = setTimeout(() => {
             handleTermOfInput(event, allTasksByIdOfSingleUserArr);
-        }, 500);
+        }, 300);
     });
 }
 
@@ -33,6 +34,7 @@ function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
  */
 async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
     if (inputText.length > 2) {
+        search_event=true;
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
         if (filteredByTitle.length > 0) {
@@ -42,12 +44,14 @@ async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
             clearBoard();
             renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
         } else {
+            clearBoard();
             renderNoSearchResultOnBoardOverlay();
         }
-        renderNoTaskInfoOnDOMLoad();
     } else {
+        search_event=false;
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
+        renderNoTaskInfoOnDOMLoad();
     }
 }
 

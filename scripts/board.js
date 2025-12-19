@@ -277,7 +277,7 @@ function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
     if (!container) return;
     const observer = new MutationObserver(() => {
-        if (container.innerHTML.trim() === '') {
+        if (container.innerHTML.trim() === '' && search_event === false) {
             renderNoTaskInfo(columnId);
         }
     });
