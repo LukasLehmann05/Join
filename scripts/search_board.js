@@ -21,7 +21,7 @@ function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
  * @param {*} event The input event object.
  */
 function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
-    let inputText = event.target.value.toLowerCase();
+    let inputText = event.target.value;
     handleInputSubmit(inputText, allTasksByIdOfSingleUserArr);
 }
 
@@ -110,7 +110,7 @@ function renderNoSearchResultOnBoardOverlay() {
  */
 function toggleSearchConflictDialog(id) {
     let dialog = document.getElementById(id);
-    dialog.open = true;
+    dialog.showModal();
     setTimeout(() => {
         document.getElementById(id).classList.toggle('show');
     }, 100)
