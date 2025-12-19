@@ -37,21 +37,31 @@ async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
         search_event=true;
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
-        if (filteredByTitle.length > 0) {
-            clearBoard();
-            renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
-        } else if (filteredByDescription.length > 0) {
-            clearBoard();
-            renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
-        } else {
-            clearBoard();
-            renderNoSearchResultOnBoardOverlay();
-        }
+        searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription);
     } else {
         search_event=false;
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
         renderNoTaskInfoOnDOMLoad();
+    }
+}
+
+/**
+ * This function applies the search filter logic to the task board.
+ * 
+ * @param {Array} filteredByTitle 
+ * @param {Array} filteredByDescription 
+ */
+function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
+    if (filteredByTitle.length > 0) {
+        clearBoard();
+        renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
+    } else if (filteredByDescription.length > 0) {
+        clearBoard();
+        renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
+    } else {
+        clearBoard();
+        renderNoSearchResultOnBoardOverlay();
     }
 }
 
