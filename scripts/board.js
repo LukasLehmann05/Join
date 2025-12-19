@@ -416,33 +416,33 @@ function filterTaskIdsByField(inputText, field) {
     return filteredTaskIdsArr;
 }
 
+/**
+ * This function renders a "no search result" message on the board overlay.
+ */
 function renderNoSearchResultOnBoardOverlay() {
+    let id = 'responseDialog';
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
         document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
-        openDialog('responseDialog', 'responseDialog');
+        toggleDialog(id);
     }, 100)
     document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
-        closeDialog('responseDialog', 'responseDialog');
-    }, 3500)
+        toggleDialog(id);
+    }, 3100)
 }
 
-
-function openDialog(id, id2) {
+/**
+ * This function toggles the visibility of a dialog.
+ * 
+ * @param {string} id The ID of the dialog element to toggle.
+ */
+function toggleDialog(id) {
     let dialog = document.getElementById(id);
     dialog.open = true;
     setTimeout(() => {
-        document.getElementById(id2).classList.add('show');
+        document.getElementById(id).classList.toggle('show');
     }, 10)
-};
-
-function closeDialog(id, id2) {
-    let dialog = document.getElementById(id);
-    document.getElementById(id2).classList.remove('show');
-    setTimeout(() => {
-        dialog.open = false;
-    }, 1000)
 };
 
 

@@ -1,7 +1,7 @@
 /**
  * opens dialog window.
  */
-function openDialog(id, id2) {
+function toggleDialog(id, id2) {
     let dialog = document.getElementById(id);
     dialog.open = true;
     setTimeout(() => {
@@ -138,7 +138,7 @@ function removeThisContactFromList(id) {
 function responseMessageAppearance() {
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
-        openDialog('responseDialog', 'responseDialog');
+        toggleDialog('responseDialog', 'responseDialog');
     }, 1500)
     document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
