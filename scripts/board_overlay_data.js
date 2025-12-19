@@ -169,9 +169,9 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
  * 
  * @param {Event} event The click event object.
  */
-function closeOverlay(event) {
+function closeOverlayByBackdrop(event) {
     if(event.target === event.currentTarget) {
-        removeShowClass();
+        closeOverlay();
     }
 }
 
@@ -183,7 +183,7 @@ function closeOverlay(event) {
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
-function removeShowClass(buttonElement, taskId) {
+function closeOverlay(buttonElement, taskId) {
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     handleButtonAddActionAndCloseOverlay(buttonElement);
