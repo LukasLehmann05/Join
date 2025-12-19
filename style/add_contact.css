@@ -78,18 +78,21 @@ dialog[open] {
 
 .name::after {
    content: "";
+   min-width: 24px;
    width: 24px;
    background: url("../assets/icons/contacts/person.svg") center / contain no-repeat;
 }
 
 .mail::after {
    content: "";
+   min-width: 24px;
    width: 24px;
    background: url("../assets/icons/contacts/mail.svg") center / contain no-repeat;
 }
 
 .phone::after {
    content: "";
+   min-width: 24px;
    width: 24px;
    background: url("../assets/icons/contacts/call.svg") center / contain no-repeat;
 }
@@ -121,11 +124,6 @@ dialog[open] {
    height: 24px;
 }
 
-.cancel-btn {
-   display: flex;
-   justify-content: flex-start;
-}
-
 .button-section-contact {
    display: flex;
    gap: 16px;
@@ -153,3 +151,25 @@ dialog[open] {
    height: 0px;
 }
 
+.cancel-add-btn ::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../assets/icons/contacts/close.svg") center / contain no-repeat;
+}
+
+.cancel-add-btn :hover::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../assets/icons/contacts/close_hover.svg") center / contain no-repeat;
+}
+
+.cancel-add-btn :hover {
+   border-color: #29ABE2;
+   color: #29ABE2;
+}
+
+.cancel-add-btn img:hover {
+   fill: #29ABE2;
+}
