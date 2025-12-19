@@ -25,17 +25,115 @@
         margin-left: -7px;
     }
 
-    .contact-list{
+    .contact-list {
         padding: 17px 4%;
     }
 
-    .single-letter{
+    .single-letter {
         padding: 17px 4%;
     }
 
-    .list-user{
+    .list-user {
         padding-left: 4%;
     }
+
+    .dialog-window {
+        padding: 0;
+    }
+
+    .dialog-content {
+        flex-direction: column;
+        min-width: 0;
+        height: auto;
+
+        margin: 80px 4%;
+
+    }
+
+    .logo-dialog {
+        display: none;
+    }
+
+    .cancel-add-btn {
+        display: none;
+    }
+
+    .main-left {
+        padding: 98px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0;
+        padding-left: 4%;
+        padding-right: 4%;
+
+    }
+
+    .main-right {
+        flex-direction: column;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 30px;
+        min-width: 0;
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .position {
+        margin: 0;
+        position: fixed;
+        top: 35%;
+        left: 50%;
+        translate: -50%;
+    }
+
+    .close-btn {
+        position: fixed;
+        top: 1%;
+        left: 92%;
+        translate: -50%;
+    }
+
+    .add-contact-info {
+        min-width: 0;
+
+    }
+
+    .label-responsiv {
+        padding: 12px 3px !important;
+    }
+
+    .button-section-contact {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    .contact-sub {
+        font-size: 18px;
+    }
+
+    .name::after {
+        margin-left: -18px;
+    }
+
+    .mail::after {
+        margin-left: -18px;
+    }
+
+    .phone::after {
+        margin-left: -18px;
+    }
+
+    .two-letter-name {
+        width: 100px;
+        height: 100px;
+    }
+
+    .add-contact-info{
+        margin-top: 80px;
+    }
 }
-
-
