@@ -2,6 +2,7 @@ let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
 let allTasksOfSingleUserObj = {};
+let filterdTasksOfSingleUserObj = {};
 
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
@@ -272,6 +273,17 @@ async function initializeBoard(userId) {
     let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
     const allTaskData = await fetchAllDataGlobal();
 
+    renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData);
+    renderNoTaskInfoOnDOMLoad();
+}
+
+/**
+ * This function renders all task cards on the board.
+ * 
+ * @param {Array} allTasksByIdOfSingleUserArr Array of task ID objects for the user.
+ * @param {Object} allTaskData The global task data object.
+ */
+function renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData) {
     for (let taskIndex in allTasksByIdOfSingleUserArr) {
         if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
@@ -280,7 +292,6 @@ async function initializeBoard(userId) {
         updateAllTasksOfSingleUserObj(taskId, task);
         renderTaskCard(taskId, task);
     }
-    renderNoTaskInfoOnDOMLoad();
 }
 
 
@@ -300,5 +311,20 @@ async function refreshTaskOnBoard(taskId, taskToUpdate) {
         await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
     }
-    
+}
+
+
+function handleInputSubmit(inputText) {
+    filterdTasksOfSingleUserObj = {};
+    if (inputText.length > 2) {
+        filterTasksByTitle(inputText);
+        filterTaskByDescription(inputText);
+        if(Object.keys(filterdTasksOfSingleUserObj).length === 0){
+            renderNoSearchResultOnBoard();
+        } else {
+            renderFilteredTasksOnBoard();
+        }
+    } else {
+        renderNoSearchResultOnBoard();
+    }
 }
