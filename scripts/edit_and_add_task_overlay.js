@@ -7,7 +7,7 @@ async function openEditTaskOverlay(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
     overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY);
-    let task = allTasksOfSingleUserObj[taskId];
+    let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
     upsertTaskTemplateHandler(taskId);
     await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
     renderSubtaskEditListItems(task.subtasks || []);
@@ -78,7 +78,7 @@ function checkTaskToAddOrEdit(taskId) {
     if (taskId.startsWith('new_task_id_')) {
         return createEmptyTask();
     } else {
-        return allTasksOfSingleUserObj[taskId];
+        return getSingleTaskOfAllTasksOfSingleUserObj(taskId);
     }
 }
 

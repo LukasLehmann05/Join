@@ -206,6 +206,16 @@ function updateAllTasksOfSingleUserObj(taskId, updatedTask) {
 }
 
 /**
+ * This function return a single task from allTasksOfSingleUserObj by its ID.
+ * 
+ * @param {string} taskId The ID of the task to retrieve.
+ * @returns {Object} The task object.
+ */
+function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
+    return allTasksOfSingleUserObj[taskId];
+}
+
+/**
  * This function renders "no task" info for all columns on DOM load.
  */
 function renderNoTaskInfoOnDOMLoad(){
