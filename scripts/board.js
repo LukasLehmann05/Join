@@ -241,6 +241,9 @@ function getAllTasksOfSingleUserObj() {
     return allTasksOfSingleUserObj; 
 }
 
+/**
+ * This function resets the allTasksOfSingleUserObj to an empty object.
+ */
 function resetAllTasksOfSingleUserObj() {
     allTasksOfSingleUserObj = {};
 }
