@@ -417,7 +417,36 @@ function filterTaskIdsByField(inputText, field) {
 }
 
 function renderNoSearchResultOnBoardOverlay() {
+    setTimeout(() => {
+        // document.getElementsByTagName("body")[0].style.overflow = "hidden";
+        openDialog('responseDialog', 'responseDialog');
+    }, 1500)
+    // document.getElementsByTagName("body")[0].style.overflow = "auto";
+    setTimeout(() => {
+        closeDialog('responseDialog', 'responseDialog');
+    }, 3500)
+    setTimeout(() => {
+        document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
+    }, 4000)
 }
+
+
+function openDialog(id, id2) {
+    let dialog = document.getElementById(id);
+    dialog.open = true;
+    setTimeout(() => {
+        document.getElementById(id2).classList.add('show');
+    }, 10)
+};
+
+function closeDialog(id, id2) {
+    let dialog = document.getElementById(id);
+    document.getElementById(id2).classList.remove('show');
+    setTimeout(() => {
+        dialog.open = false;
+    }, 1000)
+};
+
 
 /**
  * This function clears all task cards from the board.
