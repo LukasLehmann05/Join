@@ -216,12 +216,33 @@ function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
 }
 
 /**
+ * This function sets the allTasksOfSingleUserObj from the given array of 
+ * task ID objects and all tasks data.
+ * @param {Array} allTasksByIdOfSingleUserArr Array of task ID objects for the user.
+ * @returns {Object} The allTasksOfSingleUserObj object.
+ */
+function setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, allTasks) {
+    allTasksOfSingleUserObj = {};
+    for (let taskIndex in allTasksByIdOfSingleUserArr) {
+        let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];
+        let task = allTasks[taskId];
+        if (task) {
+            allTasksOfSingleUserObj[taskId] = task;
+        }
+    }
+}
+
+/**
  * This function returns all tasks of the single user object.
  * 
  * @returns {Object} The allTasksOfSingleUserObj object.
  */
 function getAllTasksOfSingleUserObj() {
-    return allTasksOfSingleUserObj;
+    return allTasksOfSingleUserObj; 
+}
+
+function resetAllTasksOfSingleUserObj() {
+    allTasksOfSingleUserObj = {};
 }
 
 /**
@@ -279,10 +300,13 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function initializeBoard(userId) {
     let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
-    const allTaskData = await fetchAllDataGlobal();
-
-    renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData);
+    initInputFieldEventListener(allTasksByIdOfSingleUserArr);
+    const joinData = await fetchAllDataGlobal();
+    
+    setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, joinData.tasks);
+    renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
+    return allTasksByIdOfSingleUserArr;
 }
 
 /**
@@ -295,9 +319,8 @@ function renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData) {
     for (let taskIndex in allTasksByIdOfSingleUserArr) {
         if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
-        let task = allTaskData.tasks[taskId];
+        let task = allTaskData[taskId];
         if (!task) continue;
-        updateAllTasksOfSingleUserObj(taskId, task);
         renderTaskCard(taskId, task);
     }
 }
@@ -322,23 +345,55 @@ async function refreshTaskOnBoard(taskId, taskToUpdate) {
 }
 
 /**
+ * This function initializes the input field event listener for task filtering.
+ * It adds a debounced input event listener to the input field with ID 'task_filter_input_field'.
+ */
+function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
+    const inputField = document.getElementById('task_filter_input_field');
+    let debounceTimeout;
+    if (!inputField) return;
+    inputField.addEventListener('input', (event) => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            handleTermOfInput(event, allTasksByIdOfSingleUserArr);
+        }, 500);
+    });
+}
+
+/**
+ * This function handles the input event for task filtering.
+ * 
+ * @param {*} event The input event object.
+ */
+function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
+    let inputText = event.target.value.toLowerCase();
+    event.preventDefault();
+    handleInputSubmit(inputText, allTasksByIdOfSingleUserArr);
+}
+
+
+/**
  * This function handles the input submission for task filtering.
  * 
  * @param {string} inputText The text input for filtering tasks.
  */
-function handleInputSubmit(inputText) {
+async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
     if (inputText.length > 2) {
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
         if (filteredByTitle.length > 0) {
+            clearBoard();
             renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
         } else if (filteredByDescription.length > 0) {
+            clearBoard();
             renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
         } else {
             renderNoSearchResultOnBoardOverlay();
         }
+        renderNoTaskInfoOnDOMLoad();
     } else {
-        renderNoSearchResultOnBoardOverlay();
+        clearBoard();
+        renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
     }
 }
 
@@ -362,4 +417,14 @@ function filterTaskIdsByField(inputText, field) {
 }
 
 function renderNoSearchResultOnBoardOverlay() {
+}
+
+/**
+ * This function clears all task cards from the board.
+ */
+function clearBoard() {
+    BOARD_COLUMN_ID_ARR.forEach(columnId => {
+        const container = document.getElementById(columnId);
+        container.innerHTML = '';
+    });
 }
