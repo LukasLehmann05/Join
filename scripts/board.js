@@ -190,9 +190,19 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
  * @param {Object} newTask The new task object.
  */
 function displayNewTaskOnBoard(newTaskId, newTask) {
-    allTasksOfSingleUserObj[newTaskId] = newTask;
+    updateAllTasksOfSingleUserObj(newTaskId, newTask);
     renderTaskCard(newTaskId, newTask);
     removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
+}
+
+/**
+ * This function updates the allTasksOfSingleUserObj with the updated task.
+ * 
+ * @param {string} taskId The ID of the task to update.
+ * @param {Object} updatedTask The updated task object.
+ */
+function updateAllTasksOfSingleUserObj(taskId, updatedTask) {
+    allTasksOfSingleUserObj[taskId] = updatedTask;
 }
 
 /**
@@ -257,7 +267,7 @@ async function initializeBoard(userId) {
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
         let task = allTaskData.tasks[taskId];
         if (!task) continue;
-        allTasksOfSingleUserObj[taskId] = task;
+        updateAllTasksOfSingleUserObj(taskId, task);
         renderTaskCard(taskId, task);
     }
     renderNoTaskInfoOnDOMLoad();
