@@ -7,17 +7,35 @@
         width: 100%;
         display: flex;
         flex-direction: column-reverse;
+        max-height: 100vh;
     }
 
     .add-contact-btn {
-        width: 32px;
-        border-radius: 50px;
+        width: 53px;
+        border-radius: 50%;
         font-size: 0;
+        padding: 10px;
         justify-content: center;
-        bottom: 80px;
-        padding: 0;
+        bottom: 100px;
+        left: 630px;
+        margin-right: 12px;
     }
 
-    
+    .add-contact-btn-img {
+        margin-left: -7px;
+    }
 
+    .contact-list{
+        padding: 17px 4%;
+    }
+
+    .single-letter{
+        padding: 17px 4%;
+    }
+
+    .list-user{
+        padding-left: 4%;
+    }
 }
+
+
