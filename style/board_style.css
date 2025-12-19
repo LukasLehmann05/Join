@@ -256,3 +256,11 @@ h1{
 .priority_indicator img{
     width: 17px;
 }
+
+.hide_overflow{
+    visibility: hidden;
+}
+
+.hide_overflow.displayed{
+    visibility: visible;
+}

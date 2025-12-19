@@ -110,7 +110,8 @@ function toggleDialog(id) {
     dialog.open = true;
     setTimeout(() => {
         document.getElementById(id).classList.toggle('show');
-    }, 10)
+    }, 100)
+    document.getElementById(id).classList.toggle('displayed');
 };
 
 
