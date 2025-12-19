@@ -1,7 +1,8 @@
 /**
  * opens dialog window.
  */
-function openDialog(id, id2) {
+function openDialog(id , id2) {
+    renderDialog(id2);
     let dialog = document.getElementById(id);
     dialog.open = true;
     setTimeout(() => {
@@ -13,7 +14,7 @@ function openDialog(id, id2) {
 /**
  * closes dialog window via button
  */
-function closeDialog(id, id2) {
+function closeDialog(id , id2) {
     let dialog = document.getElementById(id);
     document.getElementById(id2).classList.remove('show');
     setTimeout(() => {
@@ -26,13 +27,14 @@ function closeDialog(id, id2) {
  * closes dialog window via window click
  */
 window.onclick = function (event) {
-    let dialog1 = document.getElementById('addContact');
-    let dialog2 = document.getElementById('editContact');
-    if (event.target == dialog1) {
-        closeDialog('addContact', 'addContent');
-    }
-    if (event.target == dialog2) {
-        closeDialog('editContact', 'editContent');
+    let dialog = document.getElementById('dialogWindow');
+    let childAdd = document.getElementById('addContent');
+    let childEdit = document.getElementById('editContent');
+    if (event.target == dialog && dialog.contains(childAdd)) {
+        closeDialog('dialogWindow' ,'addContent');
+    } 
+    if (event.target == dialog && dialog.contains(childEdit)) {
+        closeDialog('dialogWindow' ,'editContent');
     }
 };
 
@@ -169,6 +171,20 @@ function displayAvatarInEdit(id) {
     avatar.classList.add('fullname');
     avatar.innerText = acronym
     avatar.style.backgroundColor = color;
+};
+
+
+/**
+ * renders edit or add dialog from html template
+ */
+function renderDialog(id) {
+    let dialog = document.getElementById('dialogWindow');
+    if (id === "addContent") {
+        dialog.innerHTML = addDialogHTML();
+    }
+    if (id === "editContent") {
+        dialog.innerHTML = editDialogHTML();
+    }
 };
 
 

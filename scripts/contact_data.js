@@ -199,7 +199,7 @@ async function trimDownAddingContact(newUser, name) {
     colorUser(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
-    dialogAppearences('addContact', 'addContent');
+    dialogAppearences('dialogWindow' , 'addContent');
 };
 
 
@@ -236,7 +236,7 @@ async function trimDownEditingUser(editID, editedUser) {
     removeLetterSectionIfEmpty(letter);
     await renderHtmlElements(editedUser, editID, editedUser.name);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
-    dialogAppearences('editContact', 'editContent');
+    dialogAppearences('dialogWindow' ,'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
     displayEditedContactDataInMainDisplay(editID, editedUser.email, editedUser.name, editedUser.phone)
 };
@@ -282,7 +282,7 @@ function getDataFromMain() {
 async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
     deleteThisUser(currentId)
-    dialogAppearences('editContact', 'editContent');
+    
     responseMessageAppearance();
 };
 
@@ -293,7 +293,7 @@ async function deleteThisContactFromMain(id) {
 async function deleteThisContactFromDialog() {
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
     deleteThisUser(currentId)
-    dialogAppearences('editContact', 'editContent');
+    dialogAppearences('dialogWindow' ,'editContent');
     responseMessageAppearance();
 };
 
@@ -307,7 +307,7 @@ async function deleteThisUser(currentId) {
     removeLetterSectionIfEmpty(letter);
     document.getElementById('mainView').innerHTML = "";
     document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
-    await deleteThisContactFromDatabaseById(currentId);
+    //await deleteThisContactFromDatabaseById(currentId);
 };
 
 
