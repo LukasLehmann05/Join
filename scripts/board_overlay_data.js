@@ -98,7 +98,7 @@ function clearElementsOfNewTask() {
  */
 async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
-    let task = allTasksOfSingleUserObj[taskId];
+    let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
     if (!task) return;
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
