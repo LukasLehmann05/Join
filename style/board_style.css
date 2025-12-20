@@ -257,10 +257,26 @@ h1{
     width: 17px;
 }
 
-.hide_overflow{
+.message_overflow{
+    box-sizing: border-box;
+    transform: translateX(200%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+    position: absolute;
+    background-color: #2A3647;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 20px;
+    top: 760px;
+    left: 750px;
+
     visibility: hidden;
+    opacity: 0;
 }
 
-.hide_overflow.displayed{
+.message_overflow.show {
     visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
 }
