@@ -109,12 +109,7 @@ function renderNoSearchResultOnBoardOverlay() {
  * @param {string} id The ID of the dialog element to toggle.
  */
 function toggleSearchConflictDialog(id) {
-    let dialog = document.getElementById(id);
-    dialog.showModal();
-    setTimeout(() => {
-        document.getElementById(id).classList.toggle('show');
-    }, 100)
-    document.getElementById(id).classList.toggle('displayed');
+    document.getElementById(id).classList.toggle('show');
 };
 
 
