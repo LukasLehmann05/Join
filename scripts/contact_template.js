@@ -79,7 +79,7 @@ function addDialogHTML() {
                                <button onclick="closeDialog('dialogWindow' ,'addContent') , emptyInput()"
                                    class="action-buttons">Cancel</button>
                            </div>
-                           <div class="create-task">
+                           <div class="create-task create-contact-btn">
                                <button onclick="addNewContactToDatabase()" class="action-buttons create-button">
                                    <p>Create contact</p>
                                    <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
@@ -94,7 +94,7 @@ function addDialogHTML() {
 
 function editDialogHTML() {
     return `<div id="editContent" class="dialog-content">
-               <section class="main-left">
+               <section class="main-left main-left-edit-dialog">
                    <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
                    <h1 class="white margin">Edit Contact</h1>
                    <div class="separator-horizontal"></div>
