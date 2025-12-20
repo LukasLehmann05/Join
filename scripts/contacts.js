@@ -1,20 +1,35 @@
 /**
  * opens dialog window.
  */
-function openDialog(id , id2) {
-    renderDialog(id2);
-    let dialog = document.getElementById(id);
-    dialog.open = true;
-    setTimeout(() => {
-        document.getElementById(id2).classList.add('show');
-    }, 10)
+function openDialog(id, id2) {
+        renderDialog(id2);
+        let dialog = document.getElementById(id);
+        dialog.open = true;
+        setTimeout(() => {
+            document.getElementById(id2).classList.add('show');
+        }, 10)
+    
 };
+
+
+/**
+ * opens dialog window.
+ */
+function directionOfIncomingDialog(id, id2) {
+    if (window.innerWidth <= 767) {
+        console.log(window.innerWidth);
+    }
+    if (window.innerWidth >= 767) {
+        openDialog(id, id2);
+    }
+}
+
 
 
 /**
  * closes dialog window via button
  */
-function closeDialog(id , id2) {
+function closeDialog(id, id2) {
     let dialog = document.getElementById(id);
     document.getElementById(id2).classList.remove('show');
     setTimeout(() => {
@@ -31,10 +46,10 @@ window.onclick = function (event) {
     let childAdd = document.getElementById('addContent');
     let childEdit = document.getElementById('editContent');
     if (event.target == dialog && dialog.contains(childAdd)) {
-        closeDialog('dialogWindow' ,'addContent');
-    } 
+        closeDialog('dialogWindow', 'addContent');
+    }
     if (event.target == dialog && dialog.contains(childEdit)) {
-        closeDialog('dialogWindow' ,'editContent');
+        closeDialog('dialogWindow', 'editContent');
     }
 };
 
