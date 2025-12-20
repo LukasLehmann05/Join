@@ -29,7 +29,7 @@ function directionOfIncomingDialog(id, id2) {
 /**
  * closes dialog window via button
  */
-function closeDialog(id , id2) {
+function closeDialog(id, id2) {
     let dialog = document.getElementById(id);
     document.getElementById(id2).classList.remove('show');
     setTimeout(() => {
