@@ -23,7 +23,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <div id="mainShort" class="two-letter-name fullname">${acronym}</div>
                 <div class="name-field">
                     <p id="mainName" class="fullname">${currentName}</p>
-                    <div class="main-name-btns">
+                    <div id="subMenuBtns" class="main-name-btns">
                         <button id="editUser" data-id="${currentId}" onclick="openDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
                         <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                     </div>
@@ -37,7 +37,12 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
             <div class="info-display">
                 <p class="info-text">Phone</p>
                 <span id="mainPhone">${currentPhone}</span>
-            </div>`
+            </div>
+            <button onclick="openSubMenu()" class="sub-menu-btn">
+                <img src="../assets/icons/contacts/three_dots.svg"
+                    alt="three dots opening sub menu">
+            </button>
+            `
 };
 
 function addDialogHTML() {

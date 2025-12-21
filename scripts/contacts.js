@@ -227,6 +227,24 @@ function goBacktoList() {
 };
 
 
+/**
+ * opens sub menu in single contact to display edit and delete options
+ */
+function openSubMenu() {
+    let subMenu = document.getElementById('subMenuBtns');
+    subMenu.style.transform = "translateX(0%)"
+};
+
+
+/**
+ * closes sub menu in single contact by accessing translateX property
+ */
+window.addEventListener('click', (event) => {
+  if (!event.target.closest('.sub-menu-btn') && window.innerWidth <= 767) {
+    document.getElementById('subMenuBtns').style.transform = "translateX(200%)";
+  }
+});
+
 
 
 
