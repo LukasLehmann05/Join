@@ -72,25 +72,33 @@
             </nav>
         </header>
         <main class="contact-main">
-            <aside class="sidebar-contacts">
+            <aside id="contactsAsideElement" class="sidebar-contacts">
+                <div class="add-contact-btn-position">
                     <button onclick="openDialog('dialogWindow' , 'addContent')" class="add-contact-btn">Add new contact
-                        <img class="add-contact-btn-img" src="../assets/icons/contacts/person_add.svg" alt="add_person icon">
+                        <img class="add-contact-btn-img" src="../assets/icons/contacts/person_add.svg"
+                            alt="add_person icon">
                     </button>
+                </div>
                 <div class="contact-list" id="contactList">
                 </div>
             </aside>
-            <section class="contact-display">
+            <section id="contactsMainElement" class="contact-display">
                 <div class="contact-header">
-                    <h1 class="h1">Contacts</h1>
-                    <div class="separator-vertical"></div>
-                    <span class="contact-sub">Better with a team</span>
+                    <div class="contact-header-text">
+                        <h1 class="h1">Contacts</h1>
+                        <div class="separator-vertical"></div>
+                        <span class="contact-sub">Better with a team</span>
+                    </div>
+                    <button onclick="goBacktoList()" class="go-back-btn"><img src="../assets/icons/contacts/go_back.svg"
+                            alt="go back to list"></button>
                 </div>
                 <article id="mainView" class="contact-main-view">
+
                 </article>
             </section>
             <dialog id="dialogWindow" class="dialog-window">
-                
-            </dialog> 
+
+            </dialog>
             </dialog>
             <dialog id="responseDialog" class="dialog-message">
                 <div class="white font-size-20" id="responseMessage">Contact succesfully created</div>

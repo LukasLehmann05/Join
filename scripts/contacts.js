@@ -2,13 +2,13 @@
  * opens dialog window.
  */
 function openDialog(id, id2) {
-        renderDialog(id2);
-        let dialog = document.getElementById(id);
-        dialog.open = true;
-        setTimeout(() => {
-            document.getElementById(id2).classList.add('show');
-        }, 10)
-    
+    renderDialog(id2);
+    let dialog = document.getElementById(id);
+    dialog.open = true;
+    setTimeout(() => {
+        document.getElementById(id2).classList.add('show');
+    }, 10)
+
 };
 
 
@@ -201,6 +201,32 @@ function renderDialog(id) {
         dialog.innerHTML = editDialogHTML();
     }
 };
+
+
+/**
+ * changes sizes to display the clicked contact in responive width
+ */
+function changeDisplaySize() {
+    let contactList = document.getElementById('contactsAsideElement');
+    let mainView = document.getElementById('contactsMainElement');
+    if (window.innerWidth <= 767) {
+        contactList.style.display = "none";
+        mainView.style.display = "block";
+    }
+};
+
+
+/**
+ * goes back to display contact list
+ */
+function goBacktoList() {
+    let contactList = document.getElementById('contactsAsideElement');
+    let mainView = document.getElementById('contactsMainElement');
+    contactList.style.display = "flex";
+    mainView.style.display = "none";
+};
+
+
 
 
 
