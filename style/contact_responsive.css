@@ -1,6 +1,14 @@
 @media (max-width: 767px) {
     .contact-display {
         display: none;
+        margin-left: 16px;
+        margin-top: 48px;
+    }
+
+    .contact-main {
+        height: calc(100vh - 168px);
+        min-width: 320px;
+
     }
 
     .sidebar-contacts {
@@ -10,15 +18,21 @@
         max-height: 100vh;
     }
 
+    .add-contact-btn-position {
+        margin-right: 12px;
+        bottom: 100px;
+        left: 630px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 20px;
+    }
+
     .add-contact-btn {
         width: 53px;
         border-radius: 50%;
         font-size: 0;
         padding: 10px;
         justify-content: center;
-        bottom: 100px;
-        left: 630px;
-        margin-right: 12px;
     }
 
     .add-contact-btn-img {
@@ -45,9 +59,7 @@
         flex-direction: column;
         min-width: 0;
         height: auto;
-
         margin: 80px 4%;
-
     }
 
     .logo-dialog {
@@ -67,10 +79,6 @@
         border-bottom-left-radius: 0;
         padding-left: 4%;
         padding-right: 4%;
-    }
-
-    .main-left-edit-dialog{
-
     }
 
     .main-right {
@@ -142,5 +150,67 @@
         height: 100px;
     }
 
-    
+    .main-name-btns {
+        display: none;
+    }
+
+    .contact-header-text {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .separator-vertical {
+        border-radius: 3px;
+        margin: 0px 0px;
+        width: 90px;
+        height: 3px;
+        order: 3;
+    }
+
+    .h1 {
+        font-size: 47px;
+    }
+
+    .main-name {
+
+        gap: 20px;
+
+
+        margin-left: 0px;
+    }
+
+    .fullname {
+        font-size: 30px;
+    }
+
+    .two-letter-name {
+        width: 60px;
+        height: 60px;
+    }
+
+    .go-back-btn {
+        display: flex;
+        margin-left: 80%;
+    }
+}
+
+@media (max-width: 596px) {
+    .two-letter-name {
+        width: 60px;
+        height: 60px;
+    }
+
+    .go-back-btn {
+
+        margin-left: 66%;
+    }
+
+}
+
+@media (max-width: 476px) {
+    .go-back-btn {
+        margin-left: 27%;
+    }
+
 }
