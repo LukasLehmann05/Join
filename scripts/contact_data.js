@@ -131,17 +131,24 @@ function colorUser(contact) {
 /**
  * fetches contact data from firebase and renders data into main Display
  */
-async function displayInMain(id) {
+function displayInMain(id) {
     let currentId = id.getAttribute('data-id');
     let currentName = id.getAttribute('data-name');
     let currentPhone = id.getAttribute('data-phone');
     let currentMail = id.getAttribute('data-email');
-    renderMainDisplay(currentId, currentName, currentPhone, currentMail);
+    if (window.innerWidth <= 767) {
+        changeDisplaySize();
+        renderMainDisplay(currentId, currentName, currentPhone, currentMail)
+        
+    }
+    if (window.innerWidth >= 767) {
+        renderMainDisplay(currentId, currentName, currentPhone, currentMail);
+    }
 };
 
 
 /**
- * renders date into the main display. adds the phone number and background color
+ * renders data into the main display. adds the phone number and background color
  */
 function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
     let mainDisplay = document.getElementById('mainView');
@@ -199,7 +206,7 @@ async function trimDownAddingContact(newUser, name) {
     colorUser(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
-    dialogAppearences('dialogWindow' , 'addContent');
+    dialogAppearences('dialogWindow', 'addContent');
 };
 
 
@@ -236,7 +243,7 @@ async function trimDownEditingUser(editID, editedUser) {
     removeLetterSectionIfEmpty(letter);
     await renderHtmlElements(editedUser, editID, editedUser.name);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
-    dialogAppearences('dialogWindow' ,'editContent');
+    dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
     displayEditedContactDataInMainDisplay(editID, editedUser.email, editedUser.name, editedUser.phone)
 };
@@ -282,7 +289,7 @@ function getDataFromMain() {
 async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
     deleteThisUser(currentId)
-    
+
     responseMessageAppearance();
 };
 
@@ -293,7 +300,7 @@ async function deleteThisContactFromMain(id) {
 async function deleteThisContactFromDialog() {
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
     deleteThisUser(currentId)
-    dialogAppearences('dialogWindow' ,'editContent');
+    dialogAppearences('dialogWindow', 'editContent');
     responseMessageAppearance();
 };
 

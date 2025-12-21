@@ -5,8 +5,12 @@
     height: 100%;
 }
 
+.d-none{
+    display: none;
+}
+
 .sidebar-contacts {
-    overflow-y: scroll;
+    overflow-y: auto;
     background: #FFFFFF;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
     width: 33%;
@@ -44,8 +48,13 @@
     background-color: #2A3647;
     border: none;
     border-radius: 10px;
+    
+}
+
+.add-contact-btn-position {
     position: sticky;
     top: 0px;
+    
 }
 
 .add-contact-btn:hover {
@@ -79,6 +88,7 @@
 .contact-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .separator-vertical {
@@ -131,6 +141,7 @@
 .fullname {
     font-weight: 500;
     font-size: 47px;
+    font-family: "Inter_bold";
 }
 
 .main-name-btns {
@@ -249,5 +260,17 @@
     background: url("../assets/icons/board/edit_button_hover.svg") center / contain no-repeat;
 }
 
+.go-back-btn{
+    display: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding-bottom: 70px;
+    
+    
+}
 
-
+.contact-header-text{
+    display: flex;
+    align-items: center;
+}
