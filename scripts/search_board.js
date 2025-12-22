@@ -11,7 +11,7 @@ function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
         clearTimeout(debounceTimeout);
         debounceTimeout = setTimeout(() => {
             handleTermOfInput(event, allTasksByIdOfSingleUserArr);
-        }, 300);
+        }, 500);
     });
 }
 
@@ -91,27 +91,33 @@ function filterTaskIdsByField(inputText, field) {
  * This function renders a "no search result" message on the board overlay.
  */
 function renderNoSearchResultOnBoardOverlay() {
-    let id = 'responseDialog';
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
         document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
-        toggleSearchConflictDialog(id);
+        toggleSearchConflictDialog();
     }, 100)
     document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
-        toggleSearchConflictDialog(id);
-    }, 3100)
+        toggleSearchConflictDialog();
+    }, 2100)
 }
 
+let toggleState = false;
 /**
  * This function toggles the visibility of a dialog.
- * 
- * @param {string} id The ID of the dialog element to toggle.
+ * On each call, the IDs are swapped so that the setTimeout alternates.
  */
-function toggleSearchConflictDialog(id) {
-    document.getElementById(id).classList.toggle('show');
-};
+function toggleSearchConflictDialog() {
+    const firstId = toggleState ? 'responseDialog' : 'message_overflow_background';
+    const secondId = toggleState ? 'message_overflow_background' : 'responseDialog';
 
+    document.getElementById(firstId).classList.toggle('show');
+    setTimeout(() => {
+        document.getElementById(secondId).classList.toggle('show');
+    }, 350);
+
+    toggleState = !toggleState;
+}
 
 /**
  * This function clears all task cards from the board.
