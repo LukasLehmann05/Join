@@ -39,6 +39,8 @@ async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
         searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription);
     } else {
         searchEvent = false;
+    }
+    if (inputText.length == 0 && searchEvent === false) {
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
         renderNoTaskInfoOnDOMLoad();
