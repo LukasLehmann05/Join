@@ -305,21 +305,8 @@
     transition: transform 1s ease-in-out;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 .sub-menu-btns.show {
     transform: translateX(0);
 }
-=======
->>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
-.sub-menu-btns.show {
-    transform: translateX(0);
-}
->>>>>>> 26020bb (feat: added sub menu to edit and delete a user when in responsiv view)
-=======
-.sub-menu-btns.show {
-    transform: translateX(0);
-}
->>>>>>> 829e7aefdc0c2baffb5f80c5b55ac99a93fa8dab
+
+
