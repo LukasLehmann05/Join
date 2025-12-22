@@ -56,17 +56,20 @@ async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
 function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
     if (filteredByTitle.length > 0) {
         clearBoard();
+        disableShowNoSearchResultOnBoardInfo();
         renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
     } else if (filteredByDescription.length > 0) {
         clearBoard();
+        disableShowNoSearchResultOnBoardInfo();
         renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
     } else if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
         clearBoard();
+        disableShowNoSearchResultOnBoardInfo();
         let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
         renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksOfSingleUserObj());
     } else {
         clearBoard();
-        renderNoSearchResultOnBoardOverlay();
+        showNoSearchResultOnBoardInfo();
     }
 }
 
@@ -90,35 +93,23 @@ function filterTaskIdsByField(inputText, field) {
 }
 
 /**
- * This function renders a "no search result" message on the board overlay.
+ * This function shows the "no search result" message on the board overlay.
  */
-function renderNoSearchResultOnBoardOverlay() {
-    setTimeout(() => {
-        document.getElementsByTagName("body")[0].style.overflow = "hidden";
-        document.getElementById('responseMessage').innerHTML = "No tasks found matching your search.";
-        toggleSearchConflictDialog();
-    }, 100)
-    document.getElementsByTagName("body")[0].style.overflow = "auto";
-    setTimeout(() => {
-        toggleSearchConflictDialog();
-    }, 2100)
+function showNoSearchResultOnBoardInfo() {
+    document.getElementById('no_task_found_message').classList.toggle('d-none', false);
 }
 
-let toggleState = false;
 /**
- * This function toggles the visibility of a dialog.
- * On each call, the IDs are swapped so that the setTimeout alternates.
+ * This function disables the "no search result" message on the board overlay.
+ * 
  */
-function toggleSearchConflictDialog() {
-    const firstId = toggleState ? 'responseDialog' : 'message_overflow_background';
-    const secondId = toggleState ? 'message_overflow_background' : 'responseDialog';
-
-    document.getElementById(firstId).classList.toggle('show');
-    setTimeout(() => {
-        document.getElementById(secondId).classList.toggle('show');
-    }, 350);
-
-    toggleState = !toggleState;
+function disableShowNoSearchResultOnBoardInfo() {
+    let noInfoContainer = document.getElementById('no_task_found_message');
+    if (noInfoContainer.classList.contains('d-none'))
+        return;
+    else {
+        noInfoContainer.classList.toggle('d-none', true);
+    }
 }
 
 /**
@@ -130,26 +121,3 @@ function clearBoard() {
         container.innerHTML = '';
     });
 }
-
-/**
- * This function observes the overlay element for class changes to lock/unlock the input field.
- * When the overlay is shown, the input field is disabled; when hidden, it is enabled.
- */
-function observeOverlayForInputLock() {
-    const overlay = document.getElementById('message_overflow_background');
-    const input = document.getElementById('task_filter_input_field');
-    if (!overlay || !input) return;
-    const observer = new MutationObserver(() => {
-        if (overlay.classList.contains('show')) {
-            input.disabled = true;
-        } else {
-            input.disabled = false;
-        }
-    });
-    observer.observe(overlay, { attributes: true, attributeFilter: ['class'] });
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    observeOverlayForInputLock();
-});
