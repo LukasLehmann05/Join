@@ -131,7 +131,10 @@ function clearBoard() {
     });
 }
 
-// Sperrt das Inputfeld, wenn das Overlay sichtbar ist
+/**
+ * This function observes the overlay element for class changes to lock/unlock the input field.
+ * When the overlay is shown, the input field is disabled; when hidden, it is enabled.
+ */
 function observeOverlayForInputLock() {
     const overlay = document.getElementById('message_overflow_background');
     const input = document.getElementById('task_filter_input_field');
@@ -146,7 +149,7 @@ function observeOverlayForInputLock() {
     observer.observe(overlay, { attributes: true, attributeFilter: ['class'] });
 }
 
-// Am Ende der Datei nach DOMContentLoaded registrieren:
+
 document.addEventListener('DOMContentLoaded', () => {
     observeOverlayForInputLock();
 });
