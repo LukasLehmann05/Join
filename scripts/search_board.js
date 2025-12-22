@@ -130,3 +130,23 @@ function clearBoard() {
         container.innerHTML = '';
     });
 }
+
+// Sperrt das Inputfeld, wenn das Overlay sichtbar ist
+function observeOverlayForInputLock() {
+    const overlay = document.getElementById('message_overflow_background');
+    const input = document.getElementById('task_filter_input_field');
+    if (!overlay || !input) return;
+    const observer = new MutationObserver(() => {
+        if (overlay.classList.contains('show')) {
+            input.disabled = true;
+        } else {
+            input.disabled = false;
+        }
+    });
+    observer.observe(overlay, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Am Ende der Datei nach DOMContentLoaded registrieren:
+document.addEventListener('DOMContentLoaded', () => {
+    observeOverlayForInputLock();
+});
