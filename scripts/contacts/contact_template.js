@@ -41,6 +41,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
@@ -65,15 +66,24 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
             </button>
+=======
+            <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
+                <img src="../assets/icons/contacts/three_dots.svg"
+                    alt="three dots opening sub menu">
+            </button>
+>>>>>>> 26020bb (feat: added sub menu to edit and delete a user when in responsiv view)
             <dialog id="responsivMenu" class="dialog-window-message">
                 <div class="sub-menu-btns" id="responseMenuContent">
                     <button id="editUser" data-id="${currentId}" onclick="openDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
                     <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                 </div>
             </dialog>
+<<<<<<< HEAD
 >>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
 =======
 >>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
+=======
+>>>>>>> 26020bb (feat: added sub menu to edit and delete a user when in responsiv view)
             `
 };
 
