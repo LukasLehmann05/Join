@@ -19,7 +19,7 @@ const DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY = 'data-edit-task-and-close-ove
  */
 async function sendUpdatedTaskToDB(taskId) {
     let taskToUpdate = await getTaskToUpdate(taskId);
-    allTasksOfSingleUserObj[taskId] = taskToUpdate;
+    updateAllTasksOfSingleUserObj(taskId, taskToUpdate);
     clearElementsOfNewTask();
     if (Object.keys(taskToUpdate).length !== 0) {
         await updateTask(taskId, taskToUpdate);
@@ -98,7 +98,7 @@ function clearElementsOfNewTask() {
  */
 async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
-    let task = allTasksOfSingleUserObj[taskId];
+    let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
     if (!task) return;
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
@@ -169,9 +169,9 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
  * 
  * @param {Event} event The click event object.
  */
-function closeOverlay(event) {
+function closeOverlayByBackdrop(event) {
     if(event.target === event.currentTarget) {
-        removeShowClass();
+        closeOverlay();
     }
 }
 
@@ -183,7 +183,7 @@ function closeOverlay(event) {
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
-function removeShowClass(buttonElement, taskId) {
+function closeOverlay(buttonElement, taskId) {
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     handleButtonAddActionAndCloseOverlay(buttonElement);

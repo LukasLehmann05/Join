@@ -190,9 +190,62 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
  * @param {Object} newTask The new task object.
  */
 function displayNewTaskOnBoard(newTaskId, newTask) {
-    allTasksOfSingleUserObj[newTaskId] = newTask;
+    updateAllTasksOfSingleUserObj(newTaskId, newTask);
     renderTaskCard(newTaskId, newTask);
     removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
+}
+
+/**
+ * This function updates the allTasksOfSingleUserObj with the updated task.
+ * 
+ * @param {string} taskId The ID of the task to update.
+ * @param {Object} updatedTask The updated task object.
+ */
+function updateAllTasksOfSingleUserObj(taskId, updatedTask) {
+    allTasksOfSingleUserObj[taskId] = updatedTask;
+}
+
+/**
+ * This function return a single task from allTasksOfSingleUserObj by its ID.
+ * 
+ * @param {string} taskId The ID of the task to retrieve.
+ * @returns {Object} The task object.
+ */
+function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
+    return allTasksOfSingleUserObj[taskId];
+}
+
+/**
+ * This function sets the allTasksOfSingleUserObj from the given array of 
+ * task ID objects and all tasks data.
+ * @param {Array} allTasksByIdOfSingleUserArr Array of task ID objects for the user.
+ * @returns {Object} The allTasksOfSingleUserObj object.
+ */
+function setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, allTasks) {
+    allTasksOfSingleUserObj = {};
+    for (let taskIndex in allTasksByIdOfSingleUserArr) {
+        let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];
+        let task = allTasks[taskId];
+        if (task) {
+            allTasksOfSingleUserObj[taskId] = task;
+        }
+    }
+}
+
+/**
+ * This function returns all tasks of the single user object.
+ * 
+ * @returns {Object} The allTasksOfSingleUserObj object.
+ */
+function getAllTasksOfSingleUserObj() {
+    return allTasksOfSingleUserObj; 
+}
+
+/**
+ * This function resets the allTasksOfSingleUserObj to an empty object.
+ */
+function resetAllTasksOfSingleUserObj() {
+    allTasksOfSingleUserObj = {};
 }
 
 /**
@@ -227,7 +280,7 @@ function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
     if (!container) return;
     const observer = new MutationObserver(() => {
-        if (container.innerHTML.trim() === '') {
+        if (container.innerHTML.trim() === '' && searchEvent === false) {
             renderNoTaskInfo(columnId);
         }
     });
@@ -250,17 +303,29 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function initializeBoard(userId) {
     let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
-    const allTaskData = await fetchAllDataGlobal();
+    initInputFieldEventListener(allTasksByIdOfSingleUserArr);
+    const joinData = await fetchAllDataGlobal();
+    
+    setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, joinData.tasks);
+    renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, joinData.tasks);
+    renderNoTaskInfoOnDOMLoad();
+    return allTasksByIdOfSingleUserArr;
+}
 
+/**
+ * This function renders all task cards on the board.
+ * 
+ * @param {Array} allTasksByIdOfSingleUserArr Array of task ID objects for the user.
+ * @param {Object} allTaskData The global task data object.
+ */
+function renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData) {
     for (let taskIndex in allTasksByIdOfSingleUserArr) {
         if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
-        let task = allTaskData.tasks[taskId];
+        let task = allTaskData[taskId];
         if (!task) continue;
-        allTasksOfSingleUserObj[taskId] = task;
         renderTaskCard(taskId, task);
     }
-    renderNoTaskInfoOnDOMLoad();
 }
 
 
@@ -280,5 +345,4 @@ async function refreshTaskOnBoard(taskId, taskToUpdate) {
         await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
     }
-    
 }
