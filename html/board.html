@@ -63,17 +63,22 @@
             </div>
             <section class="board_menu">
                 <h1>Board</h1>
-                <div class="board_controls">
-                    <div class="search_task">
-                        <input type="text" placeholder="Find Task" id="task_filter_input_field">
-                        <button>
-                            <img src="../assets/icons/board/search_glas.svg" alt="">
+                <div class="board_controls_container">
+                    <div class="board_controls">
+                            <div class="search_task">
+                            <input type="text" placeholder="Find Task" id="task_filter_input_field">
+                            <button>
+                                <img src="../assets/icons/board/search_glas.svg" alt="">
+                            </button>
+                        </div>
+                        <button class="button_add_task" onclick="openAddTaskOverlay()">
+                            <p>Add task</p>
+                            <img src="../assets/icons/board/add_white.svg" alt="add_task icon">
                         </button>
                     </div>
-                    <button class="button_add_task" onclick="openAddTaskOverlay()">
-                        <p>Add task</p>
-                        <img src="../assets/icons/board/add_white.svg" alt="add_task icon">
-                    </button>
+                    <div class="no_task_found_message d-none" id="no_task_found_message">
+                        <p>No tasks found matching your search.</p>
+                    </div>
                 </div>
             </section>
             <section class="table_header">
@@ -105,11 +110,6 @@
                 <div class="column_content" id="awaitFeedbackColumn" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
                 <div class="column_content" id="doneColumn" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>                    
             </section>
-            <div id="message_overflow_background" class="overlay">
-                <div id="responseDialog" class="message_overflow">
-                    <div class="white font-size-20" id="responseMessage"></div>
-                </div>
-            </div>
         </main>
     </article>
 
