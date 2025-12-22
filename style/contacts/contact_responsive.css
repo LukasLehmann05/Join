@@ -191,14 +191,6 @@
         display: none;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
-=======
->>>>>>> 26020bb (feat: added sub menu to edit and delete a user when in responsiv view)
     .sub-header-information {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -208,26 +200,10 @@
         display: flex;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 829e7ae (fix: adjusted sub menu position when responsiv)
     .sub-menu-btns {
         right: 40px;
     }
 
-<<<<<<< HEAD
-=======
->>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
->>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
-=======
->>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
->>>>>>> 26020bb (feat: added sub menu to edit and delete a user when in responsiv view)
-=======
->>>>>>> 829e7ae (fix: adjusted sub menu position when responsiv)
 }
 
 @media (max-width: 596px) {
@@ -235,11 +211,6 @@
         width: 55px;
         height: 55px;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 829e7ae (fix: adjusted sub menu position when responsiv)
 
     .sub-menu-btns {
         right: 7%;
@@ -250,13 +221,6 @@
     .sub-menu-btns {
         right: 8%;
     }
-<<<<<<< HEAD
-=======
->>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
->>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
->>>>>>> 829e7ae (fix: adjusted sub menu position when responsiv)
 }
 
 @media (max-width: 400px) {
@@ -267,21 +231,9 @@
     .fullname {
         font-size: 23px;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 829e7ae (fix: adjusted sub menu position when responsiv)
 
     .sub-menu-btns {
         
         margin-right: 6px;
     }
-<<<<<<< HEAD
-=======
->>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
->>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
-=======
->>>>>>> 829e7ae (fix: adjusted sub menu position when responsiv)
 }
