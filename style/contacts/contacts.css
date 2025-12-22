@@ -305,3 +305,6 @@
     transition: transform 1s ease-in-out;
 }
 
+.sub-menu-btns.show {
+    transform: translateX(0);
+}

@@ -192,6 +192,9 @@
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
     .sub-header-information {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -201,12 +204,15 @@
         display: flex;
     }
 
+<<<<<<< HEAD
     .sub-menu-btns {
         right: 40px;
     }
 
 =======
 >>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
+=======
+>>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
 }
 
 @media (max-width: 596px) {

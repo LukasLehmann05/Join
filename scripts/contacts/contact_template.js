@@ -39,6 +39,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <span id="mainPhone">${currentPhone}</span>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
@@ -55,6 +56,18 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                     alt="three dots opening sub menu">
             </button>
 >>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
+=======
+            <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
+                <img src="../assets/icons/contacts/three_dots.svg"
+                    alt="three dots opening sub menu">
+            </button>
+            <dialog id="responsivMenu" class="dialog-window-message">
+                <div class="sub-menu-btns" id="responseMenuContent">
+                    <button id="editUser" data-id="${currentId}" onclick="openDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
+                    <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
+                </div>
+            </dialog>
+>>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
             `
 };
 
