@@ -69,7 +69,7 @@ function createTask() {
         clearAllInputs();
     } else {
         missingInputs()
-
+        resetRequiredValues()
     }
 }
 
@@ -175,6 +175,12 @@ function missingInputs() {
         req_category_text.style.opacity = "1"
         task_category.classList.add("missing-input")
     }
+}
+
+function resetRequiredValues() {
+    req_title = false
+    req_due_date = false
+    req_category = false
 }
 
 function showSubtaskButtons() {
