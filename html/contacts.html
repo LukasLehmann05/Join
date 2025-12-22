@@ -11,16 +11,16 @@
     <link rel="stylesheet" href="../style/mainframe.css">
     <link rel="stylesheet" href="../style/board_style.css">
     <link rel="stylesheet" href="../style/board_overlay_style.css">
-    <link rel="stylesheet" href="../style/contacts.css">
-    <link rel="stylesheet" href="../style/add_contact.css">
+    <link rel="stylesheet" href="../style/contacts/contacts.css">
+    <link rel="stylesheet" href="../style/contacts/add_contact.css">
     <link rel="stylesheet" href="../style/add_task.css">
     <link rel="stylesheet" href="../style/mainframe_responsive.css">
-    <link rel="stylesheet" href="../style/contact_responsive.css">
+    <link rel="stylesheet" href="../style/contacts/contact_responsive.css">
 
     <script src="/script.js"></script>
     <script src="/scripts/firebase.js"></script>
-    <script src="/scripts/contact_data.js"></script>
-    <script src="/scripts/contact_template.js"></script>
+    <script src="/scripts/contacts/contact_data.js"></script>
+    <script src="/scripts//contacts/contact_template.js"></script>
     <script src="../scripts/board_overlay_data.js"></script>
 
 
@@ -100,12 +100,14 @@
 
             </dialog>
             </dialog>
-            <dialog id="responseDialog" class="dialog-message">
-                <div class="white font-size-20" id="responseMessage">Contact succesfully created</div>
+            <dialog id="responseDialog" class="dialog-window-message">
+                <div class="dialog-message" id="responseDialogContent">
+                    <div class="white font-size-20" id="responseMessage">Contact succesfully created</div>
+                </div>
             </dialog>
         </main>
     </article>
-    <script src="/scripts/contacts.js"></script>
+    <script src="/scripts/contacts/contacts.js"></script>
 
 </body>
 
