@@ -38,6 +38,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <p class="info-text">Phone</p>
                 <span id="mainPhone">${currentPhone}</span>
             </div>
+<<<<<<< HEAD
             <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
@@ -48,6 +49,12 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                     <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                 </div>
             </dialog>
+=======
+            <button onclick="openSubMenu()" class="sub-menu-btn">
+                <img src="../assets/icons/contacts/three_dots.svg"
+                    alt="three dots opening sub menu">
+            </button>
+>>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
             `
 };
 

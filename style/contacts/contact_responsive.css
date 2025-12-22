@@ -191,6 +191,7 @@
         display: none;
     }
 
+<<<<<<< HEAD
     .sub-header-information {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -204,6 +205,8 @@
         right: 40px;
     }
 
+=======
+>>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 }
 
 @media (max-width: 596px) {
@@ -211,6 +214,7 @@
         width: 55px;
         height: 55px;
     }
+<<<<<<< HEAD
 
     .sub-menu-btns {
         right: 7%;
@@ -221,6 +225,8 @@
     .sub-menu-btns {
         right: 8%;
     }
+=======
+>>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 }
 
 @media (max-width: 400px) {
@@ -231,9 +237,12 @@
     .fullname {
         font-size: 23px;
     }
+<<<<<<< HEAD
 
     .sub-menu-btns {
         
         margin-right: 6px;
     }
+=======
+>>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 }
