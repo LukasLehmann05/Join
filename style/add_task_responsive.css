@@ -12,6 +12,18 @@
     }
 }
 
+@media (max-width: 900px) {
+    .action-button-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .button-section {
+        justify-content: flex-end;
+        margin-bottom: 16px;
+    }
+}
+
 @media (max-width: 767px) {
 
     .show-767 {
