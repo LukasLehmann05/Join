@@ -38,10 +38,16 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <p class="info-text">Phone</p>
                 <span id="mainPhone">${currentPhone}</span>
             </div>
-            <button onclick="openSubMenu()" class="sub-menu-btn">
+            <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
             </button>
+            <dialog id="responsivMenu" class="dialog-window-message">
+                <div class="sub-menu-btns" id="responseMenuContent">
+                    <button id="editUser" data-id="${currentId}" onclick="openDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
+                    <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
+                </div>
+            </dialog>
             `
 };
 

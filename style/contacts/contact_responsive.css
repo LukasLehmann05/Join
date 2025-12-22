@@ -191,6 +191,15 @@
         display: none;
     }
 
+    .sub-header-information {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .sub-menu-btn {
+        display: flex;
+    }
+
 }
 
 @media (max-width: 596px) {
