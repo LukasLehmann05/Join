@@ -234,28 +234,28 @@
     content: "";
     width: 24px;
     height: 24px;
-    background: url("../assets/icons/contacts/edit.svg") center / contain no-repeat;
+    background: url("../../assets/icons/contacts/edit.svg") center / contain no-repeat;
 }
 
 #deleteUser::before {
     content: "";
     width: 24px;
     height: 24px;
-    background: url("../assets/icons/contacts/delete.svg") center / contain no-repeat;
+    background: url("../../assets/icons/contacts/delete.svg") center / contain no-repeat;
 }
 
 #deleteUser:hover::before {
     content: "";
     width: 24px;
     height: 24px;
-    background: url("../assets/icons/board/delete_button_hover.svg") center / contain no-repeat;
+    background: url("../../assets/icons/board/delete_button_hover.svg") center / contain no-repeat;
 }
 
 #editUser:hover::before {
     content: "";
     width: 24px;
     height: 24px;
-    background: url("../assets/icons/board/edit_button_hover.svg") center / contain no-repeat;
+    background: url("../../assets/icons/board/edit_button_hover.svg") center / contain no-repeat;
 }
 
 .go-back-btn {
@@ -301,3 +301,4 @@
     transform: translateX(200%);
     transition: transform 1s ease-in-out;
 }
+
