@@ -109,7 +109,7 @@ function getAcronym(name) {
  */
 function colorAcronym(contact) {
     let element = document.getElementById("short-" + contact);
-    if (!element) return; // guard if element not found
+    if (!element) return; 
     let position = userColourProperty.findIndex(item => item.id === contact);
     element.style.backgroundColor = userColourProperty[position].color;
 };

@@ -23,7 +23,6 @@ dialog[open] {
    width: 1200px;
    min-height: 500px;
    transform: translateX(200%);
-
    transition: transform 1s ease-in-out;
 }
 

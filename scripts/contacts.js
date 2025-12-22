@@ -232,7 +232,7 @@ function goBacktoList() {
  */
 function openSubMenu() {
     let subMenu = document.getElementById('subMenuBtns');
-    subMenu.style.transform = "translateX(0%)"
+    
 };
 
 
@@ -241,7 +241,7 @@ function openSubMenu() {
  */
 window.addEventListener('click', (event) => {
   if (!event.target.closest('.sub-menu-btn') && window.innerWidth <= 767) {
-    document.getElementById('subMenuBtns').style.transform = "translateX(200%)";
+    
   }
 });
 
