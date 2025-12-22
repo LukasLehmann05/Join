@@ -202,7 +202,7 @@ textarea.task-input {
 }
 
 .required-info {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 120%;
     color: #ff3d00;
@@ -317,7 +317,7 @@ textarea.task-input {
     border-radius: 10px;
 }
 
-.contact-element :hover {
+.contact-element button:hover {
     background-color: #F6F7F8;
     color: black;
 }
@@ -496,4 +496,13 @@ textarea.task-input {
 .subtask-check {
     filter: brightness(0) saturate(100%) invert(19%) sepia(6%) saturate(2981%) hue-rotate(177deg) brightness(93%) contrast(92%);
     height: 24px !important;
+}
+
+.clear-button:hover img {
+    filter: brightness(0) saturate(100%) invert(63%) sepia(94%) saturate(1792%) hue-rotate(165deg) brightness(90%) contrast(97%);
+}
+
+.assigned-contact button:hover {
+    background-color: #3a4555 !important;
+    color: white !important;
 }

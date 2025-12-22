@@ -12,6 +12,18 @@
     }
 }
 
+@media (max-width: 900px) and (min-width: 768px) {
+    .action-button-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .button-section {
+        justify-content: flex-end;
+        margin-bottom: 16px;
+    }
+}
+
 @media (max-width: 767px) {
 
     .show-767 {
@@ -45,6 +57,10 @@
     .priority-button {
         font-size: 16px;
         padding: 12px 4px;
+    }
+
+    .h1 {
+        font-size: 50px;
     }
 }
 

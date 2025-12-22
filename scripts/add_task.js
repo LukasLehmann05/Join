@@ -62,21 +62,25 @@ function loadDataFromAPI() {
     return joinData
 }
 
-function createTask() {
+async function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
-        sendTaskToDB();
+        await sendTaskToDB();
         clearAllInputs();
+        redirectToBoard()
     } else {
         missingInputs()
-
+        resetRequiredValues()
     }
 }
 
-function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
+async function sendTaskToDB() {
+    await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
+function redirectToBoard() {
+    window.location.replace("board.html");
+}
 
 function checkForRequired() {
     if (task_title.value != "") {
@@ -175,6 +179,12 @@ function missingInputs() {
         req_category_text.style.opacity = "1"
         task_category.classList.add("missing-input")
     }
+}
+
+function resetRequiredValues() {
+    req_title = false
+    req_due_date = false
+    req_category = false
 }
 
 function showSubtaskButtons() {
