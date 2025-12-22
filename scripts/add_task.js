@@ -62,10 +62,10 @@ function loadDataFromAPI() {
     return joinData
 }
 
-function createTask() {
+async function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
-        sendTaskToDB();
+        await sendTaskToDB();
         clearAllInputs();
         redirectToBoard()
     } else {
@@ -74,8 +74,8 @@ function createTask() {
     }
 }
 
-function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
+async function sendTaskToDB() {
+    await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
 function redirectToBoard() {
