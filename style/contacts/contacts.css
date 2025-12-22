@@ -306,8 +306,14 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .sub-menu-btns.show {
     transform: translateX(0);
 }
 =======
 >>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
+=======
+.sub-menu-btns.show {
+    transform: translateX(0);
+}
+>>>>>>> 26020bb (feat: added sub menu to edit and delete a user when in responsiv view)
