@@ -154,12 +154,10 @@ function removeThisContactFromList(id) {
  */
 function responseMessageAppearance() {
     setTimeout(() => {
-        document.getElementsByTagName("body")[0].style.overflow = "hidden";
-        toggleDialog('responseDialog', 'responseDialog');
+        openDialog('responseDialog', 'responseDialogContent');
     }, 1500)
-    document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
-        closeDialog('responseDialog', 'responseDialog');
+        closeDialog('responseDialog', 'responseDialogContent');
     }, 3500)
     setTimeout(() => {
         document.getElementById('responseMessage').innerHTML = "Contact successfully created.";

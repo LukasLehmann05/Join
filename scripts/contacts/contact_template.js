@@ -128,10 +128,11 @@ function editDialogHTML() {
                            phone number.</p>
                        <section class="button-section-contact">
                            <div class="clear-button">
-                               <button onclick="deleteThisContactFromDialog()" class="action-buttons">
-                                   <p>Delete</p>
-                                   <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                               </button>
+                                <div class="cancel-add-btn">
+                                   <button onclick="deleteThisContactFromDialog()" class="action-buttons">
+                                       Delete
+                                   </button>
+                                </div>
                            </div>
                            <div class="create-task"><button onclick="editContactInDatabase()"
                                    class="action-buttons create-button">
