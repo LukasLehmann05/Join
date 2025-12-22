@@ -200,12 +200,26 @@
         display: flex;
     }
 
+    .sub-menu-btns {
+        right: 40px;
+    }
+
 }
 
 @media (max-width: 596px) {
     .two-letter-name {
         width: 55px;
         height: 55px;
+    }
+
+    .sub-menu-btns {
+        right: 7%;
+    }
+}
+
+@media (max-width: 470px) {
+    .sub-menu-btns {
+        right: 8%;
     }
 }
 
@@ -216,5 +230,10 @@
 
     .fullname {
         font-size: 23px;
+    }
+
+    .sub-menu-btns {
+        
+        margin-right: 6px;
     }
 }
