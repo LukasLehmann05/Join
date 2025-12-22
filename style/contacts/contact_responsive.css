@@ -193,6 +193,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
     .sub-header-information {
@@ -213,6 +214,8 @@
 >>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 =======
 >>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
+=======
+>>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 }
 
 @media (max-width: 596px) {
@@ -220,6 +223,7 @@
         width: 55px;
         height: 55px;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     .sub-menu-btns {
@@ -233,6 +237,8 @@
     }
 =======
 >>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
+=======
+>>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 }
 
 @media (max-width: 400px) {
@@ -244,6 +250,7 @@
         font-size: 23px;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     .sub-menu-btns {
         
@@ -251,4 +258,6 @@
     }
 =======
 >>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
+=======
+>>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 }

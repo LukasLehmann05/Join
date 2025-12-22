@@ -40,6 +40,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
             </div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
@@ -51,10 +52,13 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 </div>
             </dialog>
 =======
+=======
+>>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
             <button onclick="openSubMenu()" class="sub-menu-btn">
                 <img src="../assets/icons/contacts/three_dots.svg"
                     alt="three dots opening sub menu">
             </button>
+<<<<<<< HEAD
 >>>>>>> 06cd924 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
 =======
             <button onclick="openDialog('responsivMenu' ,'responseMenuContent')" class="sub-menu-btn">
@@ -68,6 +72,8 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 </div>
             </dialog>
 >>>>>>> f12486d (feat: added sub menu to edit and delete a user when in responsiv view)
+=======
+>>>>>>> 8ce30c5 (fix: to prevent clutterung folders moved css and js scripts for contact in contact folders in styles and scripts)
             `
 };
 
