@@ -67,6 +67,7 @@ function createTask() {
     if (can_create == true) {
         sendTaskToDB();
         clearAllInputs();
+        redirectToBoard()
     } else {
         missingInputs()
         resetRequiredValues()
@@ -77,6 +78,9 @@ function sendTaskToDB() {
     addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
+function redirectToBoard() {
+    window.location.replace("board.html");
+}
 
 function checkForRequired() {
     if (task_title.value != "") {
