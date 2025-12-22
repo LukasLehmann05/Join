@@ -279,11 +279,11 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
             <section class="upsert_description_container">
                 <form class="input-form description">
                     <label for="task_description" class="task_field_title">Description</label>
-                    <textarea 
+                    <textarea
+                        type="text"
                         id="task_description" 
                         class="task-input" 
-                        placeholder="Enter a description">${taskDescription}
-                    </textarea>
+                        placeholder="Enter a description">${taskDescription}</textarea>
                 </form>
             </section>
             `
