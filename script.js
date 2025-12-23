@@ -10,7 +10,6 @@ async function getContactColorObj() {
     for (let contactID in contactData) {
         assignColorToContact(contactID);
     }
-    console.table(contactColorProperty);
 };
 
 getContactColorObj();
