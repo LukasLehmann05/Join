@@ -40,6 +40,10 @@
         margin-top: 48px;
     }
 
+    .cancel-add-btn{
+        display: none;
+    }
+
     .contact-main {
         min-width: 320px;
     }
@@ -126,6 +130,22 @@
         top: 42%;
         left: 50%;
         translate: -50%;
+    }
+
+    .position-edit {
+        margin: 0;
+        position: fixed;
+        top: 37%;
+        left: 50%;
+        translate: -50%;
+    }
+
+    .edit-right{
+        padding-top: 60px;
+    }
+
+    .subtask-section {
+        padding: 10px 10px;
     }
 
     .close-btn {
@@ -227,7 +247,7 @@
         position: sticky;
         top: 80%;
         left: 50%;
-        translate: -50%;  
+        translate: -50%;
     }
 }
 

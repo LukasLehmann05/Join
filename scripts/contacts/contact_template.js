@@ -109,13 +109,16 @@ function editDialogHTML() {
                    <h1 class="white margin">Edit Contact</h1>
                    <div class="separator-horizontal"></div>
                </section>
-               <section class="main-right">
-                   <div id="editedAvatar" class="two-letter-name position">
+               <section class="main-right edit-right">
+                   <div id="editedAvatar" class="two-letter-name position-edit">
                       </div>
                    <div class="add-contact-info">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'editContent')">
-                           <img class="icon-close" src="../assets/icons/contacts/close.svg"
+                           <picture>
+                               <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">
+                               <img class="icon-close" src="../assets/icons/contacts/close.svg"
                                alt="close overlay icon">
+                             </picture>
                        </button>
                        <label class="subtask-section name">
                            <input id="nameEdit" type="text" placeholder="Name">
@@ -133,7 +136,7 @@ function editDialogHTML() {
                            phone number.</p>
                        <section class="button-section-contact">
                            <div class="clear-button">
-                                <div class="cancel-add-btn">
+                                <div class="cancel-edit-btn">
                                    <button onclick="deleteThisContactFromDialog()" class="action-buttons">
                                        Delete
                                    </button>

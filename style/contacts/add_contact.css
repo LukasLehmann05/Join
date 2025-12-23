@@ -63,6 +63,13 @@ dialog[open] {
    margin-left: 50px;
 }
 
+.position-edit{
+   margin-top: auto;
+   margin-bottom: auto;
+   margin-right: 50px;
+   margin-left: 50px;
+}
+
 .white {
    color: white;
 }
@@ -186,3 +193,27 @@ dialog[open] {
 .cancel-add-btn img:hover {
    fill: #29ABE2;
 }
+
+.cancel-edit-btn ::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../../assets/icons/contacts/close.svg") center / contain no-repeat;
+}
+
+.cancel-edit-btn :hover::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../../assets/icons/contacts/close_hover.svg") center / contain no-repeat;
+}
+
+.cancel-edit-btn :hover {
+   border-color: #29ABE2;
+   color: #29ABE2;
+}
+
+.cancel-edit-btn img:hover {
+   fill: #29ABE2;
+}
+
