@@ -42,7 +42,9 @@ article{
     background-color: #091931;
 }
 
-.sidebar-nav :hover {
+.sidebar-nav a:hover{
+    transform: translate(0.5px, -0.5px);
+    margin-right: 1px;
     background-color: #2A3D59;
 }
 
@@ -58,7 +60,7 @@ article{
     align-items: center;
     color: white;
     padding: 8px 56px;
-    gap: 10px;
+    gap: 10px;   
 }
 
 .nav-icons {
