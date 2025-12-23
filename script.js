@@ -1,4 +1,5 @@
-const userColourProperty = [];
+const userColorProperty = {};
+const contactColorProperty = {};
 
 const AllData = {};
 

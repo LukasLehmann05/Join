@@ -2,21 +2,21 @@
  * array for colours to choose from for generating background colour in contact list
  */
 const colours = [
-    '#aaa827ff',
-    '#dd711fff',
-    '#3567d3ff',
-    '#539e27ff',
-    '#b6322eff',
-    '#992b97ff',
-    '#8a6710ff',
-    '#9077d4ff',
-    '#2a0394ff',
-    '#030303ff',
-    '#157402ff',
-    '#026269ff',
-    '#c73abbff',
-    '#17682fff',
-    '#c93360ff'
+    '#FFE62B',
+    '#FF4646',
+    '#FFBB2B',
+    '#FFC701',
+    '#0038FF',
+    '#C3FF2B',
+    '#FF745E',
+    '#FFA35E',
+    '#FC71FF',
+    '#9327FF',
+    '#00BEE8',
+    '#1FD7C1',
+    '#FF7A00',
+    '#FF5EB3',
+    '#6E52FF'
 ];
 
 
@@ -28,11 +28,12 @@ const colours = [
 async function fetchContactList() {
     let contactData = (await fetchAllDataGlobal()).contacts;
     for (let contactID in contactData) {
-        colorUser(contactID);
+        assignColorToContact(contactID);
         let name = contactData[contactID].name;
         let singleContactData = contactData[contactID];
         renderHtmlElements(singleContactData, contactID, name);
     }
+    console.table(contactColorProperty);
 };
 
 
@@ -108,9 +109,9 @@ function getAcronym(name) {
  */
 function colorAcronym(contact) {
     let element = document.getElementById("short-" + contact);
-    if (!element) return; 
-    let position = userColourProperty.findIndex(item => item.id === contact);
-    element.style.backgroundColor = userColourProperty[position].color;
+    if (!element) return; // guard if element not found
+    let position = contactColorProperty.findIndex(item => item.id === contact);
+    element.style.backgroundColor = contactColorProperty[position].color;
 };
 
 
@@ -119,11 +120,9 @@ function colorAcronym(contact) {
  * assigns colors to user permanently in userColourProperty
  * @const userColourProperty
  */
-function colorUser(contact) {
-    let colorUser = colours[Math.floor(Math.random() * colours.length)];
-    userColourProperty.push(
-        { id: contact, color: colorUser }
-    )
+function assignColorToContact(contactId) {
+    let userColor = colours[Math.floor(Math.random() * colours.length)];
+    contactColorProperty[contactId] = userColor;
 };
 
 
@@ -201,7 +200,7 @@ async function addNewContactToDatabase() {
  */
 async function trimDownAddingContact(newUser, name) {
     let contactID = await getLastContactAddedFromDatabase();
-    colorUser(contactID);
+    assignColorToContact(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
     dialogAppearences('dialogWindow', 'addContent');
