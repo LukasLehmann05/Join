@@ -119,9 +119,9 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
     getAssigneesOfTask(taskAssignees);
     
     for (let contactId of allAssigneesArr) {
-        const user = await getContactById(contactId);
-        if (user) {
-            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
+        const contact = await getContactById(contactId);
+        if (contact) {
+            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, contact, contactId);
         }
     }
 }
@@ -144,20 +144,20 @@ function getAssigneesOfTask(taskAssignees) {
  * This function returns the HTML content to render assigned user infos.
  * 
  * @param {boolean} renderOnlyId Whether to render only the ID/icon or also the name.
- * @param {Object} user The user object.
+ * @param {Object} contact The user object.
  * @returns {string} The HTML string for the assigned user info.
  */
-function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
+function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
     if(renderOnlyId) {
         return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
+                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contactColorProperty[contactId])}
                     </div>
                 `;
     }
     else {
         return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
-                    ${assignedUserNameTemplate(user.name)}
+                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contactColorProperty[contactId])}
+                    ${assignedUserNameTemplate(contact.name)}
                     </div>
                 `;
     }

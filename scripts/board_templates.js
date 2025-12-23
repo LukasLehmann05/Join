@@ -95,9 +95,9 @@ function taskCardTemplate(task, taskId) {
  * @param {string} initials The initials of the user.
  * @returns {string} The HTML string for the user icon.
  */
-function assignedUserIconTemplate(initials) {
+function assignedUserIconTemplate(initials, contactColor) {
      return `
-            <div class="assigned_user_avatar" style="background-color: #${Math.floor(Math.random()*16777215).toString(16)};">
+            <div class="assigned_user_avatar" style="background-color: ${contactColor};">
                 ${initials}
             </div>
             `
