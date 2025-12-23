@@ -172,10 +172,17 @@ h1{
     font-size: 16px;
     font-weight: 400;
     color: white;
-    background-color: #0038FF;
     font-family: "Inter";
     padding: 4px 16px;
     border-radius: 8px;
+}
+
+.single_task_content .Technical_Task{
+    background-color: #0038FF;
+}
+
+.single_task_content .User_Story{
+    background-color: #1FD7C1;
 }
 
 .single_task_content h3{
