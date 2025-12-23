@@ -26,7 +26,6 @@ const colours = [
  * @global AllData
  */
 async function fetchContactList() {
-    contactColorProperty = {};
     let contactData = (await fetchAllDataGlobal()).contacts;
     for (let contactID in contactData) {
         assignColorToContact(contactID);
