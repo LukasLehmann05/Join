@@ -1,16 +1,28 @@
 /**
- * opens dialog window.
+ * checks for screen width to adjust dialog incoming direction.
  */
 function directionOfIncomingDialog(id, id2) {
     renderDialog(id2);
     if (window.innerWidth <= 1150) {
-        document.getElementById(id2).style.transform = 'translateY(200%)';
-        openDialog(id, id2);
+        giveInitialPosition(id, id2);
     }
     if (window.innerWidth >= 1150) {
         document.getElementById(id2).style.transform = 'translateX(200%)';
         openDialog(id, id2);
     }
+};
+
+
+/**
+ * gives dialogs initial translating values
+ */
+function giveInitialPosition(id, id2) {
+    document.getElementById(id2).style.transform = 'translateY(200%)';
+        openDialog(id, id2);
+        if (id2 == "responseMenuContent") {
+            document.getElementById(id2).style.transform = 'translateX(200%)';
+            openDialog(id, id2);
+        }
 };
 
 
@@ -36,13 +48,38 @@ function openDialog(id, id2) {
 function closeDialog(id, id2) {
     let dialog = document.getElementById(id);
     if (window.innerWidth >= 1150) {
-        document.getElementById(id2).style.transform = 'translateX(200%)';
+        decideTranslationBigScreen(id2);
     } else {
-        document.getElementById(id2).style.transform = 'translateY(200%)';
+        decideTranslationSmallScreen(id2)
     }
     setTimeout(() => {
         dialog.open = false;
     }, 1000)
+};
+
+
+/**
+ * decides specific translation values for specific dialogs
+ */
+function decideTranslationBigScreen(id2) {
+    document.getElementById(id2).style.transform = 'translateX(200%)';
+    if (id2 == "responseDialogContent") {
+        document.getElementById(id2).style.transform = 'translateX(590%)';
+    }
+};
+
+
+/**
+ * choose specific values for specific dialogs
+ */
+function decideTranslationSmallScreen(id2) {
+    document.getElementById(id2).style.transform = 'translateY(200%)';
+    if (id2 == "responseMenuContent") {
+        document.getElementById(id2).style.transform = 'translateX(200%)';
+    }
+    if (id2 == "responseDialogContent") {
+        document.getElementById(id2).style.transform = 'translateY(400%)';
+    }
 };
 
 
@@ -71,6 +108,7 @@ window.onclick = function (event) {
  * shows response Message
  */
 function responseMessageAppearance() {
+    adjustPosition();
     setTimeout(() => {
         openDialog('responseDialog', 'responseDialogContent');
     }, 1500)
@@ -79,7 +117,19 @@ function responseMessageAppearance() {
     }, 3500)
     setTimeout(() => {
         document.getElementById('responseMessage').innerHTML = "Contact successfully created.";
-    }, 4000)
+    }, 6000)
+};
+
+
+/**
+ * adjust position of response message based on window width
+ */
+function adjustPosition() {
+    if (window.innerWidth >= 1150) {
+        document.getElementById('responseDialogContent').style.transform = 'translateX(590%)';
+    } else {
+        document.getElementById('responseDialogContent').style.transform = 'translateY(200%)';
+    }
 };
 
 

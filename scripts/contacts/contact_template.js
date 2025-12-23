@@ -44,7 +44,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
             </button>
             <dialog id="responsivMenu" class="dialog-window-message">
                 <div class="sub-menu-btns" id="responseMenuContent">
-                    <button id="editUser" data-id="${currentId}" onclick="openDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
+                    <button id="editUser" data-id="${currentId}" onclick="directionOfIncomingDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
                     <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                 </div>
             </dialog>`
