@@ -134,6 +134,7 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
  */
 function getAssigneesOfTask(taskAssignees) {
     allAssigneesArr = [];
+    if (!taskAssignees || taskAssignees.length === 0) return;
     for (let contactId of taskAssignees) {
         allAssigneesArr.push(contactId);
     }
@@ -283,4 +284,17 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('clear_button_container').classList.toggle('show');
     document.getElementById('required_text_field_section').classList.toggle('show');
     showWideOverlay = !showWideOverlay;
+}
+
+
+async function deleteTaskInOverlay(taskId, userId) {
+    closeOverlay();
+    document.getElementById(taskId+"_task_card").remove();
+    await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
+    await deleteTask(taskId);    
+}
+
+
+function getCurrentUserIdIcon() {
+    return document.getElementById('current_user_id').getAttribute('data-current-user-id');
 }
