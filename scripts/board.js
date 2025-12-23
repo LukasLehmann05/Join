@@ -224,6 +224,7 @@ function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
 function setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, allTasks) {
     allTasksOfSingleUserObj = {};
     for (let taskIndex in allTasksByIdOfSingleUserArr) {
+        if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];
         let task = allTasks[taskId];
         if (task) {
