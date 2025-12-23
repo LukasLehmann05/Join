@@ -1,6 +1,11 @@
+@media (min-width: 1305px) {
+    #responsivMenu {
+        display: none;
+    }
+}
+
 @media (max-width: 1305px) {
     .contact-display {
-
         margin-left: 25px;
         margin-top: 110px;
     }
@@ -38,9 +43,7 @@
     }
 
     .contact-main {
-        height: calc(100vh - 168px);
         min-width: 320px;
-
     }
 
     .sidebar-contacts {
@@ -235,8 +238,15 @@
     .sub-menu-btns {
         right: 40px;
     }
-
 }
+
+
+@media (max-width: 767px) {
+    .contact-main {
+        height: calc(100vh - 168px);
+    }
+}
+
 
 @media (max-width: 596px) {
     .two-letter-name {

@@ -135,12 +135,11 @@ function displayInMain(id) {
     let currentName = id.getAttribute('data-name');
     let currentPhone = id.getAttribute('data-phone');
     let currentMail = id.getAttribute('data-email');
-    if (window.innerWidth <= 767) {
+    if (window.innerWidth <= 1150) {
         changeDisplaySize();
-        renderMainDisplay(currentId, currentName, currentPhone, currentMail)
-        
+        renderMainDisplay(currentId, currentName, currentPhone, currentMail) 
     }
-    if (window.innerWidth >= 767) {
+    if (window.innerWidth >= 1150) {
         renderMainDisplay(currentId, currentName, currentPhone, currentMail);
     }
 };
@@ -244,7 +243,7 @@ async function trimDownEditingUser(editID, editedUser) {
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
-    displayEditedContactDataInMainDisplay(editID, editedUser.email, editedUser.name, editedUser.phone)
+    displayEditedContactDataInMainDisplay(editedUser.email, editedUser.name, editedUser.phone)
 };
 
 
@@ -288,7 +287,6 @@ function getDataFromMain() {
 async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
     deleteThisUser(currentId)
-
     responseMessageAppearance();
 };
 

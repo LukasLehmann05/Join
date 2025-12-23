@@ -4,6 +4,18 @@
     height: 100%;
 }
 
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-block {
+    display: block;
+}
+
 .sidebar-contacts {
     display: flex;
     overflow-y: auto;
@@ -305,5 +317,3 @@
 .sub-menu-btns.show {
     transform: translateX(0);
 }
-
-

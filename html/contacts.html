@@ -26,7 +26,7 @@
 
 </head>
 
-<body onload="fetchContactList()" class="body">
+<body onload="fetchContactList()" onresize="removeRespAttributes()" class="body">
     <aside class="sidebar">
         <div class="sidebar_upper_section">
             <section class="logo-section">
@@ -108,6 +108,7 @@
         </main>
     </article>
     <script src="../scripts/contacts/contacts.js"></script>
+    <script src="../scripts/contacts/contact_dialog.js"></script>
 
 </body>
 

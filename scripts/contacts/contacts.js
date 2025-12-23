@@ -1,61 +1,40 @@
 /**
- * opens dialog window.
+ * changes sizes to display the clicked contact in responive width
  */
-function openDialog(id, id2) {
-    renderDialog(id2);
-    let dialog = document.getElementById(id);
-    dialog.open = true;
-    setTimeout(() => {
-        document.getElementById(id2).classList.add('show');
-    }, 10)
-
+function changeDisplaySize() {
+    let contactList = document.getElementById('contactsAsideElement');
+    let mainView = document.getElementById('contactsMainElement');
+    if (window.innerWidth <= 1150) {
+        contactList.style.display = "none";
+        mainView.style.display = "block";
+    }
 };
 
 
 /**
- * opens dialog window.
+ * changes the displayed elements based on the window size and their display status
  */
-function directionOfIncomingDialog(id, id2) {
-    if (window.innerWidth <= 767) {
-        console.log(window.innerWidth);
+function removeRespAttributes() {
+    let contactList = document.getElementById('contactsAsideElement');
+    let mainView = document.getElementById('contactsMainElement');
+    if (window.innerWidth >= 1150 && contactList.style.display == "none" == true) {
+        contactList.style.display = "flex";
+        mainView.style.display = "block";
     }
-    if (window.innerWidth >= 767) {
-        openDialog(id, id2);
+    if (window.innerWidth <= 1150 && mainView.style.display == "block" == true && contactList.style.display == "none" == false) {
+        mainView.style.display = "none";
     }
-}
-
-
-
-/**
- * closes dialog window via button
- */
-function closeDialog(id, id2) {
-    let dialog = document.getElementById(id);
-    document.getElementById(id2).classList.remove('show');
-    setTimeout(() => {
-        dialog.open = false;
-    }, 1000)
 };
 
 
 /**
- * closes dialog window via window click
+ * goes back to display contact list
  */
-window.onclick = function (event) {
-    let dialog = document.getElementById('dialogWindow');
-    let dialogResponsiv = document.getElementById('responsivMenu');
-    let childAdd = document.getElementById('addContent');
-    let childEdit = document.getElementById('editContent');
-    let childResp = document.getElementById('responseMenuContent');
-    if (event.target == dialog && dialog.contains(childAdd)) {
-        closeDialog('dialogWindow', 'addContent');
-    }
-    if (event.target == dialog && dialog.contains(childEdit)) {
-        closeDialog('dialogWindow', 'editContent');
-    }
-    if (event.target == dialogResponsiv && dialogResponsiv.contains(childResp)) {
-        closeDialog('responsivMenu', 'responseMenuContent');
-    }
+function goBacktoList() {
+    let contactList = document.getElementById('contactsAsideElement');
+    let mainView = document.getElementById('contactsMainElement');
+    contactList.style.display = "flex";
+    mainView.style.display = "none";
 };
 
 
@@ -99,6 +78,40 @@ function emptyInput() {
 
 
 /**
+ * displays current edited contact in editing dialog
+ */
+function displayAvatarInEdit(id) {
+    let avatar = document.getElementById('editedAvatar');
+    let color = document.getElementById('short-' + id).style.backgroundColor;
+    let acronym = document.getElementById('short-' + id).innerText;
+    avatar.classList.add('fullname');
+    avatar.innerText = acronym
+    avatar.style.backgroundColor = color;
+};
+
+
+/**
+ * remove contact from contact list
+ */
+function removeThisContactFromList(id) {
+    let deletedContact = document.getElementById(id);
+    deletedContact.remove();
+};
+
+
+/**
+ * checks if the letter section is empty after deleting a contact and removes said section if empty
+ */
+function removeLetterSectionIfEmpty(letter) {
+    let deletedContact = document.getElementById(letter);
+    if (deletedContact.children.length <= 0) {
+        deletedContact.parentElement.remove();
+    }
+    else return;
+};
+
+
+/**
  * get contact Data from Main Display to edit dialog window
  */
 function displayMainDataInEditDialog() {
@@ -124,7 +137,7 @@ function displayEditedContactDataInList(editID, email, name) {
 /**
  * updates data in main display for the edited user
  */
-function displayEditedContactDataInMainDisplay(editID, email, name, phone) {
+function displayEditedContactDataInMainDisplay(email, name, phone) {
     let acronym = getAcronym(name);
     document.getElementById('mainMail').innerText = email;
     document.getElementById('mainName').innerText = name;
@@ -132,121 +145,6 @@ function displayEditedContactDataInMainDisplay(editID, email, name, phone) {
     document.getElementById('mainShort').innerText = acronym;
 };
 
-
-/**
- * checks if the letter section is empty after deleting a contact and removes said section if empty
- */
-function removeLetterSectionIfEmpty(letter) {
-    let deletedContact = document.getElementById(letter);
-    if (deletedContact.children.length <= 0) {
-        deletedContact.parentElement.remove();
-    }
-    else return;
-};
-
-
-/**
- * remove contact from contact list
- */
-function removeThisContactFromList(id) {
-    let deletedContact = document.getElementById(id);
-    deletedContact.remove();
-};
-
-
-/**
- * shows response Message
- */
-function responseMessageAppearance() {
-    setTimeout(() => {
-        openDialog('responseDialog', 'responseDialogContent');
-    }, 1500)
-    setTimeout(() => {
-        closeDialog('responseDialog', 'responseDialogContent');
-    }, 3500)
-    setTimeout(() => {
-        document.getElementById('responseMessage').innerHTML = "Contact successfully created.";
-    }, 4000)
-};
-
-
-/**
- * handles the appearing/disappearing of the dialogs during the process of adding a new contact
- */
-function dialogAppearences(id, idContent) {
-    closeDialog(id, idContent);
-    responseMessageAppearance();
-};
-
-
-/**
- * displays current edited contact in editing dialog
- */
-function displayAvatarInEdit(id) {
-    let avatar = document.getElementById('editedAvatar');
-    let color = document.getElementById('short-' + id).style.backgroundColor;
-    let acronym = document.getElementById('short-' + id).innerText;
-    avatar.classList.add('fullname');
-    avatar.innerText = acronym
-    avatar.style.backgroundColor = color;
-};
-
-
-/**
- * renders edit or add dialog from html template
- */
-function renderDialog(id) {
-    let dialog = document.getElementById('dialogWindow');
-    if (id === "addContent") {
-        dialog.innerHTML = addDialogHTML();
-    }
-    if (id === "editContent") {
-        dialog.innerHTML = editDialogHTML();
-    }
-};
-
-
-/**
- * changes sizes to display the clicked contact in responive width
- */
-function changeDisplaySize() {
-    let contactList = document.getElementById('contactsAsideElement');
-    let mainView = document.getElementById('contactsMainElement');
-    if (window.innerWidth <= 767) {
-        contactList.style.display = "none";
-        mainView.style.display = "block";
-    }
-};
-
-
-/**
- * goes back to display contact list
- */
-function goBacktoList() {
-    let contactList = document.getElementById('contactsAsideElement');
-    let mainView = document.getElementById('contactsMainElement');
-    contactList.style.display = "flex";
-    mainView.style.display = "none";
-};
-
-
-/**
- * opens sub menu in single contact to display edit and delete options
- */
-function openSubMenu() {
-    let subMenu = document.getElementById('subMenuBtns');
-    
-};
-
-
-/**
- * closes sub menu in single contact by accessing translateX property
- */
-window.addEventListener('click', (event) => {
-  if (!event.target.closest('.sub-menu-btn') && window.innerWidth <= 767) {
-    
-  }
-});
 
 
 
