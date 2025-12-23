@@ -336,11 +336,12 @@ function renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData) {
  * @param {Object} taskToUpdate The updated task object.
  */
 async function refreshTaskOnBoard(taskId, taskToUpdate) {
-    let taskCardElementId = taskId + '_task_card';
-    const columnContainer = document.getElementById(taskCardElementId).parentElement;
-    document.getElementById(taskCardElementId).remove();
-    if (columnContainer) {
-        columnContainer.innerHTML += taskCardTemplate(taskToUpdate, taskId);
+    const oldCard = document.getElementById(taskId + '_task_card');
+    if (oldCard) {
+        const newCard = document.createElement('div');
+        newCard.innerHTML = taskCardTemplate(taskToUpdate, taskId);
+        const newCardElement = newCard.firstElementChild;
+        oldCard.replaceWith(newCardElement);
         renderSubtaskProgress(taskId, taskToUpdate.subtasks || []);
         await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
