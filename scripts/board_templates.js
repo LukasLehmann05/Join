@@ -154,7 +154,7 @@ function overlayContentTemplate(task, taskId) {
             <aside class="edit_overlay_button_container">
                 <button 
                     class="edit_overlay_button separator_overlay" 
-                    onclick="deleteTaskOverlay('${taskId}')"
+                    onclick="deleteTaskInOverlay('${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
                     data-normal-src="../assets/icons/board/delete_button.svg" 
