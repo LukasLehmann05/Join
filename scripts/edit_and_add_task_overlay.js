@@ -131,6 +131,7 @@ async function openAddTaskOverlay() {
     renderOverlayAddTask(taskId).then(() => {
         addTaskInit();
     })
+    disableScrollOnBody();
 }
 
 
