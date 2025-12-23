@@ -26,6 +26,7 @@ const colours = [
  * @global AllData
  */
 async function fetchContactList() {
+    contactColorProperty = {};
     let contactData = (await fetchAllDataGlobal()).contacts;
     for (let contactID in contactData) {
         assignColorToContact(contactID);
@@ -107,11 +108,10 @@ function getAcronym(name) {
 /**
  * fetches color from array and assigns it as backgroundcolor for the user acronym
  */
-function colorAcronym(contact) {
-    let element = document.getElementById("short-" + contact);
+function colorAcronym(contactId) {
+    let element = document.getElementById("short-" + contactId);
     if (!element) return; // guard if element not found
-    let position = contactColorProperty.findIndex(item => item.id === contact);
-    element.style.backgroundColor = contactColorProperty[position].color;
+    element.style.backgroundColor = contactColorProperty[contactId];
 };
 
 
