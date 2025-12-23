@@ -49,7 +49,7 @@
         display: flex;
         flex-direction: column-reverse;
         max-height: 100vh;
-        min-width: 320px;
+        min-width: 302px;
     }
 
     .add-contact-btn-position {
@@ -91,7 +91,7 @@
         flex-direction: column;
         min-width: 0;
         height: auto;
-        margin: 80px 4%;
+        margin: 95px 4%;
     }
 
     .logo-dialog {
@@ -103,14 +103,12 @@
     }
 
     .main-left {
-        padding: 98px 40px;
+        padding: 125px 4%;
         display: flex;
         flex-direction: column;
         gap: 12px;
         border-top-right-radius: 30px;
         border-bottom-left-radius: 0;
-        padding-left: 4%;
-        padding-right: 4%;
     }
 
     .main-right {
@@ -129,7 +127,7 @@
     .position {
         margin: 0;
         position: fixed;
-        top: 35%;
+        top: 42%;
         left: 50%;
         translate: -50%;
     }
@@ -143,7 +141,7 @@
 
     .add-contact-info {
         min-width: 0;
-        margin-top: 80px;
+        margin-top: 25px;
         gap: 28px;
     }
 
@@ -208,11 +206,6 @@
         font-size: 30px;
     }
 
-    .two-letter-name {
-        width: 60px;
-        height: 60px;
-    }
-
     .go-back-btn {
         display: flex;
     }
@@ -254,11 +247,6 @@
 
 
 @media (max-width: 596px) {
-    .two-letter-name {
-        width: 55px;
-        height: 55px;
-    }
-
     .sub-menu-btns {
         right: 7%;
     }
