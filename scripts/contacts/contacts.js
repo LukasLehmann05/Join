@@ -19,10 +19,12 @@ function removeRespAttributes() {
     let mainView = document.getElementById('contactsMainElement');
     if (window.innerWidth >= 1150 && contactList.style.display == "none" == true) {
         contactList.style.display = "flex";
-        mainView.style.display = "block";
     }
-    if (window.innerWidth <= 1150 && mainView.style.display == "block" == true && contactList.style.display == "none" == false) {
+    if (window.innerWidth <= 1150  && contactList.style.display == "none" == false) {
         mainView.style.display = "none";
+    }
+    if (window.innerWidth >= 1150  && mainView.style.display == "none" == true) {
+        mainView.style.display = "block";
     }
 };
 
