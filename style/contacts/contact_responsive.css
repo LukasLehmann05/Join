@@ -98,10 +98,6 @@
         display: none;
     }
 
-    .cancel-add-btn {
-        display: none;
-    }
-
     .main-left {
         padding: 125px 4%;
         display: flex;
@@ -230,7 +226,8 @@
     .dialog-message {
         position: sticky;
         top: 80%;
-        left: 50%;  
+        left: 50%;
+        translate: -50%;  
     }
 }
 
@@ -243,12 +240,23 @@
     .sidebar-contacts {
         height: calc(100vh - 150px);
     }
+
 }
 
 
 @media (max-width: 596px) {
     .sub-menu-btns {
         right: 7%;
+    }
+
+    .dialog-message {
+        top: 76%;
+    }
+}
+
+@media (max-width: 560px) {
+    .dialog-message {
+        translate: -11%;
     }
 }
 
