@@ -24,7 +24,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                 <div class="name-field">
                     <p id="mainName" class="fullname">${currentName}</p>
                     <div id="subMenuBtns" class="main-name-btns">
-                        <button id="editUser" data-id="${currentId}" onclick="openDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
+                        <button id="editUser" data-id="${currentId}" onclick="directionOfIncomingDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
                         <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@media (min-width: 1305px) {
+@media (min-width: 1150px) {
     #responsivMenu {
         display: none;
     }
@@ -52,13 +52,12 @@
         flex-direction: column-reverse;
         max-height: 100vh;
         min-width: 320px;
+        
     }
 
     .add-contact-btn-position {
-        margin-right: 12px;
-        bottom: 100px;
+        bottom: 40px;
         left: 630px;
-        margin-right: none;
         margin-left: auto;
         margin-top: 20px;
     }
@@ -244,6 +243,10 @@
 @media (max-width: 767px) {
     .contact-main {
         height: calc(100vh - 168px);
+    }
+
+    .sidebar-contacts{
+        height: calc(100vh - 150px);
     }
 }
 

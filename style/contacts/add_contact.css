@@ -3,8 +3,12 @@ dialog[open] {
    z-index: 31;
 }
 
-.dialog-content.show {
+.dialog-content.show-side {
    transform: translateX(0);
+}
+
+.dialog-content.show-bottom {
+   transform: translateY(0);
 }
 
 .dialog-window {
@@ -22,7 +26,6 @@ dialog[open] {
    min-width: 950px;
    width: 1200px;
    min-height: 500px;
-   transform: translateX(200%);
    transition: transform 1s ease-in-out;
 }
 

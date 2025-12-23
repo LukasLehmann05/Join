@@ -1,28 +1,33 @@
 /**
  * opens dialog window.
  */
-function openDialog(id, id2) {
+function directionOfIncomingDialog(id, id2) {
     renderDialog(id2);
-    let dialog = document.getElementById(id);
-    dialog.open = true;
-    setTimeout(() => {
-        document.getElementById(id2).classList.add('show');
-    }, 10)
-
+    if (window.innerWidth <= 1150) {
+        document.getElementById(id2).style.transform = 'translateY(200%)';
+        openDialog(id, id2);
+    }
+    if (window.innerWidth >= 1150) {
+        document.getElementById(id2).style.transform = 'translateX(200%)';
+        openDialog(id, id2);
+    }
 };
 
 
 /**
  * opens dialog window.
  */
-function directionOfIncomingDialog(id, id2) {
-    if (window.innerWidth <= 767) {
-        console.log(window.innerWidth);
-    }
-    if (window.innerWidth >= 767) {
-        openDialog(id, id2);
-    }
-}
+function openDialog(id, id2) {
+    let dialog = document.getElementById(id);
+    dialog.open = true;
+    setTimeout(() => {
+        if (window.innerWidth >= 1150) {
+            document.getElementById(id2).style.transform = 'translateX(0%)';
+        } else {
+            document.getElementById(id2).style.transform = 'translateY(0%)';
+        }
+    }, 10)
+};
 
 
 /**
@@ -30,7 +35,11 @@ function directionOfIncomingDialog(id, id2) {
  */
 function closeDialog(id, id2) {
     let dialog = document.getElementById(id);
-    document.getElementById(id2).classList.remove('show');
+    if (window.innerWidth >= 1150) {
+        document.getElementById(id2).style.transform = 'translateX(200%)';
+    } else {
+        document.getElementById(id2).style.transform = 'translateY(200%)';
+    }
     setTimeout(() => {
         dialog.open = false;
     }, 1000)
