@@ -1,4 +1,36 @@
-@media (max-width: 767px) {
+@media (max-width: 1305px) {
+    .contact-display {
+
+        margin-left: 25px;
+        margin-top: 110px;
+    }
+
+    .h1 {
+        font-size: 50px;
+    }
+
+    .fullname {
+        font-size: 30px;
+    }
+
+    .separator-vertical {
+        margin: 0px 15px;
+    }
+
+    .contact-sub {
+        font-weight: 400;
+        font-size: 24px;
+    }
+
+    .two-letter-name {
+        width: 100px;
+        height: 100px;
+    }
+
+
+}
+
+@media (max-width: 1150px) {
     .contact-display {
         display: none;
         margin-left: 16px;
