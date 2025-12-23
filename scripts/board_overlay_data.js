@@ -73,6 +73,7 @@ async function openTaskInOverlay(taskId) {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     await renderOverlayContent(taskId);
+    disableScrollOnBody();
 }
 
 
@@ -104,6 +105,15 @@ async function renderOverlayContent(taskId) {
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
     await renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId, task.subtasks || []);
+}
+
+
+function disableScrollOnBody() {
+    document.body.style.overflow = 'hidden';
+}
+
+function enableScrollOnBody() {
+    document.body.style.overflow = 'auto';
 }
 
 
@@ -188,6 +198,7 @@ function closeOverlay(buttonElement, taskId) {
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     handleButtonAddActionAndCloseOverlay(buttonElement);
+    enableScrollOnBody();
    
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
