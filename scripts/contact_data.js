@@ -33,7 +33,6 @@ async function fetchContactList() {
         let singleContactData = contactData[contactID];
         renderHtmlElements(singleContactData, contactID, name);
     }
-    console.table(contactColorProperty);
 };
 
 
