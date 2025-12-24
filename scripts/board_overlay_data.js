@@ -309,13 +309,13 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
  * @param {string} userId This is the id of the user who owns the task
  */
 async function deleteTaskInOverlay(taskId) {
-    closeOverlay();
     const taskCardElement = document.getElementById(taskId+"_task_card")
     try {
         await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
         await deleteTask(taskId);
         if (taskCardElement) {
             taskCardElement.remove();
+            closeOverlay();
         }
     } catch (error) {
         console.error("Error deleting task with id: " + taskId, error);

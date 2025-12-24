@@ -70,7 +70,7 @@ function taskCardTemplate(task, taskId) {
                 ondragend="this.classList.remove('drag-tilt');"
                 id="${taskId}_task_card" 
                 onclick="openTaskInOverlay('${taskId}')">
-                <p class="category ${task.category.replace(" ","_")}">${task.category}</p>
+                <p class="category ${task.category.replace(/ /g,"_")}">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
                 <div class="subtask_status_bar">
