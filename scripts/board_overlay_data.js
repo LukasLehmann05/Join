@@ -107,11 +107,16 @@ async function renderOverlayContent(taskId) {
     renderSubtasksListItems(taskId, task.subtasks || []);
 }
 
-
+/**
+ * This function disables scrolling on the body element.
+ */
 function disableScrollOnBody() {
     document.body.style.overflow = 'hidden';
 }
 
+/**
+ * This function enables scrolling on the body element.
+ */
 function enableScrollOnBody() {
     document.body.style.overflow = 'auto';
 }
