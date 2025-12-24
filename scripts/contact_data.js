@@ -115,9 +115,9 @@ function colorAcronym(contactId) {
 
 
 /**
- * chooses color for user randomly from colours array. Gets called in function: "renderContactList()"
- * assigns colors to user permanently in userColourProperty
- * @const userColourProperty
+ * chooses color for contact randomly from colours array. Gets called in function: "renderContactList()"
+ * assigns colors to contact permanently in contactColorProperty
+ * @const contactColorProperty
  */
 function assignColorToContact(contactId) {
     let userColor = colours[Math.floor(Math.random() * colours.length)];
