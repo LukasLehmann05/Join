@@ -303,11 +303,19 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
  * @param {string} taskId This is the id of the task to delete
  * @param {string} userId This is the id of the user who owns the task
  */
-async function deleteTaskInOverlay(taskId, userId) {
+async function deleteTaskInOverlay(taskId) {
     closeOverlay();
-    document.getElementById(taskId+"_task_card").remove();
-    await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
-    await deleteTask(taskId);    
+    const taskCardElement = document.getElementById(taskId+"_task_card")
+    try {
+        await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
+        await deleteTask(taskId);
+        if (taskCardElement) {
+            taskCardElement.remove();
+        }
+    } catch (error) {
+        console.error("Error deleting task with id: " + taskId, error);
+        alert("An error occurred while deleting the task. Please try again.");
+    }
 }
 
 /**
