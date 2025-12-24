@@ -297,7 +297,12 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
     showWideOverlay = !showWideOverlay;
 }
 
-
+/**
+ * This function deletes a task from the overlay and updates the UI and database accordingly.
+ * 
+ * @param {string} taskId This is the id of the task to delete
+ * @param {string} userId This is the id of the user who owns the task
+ */
 async function deleteTaskInOverlay(taskId, userId) {
     closeOverlay();
     document.getElementById(taskId+"_task_card").remove();
@@ -305,7 +310,11 @@ async function deleteTaskInOverlay(taskId, userId) {
     await deleteTask(taskId);    
 }
 
-
+/**
+ * 
+ * This function gets the current user ID from the DOM.
+ * @returns {string} The current user ID.
+ */
 function getCurrentUserIdIcon() {
     return document.getElementById('current_user_id').getAttribute('data-current-user-id');
 }
