@@ -57,7 +57,6 @@
     font-size: 23px;
     font-weight: 400;
     color: white;
-    background-color: #0038FF;
     font-family: "Inter";
     padding: 4px 24px;
     border-radius: 8px;
@@ -87,6 +86,14 @@
 .overlay_content .overlay_main_content .required-info{
     font-size: 16px;
     font-weight: 400;
+}
+
+.overlay_content .technical_task{
+    background-color: #0038FF;
+}
+
+.overlay_content .user_story{
+    background-color: #1FD7C1;
 }
 
 .overlay_main_content{
