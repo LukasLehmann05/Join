@@ -70,7 +70,7 @@ function taskCardTemplate(task, taskId) {
                 ondragend="this.classList.remove('drag-tilt');"
                 id="${taskId}_task_card" 
                 onclick="openTaskInOverlay('${taskId}')">
-                <p class="category ${task.category.replace(/ /g,"_")}">${task.category}</p>
+                <p class="category ${task.category.toLowerCase().replace(/ /g,"_")}">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
                 <div class="subtask_status_bar">
@@ -123,7 +123,7 @@ function priorityIndicatorTemplate(iconPath) {
 function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
-                <p class="category_overlay">${task.category}</p>
+                <p class="category_overlay ${task.category.toLowerCase().replace(/ /g,"_")}">${task.category}</p>
                 <button class="close_overlay_button" onclick="closeOverlay(this, '${taskId}')" ${DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY}="true">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>

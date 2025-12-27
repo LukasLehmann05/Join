@@ -177,11 +177,11 @@ h1{
     border-radius: 8px;
 }
 
-.single_task_content .Technical_Task{
+.single_task_content .technical_task{
     background-color: #0038FF;
 }
 
-.single_task_content .User_Story{
+.single_task_content .user_story{
     background-color: #1FD7C1;
 }
 
