@@ -14,19 +14,19 @@ function changeDisplaySize() {
 /**
  * changes the displayed elements based on the window size and their display status
  */
-function removeRespAttributes() {
+window.addEventListener("resize", () => {
     let contactList = document.getElementById('contactsAsideElement');
     let mainView = document.getElementById('contactsMainElement');
     if (window.innerWidth >= 1150 && contactList.style.display == "none" == true) {
         contactList.style.display = "flex";
     }
-    if (window.innerWidth <= 1150  && contactList.style.display == "none" == false) {
+    if (window.innerWidth <= 1150 && contactList.style.display == "none" == false) {
         mainView.style.display = "none";
     }
-    if (window.innerWidth >= 1150  && mainView.style.display == "none" == true) {
+    if (window.innerWidth >= 1150 && mainView.style.display == "none" == true) {
         mainView.style.display = "block";
     }
-};
+});
 
 
 /**

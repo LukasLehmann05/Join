@@ -311,7 +311,7 @@ async function deleteThisUser(currentId) {
     removeLetterSectionIfEmpty(letter);
     document.getElementById('mainView').innerHTML = "";
     document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
-    //await deleteThisContactFromDatabaseById(currentId);
+    await deleteThisContactFromDatabaseById(currentId);
 };
 
 
