@@ -3,8 +3,12 @@ dialog[open] {
    z-index: 31;
 }
 
-.dialog-content.show {
+.dialog-content.show-side {
    transform: translateX(0);
+}
+
+.dialog-content.show-bottom {
+   transform: translateY(0);
 }
 
 .dialog-window {
@@ -22,8 +26,6 @@ dialog[open] {
    min-width: 950px;
    width: 1200px;
    min-height: 500px;
-   transform: translateX(200%);
-
    transition: transform 1s ease-in-out;
 }
 
@@ -61,6 +63,13 @@ dialog[open] {
    margin-left: 50px;
 }
 
+.position-edit{
+   margin-top: auto;
+   margin-bottom: auto;
+   margin-right: 50px;
+   margin-left: 50px;
+}
+
 .white {
    color: white;
 }
@@ -78,20 +87,23 @@ dialog[open] {
 
 .name::after {
    content: "";
+   min-width: 24px;
    width: 24px;
-   background: url("../assets/icons/contacts/person.svg") center / contain no-repeat;
+   background: url("../../assets/icons/contacts/person.svg") center / contain no-repeat;
 }
 
 .mail::after {
    content: "";
+   min-width: 24px;
    width: 24px;
-   background: url("../assets/icons/contacts/mail.svg") center / contain no-repeat;
+   background: url("../../assets/icons/contacts/mail.svg") center / contain no-repeat;
 }
 
 .phone::after {
    content: "";
+   min-width: 24px;
    width: 24px;
-   background: url("../assets/icons/contacts/call.svg") center / contain no-repeat;
+   background: url("../../assets/icons/contacts/call.svg") center / contain no-repeat;
 }
 
 .add-contact-info {
@@ -121,34 +133,87 @@ dialog[open] {
    height: 24px;
 }
 
-.cancel-btn {
-   display: flex;
-   justify-content: flex-start;
-}
-
 .button-section-contact {
    display: flex;
    gap: 16px;
 }
 
+.dialog-window-message {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+
 .dialog-message {
-   position: absolute;
+   position: sticky;
+   top: 800px;
+   left: 750px;
+   height: 10px; 
+   align-items: center;
    background-color: #2A3647;
    border: none;
+   display: flex;
    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
    border-radius: 20px;
    padding: 20px;
-   transform: translateX(400%);
    transition: transform 1.2s ease-in-out;
-   top: 760px;
-   left: 750px;
 }
 
 .dialog-message.show {
    transform: translateX(0);
 }
 
-.margin-add-dialog{
+.margin-add-dialog {
    margin-top: -30px;
    height: 0px;
 }
+
+.cancel-add-btn ::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../../assets/icons/contacts/close.svg") center / contain no-repeat;
+}
+
+.cancel-add-btn :hover::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../../assets/icons/contacts/close_hover.svg") center / contain no-repeat;
+}
+
+.cancel-add-btn :hover {
+   border-color: #29ABE2;
+   color: #29ABE2;
+}
+
+.cancel-add-btn img:hover {
+   fill: #29ABE2;
+}
+
+.cancel-edit-btn ::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../../assets/icons/contacts/close.svg") center / contain no-repeat;
+}
+
+.cancel-edit-btn :hover::after {
+   content: "";
+   width: 24px;
+   height: 24px;
+   background: url("../../assets/icons/contacts/close_hover.svg") center / contain no-repeat;
+}
+
+.cancel-edit-btn :hover {
+   border-color: #29ABE2;
+   color: #29ABE2;
+}
+
+.cancel-edit-btn img:hover {
+   fill: #29ABE2;
+}
+

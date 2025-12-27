@@ -26,8 +26,7 @@ const colours = [
  * @global AllData
  */
 async function fetchContactList() {
-    await fetchAllDataGlobal();
-    let contactData = AllData.data.contacts;
+    let contactData = (await fetchAllDataGlobal()).contacts;
     for (let contactID in contactData) {
         colorUser(contactID);
         let name = contactData[contactID].name;
@@ -109,7 +108,7 @@ function getAcronym(name) {
  */
 function colorAcronym(contact) {
     let element = document.getElementById("short-" + contact);
-    if (!element) return; // guard if element not found
+    if (!element) return; 
     let position = userColourProperty.findIndex(item => item.id === contact);
     element.style.backgroundColor = userColourProperty[position].color;
 };
@@ -131,17 +130,23 @@ function colorUser(contact) {
 /**
  * fetches contact data from firebase and renders data into main Display
  */
-async function displayInMain(id) {
+function displayInMain(id) {
     let currentId = id.getAttribute('data-id');
     let currentName = id.getAttribute('data-name');
     let currentPhone = id.getAttribute('data-phone');
     let currentMail = id.getAttribute('data-email');
-    renderMainDisplay(currentId, currentName, currentPhone, currentMail);
+    if (window.innerWidth <= 1150) {
+        changeDisplaySize();
+        renderMainDisplay(currentId, currentName, currentPhone, currentMail) 
+    }
+    if (window.innerWidth >= 1150) {
+        renderMainDisplay(currentId, currentName, currentPhone, currentMail);
+    }
 };
 
 
 /**
- * renders date into the main display. adds the phone number and background color
+ * renders data into the main display. adds the phone number and background color
  */
 function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
     let mainDisplay = document.getElementById('mainView');
@@ -199,7 +204,7 @@ async function trimDownAddingContact(newUser, name) {
     colorUser(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
-    dialogAppearences('addContact', 'addContent');
+    dialogAppearences('dialogWindow', 'addContent');
 };
 
 
@@ -236,9 +241,9 @@ async function trimDownEditingUser(editID, editedUser) {
     removeLetterSectionIfEmpty(letter);
     await renderHtmlElements(editedUser, editID, editedUser.name);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
-    dialogAppearences('editContact', 'editContent');
+    dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
-    displayEditedContactDataInMainDisplay(editID, editedUser.email, editedUser.name, editedUser.phone)
+    displayEditedContactDataInMainDisplay(editedUser.email, editedUser.name, editedUser.phone)
 };
 
 
@@ -282,7 +287,6 @@ function getDataFromMain() {
 async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
     deleteThisUser(currentId)
-    dialogAppearences('editContact', 'editContent');
     responseMessageAppearance();
 };
 
@@ -293,7 +297,7 @@ async function deleteThisContactFromMain(id) {
 async function deleteThisContactFromDialog() {
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
     deleteThisUser(currentId)
-    dialogAppearences('editContact', 'editContent');
+    dialogAppearences('dialogWindow', 'editContent');
     responseMessageAppearance();
 };
 

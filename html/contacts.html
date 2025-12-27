@@ -11,15 +11,18 @@
     <link rel="stylesheet" href="../style/mainframe.css">
     <link rel="stylesheet" href="../style/board_style.css">
     <link rel="stylesheet" href="../style/board_overlay_style.css">
-    <link rel="stylesheet" href="../style/contacts.css">
-    <link rel="stylesheet" href="../style/add_contact.css">
+    <link rel="stylesheet" href="../style/contacts/contacts.css">
+    <link rel="stylesheet" href="../style/contacts/add_contact.css">
     <link rel="stylesheet" href="../style/add_task.css">
+    <link rel="stylesheet" href="../style/mainframe_responsive.css">
+    <link rel="stylesheet" href="../style/contacts/contact_responsive.css">
 
     <script src="/script.js"></script>
     <script src="/scripts/firebase.js"></script>
-    <script src="/scripts/contact_data.js"></script>
-    <script src="/scripts/contact_template.js"></script>
-    
+    <script src="../scripts/contacts/contact_data.js"></script>
+    <script src="../scripts/contacts/contact_template.js"></script>
+    <script src="../scripts/board_overlay_data.js"></script>
+
 
 </head>
 
@@ -69,121 +72,43 @@
             </nav>
         </header>
         <main class="contact-main">
-            <aside class="sidebar-contacts">
-                <div>
-                    <button onclick="openDialog('addContact' , 'addContent')" class="button_add_task add-contact-btn">
-                        <p>Add new contact</p>
-                        <img src="../assets/icons/contacts/person_add.svg" alt="add_person icon">
+            <aside id="contactsAsideElement" class="sidebar-contacts">
+                <div class="add-contact-btn-position">
+                    <button onclick="directionOfIncomingDialog('dialogWindow' , 'addContent')" class="add-contact-btn">Add new contact
+                        <img class="add-contact-btn-img" src="../assets/icons/contacts/person_add.svg"
+                            alt="add_person icon">
                     </button>
                 </div>
                 <div class="contact-list" id="contactList">
                 </div>
             </aside>
-            <section class="contact-display">
+            <section id="contactsMainElement" class="contact-display">
                 <div class="contact-header">
-                    <h1 class="h1">Contacts</h1>
-                    <div class="separator-vertical"></div>
-                    <span class="contact-sub">Better with a team</span>
+                    <div class="contact-header-text">
+                        <h1 class="h1">Contacts</h1>
+                        <div class="separator-vertical"></div>
+                        <span class="contact-sub">Better with a team</span>
+                    </div>
+                    <button onclick="goBacktoList()" class="go-back-btn"><img src="../assets/icons/contacts/go_back.svg"
+                            alt="go back to list"></button>
                 </div>
                 <article id="mainView" class="contact-main-view">
+
                 </article>
             </section>
-            <dialog id="addContact" class="dialog-window">
-                <div id="addContent" class="dialog-content">
-                    <section class="main-left">
-                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                        <h1 class="white margin">Add Contact</h1>
-                        <p class="contact-sub white margin">Tasks are better with a team!</p>
-                        <div class="separator-horizontal"></div>
-                    </section>
-                    <section class="main-right">
-                        <div class="two-letter-name position">
-                            <img src="../assets/icons/contacts/person_white.svg" alt="placeholder for name">
-                        </div>
-                        <div class="add-contact-info">
-                            <button class="close-btn" onclick="closeDialog('addContact' , 'addContent')">
-                                <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                                    alt="close overlay icon">
-                            </button>
-                            <label class="subtask-section name">
-                                <input id="nameAdd" type="text" placeholder="Name">
-                            </label>
-                            <p id="required_name" class="required-info margin-add-dialog">Please enter a name.</p>
-                            <label class="subtask-section mail">
-                                <input id="emailAdd" type="email" placeholder="Email">
-                            </label>
-                            <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email address.</p>
-                            <label class="subtask-section phone">
-                                <input id="phoneAdd" type="tel" placeholder="Phone">
-                            </label>
-                            <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone number.</p>
-                            <section class="button-section-contact">
-                                <div class="clear-button">
-                                    <button onclick="closeDialog('addContact' , 'addContent') , emptyInput()"
-                                        class="action-buttons">
-                                        <p>Cancel</p>
-                                        <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                                    </button>
-                                </div>
-                                <div class="create-task">
-                                    <button onclick="addNewContactToDatabase()" class="action-buttons create-button">
-                                        <p>Create contact</p>
-                                        <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
-                                    </button>
-                                </div>
-                            </section>
-                        </div>
-                    </section>
-                </div>
+            <dialog id="dialogWindow" class="dialog-window">
+
             </dialog>
-            <dialog id="editContact" class="dialog-window">
-                <div id="editContent" class="dialog-content">
-                    <section class="main-left">
-                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                        <h1 class="white margin">Edit Contact</h1>
-                        <div class="separator-horizontal"></div>
-                    </section>
-                    <section class="main-right">
-                        <div id="editedAvatar" class="two-letter-name position">
-                            
-                        </div>
-                        <div class="add-contact-info">
-                            <button class="close-btn" onclick="closeDialog('editContact' , 'editContent')">
-                                <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                                    alt="close overlay icon">
-                            </button>
-                            <label class="subtask-section name">
-                                <input id="nameEdit" type="text" placeholder="Name">
-                            </label>
-                            <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name.</p>
-                            <label class="subtask-section mail">
-                                <input id="emailEdit" type="email" placeholder="Email">
-                            </label>
-                            <p id="required_edit_email" class="required-info margin-add-dialog">Please enter a valid email address.</p>
-                            <label class="subtask-section phone">
-                                <input id="phoneEdit" type="tel" placeholder="Phone">
-                            </label>
-                            <p id="required_edit_phone" class="required-info margin-add-dialog">Please enter a valid phone number.</p>
-                            <section class="button-section-contact">
-                                <button onclick="deleteThisContactFromDialog()" class="action-buttons">
-                                    <p>Delete</p>
-                                    <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                                </button>
-                                <button onclick="editContactInDatabase()" class="action-buttons create-button">
-                                    <p>Save</p>
-                                    <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
-                                </button>
-                            </section>
-                        </div>
-                    </section>
-                </div>
             </dialog>
-            <dialog id="responseDialog" class="dialog-message">
-                <div class="white font-size-20" id="responseMessage">Contact succesfully created</div>
+            <dialog id="responseDialog" class="dialog-window-message">
+                <div class="dialog-message" id="responseDialogContent">
+                    <div class="white font-size-20" id="responseMessage">Contact successfully created</div>
+                </div>
             </dialog>
         </main>
     </article>
-    <script src="/scripts/contacts.js"></script>
+    <script src="../scripts/contacts/contacts.js"></script>
+    <script src="../scripts/contacts/contact_dialog.js"></script>
 
 </body>
 

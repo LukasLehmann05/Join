@@ -1,17 +1,19 @@
 .contact-main {
     display: flex;
-    max-width: 1440px;
     background-color: #F6F7F8;
     height: 100%;
 }
 
 .sidebar-contacts {
-    overflow-y: scroll;
+    display: flex;
+    overflow-y: auto;
     background: #FFFFFF;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
-    width: 33%;
+    min-width: 390px;
     z-index: 20;
     height: calc(100vh - 96px);
+    flex-direction: column;
+    padding: 0 2% 0 2%;
 }
 
 .contact-list {
@@ -19,7 +21,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 17px 36px;
     gap: 8px;
 }
 
@@ -30,11 +31,30 @@
 }
 
 .add-contact-btn {
-    padding-top: 20px;
-    margin-top: 20px;
-    padding: 8px 80px !important;
-    margin-right: auto;
-    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 8px 80px;
+    margin: 0 auto 0 auto;
+    gap: 10px;
+    cursor: pointer;
+    color: white;
+    font-family: "Inter_bold";
+    font-size: 21px;
+    background-color: #2A3647;
+    border: none;
+    border-radius: 10px;
+}
+
+.add-contact-btn-position {
+    position: sticky;
+    top: 0px;
+    margin-top: 12px;
+
+}
+
+.add-contact-btn:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .separator-list {
@@ -50,12 +70,12 @@
     padding: 17px 36px;
 }
 
-.single-letter-section { 
+.single-letter-section {
     align-self: stretch;
 }
 
 .contact-display {
-    width: 66%;
+    width: 100%;
     margin-left: 80px;
     margin-top: 110px;
 }
@@ -63,6 +83,7 @@
 .contact-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .separator-vertical {
@@ -97,7 +118,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: orange;
+    background-color: #D9D9D9;
     border: 3px solid #FFFFFF;
     color: white;
     border-radius: 70px;
@@ -115,6 +136,7 @@
 .fullname {
     font-weight: 500;
     font-size: 47px;
+    font-family: "Inter_bold";
 }
 
 .main-name-btns {
@@ -131,7 +153,7 @@
     gap: 8px;
 }
 
-.font-size-16{
+.font-size-16 {
     font-weight: 400;
     font-size: 16px;
 }
@@ -190,7 +212,96 @@
     font-size: 20px;
 }
 
-.single-User{
+.single-User {
     display: flex;
     gap: 35px;
+}
+
+#editUser:hover {
+    font-family: "Inter_bold";
+    color: #29ABE2;
+}
+
+#deleteUser:hover {
+    font-family: "Inter_bold";
+    color: #29ABE2;
+}
+
+#editUser::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/icons/contacts/edit.svg") center / contain no-repeat;
+}
+
+#deleteUser::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/icons/contacts/delete.svg") center / contain no-repeat;
+}
+
+#deleteUser:hover::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/icons/board/delete_button_hover.svg") center / contain no-repeat;
+}
+
+#editUser:hover::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background: url("../../assets/icons/board/edit_button_hover.svg") center / contain no-repeat;
+}
+
+.go-back-btn {
+    display: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding-bottom: 70px;
+}
+
+.contact-header-text {
+    display: flex;
+    align-items: center;
+}
+
+.sub-menu-btn {
+    display: none;
+    position: absolute;
+    border-radius: 50%;
+    font-size: 0;
+    padding: 10px;
+    background-color: #2A3647;
+    border: none;
+    cursor: pointer;
+    bottom: 100px;
+    right: 2%;
+}
+
+.sub-menu-btn:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sub-menu-btns {
+    position: absolute;
+    bottom: 130px;
+    right: 5%;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px 20px 0px 20px;
+    width: 90px;
+    height: auto;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, .2);
+    z-index: 1;
+    transform: translateX(200%);
+    transition: transform 1s ease-in-out;
+}
+
+.sub-menu-btns.show {
+    transform: translateX(0);
 }
