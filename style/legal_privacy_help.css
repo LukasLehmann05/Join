@@ -33,3 +33,7 @@ ol ::marker{
 .margin-top{
     margin-top: 20px;
 }
+
+.break-link {
+  word-break: break-all;
+}
