@@ -224,3 +224,129 @@ async function fetchTasksForUser(userId) {
   const url = getJoinUrl(`users/${userId}/tasks`);
   return await fetchJson(url, "Error loading tasks for user");
 }
+
+async function fetchTasksByUserId(userId) {
+  try {
+    // 1. Hole die Task-Referenzen für diesen User
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    const taskRefsArray = await fetchJson(tasksByUserUrl, 'Error loading task refs for user');
+    
+    // Prüfe ob Daten existieren und konvertiere zu Array falls nötig
+    if (!taskRefsArray) {
+      return {};
+    }
+    
+    // Wenn es ein Objekt ist, konvertiere zu Array
+    const refsArray = Array.isArray(taskRefsArray) 
+      ? taskRefsArray 
+      : Object.values(taskRefsArray);
+    
+    if (refsArray.length === 0) {
+      return {};
+    }
+    
+    // 2. Hole alle Tasks
+    const allTasksUrl = getJoinUrl('tasks');
+    const allTasks = await fetchJson(allTasksUrl, 'Error loading all tasks');
+    
+    // 3. Extrahiere Task-IDs aus den Objekten und filtere
+    const userTasks = {};
+    
+    for (const item of refsArray) {
+      if (!item || typeof item !== 'object') continue;
+      
+      // Hole die Task-ID (der Key des Objekts)
+      const taskId = Object.keys(item)[0];
+      
+      if (taskId && allTasks[taskId]) {
+        userTasks[taskId] = allTasks[taskId];
+      }
+    }
+    
+    return userTasks;
+    
+  } catch (error) {
+    console.error('Error fetching tasks by user ID:', error);
+    return {};
+  }
+}
+
+// Globale Funktion zum Laden aller Daten
+async function fetchAllDataGlobal() {
+  const url = `${FIREBASE_BASE_URL}/join.json`;
+  return await fetchJson(url, 'Error loading all data');
+}
+
+// Funktion zum Laden aller Task-IDs eines Users
+async function getAllTaskIdByUserId(userId) {
+  try {
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    const taskRefs = await fetchJson(tasksByUserUrl, 'Error loading task IDs for user');
+    
+    if (!taskRefs) {
+      return [];
+    }
+    
+    // Konvertiere zu Array falls nötig
+    const refsArray = Array.isArray(taskRefs) 
+      ? taskRefs 
+      : Object.values(taskRefs);
+    
+    return refsArray;
+    
+  } catch (error) {
+    console.error('Error getting task IDs by user ID:', error);
+    return [];
+  }
+}
+
+// Funktion zum Holen eines einzelnen Contacts
+async function getContactById(contactId) {
+  try {
+    const url = getJoinUrl(`contacts/${contactId}`);
+    const contact = await fetchJson(url, 'Error loading contact');
+    return contact;
+  } catch (error) {
+    console.error('Error fetching contact:', error);
+    return null;
+  }
+}
+
+// Funktion zum Holen eines einzelnen Tasks
+async function getTaskById(taskId) {
+  try {
+    const url = getJoinUrl(`tasks/${taskId}`);
+    const task = await fetchJson(url, 'Error loading task');
+    return task;
+  } catch (error) {
+    console.error('Error fetching task:', error);
+    return null;
+  }
+}
+
+// Funktion zum Löschen eines Tasks aus der User-Liste
+async function deleteTaskFromUserById(taskId, userId) {
+  try {
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    const taskRefs = await fetchJson(tasksByUserUrl, 'Error loading task refs');
+    
+    if (!taskRefs) return;
+    
+    // Finde den Index des Tasks
+    const refsArray = Array.isArray(taskRefs) ? taskRefs : Object.values(taskRefs);
+    const index = refsArray.findIndex(item => {
+      if (!item || typeof item !== 'object') return false;
+      const id = Object.keys(item)[0];
+      return id === taskId;
+    });
+    
+    if (index !== -1) {
+      // Lösche den Task aus der Liste
+      const deleteUrl = `${FIREBASE_BASE_URL}/join/tasks_by_user/${userId}/${index}.json`;
+      await fetch(deleteUrl, { method: 'DELETE' });
+    }
+    
+  } catch (error) {
+    console.error('Error deleting task from user:', error);
+  }
+}
