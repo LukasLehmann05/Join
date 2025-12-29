@@ -42,3 +42,7 @@ ol ::marker{
     background-color: #091931;
     padding: 8px 71px;
 }
+
+.d-none{
+    display: none;
+}
