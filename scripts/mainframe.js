@@ -122,3 +122,29 @@ function initHeaderAvatar() {
   setupAvatarOutsideClick(avatarButton, menu);
   setupAvatarMenuLinks();
 }
+
+
+function requireAuth() {
+  const user = getCurrentUserSafe();
+  if (!user) {
+    redirectToLogin();
+  }
+}
+
+function updateCurrentUserId() {
+  const user = getCurrentUserSafe();
+  if (!user || !user.id) return;
+  
+  const userIdElement = document.getElementById("current_user_id");
+  if (userIdElement) {
+    userIdElement.setAttribute("data-current-user-id", user.id);
+  }
+}
+
+function initMainframe() {
+  requireAuth();
+  updateCurrentUserId();
+  initHeaderAvatar();
+}
+
+document.addEventListener("DOMContentLoaded", initMainframe);

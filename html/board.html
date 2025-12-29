@@ -47,14 +47,26 @@
         <header class="header">
             <nav class="header-nav">
                 <p>Kanban Project Management Tool</p>
-                <section class="header-side-buttons" id="current_user_id" data-current-user-id="-OfhU5mv5Jc_R3Ybzq8T">
-                    <a href="#">
-                        <img src="../assets/icons/header/help.svg" alt="help icon">
-                    </a>
-                    <a href="#">
-                        <img src="../assets/icons/header/user_placeholder.svg" alt="user icon">
-                    </a>
-                </section>
+                <section class="header-side-buttons" id="current_user_id" data-current-user-id="">
+        <a href="#">
+        <img src="../assets/icons/header/help.svg" alt="help icon">
+    </a>
+    <button type="button" class="avatar-wrapper" id="avatar-button">
+        <div id="header-avatar" class="header-avatar"></div>
+    </button>
+
+    <div id="avatar-menu" class="avatar-menu hidden">
+        <button type="button" class="avatar-menu-item" id="menu-legal">
+            Legal Notice
+        </button>
+        <button type="button" class="avatar-menu-item" id="menu-privacy">
+            Privacy Policy
+        </button>
+        <button type="button" class="avatar-menu-item" id="menu-logout">
+            Log out
+        </button>
+    </div>
+</section>
             </nav>
         </header>
         <main class="main-content">
@@ -125,6 +137,7 @@
     <script src="../scripts/subtasks_overlay.js"></script>
     <script src="../scripts/edit_and_add_task_overlay.js"></script>
     <script src="../scripts/board_overlay_data.js"></script>
+    <script src="../scripts/mainframe.js"></script>
 </body>
 
 
