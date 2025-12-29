@@ -145,6 +145,9 @@ function initMainframe() {
   requireAuth();
   updateCurrentUserId();
   initHeaderAvatar();
+  
+  // Dispatch Custom Event wenn fertig
+  window.dispatchEvent(new CustomEvent('mainframe-ready'));
 }
 
 document.addEventListener("DOMContentLoaded", initMainframe);
