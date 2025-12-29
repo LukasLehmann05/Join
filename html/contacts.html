@@ -5,17 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
-    <link rel="stylesheet" href="../style/contacts.css">
+    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/mainframe.css">
-    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
     <link rel="stylesheet" href="../style/board_style.css">
-    <link rel="stylesheet" href="../style/add_contact.css">
-    <link rel="stylesheet" href="/style/add_task.css">
     <link rel="stylesheet" href="../style/board_overlay_style.css">
+    <link rel="stylesheet" href="../style/contacts/contacts.css">
+    <link rel="stylesheet" href="../style/contacts/add_contact.css">
+    <link rel="stylesheet" href="../style/add_task.css">
+    <link rel="stylesheet" href="../style/mainframe_responsive.css">
+    <link rel="stylesheet" href="../style/contacts/contact_responsive.css">
+
+    <script src="/script.js"></script>
+    <script src="/scripts/firebase.js"></script>
+    <script src="../scripts/contacts/contact_data.js"></script>
+    <script src="../scripts/contacts/contact_template.js"></script>
+    <script src="../scripts/board_overlay_data.js"></script>
+
+
 </head>
 
-<body class="body">
+<body onload="fetchContactList()" class="body">
     <aside class="sidebar">
         <div class="sidebar_upper_section">
             <section class="logo-section">
@@ -42,8 +53,8 @@
             </nav>
         </div>
         <footer class="sidebar-footer">
-            <a href="/html/privacyPolicy.html">Privacy Policy</a>
-            <a href="/html/legalNotice.html">Legal notice</a>
+            <a href="./privacyPolicy.html">Privacy Policy</a>
+            <a href="./legalNotice.html">Legal notice</a>
         </footer>
     </aside>
     <article>
@@ -61,239 +72,44 @@
             </nav>
         </header>
         <main class="contact-main">
-            <aside class="sidebar-contacts">
-                
-                    <button onclick="openDialog('addContact' , 'addContent')" class="button_add_task add-contact-btn">
-                        <p>Add new contact</p>
-                        <img src="../assets/icons/contacts/person_add.svg" alt="add_person icon">
+            <aside id="contactsAsideElement" class="sidebar-contacts">
+                <div class="add-contact-btn-position">
+                    <button onclick="directionOfIncomingDialog('dialogWindow' , 'addContent')" class="add-contact-btn">Add new contact
+                        <img class="add-contact-btn-img" src="../assets/icons/contacts/person_add.svg"
+                            alt="add_person icon">
                     </button>
-                
-                <div class="contact-list">
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">A</h2>
-                        <div class="separator-list"></div>
-                        <section id="test" onclick="displayInMain()" class="list-user">
-                        </section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">B</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">C</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">D</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">E</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">F</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">G</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">H</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">I</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">J</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">K</h2>
-                        <div class="separator"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">L</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">M</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">N</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">O</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">P</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">Q</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">R</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">S</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">T</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">U</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">V</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">W</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">X</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">Y</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
-                    <article class="single-letter-section">
-                        <h2 class="single-letter font-size-20">Z</h2>
-                        <div class="separator-list"></div>
-                        <section></section>
-                    </article>
+                </div>
+                <div class="contact-list" id="contactList">
                 </div>
             </aside>
-            <section class="contact-display">
+            <section id="contactsMainElement" class="contact-display">
                 <div class="contact-header">
-                    <h1>Contacts</h1>
-                    <div class="separator-vertical"></div>
-                    <span class="contact-sub">Better with a team</span>
+                    <div class="contact-header-text">
+                        <h1 class="h1">Contacts</h1>
+                        <div class="separator-vertical"></div>
+                        <span class="contact-sub">Better with a team</span>
+                    </div>
+                    <button onclick="goBacktoList()" class="go-back-btn"><img src="../assets/icons/contacts/go_back.svg"
+                            alt="go back to list"></button>
                 </div>
                 <article id="mainView" class="contact-main-view">
+
                 </article>
             </section>
-            <dialog id="addContact" class="dialog-window">
-                <div id="addContent" class="dialog-content">
-                    <section class="main-left">
-                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                        <h1 class="white margin">Add Contact</h1>
-                        <p class="contact-sub white margin">Tasks are better with a team!</p>
-                        <div class="separator-horizontal"></div>
-                    </section>
-                    <section class="main-right">
-                        <div class="two-letter-name position">
-                            <img src="../assets/icons/contacts/person_white.svg" alt="placeholder for name">
-                        </div>
-                        <div class="add-contact-info">
-                            <button class="close-btn" onclick="closeDialog('addContact' , 'addContent')">
-                                <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                                    alt="close overlay icon">
-                            </button>
-                            <label class="subtask-section name">
-                                <input type="text" placeholder="Name">
-                            </label>
-                            <label class="subtask-section mail">
-                                <input type="email" placeholder="Email">
-                            </label>
-                            <label class="subtask-section phone">
-                                <input type="tel" placeholder="Phone">
-                            </label>
-                            <section class="button-section-contact">
-                                <button onclick="closeDialog('addContact' , 'addContent')" class="action-buttons">
-                                    <p>Cancel</p>
-                                    <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                                </button>
-                                <button class="action-buttons create-button">
-                                    <p>Create contact</p>
-                                    <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
-                                </button>
-                            </section>
-                        </div>
-                    </section>
-                </div>
+            <dialog id="dialogWindow" class="dialog-window">
+
             </dialog>
-            <dialog id="editContact" class="dialog-window">
-                <div id="editContent" class="dialog-content">
-                    <section class="main-left">
-                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                        <h1 class="white margin">Edit Contact</h1>
-                        <div class="separator-horizontal"></div>
-                    </section>
-                    <section class="main-right">
-                        <div class="two-letter-name position">
-                            <img src="../assets/icons/contacts/person_white.svg" alt="placeholder for name">
-                        </div>
-                        <div class="add-contact-info">
-                            <button class="close-btn" onclick="closeDialog('editContact' , 'editContent')">
-                                <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                                    alt="close overlay icon">
-                            </button>
-                            <label class="subtask-section name">
-                                <input type="text" placeholder="Name">
-                            </label>
-                            <label class="subtask-section mail">
-                                <input type="email" placeholder="Email">
-                            </label>
-                            <label class="subtask-section phone">
-                                <input type="tel" placeholder="Phone">
-                            </label>
-                            <section class="button-section-contact">
-                                <button onclick="closeDialog('editContact' , 'editContent')" class="action-buttons">
-                                    <p>Delete</p>
-                                    <img src="../assets/icons/contacts/close.svg" alt="cancel contact icon">
-                                </button>
-                                <button class="action-buttons create-button">
-                                    <p>Save</p>
-                                    <img src="../assets/icons/contacts/check.svg" alt="create contact icon">
-                                </button>
-                            </section>
-                        </div>
-                    </section>
+            </dialog>
+            <dialog id="responseDialog" class="dialog-window-message">
+                <div class="dialog-message" id="responseDialogContent">
+                    <div class="white font-size-20" id="responseMessage">Contact successfully created</div>
                 </div>
             </dialog>
         </main>
     </article>
-    <script src="/scripts/contacts.js"></script>
-    <script src="/scripts/contact_template.js"></script>
+    <script src="../scripts/contacts/contacts.js"></script>
+    <script src="../scripts/contacts/contact_dialog.js"></script>
+
 </body>
 
 </html>

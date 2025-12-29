@@ -1,0 +1,75 @@
+@media (max-width: 1000px) {
+    .task-details {
+        flex-direction: column;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .header-nav {
+        padding-left: 48px;
+    }
+}
+
+@media (max-width: 900px) and (min-width: 768px) {
+    .action-button-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .button-section {
+        justify-content: flex-end;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .show-767 {
+        display: flex;
+        position: sticky;
+        bottom: 72px;
+        background-color: #F6F7F8;
+        margin: 0px;
+        padding: 20px 16px 20px 0px;
+        justify-content: flex-end;
+    }
+
+    .hide-767 {
+        display: none;
+    }
+
+    .show-req-text-767 {
+        display: block;
+    }
+
+    .hide-req-text-767 {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-content {
+        padding: 16px !important;
+    }
+
+    .priority-button {
+        font-size: 16px;
+        padding: 12px 4px;
+    }
+
+    .h1 {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 380px) {
+    .priority-section {
+        gap: 8px;
+    }
+
+    .contact-button {
+        padding: 12px 4px;
+    }
+}

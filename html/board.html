@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Board</title>
     <link rel="stylesheet" href="../style/add_task.css">
+    <link rel="stylesheet" href="../style/add_contact.css">
     <link rel="stylesheet" href="../style/board_style.css">
     <link rel="stylesheet" href="../style/board_overlay_style.css">
     <link rel="stylesheet" href="../style/standard.css">
@@ -42,11 +43,11 @@
             <a href="../html/legalNotice.html">Legal notice</a>
         </footer>
     </aside>
-    <article>
+    <article class="article-bg">
         <header class="header">
             <nav class="header-nav">
                 <p>Kanban Project Management Tool</p>
-                <section class="header-side-buttons">
+                <section class="header-side-buttons" id="current_user_id" data-current-user-id="-OfhU5mv5Jc_R3Ybzq8T">
                     <a href="#">
                         <img src="../assets/icons/header/help.svg" alt="help icon">
                     </a>
@@ -57,22 +58,27 @@
             </nav>
         </header>
         <main class="main-content">
-            <div id="overlay" class="overlay" onclick="closeOverlay(event)">
+            <div id="overlay" class="overlay" onclick="closeOverlayByBackdrop(event)">
                 <div id="overlay_content" class="overlay_content"></div>
             </div>
             <section class="board_menu">
                 <h1>Board</h1>
-                <div class="board_controls">
-                    <div class="search_task">
-                        <input type="text" placeholder="Find Task" id="find_task">
-                        <button>
-                            <img src="../assets/icons/board/search_glas.svg" alt="">
+                <div class="board_controls_container">
+                    <div class="board_controls">
+                            <div class="search_task">
+                            <input type="text" placeholder="Find Task" id="task_filter_input_field">
+                            <button>
+                                <img src="../assets/icons/board/search_glas.svg" alt="">
+                            </button>
+                        </div>
+                        <button class="button_add_task" onclick="openAddTaskOverlay()">
+                            <p>Add task</p>
+                            <img src="../assets/icons/board/add_white.svg" alt="add_task icon">
                         </button>
                     </div>
-                    <button class="button_add_task">
-                        <p>Add task</p>
-                        <img src="../assets/icons/board/add_white.svg" alt="add_task icon">
-                    </button>
+                    <div class="no_task_found_message d-none" id="no_task_found_message">
+                        <p>No tasks found matching your search.</p>
+                    </div>
                 </div>
             </section>
             <section class="table_header">
@@ -107,8 +113,18 @@
         </main>
     </article>
 
+    <script src="../scripts/firebase.js"></script>
+    <script src="../scripts/add_task.js"></script>
+    <script src="../scripts/contacts/contact_data.js"></script>
+    <script src="../script.js"></script>
+    <script src="../scripts/add_task_templates.js"></script>
     <script src="../scripts/board_templates.js"></script>
     <script src="../scripts/board.js"></script>
+    <script src="../scripts/search_board.js"></script>
+    <script src="../scripts/drag_and_drop_handler.js"></script>
+    <script src="../scripts/subtasks_overlay.js"></script>
+    <script src="../scripts/edit_and_add_task_overlay.js"></script>
+    <script src="../scripts/board_overlay_data.js"></script>
 </body>
 
 

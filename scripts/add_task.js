@@ -1,61 +1,86 @@
-const task_title = document.getElementById("task_title")
-const task_description = document.getElementById("task_description")
-const task_due_date = document.getElementById("task_due_date")
-const task_assign = document.getElementById("task_assign")
-const task_category = document.getElementById("task_category")
-const task_subtask = document.getElementById("task_subtask")
-const req_title_text = document.getElementById("required_title")
-const req_due_date_text = document.getElementById("required_date")
-const req_category_text = document.getElementById("required_category")
+const PRIORITY_ARR = ["low", "medium", "urgent"];
+const TASK_STATE_ARR = ['todo', 'in progress', 'awaiting feedback', 'done'];
 
-const low_prio_button = document.getElementById("button_prio_low")
-const medium_prio_button = document.getElementById("button_prio_medium")
-const urgent_prio_button = document.getElementById("button_prio_urgent")
-
-const subtask_button_section = document.getElementById("subtask_button_section")
-const subtask_list = document.getElementById("subtask_render")
-const contact_selector = document.getElementById("contact_selector")
-const rendered_contact_images = document.getElementById("rendered_contact_images")
+let task_subtask = null;
+let low_prio_button = null;
+let medium_prio_button = null;
+let urgent_prio_button = null;
+let subtask_button_section = null;
+let subtask_list = null;
+let task_assign = null;
+let rendered_contact_images = null;
+let task_title = null;
+let task_description = null;
+let task_due_date = null;
+let task_category = null;
+let req_title_text = null;
+let req_due_date_text = null;
+let req_category_text = null;
 
 let subtask_buttons_active = false
 let contacts_shown = false
 
-let current_priority = "medium"
+let current_priority = PRIORITY_ARR[1]  // default medium priority
+let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 
 let req_title = false
 let req_due_date = false
 let req_category = false
 
-let all_subtasks = []
-let all_contacts = []
+let allSubtasksArr = []
+let allAssigneesArr = []
 
-async function init() {
-    let api_data = await loadDataFromAPI()
-    addContactsToAssign(api_data)
+let subtask_amount = 0
+let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
 
+
+function addTaskInit() {
+    loadPrioButtonsAndSubtaskSectionById();
+    
+}
+
+function loadPrioButtonsAndSubtaskSectionById() {
+    low_prio_button = document.getElementById("button_prio_low");
+    medium_prio_button = document.getElementById("button_prio_medium");
+    urgent_prio_button = document.getElementById("button_prio_urgent");
+    task_subtask = document.getElementById("task_subtask");
+    subtask_button_section = document.getElementById("subtask_button_section");
+    subtask_list = document.getElementById("subtask_render");
+    task_assign = document.getElementById("task_assign");
+    rendered_contact_images = document.getElementById("rendered_contact_images");
+    task_title = document.getElementById("task_title");
+    task_description = document.getElementById("task_description");
+    task_due_date = document.getElementById("task_due_date");
+    task_category = document.getElementById("task_category");
+    req_title_text = document.getElementById("required_title");
+    req_due_date_text = document.getElementById("required_date");
+    req_category_text = document.getElementById("required_category");
 }
 
 function loadDataFromAPI() {
     let joinData = fetchAllData()
-    console.log(joinData)
     return joinData
 }
 
-function createTask() {
+async function createTask() {
     let can_create = checkForRequired()
     if (can_create == true) {
-        sendTaskToDB()
-        clearAllInputs()
+        await sendTaskToDB();
+        clearAllInputs();
+        redirectToBoard()
     } else {
         missingInputs()
-
+        resetRequiredValues()
     }
 }
 
-function sendTaskToDB() {
-    addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, all_contacts, all_subtasks)
+async function sendTaskToDB() {
+    await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
+function redirectToBoard() {
+    window.location.replace("board.html");
+}
 
 function checkForRequired() {
     if (task_title.value != "") {
@@ -81,22 +106,23 @@ function clearAllInputs() {
     req_title = false
     req_due_date = false
     req_category = false
-    all_subtasks = []
-    changePriority("medium")
+    allSubtasksArr = []
+    changePriority(PRIORITY_ARR[1]) // reset to medium priority
     clearRequiredIndicators()
     clearContacts()
     clearSubtask()
+    subtask_amount = 0
 }
 
 function changePriority(priority) {
     switch (priority) {
-        case "low":
+        case PRIORITY_ARR[0]:
             changeToLowPrio()
             break;
-        case "medium":
+        case PRIORITY_ARR[1]:
             changeToMedPrio()
             break
-        case "urgent":
+        case PRIORITY_ARR[2]:
             changeToUrgentPrio()
             break
         default:
@@ -106,14 +132,14 @@ function changePriority(priority) {
 
 function removeOldBackground() {
     switch (current_priority) {
-        case "low":
+        case PRIORITY_ARR[0]:
             low_prio_button.classList.remove("bg-green")
             break;
-        case "medium":
+        case PRIORITY_ARR[1]:
             medium_prio_button.classList.remove("bg-yellow")
             medium_prio_button.classList.add("yellow-filter")
             break;
-        case "urgent":
+        case PRIORITY_ARR[2]:
             urgent_prio_button.classList.remove("bg-red")
             break;
         default:
@@ -123,20 +149,20 @@ function removeOldBackground() {
 
 function changeToLowPrio() {
     removeOldBackground()
-    current_priority = "low"
+    current_priority = PRIORITY_ARR[0]
     low_prio_button.classList.add("bg-green")
 }
 
 function changeToMedPrio() {
     removeOldBackground()
-    current_priority = "medium"
+    current_priority = PRIORITY_ARR[1]
     medium_prio_button.classList.add("bg-yellow")
     medium_prio_button.classList.remove("yellow-filter")
 }
 
 function changeToUrgentPrio() {
     removeOldBackground()
-    current_priority = "urgent"
+    current_priority = PRIORITY_ARR[2]
     urgent_prio_button.classList.add("bg-red")
 }
 
@@ -155,6 +181,12 @@ function missingInputs() {
     }
 }
 
+function resetRequiredValues() {
+    req_title = false
+    req_due_date = false
+    req_category = false
+}
+
 function showSubtaskButtons() {
     if (subtask_buttons_active == false) {
         subtask_button_section.style.display = "flex"
@@ -171,48 +203,43 @@ function hideSubtaskButtons() {
 
 function clearSubtask() {
     task_subtask.value = ""
-    all_subtasks = []
+    allSubtasksArr = []
     document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
 }
 
 function clearContacts() {
-    console.log(all_contacts);
-
-    for (let index = 0; index < all_contacts.length; index++) {
-        const contact_element = document.getElementById(all_contacts[index]);
+    for (let index = 0; index < allAssigneesArr.length; index++) {
+        const contact_element = document.getElementById(allAssigneesArr[index]);
         contact_element.classList.remove("assigned-contact")
-        const checkbox_icon = document.getElementById("checkbox_" + all_contacts[index])
+        const checkbox_icon = document.getElementById("checkbox_" + allAssigneesArr[index])
         checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
         checkbox_icon.classList.remove("checkbox-filter")
     }
-    all_contacts = []
+    allAssigneesArr = []
     rendered_contact_images.innerHTML = ""
 }
 
 function addSubtask() {
     if (task_subtask.value != "") {
         let subtask = task_subtask.value
-        let subtask_template = returnSubtaskTemplate(subtask)
+        let subtask_id = returnSubtaskId()
+        let subtask_template = returnSubtaskTemplate(subtask,subtask_id)
         subtask_list.innerHTML += subtask_template
-        all_subtasks.push(task_subtask.value)
+        let subtaskObj = { title: task_subtask.value, done: false };
+        allSubtasksArr.push(subtaskObj)
         task_subtask.value = ""
         hideSubtaskButtons()
     }
+    console.log(allSubtasksArr);
+    
 }
 
-let testUser = {
-    "user_id_1": {
-        "email": "max.mustermann@example.com",
-        "name": "Max Mustermann",
-        "password": "hashed_password_123"
-    },
-    "user_id_2": {
-        "email": "erika.musterfrau@example.com",
-        "name": "Erika Musterfrau",
-        "password": "hashed_password_456"
-    }
+function returnSubtaskId() {
+    subtask_amount += 1
+    return "subtask_" + subtask_amount
 }
+
 
 function addContactsToAssign(join_data) {
     let contacts = join_data.contacts
@@ -223,7 +250,11 @@ function addContactsToAssign(join_data) {
     }
 }
 
-function showContacts() {
+async function showContacts() {
+    let apiData = await loadDataFromAPI()
+    addContactsToAssign(apiData);
+
+    let contact_selector = document.getElementById("contact_selector");
     if (contacts_shown == false) {
         contact_selector.style.display = "block"
         contacts_shown = true
@@ -234,10 +265,10 @@ function showContacts() {
 }
 
 function assignContact(contact_id) {
-    if (all_contacts.includes(contact_id)) {
+    if (allAssigneesArr.includes(contact_id)) {
         unassignContact(contact_id)
     } else {
-        all_contacts.push(contact_id)
+        allAssigneesArr.push(contact_id)
         const contact_element = document.getElementById(contact_id)
         const checkbox_icon = document.getElementById("checkbox_" + contact_id)
         checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
@@ -248,8 +279,8 @@ function assignContact(contact_id) {
 }
 
 function unassignContact(contact_id) {
-    let contact_index = all_contacts.indexOf(contact_id)
-    all_contacts.splice(contact_index, 1)
+    let contact_index = allAssigneesArr.indexOf(contact_id)
+    allAssigneesArr.splice(contact_index, 1)
     const contact_element = document.getElementById(contact_id)
     const checkbox_icon = document.getElementById("checkbox_" + contact_id)
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
@@ -295,3 +326,58 @@ function removeIndicatorOnInput(field) {
             break;
     }
 }
+
+
+function assignTaskToUserById(userId, taskId) {
+    let allTasksOfUser = [];
+    allTasksOfUser += taskId;
+    updateUserTasksInDB(userId, allTasksOfUser);
+}
+
+function showSubtaskEdit(subtask_id) {
+    let subtask_to_edit = document.getElementById(subtask_id);
+    let original_subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    removeSubtaskFromArray(original_subtask_text);
+    let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
+    subtask_to_edit.innerHTML = subtask_edit_template
+}
+
+function deleteSubtask(event,subtask_id) {
+    event.stopPropagation()
+    let subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
+    removeSubtaskFromArray(subtask_text);
+    let subtask_to_delete = document.getElementById(subtask_id)
+    subtask_to_delete.remove()
+}
+
+function deleteSubtaskEdit(event,subtask_id) {
+    event.stopPropagation()
+    let subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value;
+    removeSubtaskFromArray(subtask_text);
+    let subtask_to_delete = document.getElementById(subtask_id)
+    subtask_to_delete.remove()
+}
+
+function removeSubtaskFromArray(subtask_text) {
+    let subtask_index = allSubtasksArr.findIndex(subtask => subtask.title === subtask_text)
+    if (subtask_index !== -1) {
+        allSubtasksArr.splice(subtask_index, 1)
+    }
+}
+
+function addSubtaskEditToArray(subtask_id) {
+    let subtask_input_field = document.getElementById("subtask_edit_input_" + subtask_id)
+    let edited_subtask_text = subtask_input_field.value
+    let subtaskObj = { title: edited_subtask_text, done: false }
+    allSubtasksArr.push(subtaskObj)
+}
+
+function confirmSubtaskEdit(subtask_id) {
+    addSubtaskEditToArray(subtask_id)
+    let subtask_to_confirm = document.getElementById(subtask_id)
+    let edited_subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value
+    let subtask_template = returnEditedSubtaskTemplate(subtask_id, edited_subtask_text)
+    subtask_to_confirm.innerHTML = subtask_template
+}
+
+document.addEventListener("DOMContentLoaded", addTaskInit)
