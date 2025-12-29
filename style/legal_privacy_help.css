@@ -37,3 +37,8 @@ ol ::marker{
 .break-link {
   word-break: break-all;
 }
+
+.sidebar-footer .active{
+    background-color: #091931;
+    padding: 8px 71px;
+}
