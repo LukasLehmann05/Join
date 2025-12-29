@@ -70,7 +70,7 @@ function taskCardTemplate(task, taskId) {
                 ondragend="this.classList.remove('drag-tilt');"
                 id="${taskId}_task_card" 
                 onclick="openTaskInOverlay('${taskId}')">
-                <p class="category">${task.category}</p>
+                <p class="category ${task.category.toLowerCase().replace(/ /g,"_")}">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
                 <div class="subtask_status_bar">
@@ -95,9 +95,9 @@ function taskCardTemplate(task, taskId) {
  * @param {string} initials The initials of the user.
  * @returns {string} The HTML string for the user icon.
  */
-function assignedUserIconTemplate(initials) {
+function assignedUserIconTemplate(initials, contactColor) {
      return `
-            <div class="assigned_user_avatar" style="background-color: #${Math.floor(Math.random()*16777215).toString(16)};">
+            <div class="assigned_user_avatar" style="background-color: ${contactColor};">
                 ${initials}
             </div>
             `
@@ -123,7 +123,7 @@ function priorityIndicatorTemplate(iconPath) {
 function overlayContentTemplate(task, taskId) {
     return `
             <header class="overlay_header">
-                <p class="category_overlay">${task.category}</p>
+                <p class="category_overlay ${task.category.toLowerCase().replace(/ /g,"_")}">${task.category}</p>
                 <button class="close_overlay_button" onclick="closeOverlay(this, '${taskId}')" ${DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY}="true">
                     <img src="../assets/icons/board/close_button.svg" alt="close overlay icon">
                 </button>
@@ -154,7 +154,7 @@ function overlayContentTemplate(task, taskId) {
             <aside class="edit_overlay_button_container">
                 <button 
                     class="edit_overlay_button separator_overlay" 
-                    onclick="deleteTaskOverlay('${taskId}')"
+                    onclick="deleteTaskInOverlay('${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
                     data-normal-src="../assets/icons/board/delete_button.svg" 

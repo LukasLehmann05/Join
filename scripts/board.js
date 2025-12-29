@@ -128,10 +128,10 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
     let containerIdSuffix = 'assigned_users';
     
     for (let contactId of taskAssignees) {        
-        const user = await getContactById(contactId);
-        if (!user) continue;
-        const initials = getInitialsFromUser(user);
-        const iconHTML = assignedUserIconTemplate(initials);
+        const contact = await getContactById(contactId);
+        if (!contact) continue;
+        const initials = getInitialsFromUser(contact);
+        const iconHTML = assignedUserIconTemplate(initials, contactColorProperty[contactId]);
         const container = document.getElementById(taskId + '_' + containerIdSuffix);
         container.innerHTML += iconHTML;
     }
@@ -224,6 +224,7 @@ function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
 function setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, allTasks) {
     allTasksOfSingleUserObj = {};
     for (let taskIndex in allTasksByIdOfSingleUserArr) {
+        if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
         let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];
         let task = allTasks[taskId];
         if (task) {
@@ -336,11 +337,12 @@ function renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData) {
  * @param {Object} taskToUpdate The updated task object.
  */
 async function refreshTaskOnBoard(taskId, taskToUpdate) {
-    let taskCardElementId = taskId + '_task_card';
-    const columnContainer = document.getElementById(taskCardElementId).parentElement;
-    document.getElementById(taskCardElementId).remove();
-    if (columnContainer) {
-        columnContainer.innerHTML += taskCardTemplate(taskToUpdate, taskId);
+    const oldCard = document.getElementById(taskId + '_task_card');
+    if (oldCard) {
+        const newCard = document.createElement('div');
+        newCard.innerHTML = taskCardTemplate(taskToUpdate, taskId);
+        const newCardElement = newCard.firstElementChild;
+        oldCard.replaceWith(newCardElement);
         renderSubtaskProgress(taskId, taskToUpdate.subtasks || []);
         await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');

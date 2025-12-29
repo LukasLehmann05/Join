@@ -73,6 +73,7 @@ async function openTaskInOverlay(taskId) {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
     await renderOverlayContent(taskId);
+    disableScrollOnBody();
 }
 
 
@@ -106,6 +107,20 @@ async function renderOverlayContent(taskId) {
     renderSubtasksListItems(taskId, task.subtasks || []);
 }
 
+/**
+ * This function disables scrolling on the body element.
+ */
+function disableScrollOnBody() {
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * This function enables scrolling on the body element.
+ */
+function enableScrollOnBody() {
+    document.body.style.overflow = 'auto';
+}
+
 
 /**
  * This function renders the assigned user infos in the overlay.
@@ -119,9 +134,9 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
     getAssigneesOfTask(taskAssignees);
     
     for (let contactId of allAssigneesArr) {
-        const user = await getContactById(contactId);
-        if (user) {
-            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, user);
+        const contact = await getContactById(contactId);
+        if (contact) {
+            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, contact, contactId);
         }
     }
 }
@@ -134,6 +149,7 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
  */
 function getAssigneesOfTask(taskAssignees) {
     allAssigneesArr = [];
+    if (!taskAssignees || taskAssignees.length === 0) return;
     for (let contactId of taskAssignees) {
         allAssigneesArr.push(contactId);
     }
@@ -144,20 +160,20 @@ function getAssigneesOfTask(taskAssignees) {
  * This function returns the HTML content to render assigned user infos.
  * 
  * @param {boolean} renderOnlyId Whether to render only the ID/icon or also the name.
- * @param {Object} user The user object.
+ * @param {Object} contact The user object.
  * @returns {string} The HTML string for the assigned user info.
  */
-function getContentToRenderAssignedUserInfos(renderOnlyId, user) {
+function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
     if(renderOnlyId) {
         return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
+                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contactColorProperty[contactId])}
                     </div>
                 `;
     }
     else {
         return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(user))}
-                    ${assignedUserNameTemplate(user.name)}
+                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contactColorProperty[contactId])}
+                    ${assignedUserNameTemplate(contact.name)}
                     </div>
                 `;
     }
@@ -187,6 +203,7 @@ function closeOverlay(buttonElement, taskId) {
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     handleButtonAddActionAndCloseOverlay(buttonElement);
+    enableScrollOnBody();
    
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
@@ -283,4 +300,34 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('clear_button_container').classList.toggle('show');
     document.getElementById('required_text_field_section').classList.toggle('show');
     showWideOverlay = !showWideOverlay;
+}
+
+/**
+ * This function deletes a task from the overlay and updates the UI and database accordingly.
+ * 
+ * @param {string} taskId This is the id of the task to delete
+ * @param {string} userId This is the id of the user who owns the task
+ */
+async function deleteTaskInOverlay(taskId) {
+    const taskCardElement = document.getElementById(taskId+"_task_card")
+    try {
+        await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
+        await deleteTask(taskId);
+        if (taskCardElement) {
+            taskCardElement.remove();
+            closeOverlay();
+        }
+    } catch (error) {
+        console.error("Error deleting task with id: " + taskId, error);
+        alert("An error occurred while deleting the task. Please try again.");
+    }
+}
+
+/**
+ * 
+ * This function gets the current user ID from the DOM.
+ * @returns {string} The current user ID.
+ */
+function getCurrentUserIdIcon() {
+    return document.getElementById('current_user_id').getAttribute('data-current-user-id');
 }

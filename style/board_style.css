@@ -105,14 +105,18 @@ h1{
 .board_table{
     display: flex;
     gap: 24px;
+    overflow-y: hidden;
+    height: calc(100vh - 400px);
 }
 
 .board_table .column_content{
-    min-height: 500px;
     width: calc(100% / 4);
     margin-top: 8px;
     box-sizing: border-box;
     word-wrap: break-word;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .no_task_yet{
@@ -172,10 +176,17 @@ h1{
     font-size: 16px;
     font-weight: 400;
     color: white;
-    background-color: #0038FF;
     font-family: "Inter";
     padding: 4px 16px;
     border-radius: 8px;
+}
+
+.single_task_content .technical_task{
+    background-color: #0038FF;
+}
+
+.single_task_content .user_story{
+    background-color: #1FD7C1;
 }
 
 .single_task_content h3{
