@@ -288,12 +288,20 @@ function observeColumnEmpty(columnId) {
     observer.observe(container, { childList: true, subtree: false });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('mainframe-ready', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[0]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[1]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
-    initializeBoard(testUserId);
+    
+    const currentUserId = document.getElementById('current_user_id')?.getAttribute('data-current-user-id');
+    
+    if (currentUserId) {
+        console.log("Initializing board with user:", currentUserId);
+        initializeBoard(currentUserId);
+    } else {
+        console.error('No user ID found in header');
+    }
 });
 
 
@@ -303,13 +311,23 @@ document.addEventListener('DOMContentLoaded', () => {
  * @param {string} userId The ID of the user whose board is initialized.
  */
 async function initializeBoard(userId) {
+    console.log("=== BOARD DEBUG START ===");
+    console.log("User ID:", userId);
+    
     let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
+    console.log("Task IDs Array:", allTasksByIdOfSingleUserArr);
+    
     initInputFieldEventListener(allTasksByIdOfSingleUserArr);
     const joinData = await fetchAllDataGlobal();
+    console.log("All Tasks from Firebase:", joinData.tasks);
     
     setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, joinData.tasks);
+    console.log("Tasks for this user:", getAllTasksOfSingleUserObj());
+    
     renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
+    console.log("=== BOARD DEBUG END ===");
+    
     return allTasksByIdOfSingleUserArr;
 }
 

@@ -75,9 +75,26 @@ async function createTask() {
 }
 
 async function sendTaskToDB() {
-    await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
+    const currentUser = getCurrentUserSafe();
+    if (!currentUser || !currentUser.id) {
+        console.error('No user logged in');
+        return;
+    }
+    
+    const taskData = {
+        title: task_title.value,
+        description: task_description.value,
+        due_date: task_due_date.value,
+        priority: current_priority,
+        category: task_category.value,
+        state: stateOfNewTask,
+        assigned_to: allAssigneesArr,
+        subtasks: allSubtasksArr,
+        createdAt: new Date().toISOString()
+    };
+    
+    await createTaskAndLinkToUser(currentUser.id, taskData);
 }
-
 function redirectToBoard() {
     window.location.replace("board.html");
 }

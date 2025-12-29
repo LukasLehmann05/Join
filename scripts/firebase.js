@@ -350,3 +350,43 @@ async function deleteTaskFromUserById(taskId, userId) {
     console.error('Error deleting task from user:', error);
   }
 }
+
+async function createTaskAndLinkToUser(userId, taskData) {
+  try {
+    // 1. Erstelle den Task in /tasks
+    const taskUrl = getJoinUrl('tasks');
+    const response = await postJson(taskUrl, taskData, 'Error creating task');
+    const taskId = response.name;
+    
+    // 2. Hole die aktuelle Liste von Task-Referenzen
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    let existingRefs = await fetchJson(tasksByUserUrl, 'Error loading task refs');
+    
+    // Wenn noch keine Referenzen existieren, erstelle leeres Array
+    if (!existingRefs) {
+      existingRefs = [];
+    }
+    
+    // Konvertiere zu Array falls nötig
+    const refsArray = Array.isArray(existingRefs) ? existingRefs : Object.values(existingRefs);
+    
+    // 3. Füge neue Task-Referenz hinzu
+    const newTaskRef = {};
+    newTaskRef[taskId] = true;
+    refsArray.push(newTaskRef);
+    
+    // 4. Überschreibe die komplette Liste (PUT statt POST)
+    const updateUrl = `${FIREBASE_BASE_URL}/join/tasks_by_user/${userId}.json`;
+    await fetch(updateUrl, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(refsArray)
+    });
+    
+    return { taskId, ...taskData };
+    
+  } catch (error) {
+    console.error('Error creating task and linking to user:', error);
+    throw error;
+  }
+}
