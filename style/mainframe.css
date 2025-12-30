@@ -26,7 +26,7 @@
     font-family: "Inter";
 }
 
-article{
+article {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -38,17 +38,17 @@ article{
     gap: 20px;
 }
 
-.sidebar-nav .active{
+.sidebar-nav .active {
     background-color: #091931;
 }
 
-.sidebar-nav a:hover{
+.sidebar-nav a:hover {
     transform: translate(0.5px, -0.5px);
     margin-right: 1px;
     background-color: #2A3D59;
 }
 
-.sidebar_upper_section{
+.sidebar_upper_section {
     display: flex;
     flex-direction: column;
     gap: 150px;
@@ -58,7 +58,7 @@ article{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: white;
+    color: #CDCDCD;
     padding: 8px 56px;
     gap: 10px;
 }
@@ -132,4 +132,8 @@ article{
 
 .current-selection {
     background-color: #091931;
+}
+
+.white {
+    color: #ffffff;
 }
