@@ -271,13 +271,6 @@ async function fetchTasksByUserId(userId) {
   }
 }
 
-// Globale Funktion zum Laden aller Daten
-async function fetchAllDataGlobal() {
-  const url = `${FIREBASE_BASE_URL}/join.json`;
-  return await fetchJson(url, 'Error loading all data');
-}
-
-// Funktion zum Laden aller Task-IDs eines Users
 async function getAllTaskIdByUserId(userId) {
   try {
     const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
@@ -390,3 +383,5 @@ async function createTaskAndLinkToUser(userId, taskData) {
     throw error;
   }
 }
+
+const fetchAllDataGlobal = fetchAllData;
