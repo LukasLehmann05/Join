@@ -149,3 +149,31 @@ function renderOverlayAddTask(taskId) {
     toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();
 }
+
+function renderNewTaskAddedToastContainer() {
+    setTimeout(() => {
+        document.getElementsByTagName("body")[0].style.overflow = "hidden";
+        toggleNewTaskToast();
+    }, 100)
+    document.getElementsByTagName("body")[0].style.overflow = "auto";
+    setTimeout(() => {
+        toggleNewTaskToast();
+    }, 2100)
+}
+
+let toggleState = false;
+/**
+ * This function toggles the visibility of a dialog.
+ * On each call, the IDs are swapped so that the setTimeout alternates.
+ */
+function toggleNewTaskToast() {
+    const firstId = toggleState ? 'responseDialog' : 'message_overflow_background';
+    const secondId = toggleState ? 'message_overflow_background' : 'responseDialog';
+
+    document.getElementById(firstId).classList.toggle('show');
+    setTimeout(() => {
+        document.getElementById(secondId).classList.toggle('show');
+    }, 350);
+
+    toggleState = !toggleState;
+}
