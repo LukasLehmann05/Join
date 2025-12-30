@@ -1,0 +1,10 @@
+@media (max-width: 767px) {
+    .help-content {
+        margin-right: 16px;
+    }
+
+    .help-responsive {
+        height: auto !important;
+        min-width: 305px;
+    }
+}

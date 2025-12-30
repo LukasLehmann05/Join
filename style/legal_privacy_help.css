@@ -1,0 +1,48 @@
+.help-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-display a{
+    color: #29ABE2;
+}
+
+.help-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-right: 80px;
+    margin-bottom: 40px;
+}
+
+.help-content ol {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.help-content ol ::marker {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.display-in-wide{
+    display: flex !important;
+}
+
+.margin-top{
+    margin-top: 20px;
+}
+
+.break-link {
+  word-break: break-all;
+}
+
+.sidebar-footer .active{
+    background-color: #091931;
+    padding: 8px 71px;
+}
+
+.d-none{
+    display: none;
+}
