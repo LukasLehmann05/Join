@@ -1,7 +1,3 @@
-// ============================================
-// AUTHENTICATION & USER MANAGEMENT
-// ============================================
-
 function loadCurrentUserRaw() {
   return localStorage.getItem("currentUser");
 }
@@ -30,10 +26,6 @@ function requireAuth() {
     redirectToLogin();
   }
 }
-
-// ============================================
-// HEADER AVATAR FUNCTIONS
-// ============================================
 
 function getInitialsFromParts(parts) {
   if (parts.length === 0) return "?";
@@ -138,10 +130,6 @@ function initHeaderAvatar() {
   setupAvatarMenuLinks();
 }
 
-// ============================================
-// GREETING FUNCTIONS
-// ============================================
-
 function getGreetingElements() {
   const greetingTextEl = document.querySelector(".greeting-text");
   const greetingNameEl = document.querySelector(".greeting-name");
@@ -150,7 +138,6 @@ function getGreetingElements() {
 
 function getSafeUserName(user) {
   const name = user?.name?.trim();
-  // Wenn Guest oder leer, gib leeren String zurück
   if (!name || name.toLowerCase() === 'guest') {
     return '';
   }
@@ -177,7 +164,6 @@ function renderGreeting() {
   const hour = new Date().getHours();
   const greeting = calculateGreeting(hour);
 
- // Prüfe ob leer (Guest)
 if (!fullName) {
   greetingTextEl.textContent = greeting + '!';
   greetingNameEl.textContent = '';
@@ -186,7 +172,7 @@ if (!fullName) {
 }
 }
 function showGreetingOverlay() {
-    // Nur bei Bildschirmbreite < 1025px
+
     if (window.innerWidth > 1025) return;
 
     const overlay = document.getElementById('greeting-overlay');
@@ -200,8 +186,6 @@ function showGreetingOverlay() {
     const hour = new Date().getHours();
     const greeting = calculateGreeting(hour);
 
-    // Guest: Nur Greeting mit !
-    // Normale User: Greeting mit Komma + Name
     if (!fullName) {
         overlayText.textContent = greeting + '!';
         overlayName.textContent = '';
@@ -210,10 +194,8 @@ function showGreetingOverlay() {
         overlayName.textContent = fullName;
     }
 
-    // Zeige Overlay für ALLE User
     overlay.classList.remove('hidden');
 
-    // Verstecke nach 5 Sekunden
     setTimeout(() => {
         overlay.classList.add('hidden');
     }, 5000);
@@ -228,7 +210,7 @@ async function fetchTasksForSummary() {
   }
 
   try {
-    const tasksObj = await fetchTasksByUserId(currentUser.id); // <-- Nutzt jetzt die neue Funktion
+    const tasksObj = await fetchTasksByUserId(currentUser.id);
     return Object.values(tasksObj || {});
   } catch (error) {
     console.error("Error fetching tasks for summary:", error);
@@ -254,19 +236,13 @@ function countUrgentTasks(tasks) {
   ).length;
 }
 
-// ============================================
-// URGENT DEADLINE FUNCTIONS
-// ============================================
-
 function parseDueDate(rawDate) {
   if (!rawDate) return null;
 
-  // Format: YYYY-MM-DD
   if (rawDate.includes("-")) {
     return new Date(rawDate);
   }
 
-  // Format: DD/MM/YYYY or DD.MM.YYYY
   if (rawDate.includes("/") || rawDate.includes(".")) {
     const parts = rawDate.split(/[./]/);
     const [day, month, year] = parts;
@@ -315,34 +291,27 @@ function updateUrgentCard(tasks) {
   setTextContent(".urgent-date", formatDateForDisplay(nextDeadline));
 }
 
-// ============================================
-// MAIN SUMMARY RENDER FUNCTION
-// ============================================
-
 async function loadAndRenderSummary() {
   try {
     const tasks = await fetchTasksForSummary();
 
-    // Zähle Tasks nach State (entspricht der Board-Logik)
     const todo = countTasksByState(tasks, "todo");
     const done = countTasksByState(tasks, "done");
     const inProgress = countTasksByState(tasks, "in progress");
     const awaitFeedback = countTasksByState(tasks, "awaiting feedback");
     const total = tasks.length;
 
-    // Aktualisiere die Zähler in der UI
     setTextContent(".todo-number", todo);
     setTextContent(".done-number", done);
     setTextContent(".board-number", total);
     setTextContent(".progress-number", inProgress);
     setTextContent(".feedback-number", awaitFeedback);
 
-    // Urgent Tasks und Deadline
     updateUrgentCard(tasks);
 
   } catch (error) {
     console.error("Error loading summary data:", error);
-    // Setze alle Werte auf 0 bei Fehler
+    
     setTextContent(".todo-number", 0);
     setTextContent(".done-number", 0);
     setTextContent(".board-number", 0);
