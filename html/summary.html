@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/summary.css">
     <link rel="stylesheet" href="../style/mainframe.css">
-    <link rel="stylesheet" href="../style/mainframe_responsive.css">
+    <link rel="stylesheet" href="../style/mainframe_responsive.css"> 
+    <link rel="stylesheet" href="../style/summary_responsive.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 </head>
 
@@ -48,6 +49,7 @@
         
         <header class="header">
             <nav class="header-nav">
+                <img src="../assets/icons/logo/logoBig.svg" alt="join logo" class="logo-responsive">
                 <p>Kanban Project Management Tool</p>
                 <section class="header-side-buttons">
                     <a href="#">
@@ -72,6 +74,11 @@
             </nav>
         </header>
             <main class="main-content">
+
+                <div id="greeting-overlay" class="greeting-overlay hidden">
+        <p class="greeting-overlay-text">Good morning,</p>
+        <h2 class="greeting-overlay-name"></h2>
+    </div>
 
     <section class="summary-title-wrapper">
         <h1 class="summary-title">Join 360</h1>

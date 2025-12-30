@@ -150,7 +150,11 @@ function getGreetingElements() {
 
 function getSafeUserName(user) {
   const name = user?.name?.trim();
-  return name || "Guest";
+  // Wenn Guest oder leer, gib leeren String zurück
+  if (!name || name.toLowerCase() === 'guest') {
+    return '';
+  }
+  return name;
 }
 
 function calculateGreeting(hour) {
@@ -173,12 +177,47 @@ function renderGreeting() {
   const hour = new Date().getHours();
   const greeting = calculateGreeting(hour);
 
+ // Prüfe ob leer (Guest)
+if (!fullName) {
+  greetingTextEl.textContent = greeting + '!';
+  greetingNameEl.textContent = '';
+} else {
   showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
 }
+}
+function showGreetingOverlay() {
+    // Nur bei Bildschirmbreite < 1025px
+    if (window.innerWidth > 1025) return;
 
-// ============================================
-// TASK DATA FUNCTIONS
-// ============================================
+    const overlay = document.getElementById('greeting-overlay');
+    const overlayText = document.querySelector('.greeting-overlay-text');
+    const overlayName = document.querySelector('.greeting-overlay-name');
+
+    if (!overlay) return;
+
+    const user = getCurrentUserSafe();
+    const fullName = getSafeUserName(user);
+    const hour = new Date().getHours();
+    const greeting = calculateGreeting(hour);
+
+    // Guest: Nur Greeting mit !
+    // Normale User: Greeting mit Komma + Name
+    if (!fullName) {
+        overlayText.textContent = greeting + '!';
+        overlayName.textContent = '';
+    } else {
+        overlayText.textContent = `${greeting},`;
+        overlayName.textContent = fullName;
+    }
+
+    // Zeige Overlay für ALLE User
+    overlay.classList.remove('hidden');
+
+    // Verstecke nach 5 Sekunden
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+    }, 5000);
+}
 
 async function fetchTasksForSummary() {
   const currentUser = getCurrentUserSafe();
@@ -316,9 +355,8 @@ async function loadAndRenderSummary() {
 
 async function initSummaryPage() {
   requireAuth();
-  initHeaderAvatar();
   renderGreeting();
-  
+  showGreetingOverlay();
   
   await loadAndRenderSummary();
 }
