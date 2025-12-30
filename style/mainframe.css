@@ -58,9 +58,13 @@ article{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: white;
+    color: #CDCDCD;
     padding: 8px 56px;
     gap: 10px;
+}
+
+.sidebar-nav-section.active{
+    color: white;
 }
 
 .nav-icons {

@@ -285,3 +285,27 @@ h1{
 .d-none{
     display: none;
 }
+
+.responseToastContent{
+    box-sizing: border-box;
+    transform: translateX(200%);
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 0;
+    z-index: 1001;
+    position: absolute;
+    background-color: #2A3647;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    color: white;
+    font-size: 20px;
+}
+
+.responseToastContent.show {
+    opacity: 1;
+    transform: translateX(0);
+}
