@@ -78,6 +78,23 @@ async function deleteTask(taskId) {
     }
 }
 
+/**
+ * This function fetches a single task by its ID from the database.
+ * 
+ * @param {String} taskId Task ID to fetch
+ * @returns {Object|null} Task data object or null if not found
+ */
+async function getTaskById(taskId) {
+    try {
+    let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
+    let taskData = await taskFetch.json();
+    return taskData;
+    } catch (error) {
+        console.error('Error fetching task by ID:', error)
+        return null;
+    }
+}
+
 
 /**
  *department contacts: post new Contact that got add to database
