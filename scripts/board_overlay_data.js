@@ -199,19 +199,16 @@ function closeOverlayByBackdrop(event) {
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
-function closeOverlay(buttonElement, taskId) {
-    renderNewTaskAddedToastContainer();
-    
-    setTimeout(() => {
-        handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
-        handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-        handleButtonAddActionAndCloseOverlay(buttonElement);
-        enableScrollOnBody();
-        
-        const overlay = document.getElementById('overlay');
-        const overlayContent = document.getElementById('overlay_content');
-        
-        if (overlay.classList.contains('show')) {
+async function closeOverlay(buttonElement, taskId) {
+    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
+    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+    await handleButtonAddActionAndCloseOverlay(buttonElement);
+    enableScrollOnBody();
+
+    const overlay = document.getElementById('overlay');
+    const overlayContent = document.getElementById('overlay_content');
+
+    if (overlay.classList.contains('show')) {
         overlayContent.classList.remove('show');
         setTimeout(() => {
             overlay.classList.remove('show');
@@ -219,8 +216,7 @@ function closeOverlay(buttonElement, taskId) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
         }, 500);
-        }
-    }, 2000);
+    }
 }
 
 
@@ -262,11 +258,18 @@ function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  */
-function handleButtonAddActionAndCloseOverlay(buttonElement) {
-     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+async function handleButtonAddActionAndCloseOverlay(buttonElement) {
+    const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonCreateTaskAndCloseOverlay) {
-        createTask();
+        renderNewTaskAddedToastContainer();
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                createTask();
+                resolve();
+            }, 2000);
+        });
     }
+    return Promise.resolve();
 }
 
 
