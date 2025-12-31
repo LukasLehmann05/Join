@@ -200,6 +200,22 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
+    // Pflichtfeldprüfung je nach Button
+    if (buttonElement) {
+        if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
+            if (!checkForRequired(['title', 'dueDate', 'category'])) {
+                missingInputs();
+                return;
+            }
+        } else if (buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true') {
+            if (!checkForRequired(['title', 'dueDate'])) {
+                missingInputs();
+                return;
+            }
+        }
+        // handleButtonActionSaveAndCloseOverlay hat keine Pflichtfelder
+    }
+
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     await handleButtonAddActionAndCloseOverlay(buttonElement);
@@ -263,8 +279,8 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
     if (buttonCreateTaskAndCloseOverlay) {
         renderNewTaskAddedToastContainer();
         return new Promise((resolve) => {
-            setTimeout(() => {
-                createTask();
+            setTimeout(async () => {
+                await sendTaskToDB();
                 resolve();
             }, 2000);
         });
