@@ -65,7 +65,7 @@ function loadDataFromAPI() {
 async function createTask() {
     let can_create = checkForRequired(['title', 'dueDate', 'category'])
     if (can_create == true) {
-        await sendTaskToDB();
+        await sendTaskToDB(stateOfNewTask = TASK_STATE_ARR[0]);
         clearAllInputs();
         redirectToBoard()
     } else {
@@ -74,7 +74,7 @@ async function createTask() {
     }
 }
 
-async function sendTaskToDB() {
+async function sendTaskToDB(stateOfNewTask) {
     await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 

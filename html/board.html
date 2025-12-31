@@ -51,7 +51,7 @@
                     <a href="../html/help.html">
                         <img src="../assets/icons/header/help.svg" alt="help icon">
                     </a>
-                    <a href="#">
+                    <a href="#" id="current_user_id" data-current-user-id="-OfhU5mv5Jc_R3Ybzq8T">
                         <img src="../assets/icons/header/user_placeholder.svg" alt="user icon">
                     </a>
                 </section>
@@ -76,7 +76,7 @@
                                 <img src="../assets/icons/board/search_glas.svg" alt="">
                             </button>
                         </div>
-                        <button class="button_add_task" onclick="openAddTaskOverlay()">
+                        <button class="button_add_task" onclick="openAddTaskOverlay(this)" data-task-state="to do">
                             <p>Add task</p>
                             <img src="../assets/icons/board/add_white.svg" alt="add_task icon">
                         </button>
@@ -89,19 +89,19 @@
             <section class="table_header">
                 <div class="column_header">
                     <p class="column_title">To do</p>
-                    <button>
+                    <button onclick="openAddTaskOverlay(this)" data-task-state="to do">
                         <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
                     </button>
                 </div>
                 <div class="column_header">
                     <p class="column_title">In progress</p>
-                    <button>
+                    <button onclick="openAddTaskOverlay(this)" data-task-state="in progress">
                         <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
                     </button>
                 </div>
                 <div class="column_header">
                     <p class="column_title">Await feedback</p>
-                    <button>
+                    <button onclick="openAddTaskOverlay(this)" data-task-state="awaiting feedback">
                         <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
                     </button>
                 </div>

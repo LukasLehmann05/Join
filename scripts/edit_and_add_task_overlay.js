@@ -3,10 +3,14 @@
  * 
  * @param {string} taskId The ID of the task to edit.
  */
-async function openEditTaskOverlay(taskId) {
+async function openEditTaskOverlay(buttonElement, taskId) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
+    }
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY, taskState);
     let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
     upsertTaskTemplateHandler(taskId);
     await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
@@ -119,7 +123,11 @@ function escapeTextareaContent(text) {
 /**
  * This function opens the overlay for adding a new task and initializes the form.
  */
-async function openAddTaskOverlay() {
+async function openAddTaskOverlay(buttonElement) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
+    }
     allAssigneesArr = [];
     allSubtasksArr = [];
     clearElementsOfNewTask();
@@ -128,7 +136,7 @@ async function openAddTaskOverlay() {
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
-    renderOverlayAddTask(taskId).then(() => {
+    renderOverlayAddTask(taskId, taskState).then(() => {
         addTaskInit();
     })
     disableScrollOnBody();
@@ -141,10 +149,10 @@ async function openAddTaskOverlay() {
  * @param {string} taskId The ID of the new task.
  * @returns {Promise<void>} A promise that resolves when rendering is complete.
  */
-function renderOverlayAddTask(taskId) {
+function renderOverlayAddTask(taskId, taskState) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY, taskState);
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();

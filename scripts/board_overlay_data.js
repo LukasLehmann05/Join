@@ -275,12 +275,16 @@ function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  */
 async function handleButtonAddActionAndCloseOverlay(buttonElement) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
+    }
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonCreateTaskAndCloseOverlay) {
         renderNewTaskAddedToastContainer();
         return new Promise((resolve) => {
             setTimeout(async () => {
-                await sendTaskToDB();
+                await sendTaskToDB(taskState);
                 resolve();
             }, 2000);
         });
