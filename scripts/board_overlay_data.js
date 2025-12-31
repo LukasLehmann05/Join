@@ -200,23 +200,27 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 function closeOverlay(buttonElement, taskId) {
-    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
-    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-    handleButtonAddActionAndCloseOverlay(buttonElement);
-    enableScrollOnBody();
-   
-    const overlay = document.getElementById('overlay');
-    const overlayContent = document.getElementById('overlay_content');
-
-    if (overlay.classList.contains('show')) {
+    renderNewTaskAddedToastContainer();
+    
+    setTimeout(() => {
+        handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
+        handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+        handleButtonAddActionAndCloseOverlay(buttonElement);
+        enableScrollOnBody();
+        
+        const overlay = document.getElementById('overlay');
+        const overlayContent = document.getElementById('overlay_content');
+        
+        if (overlay.classList.contains('show')) {
         overlayContent.classList.remove('show');
-         setTimeout(() => {
+        setTimeout(() => {
             overlay.classList.remove('show');
             if(showWideOverlay) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
         }, 500);
-    }
+        }
+    }, 2000);
 }
 
 

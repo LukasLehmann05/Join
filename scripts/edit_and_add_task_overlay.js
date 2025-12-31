@@ -158,22 +158,13 @@ function renderNewTaskAddedToastContainer() {
     document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
         toggleNewTaskToast();
-    }, 2100)
+    }, 1600)
 }
 
-let toggleState = false;
 /**
  * This function toggles the visibility of a dialog.
  * On each call, the IDs are swapped so that the setTimeout alternates.
  */
 function toggleNewTaskToast() {
-    const firstId = toggleState ? 'responseDialog' : 'message_overflow_background';
-    const secondId = toggleState ? 'message_overflow_background' : 'responseDialog';
-
-    document.getElementById(firstId).classList.toggle('show');
-    setTimeout(() => {
-        document.getElementById(secondId).classList.toggle('show');
-    }, 350);
-
-    toggleState = !toggleState;
+    document.getElementById('responseToast').classList.toggle('show');
 }
