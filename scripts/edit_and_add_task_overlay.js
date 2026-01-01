@@ -191,8 +191,8 @@ function renderNewTaskAddedToastContainer() {
 }
 
 /**
- * This function toggles the visibility of a dialog.
- * On each call, the IDs are swapped so that the setTimeout alternates.
+ * This function toggles the visibility of the new task toast notification.
+ * Toggles the 'show' class on the toast element.
  */
 function toggleNewTaskToast() {
     document.getElementById('responseToast').classList.toggle('show');
