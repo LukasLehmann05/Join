@@ -238,7 +238,7 @@ function addSubtask() {
         task_subtask.value = ""
         hideSubtaskButtons()
     }
-    console.log(allSubtasksArr);
+    
     
 }
 
