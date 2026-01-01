@@ -229,8 +229,8 @@ function validatePasswordField(password, errors) {
     return;
   }
   
-  if (password.length < 6) {
-    errors.password = 'Password should be at least 6 characters long.';
+  if (password.length < 8) {
+    errors.password = 'Password should be at least 8 characters long.';
   }
 }
 
