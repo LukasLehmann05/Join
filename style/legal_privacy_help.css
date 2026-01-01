@@ -47,6 +47,6 @@
     display: none;
 }
 
-.disable {
+.disabled {
     pointer-events: none;
 }
