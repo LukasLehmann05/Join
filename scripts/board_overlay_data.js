@@ -216,7 +216,7 @@ async function closeOverlay(buttonElement, taskId) {
 
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-    // Prüfe, ob ein Task erstellt wurde und warte ggf. auf Toast
+    
     const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
     if (created instanceof Promise) {
         await created;
@@ -225,15 +225,18 @@ async function closeOverlay(buttonElement, taskId) {
 
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
-
+    const DELAY_BETWEEN_CLASSES = 500;
+    const TOTAL_DELAY = 1000;
     if (overlay.classList.contains('show')) {
-        overlayContent.classList.remove('show');
+        setTimeout(() => {
+            overlayContent.classList.remove('show');
+        }, DELAY_BETWEEN_CLASSES);
         setTimeout(() => {
             overlay.classList.remove('show');
             if (showWideOverlay) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
-        }, 500);
+        }, TOTAL_DELAY);
     }
 }
 
