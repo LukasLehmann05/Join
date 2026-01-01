@@ -226,7 +226,7 @@ async function closeOverlay(buttonElement, taskId) {
         overlayContent.classList.remove('show');
         setTimeout(() => {
             overlay.classList.remove('show');
-            if(showWideOverlay) {
+            if (showWideOverlay) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
         }, 500);
