@@ -200,7 +200,6 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    // Pflichtfeldprüfung je nach Button
     if (buttonElement) {
         if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
             if (!checkForRequired(['title', 'dueDate', 'category'])) {
@@ -213,7 +212,6 @@ async function closeOverlay(buttonElement, taskId) {
                 return;
             }
         }
-        // handleButtonActionSaveAndCloseOverlay hat keine Pflichtfelder
     }
 
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
