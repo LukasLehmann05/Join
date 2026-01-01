@@ -199,23 +199,44 @@ function closeOverlayByBackdrop(event) {
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
-function closeOverlay(buttonElement, taskId) {
+async function closeOverlay(buttonElement, taskId) {
+    if (buttonElement) {
+        if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
+            if (!checkForRequired(['title', 'dueDate', 'category'])) {
+                missingInputs();
+                return;
+            }
+        } else if (buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true') {
+            if (!checkForRequired(['title', 'dueDate'])) {
+                missingInputs();
+                return;
+            }
+        }
+    }
+
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-    handleButtonAddActionAndCloseOverlay(buttonElement);
+    
+    const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
+    if (created instanceof Promise) {
+        await created;
+    }
     enableScrollOnBody();
-   
+
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
-
+    const DELAY_BETWEEN_CLASSES = 500;
+    const TOTAL_DELAY = 1000;
     if (overlay.classList.contains('show')) {
-        overlayContent.classList.remove('show');
-         setTimeout(() => {
+        setTimeout(() => {
+            overlayContent.classList.remove('show');
+        }, DELAY_BETWEEN_CLASSES);
+        setTimeout(() => {
             overlay.classList.remove('show');
-            if(showWideOverlay) {
+            if (showWideOverlay) {
                 toggleTitleCategorySeparatorInAddTaskOverlay();
             }
-        }, 500);
+        }, TOTAL_DELAY);
     }
 }
 
@@ -258,11 +279,20 @@ function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  */
-function handleButtonAddActionAndCloseOverlay(buttonElement) {
-     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonCreateTaskAndCloseOverlay) {
-        createTask();
+async function handleButtonAddActionAndCloseOverlay(buttonElement) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
     }
+    else {
+        taskState = 'todo';
+    }
+    const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+    if (buttonCreateTaskAndCloseOverlay) {
+        await sendTaskToDB(taskState);
+        return renderNewTaskAddedToastContainer();
+    }
+    return;
 }
 
 

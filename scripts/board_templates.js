@@ -165,11 +165,12 @@ function overlayContentTemplate(task, taskId) {
                 </button>
                 <button 
                     class="edit_overlay_button" 
-                    onclick="openEditTaskOverlay('${taskId}')"
+                    onclick="openEditTaskOverlay(this, '${taskId}')"
                     onmouseover="swapImage(this, true)" 
                     onmouseout="swapImage(this, false)"
                     data-normal-src="../assets/icons/board/edit_button.svg" 
-                    data-hover-src="../assets/icons/board/edit_button_hover.svg">
+                    data-hover-src="../assets/icons/board/edit_button_hover.svg"
+                    data-task-state="${task.state}">
                     <img src="../assets/icons/board/edit_button.svg" alt="edit task icon">
                     <p>Edit</p>
                 </button>
@@ -212,9 +213,11 @@ function subtasksListItemTemplate(taskId, title, counter) {
  * This function returns the HTML template for the upsert task overlay.
  * @param {string} taskId The ID of the task.
  * @param {string} confirmButtonText The text for the confirm button.
+ * @param {string} buttonDataAttribute The data attribute for the confirm button.
+ * @param {string} taskState The state of the task.
  * @returns {string} The HTML string for the upsert task overlay.
  */
-function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribute) {
+function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribute, taskState) {
     return  `
             <header class="overlay_header upsert_overlay_header">
                 <h1 id="overlay_title">Add Task</h1>
@@ -235,7 +238,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribut
                         </button>
                     </div>
                     <div class="create-task">
-                        <button class="action-buttons create-button" onclick="closeOverlay(this, '${taskId}')" ${buttonDataAttribute}="true">
+                        <button class="action-buttons create-button" onclick="closeOverlay(this, '${taskId}')" ${buttonDataAttribute}="true" data-task-state="${taskState}">
                             <p>${confirmButtonText}</p>
                             <img src="../assets/icons/contacts/check.svg" alt="submit icon">
                         </button>
@@ -279,11 +282,7 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
             <section class="upsert_description_container">
                 <form class="input-form description">
                     <label for="task_description" class="task_field_title">Description</label>
-                    <textarea
-                        type="text"
-                        id="task_description" 
-                        class="task-input" 
-                        placeholder="Enter a description">${taskDescription}</textarea>
+                    <textarea type="text" id="task_description" class="task-input" placeholder="Enter a description">${taskDescription}</textarea>
                 </form>
             </section>
             `

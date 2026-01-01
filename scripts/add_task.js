@@ -58,14 +58,14 @@ function loadPrioButtonsAndSubtaskSectionById() {
 }
 
 function loadDataFromAPI() {
-    let joinData = fetchAllData()
+    let joinData = fetchAllDataGlobal()
     return joinData
 }
 
 async function createTask() {
-    let can_create = checkForRequired()
+    let can_create = checkForRequired(['title', 'dueDate', 'category'])
     if (can_create == true) {
-        await sendTaskToDB();
+        await sendTaskToDB(TASK_STATE_ARR[0]);
         clearAllInputs();
         redirectToBoard()
     } else {
@@ -74,7 +74,7 @@ async function createTask() {
     }
 }
 
-async function sendTaskToDB() {
+async function sendTaskToDB(stateOfNewTask) {
     await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
 }
 
@@ -82,21 +82,28 @@ function redirectToBoard() {
     window.location.replace("board.html");
 }
 
-function checkForRequired() {
-    if (task_title.value != "") {
-        req_title = true
+/**
+ * Checks if the required fields are filled.
+ * @param {Array<string>} requiredFields - Array of field names to check (e.g. ['title', 'dueDate', 'category'])
+ * @returns {boolean} true if all required fields are filled, false otherwise
+ */
+function checkForRequired(requiredFields) {
+    let isValid = true;
+    for (const field of requiredFields) {
+        switch (field) {
+            case 'title':
+                if (!document.getElementById('task_title').value.trim()) isValid = false;
+                break;
+            case 'dueDate':
+                if (!document.getElementById('task_due_date').value.trim()) isValid = false;
+                break;
+            case 'category':
+                if (!document.getElementById('task_category').value.trim()) isValid = false;
+                break;
+            // ggf. weitere Felder ergänzen
+        }
     }
-    if (task_due_date.value != "") {
-        req_due_date = true
-    }
-    if (task_category.value != "") {
-        req_category = true
-    }
-    if (req_title == true && req_due_date == true && req_category == true) {
-        return true
-    } else {
-        return false
-    }
+    return isValid;
 }
 
 function clearAllInputs() {
@@ -231,7 +238,7 @@ function addSubtask() {
         task_subtask.value = ""
         hideSubtaskButtons()
     }
-    console.log(allSubtasksArr);
+    
     
 }
 

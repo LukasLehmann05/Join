@@ -64,6 +64,10 @@ article {
     gap: 10px;
 }
 
+.sidebar-nav-section.active{
+    color: white;
+}
+
 .nav-icons {
     height: 30px;
     aspect-ratio: 1;
