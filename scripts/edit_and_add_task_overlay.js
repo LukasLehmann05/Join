@@ -160,6 +160,22 @@ function renderOverlayAddTask(taskId, taskState) {
     return Promise.resolve();
 }
 
+ /**
+ * Duration (in ms) for which the toast is visibly displayed.
+ */
+const TOAST_DISPLAY_DURATION = 1500;
+
+/**
+ * Buffer time (in ms) to allow toast animations/setup before and after display.
+ */
+const TOAST_ANIMATION_BUFFER = 100;
+
+/**
+ * Total duration (in ms) from showing the toast to hiding it again.
+ * Equals TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER.
+ */
+const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
+
 /**
  * This function renders a toast notification indicating that a new task has been added.
  */
@@ -167,11 +183,11 @@ function renderNewTaskAddedToastContainer() {
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
         toggleNewTaskToast();
-    }, 100)
+    }, TOAST_ANIMATION_BUFFER)
     setTimeout(() => {
         toggleNewTaskToast();
         document.getElementsByTagName("body")[0].style.overflow = "auto";
-    }, 1600)
+    }, TOAST_TOTAL_DURATION)
 }
 
 /**
