@@ -86,12 +86,12 @@ async function deleteTask(taskId) {
  */
 async function getTaskById(taskId) {
     try {
-    let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
-    let taskData = await taskFetch.json();
-    return taskData;
+        let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
+        let taskData = await taskFetch.json();
+        return taskData;
     } catch (error) {
-        console.error('Error fetching task by ID:', error)
-        return null;
+        console.error('Error fetching task by ID:', error);
+        return error;
     }
 }
 
