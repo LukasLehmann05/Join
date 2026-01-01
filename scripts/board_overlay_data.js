@@ -216,7 +216,11 @@ async function closeOverlay(buttonElement, taskId) {
 
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-    await handleButtonAddActionAndCloseOverlay(buttonElement);
+    // Prüfe, ob ein Task erstellt wurde und warte ggf. auf Toast
+    const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
+    if (created instanceof Promise) {
+        await created;
+    }
     enableScrollOnBody();
 
     const overlay = document.getElementById('overlay');
@@ -282,15 +286,10 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
     }
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonCreateTaskAndCloseOverlay) {
-        renderNewTaskAddedToastContainer();
-        return new Promise((resolve) => {
-            setTimeout(async () => {
-                await sendTaskToDB(taskState);
-                resolve();
-            }, 2000);
-        });
+        await sendTaskToDB(taskState);
+        return renderNewTaskAddedToastContainer();
     }
-    return Promise.resolve();
+    return;
 }
 
 

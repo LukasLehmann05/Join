@@ -180,14 +180,17 @@ const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
  * This function renders a toast notification indicating that a new task has been added.
  */
 function renderNewTaskAddedToastContainer() {
-    setTimeout(() => {
-        document.getElementsByTagName("body")[0].style.overflow = "hidden";
-        toggleNewTaskToast();
-    }, TOAST_ANIMATION_BUFFER)
-    setTimeout(() => {
-        toggleNewTaskToast();
-        document.getElementsByTagName("body")[0].style.overflow = "auto";
-    }, TOAST_TOTAL_DURATION)
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            document.getElementsByTagName("body")[0].style.overflow = "hidden";
+            toggleNewTaskToast();
+        }, TOAST_ANIMATION_BUFFER);
+        setTimeout(() => {
+            toggleNewTaskToast();
+            document.getElementsByTagName("body")[0].style.overflow = "auto";
+            resolve();
+        }, TOAST_TOTAL_DURATION);
+    });
 }
 
 /**
