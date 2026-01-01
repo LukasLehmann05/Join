@@ -2,6 +2,7 @@
  * This function opens the edit overlay for a task and renders its content.
  * 
  * @param {string} taskId The ID of the task to edit.
+ * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  */
 async function openEditTaskOverlay(buttonElement, taskId) {
     let taskState = '';
@@ -122,6 +123,7 @@ function escapeTextareaContent(text) {
 
 /**
  * This function opens the overlay for adding a new task and initializes the form.
+ * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  */
 async function openAddTaskOverlay(buttonElement) {
     let taskState = '';
@@ -158,14 +160,17 @@ function renderOverlayAddTask(taskId, taskState) {
     return Promise.resolve();
 }
 
+/**
+ * This function renders a toast notification indicating that a new task has been added.
+ */
 function renderNewTaskAddedToastContainer() {
     setTimeout(() => {
         document.getElementsByTagName("body")[0].style.overflow = "hidden";
         toggleNewTaskToast();
     }, 100)
-    document.getElementsByTagName("body")[0].style.overflow = "auto";
     setTimeout(() => {
         toggleNewTaskToast();
+        document.getElementsByTagName("body")[0].style.overflow = "auto";
     }, 1600)
 }
 
