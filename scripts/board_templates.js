@@ -213,6 +213,8 @@ function subtasksListItemTemplate(taskId, title, counter) {
  * This function returns the HTML template for the upsert task overlay.
  * @param {string} taskId The ID of the task.
  * @param {string} confirmButtonText The text for the confirm button.
+ * @param {string} buttonDataAttribute The data attribute for the confirm button.
+ * @param {string} taskState The state of the task.
  * @returns {string} The HTML string for the upsert task overlay.
  */
 function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribute, taskState) {
