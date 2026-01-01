@@ -1,12 +1,17 @@
 /**
  * This function opens the edit overlay for a task and renders its content.
  * 
+ * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  * @param {string} taskId The ID of the task to edit.
  */
-async function openEditTaskOverlay(taskId) {
+async function openEditTaskOverlay(buttonElement, taskId) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
+    }
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Ok', DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY, taskState);
     let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
     upsertTaskTemplateHandler(taskId);
     await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
@@ -118,8 +123,13 @@ function escapeTextareaContent(text) {
 
 /**
  * This function opens the overlay for adding a new task and initializes the form.
+ * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  */
-async function openAddTaskOverlay() {
+async function openAddTaskOverlay(buttonElement) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
+    }
     allAssigneesArr = [];
     allSubtasksArr = [];
     clearElementsOfNewTask();
@@ -128,9 +138,9 @@ async function openAddTaskOverlay() {
     setTimeout(() => {
         document.getElementById('overlay_content').classList.add('show');
     }, 10);
-    renderOverlayAddTask(taskId).then(() => {
+    renderOverlayAddTask(taskId, taskState).then(() => {
         addTaskInit();
-    })
+    });
     disableScrollOnBody();
 }
 
@@ -141,11 +151,52 @@ async function openAddTaskOverlay() {
  * @param {string} taskId The ID of the new task.
  * @returns {Promise<void>} A promise that resolves when rendering is complete.
  */
-function renderOverlayAddTask(taskId) {
+function renderOverlayAddTask(taskId, taskState) {
     const overlayContent = document.getElementById('overlay_content');
     overlayContent.innerHTML = '';
-    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY);
+    overlayContent.innerHTML = overlayUpsertTaskTemplate(taskId, 'Create Task', DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY, taskState);
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();
+}
+
+ /**
+ * Duration (in ms) for which the toast is visibly displayed.
+ */
+const TOAST_DISPLAY_DURATION = 1500;
+
+/**
+ * Buffer time (in ms) to allow toast animations/setup before and after display.
+ */
+const TOAST_ANIMATION_BUFFER = 100;
+
+/**
+ * Total duration (in ms) from showing the toast to hiding it again.
+ * Equals TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER.
+ */
+const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
+
+/**
+ * This function renders a toast notification indicating that a new task has been added.
+ */
+function renderNewTaskAddedToastContainer() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            document.getElementsByTagName("body")[0].style.overflow = "hidden";
+            toggleNewTaskToast();
+        }, TOAST_ANIMATION_BUFFER);
+        setTimeout(() => {
+            toggleNewTaskToast();
+            document.getElementsByTagName("body")[0].style.overflow = "auto";
+            resolve();
+        }, TOAST_TOTAL_DURATION);
+    });
+}
+
+/**
+ * This function toggles the visibility of the new task toast notification.
+ * Toggles the 'show' class on the toast element.
+ */
+function toggleNewTaskToast() {
+    document.getElementById('responseToast').classList.toggle('show');
 }
