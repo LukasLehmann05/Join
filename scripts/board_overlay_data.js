@@ -277,6 +277,9 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
     if (buttonElement) {
         taskState = buttonElement.getAttribute('data-task-state');
     }
+    else {
+        taskState = 'todo';
+    }
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonCreateTaskAndCloseOverlay) {
         renderNewTaskAddedToastContainer();
