@@ -1,0 +1,264 @@
+.body {
+    min-width: 100%;
+    overflow-x: auto; 
+}
+
+.sidebar {
+    flex-shrink: 0; 
+}
+
+article {
+    min-width: 0; 
+    flex: 1;
+}
+
+@media (max-width: 1400px) {
+    .main-content {
+        padding: 0px 40px;
+    }
+
+    .summary-title {
+        font-size: 50px;
+    }
+
+    .summary-subtext {
+        font-size: 22px;
+    }
+
+    .summary-content-layout {
+        gap: 80px;
+    }
+
+    .greeting-text {
+        font-size: 40px;
+    }
+
+    .greeting-name {
+        font-size: 50px;
+    }
+
+    .summary-greeting-section {
+        margin-top: 150px;
+    }
+
+    .todo-card,
+    .done-card {
+        width: 230px;
+        height: 150px;
+    }
+
+    .urgent-card {
+        width: 480px;
+        height: 150px;
+    }
+
+    .board-card,
+    .progress-card,
+    .feedback-card {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 1170px) {
+    .main-content {
+        padding: 0px 32px;
+    }
+
+    .summary-title {
+        font-size: 42px;
+    }
+
+    .summary-subtext {
+        font-size: 18px;
+    }
+
+    .summary-content-layout {
+        gap: 50px; 
+    }
+
+    .greeting-text {
+        font-size: 34px;
+    }
+
+    .greeting-name {
+        font-size: 42px;
+    }
+
+    .summary-greeting-section {
+        margin-top: 120px;
+    }
+
+    /* Cards noch kompakter */
+    .todo-card,
+    .done-card {
+        width: 200px;
+        height: 130px;
+        padding: 20px 15px;
+    }
+
+    .todo-icon,
+    .done-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+    .todo-number,
+    .done-number {
+        font-size: 52px;
+    }
+
+    .urgent-card {
+        width: 420px;
+        height: 130px;
+        padding: 20px 32px;
+        gap: 40px;
+    }
+
+    .urgent-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+    .urgent-number {
+        font-size: 52px;
+    }
+
+    .board-card,
+    .progress-card,
+    .feedback-card {
+        width: 130px;
+        height: 130px;
+    }
+
+    .board-number,
+    .progress-number,
+    .feedback-number {
+        font-size: 52px;
+    }
+
+    .board-label,
+    .progress-label,
+    .feedback-label {
+        font-size: 18px;
+    }
+}
+.greeting-overlay {
+    position: absolute; /* Statt fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #F6F7F8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 100;
+    animation: fadeOut 1s ease 2s forwards;
+    padding-top: 160px;
+  
+}
+
+
+.greeting-overlay.hidden {
+    display: none;
+}
+
+.greeting-overlay-text {
+    font-size: 36px;
+    font-weight: 400;
+    color: #2A3647;
+    margin-bottom: 8px;
+}
+
+.greeting-overlay-name {
+    font-size: 48px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Noch kompakter ab 1025px */
+@media (max-width: 1025px) {
+    /* Verstecke die normale Greeting Section */
+    .summary-greeting-section {
+        display: none !important;
+    }
+
+    /* Rest deiner 1025px Styles... */
+}
+
+@media (max-width: 1000px) {
+    .header-nav {
+        padding-left: 48px; 
+    }
+}
+
+.logo-responsive {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .logo-responsive {
+        display: block;
+        height: 56px;
+    }
+}
+@media (max-width: 767px) {
+    /* ... bestehender Code ... */
+
+    /* Sidebar zu Bottom-Navigation */
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        min-height: 0;
+        min-width: auto;
+        z-index: 30;
+        margin: 0; /* Entferne alle Margins */
+        padding: 0; /* Entferne alle Paddings */
+    }
+
+    .sidebar_upper_section {
+        margin: 0;
+        padding: 0;
+        gap: 0;
+    }
+
+    .sidebar-nav {
+        justify-content: space-evenly;
+        flex-direction: row;
+        gap: 0;
+        padding: 0;
+        margin: 0; /* Kein Margin */
+    }
+
+    .sidebar-nav-section {
+        flex-direction: column;
+        flex: 1;
+        padding: 12px 0; /* Nur oben/unten Padding */
+        border-radius: 0;
+        gap: 4px;
+        margin: 0; /* Kein Margin */
+    }
+
+    /* ... Rest des Codes ... */
+}
+
+@media (max-width: 767px) {
+    body, .body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* ... Rest des Codes ... */
+}
