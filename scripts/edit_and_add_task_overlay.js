@@ -1,8 +1,8 @@
 /**
  * This function opens the edit overlay for a task and renders its content.
  * 
- * @param {string} taskId The ID of the task to edit.
  * @param {HTMLElement} buttonElement The button element that triggered the overlay.
+ * @param {string} taskId The ID of the task to edit.
  */
 async function openEditTaskOverlay(buttonElement, taskId) {
     let taskState = '';
