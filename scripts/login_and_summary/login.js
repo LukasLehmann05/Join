@@ -153,7 +153,7 @@ async function findUserByEmail(email) {
     
     const user = allUsers[userId];
     
-    console.log(user.email);
+    
     
     
     if (!user || !user.email) continue;
