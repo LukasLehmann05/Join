@@ -66,29 +66,6 @@ async function loadTasksForUser(userId) {
 
 
 /**
- * Loads tasks by user ID from task references
- * @param {string} userId - User ID
- * @returns {Promise<Object>} User tasks object
- */
-async function loadTasksByUserId(userId) {
-  try {
-    const taskReferences = await loadTaskReferences(userId);
-    if (!taskReferences) return {};
-    
-    const referencesArray = convertToArray(taskReferences);
-    if (referencesArray.length === 0) return {};
-    
-    const allTasks = await loadAllTasks();
-    return extractUserTasks(referencesArray, allTasks);
-    
-  } catch (error) {
-    console.error('Error fetching tasks by user ID:', error);
-    return {};
-  }
-}
-
-
-/**
  * Loads task references for user
  * @param {string} userId - User ID
  * @returns {Promise<Object>} Task references
@@ -129,6 +106,30 @@ function extractUserTasks(referencesArray, allTasks) {
   }
   
   return userTasks;
+}
+
+
+/**
+ * Loads tasks by user ID from task references
+ * WICHTIG: Diese Funktion wird von summary.js verwendet!
+ * @param {string} userId - User ID
+ * @returns {Promise<Object>} User tasks object
+ */
+async function loadTasksByUserId(userId) {
+  try {
+    const taskReferences = await loadTaskReferences(userId);
+    if (!taskReferences) return {};
+    
+    const referencesArray = convertToArray(taskReferences);
+    if (referencesArray.length === 0) return {};
+    
+    const allTasks = await loadAllTasks();
+    return extractUserTasks(referencesArray, allTasks);
+    
+  } catch (error) {
+    console.error('Error fetching tasks by user ID:', error);
+    return {};
+  }
 }
 
 
@@ -237,8 +238,6 @@ async function saveTaskReferences(userId, referencesArray) {
     body: JSON.stringify(referencesArray)
   });
 }
-
-
 
 const createTaskForUser = saveTaskForUser;
 const fetchTasksForUser = loadTasksForUser;

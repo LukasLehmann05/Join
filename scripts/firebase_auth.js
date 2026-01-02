@@ -1,3 +1,9 @@
+const FIREBASE_BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app";
+
+function buildFirebaseUrl(path) {
+  return `${FIREBASE_BASE_URL}/join/${path}.json`;
+}
+
 /**
  * Fetches data from URL
  * @param {string} url - URL to fetch from
