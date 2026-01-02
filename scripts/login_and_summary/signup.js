@@ -23,6 +23,7 @@ function getSignupElements() {
 }
 
 function attachPrivacyCheckboxHandler(ui) {
+
   if (!ui.checkbox || !ui.signupBtn) return;
 
   ui.checkbox.addEventListener("change", () => {
@@ -208,16 +209,20 @@ function setFieldError(inputElement, errorElementId, message) {
 }
 
 async function submitSignup(data, ui) {
+
+
   if (ui.signupBtn) {
     setLoadingState(ui.signupBtn, true);
+    console.log(1);
+
   }
   try {
-    const existingUser = await getUserByEmail(data.email);
+    const existingUser = await findUserByEmail(data.email);
     if (existingUser) {
       handleExistingUser(ui);
       return;
     }
-    const newUser = await createUserInDB(
+    const newUser = await saveNewUser(
       data.name,
       data.email,
       data.password
@@ -247,7 +252,7 @@ function handleSignupSuccess(newUser) {
   setTimeout(() => {
     localStorage.setItem("currentUser", JSON.stringify(newUser));
     localStorage.setItem("isGuest", "false");
-    window.location.href = "../html/summary.html";
+    window.location.href = "../html/login.html";
   }, 1200);
 }
 
