@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../style/add_task_responsive.css">
     <link rel="stylesheet" href="../style/mainframe_responsive.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+
+    <script src="../scripts/login_and_summary/login.js"></script>
 </head>
 
 <body class="body">
@@ -76,10 +78,91 @@
             </nav>
         </header>
         <main class="main-content">
-            
+            <div id="greeting-overlay" class="greeting-overlay hidden">
+                <p class="greeting-overlay-text">Good morning,</p>
+                <h2 class="greeting-overlay-name"></h2>
+            </div>
+
+            <section class="summary-title-wrapper">
+                <h1 class="summary-title">Join 360</h1>
+                <div class="summary-title-divider"></div>
+                <p class="summary-subtext">Key Metrics at a Glance</p>
+            </section>
+
+            <div class="summary-content-layout">
+
+                <section class="summary-cards-wrapper">
+
+                    <div class="summary-row summary-row-top">
+                        <div class="summary-card todo-card">
+                            <img class="todo-icon" src="../assets/icons/summary/toDo.svg" alt="To-Do icon">
+                            <div class="todo-info">
+                                <div class="todo-number">0</div>
+                                <div class="todo-label">To-Do</div>
+                            </div>
+                        </div>
+                        <div class="summary-card done-card">
+                            <img class="done-icon" src="../assets/icons/summary/done.svg" alt="Done icon">
+                            <div class="done-info">
+                                <div class="done-number">0</div>
+                                <div class="done-label">Done</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-row summary-row-urgent">
+                        <div class="urgent-card">
+                            <div class="urgent-left">
+                                <div class="urgent-icon-wrapper">
+                                    <img class="urgent-icon" src="../assets/icons/summary/urgent.svg" alt="Urgent icon">
+                                </div>
+                                <div class="urgent-info">
+                                    <div class="urgent-number">0</div>
+                                    <div class="urgent-label">Urgent</div>
+                                </div>
+                            </div>
+                            <div class="urgent-divider"></div>
+                            <div class="urgent-right">
+                                <div class="urgent-date">No deadline</div>
+                                <div class="urgent-deadline">Upcoming Deadline</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="summary-greeting-section">
+                    <p class="greeting-text">Good morning!</p>
+                    <h2 class="greeting-name"></h2>
+                </section>
+
+            </div>
+
+            <section class="summary-stats-bottom">
+                <div class="summary-row summary-row-stats">
+                    <div class="summary-stat-card board-card">
+                        <div class="board-info">
+                            <div class="board-number">0</div>
+                            <div class="board-label">Tasks in Board</div>
+                        </div>
+                    </div>
+                    <div class="summary-stat-card progress-card">
+                        <div class="progress-info">
+                            <div class="progress-number">0</div>
+                            <div class="progress-label">Tasks in Progress</div>
+                        </div>
+                    </div>
+                    <div class="summary-stat-card feedback-card">
+                        <div class="feedback-info">
+                            <div class="feedback-number">0</div>
+                            <div class="feedback-label">Awaiting Feedback</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </article>
-    
+
 </body>
 
 </html>
