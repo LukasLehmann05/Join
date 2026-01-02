@@ -164,41 +164,41 @@ function renderGreeting() {
   const hour = new Date().getHours();
   const greeting = calculateGreeting(hour);
 
-if (!fullName) {
-  greetingTextEl.textContent = greeting + '!';
-  greetingNameEl.textContent = '';
-} else {
-  showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
-}
+  if (!fullName) {
+    greetingTextEl.textContent = greeting + '!';
+    greetingNameEl.textContent = '';
+  } else {
+    showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
+  }
 }
 function showGreetingOverlay() {
 
-    if (window.innerWidth > 1025) return;
+  if (window.innerWidth > 1025) return;
 
-    const overlay = document.getElementById('greeting-overlay');
-    const overlayText = document.querySelector('.greeting-overlay-text');
-    const overlayName = document.querySelector('.greeting-overlay-name');
+  const overlay = document.getElementById('greeting-overlay');
+  const overlayText = document.querySelector('.greeting-overlay-text');
+  const overlayName = document.querySelector('.greeting-overlay-name');
 
-    if (!overlay) return;
+  if (!overlay) return;
 
-    const user = getCurrentUserSafe();
-    const fullName = getSafeUserName(user);
-    const hour = new Date().getHours();
-    const greeting = calculateGreeting(hour);
+  const user = getCurrentUserSafe();
+  const fullName = getSafeUserName(user);
+  const hour = new Date().getHours();
+  const greeting = calculateGreeting(hour);
 
-    if (!fullName) {
-        overlayText.textContent = greeting + '!';
-        overlayName.textContent = '';
-    } else {
-        overlayText.textContent = `${greeting},`;
-        overlayName.textContent = fullName;
-    }
+  if (!fullName) {
+    overlayText.textContent = greeting + '!';
+    overlayName.textContent = '';
+  } else {
+    overlayText.textContent = `${greeting},`;
+    overlayName.textContent = fullName;
+  }
 
-    overlay.classList.remove('hidden');
+  overlay.classList.remove('hidden');
 
-    setTimeout(() => {
-        overlay.classList.add('hidden');
-    }, 5000);
+  setTimeout(() => {
+    overlay.classList.add('hidden');
+  }, 5000);
 }
 
 async function fetchTasksForSummary() {
@@ -311,7 +311,7 @@ async function loadAndRenderSummary() {
 
   } catch (error) {
     console.error("Error loading summary data:", error);
-    
+
     setTextContent(".todo-number", 0);
     setTextContent(".done-number", 0);
     setTextContent(".board-number", 0);
@@ -326,7 +326,7 @@ async function initSummaryPage() {
   requireAuth();
   renderGreeting();
   showGreetingOverlay();
-  
+
   await loadAndRenderSummary();
 }
 
