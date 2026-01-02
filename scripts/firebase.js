@@ -1,77 +1,53 @@
-const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
-
-
-/**
- * fetches data onetime and stores it in const "AllData" for everybodys use at the start
- * @async @global
- */
-async function fetchAllDataGlobal() {
-    let AllData = {};
-    let joinFetch = await fetch(BASE_URL + ".json");
-    let joinData = await joinFetch.json();
-    return AllData.data = joinData;
-};
-
-
+const base_url = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr, userId) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, all_contacts, all_subtasks) {
     const newTask = {
         "category": task_category,
         "title": task_title,
         "description": task_description,
         "due_date": task_due_date,
         "priority": task_priority,
-        "state": task_state,
-        "assigned_to": allAssigneesArr,
-        "subtasks": allSubtasksArr,
+        "assigned_to": all_contacts,
+        "subtasks": all_subtasks,
     }
 
-    let response = await fetch(`${BASE_URL}/tasks.json`, {
+    let response = await fetch('https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks.json', {
         method: 'POST',
         body: JSON.stringify(newTask),
-        headers: {
+        header: {
             'Content-Type': 'application/json'
         }
     })
-    if (!response.ok) {
-        throw new Error('Error adding task: ' + response.status);
-    }
-    else {
-        let responseData = await response.json();
-        let newTaskId = responseData.name;
-        await assignNewTaskToUserById(newTaskId, userId);
-        if (window.location.pathname.endsWith('board.html')) {
-            displayNewTaskOnBoard(newTaskId, newTask);
-        }
-    }
 }
 
-
-async function updateTask(taskId, taskToUpdate) {
+async function updateTask(taskId, fieldsToUpdate) {
     try {
-        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(taskToUpdate),
+        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
+            method: 'PATCH',
+            body: JSON.stringify(fieldsToUpdate),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        if (!response.ok) {
-            throw new Error('Error updating task: ' + response.status);
-            }
+        if (response.ok) {
+            console.log('Task updated successfully')
+        } else {
+            console.error('Error updating task:', response.status)
+        }
     } catch (error) {
         console.error('Error updating task:', error)
     }
 }
 
-
 async function deleteTask(taskId) {
     try {
-        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+        let response = await fetch(`https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/tasks/${taskId}.json`, {
             method: 'DELETE'
         })
-        if (!response.ok) {
-            throw new Error('Error deleting task: ' + response.status);
+        if (response.ok) {
+            console.log('Task deleted successfully')
+        } else {
+            console.error('Error deleting task:', response.status)
         }
     } catch (error) {
         console.error('Error deleting task:', error)
@@ -153,81 +129,142 @@ async function getContactById(contactID) {
     if (!contactFetch.ok) {
         throw new Error('Network response was not ok');
     }
-    let contactData = await contactFetch.json();
-    if (contactData === null) {
-        return null;
+    
+    // 2. Hole alle Tasks
+    const allTasksUrl = getJoinUrl('tasks');
+    const allTasks = await fetchJson(allTasksUrl, 'Error loading all tasks');
+    
+    // 3. Extrahiere Task-IDs aus den Objekten und filtere
+    const userTasks = {};
+    
+    for (const item of refsArray) {
+      if (!item || typeof item !== 'object') continue;
+      
+      // Hole die Task-ID (der Key des Objekts)
+      const taskId = Object.keys(item)[0];
+      
+      if (taskId && allTasks[taskId]) {
+        userTasks[taskId] = allTasks[taskId];
+      }
     }
-    return contactData;
-    } catch (error) {
-        console.error('Error fetching contact by ID:', error)
-        return null;
-    }
+    
+    return userTasks;
+    
+  } catch (error) {
+    console.error('Error fetching tasks by user ID:', error);
+    return {};
+  }
 }
-
 
 async function getAllTaskIdByUserId(userId) {
-    try {
-        let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
-        let joinDataAllTasksByUser = await joinFetchAllTasks.json();
-        let taskIdsByUser = [];
-        for (let taskId in joinDataAllTasksByUser) {
-            taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
-        }
-        if (!joinFetchAllTasks.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return taskIdsByUser;
-    } catch (error) {
-        console.error('Error fetching tasks by user ID:', error);
+  try {
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    const taskRefs = await fetchJson(tasksByUserUrl, 'Error loading task IDs for user');
+    
+    if (!taskRefs) {
+      return [];
     }
+    
+    // Konvertiere zu Array falls nötig
+    const refsArray = Array.isArray(taskRefs) 
+      ? taskRefs 
+      : Object.values(taskRefs);
+    
+    return refsArray;
+    
+  } catch (error) {
+    console.error('Error getting task IDs by user ID:', error);
+    return [];
+  }
 }
 
-
-async function assignNewTaskToUserById(taskId, userId) {
-    try {
-        let userTasksArr = await getAllTaskIdByUserId(userId);
-        let taskObj = {[taskId]: true};
-        if (!userTasksArr) {
-            userTasksArr = [];
-        }
-        userTasksArr.push(taskObj);
-        let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(userTasksArr),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Error assigning task to user: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error assigning task to user:', error)
-    }
+// Funktion zum Holen eines einzelnen Contacts
+async function getContactById(contactId) {
+  try {
+    const url = getJoinUrl(`contacts/${contactId}`);
+    const contact = await fetchJson(url, 'Error loading contact');
+    return contact;
+  } catch (error) {
+    console.error('Error fetching contact:', error);
+    return null;
+  }
 }
 
+// Funktion zum Holen eines einzelnen Tasks
+async function getTaskById(taskId) {
+  try {
+    const url = getJoinUrl(`tasks/${taskId}`);
+    const task = await fetchJson(url, 'Error loading task');
+    return task;
+  } catch (error) {
+    console.error('Error fetching task:', error);
+    return null;
+  }
+}
 
+// Funktion zum Löschen eines Tasks aus der User-Liste
 async function deleteTaskFromUserById(taskId, userId) {
-    try {
-        let userTasksArr = await getAllTaskIdByUserId(userId);
-        if (!userTasksArr) {
-            return;
-        }
-        const indexToRemove = userTasksArr.findIndex(taskObj => taskObj && Object.keys(taskObj).includes(taskId));
-        if (indexToRemove !== -1) {
-            userTasksArr.splice(indexToRemove, 1);
-        }
-        let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(userTasksArr),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Error removing task from user: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error removing task from user:', error)
+  try {
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    const taskRefs = await fetchJson(tasksByUserUrl, 'Error loading task refs');
+    
+    if (!taskRefs) return;
+    
+    // Finde den Index des Tasks
+    const refsArray = Array.isArray(taskRefs) ? taskRefs : Object.values(taskRefs);
+    const index = refsArray.findIndex(item => {
+      if (!item || typeof item !== 'object') return false;
+      const id = Object.keys(item)[0];
+      return id === taskId;
+    });
+    
+    if (index !== -1) {
+      // Lösche den Task aus der Liste
+      const deleteUrl = `${FIREBASE_BASE_URL}/join/tasks_by_user/${userId}/${index}.json`;
+      await fetch(deleteUrl, { method: 'DELETE' });
     }
+    
+  } catch (error) {
+    console.error('Error deleting task from user:', error);
+  }
+}
+
+async function createTaskAndLinkToUser(userId, taskData) {
+  try {
+    // 1. Erstelle den Task in /tasks
+    const taskUrl = getJoinUrl('tasks');
+    const response = await postJson(taskUrl, taskData, 'Error creating task');
+    const taskId = response.name;
+    
+    // 2. Hole die aktuelle Liste von Task-Referenzen
+    const tasksByUserUrl = getJoinUrl(`tasks_by_user/${userId}`);
+    let existingRefs = await fetchJson(tasksByUserUrl, 'Error loading task refs');
+    
+    // Wenn noch keine Referenzen existieren, erstelle leeres Array
+    if (!existingRefs) {
+      existingRefs = [];
+    }
+    
+    // Konvertiere zu Array falls nötig
+    const refsArray = Array.isArray(existingRefs) ? existingRefs : Object.values(existingRefs);
+    
+    // 3. Füge neue Task-Referenz hinzu
+    const newTaskRef = {};
+    newTaskRef[taskId] = true;
+    refsArray.push(newTaskRef);
+    
+    // 4. Überschreibe die komplette Liste (PUT statt POST)
+    const updateUrl = `${FIREBASE_BASE_URL}/join/tasks_by_user/${userId}.json`;
+    await fetch(updateUrl, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(refsArray)
+    });
+    
+    return { taskId, ...taskData };
+    
+  } catch (error) {
+    console.error('Error creating task and linking to user:', error);
+    throw error;
+  }
 }
