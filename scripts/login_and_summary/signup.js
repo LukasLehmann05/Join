@@ -213,7 +213,6 @@ async function submitSignup(data, ui) {
 
   if (ui.signupBtn) {
     setLoadingState(ui.signupBtn, true);
-    console.log(1);
 
   }
   try {
