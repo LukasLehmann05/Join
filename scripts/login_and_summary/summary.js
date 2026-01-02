@@ -210,7 +210,7 @@ async function fetchTasksForSummary() {
   }
 
   try {
-    const tasksObj = await fetchTasksByUserId(currentUser.id);
+    const tasksObj = (await fetchAllDataGlobal()).tasks;
     return Object.values(tasksObj || {});
   } catch (error) {
     console.error("Error fetching tasks for summary:", error);
