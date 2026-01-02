@@ -116,8 +116,8 @@ function onGuestClick(errorBox) {
  * @param {string} errorMessage - Error message prefix
  * @returns {Promise<Object>} Response data
  */
-async function sendDataToUrl(url, payload, errorMessage) {
-  const response = await fetch(url, {
+async function sendDataToUrl(payload, errorMessage) {
+  const response = await fetch(BASE_URL + `/users.json`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -138,12 +138,9 @@ async function sendDataToUrl(url, payload, errorMessage) {
  * @param {string} errorMessage - Error message prefix
  * @returns {Promise<Object>} Saved data with ID
  */
-async function saveDataToFirebase(path, payload, errorMessage) {
-  const url = buildFirebaseUrl(path);
-  
-  const responseData = await sendDataToUrl(url, payload, errorMessage);
+async function saveDataToFirebase(payload, errorMessage) {
+  const responseData = await sendDataToUrl(payload, errorMessage);
   const generatedId = responseData.name;
-  
   return { id: generatedId, ...payload };
 }
 
@@ -175,13 +172,13 @@ async function loadAllUsers() {
  */
 async function findUserByEmail(email) {
   const allUsers = (await fetchAllDataGlobal()).users;
-  console.log(email);
+  
   
   for (const userId in allUsers) {
     
     const user = allUsers[userId];
     
-    console.log(user.email);
+    
     
     
     if (!user || !user.email) continue;
@@ -247,7 +244,7 @@ function createGuestObject() {
  */
 async function saveNewUser(name, email, password) {
   const userData = createUserObject(name, email, password);
-  return await saveDataToFirebase('users', userData, 'Error creating user');
+  return await saveDataToFirebase(userData, 'Error creating user');
 }
 
 
@@ -257,7 +254,7 @@ async function saveNewUser(name, email, password) {
  */
 async function saveNewGuest() {
   const guestData = createGuestObject();
-  return await saveDataToFirebase('users', guestData, 'Error creating guest user');
+  return await saveDataToFirebase(guestData, 'Error creating guest user');
 }
 
 
