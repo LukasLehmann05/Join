@@ -150,15 +150,20 @@ async function loadAllUsers() {
 async function findUserByEmail(email) {
   const allUsers = (await fetchAllDataGlobal()).users;
   for (const userId in allUsers) {
+    
     const user = allUsers[userId];
+    
+    console.log(user.email);
+    
+    
     if (!user || !user.email) continue;
     
     if (isEmailMatch(user.email, email)) {
-      return { id: userId, ...user };
+      //return { id: userId, ...user };
     }
   }
   
-  return null;
+  //return null;
 }
 
 
