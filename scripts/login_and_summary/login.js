@@ -72,7 +72,7 @@ function handleLogin(email, password, errorBox) {
 }
 
 function loginUser(email, password) {
-  return getUserByEmail(email).then((user) => {
+  return findUserByEmail(email).then((user) => {
     validateUserCredentials(user, password);
     return user;
   });
@@ -174,7 +174,8 @@ async function loadAllUsers() {
  * @returns {Promise<Object|null>} User object or null
  */
 async function findUserByEmail(email) {
-  const allUsers = await loadAllUsers();
+  const allUsers = await fetchAllDataGlobal();
+  console.log(1);
   
   for (const userId in allUsers) {
     const user = allUsers[userId];
@@ -276,17 +277,20 @@ function searchGuestInUsers(allUsers) {
  * @returns {Promise<Object>} Guest user object
  */
 async function loadOrCreateGuest() {
-  const allUsers = await loadAllUsers();
+  const allUsers = await fetchAllDataGlobal();
   const existingGuest = searchGuestInUsers(allUsers);
   
   if (existingGuest) {
     return existingGuest;
   }
   
+  
+  
   //return await saveNewGuest();
 }
 
 
 // Aliases für Abwärtskompatibilität
-const getUserByEmail = findUserByEmail;
-const createUserInDB = saveNewUser;
+//const getUserByEmail = findUserByEmail;
+//const createUserInDB = saveNewUser;
+const getOrCreateGuestUser = loadOrCreateGuest;
