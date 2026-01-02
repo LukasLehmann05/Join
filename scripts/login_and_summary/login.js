@@ -98,7 +98,7 @@ function handleLoginSuccess(user, isGuest, errorBox) {
 }
 
 function onGuestClick(errorBox) {
-  getOrCreateGuestUser()
+  loadOrCreateGuest()
     .then((guestUser) => {
       handleLoginSuccess(guestUser, true, errorBox);
     })
@@ -140,7 +140,6 @@ async function sendDataToUrl(url, payload, errorMessage) {
  */
 async function saveDataToFirebase(path, payload, errorMessage) {
   const url = buildFirebaseUrl(path);
-  console.log(path);
   
   const responseData = await sendDataToUrl(url, payload, errorMessage);
   const generatedId = responseData.name;
@@ -284,11 +283,10 @@ async function loadOrCreateGuest() {
     return existingGuest;
   }
   
-  return await saveNewGuest();
+  //return await saveNewGuest();
 }
 
 
 // Aliases für Abwärtskompatibilität
 const getUserByEmail = findUserByEmail;
 const createUserInDB = saveNewUser;
-const getOrCreateGuestUser = loadOrCreateGuest;
