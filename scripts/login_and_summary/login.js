@@ -174,19 +174,24 @@ async function loadAllUsers() {
  * @returns {Promise<Object|null>} User object or null
  */
 async function findUserByEmail(email) {
-  const allUsers = await fetchAllDataGlobal();
-  console.log(1);
+  const allUsers = (await fetchAllDataGlobal()).users;
+  console.log(email);
   
   for (const userId in allUsers) {
+    
     const user = allUsers[userId];
+    
+    console.log(user.email);
+    
+    
     if (!user || !user.email) continue;
     
     if (isEmailMatch(user.email, email)) {
-      return { id: userId, ...user };
+      //return { id: userId, ...user };
     }
   }
   
-  return null;
+  //return null;
 }
 
 
@@ -277,7 +282,7 @@ function searchGuestInUsers(allUsers) {
  * @returns {Promise<Object>} Guest user object
  */
 async function loadOrCreateGuest() {
-  const allUsers = await fetchAllDataGlobal();
+  const allUsers = (await fetchAllDataGlobal()).users;
   const existingGuest = searchGuestInUsers(allUsers);
   
   if (existingGuest) {
