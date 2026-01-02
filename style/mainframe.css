@@ -137,3 +137,81 @@ article{
 .current-selection {
     background-color: #091931;
 }
+
+.content-wrapper {
+    max-width: 1440px;  
+    width: 100%;
+    min-height: 100vh;
+    display: flex;       
+    background: #f6f7f8;
+}
+
+.header {
+    background-color: #FFFFFF;
+}
+
+.header-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 3px solid #2A3647;
+    color: #29ABE2;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.avatar-wrapper {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.avatar-menu {
+    position: absolute;
+    top: 64px;             
+    right: 0;           
+    background-color: #2A3647;
+    border-radius: 20px 0 20px 20px;
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.avatar-menu-item {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    text-align: left;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.avatar-menu-item:hover {
+    text-decoration: underline;
+}
+
+.avatar-menu {
+    top: 55px;
+    right: 327px;
+}
