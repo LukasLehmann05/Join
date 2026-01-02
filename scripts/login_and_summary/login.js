@@ -150,20 +150,15 @@ async function loadAllUsers() {
 async function findUserByEmail(email) {
   const allUsers = (await fetchAllDataGlobal()).users;
   for (const userId in allUsers) {
-    
     const user = allUsers[userId];
-    
-    
-    
-    
     if (!user || !user.email) continue;
     
     if (isEmailMatch(user.email, email)) {
-      //return { id: userId, ...user };
+      return { id: userId, ...user };
     }
   }
   
-  //return null;
+  return null;
 }
 
 
@@ -261,5 +256,5 @@ async function loadOrCreateGuest() {
     return existingGuest;
   }
   return await saveNewGuest();
+  return await saveNewGuest();
 }
-
