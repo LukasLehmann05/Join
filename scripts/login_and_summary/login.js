@@ -256,6 +256,5 @@ async function loadOrCreateGuest() {
     return existingGuest;
   }
   return await saveNewGuest();
-  return await saveNewGuest();
 }
 
