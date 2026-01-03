@@ -1,33 +1,11 @@
-.summary-title-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 40px;
-    margin-top: 0;
-}
-
-.summary-title {
-    font-size: 61px;
-    font-weight: 700;
-    font-family: Inter_bold;
-}
-
-.summary-title-divider {
-    width: 3px;
-    height: 59px;
-    background: #29ABE2;
-    border-radius: 16px;
-}
-
-.summary-subtext {
-    font-size: 27px;
-    color: #2A3647;
-}
-
 .summary-content-layout {
     display: flex;
     gap: 120px;
     align-items: flex-start;
+}
+
+.summary-padding-top{
+    padding-top: 110px;
 }
 
 .summary-greeting-section {
@@ -432,10 +410,6 @@
     font-size: 61px;
     font-weight: 700;
     color: #29ABE2;
-}
-
-.main-content {
-    margin-top: 80px;
 }
 
 .sidebar-nav-section.current-selection {
