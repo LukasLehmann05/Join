@@ -38,8 +38,8 @@ function returnContactTemplate(contact_name,user_id,contact_initial,contact_colo
             </li>`
 }
 
-function returnSmallContactTemplate(user_id) {
-    return `<img src="../assets/icons/header/user_placeholder.svg" alt="contact_icon" id="small_contact_${user_id}">`
+function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
+    return `<div class="contact-icon" style="background-color: ${contact_color};" id="small_contact_${user_id}">${contact_initial}</div>`
 }
 
 function returnSubtaskEditTemplate(subtask_id, subtask_text) {

@@ -36,7 +36,7 @@ let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
-    
+
 }
 
 function loadPrioButtonsAndSubtaskSectionById() {
@@ -231,13 +231,13 @@ function addSubtask() {
     if (task_subtask.value != "") {
         let subtask = task_subtask.value
         let subtask_id = returnSubtaskId()
-        let subtask_template = returnSubtaskTemplate(subtask,subtask_id)
+        let subtask_template = returnSubtaskTemplate(subtask, subtask_id)
         subtask_list.innerHTML += subtask_template
         let subtaskObj = { title: task_subtask.value, done: false };
         allSubtasksArr.push(subtaskObj)
         task_subtask.value = ""
         hideSubtaskButtons()
-    } 
+    }
 }
 
 function returnSubtaskId() {
@@ -251,13 +251,13 @@ async function addContactsToAssign(join_data) {
         let contact = contacts[contact_id]
         let contact_intial = await getInitialsFromUser(contact)
         let contact_color = await contactColorProperty[contact_id]
-        let contact_option = returnContactTemplate(contact.name, contact_id,contact_intial,contact_color)
+        let contact_option = returnContactTemplate(contact.name, contact_id, contact_intial, contact_color)
         task_assign.innerHTML += contact_option
     }
 }
 
 function getInitialsFromUser(user) {
-    const initials = user.name  
+    const initials = user.name
         .split(' ')
         .map(word => word[0])
         .join('')
@@ -304,8 +304,11 @@ function unassignContact(contact_id) {
     removeSmallContact(contact_id)
 }
 
-function renderSmallContacts(contact_id) {
-    const small_contact_template = returnSmallContactTemplate(contact_id)
+async function renderSmallContacts(contact_id) {
+    let contact = await getContactById(contact_id)
+    let contact_intial = await getInitialsFromUser(contact)
+    let contact_color = await contactColorProperty[contact_id]
+    const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
     rendered_contact_images.innerHTML += small_contact_template
 }
 
@@ -356,7 +359,7 @@ function showSubtaskEdit(subtask_id) {
     subtask_to_edit.innerHTML = subtask_edit_template
 }
 
-function deleteSubtask(event,subtask_id) {
+function deleteSubtask(event, subtask_id) {
     event.stopPropagation()
     let subtask_text = document.getElementById("subtask_text_" + subtask_id).innerText;
     removeSubtaskFromArray(subtask_text);
@@ -364,7 +367,7 @@ function deleteSubtask(event,subtask_id) {
     subtask_to_delete.remove()
 }
 
-function deleteSubtaskEdit(event,subtask_id) {
+function deleteSubtaskEdit(event, subtask_id) {
     event.stopPropagation()
     let subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value;
     removeSubtaskFromArray(subtask_text);
