@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 30px;
+    gap: 20px;
 }
 
 .card-shadow {
@@ -71,7 +71,7 @@
 }
 
 .summary-cards-first-row{
-    width: 50%;
+    width: 42%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,9 +127,7 @@
 .summary-number{
     font-weight: 600;
     font-size: 64px;
-    line-height: 120%;
     text-align: center;
-    margin: 0 auto;
 }
 
 .urgent-left {
@@ -162,28 +160,23 @@
 }
 
 .urgent-date {
-    width: 178px;
-    height: 25px;
     white-space: nowrap;
     font-weight: 700;
     font-size: 21px;
-    line-height: 120%;
 }
 
 .urgent-deadline {
-    width: 148px;
-    height: 19px;
     font-weight: 400;
     font-size: 16px;
-    line-height: 120%;
-    opacity: 0.8;
+    color: #2A3647;
 }
 
 .summary-cards-last-row {
-    width: 33%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px 20px;
 }
 
 .greeting-text {
