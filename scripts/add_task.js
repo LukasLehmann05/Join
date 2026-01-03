@@ -237,9 +237,7 @@ function addSubtask() {
         allSubtasksArr.push(subtaskObj)
         task_subtask.value = ""
         hideSubtaskButtons()
-    }
-    
-    
+    } 
 }
 
 function returnSubtaskId() {
@@ -247,14 +245,24 @@ function returnSubtaskId() {
     return "subtask_" + subtask_amount
 }
 
-
-function addContactsToAssign(join_data) {
+async function addContactsToAssign(join_data) {
     let contacts = join_data.contacts
     for (let contact_id in contacts) {
         let contact = contacts[contact_id]
-        let contact_option = returnContactTemplate(contact.name, contact_id)
+        let contact_intial = await getInitialsFromUser(contact)
+        let contact_color = await contactColorProperty[contact_id]
+        let contact_option = returnContactTemplate(contact.name, contact_id,contact_intial,contact_color)
         task_assign.innerHTML += contact_option
     }
+}
+
+function getInitialsFromUser(user) {
+    const initials = user.name  
+        .split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase();
+    return initials;
 }
 
 async function showContacts() {
@@ -333,7 +341,6 @@ function removeIndicatorOnInput(field) {
             break;
     }
 }
-
 
 function assignTaskToUserById(userId, taskId) {
     let allTasksOfUser = [];

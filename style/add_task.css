@@ -335,6 +335,19 @@ textarea.task-input {
     justify-content: flex-start;
 }
 
+.contact-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'Inter';
+    color: white;
+    margin: 4px 0px;
+}
+
 .assigned-contact button {
     background-color: #2A3647;
     color: white;

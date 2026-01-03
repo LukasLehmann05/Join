@@ -28,10 +28,10 @@ function returnEditedSubtaskTemplate(subtask_id, subtask_text) {
                 </button>`
 }
 
-function returnContactTemplate(contact_name,user_id) {
+function returnContactTemplate(contact_name,user_id,contact_initial,contact_color) {
     return `<li class="contact-element" id="${user_id}">
                 <button class="contact-select-button" type="button" onclick="assignContact('${user_id}')">
-                    <img src="../assets/icons/header/user_placeholder.svg" alt="contact_icon">
+                    <div class="contact-icon" style="background-color: ${contact_color};">${contact_initial}</div>
                     <p>${contact_name}</p>
                     <img src="../assets/icons/board/checkbox_undone.svg" alt="checkobx_icon" id="checkbox_${user_id}">
                 </button type="button">
@@ -56,4 +56,3 @@ function returnSubtaskEditTemplate(subtask_id, subtask_text) {
                         <aside class="subtask-underline-blue"></aside>
                     </div>`
 }
-
