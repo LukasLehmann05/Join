@@ -22,10 +22,6 @@
     margin-top: 190px;
 }
 
-.summary-stats-bottom {
-    margin-top: 32px;
-}
-
 .summary-cards-wrapper {
     display: flex;
     flex-direction: column;
