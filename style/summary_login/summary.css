@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 12px;
+    gap: 30px;
 }
 
 .summary-card,
@@ -109,15 +109,10 @@
     margin: 0 auto;
 }
 
-.todo-label {
-    font-family: Inter, sans-serif;
+.number-label {
     font-weight: 400;
     font-size: 20px;
-    line-height: 120%;
     text-align: center;
-    height: 24px;
-    width: 63px;
-    opacity: 1;
 }
 
 .done-info {
@@ -138,17 +133,6 @@
     height: 77px;
     width: 31px;
     margin: 0 auto;
-}
-
-.done-label {
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
-    height: 24px;
-    width: 63px;
-    opacity: 1;
 }
 
 .urgent-card {
@@ -181,16 +165,6 @@
     border-radius: 50%;
     width: 69px;
     height: 69px;
-}
-
-.urgent-label {
-    width: 52px;
-    height: 19px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    text-align: center;
 }
 
 .urgent-divider {
@@ -228,41 +202,11 @@
     opacity: 0.8;
 }
 
-.board-label {
-    width: 83px;
-    height: 48px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
-}
-
-.progress-label {
-    width: 86px;
-    height: 50px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
-}
-
 .summary-cards-last-row {
-    width: 168px;
+    width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.feedback-label {
-    width: 93px;
-    height: 48px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
 }
 
 .greeting-text {
