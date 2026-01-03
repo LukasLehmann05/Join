@@ -338,6 +338,7 @@ textarea.task-input {
 .contact-icon {
     width: 42px;
     height: 42px;
+    aspect-ratio: 1;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -358,6 +359,7 @@ textarea.task-input {
     gap: 8px;
     margin-top: 8px;
     justify-content: flex-start;
+    overflow-x: auto;
 }
 
 .rendered-contacts img {
