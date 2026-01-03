@@ -1,4 +1,4 @@
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .task-details {
         flex-direction: column;
     }
@@ -21,6 +21,13 @@
     .button-section {
         justify-content: flex-end;
         margin-bottom: 16px;
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar-sticky {
+        position: sticky;
+        top: 0px;
     }
 }
 
