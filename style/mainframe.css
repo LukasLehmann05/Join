@@ -12,13 +12,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #2A3647;
     min-height: 100vh;
     z-index: 30;
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
     min-width: 232px;
+    max-height: 100vh;
+    background-color: #2A3647;
 }
 
 .body {
@@ -26,7 +27,7 @@
     font-family: "Inter";
 }
 
-article{
+article {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -38,17 +39,17 @@ article{
     gap: 20px;
 }
 
-.sidebar-nav .active{
+.sidebar-nav .active {
     background-color: #091931;
 }
 
-.sidebar-nav a:hover{
+.sidebar-nav a:hover {
     transform: translate(0.5px, -0.5px);
     margin-right: 1px;
     background-color: #2A3D59;
 }
 
-.sidebar_upper_section{
+.sidebar_upper_section {
     display: flex;
     flex-direction: column;
     gap: 150px;
@@ -136,4 +137,12 @@ article{
 
 .current-selection {
     background-color: #091931;
+}
+
+.white-writing {
+    color: #ffffff;
+}
+
+.sidebar-background-color {
+    background-color: #2A3647;
 }

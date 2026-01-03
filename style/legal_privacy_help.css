@@ -46,3 +46,7 @@
 .d-none{
     display: none;
 }
+
+.disabled {
+    pointer-events: none;
+}
