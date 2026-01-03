@@ -127,35 +127,23 @@
     font-size: 64px;
     line-height: 120%;
     text-align: center;
-    height: 77px;
-    width: 31px;
     margin: 0 auto;
 }
 
 .urgent-left {
-    width: 130px;
-    height: 96px;
     display: flex;
     align-items: center;
     gap: 18px;
 }
 
 .urgent-icon-wrapper {
-    width: 60px;
-    height: 60px;
-    background: #FF3D00;
-    border-radius: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .urgent-icon {
-    background-color: #FF3D00;
     padding: 8px;
     border-radius: 50%;
-    width: 69px;
-    height: 69px;
+    width: 74px;
 }
 
 .urgent-divider {
@@ -163,12 +151,10 @@
     height: 102px;
     border-left: 2px solid #d1d1d1;
     border-radius: 20px;
-    margin: 0px 61px;
+    margin: 0px 50px;
 }
 
 .urgent-right {
-    width: 178px;
-    height: 57px;
     display: flex;
     flex-direction: column;
     gap: 13px;
