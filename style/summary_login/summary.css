@@ -12,8 +12,12 @@
     height: 130px;
 }
 
-.summary-padding-top{
+.summary-padding-top {
     padding-top: 110px;
+}
+
+.summary-container-height {
+    height: 168px;
 }
 
 .summary-greeting-section {
