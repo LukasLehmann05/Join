@@ -82,7 +82,7 @@
 }
 
 .padding-all-cards{
-    padding: 38px 19px;
+    padding: 20px 12px;
 }
 
 .todo-icon {
@@ -257,13 +257,6 @@
     gap: 32px;
 }
 
-.board-card {
-    width: 168px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .board-info {
     width: 83px;
     height: 125px;
@@ -292,13 +285,6 @@
     font-size: 20px;
     line-height: 120%;
     text-align: center;
-}
-
-.progress-card {
-    width: 168px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .progress-info {
@@ -331,7 +317,7 @@
     text-align: center;
 }
 
-.feedback-card {
+.summary-cards-last-row {
     width: 168px;
     display: flex;
     justify-content: center;
