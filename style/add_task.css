@@ -36,7 +36,7 @@
 .separator {
     width: 1px;
     background-color: #D1D1D1;
-    margin: 0px 5%;
+    margin: 0px 40px;
 }
 
 .priority-button {
@@ -143,6 +143,7 @@ textarea.task-input {
     display: flex;
     justify-content: space-between;
     margin-top: 64px;
+    margin-bottom: 24px;
 }
 
 .task-detail-container {
@@ -359,7 +360,9 @@ textarea.task-input {
     gap: 8px;
     margin-top: 8px;
     justify-content: flex-start;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    max-height: 110px;
+    overflow-y: auto;
 }
 
 .rendered-contacts img {
