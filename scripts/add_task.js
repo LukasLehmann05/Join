@@ -36,7 +36,7 @@ let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
-
+    loadContactsForAssign()
 }
 
 function loadPrioButtonsAndSubtaskSectionById() {
@@ -265,10 +265,12 @@ function getInitialsFromUser(user) {
     return initials;
 }
 
-async function showContacts() {
-    let apiData = await loadDataFromAPI()
-    addContactsToAssign(apiData);
+async function loadContactsForAssign() {
+    let join_data = await loadDataFromAPI()
+    await addContactsToAssign(join_data)
+}
 
+async function showContacts() {
     let contact_selector = document.getElementById("contact_selector");
     if (contacts_shown == false) {
         contact_selector.style.display = "block"
