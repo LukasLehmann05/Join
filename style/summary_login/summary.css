@@ -10,7 +10,7 @@
 }
 
 .summary-container-height {
-    height: 168px;
+    height: 130px;
 }
 
 .summary-greeting-section {
@@ -73,17 +73,16 @@
     margin-top: 4px;
 }
 
-.todo-card {
+.summary-cards-first-row{
     width: 264px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 18px;
+}
+
+.padding-all-cards{
     padding: 38px 19px;
-    background: #FFFFFF;
-    border-radius: 30px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .todo-icon {
@@ -119,19 +118,6 @@
     height: 24px;
     width: 63px;
     opacity: 1;
-}
-
-.done-card {
-    width: 264px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    padding: 38px 19px;
-    background: #FFFFFF;
-    border-radius: 30px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .done-icon {
@@ -172,14 +158,9 @@
 
 .urgent-card {
     width: 560px;
-
     display: flex;
     align-items: center;
     gap: 61px;
-    padding: 28px 48px;
-    background: #FFFFFF;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .urgent-left {
@@ -278,15 +259,9 @@
 
 .board-card {
     width: 168px;
-
-    background: #FFFFFF;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 .board-info {
@@ -321,15 +296,9 @@
 
 .progress-card {
     width: 168px;
-
-    background: #FFFFFF;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 .progress-info {
@@ -364,15 +333,9 @@
 
 .feedback-card {
     width: 168px;
-
-    background: #FFFFFF;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 .feedback-info {
