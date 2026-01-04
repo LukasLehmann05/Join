@@ -176,11 +176,4 @@ async function initSummaryPage() {
 document.addEventListener("DOMContentLoaded", initSummaryPage);
 
 
-/**
- * changes icon svg
- */
-function updateIconSrc(id, path) {
-  document.getElementById(id).src = path;
-};
-
 

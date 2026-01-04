@@ -77,6 +77,14 @@
     margin: 10px 10px;
 }
 
+.done-container:hover img {
+    content: url("../../assets/icons/summary/done_white.svg");
+}
+
+.to-do-container:hover img {
+    content: url("../../assets/icons/summary/toDo_white.svg");
+}
+
 .summary-card-second-row {
     display: flex;
     align-items: center;
