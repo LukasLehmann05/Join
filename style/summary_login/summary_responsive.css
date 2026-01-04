@@ -53,6 +53,11 @@
 @media (max-width: 1150px) {
     .main-content {
         padding: 0px 15px;
+
+
+
+        margin: 0 auto;
+
     }
 
     .summary-padding-top {
@@ -109,7 +114,7 @@
     .summary-cards-first-row:hover,
     .summary-cards-last-row:hover,
     .summary-card-second-row:hover {
-        padding: 10px 10px;
+        padding: 20px 20px;
     }
 
     .number-label {
@@ -133,7 +138,7 @@
     }
 
     .summary-cards-wrapper {
-        margin-bottom: 138px;
+        margin-bottom: 170px;
     }
 
     .summary-cards-wrapper {
@@ -141,8 +146,50 @@
     }
 
     .summary-cards-first-row {
-        gap: 5px;  
+        gap: 5px;
     }
 }
 
-@media (max-width: 510px) {}
+@media (max-width: 500px) {
+    .summary-cards-wrapper {
+        margin-bottom: 138px;
+    }
+}
+
+@media (max-width: 410px) {
+    .main-content {
+        padding: 0;
+        margin: 0;
+    }
+
+    .summary-cards-wrapper {
+        max-width: 308px;
+        height: 548px;
+        margin: 0px -5px;
+    }
+
+    .summary-row {
+        gap: 0px;
+    }
+
+    .summary-number {
+        font-size: 36px;
+    }
+
+    .urgent-left {
+        gap: 5px;
+    }
+
+    .urgent-icon {
+        padding: 0;
+    }
+
+    .urgent-right {
+        gap: 3px;
+    }
+
+    .summary-card-second-row {
+        gap: 6px;
+    }
+
+}
