@@ -85,11 +85,11 @@ function setupAvatarOutsideClick(avatarButton, menu) {
 }
 
 function handleLegalClick() {
-  window.location.href = "../html/legalNotice.html";
+  window.location.href = "../html/legal_notice.html";
 }
 
 function handlePrivacyClick() {
-  window.location.href = "../html/privacyPolicy.html";
+  window.location.href = "../html/privacy_policy.html";
 }
 
 function handleLogoutClick() {
@@ -107,7 +107,6 @@ function setupAvatarMenuLinks() {
   const legalBtn = document.getElementById("menu-legal");
   const privacyBtn = document.getElementById("menu-privacy");
   const logoutBtn = document.getElementById("menu-logout");
-
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
@@ -116,7 +115,6 @@ function setupAvatarMenuLinks() {
 function initHeaderAvatar() {
   const { avatarButton, menu } = getAvatarCoreElements();
   if (!avatarButton || !menu) return;
-
   renderHeaderAvatar();
   setupAvatarToggle(avatarButton, menu);
   setupAvatarOutsideClick(avatarButton, menu);
@@ -134,7 +132,6 @@ function requireAuth() {
 function updateCurrentUserId() {
   const user = getCurrentUserSafe();
   if (!user || !user.id) return;
-  
   const userIdElement = document.getElementById("current_user_id");
   if (userIdElement) {
     userIdElement.setAttribute("data-current-user-id", user.id);
@@ -152,9 +149,5 @@ function initMainframe() {
 
 document.addEventListener("DOMContentLoaded", initMainframe);
 
-
-
-
-////////////////////////////////////////////
 
 
