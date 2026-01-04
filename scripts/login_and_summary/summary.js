@@ -1,5 +1,3 @@
-var showGreetingSwitch;
-
 function getGreetingElements() {
   const greetingTextEl = document.querySelector(".greeting-text");
   const greetingNameEl = document.querySelector(".greeting-name");
@@ -191,12 +189,5 @@ function changeBackDisplay(id, path) {
   document.getElementById(id).src = path;
 };
 
-
-/**
- * directs via onclick from a summary element to the board
- */
-function directToBoard() {
-  window.location.href = '../html/board.html';
-};
 
 
