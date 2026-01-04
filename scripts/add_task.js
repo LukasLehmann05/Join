@@ -245,9 +245,6 @@ function returnSubtaskId() {
 }
 
 async function addContactsToAssign(join_data) {
-    let test1 = userColorProperty
-    console.log(test1);
-    
     let contacts = join_data.contacts
     for (let contact_id in contacts) {
         let contact = contacts[contact_id]
