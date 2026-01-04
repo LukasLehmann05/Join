@@ -203,3 +203,52 @@
 .sidebar-nav-section.current-selection {
     background-color: #091931;
 }
+
+.greeting-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #F6F7F8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 2;
+    animation: fadeOut 1s ease 2s forwards;
+    padding-top: 160px;
+}
+
+.greeting-overlay.hidden {
+    display: none;
+}
+
+.greeting-overlay-text {
+    font-size: 36px;
+    font-weight: 400;
+    color: #2A3647;
+    margin-bottom: 8px;
+}
+
+.greeting-overlay-name {
+    font-size: 48px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.logo-responsive {
+    display: none;
+}
+
+.avatar-menu {
+    right: 40px !important;
+    top: 70px;
+}
