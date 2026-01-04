@@ -331,3 +331,21 @@ async function initSummaryPage() {
 }
 
 document.addEventListener("DOMContentLoaded", initSummaryPage);
+
+
+/**
+ * changes backgroundcolor, writing color and appearance of the icon when hovered over a stat in the summary board
+ */
+function changeDisplay() {
+  
+};
+
+
+/**
+ * directs via onclick from a summary element to the board
+ */
+function directToBoard() {
+  window.location.href = '../html/board.html';
+};
+
+

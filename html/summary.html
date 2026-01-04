@@ -92,14 +92,14 @@
             <div class="summary-content-layout">
                 <div class="summary-cards-wrapper">
                     <section class="summary-row">
-                        <div class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
+                        <div onclick="directToBoard()" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
                             <img class="summary-icon" src="../assets/icons/summary/toDo.svg" alt="To-Do icon">
                             <div class="summary-info">
                                 <div class="todo-number summary-number"></div>
                                 <div class="number-label">To-Do</div>
                             </div>
                         </div>
-                        <div class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
+                        <div onclick="directToBoard()" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
                             <img class="summary-icon" src="../assets/icons/summary/done.svg" alt="Done icon">
                             <div class="summary-info">
                                 <div class="done-number summary-number"></div>
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                     </section>
-                    <section class="card-shadow summary-card-second-row urgent-card summary-container-height padding-all-cards">
+                    <section onclick="directToBoard()" class="card-shadow summary-card-second-row urgent-card summary-container-height padding-all-cards">
                         <div class="urgent-left">
                             <div class="urgent-icon-wrapper">
                                 <img class="urgent-icon" src="../assets/icons/summary/urgent.svg" alt="Urgent icon">
@@ -124,21 +124,21 @@
                         </div>
                     </section>
                     <section class="summary-row">
-                        <div
+                        <div onclick="directToBoard()"
                             class="card-shadow summary-stat-card summary-cards-last-row summary-container-height">
                             <div class="summary-info">
                                 <div class="board-number summary-number"></div>
                                 <div class="number-label">Tasks in Board</div>
                             </div>
                         </div>
-                        <div
+                        <div onclick="directToBoard()"
                             class="card-shadow summary-stat-card summary-cards-last-row summary-container-height">
                             <div class="summary-info">
                                 <div class="progress-number summary-number"></div>
                                 <div class="number-label">Tasks in Progress</div>
                             </div>
                         </div>
-                        <div
+                        <div onclick="directToBoard()"
                             class="card-shadow summary-stat-card summary-cards-last-row summary-container-height">
                             <div class="summary-info">
                                 <div class="feedback-number summary-number"></div>
