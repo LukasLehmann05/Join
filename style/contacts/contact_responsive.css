@@ -259,6 +259,7 @@
 
     .sidebar-contacts {
         height: calc(100vh - 150px);
+        z-index: 19;
     }
 
 }
