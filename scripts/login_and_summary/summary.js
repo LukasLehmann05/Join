@@ -1,3 +1,5 @@
+var showGreetingSwitch;
+
 function getGreetingElements() {
   const greetingTextEl = document.querySelector(".greeting-text");
   const greetingNameEl = document.querySelector(".greeting-name");
@@ -164,8 +166,10 @@ async function loadAndRenderSummary() {
 
 async function initSummaryPage() {
   requireAuth();
-  renderGreeting();
-  showGreetingOverlay();
+  if (document.referrer.includes("login.html")){
+    renderGreeting();
+    showGreetingOverlay();
+  }
   await loadAndRenderSummary();
 }
 
