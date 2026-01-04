@@ -36,7 +36,6 @@ let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
 
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
-    loadContactsForAssign()
 }
 
 function loadPrioButtonsAndSubtaskSectionById() {
@@ -246,6 +245,9 @@ function returnSubtaskId() {
 }
 
 async function addContactsToAssign(join_data) {
+    let test1 = userColorProperty
+    console.log(test1);
+    
     let contacts = join_data.contacts
     for (let contact_id in contacts) {
         let contact = contacts[contact_id]
