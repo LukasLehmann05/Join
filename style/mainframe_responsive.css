@@ -3,6 +3,10 @@
         display: none;
     }
 
+    .hide-in-resp{
+        display: none;
+    }
+
     .header-nav {
         justify-content: space-between;
     }
