@@ -1,27 +1,4 @@
-.body {
-    min-width: 100%;
-    overflow-x: auto; 
-}
-
-.sidebar {
-    flex-shrink: 0; 
-}
-
-article {
-    min-width: 0; 
-    flex: 1;
-}
-
-.avatar-menu {
-    right: 40px !important;
-    top: 70px;
-}
-
 @media (max-width: 1400px) {
-    .main-content {
-        padding: 0px 40px;
-    }
-
     .summary-title {
         font-size: 50px;
     }
@@ -31,7 +8,7 @@ article {
     }
 
     .summary-content-layout {
-        gap: 80px;
+        gap: 3%;
     }
 
     .greeting-text {
@@ -44,24 +21,6 @@ article {
 
     .summary-greeting-section {
         margin-top: 150px;
-    }
-
-    .todo-card,
-    .done-card {
-        width: 230px;
-        height: 150px;
-    }
-
-    .urgent-card {
-        width: 480px;
-        height: 150px;
-    }
-
-    .board-card,
-    .progress-card,
-    .feedback-card {
-        width: 150px;
-        height: 150px;
     }
 }
 
@@ -78,10 +37,6 @@ article {
         font-size: 18px;
     }
 
-    .summary-content-layout {
-        gap: 50px; 
-    }
-
     .greeting-text {
         font-size: 34px;
     }
@@ -93,177 +48,148 @@ article {
     .summary-greeting-section {
         margin-top: 120px;
     }
-
-    /* Cards noch kompakter */
-    .todo-card,
-    .done-card {
-        width: 200px;
-        height: 130px;
-        padding: 20px 15px;
-    }
-
-    .todo-icon,
-    .done-icon {
-        width: 55px;
-        height: 55px;
-    }
-
-    .todo-number,
-    .done-number {
-        font-size: 52px;
-    }
-
-    .urgent-card {
-        width: 420px;
-        height: 130px;
-        padding: 20px 32px;
-        gap: 40px;
-    }
-
-    .urgent-icon {
-        width: 55px;
-        height: 55px;
-    }
-
-    .urgent-number {
-        font-size: 52px;
-    }
-
-    .board-card,
-    .progress-card,
-    .feedback-card {
-        width: 130px;
-        height: 130px;
-    }
-
-    .board-number,
-    .progress-number,
-    .feedback-number {
-        font-size: 52px;
-    }
-
-    .board-label,
-    .progress-label,
-    .feedback-label {
-        font-size: 18px;
-    }
-}
-.greeting-overlay {
-    position: absolute; /* Statt fixed */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #F6F7F8;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 100;
-    animation: fadeOut 1s ease 2s forwards;
-    padding-top: 160px;
-  
 }
 
+@media (max-width: 1150px) {
+    .main-content {
+        padding: 0px 15px;
 
-.greeting-overlay.hidden {
-    display: none;
-}
 
-.greeting-overlay-text {
-    font-size: 36px;
-    font-weight: 400;
-    color: #2A3647;
-    margin-bottom: 8px;
-}
 
-.greeting-overlay-name {
-    font-size: 48px;
-    font-weight: 700;
-    color: #29ABE2;
-}
+        margin: 0 auto;
 
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-        visibility: hidden;
     }
+
+    .summary-padding-top {
+        padding-top: 60px;
+    }
+
 }
 
-/* Noch kompakter ab 1025px */
 @media (max-width: 1025px) {
-    /* Verstecke die normale Greeting Section */
     .summary-greeting-section {
         display: none !important;
     }
-
-    /* Rest deiner 1025px Styles... */
 }
 
-@media (max-width: 1000px) {
-    .header-nav {
-        padding-left: 48px; 
+@media (max-width: 800px) {
+    .summary-cards-wrapper {
+        max-width: 490px;
     }
-}
-
-.logo-responsive {
-    display: none;
 }
 
 @media (max-width: 767px) {
-    .logo-responsive {
-        display: block;
-        height: 56px;
+    .summary-padding-top {
+        padding-top: 40px;
+    }
+
+    .summary-content-layout {
+        margin-top: 10px;
+    }
+
+    .summary-cards-wrapper {
+        margin-bottom: 110px;
+    }
+
+    .summary-container-height {
+        height: 90px;
+    }
+
+}
+
+@media (max-width: 510px) {
+    .summary-number {
+        font-size: 47px;
+    }
+
+    .summary-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .padding-all-cards {
+        padding: 10px 10px;
+    }
+
+    .summary-cards-first-row:hover,
+    .summary-cards-last-row:hover,
+    .summary-card-second-row:hover {
+        padding: 20px 20px;
+    }
+
+    .number-label {
+        font-size: 16px;
+    }
+
+    .urgent-icon {
+        width: 40px;
+    }
+
+    .urgent-divider {
+        height: 68px;
+    }
+
+    .urgent-date {
+        font-size: 16px;
+    }
+
+    .summary-row {
+        gap: 5px;
+    }
+
+    .summary-cards-wrapper {
+        margin-bottom: 170px;
+    }
+
+    .summary-cards-wrapper {
+        max-width: 385px;
+    }
+
+    .summary-cards-first-row {
+        gap: 5px;
     }
 }
-@media (max-width: 767px) {
-    /* ... bestehender Code ... */
 
-    /* Sidebar zu Bottom-Navigation */
-    .sidebar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        min-height: 0;
-        min-width: auto;
-        z-index: 30;
-        margin: 0; /* Entferne alle Margins */
-        padding: 0; /* Entferne alle Paddings */
+@media (max-width: 500px) {
+    .summary-cards-wrapper {
+        margin-bottom: 138px;
     }
+}
 
-    .sidebar_upper_section {
+@media (max-width: 410px) {
+    .main-content {
+        padding: 0;
         margin: 0;
-        padding: 0;
-        gap: 0;
     }
 
-    .sidebar-nav {
-        justify-content: space-evenly;
-        flex-direction: row;
-        gap: 0;
-        padding: 0;
-        margin: 0; /* Kein Margin */
+    .summary-cards-wrapper {
+        max-width: 308px;
+        height: 548px;
+        margin: 0px -5px;
     }
 
-    .sidebar-nav-section {
-        flex-direction: column;
-        flex: 1;
-        padding: 12px 0; /* Nur oben/unten Padding */
-        border-radius: 0;
-        gap: 4px;
-        margin: 0; /* Kein Margin */
+    .summary-row {
+        gap: 0px;
     }
 
-    /* ... Rest des Codes ... */
-}
+    .summary-number {
+        font-size: 36px;
+    }
 
-@media (max-width: 767px) {
-    body, .body {
-        margin: 0;
+    .urgent-left {
+        gap: 5px;
+    }
+
+    .urgent-icon {
         padding: 0;
     }
 
-    /* ... Rest des Codes ... */
+    .urgent-right {
+        gap: 3px;
+    }
+
+    .summary-card-second-row {
+        gap: 6px;
+    }
+
 }

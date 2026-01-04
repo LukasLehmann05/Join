@@ -3,6 +3,10 @@
         display: none;
     }
 
+    .hide-in-resp{
+        display: none;
+    }
+
     .header-nav {
         justify-content: space-between;
     }
@@ -45,7 +49,7 @@
     }
 
     .logo-responsive {
-        display: block;
+        display: block !important;
         height: 56px;
     }
 

@@ -94,6 +94,7 @@ function handleLoginSuccess(user, isGuest, errorBox) {
   clearError(errorBox);
   localStorage.setItem('currentUser', JSON.stringify(user));
   localStorage.setItem('isGuest', String(isGuest));
+  sessionStorage.setItem("visiting", "true");
   window.location.href = '../html/summary.html';
 }
 
