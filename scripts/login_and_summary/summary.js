@@ -114,7 +114,6 @@ function setupAvatarMenuLinks() {
   const legalBtn = document.getElementById("menu-legal");
   const privacyBtn = document.getElementById("menu-privacy");
   const logoutBtn = document.getElementById("menu-logout");
-
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
@@ -123,7 +122,6 @@ function setupAvatarMenuLinks() {
 function initHeaderAvatar() {
   const { avatarButton, menu } = getAvatarCoreElements();
   if (!avatarButton || !menu) return;
-
   renderHeaderAvatar();
   setupAvatarToggle(avatarButton, menu);
   setupAvatarOutsideClick(avatarButton, menu);
@@ -158,12 +156,10 @@ function showGreeting(greetingTextEl, greetingNameEl, greeting, fullName) {
 function renderGreeting() {
   const { greetingTextEl, greetingNameEl } = getGreetingElements();
   if (!greetingTextEl || !greetingNameEl) return;
-
   const user = getCurrentUserSafe();
   const fullName = getSafeUserName(user);
   const hour = new Date().getHours();
   const greeting = calculateGreeting(hour);
-
   if (!fullName) {
     greetingTextEl.textContent = greeting + '!';
     greetingNameEl.textContent = '';
@@ -171,21 +167,18 @@ function renderGreeting() {
     showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
   }
 }
+
+
 function showGreetingOverlay() {
-
   if (window.innerWidth > 1025) return;
-
   const overlay = document.getElementById('greeting-overlay');
   const overlayText = document.querySelector('.greeting-overlay-text');
   const overlayName = document.querySelector('.greeting-overlay-name');
-
   if (!overlay) return;
-
   const user = getCurrentUserSafe();
   const fullName = getSafeUserName(user);
   const hour = new Date().getHours();
   const greeting = calculateGreeting(hour);
-
   if (!fullName) {
     overlayText.textContent = greeting + '!';
     overlayName.textContent = '';
@@ -193,9 +186,7 @@ function showGreetingOverlay() {
     overlayText.textContent = `${greeting},`;
     overlayName.textContent = fullName;
   }
-
   overlay.classList.remove('hidden');
-
   setTimeout(() => {
     overlay.classList.add('hidden');
   }, 5000);
@@ -203,12 +194,10 @@ function showGreetingOverlay() {
 
 async function fetchTasksForSummary() {
   const currentUser = getCurrentUserSafe();
-
   if (!currentUser || !currentUser.id) {
     console.warn("No current user found for summary");
     return [];
   }
-
   try {
     const tasksObj = (await fetchAllDataGlobal()).tasks;
     return Object.values(tasksObj || {});
@@ -238,17 +227,14 @@ function countUrgentTasks(tasks) {
 
 function parseDueDate(rawDate) {
   if (!rawDate) return null;
-
   if (rawDate.includes("-")) {
     return new Date(rawDate);
   }
-
   if (rawDate.includes("/") || rawDate.includes(".")) {
     const parts = rawDate.split(/[./]/);
     const [day, month, year] = parts;
     return new Date(`${year}-${month}-${day}`);
   }
-
   return null;
 }
 
@@ -256,13 +242,10 @@ function findNextUrgentDeadline(tasks) {
   const urgentTasks = tasks.filter(
     (task) => (task.priority || "").toLowerCase() === "urgent"
   );
-
   if (urgentTasks.length === 0) {
     return null;
   }
-
   let nextDeadline = null;
-
   for (const task of urgentTasks) {
     const date = parseDueDate(task.due_date);
     if (!date) continue;
@@ -270,7 +253,6 @@ function findNextUrgentDeadline(tasks) {
       nextDeadline = date;
     }
   }
-
   return nextDeadline;
 }
 
@@ -286,7 +268,6 @@ function formatDateForDisplay(date) {
 function updateUrgentCard(tasks) {
   const urgentCount = countUrgentTasks(tasks);
   const nextDeadline = findNextUrgentDeadline(tasks);
-
   setTextContent(".urgent-number", urgentCount);
   setTextContent(".urgent-date", formatDateForDisplay(nextDeadline));
 }
@@ -294,24 +275,18 @@ function updateUrgentCard(tasks) {
 async function loadAndRenderSummary() {
   try {
     const tasks = await fetchTasksForSummary();
-
     const todo = countTasksByState(tasks, "todo");
     const done = countTasksByState(tasks, "done");
     const inProgress = countTasksByState(tasks, "in progress");
     const awaitFeedback = countTasksByState(tasks, "awaiting feedback");
     const total = tasks.length;
-
     setTextContent(".todo-number", todo);
     setTextContent(".done-number", done);
     setTextContent(".board-number", total);
     setTextContent(".progress-number", inProgress);
     setTextContent(".feedback-number", awaitFeedback);
-
     updateUrgentCard(tasks);
-
   } catch (error) {
-    console.error("Error loading summary data:", error);
-
     setTextContent(".todo-number", 0);
     setTextContent(".done-number", 0);
     setTextContent(".board-number", 0);
@@ -326,7 +301,6 @@ async function initSummaryPage() {
   requireAuth();
   renderGreeting();
   showGreetingOverlay();
-
   await loadAndRenderSummary();
 }
 
