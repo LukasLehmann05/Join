@@ -92,16 +92,16 @@
             <div class="summary-content-layout">
                 <div class="summary-cards-wrapper">
                     <section class="summary-row">
-                        <div id="toDoBox" onclick="directToBoard()" onmouseover="changeDisplay('toDoBox', 'toDoIcon', 'toDoInfo')" onmouseout="changeBackDisplay('toDoBox', 'toDoIcon', 'toDoInfo')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
+                        <div onclick="directToBoard()" onmouseover="changeDisplay('toDoIcon', '../assets/icons/summary/toDo_white.svg')" onmouseout="changeBackDisplay('toDoIcon', '../assets/icons/summary/toDo.svg')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
                             <img id="toDoIcon" class="summary-icon" src="../assets/icons/summary/toDo.svg" alt="To-Do icon">
-                            <div id="toDoInfo" class="summary-info">
+                            <div class="summary-info">
                                 <div class="todo-number summary-number"></div>
                                 <div class="number-label">To-Do</div>
                             </div>
                         </div>
-                        <div id="doneBox" onclick="directToBoard()" onmouseover="changeDisplay('doneBox', 'doneIcon', 'doneInfo')" onmouseout="changeBackDisplay('doneBox', 'doneIcon', 'doneInfo')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
+                        <div onclick="directToBoard()" onmouseover="changeDisplay('doneIcon', '../assets/icons/summary/done_white.svg')" onmouseout="changeBackDisplay('doneIcon', '../assets/icons/summary/done.svg')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
                             <img id="doneIcon" class="summary-icon" src="../assets/icons/summary/done.svg" alt="Done icon">
-                            <div id="doneInfo" class="summary-info">
+                            <div class="summary-info">
                                 <div class="done-number summary-number"></div>
                                 <div class="number-label">Done</div>
                             </div>
