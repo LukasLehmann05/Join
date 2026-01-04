@@ -231,3 +231,25 @@ async function deleteTaskFromUserById(taskId, userId) {
         console.error('Error removing task from user:', error)
     }
 }
+
+
+/**
+ * Sends data to URL via POST
+ * @param {string} url - URL to send to
+ * @param {Object} payload - Data to send
+ * @param {string} errorMessage - Error message prefix
+ * @returns {Promise<Object>} Response data
+ */
+async function sendDataToUrl(payload, errorMessage) {
+  const response = await fetch(BASE_URL + `/users.json`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  
+  if (!response.ok) {
+    throw new Error(`${errorMessage}: ${response.status}`);
+  }
+  
+  return await response.json();
+}

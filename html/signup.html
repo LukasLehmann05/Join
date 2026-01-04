@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Join - Sign up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/standard.css">
+    <link rel="stylesheet" href="../style/summary_login/login.css">
+    <link rel="stylesheet" href="../style/summary_login/login_responsive.css">
+    <link rel="stylesheet" href="../style/summary_login/signup_responsive.css">
+    <link rel="stylesheet" href="../style/summary_login/signup.css">
+    <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+
+
+</head>
+
+<body class="body">
+
+    <div id="signup-toast" class="signup-toast hidden">
+        You Signed Up successfully
+    </div>
+    <div class="login-wrapper">
+        <div class="login-logo-section">
+            <img class="login-logo" src="../assets/icons/logo/logoSmall.svg" alt="Join logo">
+        </div>
+        <div class="login-header">
+        </div>
+        <main class="login-card signup-card">
+            <a href="../html/login.html" class="back-arrow"></a>
+            <h1 class="login-title">Sign up</h1>
+            <form class="login-form" id="signup-form" novalidate>
+                <div class="input-wrapper">
+                    <input type="text" id="signup-name" class="login-input" placeholder="Name" required>
+                    <img src="../assets/icons/contacts/person.svg" alt="User icon" class="input-icon">
+                    <span class="input-error" id="error-signup-name"></span>
+                </div>
+                <div class="input-wrapper">
+                    <input autocomplete="username" type="email" id="signup-email" class="login-input"
+                        placeholder="Email" required>
+                    <img src="../assets/icons/contacts/mail.svg" alt="Email icon" class="input-icon">
+                    <span class="input-error" id="error-signup-email"></span>
+                </div>
+                <div class="input-wrapper">
+                    <input autocomplete="current-password" type="password" id="signup-password" class="login-input"
+                        placeholder="Password" required>
+                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+                    <span class="input-error" id="error-signup-password"></span>
+                </div>
+                <div class="input-wrapper">
+                    <input autocomplete="current-password" type="password" id="signup-password-confirm"
+                        class="login-input" placeholder="Confirm Password" required>
+                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
+                    <span class="input-error" id="error-signup-password-confirm"></span>
+                </div>
+
+                <label class="privacy-check" style="align-self: flex-start; margin-top: 8px;">
+                    <input type="checkbox" id="privacy-checkbox">
+                    <span> I accept the <a href="#">Privacy policy</a></span>
+                </label>
+                <div class="login-buttons" style="margin-top: 24px;">
+                    <button type="submit" class="login-button-primary" id="signup-btn" disabled>
+                        Sign up
+                    </button>
+                </div>
+            </form>
+        </main>
+        <footer class="login-footer">
+            <a href="../html/privacyPolicy.html">Privacy Policy</a>
+            <a href="../html/legalNotice.html">Legal notice</a>
+        </footer>
+    </div>
+
+    <script src="../scripts/firebase.js"></script>
+    <script src="../scripts/login_and_summary/login.js"></script>
+    <script src="../scripts/login_and_summary/signup.js" defer></script>
+</body>
+
+</html>

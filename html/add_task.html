@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="../style/add_task_responsive.css">
     <link rel="stylesheet" href="../style/mainframe_responsive.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+
+    <script src="../scripts/login_and_summary/avatar.js"></script>
 </head>
 
 <body class="body">
@@ -20,7 +22,7 @@
                 <img class="logo" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
             </section>
             <nav class="sidebar-nav">
-                <a href="#" class="sidebar-nav-section">
+                <a href="../html/summary.html" class="sidebar-nav-section">
                     <img class="nav-icons" src="../assets/icons/sideBar/summary.svg" alt="summary icon">
                     <p>Summary</p>
                 </a>
@@ -68,9 +70,20 @@
                     <a href="../html/help.html">
                         <img src="../assets/icons/header/help.svg" alt="help icon">
                     </a>
-                    <a href="#">
-                        <img src="../assets/icons/header/user_placeholder.svg" alt="user icon">
-                    </a>
+                    <button type="button" class="avatar-wrapper" id="avatar-button">
+                        <div id="header-avatar" class="header-avatar"></div>
+                    </button>
+                    <div id="avatar-menu" class="avatar-menu hidden">
+                        <button type="button" class="avatar-menu-item" id="menu-legal">
+                            Legal Notice
+                        </button>
+                        <button type="button" class="avatar-menu-item" id="menu-privacy">
+                            Privacy Policy
+                        </button>
+                        <button type="button" class="avatar-menu-item" id="menu-logout">
+                            Log out
+                        </button>
+                    </div>
                 </section>
             </nav>
         </header>
