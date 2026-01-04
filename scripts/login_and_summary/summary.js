@@ -179,17 +179,8 @@ document.addEventListener("DOMContentLoaded", initSummaryPage);
 /**
  * changes icon svg
  */
-function changeDisplay(id, path) {
+function updateIconSrc(id, path) {
   document.getElementById(id).src = path;
 };
-
-
-/**
- * reverts changes from function changeDisplay, so the element appears in the original state
- */
-function changeBackDisplay(id, path) {
-  document.getElementById(id).src = path;
-};
-
 
 
