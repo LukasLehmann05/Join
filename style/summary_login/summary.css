@@ -67,7 +67,7 @@
     margin-top: 4px;
 }
 
-.summary-cards-first-row{
+.summary-cards-first-row {
     width: 42%;
     display: flex;
     align-items: center;
@@ -76,7 +76,7 @@
     cursor: pointer;
 }
 
-.summary-card-second-row{
+.summary-card-second-row {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -84,7 +84,7 @@
     cursor: pointer;
 }
 
-.padding-all-cards{
+.padding-all-cards {
     padding: 20px 12px;
 }
 
@@ -123,7 +123,7 @@
     justify-content: center;
 }
 
-.summary-number{
+.summary-number {
     font-weight: 600;
     font-size: 64px;
     text-align: center;
@@ -177,6 +177,12 @@
     align-items: center;
     padding: 20px 20px;
     cursor: pointer;
+}
+
+.summary-cards-last-row:hover {
+    color: white;
+    background-color: #2A3647;
+    padding: 25px 25px;
 }
 
 .greeting-text {
