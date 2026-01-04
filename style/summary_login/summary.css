@@ -85,6 +85,17 @@
     margin: 10px 10px;
 }
 
+.summary-cards-last-row {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px 10px;
+}
+
+.summary-cards-first-row:hover,
+.summary-cards-last-row:hover,
 .summary-card-second-row:hover {
     color: white;
     background-color: #2A3647;
@@ -92,25 +103,8 @@
     margin: 0px 0px;
 }
 
-.summary-cards-last-row {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 20px;
-    cursor: pointer;
-    margin: 10px 10px;
-}
-
-.summary-cards-last-row:hover {
-    color: white;
-    background-color: #2A3647;
-    padding: 30px 30px;
-    margin: 0px 0px;
-}
-
 .padding-all-cards {
-    padding: 20px 12px;
+    padding: 20px 20px;
 }
 
 .summary-icon {

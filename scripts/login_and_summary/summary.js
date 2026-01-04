@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", initSummaryPage);
  * changes backgroundcolor, writing color and appearance of the icon when hovered over a stat in the summary board
  */
 function changeDisplay(box, icon, info) {
-  console.log(box, icon, info);
+  
   
   
   
