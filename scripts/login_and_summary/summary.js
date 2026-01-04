@@ -63,11 +63,6 @@ function showGreetingOverlay() {
 }
 
 async function fetchTasksForSummary() {
-  const currentUser = getCurrentUserSafe();
-  /* if (!currentUser || !currentUser.id) {
-    console.warn("No current user found for summary");
-    return [];
-  } */
   try {
     const tasksObj = (await fetchAllDataGlobal()).tasks;
     return Object.values(tasksObj || {});
