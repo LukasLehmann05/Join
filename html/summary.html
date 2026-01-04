@@ -92,22 +92,22 @@
             <div class="summary-content-layout">
                 <div class="summary-cards-wrapper">
                     <section class="summary-row">
-                        <button onclick="directToBoard()" onmouseover="changeDisplay('toDoIcon', '../assets/icons/summary/toDo_white.svg')" onmouseout="changeBackDisplay('toDoIcon', '../assets/icons/summary/toDo.svg')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
+                        <a href="../html/board.html" onmouseover="changeDisplay('toDoIcon', '../assets/icons/summary/toDo_white.svg')" onmouseout="changeBackDisplay('toDoIcon', '../assets/icons/summary/toDo.svg')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
                             <img id="toDoIcon" class="summary-icon" src="../assets/icons/summary/toDo.svg" alt="To-Do icon">
                             <div class="summary-info">
                                 <div class="todo-number summary-number"></div>
                                 <div class="number-label">To-Do</div>
                             </div>
-                        </button>
-                        <button onclick="directToBoard()" onmouseover="changeDisplay('doneIcon', '../assets/icons/summary/done_white.svg')" onmouseout="changeBackDisplay('doneIcon', '../assets/icons/summary/done.svg')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
+                        </a>
+                        <a href="../html/board.html" onmouseover="changeDisplay('doneIcon', '../assets/icons/summary/done_white.svg')" onmouseout="changeBackDisplay('doneIcon', '../assets/icons/summary/done.svg')" class="card-shadow summary-cards-first-row summary-container-height padding-all-cards">
                             <img id="doneIcon" class="summary-icon" src="../assets/icons/summary/done.svg" alt="Done icon">
                             <div class="summary-info">
                                 <div class="done-number summary-number"></div>
                                 <div class="number-label">Done</div>
                             </div>
-                        </button>
+                        </a>
                     </section>
-                    <button onclick="directToBoard()" class="card-shadow summary-card-second-row urgent-card summary-container-height padding-all-cards">
+                    <a href="../html/board.html" class="card-shadow summary-card-second-row urgent-card summary-container-height padding-all-cards">
                         <div class="urgent-left">
                             <div class="urgent-icon-wrapper">
                                 <img class="urgent-icon" src="../assets/icons/summary/urgent.svg" alt="Urgent icon">
@@ -122,29 +122,29 @@
                             <div class="urgent-date">No deadline</div>
                             <div class="urgent-deadline">Upcoming Deadline</div>
                         </div>
-                    </button>
+                    </a>
                     <section class="summary-row">
-                        <button onclick="directToBoard()"
+                        <a href="../html/board.html"
                             class="card-shadow summary-stat-card summary-cards-last-row summary-container-height padding-all-cards">
                             <div class="summary-info">
                                 <div class="board-number summary-number"></div>
                                 <div class="number-label">Tasks in Board</div>
                             </div>
-                        </button>
-                        <button onclick="directToBoard()" 
+                        </a>
+                        <a href="../html/board.html" 
                             class="card-shadow summary-stat-card summary-cards-last-row summary-container-height padding-all-cards">
                             <div class="summary-info">
                                 <div class="progress-number summary-number"></div>
                                 <div class="number-label">Tasks in Progress</div>
                             </div>
-                        </button>
-                        <button onclick="directToBoard()"
+                        </a>
+                        <a href="../html/board.html"
                             class="card-shadow summary-stat-card summary-cards-last-row summary-container-height padding-all-cards">
                             <div class="summary-info">
                                 <div class="feedback-number summary-number"></div>
                                 <div class="number-label">Awaiting Feedback</div>
                             </div>
-                        </button>
+                        </a>
                     </section>
                 </div>
                 <section class="summary-greeting-section">
