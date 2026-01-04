@@ -117,29 +117,10 @@
     flex-direction: column;
 }
 
-.todo-number {
-    font-weight: 600;
-    font-size: 64px;
-    line-height: 120%;
-    text-align: center;
-    height: 77px;
-    width: 31px;
-    margin: 0 auto;
-}
-
 .number-label {
     font-weight: 400;
     font-size: 20px;
     text-align: center;
-}
-
-.done-info {
-    width: 63px;
-    height: 101px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .summary-number {
