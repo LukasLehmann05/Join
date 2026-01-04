@@ -3,9 +3,9 @@
  */
 function redirectBack() {
     let referrer = document.referrer;
-    if (referrer) {
-        window.location.href = referrer;
+    if (document.referrer.includes("help.html")) {
+        window.location.href = '../html/board.html';
     } else {
-        window.location.href = '../board.html';
+        window.location.href = referrer;
     }
 };
