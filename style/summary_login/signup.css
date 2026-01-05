@@ -127,8 +127,9 @@ button.signup-button-primary:disabled {
 .input-error {
     display: block;
     margin-top: 4px;
-    font-size: 12px;
+    font-size: 16px;
     color: #FF3B3B;
+    font-family: Inter, sans-serif;
 }
 
 .login-input.error {
