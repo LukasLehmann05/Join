@@ -207,32 +207,6 @@ async function assignNewTaskToUserById(taskId, userId) {
 }
 
 
-async function deleteTaskFromUserById(taskId, userId) {
-    try {
-        let userTasksArr = await getAllTaskIdByUserId(userId);
-        if (!userTasksArr) {
-            return;
-        }
-        const indexToRemove = userTasksArr.findIndex(taskObj => taskObj && Object.keys(taskObj).includes(taskId));
-        if (indexToRemove !== -1) {
-            userTasksArr.splice(indexToRemove, 1);
-        }
-        let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(userTasksArr),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Error removing task from user: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error removing task from user:', error)
-    }
-}
-
-
 /**
  * Sends data to URL via POST
  * @param {string} url - URL to send to
