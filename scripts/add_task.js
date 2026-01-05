@@ -246,6 +246,8 @@ function returnSubtaskId() {
 }
 
 async function addContactsToAssign(join_data) {
+    // If the assign list is not present (e.g., when included on the board page), skip rendering
+    if (!task_assign) return;
     let contacts = join_data.contacts
     for (let contact_id in contacts) {
         let contact = contacts[contact_id]
@@ -266,11 +268,13 @@ function getInitialsFromUser(user) {
 }
 
 async function loadContactsForAssign() {
+    // If there's no contact assign element on the page, skip loading contacts
+    if (!document.getElementById("task_assign")) return;
     let join_data = await loadDataFromAPI()
-    await addContactsToAssign(join_data)
+    addContactsToAssign(join_data)
 }
 
-async function showContacts() {
+function showContacts() {
     let contact_selector = document.getElementById("contact_selector");
     if (contacts_shown == false) {
         contact_selector.style.display = "block"
