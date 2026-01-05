@@ -43,7 +43,7 @@
 }
 
 .signup-card {
-    margin-top: 100px;
+    margin-top: 180px;
 }
 
 .login-button-primary {
@@ -52,7 +52,7 @@
 
 .privacy-check {
     align-self: center;
-    margin-top: 8px;
+    margin-top: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -84,11 +84,9 @@
 .signup-toast {
     position: fixed;
     top: 70px;
-    /* Höhe wie im Join-Original */
     left: 50%;
     transform: translateX(-50%);
     background-color: #2A3647;
-    /* Dunkelblau */
     color: white;
     padding: 12px 22px;
     border-radius: 20px;
