@@ -14,7 +14,7 @@ async function fetchAllDataGlobal() {
 
 
 //contacts and subtasks are arrays
-async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr, userId) {
+async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr) {
     const newTask = {
         "category": task_category,
         "title": task_title,
@@ -39,7 +39,6 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
     else {
         let responseData = await response.json();
         let newTaskId = responseData.name;
-        await assignNewTaskToUserById(newTaskId, userId);
         if (window.location.pathname.endsWith('board.html')) {
             displayNewTaskOnBoard(newTaskId, newTask);
         }
@@ -161,48 +160,6 @@ async function getContactById(contactID) {
     } catch (error) {
         console.error('Error fetching contact by ID:', error)
         return null;
-    }
-}
-
-
-async function getAllTaskIdByUserId(userId) {
-    try {
-        let joinFetchAllTasks = await fetch(BASE_URL + `/tasks_by_user/${userId}.json`)
-        let joinDataAllTasksByUser = await joinFetchAllTasks.json();
-        let taskIdsByUser = [];
-        for (let taskId in joinDataAllTasksByUser) {
-            taskIdsByUser.push(joinDataAllTasksByUser[taskId]);
-        }
-        if (!joinFetchAllTasks.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return taskIdsByUser;
-    } catch (error) {
-        console.error('Error fetching tasks by user ID:', error);
-    }
-}
-
-
-async function assignNewTaskToUserById(taskId, userId) {
-    try {
-        let userTasksArr = await getAllTaskIdByUserId(userId);
-        let taskObj = {[taskId]: true};
-        if (!userTasksArr) {
-            userTasksArr = [];
-        }
-        userTasksArr.push(taskObj);
-        let response = await fetch(`${BASE_URL}/tasks_by_user/${userId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(userTasksArr),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Error assigning task to user: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error assigning task to user:', error)
     }
 }
 
