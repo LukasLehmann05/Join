@@ -341,7 +341,6 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
 async function deleteTaskInOverlay(taskId) {
     const taskCardElement = document.getElementById(taskId+"_task_card")
     try {
-        await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
         await deleteTask(taskId);
         if (taskCardElement) {
             taskCardElement.remove();
@@ -351,13 +350,4 @@ async function deleteTaskInOverlay(taskId) {
         console.error("Error deleting task with id: " + taskId, error);
         alert("An error occurred while deleting the task. Please try again.");
     }
-}
-
-/**
- * 
- * This function gets the current user ID from the DOM.
- * @returns {string} The current user ID.
- */
-function getCurrentUserIdIcon() {
-    return document.getElementById('current_user_id').getAttribute('data-current-user-id');
 }
