@@ -1,7 +1,7 @@
 let lastDropAcceptanceColumnId = null;
 let startDropAcceptanceColumnId = null;
 let dragOverCounter = 0;
-let allTasksOfSingleUserObj = {};
+let allTasksObj = {};
 
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
@@ -202,7 +202,7 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
  * @param {Object} updatedTask The updated task object.
  */
 function updateAllTasksOfSingleUserObj(taskId, updatedTask) {
-    allTasksOfSingleUserObj[taskId] = updatedTask;
+    allTasksObj[taskId] = updatedTask;
 }
 
 /**
@@ -212,23 +212,23 @@ function updateAllTasksOfSingleUserObj(taskId, updatedTask) {
  * @returns {Object} The task object.
  */
 function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
-    return allTasksOfSingleUserObj[taskId];
+    return allTasksObj[taskId];
 }
 
 /**
  * This function sets the allTasksOfSingleUserObj from the given array of 
  * task ID objects and all tasks data.
- * @param {Array} allTasksByIdOfSingleUserArr Array of task ID objects for the user.
+ * @param {Array} allTasksByIdArr Array of task ID objects for the user.
  * @returns {Object} The allTasksOfSingleUserObj object.
  */
-function setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, allTasks) {
-    allTasksOfSingleUserObj = {};
-    for (let taskIndex in allTasksByIdOfSingleUserArr) {
-        if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
-        let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];
+function setAllTasksObj(allTasksByIdArr, allTasks) {
+    allTasksObj = {};
+    for (let taskIndex in allTasksByIdArr) {
+        if (allTasksByIdArr[taskIndex] === null) continue;
+        let taskId = allTasksByIdArr[taskIndex];
         let task = allTasks[taskId];
         if (task) {
-            allTasksOfSingleUserObj[taskId] = task;
+            allTasksObj[taskId] = task;
         }
     }
 }
@@ -236,17 +236,17 @@ function setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, allTasks) {
 /**
  * This function returns all tasks of the single user object.
  * 
- * @returns {Object} The allTasksOfSingleUserObj object.
+ * @returns {Object} The allTasksObj object.
  */
-function getAllTasksOfSingleUserObj() {
-    return allTasksOfSingleUserObj; 
+function getAllTasksObj() {
+    return allTasksObj; 
 }
 
 /**
- * This function resets the allTasksOfSingleUserObj to an empty object.
+ * This function resets the allTasksObj to an empty object.
  */
-function resetAllTasksOfSingleUserObj() {
-    allTasksOfSingleUserObj = {};
+function resetAllTasksObj() {
+    allTasksObj = {};
 }
 
 /**
@@ -293,36 +293,44 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[1]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
-    initializeBoard(testUserId);
+    initializeBoard();
 });
 
 
 /**
  * This function initializes the board for a user.
- * 
- * @param {string} userId The ID of the user whose board is initialized.
+ * @returns {Array} Array of task ID objects for the user.
  */
-async function initializeBoard(userId) {
-    let allTasksByIdOfSingleUserArr = await getAllTaskIdByUserId(userId);
-    initInputFieldEventListener(allTasksByIdOfSingleUserArr);
+async function initializeBoard() {
     const joinData = await fetchAllDataGlobal();
+    let allTasksByIdArr = getAllTaskIds(joinData);
+    initInputFieldEventListener(allTasksByIdArr);
     
-    setAllTasksOfSingleUserObj(allTasksByIdOfSingleUserArr, joinData.tasks);
-    renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, joinData.tasks);
+    setAllTasksObj(allTasksByIdArr, joinData.tasks);
+    renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
-    return allTasksByIdOfSingleUserArr;
+    return allTasksByIdArr;
+}
+
+
+function getAllTaskIds(joinData) {
+    let allTaskIds = [];
+    for (let taskId in joinData.tasks) {
+        allTaskIds.push(taskId);
+    }
+    return allTaskIds;
 }
 
 /**
  * This function renders all task cards on the board.
  * 
- * @param {Array} allTasksByIdOfSingleUserArr Array of task ID objects for the user.
+ * @param {Array} allTasksByIdArr Array of task ID objects for the user.
  * @param {Object} allTaskData The global task data object.
  */
-function renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, allTaskData) {
-    for (let taskIndex in allTasksByIdOfSingleUserArr) {
-        if (allTasksByIdOfSingleUserArr[taskIndex] === null) continue;
-        let taskId = Object.keys(allTasksByIdOfSingleUserArr[taskIndex])[0];        
+function renderAllTaskCardsOnBoard(allTasksByIdArr, allTaskData) {
+    for (let taskIndex in allTasksByIdArr) {
+        if (allTasksByIdArr[taskIndex] === null) continue;
+        let taskId = allTasksByIdArr[taskIndex];        
         let task = allTaskData[taskId];
         if (!task) continue;
         renderTaskCard(taskId, task);

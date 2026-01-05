@@ -3,14 +3,14 @@ let searchEvent=false;
  * This function initializes the input field event listener for task filtering.
  * It adds a debounced input event listener to the input field with ID 'task_filter_input_field'.
  */
-function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
+function initInputFieldEventListener(allTasksByIdArr) {
     const inputField = document.getElementById('task_filter_input_field');
     let debounceTimeout;
     if (!inputField) return;
     inputField.addEventListener('input', (event) => {
         clearTimeout(debounceTimeout);
         debounceTimeout = setTimeout(() => {
-            handleTermOfInput(event, allTasksByIdOfSingleUserArr);
+            handleTermOfInput(event, allTasksByIdArr);
         }, 500);
     });
 }
@@ -20,9 +20,9 @@ function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
  * 
  * @param {*} event The input event object.
  */
-function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
+function handleTermOfInput(event, allTasksByIdArr) {
     let inputText = event.target.value;
-    handleInputSubmit(inputText, allTasksByIdOfSingleUserArr);
+    handleInputSubmit(inputText, allTasksByIdArr);
 }
 
 
@@ -31,7 +31,7 @@ function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
  * 
  * @param {string} inputText The text input for filtering tasks.
  */
-async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
+async function handleInputSubmit(inputText, allTasksByIdArr) {
     if (inputText.length > 2) {
         searchEvent = true;
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
@@ -42,7 +42,7 @@ async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
     }
     if (inputText.length == 0 && searchEvent === false) {
         clearBoard();
-        renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
+        renderAllTaskCardsOnBoard(allTasksByIdArr, getAllTasksObj());
         renderNoTaskInfoOnDOMLoad();
     }
 }
@@ -57,16 +57,16 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
     if (filteredByTitle.length > 0) {
         clearBoard();
         disableShowNoSearchResultOnBoardInfo();
-        renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
+        renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksObj());
     } else if (filteredByDescription.length > 0) {
         clearBoard();
         disableShowNoSearchResultOnBoardInfo();
-        renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
+        renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksObj());
     } else if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
         clearBoard();
         disableShowNoSearchResultOnBoardInfo();
         let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
-        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksOfSingleUserObj());
+        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksObj());
     } else {
         clearBoard();
         showNoSearchResultOnBoardInfo();
@@ -81,12 +81,10 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
  */
 function filterTaskIdsByField(inputText, field) {
     let filteredTaskIdsArr = [];
-    for (let taskId in allTasksOfSingleUserObj) {
-        let task = allTasksOfSingleUserObj[taskId];
+    for (let taskId in allTasksObj) {
+        let task = allTasksObj[taskId];
         if (task[field] && task[field].toLowerCase().includes(inputText.toLowerCase())) {
-            let taskIdObj = {};
-            taskIdObj[taskId] = true;
-            filteredTaskIdsArr.push(taskIdObj);
+            filteredTaskIdsArr.push(taskId);
         }
     }
     return filteredTaskIdsArr;
