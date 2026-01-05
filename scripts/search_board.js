@@ -44,6 +44,7 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdArr, getAllTasksObj());
         renderNoTaskInfoOnDOMLoad();
+        disableShowNoSearchResultOnBoardInfo();
     }
 }
 
