@@ -65,7 +65,7 @@
     background: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    padding: 48px 48px;
+    padding: 48px 48px 32px 48px;
     width: 100%;
     max-width: 652px;
     margin: 230px auto 0;
@@ -97,23 +97,24 @@
 
 .login-form {
     width: 100%;
-    max-width: 422px;
-    margin-top: 24px;
+    max-width: 432px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 32px;
 }
 
 .input-wrapper {
     position: relative;
     width: 100%;
+    transform: translate(-10px);
 }
 
 .login-input {
     width: 100%;
     height: 48px;
-    padding: 12px 48px 12px 21px;
+    padding: 4px 0px 4px 21px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     font-family: Inter, sans-serif;
@@ -135,7 +136,7 @@
 
 .input-icon {
     position: absolute;
-    right: 21px;
+    right: 9px;
     top: 50%;
     transform: translateY(-50%);
     width: 20px;
@@ -146,7 +147,7 @@
 .login-buttons {
     display: flex;
     gap: 32px;
-    margin-top: 16px;
+    margin-top: 32px;
 }
 
 .login-button-primary,
@@ -166,6 +167,7 @@
     background-color: #2A3647;
     color: #FFFFFF;
     border: none;
+    padding: 0 18px;
 }
 
 .login-button-primary:hover {
@@ -223,9 +225,10 @@
 
 .login-error-message {
     margin-top: 16px;
-    font-size: 14px;
+    font-size: 18px;
     color: #FF3B3B;
     text-align: center;
     min-height: 18px;
-    /* damit der Bereich nicht springt */
+    font-family: Inter, sans-serif;
+
 }
