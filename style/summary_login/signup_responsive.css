@@ -24,10 +24,6 @@
         margin-top: 150px;  
     }
 
-    .back-arrow {
-        top: 60px;         
-        left: 40px;        
-    }
 }
 
 @media (max-width: 768px) {
@@ -83,10 +79,6 @@
         left: 60px;
     }
 
-    .privacy-check {
-        font-size: 14px;
-        text-align: left;
-    }
 }
 
 @media (max-width: 450px) {
@@ -96,17 +88,6 @@
     .back-arrow.back-arrow {
         top: 195px;
         left: 60px;
-    }
-}
-
-@media (max-width: 420px) {
-    .signup-button-primary {
-        width: 100%;
-        font-size: 16px;
-    }
-    
-    .privacy-check {
-        font-size: 13px;
     }
 }
 
