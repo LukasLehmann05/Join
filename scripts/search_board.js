@@ -37,10 +37,9 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
         searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription);
-    } else {
-        searchEvent = false;
     }
-    if (inputText.length == 0 && searchEvent === false) {
+    if (inputText.length == 0) {
+        searchEvent = false;
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdArr, getAllTasksObj());
         renderNoTaskInfoOnDOMLoad();
@@ -78,7 +77,7 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
  * Filters task IDs by a given field and input text.
  * @param {string} inputText The text to search for.
  * @param {string} field The field to search in ('title' or 'description').
- * @returns {Array} Array of filtered task ID objects.
+ * @returns {Array} Array of filtered task IDs.
  */
 function filterTaskIdsByField(inputText, field) {
     let filteredTaskIdsArr = [];
