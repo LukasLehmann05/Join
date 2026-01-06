@@ -25,6 +25,14 @@
     .overlay_content.add_task_attributes {
         width: 95%;
     }
+
+    .overlay_content {
+        width: 95%;
+    }
+
+    .overlay_main_content h1 {
+        font-size: 44px;
+    }
 }
 
 @media (max-width: 500px) {
