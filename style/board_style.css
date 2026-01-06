@@ -311,3 +311,8 @@ h1 {
     transform: translateY(0);
     pointer-events: auto;
 }
+
+.repsonsive_add_task_button:hover {
+    background-color: #29ABE2;
+    cursor: pointer;
+}
