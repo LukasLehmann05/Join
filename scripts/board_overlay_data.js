@@ -19,7 +19,7 @@ const DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY = 'data-edit-task-and-close-ove
  */
 async function sendUpdatedTaskToDB(taskId) {
     let taskToUpdate = await getTaskToUpdate(taskId);
-    updateAllTasksOfSingleUserObj(taskId, taskToUpdate);
+    updateAllTasksObj(taskId, taskToUpdate);
     clearElementsOfNewTask();
     if (Object.keys(taskToUpdate).length !== 0) {
         await updateTask(taskId, taskToUpdate);
@@ -99,7 +99,7 @@ function clearElementsOfNewTask() {
  */
 async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
-    let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
+    let task = getSingleTaskOfAllTasksObj(taskId);
     if (!task) return;
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
