@@ -15,7 +15,7 @@
         max-width: 400px;
     }
     .login-logo {
-        width: 80px;
+        width: 72px;
     }
 }
 
@@ -31,53 +31,67 @@
 }
 
 @media (max-width: 768px) {
-    .login-wrapper {
-        justify-content: flex-start;
-        align-items: center;
-        padding: 24px 16px 32px;
-    }
-
-    .login-logo {
-        width: 72px;
-    }
-
-    .login-logo-section {
-        position: static;
-        align-self: flex-start;
-        margin-left: 8px;
-        margin-top: 0;
-        margin-bottom: 16px;
-    }
 
     .login-card {
         width: 100%;
         max-width: 380px;
-        padding: 32px 16px;
     }
 
-    .back-arrow {
-        top: 55px;
-        left: 30px;
+    .signup-card.signup-card {
+        margin-top: 40px;
+    }
+
+    .back-arrow.back-arrow {
+        top: 240px;
+        left: 180px;
+    }
+}
+
+@media (max-width: 700px) {
+    .back-arrow.back-arrow {
+        top: 240px;
+        left: 130px;
+    }
+}
+
+@media (max-width: 620px) {
+    .back-arrow.back-arrow {
+        top: 240px;
+        left: 100px;
+    }
+}
+
+@media (max-width: 550px) {
+    .back-arrow.back-arrow {
+        top: 240px;
+        left: 60px;
     }
 }
 
 @media (max-width: 500px) {
     .login-card {
-        padding: 28px 16px;
+        max-width: 320px;
+        padding: 28px 28px;
     }
 
     .login-title {
         font-size: 47px;
     }
 
-    .back-arrow {
-        top: 42px;
-        left: 45px;
+    .back-arrow.back-arrow {
+        top: 210px;
+        left: 60px;
     }
 
     .privacy-check {
         font-size: 14px;
         text-align: left;
+    }
+}
+
+@media (max-width: 450px) {
+    .login-logo {
+        width: 60px;
     }
 }
 
@@ -94,7 +108,8 @@
 
 @media (max-width: 400px) {
     .login-card {
-        padding: 24px 12px;
+        padding: 24px 24px;
+        max-width: 280px;
     }
 
     .login-title {
@@ -112,5 +127,22 @@
     .back-arrow {
         top: 35px;
         left: 20px;
+    }
+}
+
+@media (max-width: 365px) {
+    .login-logo {
+        width: 50px;
+    }
+
+}
+
+@media (max-width: 350px) {
+    .login-card {
+        max-width: 250px;
+    }
+    .back-arrow.back-arrow {
+        top: 205px;
+        left: 40px;
     }
 }
