@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../style/add_task_responsive.css">
     <link rel="stylesheet" href="../style/mainframe_responsive.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+    <link rel="stylesheet" href="../style/board_style.css">
 
     <script src="../scripts/login_and_summary/avatar.js"></script>
 </head>
@@ -87,7 +88,7 @@
                 </section>
             </nav>
         </header>
-        <main class="main-content">
+        <main class="main-content order-middle">
             <article class="add-task-content">
                 <header>
                     <h1 class="h1">Add Task</h1>
@@ -207,10 +208,15 @@
                     </section>
                 </aside>
             </article>
+            <div id="responseToast" class="responseToastContent add-task-toast-adaption">
+                <p class="white font-size-20">Task added to board</p>
+                <img src="../assets/icons/sideBar/board.svg" alt="image of board icon">
+            </div>
         </main>
     </article>
     <script src="../scripts/firebase.js"></script>
     <script src="../scripts/contacts/contact_data.js"></script>
+    <script src="../scripts/edit_and_add_task_overlay.js"></script>
     <script src="../script.js"></script>
     <script src="../scripts/add_task_templates.js"></script>
     <script src="../scripts/add_task.js"></script>
