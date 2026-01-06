@@ -76,6 +76,21 @@
     .header-nav {
         padding-left: 48px;
     }
+    
+    .board_table {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .column_content {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto !important;
+    }
+
+    .board_column {
+        width: 100%;
+    }
 }
 
 @media (max-width: 500px) {
