@@ -30,4 +30,8 @@
     .board_controls {
         margin-right: 0px;
     }
+
+    .repsonsive_add_task_button {
+        display: block;
+    }
 }
