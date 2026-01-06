@@ -1,3 +1,14 @@
+@media (max-width: 1100px) {
+    .overlay_main_content {
+        flex-direction: column !important;
+    }
+
+    .overlay_separator_add_task.show {
+        display: none;
+        visibility: hidden;
+    }
+}
+
 @media (max-width: 600px) {
     
 }
