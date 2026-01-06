@@ -7,6 +7,14 @@
         display: none;
         visibility: hidden;
     }
+
+    .required-field-section {
+        display: none !important;
+    }
+
+    .action-button-section {
+        justify-content: flex-end;
+    }
 }
 
 @media (max-width: 650px) {
