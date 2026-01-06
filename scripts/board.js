@@ -218,7 +218,7 @@ function getSingleTaskOfAllTasksObj(taskId) {
 /**
  * This function sets the allTasksObj from the given array of 
  * task ID objects and all tasks data.
- * @param {Array} allTasksByIdArr Array of task ID objects.
+ * @param {Array} allTasksByIdArr Array of task IDs.
  * @returns {Object} The allTasksObj object.
  */
 function setAllTasksObj(allTasksByIdArr, allTasks) {
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * This function initializes the board by fetching data and rendering tasks.
- * @returns {Array} Array of all task ID.
+ * @returns {Array} Array of all task IDs.
  */
 async function initializeBoard() {
     const joinData = await fetchAllDataGlobal();
