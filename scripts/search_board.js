@@ -55,7 +55,12 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
  * @param {Array} filteredByDescription 
  */
 function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
-    if (filteredByTitle.length > 0) {
+    if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
+        clearBoard();
+        disableShowNoSearchResultOnBoardInfo();
+        let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
+        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksObj());
+    } else if (filteredByTitle.length > 0) {
         clearBoard();
         disableShowNoSearchResultOnBoardInfo();
         renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksObj());
@@ -63,11 +68,6 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
         clearBoard();
         disableShowNoSearchResultOnBoardInfo();
         renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksObj());
-    } else if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
-        clearBoard();
-        disableShowNoSearchResultOnBoardInfo();
-        let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
-        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksObj());
     } else {
         clearBoard();
         showNoSearchResultOnBoardInfo();
