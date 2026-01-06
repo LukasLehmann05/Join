@@ -111,7 +111,7 @@
                 </div>
             </section>
             <section class="board_table">
-                <div>
+                <div class="board_column">
                     <div class="column_header">
                         <p class="column_title">To do</p>
                         <button onclick="openAddTaskOverlay(this)" data-task-state="todo">
@@ -121,7 +121,7 @@
                     <div class="column_content" id="toDoColumn" ondrop="dropHandler(event)"
                         ondragover="dragOverHandler(event)"></div>
                 </div>
-                <div>
+                <div class="board_column">
                     <div class="column_header">
                         <p class="column_title">In progress</p>
                         <button onclick="openAddTaskOverlay(this)" data-task-state="in progress">
@@ -131,7 +131,7 @@
                     <div class="column_content" id="inProgressColumn" ondrop="dropHandler(event)"
                         ondragover="dragOverHandler(event)"></div>
                 </div>
-                <div>
+                <div class="board_column">
                     <div class="column_header">
                         <p class="column_title">Await feedback</p>
                         <button onclick="openAddTaskOverlay(this)" data-task-state="awaiting feedback">
@@ -141,7 +141,7 @@
                     <div class="column_content" id="awaitFeedbackColumn" ondrop="dropHandler(event)"
                         ondragover="dragOverHandler(event)"></div>
                 </div>
-                <div>
+                <div class="board_column">
                     <div class="column_header">
                         <p class="column_title">Done</p>
                     </div>
