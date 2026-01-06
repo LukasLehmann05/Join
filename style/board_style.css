@@ -288,7 +288,7 @@ h1{
 
 .responseToastContent{
     box-sizing: border-box;
-    transform: translateY(200vh);
+    transform: translateY(40vh);
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
     opacity: 0;
     z-index: 1001;
