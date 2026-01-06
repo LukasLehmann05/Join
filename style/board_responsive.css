@@ -1,6 +1,7 @@
 @media (max-width: 1100px) {
     .board_menu {
         flex-direction: column;
+        margin-bottom: 24px;
     }
 
     .button_add_task {
