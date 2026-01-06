@@ -65,6 +65,7 @@ async function createTask() {
     let can_create = checkForRequired(['title', 'dueDate', 'category'])
     if (can_create == true) {
         await sendTaskToDB(TASK_STATE_ARR[0]);
+        await renderNewTaskAddedToastContainer();
         clearAllInputs();
         redirectToBoard()
     } else {
