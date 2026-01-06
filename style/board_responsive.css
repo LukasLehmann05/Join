@@ -123,9 +123,15 @@
         display: flex;
         flex-direction: row;
         overflow-x: auto !important;
+        gap: 16px;
     }
 
     .board_column {
         width: 100%;
+    }
+
+    .single_task_content {
+        min-width: 200px;
+        max-width: 220px;
     }
 }
