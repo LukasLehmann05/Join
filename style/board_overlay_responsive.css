@@ -97,4 +97,8 @@
     .action-buttons p {
         font-size: 16px;
     }
+
+    #task_subtask {
+        width: 100%;
+    }
 }
