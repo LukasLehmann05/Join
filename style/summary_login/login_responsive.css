@@ -114,6 +114,10 @@
         flex-direction: column;
         gap: 12px;
     }
+    
+    .login-logo {
+        width: 60px;
+    }
 
     .login-footer {
         margin-top: 60px;
