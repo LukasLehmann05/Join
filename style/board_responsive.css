@@ -20,4 +20,14 @@
         width: 28px;
         padding: 10px;
     }
+
+    .h1_section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .board_controls {
+        margin-right: 0px;
+    }
 }
