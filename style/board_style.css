@@ -313,6 +313,7 @@ h1{
 }
 
 .repsonsive_add_task_button {
+    display: none;
     border-radius: 20%;
     background-color: #2A3647;
     border: none;
