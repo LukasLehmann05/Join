@@ -68,7 +68,7 @@
     padding: 48px 48px 32px 48px;
     width: 100%;
     max-width: 652px;
-    margin: 230px auto 0;
+    margin: calc(50vh - 240px) auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
