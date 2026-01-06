@@ -67,7 +67,7 @@ async function createTask() {
         await sendTaskToDB(TASK_STATE_ARR[0]);
         await renderNewTaskAddedToastContainer();
         clearAllInputs();
-        redirectToBoard()
+        setTimeout(redirectToBoard, 300);
     } else {
         missingInputs()
         resetRequiredValues()
