@@ -38,7 +38,7 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
         searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription);
     }
-    if (inputText.length == 0) {
+    if (inputText.length === 0) {
         searchEvent = false;
         clearBoard();
         renderAllTaskCardsOnBoard(allTasksByIdArr, getAllTasksObj());
