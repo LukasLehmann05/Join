@@ -311,20 +311,3 @@ h1 {
     transform: translateY(0);
     pointer-events: auto;
 }
-
-.repsonsive_add_task_button {
-    display: none;
-    border-radius: 20%;
-    background-color: #2A3647;
-    border: none;
-    aspect-ratio: 1;
-}
-
-.repsonsive_add_task_button:hover {
-    background-color: #29ABE2;
-    cursor: pointer;
-}
-
-.required-field-section-responsive {
-    display: none;
-}
