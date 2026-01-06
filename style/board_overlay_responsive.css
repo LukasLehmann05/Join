@@ -14,3 +14,17 @@
         width: 95%;
     }
 }
+
+@media (max-width: 500px) {
+    #overlay_title {
+        font-size: 48px;
+    }
+
+    .priority-button {
+        padding: 10px 5px;
+    }
+
+    .priority-section {
+        padding: 8px;
+    }
+}
