@@ -50,8 +50,8 @@
 }
 
 @media (max-width: 420px) {
-    .action-buttons {
-        padding: 8px;
+    .priority-section {
+        flex-direction: column;
     }
 
     .action-buttons p {
