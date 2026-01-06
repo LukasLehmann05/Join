@@ -524,3 +524,12 @@ textarea.task-input {
     background-color: #3a4555 !important;
     color: white !important;
 }
+
+.order-middle{
+    display: flex;
+    justify-content: center;
+}
+
+.add-task-toast-adaption {
+    margin-top: 40vh;
+}
