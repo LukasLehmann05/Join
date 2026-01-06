@@ -35,3 +35,9 @@
         display: block;
     }
 }
+
+@media (max-width: 767px) {
+    .header-nav {
+        padding-left: 48px;
+    }
+}
