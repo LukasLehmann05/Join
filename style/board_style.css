@@ -348,3 +348,7 @@ h1 {
     background-color: #29ABE2;
     cursor: pointer;
 }
+
+.required-field-section-responsive {
+    display: none;
+}
