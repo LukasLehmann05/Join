@@ -1,11 +1,11 @@
-.board_content{
+.board_content {
     display: flex;
     flex-direction: column;
     gap: 20px;
     max-width: 1400px;
 }
 
-.board_menu{
+.board_menu {
     display: flex;
     height: 152px;
     justify-content: space-between;
@@ -13,37 +13,25 @@
     font-family: "Inter_bold";
 }
 
-.board_controls{
+.board_controls {
     display: flex;
     justify-content: space-between;
     gap: 32px;
     margin-right: 24px;
 }
 
-.table_header{
-    display: flex;
-    gap: 24px;
-}
-
-.column_title{
+.column_title {
     font-size: 20px;
     font-weight: 700;
     color: #42526E
 }
 
-.table_header .column_header{
-    display: flex;
-    align-items: center;
-    width: calc(100% / 4);
-    justify-content: space-between;
-}
-
-h1{
+h1 {
     font-size: 61px;
     font-weight: 700;
 }
 
-.search_task{
+.search_task {
     border: 1px solid;
     border-color: #A8A8A8;
     border-radius: 10px;
@@ -57,7 +45,7 @@ h1{
     border-color: #29ABE2;
 }
 
-.search_task input{
+.search_task input {
     border: none;
     outline: none;
     font-size: 20px;
@@ -71,13 +59,13 @@ h1{
     color: #D1D1D1;
 }
 
-.search_task button{
+.search_task button {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
-.button_add_task{
+.button_add_task {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -86,31 +74,36 @@ h1{
     border-radius: 10px;
     padding: 8px 16px;
     cursor: pointer;
-    color:white;
+    color: white;
     font-family: "Inter_bold";
     font-size: 21px;
 }
 
-.button_add_task:hover{
+.button_add_task:hover {
     background-color: #29ABE2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.table_header .column_header button{
+.column_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.column_header button {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
-.board_table{
+.board_table {
     display: flex;
     gap: 24px;
     overflow-y: hidden;
     height: calc(100vh - 400px);
 }
 
-.board_table .column_content{
-    width: calc(100% / 4);
+.board_table .column_content {
     margin-top: 8px;
     box-sizing: border-box;
     word-wrap: break-word;
@@ -119,7 +112,11 @@ h1{
     overflow-x: hidden;
 }
 
-.no_task_yet{
+.board_column {
+    width: calc(100% / 4);
+}
+
+.no_task_yet {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,12 +153,13 @@ h1{
     border-radius: 4px 0 0 4px;
     transition: width 0.3s;
 }
+
 .subtask_status_bar_text {
     font-size: 14px;
     color: #42526E;
 }
 
-.single_task_content{
+.single_task_content {
     background-color: white;
     border-radius: 24px;
     padding: 16px;
@@ -172,7 +170,7 @@ h1{
     margin-bottom: 16px;
 }
 
-.single_task_content .category{
+.single_task_content .category {
     font-size: 16px;
     font-weight: 400;
     color: white;
@@ -181,29 +179,29 @@ h1{
     border-radius: 8px;
 }
 
-.single_task_content .technical_task{
+.single_task_content .technical_task {
     background-color: #0038FF;
 }
 
-.single_task_content .user_story{
+.single_task_content .user_story {
     background-color: #1FD7C1;
 }
 
-.single_task_content h3{
+.single_task_content h3 {
     font-size: 16px;
     font-weight: 700;
     margin: 16px 0px 8px 0px;
     font-family: "Inter_bold";
 }
 
-.single_task_content p{
+.single_task_content p {
     font-size: 16px;
     font-weight: 400;
     color: #A8A8A8;
     font-family: "Inter";
 }
 
-.single_task_content .subtask_status_bar .subtask_info{
+.single_task_content .subtask_status_bar .subtask_info {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -211,19 +209,20 @@ h1{
     font-family: "Inter";
 }
 
-.single_task_content .subtask_status_bar .subtask_info p{
+.single_task_content .subtask_status_bar .subtask_info p {
     color: black
 }
-.assigned_user_avatar{
-    width:32px;
-    height:32px;
-    color:#fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+
+.assigned_user_avatar {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 400;
-    font-size:16px;
+    font-size: 16px;
     font-family: "Inter";
     margin-left: -12px;
     border: 1px solid #fff;
@@ -231,13 +230,13 @@ h1{
     z-index: 1;
 }
 
-.assigned_user_content .assigned_user_avatar{
-    width:42px;
-    height:42px;
+.assigned_user_content .assigned_user_avatar {
+    width: 42px;
+    height: 42px;
     border: 2px solid #fff;
 }
 
-.assigned_users_section_and_priority{
+.assigned_users_section_and_priority {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -245,14 +244,15 @@ h1{
     margin-top: 16px;
 }
 
-.assigned_users_section_and_priority .assigned_users{
+.assigned_users_section_and_priority .assigned_users {
     display: flex;
     position: relative;
 }
 
 .assigned_user_avatar:first-child {
-    margin-left: 0; 
+    margin-left: 0;
 }
+
 .single_task_content.drag-tilt {
     transform: rotateZ(5deg);
 }
@@ -264,11 +264,11 @@ h1{
     height: 220px;
 }
 
-.priority_indicator img{
+.priority_indicator img {
     width: 17px;
 }
 
-.no_task_found_message{
+.no_task_found_message {
     font-size: 16px;
     font-weight: 400;
     color: #ff3d00;
@@ -276,17 +276,17 @@ h1{
     display: block;
 }
 
-.board_controls_container{
+.board_controls_container {
     display: flex;
     flex-direction: column;
-    gap:8px;
+    gap: 8px;
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
-.responseToastContent{
+.responseToastContent {
     box-sizing: border-box;
     transform: translateY(40vh);
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
