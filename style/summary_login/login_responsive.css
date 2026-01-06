@@ -4,7 +4,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1000px), (max-height: 900px) {
     .login-header {
         position: static;
         margin-top: 24px;
@@ -63,7 +63,7 @@
     }
 
     .login-container {
-        margin-top: 50px;
+        /* margin-top: 50px; */
         width: 100%;
         max-width: 100%;
         display: flex;
@@ -75,7 +75,7 @@
         position: static;
         width: 100%;
         max-width: 450px;
-        margin-top: 24px;
+        margin-top: calc(50vh - 240px - 130px);
         order: 1;
     }
 
