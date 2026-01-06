@@ -102,13 +102,19 @@
 
 @media (max-width: 530px) {
     .login-card {
-        max-width: 350px;
+        max-width: 310px;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .login-card {
-        max-width: 340px;
+        max-width: 280px;
+        padding: 48px 28px 48px 28px;
+        }
+
+     .login-buttons {
+        flex-direction: column;
+        gap: 12px;
     }
 
     .login-footer {
@@ -137,6 +143,13 @@
         width: 60%;
         font-size: 14px;
 
+    }
+    
+}
+
+@media (max-width: 365px) {
+    .login-card {
+        max-width: 240px;
     }
 }
 
