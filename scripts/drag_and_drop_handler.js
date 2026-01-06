@@ -134,7 +134,7 @@ function dropHandler(event) {
  * @param {string} newColumnId The ID of the new column.
  */
 async function updateStateOfDroppedTask(taskId, newColumnId) {
-    const task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
+    const task = getSingleTaskOfAllTasksObj(taskId);
     if (!task) {
         console.error(`Task with ID ${taskId} not found.`);
         return;

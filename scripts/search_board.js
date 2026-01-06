@@ -3,14 +3,14 @@ let searchEvent=false;
  * This function initializes the input field event listener for task filtering.
  * It adds a debounced input event listener to the input field with ID 'task_filter_input_field'.
  */
-function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
+function initInputFieldEventListener(allTasksByIdArr) {
     const inputField = document.getElementById('task_filter_input_field');
     let debounceTimeout;
     if (!inputField) return;
     inputField.addEventListener('input', (event) => {
         clearTimeout(debounceTimeout);
         debounceTimeout = setTimeout(() => {
-            handleTermOfInput(event, allTasksByIdOfSingleUserArr);
+            handleTermOfInput(event, allTasksByIdArr);
         }, 500);
     });
 }
@@ -20,9 +20,9 @@ function initInputFieldEventListener(allTasksByIdOfSingleUserArr) {
  * 
  * @param {*} event The input event object.
  */
-function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
+function handleTermOfInput(event, allTasksByIdArr) {
     let inputText = event.target.value;
-    handleInputSubmit(inputText, allTasksByIdOfSingleUserArr);
+    handleInputSubmit(inputText, allTasksByIdArr);
 }
 
 
@@ -31,19 +31,19 @@ function handleTermOfInput(event, allTasksByIdOfSingleUserArr) {
  * 
  * @param {string} inputText The text input for filtering tasks.
  */
-async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
+async function handleInputSubmit(inputText, allTasksByIdArr) {
     if (inputText.length > 2) {
         searchEvent = true;
         let filteredByTitle = filterTaskIdsByField(inputText, 'title');
         let filteredByDescription = filterTaskIdsByField(inputText, 'description');
         searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription);
-    } else {
-        searchEvent = false;
     }
-    if (inputText.length == 0 && searchEvent === false) {
+    if (inputText.length === 0) {
+        searchEvent = false;
         clearBoard();
-        renderAllTaskCardsOnBoard(allTasksByIdOfSingleUserArr, getAllTasksOfSingleUserObj());
+        renderAllTaskCardsOnBoard(allTasksByIdArr, getAllTasksObj());
         renderNoTaskInfoOnDOMLoad();
+        disableShowNoSearchResultOnBoardInfo();
     }
 }
 
@@ -54,19 +54,19 @@ async function handleInputSubmit(inputText, allTasksByIdOfSingleUserArr) {
  * @param {Array} filteredByDescription 
  */
 function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
-    if (filteredByTitle.length > 0) {
-        clearBoard();
-        disableShowNoSearchResultOnBoardInfo();
-        renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksOfSingleUserObj());
-    } else if (filteredByDescription.length > 0) {
-        clearBoard();
-        disableShowNoSearchResultOnBoardInfo();
-        renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksOfSingleUserObj());
-    } else if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
+    if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
         clearBoard();
         disableShowNoSearchResultOnBoardInfo();
         let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
-        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksOfSingleUserObj());
+        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksObj());
+    } else if (filteredByTitle.length > 0) {
+        clearBoard();
+        disableShowNoSearchResultOnBoardInfo();
+        renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksObj());
+    } else if (filteredByDescription.length > 0) {
+        clearBoard();
+        disableShowNoSearchResultOnBoardInfo();
+        renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksObj());
     } else {
         clearBoard();
         showNoSearchResultOnBoardInfo();
@@ -77,16 +77,14 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
  * Filters task IDs by a given field and input text.
  * @param {string} inputText The text to search for.
  * @param {string} field The field to search in ('title' or 'description').
- * @returns {Array} Array of filtered task ID objects.
+ * @returns {Array} Array of filtered task IDs.
  */
 function filterTaskIdsByField(inputText, field) {
     let filteredTaskIdsArr = [];
-    for (let taskId in allTasksOfSingleUserObj) {
-        let task = allTasksOfSingleUserObj[taskId];
+    for (let taskId in allTasksObj) {
+        let task = allTasksObj[taskId];
         if (task[field] && task[field].toLowerCase().includes(inputText.toLowerCase())) {
-            let taskIdObj = {};
-            taskIdObj[taskId] = true;
-            filteredTaskIdsArr.push(taskIdObj);
+            filteredTaskIdsArr.push(taskId);
         }
     }
     return filteredTaskIdsArr;

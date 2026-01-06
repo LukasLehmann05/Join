@@ -31,7 +31,6 @@ let allSubtasksArr = []
 let allAssigneesArr = []
 
 let subtask_amount = 0
-let testUserId = "-OfhU5mv5Jc_R3Ybzq8T" // to be removed later
 
 
 function addTaskInit() {
@@ -75,7 +74,7 @@ async function createTask() {
 }
 
 async function sendTaskToDB(stateOfNewTask) {
-    await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr, testUserId)
+    await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr);
 }
 
 function redirectToBoard() {

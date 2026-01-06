@@ -19,7 +19,7 @@ const DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY = 'data-edit-task-and-close-ove
  */
 async function sendUpdatedTaskToDB(taskId) {
     let taskToUpdate = await getTaskToUpdate(taskId);
-    updateAllTasksOfSingleUserObj(taskId, taskToUpdate);
+    updateAllTasksObj(taskId, taskToUpdate);
     clearElementsOfNewTask();
     if (Object.keys(taskToUpdate).length !== 0) {
         await updateTask(taskId, taskToUpdate);
@@ -99,7 +99,7 @@ function clearElementsOfNewTask() {
  */
 async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
-    let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
+    let task = getSingleTaskOfAllTasksObj(taskId);
     if (!task) return;
     overlayContent.innerHTML = overlayContentTemplate(task, taskId);
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
@@ -341,7 +341,6 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
 async function deleteTaskInOverlay(taskId) {
     const taskCardElement = document.getElementById(taskId+"_task_card")
     try {
-        await deleteTaskFromUserById(taskId, getCurrentUserIdIcon())
         await deleteTask(taskId);
         if (taskCardElement) {
             taskCardElement.remove();
@@ -351,13 +350,4 @@ async function deleteTaskInOverlay(taskId) {
         console.error("Error deleting task with id: " + taskId, error);
         alert("An error occurred while deleting the task. Please try again.");
     }
-}
-
-/**
- * 
- * This function gets the current user ID from the DOM.
- * @returns {string} The current user ID.
- */
-function getCurrentUserIdIcon() {
-    return document.getElementById('current_user_id').getAttribute('data-current-user-id');
 }
