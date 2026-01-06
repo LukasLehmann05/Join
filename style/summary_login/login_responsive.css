@@ -130,6 +130,13 @@
     .login-card {
         max-width: 240px;
     }
+    
+}
+
+@media (max-width: 365px) {
+    .login-card {
+        max-width: 240px;
+    }
 }
 
 @media (min-width: 900px) and (max-width: 1100px) and (max-height: 700px) {
