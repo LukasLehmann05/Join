@@ -190,36 +190,36 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
  * @param {Object} newTask The new task object.
  */
 function displayNewTaskOnBoard(newTaskId, newTask) {
-    updateAllTasksOfSingleUserObj(newTaskId, newTask);
+    updateAllTasksObj(newTaskId, newTask);
     renderTaskCard(newTaskId, newTask);
     removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
 }
 
 /**
- * This function updates the allTasksOfSingleUserObj with the updated task.
+ * This function updates the allTasksObj with the updated task.
  * 
  * @param {string} taskId The ID of the task to update.
  * @param {Object} updatedTask The updated task object.
  */
-function updateAllTasksOfSingleUserObj(taskId, updatedTask) {
+function updateAllTasksObj(taskId, updatedTask) {
     allTasksObj[taskId] = updatedTask;
 }
 
 /**
- * This function return a single task from allTasksOfSingleUserObj by its ID.
+ * This function return a single task from allTasksObj by its ID.
  * 
  * @param {string} taskId The ID of the task to retrieve.
  * @returns {Object} The task object.
  */
-function getSingleTaskOfAllTasksOfSingleUserObj(taskId) {
+function getSingleTaskOfAllTasksObj(taskId) {
     return allTasksObj[taskId];
 }
 
 /**
- * This function sets the allTasksOfSingleUserObj from the given array of 
+ * This function sets the allTasksObj from the given array of 
  * task ID objects and all tasks data.
- * @param {Array} allTasksByIdArr Array of task ID objects for the user.
- * @returns {Object} The allTasksOfSingleUserObj object.
+ * @param {Array} allTasksByIdArr Array of task ID objects.
+ * @returns {Object} The allTasksObj object.
  */
 function setAllTasksObj(allTasksByIdArr, allTasks) {
     allTasksObj = {};
@@ -234,7 +234,7 @@ function setAllTasksObj(allTasksByIdArr, allTasks) {
 }
 
 /**
- * This function returns all tasks of the single user object.
+ * This function returns all tasks.
  * 
  * @returns {Object} The allTasksObj object.
  */
@@ -298,8 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /**
- * This function initializes the board for a user.
- * @returns {Array} Array of task ID objects for the user.
+ * This function initializes the board by fetching data and rendering tasks.
+ * @returns {Array} Array of all task ID.
  */
 async function initializeBoard() {
     const joinData = await fetchAllDataGlobal();
@@ -312,7 +312,12 @@ async function initializeBoard() {
     return allTasksByIdArr;
 }
 
-
+/**
+ * This function retrieves all task IDs from the join data.
+ * 
+ * @param {Object} joinData This is the global join data object.
+ * @returns {Array} Array of all task IDs.
+ */
 function getAllTaskIds(joinData) {
     let allTaskIds = [];
     for (let taskId in joinData.tasks) {
@@ -324,7 +329,7 @@ function getAllTaskIds(joinData) {
 /**
  * This function renders all task cards on the board.
  * 
- * @param {Array} allTasksByIdArr Array of task ID objects for the user.
+ * @param {Array} allTasksByIdArr Array of task IDs.
  * @param {Object} allTaskData The global task data object.
  */
 function renderAllTaskCardsOnBoard(allTasksByIdArr, allTaskData) {
