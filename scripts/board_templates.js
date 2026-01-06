@@ -408,6 +408,9 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                     </section>
                 </form>
                 <ul class="subtasks_upsert_list" id="subtask_render"></ul>
+                <section class="required-field-section-responsive">
+                    <p class="required-text" id="required_text_field_section"><span class="required">*</span>This field is required</p>
+                </section>
             </section>
             `
 }
