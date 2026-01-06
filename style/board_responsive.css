@@ -63,3 +63,9 @@
         max-width: 220px;
     }
 }
+
+@media (max-width: 500px) {
+    .main-content {
+        padding: 16px 24px;
+    }
+}
