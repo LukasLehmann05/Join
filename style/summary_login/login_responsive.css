@@ -45,9 +45,7 @@
 
 @media (max-width: 768px) {
 
-    body {
-        overflow: hidden;
-    }
+
 
     .login-wrapper {
         justify-content: flex-start;
