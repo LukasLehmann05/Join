@@ -11,7 +11,13 @@
         flex: 1;
     }
 
-        .search_task input{
+    .search_task input{
         flex: 1;
+    }
+
+    .add_task_res_btn {
+        height: 28px;
+        width: 28px;
+        padding: 10px;
     }
 }
