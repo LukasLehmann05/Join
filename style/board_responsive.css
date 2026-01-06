@@ -1,0 +1,17 @@
+@media (max-width: 1100px) {
+    .board_menu {
+        flex-direction: column;
+    }
+
+    .button_add_task {
+        display: none;
+    }
+
+    .search_task {
+        flex: 1;
+    }
+
+        .search_task input{
+        flex: 1;
+    }
+}
