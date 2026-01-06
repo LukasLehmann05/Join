@@ -40,7 +40,7 @@
         flex: 1;
     }
 
-    .search_task input {
+    .search_task input{
         flex: 1;
     }
 
@@ -75,21 +75,6 @@
 @media (max-width: 767px) {
     .header-nav {
         padding-left: 48px;
-    }
-
-    .board_table {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .column_content {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto !important;
-    }
-
-    .board_column {
-        width: 100%;
     }
 }
 
