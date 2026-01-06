@@ -108,7 +108,7 @@
 @media (max-width: 450px) {
     .login-card {
         max-width: 280px;
-        padding: 48px 28px 48px 28px;
+        padding: 48px 28px;
         }
 
      .login-buttons {
@@ -139,21 +139,6 @@
     .login-error-message.login-error-message {
         font-size: 14px;
     }
-}
-
-@media (max-width: 365px) {
-    .login-card {
-        max-width: 240px;
-    }
-
-    .login-buttons button{
-        font-size: 18px;
-    }
-
-    .login-logo {
-        width: 50px;
-    }
-
 }
 
 @media (max-width: 365px) {
