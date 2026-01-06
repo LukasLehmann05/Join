@@ -10,7 +10,13 @@
     <link rel="stylesheet" href="../style/summary_login/login_responsive.css">
     <link rel="stylesheet" href="../style/summary_login/signup_responsive.css">
     <link rel="stylesheet" href="../style/summary_login/signup.css">
+    <link rel="stylesheet" href="../style/add_task.css">
+    <link rel="stylesheet" href="../style/add_task_responsive.css">
+    <link rel="stylesheet" href="../style/contacts/add_contact.css">
+    <link rel="stylesheet" href="../style/contacts/contact_responsive.css">
+
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
+
 
 
 </head>
@@ -29,31 +35,26 @@
         <main class="login-card signup-card">
             <a href="../html/login.html" class="back-arrow"></a>
             <h1 class="login-title">Sign up</h1>
-            <form class="login-form" id="signup-form" novalidate>
-                <div class="input-wrapper">
+            <form class="signup-form" id="signup-form" novalidate>
+                <label class="padding-sign-up-input subtask-section name">
                     <input type="text" id="signup-name" class="login-input" placeholder="Name" required>
-                    <img src="../assets/icons/contacts/person.svg" alt="User icon" class="input-icon">
-                    <span class="input-error" id="error-signup-name"></span>
-                </div>
-                <div class="input-wrapper">
+                </label>
+                <span class="input-error" id="error-signup-name"></span>
+                <label class=" padding-sign-up-input subtask-section mail">
                     <input autocomplete="username" type="email" id="signup-email" class="login-input"
                         placeholder="Email" required>
-                    <img src="../assets/icons/contacts/mail.svg" alt="Email icon" class="input-icon">
-                    <span class="input-error" id="error-signup-email"></span>
-                </div>
-                <div class="input-wrapper">
+                </label>
+                <span class="input-error" id="error-signup-email"></span>
+                <label class="padding-sign-up-input subtask-section lock">
                     <input autocomplete="current-password" type="password" id="signup-password" class="login-input"
                         placeholder="Password" required>
-                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
-                    <span class="input-error" id="error-signup-password"></span>
-                </div>
-                <div class="input-wrapper">
+                </label>
+                <span class="input-error" id="error-signup-password"></span>
+                <label class="padding-sign-up-input subtask-section lock">
                     <input autocomplete="current-password" type="password" id="signup-password-confirm"
                         class="login-input" placeholder="Confirm Password" required>
-                    <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
-                    <span class="input-error" id="error-signup-password-confirm"></span>
-                </div>
-
+                </label>
+                <span class="input-error" id="error-signup-password-confirm"></span>
                 <label class="privacy-check">
                     <input type="checkbox" id="privacy-checkbox">
                     <span> I accept the <a href="#">Privacy policy</a></span>
@@ -66,8 +67,8 @@
             </form>
         </main>
         <footer class="login-footer">
-            <a href="../html/privacyPolicy.html">Privacy Policy</a>
-            <a href="../html/legalNotice.html">Legal notice</a>
+            <a href="../html/privacy_policy.html">Privacy Policy</a>
+            <a href="../html/legal_notice.html">Legal notice</a>
         </footer>
     </div>
 
