@@ -128,25 +128,6 @@
     }
 }
 
-@media (max-width: 420px) {
-    .login-buttons {
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login-button-primary,
-    .login-button-secondary,
-    .guest-button {
-        width: 60%;
-        font-size: 14px;
-
-    }
-    
-}
-
 @media (max-width: 365px) {
     .login-card {
         max-width: 240px;
