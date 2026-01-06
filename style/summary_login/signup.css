@@ -1,6 +1,21 @@
-.signup-card .login-form {
+.signup-card {
     gap: 16px;
+    margin-top: 120px;
 }
+
+.padding-sign-up-input{
+    padding: 0 !important;
+}
+
+.signup-form {
+    width: 100%;
+    max-width: 432px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .signup-button-primary {
     max-width: 180px;
     display: block;
@@ -65,10 +80,6 @@ button.signup-button-primary:disabled {
     height: 0;
     border-top: 3px solid #29ABE2;
     transform: translateY(-50%);
-}
-
-.signup-card {
-    margin-top: 180px;
 }
 
 .privacy-check {
