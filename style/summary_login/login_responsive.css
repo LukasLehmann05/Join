@@ -137,6 +137,12 @@
     }
 }
 
+@media (max-width: 400px) {
+    .login-error-message.login-error-message {
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 365px) {
     .login-card {
         max-width: 240px;
