@@ -28,10 +28,10 @@ const colours = [
 async function fetchContactList() {
     let contactData = (await fetchAllDataGlobal()).contacts;
     for (let contactID in contactData) {
-        assignColorToContact(contactID);
+        let color = contactData[contactID].color;
         let name = contactData[contactID].name;
         let singleContactData = contactData[contactID];
-        renderHtmlElements(singleContactData, contactID, name);
+        renderHtmlElements(singleContactData, contactID, name, color);
     }
 };
 
@@ -40,9 +40,9 @@ async function fetchContactList() {
  * vehicle for better structure
  * @async
  */
-async function renderHtmlElements(singleContactData, contactID, name) {
+async function renderHtmlElements(singleContactData, contactID, name, color) {
     await renderListLetter(name);
-    await renderContactList(singleContactData, contactID);
+    await renderContactList(singleContactData, contactID, color);
 };
 
 
@@ -78,14 +78,14 @@ function sortAlphabetically(parent) {
 /**
  * renders contact into contact list. Gets called in function: "fetchContactList()"
  */
-async function renderContactList(singleContactData, contactID) {
+async function renderContactList(singleContactData, contactID, color) {
     let name = singleContactData.name;
     let email = singleContactData.email;
     let phone = singleContactData.phone;
     let acronym = getAcronym(name);
     let letter = name.charAt(0).toUpperCase();
     document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
-    colorAcronym(contactID);
+    colorAcronym(contactID, color);
 };
 
 
@@ -106,10 +106,10 @@ function getAcronym(name) {
 /**
  * fetches color from array and assigns it as backgroundcolor for the user acronym
  */
-function colorAcronym(contactId) {
+function colorAcronym(contactId, color) {
     let element = document.getElementById("short-" + contactId);
-    if (!element) return; // guard if element not found
-    element.style.backgroundColor = contactColorProperty[contactId];
+    if (!element) return;
+    element.style.backgroundColor = color;
 };
 
 
@@ -118,9 +118,9 @@ function colorAcronym(contactId) {
  * assigns colors to contact permanently in contactColorProperty
  * @const contactColorProperty
  */
-function assignColorToContact(contactId) {
+function assignColorToContact() {
     let userColor = colours[Math.floor(Math.random() * colours.length)];
-    contactColorProperty[contactId] = userColor;
+    return userColor;
 };
 
 
@@ -161,10 +161,12 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
     let name = document.getElementById(nameInput).value;
     let phone = document.getElementById(phoneInput).value;
     let email = document.getElementById(emailInput).value;
+    let color = assignColorToContact();
     let newUser = {
         "email": email,
         "name": name,
         "phone": phone,
+        "color": color
     };
     return newUser;
 };
@@ -198,7 +200,6 @@ async function addNewContactToDatabase() {
  */
 async function trimDownAddingContact(newUser, name) {
     let contactID = await getLastContactAddedFromDatabase();
-    assignColorToContact(contactID);
     await renderHtmlElements(newUser, contactID, name);
     emptyInput();
     dialogAppearences('dialogWindow', 'addContent');
@@ -272,7 +273,8 @@ function getDataFromMain() {
         "email": email,
         "name": name,
         "phone": phone,
-        "id": currentId
+        "id": currentId,
+        "color": color,
     };
     return currentContact;
 };
