@@ -28,8 +28,8 @@
 .login-logo {
     padding-top: 80px;
     padding-left: 77px;
-    width: 100px;
-    height: auto;
+    display: flex;
+    object-fit: contain;
 }
 
 .login-header {
