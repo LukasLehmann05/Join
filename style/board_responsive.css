@@ -104,7 +104,7 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1100px) and (min-width: 768px) {
     .article-bg {
         width: calc(100vw - 247px);
     }
