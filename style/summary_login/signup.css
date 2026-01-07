@@ -2,8 +2,12 @@
     gap: 16px;
 }
 
-.padding-sign-up-input{
-    padding: 0 !important;
+.sign-up-input{
+    padding: 0 21px;
+    display: flex;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #D1D1D1;
 }
 
 .signup-form {
@@ -12,7 +16,6 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
 }
 
 .signup-button-primary {
@@ -131,6 +134,7 @@ button.signup-button-primary:disabled {
     font-size: 16px;
     color: #FF3B3B;
     font-family: Inter, sans-serif;
+    height: 24px;
 }
 
 .login-input.error {
