@@ -1,3 +1,7 @@
+.login-mobile {
+    display: none;
+}
+
 @media (max-width: 1000px), (max-height: 900px) {
     .login-header {
         position: static;
@@ -63,6 +67,36 @@
 }
 
 @media (max-width: 600px) {
+   .login-header{
+        display: none;
+   }
+
+   .login-logo img{
+        width: 64px;
+        height: 78px;
+    }
+    
+    .login-logo{
+       padding-top: 37px;
+       padding-left: 38px;
+   }
+
+   .login-mobile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-top: 24px;
+        margin-bottom: 16px;
+    }
+
+    .login-button-primary{
+        font-size: 18px;
+    }
+
+    .login-button-secondary{
+        font-size: 18px;
+    }
    
 }
 
