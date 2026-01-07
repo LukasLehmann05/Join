@@ -27,7 +27,6 @@
 
     .login-footer {
         position: static;
-        margin-top: auto;
         padding-bottom: 24px;
         display: flex;
         justify-content: center;
@@ -74,7 +73,7 @@
     .login-card {
         position: static;
         width: 100%;
-        max-width: 450px;
+        /* max-width: 450px; */
         margin-top: calc(50vh - 240px - 130px);
         order: 1;
     }
@@ -86,19 +85,19 @@
 
 @media (max-width: 700px) {
     .login-card {
-        max-width: 400px;
+        /* max-width: 400px; */
     }
 }
 
 @media (max-width: 600px) {
     .login-card {
-        max-width: 380px;
+        /* max-width: 380px; */
     }
 }
 
 @media (max-width: 530px) {
     .login-card {
-        max-width: 310px;
+        /* max-width: 310px; */
     }
 
     .login-title {
@@ -108,7 +107,7 @@
 
 @media (max-width: 450px) {
     .login-card {
-        max-width: 280px;
+        /* max-width: 280px; */
         padding: 48px 28px;
     }
 
@@ -144,7 +143,7 @@
 
 @media (max-width: 365px) {
     .login-card {
-        max-width: 240px;
+        /* max-width: 240px; */
     }
 
     .login-buttons button {
@@ -173,7 +172,7 @@
 
 @media (max-height: 800px) {
     .login-card {
-        margin-top: calc(50vh - 240px - 60px);
-        padding: 32px 16px;
+        /* margin-top: calc(50vh - 240px - 60px); */
+        /* padding: 32px 16px; */
     }
 }
