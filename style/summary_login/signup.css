@@ -131,7 +131,7 @@ button.signup-button-primary:disabled {
     font-size: 16px;
     color: #FF3B3B;
     font-family: Inter, sans-serif;
-    height: 24px;
+    height: 20px;
 }
 
 .login-input.error {
