@@ -8,16 +8,20 @@
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/summary_login/login.css">
     <link rel="stylesheet" href="../style/summary_login/login_responsive.css">
+    <link rel="stylesheet" href="../style/summary_login/animation.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 
 
 </head>
 
 <body class="body">
+
+<div class="animation-overlay" id="animationOverlay">
+    <img class="animated-logo" src="../assets/icons/logo/logoBig.svg" alt="Join logo">
+</div>
+
     <div class="login-wrapper">
-        <div class="login-logo-section">
-            <img class="login-logo" src="../assets/icons/logo/logoSmall.svg" alt="Join logo">
-        </div>
+        
         <div class="login-container">
             <div class="login-header">
                 <p class="login-header-text">Not a Join user?</p>
@@ -54,6 +58,7 @@
         </div>
     </div>
 </body>
+<script src="../scripts/login_and_summary/animation.js"></script>
 <script src="../scripts/firebase.js"></script>
 <script src="../scripts/login_and_summary/login.js" defer></script>
 
