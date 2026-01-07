@@ -1,0 +1,69 @@
+.animation-overlay {
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #F6F7F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+}
+
+.animation-overlay.fade-out {
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.animation-overlay.static {
+    position: absolute;
+    top: 64px;
+    left: 66px;
+    width: auto;
+    height: auto;
+    display: block;
+    background: transparent;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.animated-logo {
+    width: 274px;
+    height: auto;
+    animation: logoAnimation 1.5s ease-in-out forwards;
+}
+
+@keyframes logoAnimation {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    66% {
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        transform: translate(calc(-50vw + 116px), calc(-50vh + 124px)) scale(0.365);
+    }
+}
+
+.login-wrapper {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.login-wrapper.visible {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    @keyframes logoAnimation {
+        0% {
+            transform: translate(0, 0) scale(1);
+        }
+        66% {
+            transform: translate(0, 0) scale(1);
+        }
+        100% {
+            transform: translate(calc(-50vw + 60px), calc(-50vh + 68px)) scale(0.263);
+        }
+    }
+}
