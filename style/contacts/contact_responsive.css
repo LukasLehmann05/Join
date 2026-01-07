@@ -40,7 +40,7 @@
         margin-top: 48px;
     }
 
-    .cancel-add-btn{
+    .cancel-add-btn {
         display: none;
     }
 
@@ -140,7 +140,7 @@
         translate: -50%;
     }
 
-    .edit-right{
+    .edit-right {
         padding-top: 60px;
     }
 
@@ -298,5 +298,32 @@
 
     .sub-menu-btns {
         margin-right: 6px;
+    }
+
+    .dialog-content {
+        margin: 14px 4%;
+    }
+
+    .main-left {
+        padding: 80px 4%;
+    }
+
+    .position {
+        top: 33%;
+    }
+
+    .contact-display {
+        margin-left: 16px;
+        margin-top: 25px;
+    }
+
+    .main-right {
+        flex: none;
+        padding-bottom: 21px;
+        padding-top: 24px;
+    }
+
+    .position-edit {
+        top: 26%;
     }
 }
