@@ -1,4 +1,4 @@
-**
+/**
  * Initializes the logo animation on page load.
  * Displays a centered logo that animates to the top-left corner,
  * then transitions to a static logo position.
