@@ -9,16 +9,16 @@
 }
 
 .login-logo-section {
-    position: absolute;
-    top: 64px;
-    left: 66px;
+    position: relative;
+    width: 100%;
     max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .login-container {
     width: 100%;
     max-width: 1440px;
-    margin: 0 auto;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -26,14 +26,17 @@
 }
 
 .login-logo {
+    position: relative;
+    top: 80px;
+    left: 77px;
     width: 100px;
     height: auto;
 }
 
 .login-header {
-    position: absolute;
-    top: 64px;
-    right: 150px;
+    position: relative;
+    top: 67px;
+    right: 122px;
     display: flex;
     align-items: center;
     gap: 35px;
@@ -65,10 +68,10 @@
     background: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    padding: 48px 48px 32px 48px;
+    padding: 48px clamp(16px, -132.5px + 24.75vw, 115px);
     width: 100%;
     max-width: 652px;
-    margin: calc(50vh - 240px) auto 0;
+    margin: calc(50vh - 240px) 16px 16px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
