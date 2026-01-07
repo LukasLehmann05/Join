@@ -54,12 +54,26 @@ button.signup-button-primary:disabled {
     position: absolute;
     top: 70px;
     left: 50px;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
+    object-fit: contain;
+    display: flex;
+    border-radius: 16px;
 }
 
-.back-arrow::before {
+.hover-img{
+    background-color: transparent;
+    margin: 5px;
+    
+}
+
+.back-arrow:hover{
+    background-color: #D1D1D1;
+    transform: scale(1.1);
+}
+
+/* .back-arrow::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -80,7 +94,7 @@ button.signup-button-primary:disabled {
     height: 0;
     border-top: 3px solid #29ABE2;
     transform: translateY(-50%);
-}
+} */
 
 .privacy-check {
     align-self: center;
