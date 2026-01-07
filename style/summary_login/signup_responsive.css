@@ -17,6 +17,10 @@
     .login-logo {
         width: 72px;
     }
+    .back-arrow {
+        top: 40px;
+        left: 40px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -28,32 +32,6 @@
 
     .signup-card.signup-card {
         margin-top: 28px;
-    }
-
-    .back-arrow.back-arrow {
-        top: 240px;
-        left: 180px;
-    }
-}
-
-@media (max-width: 700px) {
-    .back-arrow.back-arrow {
-        top: 240px;
-        left: 130px;
-    }
-}
-
-@media (max-width: 620px) {
-    .back-arrow.back-arrow {
-        top: 240px;
-        left: 100px;
-    }
-}
-
-@media (max-width: 550px) {
-    .back-arrow.back-arrow {
-        top: 240px;
-        left: 60px;
     }
 }
 
@@ -67,20 +45,11 @@
         font-size: 47px;
     }
 
-    .back-arrow.back-arrow {
-        top: 210px;
-        left: 60px;
-    }
-
 }
 
 @media (max-width: 450px) {
     .login-logo {
         width: 60px;
-    }
-    .back-arrow.back-arrow {
-        top: 195px;
-        left: 60px;
     }
 }
 
@@ -106,27 +75,22 @@
     .input-error.input-error {
         font-size: 16px;
     }
+
+       .back-arrow {
+        top: 30px;
+        left: 30px;
+    }
 }
 
 @media (max-width: 365px) {
     .login-logo {
         width: 50px;
     }
-
-    .back-arrow.back-arrow {
-        top: 180px;
-        left: 50px;
-    }
-
 }
 
 @media (max-width: 350px) {
     .login-card {
         max-width: 250px;
-    }
-    .back-arrow.back-arrow {
-        top: 180px;
-        left: 40px;
     }
 }
 
