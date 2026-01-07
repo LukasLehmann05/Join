@@ -127,7 +127,7 @@ function validatePasswordConfirm(data, errors) {
     return;
   }
   if (data.password !== data.passwordConfirm) {
-    errors.passwordConfirm = "Passwords do not match.";
+    errors.passwordConfirm = "Passwords does not match.";
   }
 }
 
