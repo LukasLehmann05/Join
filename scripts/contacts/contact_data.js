@@ -182,7 +182,7 @@ async function addNewContactToDatabase() {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
                 await postNewContactToDatabase(newUser);
-                await trimDownAddingContact(newUser, newUser.name);
+                await trimDownAddingContact(newUser, newUser.name, newUser.color);
             } else {
                 displayHint('required_phone');
             }
@@ -198,9 +198,9 @@ async function addNewContactToDatabase() {
 /**
  * shell for restructuring html templates and dialog appearences
  */
-async function trimDownAddingContact(newUser, name) {
+async function trimDownAddingContact(newUser, name, color) {
     let contactID = await getLastContactAddedFromDatabase();
-    await renderHtmlElements(newUser, contactID, name);
+    await renderHtmlElements(newUser, contactID, name, color);
     emptyInput();
     dialogAppearences('dialogWindow', 'addContent');
 };
