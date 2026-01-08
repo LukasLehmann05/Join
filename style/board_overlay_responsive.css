@@ -35,6 +35,12 @@
     }
 }
 
+@media (max-width: 550px) {
+    .overlay_main_content h1 {
+        font-size: 40px;
+    }
+}
+
 @media (max-width: 500px) {
     #overlay_title {
         font-size: 48px;
@@ -50,6 +56,10 @@
 
     .overlay_content {
         padding: 20px 16px;
+    }
+
+    .overlay_main_content h1 {
+        font-size: 36px;
     }
 }
 
@@ -76,7 +86,11 @@
 }
 
 @media (max-width: 370px) {
-    .subtask-edit input{
+    .subtask-edit input {
         width: 180px;
+    }
+
+    .overlay_main_content h1 {
+        font-size: 26px;
     }
 }
