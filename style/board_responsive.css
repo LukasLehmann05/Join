@@ -4,10 +4,10 @@
         height: auto;
     }
 
-    .column_content {
+    .board_table .column_content {
         display: flex;
         flex-direction: row;
-        overflow-x: auto !important;
+        overflow-x: auto;
         gap: 16px;
     }
 
