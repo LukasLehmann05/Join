@@ -43,12 +43,6 @@
     }
 }
 
-@media (max-width: 365px) {
-    .login-logo {
-        width: 50px;
-    }
-}
-
 @media (min-width: 1260px) and (max-width: 1300px) and (min-height: 780px) and (max-height: 820px) {
     .login-footer {
         margin-top: 20px;
