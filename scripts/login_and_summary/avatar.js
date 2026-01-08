@@ -17,7 +17,7 @@ function getCurrentUserSafe() {
 }
 
 function redirectToLogin() {
-  window.location.href = "../html/login.html";
+  window.location.href = "../index.html";
 }
 
 function getInitialsFromParts(parts) {

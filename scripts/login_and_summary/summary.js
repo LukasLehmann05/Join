@@ -164,7 +164,7 @@ async function loadAndRenderSummary() {
 
 async function initSummaryPage() {
   requireAuth();
-  if (document.referrer.includes("login.html") && sessionStorage.getItem("visiting")){
+  if (document.referrer.includes("index.html") && sessionStorage.getItem("visiting")){
     renderGreeting();
     showGreetingOverlay();
   }

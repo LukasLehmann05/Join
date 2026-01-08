@@ -251,7 +251,7 @@ function handleSignupSuccess(newUser) {
   setTimeout(() => {
     localStorage.setItem("currentUser", JSON.stringify(newUser));
     localStorage.setItem("isGuest", "false");
-    window.location.href = "../html/login.html";
+    window.location.href = "../index.html";
   }, 1200);
 }
 
