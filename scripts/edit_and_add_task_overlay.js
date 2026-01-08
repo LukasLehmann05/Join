@@ -145,11 +145,12 @@ async function openAddTaskOverlay(buttonElement) {
     disableScrollOnBody();
 }
 
-/** * This function checks the screen size and redirects to the add task page if the width is less than 768px.
+/** 
+ * This function checks the screen size and redirects to the add task page if the width is less than 768px.
  */
 function checkScreenSizeForRedirect() {
     if (window.innerWidth < 768) {
-        window.location.replace("add_task.html")
+        window.location.href = 'add_task.html';
     }
 }
 
