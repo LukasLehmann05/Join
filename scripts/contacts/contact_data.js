@@ -2,18 +2,18 @@
  * array for colours to choose from for generating background colour in contact list
  */
 const colours = [
-    '#FFE62B',
+    '#b4a429ff',
     '#FF4646',
-    '#FFBB2B',
+    '#aa7f24ff',
     '#FFC701',
     '#0038FF',
-    '#C3FF2B',
+    '#76a00eff',
     '#FF745E',
     '#FFA35E',
     '#FC71FF',
     '#9327FF',
     '#00BEE8',
-    '#1FD7C1',
+    '#228f82ff',
     '#FF7A00',
     '#FF5EB3',
     '#6E52FF'
