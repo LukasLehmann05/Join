@@ -40,7 +40,7 @@
         flex: 1;
     }
 
-    .search_task input{
+    .search_task input {
         flex: 1;
     }
 
@@ -101,12 +101,6 @@
     .sidebar {
         position: sticky;
         top: 0px;
-    }
-}
-
-@media (min-width: 768px) {
-    .article-bg {
-        width: calc(100vw - 247px);
     }
 }
 
