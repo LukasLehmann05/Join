@@ -33,10 +33,6 @@
     }
 }
 
-@media (max-width: 900px) {
-   
-}
-
 @media (max-width: 768px) {
 
 
@@ -58,10 +54,6 @@
         align-items: center;
         justify-content: space-evenly;
     }
-}
-
-@media (max-width: 700px) {
-    
 }
 
 @media (max-width: 600px) {
@@ -141,7 +133,7 @@
 }
 
 @media (max-width: 400px) {
-    .login-error-message.login-error-message {
+    .login-error-message {
         font-size: 14px;
     }
 }
