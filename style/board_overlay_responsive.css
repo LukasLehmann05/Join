@@ -45,15 +45,11 @@
     }
 
     .priority-section {
-        padding: 8px;
+        flex-direction: column;
     }
 }
 
 @media (max-width: 420px) {
-    .priority-section {
-        flex-direction: column;
-    }
-
     .action-buttons {
         padding: 8px;
     }
