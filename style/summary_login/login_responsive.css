@@ -109,11 +109,6 @@
     .login-buttons button {
         font-size: 18px;
     }
-
-    .login-logo {
-        width: 50px;
-    }
-
 }
 
 @media (min-width: 900px) and (max-width: 1100px) and (max-height: 700px) {
