@@ -3,7 +3,7 @@
         display: none;
     }
 
-    .hide-in-resp{
+    .hide-in-resp {
         display: none;
     }
 
@@ -53,4 +53,8 @@
         height: 56px;
     }
 
+    .header {
+        position: sticky;
+        top: 0px;
+    }
 }
