@@ -34,18 +34,6 @@
 }
 
 @media (max-width: 768px) {
-
-
-
-    .login-wrapper {
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .login-logo {
-        width: 72px;
-    }
-
     .login-container {
         width: 100%;
         max-width: 100%;
@@ -101,22 +89,6 @@
     .login-title {
         font-size: 43px;
     }
-    
-    .login-logo {
-        width: 60px;
-    }
-
-    .login-title {
-        font-size: 43px;
-    }
-    
-    .login-logo {
-        width: 60px;
-    }
-
-    .login-title {
-        font-size: 43px;
-    }
 
     .login-logo {
         width: 64px;
@@ -139,10 +111,14 @@
 }
 
 @media (max-width: 365px) {
-    .login-card {
-        /* max-width: 240px; */
+    .login-buttons button {
+        font-size: 18px;
     }
-    
+
+    .login-logo {
+        width: 50px;
+    }
+
 }
 
 @media (min-width: 900px) and (max-width: 1100px) and (max-height: 700px) {
