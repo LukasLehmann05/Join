@@ -336,7 +336,7 @@ h1 {
     aspect-ratio: 1;
 }
 
-.repsonsive_add_task_button {
+.responsive_add_task_button {
     display: none;
     border-radius: 20%;
     background-color: #2A3647;
@@ -344,7 +344,7 @@ h1 {
     aspect-ratio: 1;
 }
 
-.repsonsive_add_task_button:hover {
+.responsive_add_task_button:hover {
     background-color: #29ABE2;
     cursor: pointer;
 }
