@@ -70,21 +70,3 @@
         font-size: 32px;
     }
 }
-
-@media (max-width: 420px) {
-    .priority-section {
-        flex-direction: column;
-    }
-
-    .action-buttons {
-        padding: 8px;
-    }
-
-    .action-buttons p {
-        font-size: 16px;
-    }
-
-    #task_subtask {
-        width: 100%;
-    }
-}
