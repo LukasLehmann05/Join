@@ -127,7 +127,7 @@ async function deleteThisContactFromDatabaseById(contactID) {
  */
 async function editContactDataInDatabase(editedUser, contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         },
