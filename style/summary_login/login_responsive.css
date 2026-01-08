@@ -90,11 +90,6 @@
         font-size: 43px;
     }
 
-    .login-logo {
-        width: 64px;
-        height: 78px;
-    }
-
     .login-footer {
         display: flex;
         justify-content: center;
