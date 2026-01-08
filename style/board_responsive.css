@@ -1,42 +1,5 @@
-@media (max-width: 1100px) {
-    .board_menu {
-        flex-direction: column;
-        margin-bottom: 24px;
-    }
-
-    .button_add_task {
-        display: none;
-    }
-
-    .search_task {
-        flex: 1;
-    }
-
-    .search_task input{
-        flex: 1;
-    }
-
-    .add_task_res_btn {
-        height: 28px;
-        width: 28px;
-        padding: 10px;
-    }
-
-    .h1_section {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .board_controls {
-        margin-right: 0px;
-    }
-
-    .repsonsive_add_task_button {
-        display: block;
-    }
-
-        .board_table {
+@media (max-width: 1300px) {
+    .board_table {
         flex-direction: column;
         height: auto;
     }
@@ -61,6 +24,46 @@
         position: sticky;
         top: 0px;
     }
+}
+
+@media (max-width: 1100px) {
+    .board_menu {
+        flex-direction: column;
+        margin-bottom: 24px;
+    }
+
+    .button_add_task {
+        display: none;
+    }
+
+    .search_task {
+        flex: 1;
+    }
+
+    .search_task input {
+        flex: 1;
+    }
+
+    .add_task_res_btn {
+        height: 28px;
+        width: 28px;
+        padding: 10px;
+    }
+
+    .h1_section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .board_controls {
+        margin-right: 0px;
+    }
+
+    .repsonsive_add_task_button {
+        display: block;
+    }
+
 }
 
 @media (min-width: 768px) {
