@@ -47,6 +47,10 @@
     .priority-section {
         flex-direction: column;
     }
+
+    .overlay_content {
+        padding: 20px 16px;
+    }
 }
 
 @media (max-width: 420px) {
@@ -68,5 +72,11 @@
 
     .overlay_main_content h1 {
         font-size: 32px;
+    }
+}
+
+@media (max-width: 370px) {
+    .subtask-edit input{
+        width: 180px;
     }
 }
