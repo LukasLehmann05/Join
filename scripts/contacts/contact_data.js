@@ -274,7 +274,6 @@ function getDataFromMain() {
         "name": name,
         "phone": phone,
         "id": currentId,
-        "color": color,
     };
     return currentContact;
 };
