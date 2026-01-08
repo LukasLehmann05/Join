@@ -18,10 +18,10 @@ window.addEventListener("resize", () => {
     let contactList = document.getElementById('contactsAsideElement');
     let mainView = document.getElementById('contactsMainElement');
     if (window.innerWidth >= 1150 && contactList.style.display == "none" == true) {
-        contactList.style.display = "flex";
+        contactList.style.display = "flex"; 
     }
     if (window.innerWidth <= 1150 && contactList.style.display == "none" == false) {
-        mainView.style.display = "none";
+        mainView.style.display = "none";  
     }
     if (window.innerWidth >= 1150 && mainView.style.display == "none" == true) {
         mainView.style.display = "block";
