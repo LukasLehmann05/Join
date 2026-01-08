@@ -56,7 +56,7 @@ function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
  * @param {number} subtaskCounter The index of the subtask (1-based).
  */
 function toggleSubtaskDone(taskId, subtaskCounter) {
-    let task = getSingleTaskOfAllTasksOfSingleUserObj(taskId);
+    let task = getSingleTaskOfAllTasksObj(taskId);
     let subtaskIndex = subtaskCounter - 1;
     task.subtasks[subtaskIndex].done = !task.subtasks[subtaskIndex].done;
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);

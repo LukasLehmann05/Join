@@ -303,9 +303,11 @@ h1{
     gap: 32px;
     color: white;
     font-size: 20px;
+    pointer-events: none;
 }
 
 .responseToastContent.show {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
 }
