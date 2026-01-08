@@ -86,11 +86,9 @@
         gap: 12px;
     }
 
-    .login-button-primary{
-        font-size: 18px;
-    }
-
-    .login-button-secondary{
+    .login-button-primary,
+    .login-button-secondary,
+    .login-input{
         font-size: 18px;
     }
    
@@ -169,6 +167,7 @@
 
 @media (max-height: 800px) {
     .login-card{
-        padding: 32px 16px;
+        padding-top: 32px;
+        padding-bottom: 32px;
     }
 }
