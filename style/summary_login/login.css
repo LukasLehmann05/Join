@@ -9,34 +9,36 @@
 }
 
 .login-logo-section {
-    position: absolute;
-    top: 64px;
-    left: 66px;
+    width: 100%;
     max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .login-container {
     width: 100%;
     max-width: 1440px;
-    margin: 0 auto;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .login-logo {
-    width: 100px;
-    height: auto;
+    padding-top: 80px;
+    padding-left: 77px;
+    display: flex;
+    object-fit: contain;
 }
 
 .login-header {
-    position: absolute;
-    top: 64px;
-    right: 150px;
+    padding-top: 67px;
+    padding-right: 122px;
     display: flex;
     align-items: center;
     gap: 35px;
+    height: 50px;
 }
 
 .login-header-text {
@@ -65,10 +67,10 @@
     background: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    padding: 48px 48px;
-    width: 100%;
-    max-width: 720px;
-    margin: 280px auto 0;
+    padding: 48px clamp(16px, -132.5px + 24.75vw, 115px);
+    width: calc(100% - 64px);
+    max-width: 422px;
+    margin: 32px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,7 +78,7 @@
 }
 
 .login-title {
-    font-family: Inter, sans-serif;
+    font-family: Inter_bold, sans-serif;
     font-size: 61px;
     font-weight: 700;
     line-height: 120%;
@@ -97,31 +99,38 @@
 
 .login-form {
     width: 100%;
-    max-width: 422px;
-    margin-top: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+}
+
+.lock::after {
+    content: "";
+    min-width: 24px;
+    width: 24px;
+    background: url(../../assets/icons/login/lock.svg) center / contain no-repeat;
 }
 
 .input-wrapper {
-    position: relative;
-    width: 100%;
+    width: calc(100% - 42px);
+    display: flex;
+    align-items: center;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 0 21px;
+    margin-top: 32px;
 }
 
 .login-input {
     width: 100%;
-    height: 48px;
-    padding: 12px 48px 12px 21px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
+    height: 45px;
     font-family: Inter, sans-serif;
     font-size: 20px;
     font-weight: 400;
     color: #000000;
     background-color: #FFFFFF;
     transition: border-color 0.3s ease;
+    border: none;
 }
 
 .login-input:focus {
@@ -134,19 +143,14 @@
 }
 
 .input-icon {
-    position: absolute;
-    right: 21px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     pointer-events: none;
 }
 
 .login-buttons {
     display: flex;
     gap: 32px;
-    margin-top: 16px;
 }
 
 .login-button-primary,
@@ -166,6 +170,7 @@
     background-color: #2A3647;
     color: #FFFFFF;
     border: none;
+    padding: 0 18px;
 }
 
 .login-button-primary:hover {
@@ -187,11 +192,11 @@
 
 .login-footer {
     width: 100%;
+    max-width: 1440px;
     display: flex;
     justify-content: center;
     gap: 32px;
-    margin-top: auto;
-    padding-bottom: 32px;
+    padding: 22px 0;
 }
 
 .login-footer a {
@@ -204,6 +209,12 @@
 
 .login-footer a:hover {
     color: #29ABE2;
+}
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 
 .login-button {
@@ -222,10 +233,11 @@
 }
 
 .login-error-message {
-    margin-top: 16px;
-    font-size: 14px;
+    margin: 8px 0;
+    font-size: 18px;
     color: #FF3B3B;
     text-align: center;
-    min-height: 18px;
-    /* damit der Bereich nicht springt */
+    min-height: 34px;
+    font-family: Inter, sans-serif;
+
 }

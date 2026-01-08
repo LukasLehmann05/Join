@@ -1,58 +1,78 @@
-.signup-button-primary {
-    max-width: 140px;
-    display: block;
-    margin: 0 auto;
+.sign-up-input{
+    padding: 0 21px;
+    display: flex;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: #D1D1D1;
 }
 
-.signup-button-primary:disabled {
-    background-color: #A8A8A8;
-    cursor: not-allowed;
+.signup-form {
+    width: 100%;
+    max-width: 432px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-button-primary {
+    max-width: 180px;
+    display: block;
+    margin: 0 auto;
+    background-color: #2A3647;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    height: 48px;
+    border-radius: 8px;
+    font-family: Inter, sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.signup-button-primary:not(:disabled):hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+button.signup-button-primary:disabled {
+    background-color: #D1D1D1;
+    color: #FFFFFF;
     box-shadow: none;
+}
+
+.login-buttons {
+    margin-top: 32px;
 }
 
 .back-arrow {
     position: absolute;
-    top: 70px;
-    left: 50px;
-    width: 24px;
-    height: 24px;
+    top: 64px;
+    left: 48px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
+    object-fit: contain;
+    display: flex;
+    border-radius: 16px;
 }
 
-.back-arrow::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 4px;
-    width: 12px;
-    height: 12px;
-    border-left: 3px solid #29ABE2;
-    border-bottom: 3px solid #29ABE2;
-    transform: translateY(-50%) rotate(45deg);
+.hover-img{
+    background-color: transparent;
+    margin: 5px;
 }
 
-.back-arrow::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 4px;
-    width: 22px;
-    height: 0;
-    border-top: 3px solid #29ABE2;
-    transform: translateY(-50%);
-}
-
-.signup-card {
-    margin-top: 100px;
-}
-
-.login-button-primary {
-    padding: 12px 18px;
+.back-arrow:hover{
+    background-color: #D1D1D1;
+    transform: scale(1.1);
 }
 
 .privacy-check {
     align-self: center;
-    margin-top: 8px;
+    margin-top: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -76,19 +96,12 @@
     text-decoration: underline;
 }
 
-.login-buttons {
-    width: 100%;
-    margin-top: 0;
-}
-
 .signup-toast {
     position: fixed;
     top: 70px;
-    /* Höhe wie im Join-Original */
     left: 50%;
     transform: translateX(-50%);
     background-color: #2A3647;
-    /* Dunkelblau */
     color: white;
     padding: 12px 22px;
     border-radius: 20px;
@@ -111,10 +124,13 @@
 }
 
 .input-error {
-    display: block;
+    display: flex;
+    align-items: center;
     margin-top: 4px;
-    font-size: 12px;
+    font-size: 16px;
     color: #FF3B3B;
+    font-family: Inter, sans-serif;
+    height: 20px;
 }
 
 .login-input.error {

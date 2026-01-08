@@ -1,10 +1,8 @@
-@media (max-width: 1100px) {
-    .login-card {
-        max-width: 650px;
-    }
+.login-mobile {
+    display: none;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1000px), (max-height: 900px) {
     .login-header {
         position: static;
         margin-top: 24px;
@@ -27,8 +25,6 @@
 
     .login-footer {
         position: static;
-        margin-top: auto;
-        padding-bottom: 24px;
         display: flex;
         justify-content: center;
         gap: 16px;
@@ -37,70 +33,64 @@
     }
 }
 
-@media (max-width: 900px) {
-    .login-card {
-        max-width: 600px;
-    }
-}
-
 @media (max-width: 768px) {
-    .login-wrapper {
-        justify-content: flex-start;
-        align-items: center;
-        padding: 24px 16px 32px;
-    }
-
-    .login-logo-section {
-        position: static;
-        align-self: flex-start;
-        margin-left: 12px;
-        margin-bottom: 16px;
-    }
-
-    .login-logo {
-        width: 72px;
-    }
-
     .login-container {
-        margin-top: 50px;
         width: 100%;
         max-width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .login-card {
-        position: static;
-        width: 100%;
-        max-width: 380px;
-        padding: 32px 12px;
-        margin-top: 24px;
-        order: 1;
+        justify-content: space-evenly;
     }
 }
 
-@media (max-width: 700px) {
-    .login-card {
-        max-width: 500px;
+@media (max-width: 600px) {
+   .login-header{
+        display: none;
+   }
+
+   .login-logo img{
+        width: 64px;
+        height: 78px;
+    }
+    
+    .login-logo{
+       padding-top: 37px;
+       padding-left: 38px;
+   }
+
+   .login-mobile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .login-button-primary,
+    .login-button-secondary,
+    .login-input{
+        font-size: 18px;
+    }
+   
+}
+
+@media (max-width: 530px) {
+    .login-title {
+        font-size: 47px;
     }
 }
 
-@media (max-width: 500px) {
-    .login-card {
-        max-width: 380px;
-        padding: 32px 20px;
+@media (max-width: 450px) {
+    .login-buttons {
+        flex-direction: column;
+        gap: 12px;
     }
-}
 
-@media (max-width: 400px) {
-    .login-card {
-        max-width: 340px;
+    .login-title {
+        font-size: 43px;
     }
 
     .login-footer {
-        margin-top: 60px;
-        padding-bottom: 32px;
         display: flex;
         justify-content: center;
         gap: 16px;
@@ -109,34 +99,33 @@
     }
 }
 
-@media (max-width: 420px) {
-    .login-buttons {
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login-button-primary,
-    .login-button-secondary,
-    .guest-button {
-        width: 60%;
+@media (max-width: 400px) {
+    .login-error-message {
         font-size: 14px;
+    }
+}
 
+@media (max-width: 365px) {
+    .login-buttons button {
+        font-size: 18px;
     }
 }
 
 @media (min-width: 900px) and (max-width: 1100px) and (max-height: 700px) {
     .login-footer {
-        margin-top: 60px;
         padding-bottom: 40px;
     }
 }
 
-@media (min-width: 480px) and (max-width: 600px) and (min-height: 650px) and (max-height: 800px) {
+@media (min-width: 480px) and (max-width: 600px) and (min-height: 600px) and (max-height: 800px) {
     .login-footer {
-        margin-top: 56px;
         padding-bottom: 40px;
+    }
+}
+
+@media (max-height: 800px) {
+    .login-card{
+        padding-top: 32px;
+        padding-bottom: 32px;
     }
 }
