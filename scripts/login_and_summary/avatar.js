@@ -84,6 +84,10 @@ function setupAvatarOutsideClick(avatarButton, menu) {
   });
 }
 
+function handleHelpClick() {
+  window.location.href = "../html/help.html";
+}
+
 function handleLegalClick() {
   window.location.href = "../html/legal_notice.html";
 }
@@ -104,9 +108,11 @@ function addClickIfPresent(element, handler) {
 }
 
 function setupAvatarMenuLinks() {
+  const helpBtn = document.getElementById("menu-help");
   const legalBtn = document.getElementById("menu-legal");
   const privacyBtn = document.getElementById("menu-privacy");
   const logoutBtn = document.getElementById("menu-logout");
+  addClickIfPresent(helpBtn, handleHelpClick);
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
