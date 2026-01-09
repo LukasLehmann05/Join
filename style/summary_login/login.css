@@ -4,15 +4,15 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: relative;
     background-color: #F6F7F8;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-.login-logo-section {
-    width: 100%;
-    max-width: 1440px;
-    display: flex;
-    justify-content: space-between;
+.login-wrapper.visible {
+    opacity: 1;
 }
 
 .login-container {
@@ -25,16 +25,10 @@
     justify-content: center;
 }
 
-.login-logo {
-    padding-top: 80px;
-    padding-left: 77px;
-    display: flex;
-    object-fit: contain;
-}
-
 .login-header {
-    padding-top: 67px;
-    padding-right: 122px;
+    position: fixed;
+    top: 67px;
+    right: 122px;
     display: flex;
     align-items: center;
     gap: 35px;
@@ -57,6 +51,8 @@
     font-size: 16px;
     font-weight: 700;
     transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
 }
 
 .signup-button:hover {
@@ -67,7 +63,7 @@
     background: #FFFFFF;
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    padding: 48px clamp(16px, -132.5px + 24.75vw, 115px);
+    padding: 48px clamp(16px, -132.5px + 24.75vw, 115px) 0;
     width: calc(100% - 64px);
     max-width: 422px;
     margin: 32px 16px;
@@ -151,6 +147,7 @@
 .login-buttons {
     display: flex;
     gap: 32px;
+    margin-top: 60px;
 }
 
 .login-button-primary,
@@ -164,6 +161,7 @@
     padding: 0 12px;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-height: 48px;
 }
 
 .login-button-primary {
@@ -196,7 +194,9 @@
     display: flex;
     justify-content: center;
     gap: 32px;
-    padding: 22px 0;
+    padding-bottom: 40px;
+    bottom: 0;
+    position: absolute;
 }
 
 .login-footer a {
@@ -228,12 +228,8 @@
     padding: 0 24px;
 }
 
-.login-buttons button {
-    min-height: 48px;
-}
-
 .login-error-message {
-    margin: 8px 0;
+    margin-top: 14px;
     font-size: 18px;
     color: #FF3B3B;
     text-align: center;
