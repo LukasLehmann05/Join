@@ -13,3 +13,14 @@ async function getContactColorObj() {
 };
 
 getContactColorObj();
+
+
+/**
+ * chooses color for contact randomly from colours array. Gets called in function: "renderContactList()"
+ * assigns colors to contact permanently in contactColorProperty
+ * @const contactColorProperty
+ */
+function assignColorToContact() {
+    let userColor = colours[Math.floor(Math.random() * colours.length)];
+    return userColor;
+};

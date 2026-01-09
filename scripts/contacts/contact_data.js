@@ -114,17 +114,6 @@ function colorAcronym(contactId, color) {
 
 
 /**
- * chooses color for contact randomly from colours array. Gets called in function: "renderContactList()"
- * assigns colors to contact permanently in contactColorProperty
- * @const contactColorProperty
- */
-function assignColorToContact() {
-    let userColor = colours[Math.floor(Math.random() * colours.length)];
-    return userColor;
-};
-
-
-/**
  * fetches contact data from firebase and renders data into main Display
  */
 function displayInMain(id) {
