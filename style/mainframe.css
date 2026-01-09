@@ -178,6 +178,10 @@ article {
     box-sizing: border-box;
 }
 
+.header-avatar:hover {
+    background-color: #CDCDCD;
+}
+
 .avatar-wrapper {
     position: relative;
     border: none;
