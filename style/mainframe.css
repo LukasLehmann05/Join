@@ -239,3 +239,7 @@ article {
     transform: scale(1.2);
 
 }
+
+.hide-for-desktop{
+    display: none;
+}

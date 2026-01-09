@@ -204,9 +204,11 @@ function addClickIfPresent(element, handler) {
  * Attaches click handlers to the avatar menu links (legal, privacy, logout).
  */
 function setupAvatarMenuLinks() {
+  const helpBtn = document.getElementById("menu-help");
   const legalBtn = document.getElementById("menu-legal");
   const privacyBtn = document.getElementById("menu-privacy");
   const logoutBtn = document.getElementById("menu-logout");
+  addClickIfPresent(helpBtn, handleHelpClick);
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
