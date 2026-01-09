@@ -313,7 +313,7 @@ function unassignContact(contact_id) {
 async function renderSmallContacts(contact_id) {
     let contact = await getContactById(contact_id)
     let contact_intial = await getInitialsFromUser(contact)
-    let contact_color = await contactColorProperty[contact_id]
+    let contact_color = contact.color
     const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
     rendered_contact_images.innerHTML += small_contact_template
 }
