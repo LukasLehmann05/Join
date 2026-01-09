@@ -282,10 +282,6 @@ h1 {
     gap: 8px;
 }
 
-.d-none {
-    display: none;
-}
-
 .responseToastContent {
     box-sizing: border-box;
     transform: translateY(40vh);
