@@ -29,10 +29,8 @@ function initLogoAnimation() {
      * and transforms the animated logo into the permanent logo
      */
     setTimeout(() => {
-        animationOverlay.classList.add('static');
-        animatedLogo.classList.remove('animated-logo');
-        animatedLogo.classList.add('login-logo');
-    }, 1500);
+                animationOverlay.classList.add('static');
+            }, 1500);
 }
 
 // Execute animation when DOM is fully loaded
