@@ -3,6 +3,10 @@
     justify-content: space-between;
 }
 
+.overflow{
+    overflow-y: auto;
+}
+
 .contact-display a{
     color: #29ABE2;
 }
