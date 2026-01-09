@@ -73,7 +73,8 @@ function renderSubtaskEditListItems(subtasksArr) {
     allSubtasksArr = [];
     subtask_list = document.getElementById('subtask_render');
     for (let subtask of subtasksArr) {
-        let subtaskTitleHtml = returnSubtaskTemplate(subtask.title);
+        let subtask_id = returnSubtaskId()
+        let subtaskTitleHtml = returnSubtaskTemplate(subtask.title,subtask_id);
         subtask_list.innerHTML += subtaskTitleHtml;
         let subtaskObj = { title: subtask.title, done: subtask.done };
         allSubtasksArr.push(subtaskObj);
