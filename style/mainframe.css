@@ -226,3 +226,12 @@ article {
     top: 55px;
     right: 327px;
 }
+
+.help-icon{
+    transition: transform 0.1s ease-in-out;
+}
+
+.help-icon:hover{
+    transform: scale(1.2);
+
+}
