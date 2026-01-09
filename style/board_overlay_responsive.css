@@ -22,6 +22,12 @@
     }
 }
 
+@media (max-width: 767px) {
+    .overlay_content p {
+        font-size: 16px;
+    }
+}
+
 @media (max-width: 650px) {
     .overlay_content.add_task_attributes {
         width: 95%;
