@@ -18,6 +18,7 @@
 
     .required-field-section-responsive {
         display: flex;
+        margin-top: 16px;
     }
 }
 
