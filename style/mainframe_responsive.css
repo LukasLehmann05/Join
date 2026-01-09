@@ -7,6 +7,10 @@
         display: none;
     }
 
+    .hide-for-desktop{
+        display: unset;
+    }
+
     .header-nav {
         justify-content: space-between;
     }
