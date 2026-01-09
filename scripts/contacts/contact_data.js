@@ -204,7 +204,7 @@ async function trimDownEditingUser(editID, editedUser) {
     removeThisContactFromList(editID);
     let letter = document.getElementById('mainName').innerText.charAt(0).toUpperCase();
     removeLetterSectionIfEmpty(letter);
-    await renderHtmlElements(editedUser, editID, editedUser.name);
+    await renderHtmlElements(editedUser, editID, editedUser.name, editedUser.color);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
@@ -219,10 +219,12 @@ function getEditedContactData() {
     let email = document.getElementById('emailEdit').value;
     let name = document.getElementById('nameEdit').value;
     let phone = document.getElementById('phoneEdit').value;
+    let color = document.getElementById("editedAvatar").style.backgroundColor;
     let editedContact = {
         "email": email,
         "name": name,
         "phone": phone,
+        "color": color
     };
     return editedContact;
 };
