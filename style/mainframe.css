@@ -25,6 +25,7 @@
 .body {
     display: flex;
     font-family: "Inter";
+    overflow-x: hidden;
 }
 
 article {
@@ -195,8 +196,8 @@ article {
 
 .avatar-menu {
     position: absolute;
-    top: 64px;
-    right: 0;
+    top: 76px;             
+    right: -20px; 
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
     padding: 12px 18px;
@@ -205,9 +206,21 @@ article {
     gap: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
+    transform: translateX(120%);
+    transition: opacity 0.0s, transform 0.0s, visibility 0.0s;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
 
-.hidden {
+.show-avatar-menu {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.hidden{
     display: none;
 }
 
@@ -224,11 +237,6 @@ article {
 
 .avatar-menu-item:hover {
     text-decoration: underline;
-}
-
-.avatar-menu {
-    top: 55px;
-    right: 327px;
 }
 
 .help-icon{
