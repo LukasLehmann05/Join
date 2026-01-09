@@ -3,6 +3,28 @@ const contactColorProperty = {};
 
 const AllData = {};
 
+/**
+ * array for colours to choose from for generating background colour in contact list
+ */
+const colours = [
+    '#b4a429ff',
+    '#FF4646',
+    '#aa7f24ff',
+    '#FFC701',
+    '#0038FF',
+    '#76a00eff',
+    '#FF745E',
+    '#FFA35E',
+    '#FC71FF',
+    '#9327FF',
+    '#00BEE8',
+    '#228f82ff',
+    '#FF7A00',
+    '#FF5EB3',
+    '#6E52FF'
+];
+
+
 // TODO: Refactor to single function for users and contacts
 // Helper function to get contact colors on board load
 async function getContactColorObj() {
