@@ -60,7 +60,7 @@ function getAvatarCoreElements() {
 
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
-  menu.classList.toggle("hidden");
+  menu.classList.toggle("show-avatar-menu");
 }
 
 function setupAvatarToggle(avatarButton, menu) {
@@ -70,11 +70,11 @@ function setupAvatarToggle(avatarButton, menu) {
 }
 
 function hideMenuIfClickedOutside(event, avatarButton, menu) {
-  if (menu.classList.contains("hidden")) return;
+  if (!menu.classList.contains("show-avatar-menu")) return;
   const inMenu = menu.contains(event.target);
   const inAvatar = avatarButton.contains(event.target);
   if (!inMenu && !inAvatar) {
-    menu.classList.add("hidden");
+    menu.classList.remove("show-avatar-menu");
   }
 }
 
