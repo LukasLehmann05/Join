@@ -153,12 +153,12 @@ async function findUserByEmail(email) {
   for (const userId in allUsers) {
     const user = allUsers[userId];
     if (!user || !user.email) continue;
-    
+
     if (isEmailMatch(user.email, email)) {
       return { id: userId, ...user };
     }
   }
-  
+
   return null;
 }
 
@@ -215,7 +215,24 @@ function createGuestObject() {
  */
 async function saveNewUser(name, email, password) {
   const userData = createUserObject(name, email, password);
+  let newUser = createNewContactInSignUp(name, email);
+  await postNewContactToDatabase(newUser)
   return await saveDataToFirebase(userData, 'Error creating user');
+}
+
+
+/**
+ * Saves new guest user to database
+ */
+function createNewContactInSignUp(name, email) {
+  let color = assignColorToContact();
+  let newUser = {
+    "email": email,
+    "name": name,
+    "phone": "",
+    "color": color
+  };
+  return newUser;
 }
 
 
@@ -252,7 +269,7 @@ function searchGuestInUsers(allUsers) {
 async function loadOrCreateGuest() {
   const allUsers = (await fetchAllDataGlobal()).users;
   const existingGuest = searchGuestInUsers(allUsers);
-  
+
   if (existingGuest) {
     return existingGuest;
   }
