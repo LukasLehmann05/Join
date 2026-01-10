@@ -449,6 +449,15 @@ function removeSmallContact(contact_id) {
     }
 }
 
+function checkContactRenderAmount() {
+    if (rendered_contacts > 3) {
+        contactRenderOverflow(action_type)
+    }
+}
+
+function contactRenderOverflow(action_type,amount) {
+
+}
 
 /**
  * Clears UI indicators for required fields.
