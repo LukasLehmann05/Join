@@ -31,6 +31,7 @@ let allSubtasksArr = []
 let allAssigneesArr = []
 
 let subtask_amount = 0
+let rendered_contacts = 0
 
 
 /**
@@ -432,6 +433,7 @@ async function renderSmallContacts(contact_id) {
     let contact_color = contact.color
     const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
     rendered_contact_images.innerHTML += small_contact_template
+    rendered_contacts += 1
 }
 
 
@@ -442,6 +444,9 @@ async function renderSmallContacts(contact_id) {
 function removeSmallContact(contact_id) {
     const small_contact_element = document.getElementById("small_contact_" + contact_id)
     rendered_contact_images.removeChild(small_contact_element)
+    if (rendered_contacts > 0) {
+        rendered_contacts -= 1
+    }
 }
 
 
