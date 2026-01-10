@@ -207,7 +207,8 @@
     align-items: center;
     z-index: 2;
     animation: fadeOut 1s ease 2s forwards;
-    padding-top: 160px;
+    display: flex;
+    justify-content: center;
 }
 
 .greeting-overlay.hidden {
