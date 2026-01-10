@@ -220,7 +220,7 @@ article {
     visibility: visible;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
@@ -239,15 +239,14 @@ article {
     text-decoration: underline;
 }
 
-.help-icon{
+.help-icon {
     transition: transform 0.1s ease-in-out;
 }
 
-.help-icon:hover{
+.help-icon:hover {
     transform: scale(1.2);
-
 }
 
-.hide-for-desktop{
+.hide-for-desktop {
     display: none;
 }
