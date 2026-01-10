@@ -15,7 +15,7 @@ function renderSubtasksListItems(taskId, subtasksArr) {
         container.innerHTML += subtaskHtml;
         renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtask.done);
     }
-}
+};
 
 /**
  * This function updates the global subtasks array for the current task.
@@ -28,7 +28,8 @@ function getSubtasksOfTask(subtasksArr) {
         let subtaskObj = { title: subtask.title, done: subtask.done };
         allSubtasksArr.push(subtaskObj);
     }
-}
+};
+
 
 /**
  * This function renders the checkbox for a subtask list item.
@@ -47,7 +48,8 @@ function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
     } else {
         checkboxCustomElement.innerHTML = `<img src="${undoneImgPath}" alt="checkbox undone icon">`;
     }
-}
+};
+
 
 /**
  * This function toggles the done state of a subtask and updates the UI.
@@ -62,7 +64,8 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
     renderSubtaskProgress(taskId, task.subtasks);
     newSubtasksArr = task.subtasks;
-}
+};
+
 
 /**
  * This function renders the editable list items for subtasks in the overlay.
@@ -79,4 +82,4 @@ function renderSubtaskEditListItems(subtasksArr) {
         let subtaskObj = { title: subtask.title, done: subtask.done };
         allSubtasksArr.push(subtaskObj);
     }
-}
+};
