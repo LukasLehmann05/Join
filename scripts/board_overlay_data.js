@@ -101,7 +101,12 @@ async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');
     let task = getSingleTaskOfAllTasksObj(taskId);
     if (!task) return;
-    overlayContent.innerHTML = overlayContentTemplate(task, taskId);
+    if (task.title.length > 16) {
+        let cut_title = task.title.substring(0, 16) + '...';
+        overlayContent.innerHTML = overlayContentTemplate(task, taskId, cut_title);
+    } else {
+        overlayContent.innerHTML = overlayContentTemplate(task, taskId, task.title);
+    }
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
     await renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId, task.subtasks || []);

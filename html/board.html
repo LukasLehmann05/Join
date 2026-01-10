@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,9 @@
     <link rel="stylesheet" href="../style/board_overlay_style.css">
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/mainframe.css">
+    <link rel="stylesheet" href="../style/mainframe_responsive.css">
+    <link rel="stylesheet" href="../style/board_responsive.css">
+    <link rel="stylesheet" href="../style/board_overlay_responsive.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 
     <script src="../scripts/login_and_summary/avatar.js"></script>
@@ -48,6 +52,7 @@
     <article class="article-bg">
         <header class="header">
             <nav class="header-nav">
+                <img src="../assets/icons/logo/logoBig.svg" alt="join logo" class="logo-responsive">
                 <p>Kanban Project Management Tool</p>
                 <section class="header-side-buttons">
                     <a class="hide-in-resp" href="../html/help.html">
@@ -79,10 +84,17 @@
                 </div>
             </div>
             <section class="board_menu">
-                <h1>Board</h1>
+                <div class="h1_section">
+                    <h1>Board</h1>
+                    <button class="responsive_add_task_button" onclick="openAddTaskOverlay(this)"
+                        data-task-state="todo" aria-label="Add task">
+                        <img class="add_task_res_btn" src="../assets/icons/board/addTaskButtonRes.svg"
+                            alt="Add Task icon">
+                    </button>
+                </div>
                 <div class="board_controls_container">
                     <div class="board_controls">
-                            <div class="search_task">
+                        <div class="search_task">
                             <input type="text" placeholder="Find Task" id="task_filter_input_field">
                             <button>
                                 <img src="../assets/icons/board/search_glas.svg" alt="">
@@ -98,34 +110,44 @@
                     </div>
                 </div>
             </section>
-            <section class="table_header">
-                <div class="column_header">
-                    <p class="column_title">To do</p>
-                    <button onclick="openAddTaskOverlay(this)" data-task-state="todo">
-                        <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
-                    </button>
-                </div>
-                <div class="column_header">
-                    <p class="column_title">In progress</p>
-                    <button onclick="openAddTaskOverlay(this)" data-task-state="in progress">
-                        <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
-                    </button>
-                </div>
-                <div class="column_header">
-                    <p class="column_title">Await feedback</p>
-                    <button onclick="openAddTaskOverlay(this)" data-task-state="awaiting feedback">
-                        <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
-                    </button>
-                </div>
-                <div class="column_header">
-                    <p class="column_title">Done</p>
-                </div>
-            </section>
             <section class="board_table">
-                <div class="column_content" id="toDoColumn" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
-                <div class="column_content" id="inProgressColumn" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
-                <div class="column_content" id="awaitFeedbackColumn" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>
-                <div class="column_content" id="doneColumn" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)"></div>                    
+                <div class="board_column">
+                    <div class="column_header">
+                        <p class="column_title">To do</p>
+                        <button onclick="openAddTaskOverlay(this)" data-task-state="todo">
+                            <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="column_content" id="toDoColumn" ondrop="dropHandler(event)"
+                        ondragover="dragOverHandler(event)"></div>
+                </div>
+                <div class="board_column">
+                    <div class="column_header">
+                        <p class="column_title">In progress</p>
+                        <button onclick="openAddTaskOverlay(this)" data-task-state="in progress">
+                            <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="column_content" id="inProgressColumn" ondrop="dropHandler(event)"
+                        ondragover="dragOverHandler(event)"></div>
+                </div>
+                <div class="board_column">
+                    <div class="column_header">
+                        <p class="column_title">Await feedback</p>
+                        <button onclick="openAddTaskOverlay(this)" data-task-state="awaiting feedback">
+                            <img src="../assets/icons/board/plus_boarder_var1.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="column_content" id="awaitFeedbackColumn" ondrop="dropHandler(event)"
+                        ondragover="dragOverHandler(event)"></div>
+                </div>
+                <div class="board_column">
+                    <div class="column_header">
+                        <p class="column_title">Done</p>
+                    </div>
+                    <div class="column_content" id="doneColumn" ondrop="dropHandler(event)"
+                        ondragover="dragOverHandler(event)"></div>
+                </div>
             </section>
         </main>
     </article>

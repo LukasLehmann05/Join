@@ -126,6 +126,7 @@ function escapeTextareaContent(text) {
  * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  */
 async function openAddTaskOverlay(buttonElement) {
+    checkScreenSizeForRedirect()
     let taskState = '';
     if (buttonElement) {
         taskState = buttonElement.getAttribute('data-task-state');
@@ -142,6 +143,15 @@ async function openAddTaskOverlay(buttonElement) {
         addTaskInit();
     });
     disableScrollOnBody();
+}
+
+/** 
+ * This function checks the screen size and redirects to the add task page if the width is less than 768px.
+ */
+function checkScreenSizeForRedirect() {
+    if (window.innerWidth < 768) {
+        window.location.href = 'add_task.html';
+    }
 }
 
 

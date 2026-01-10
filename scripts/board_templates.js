@@ -120,7 +120,7 @@ function priorityIndicatorTemplate(iconPath) {
  * @param {string} taskId The ID of the task.
  * @returns {string} The HTML string for the overlay content.
  */
-function overlayContentTemplate(task, taskId) {
+function overlayContentTemplate(task, taskId, task_title) {
     return `
             <header class="overlay_header">
                 <p class="category_overlay ${task.category.toLowerCase().replace(/ /g,"_")}">${task.category}</p>
@@ -129,7 +129,7 @@ function overlayContentTemplate(task, taskId) {
                 </button>
             </header>
             <section class="overlay_main_content">
-                <h1>${task.title}</h1>
+                <h1 class="overlay_title">${task_title}</h1>
                 <p>${task.description}</p>
                 <div class="due_date_info">
                     <p class="attribute">Due date:</p>
@@ -408,6 +408,9 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                     </section>
                 </form>
                 <ul class="subtasks_upsert_list" id="subtask_render"></ul>
+                <section class="required-field-section-responsive">
+                    <p class="required-text" id="required_text_field_section"><span class="required">*</span>This field is required</p>
+                </section>
             </section>
             `
 }

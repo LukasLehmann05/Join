@@ -1,0 +1,110 @@
+@media (max-width: 1300px) {
+    .board_table {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .board_table .column_content {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 16px;
+    }
+
+    .board_column {
+        width: 100%;
+    }
+
+    .single_task_content {
+        min-width: 200px;
+        max-width: 220px;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 0px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .board_menu {
+        flex-direction: column;
+        margin-bottom: 24px;
+    }
+
+    .button_add_task {
+        display: none;
+    }
+
+    .search_task {
+        flex: 1;
+    }
+
+    .search_task input {
+        flex: 1;
+    }
+
+    .add_task_res_btn {
+        height: 28px;
+        width: 28px;
+        padding: 10px;
+    }
+
+    .h1_section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .board_controls {
+        margin-right: 0px;
+    }
+
+    .responsive_add_task_button {
+        display: block;
+    }
+}
+
+@media (min-width: 767px) {
+    .article-bg {
+        width: calc(100vw - 247px);
+    }
+}
+
+@media (max-width: 767px) {
+    .header-nav {
+        padding-left: 48px;
+    }
+    
+    .board_table {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .column_content {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto !important;
+        gap: 16px;
+    }
+
+    .board_column {
+        width: 100%;
+    }
+
+    .single_task_content {
+        min-width: 200px;
+        max-width: 220px;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 0px;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-content {
+        padding: 16px 24px;
+    }
+}
