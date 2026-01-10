@@ -328,27 +328,3 @@ h1 {
 .required-field-section-responsive {
     display: none;
 }
-
-.repsonsive_add_task_button {
-    border-radius: 20%;
-    background-color: #2A3647;
-    border: none;
-    aspect-ratio: 1;
-}
-
-.responsive_add_task_button {
-    display: none;
-    border-radius: 20%;
-    background-color: #2A3647;
-    border: none;
-    aspect-ratio: 1;
-}
-
-.responsive_add_task_button:hover {
-    background-color: #29ABE2;
-    cursor: pointer;
-}
-
-.required-field-section-responsive {
-    display: none;
-}
