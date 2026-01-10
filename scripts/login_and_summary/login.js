@@ -237,7 +237,6 @@ async function findUserByEmail(email) {
       return { id: userId, ...user };
     }
   }
-
   return null;
 };
 
@@ -297,22 +296,7 @@ async function saveNewUser(name, email, password) {
   let newUser = createNewContactInSignUp(name, email);
   await postNewContactToDatabase(newUser)
   return await saveDataToFirebase(userData, 'Error creating user');
-}
-
-
-/**
- * Saves new guest user to database
- */
-function createNewContactInSignUp(name, email) {
-  let color = assignColorToContact();
-  let newUser = {
-    "email": email,
-    "name": name,
-    "phone": "",
-    "color": color
-  };
-  return newUser;
-}
+};
 
 
 /**
