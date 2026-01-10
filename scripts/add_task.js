@@ -328,6 +328,16 @@ function removeSmallContact(contact_id) {
     }
 }
 
+function checkContactRenderAmount() {
+    if (rendered_contacts > 3) {
+        contactRenderOverflow(action_type)
+    }
+}
+
+function contactRenderOverflow(action_type,amount) {
+
+}
+
 function clearRequiredIndicators() {
     req_title_text.style.opacity = "0"
     req_due_date_text.style.opacity = "0"
