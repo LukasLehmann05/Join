@@ -7,6 +7,14 @@
         display: none;
     }
 
+    .hide-for-desktop{
+        display: unset;
+    }
+
+    .avatar-menu{
+        transition: opacity 0.5s, transform 0.3s, visibility 0.3s;
+    }
+
     .header-nav {
         justify-content: space-between;
     }

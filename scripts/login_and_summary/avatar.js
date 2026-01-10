@@ -60,7 +60,7 @@ function getAvatarCoreElements() {
 
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
-  menu.classList.toggle("hidden");
+  menu.classList.toggle("show-avatar-menu");
 }
 
 function setupAvatarToggle(avatarButton, menu) {
@@ -70,11 +70,11 @@ function setupAvatarToggle(avatarButton, menu) {
 }
 
 function hideMenuIfClickedOutside(event, avatarButton, menu) {
-  if (menu.classList.contains("hidden")) return;
+  if (!menu.classList.contains("show-avatar-menu")) return;
   const inMenu = menu.contains(event.target);
   const inAvatar = avatarButton.contains(event.target);
   if (!inMenu && !inAvatar) {
-    menu.classList.add("hidden");
+    menu.classList.remove("show-avatar-menu");
   }
 }
 
@@ -82,6 +82,10 @@ function setupAvatarOutsideClick(avatarButton, menu) {
   document.addEventListener("click", (event) => {
     hideMenuIfClickedOutside(event, avatarButton, menu);
   });
+}
+
+function handleHelpClick() {
+  window.location.href = "../html/help.html";
 }
 
 function handleLegalClick() {
@@ -104,9 +108,11 @@ function addClickIfPresent(element, handler) {
 }
 
 function setupAvatarMenuLinks() {
+  const helpBtn = document.getElementById("menu-help");
   const legalBtn = document.getElementById("menu-legal");
   const privacyBtn = document.getElementById("menu-privacy");
   const logoutBtn = document.getElementById("menu-logout");
+  addClickIfPresent(helpBtn, handleHelpClick);
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
