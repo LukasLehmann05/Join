@@ -10,7 +10,8 @@ function initSignup() {
   }
   attachPrivacyCheckboxHandler(ui);
   attachSignupHandler(ui);
-}
+};
+
 
 /**
  * Retrieves commonly used signup form elements.
@@ -27,24 +28,23 @@ function getSignupElements() {
     passwordConfirmInput: document.getElementById("signup-password-confirm"),
     errorBox: document.getElementById("signup-error-message"),
   };
-}
+};
+
 
 /**
  * Attaches handlers to the privacy checkbox for state and accessibility.
  * @param {Object} ui - Signup UI elements.
  */
 function attachPrivacyCheckboxHandler(ui) {
-
   if (!ui.checkbox || !ui.signupBtn) return;
-
   ui.checkbox.addEventListener("change", () => {
     handleCheckboxChange(ui);
   });
-
   ui.checkbox.addEventListener("keydown", (e) => {
     handleCheckboxKeydown(e, ui);
   });
-}
+};
+
 
 /**
  * Enables or disables the signup button based on privacy checkbox.
@@ -61,7 +61,8 @@ function handleCheckboxChange(ui) {
   } else {
     disableButton(ui.signupBtn);
   }
-}
+};
+
 
 /**
  * Toggles privacy checkbox on Enter key for keyboard accessibility.
@@ -75,7 +76,8 @@ function handleCheckboxKeydown(e, ui) {
   e.preventDefault();
   ui.checkbox.checked = !ui.checkbox.checked;
   ui.checkbox.dispatchEvent(new Event("change"));
-}
+};
+
 
 /**
  * Binds the signup form submit to the handler.
@@ -86,7 +88,8 @@ function attachSignupHandler(ui) {
     event.preventDefault();
     handleSignupSubmit(ui);
   });
-}
+};
+
 
 /**
  * Processes signup form submit: validates data and sends to backend.
@@ -102,7 +105,8 @@ async function handleSignupSubmit(ui) {
     return;
   }
   await submitSignup(data, ui);
-}
+};
+
 
 /**
  * Extracts and returns trimmed form data from UI inputs.
@@ -116,7 +120,8 @@ function getFormData(ui) {
     password: ui.passwordInput.value,
     passwordConfirm: ui.passwordConfirmInput.value,
   };
-}
+};
+
 
 /**
  * Runs all field validators and returns an errors object.
@@ -132,7 +137,8 @@ function validateSignupData(data, checkbox) {
   validatePasswordConfirm(data, errors);
   validatePrivacy(checkbox, errors);
   return errors;
-}
+};
+
 
 /**
  * Validates the name field and appends to errors if invalid.
@@ -143,7 +149,8 @@ function validateName(data, errors) {
   if (!data.name) {
     errors.name = "Please enter your name.";
   }
-}
+};
+
 
 /**
  * Validates the email format and presence, populates errors.
@@ -159,7 +166,8 @@ function validateEmail(data, errors) {
   if (!emailRegex.test(data.email)) {
     errors.email = "Please enter a valid email.";
   }
-}
+};
+
 
 /**
  * Validates password presence and minimum length.
@@ -174,7 +182,8 @@ function validatePassword(data, errors) {
   if (data.password.length < 6) {
     errors.password = "Password should be at least 6 characters long.";
   }
-}
+};
+
 
 /**
  * Validates password confirmation matches the password.
@@ -189,7 +198,8 @@ function validatePasswordConfirm(data, errors) {
   if (data.password !== data.passwordConfirm) {
     errors.passwordConfirm = "Passwords do not match.";
   }
-}
+};
+
 
 /**
  * Validates that the privacy checkbox is checked.
@@ -200,7 +210,8 @@ function validatePrivacy(checkbox, errors) {
   if (!checkbox || !checkbox.checked) {
     errors.privacy = "You must accept the Privacy Policy.";
   }
-}
+};
+
 
 /**
  * Returns whether the errors object contains any keys.
@@ -209,7 +220,8 @@ function validatePrivacy(checkbox, errors) {
  */
 function hasErrors(errors) {
   return Object.keys(errors).length > 0;
-}
+};
+
 
 /**
  * Displays field-specific validation messages in the UI.
@@ -230,7 +242,8 @@ function showValidationErrors(errors, ui) {
 function showNameError(errors, ui) {
   if (!errors.name) return;
   setFieldError(ui.nameInput, "error-signup-name", errors.name);
-}
+};
+
 
 /**
  * Shows email field error if present.
@@ -238,7 +251,8 @@ function showNameError(errors, ui) {
 function showEmailError(errors, ui) {
   if (!errors.email) return;
   setFieldError(ui.emailInput, "error-signup-email", errors.email);
-}
+};
+
 
 /**
  * Shows password field error if present.
@@ -246,7 +260,8 @@ function showEmailError(errors, ui) {
 function showPasswordError(errors, ui) {
   if (!errors.password) return;
   setFieldError(ui.passwordInput, "error-signup-password", errors.password);
-}
+};
+
 
 /**
  * Shows password confirmation error if present.
@@ -258,7 +273,8 @@ function showPasswordConfirmError(errors, ui) {
     "error-signup-password-confirm",
     errors.passwordConfirm
   );
-}
+};
+
 
 /**
  * Shows privacy checkbox error message if present.
@@ -270,7 +286,8 @@ function showPrivacyError(errors) {
   if (privacyErr) {
     privacyErr.textContent = errors.privacy;
   }
-}
+};
+
 
 /**
  * Displays a general validation message in the error box.
@@ -279,7 +296,8 @@ function showPrivacyError(errors) {
 function showGlobalValidationMessage(ui) {
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Please correct the highlighted fields.";
-}
+};
+
 
 /**
  * Clears all validation messages and error classes from the form.
@@ -295,7 +313,8 @@ function clearFieldErrors(ui) {
   if (ui.errorBox) {
     ui.errorBox.textContent = "";
   }
-}
+};
+
 
 /**
  * Sets an error message for a specific field and marks the input.
@@ -311,7 +330,8 @@ function setFieldError(inputElement, errorElementId, message) {
   if (inputElement) {
     inputElement.classList.add("error");
   }
-}
+};
+
 
 /**
  * Submits signup data: checks for existing user and creates a new user.
@@ -319,8 +339,6 @@ function setFieldError(inputElement, errorElementId, message) {
  * @param {Object} ui - Signup UI elements.
  */
 async function submitSignup(data, ui) {
-
-
   if (ui.signupBtn) {
     setLoadingState(ui.signupBtn, true);
 
@@ -344,7 +362,8 @@ async function submitSignup(data, ui) {
       setLoadingState(ui.signupBtn, false);
     }
   }
-}
+};
+
 
 /**
  * Handles the case when a user already exists for the provided email.
@@ -358,7 +377,8 @@ function handleExistingUser(ui) {
   );
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Please use another email address.";
-}
+};
+
 
 /**
  * Finalizes signup success: shows a toast, stores session and redirects.
@@ -371,7 +391,8 @@ function handleSignupSuccess(newUser) {
     localStorage.setItem("isGuest", "false");
     window.location.href = "../index.html";
   }, 1200);
-}
+};
+
 
 /**
  * Displays a generic signup error message.
@@ -380,7 +401,8 @@ function handleSignupSuccess(newUser) {
 function handleSignupError(ui) {
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Sign up failed. Please try again later.";
-}
+};
+
 
 /**
  * Toggles loading state on a button and updates its label.
@@ -390,7 +412,8 @@ function handleSignupError(ui) {
 function setLoadingState(button, isLoading) {
   button.disabled = isLoading;
   button.textContent = isLoading ? "Signing up..." : "Sign up";
-}
+};
+
 
 /**
  * Enables a button and applies the active class.
@@ -399,7 +422,8 @@ function setLoadingState(button, isLoading) {
 function enableButton(button) {
   button.disabled = false;
   button.classList.add("active");
-}
+};
+
 
 /**
  * Disables a button and removes the active class.
@@ -408,7 +432,8 @@ function enableButton(button) {
 function disableButton(button) {
   button.disabled = true;
   button.classList.remove("active");
-}
+};
+
 
 /**
  * Shows a temporary signup toast notification.
@@ -422,4 +447,4 @@ function showSignupToast() {
     toast.classList.remove("show");
     setTimeout(() => toast.classList.add("hidden"), 300);
   }, 2000);
-}
+};

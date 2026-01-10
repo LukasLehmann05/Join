@@ -4,7 +4,8 @@
  */
 function loadCurrentUserRaw() {
   return localStorage.getItem("currentUser");
-}
+};
+
 
 /**
  * Safely parses JSON and returns null on failure.
@@ -17,7 +18,8 @@ function parseJsonSafe(json) {
   } catch (e) {
     return null;
   }
-}
+};
+
 
 /**
  * Retrieves the current user object from localStorage, safely parsed.
@@ -27,14 +29,16 @@ function getCurrentUserSafe() {
   const raw = loadCurrentUserRaw();
   if (!raw) return null;
   return parseJsonSafe(raw);
-}
+};
+
 
 /**
  * Redirects the browser to the login page.
  */
 function redirectToLogin() {
   window.location.href = "../index.html";
-}
+};
+
 
 /**
  * Builds initials string from name parts.
@@ -47,7 +51,8 @@ function getInitialsFromParts(parts) {
     return parts[0][0].toUpperCase();
   }
   return (parts[0][0] + parts[1][0]).toUpperCase();
-}
+};
+
 
 /**
  * Computes initials from a full name string.
@@ -59,7 +64,8 @@ function getInitials(name) {
   if (!cleanName) return "?";
   const parts = cleanName.split(" ");
   return getInitialsFromParts(parts);
-}
+};
+
 
 /**
  * Returns initials for a user object.
@@ -69,7 +75,8 @@ function getInitials(name) {
 function getUserInitials(user) {
   if (!user || !user.name) return "?";
   return getInitials(user.name);
-}
+};
+
 
 /**
  * Updates the avatar element's displayed text.
@@ -78,7 +85,8 @@ function getUserInitials(user) {
  */
 function updateAvatarText(avatarElement, initials) {
   avatarElement.textContent = initials;
-}
+};
+
 
 /**
  * Renders the header avatar using current user initials.
@@ -89,7 +97,8 @@ function renderHeaderAvatar() {
   const user = getCurrentUserSafe();
   const initials = getUserInitials(user);
   updateAvatarText(avatarElement, initials);
-}
+};
+
 
 /**
  * Returns the core avatar DOM elements (button and menu).
@@ -99,7 +108,8 @@ function getAvatarCoreElements() {
   const avatarButton = document.getElementById("avatar-button");
   const menu = document.getElementById("avatar-menu");
   return { avatarButton, menu };
-}
+};
+
 
 /**
  * Toggles visibility of the avatar menu and stops event propagation.
@@ -109,7 +119,8 @@ function getAvatarCoreElements() {
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
   menu.classList.toggle("hidden");
-}
+};
+
 
 /**
  * Attaches click handler to avatar button to toggle menu.
@@ -120,7 +131,8 @@ function setupAvatarToggle(avatarButton, menu) {
   avatarButton.addEventListener("click", (event) => {
     toggleMenuVisibility(event, menu);
   });
-}
+};
+
 
 /**
  * Hides the avatar menu when a click occurs outside of it.
@@ -135,7 +147,8 @@ function hideMenuIfClickedOutside(event, avatarButton, menu) {
   if (!inMenu && !inAvatar) {
     menu.classList.add("hidden");
   }
-}
+};
+
 
 /**
  * Sets up a document click listener to close the avatar menu when
@@ -147,21 +160,24 @@ function setupAvatarOutsideClick(avatarButton, menu) {
   document.addEventListener("click", (event) => {
     hideMenuIfClickedOutside(event, avatarButton, menu);
   });
-}
+};
+
 
 /**
  * Navigates to the legal notice page.
  */
 function handleLegalClick() {
   window.location.href = "../html/legal_notice.html";
-}
+};
+
 
 /**
  * Navigates to the privacy policy page.
  */
 function handlePrivacyClick() {
   window.location.href = "../html/privacy_policy.html";
-}
+};
+
 
 /**
  * Clears session data and redirects to login (logout action).
@@ -170,7 +186,8 @@ function handleLogoutClick() {
   localStorage.removeItem("currentUser");
   localStorage.removeItem("isGuest");
   redirectToLogin();
-}
+};
+
 
 /**
  * Adds a click listener to an element if it exists.
@@ -180,7 +197,8 @@ function handleLogoutClick() {
 function addClickIfPresent(element, handler) {
   if (!element) return;
   element.addEventListener("click", handler);
-}
+};
+
 
 /**
  * Attaches click handlers to the avatar menu links (legal, privacy, logout).
@@ -192,7 +210,8 @@ function setupAvatarMenuLinks() {
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
-}
+};
+
 
 /**
  * Initializes header avatar UI: renders avatar and hooks menu behavior.
@@ -204,7 +223,7 @@ function initHeaderAvatar() {
   setupAvatarToggle(avatarButton, menu);
   setupAvatarOutsideClick(avatarButton, menu);
   setupAvatarMenuLinks();
-}
+};
 
 
 /**
@@ -215,7 +234,8 @@ function requireAuth() {
   if (!user) {
     redirectToLogin();
   }
-}
+};
+
 
 /**
  * Updates DOM element with current user's id as a data attribute.
@@ -227,7 +247,8 @@ function updateCurrentUserId() {
   if (userIdElement) {
     userIdElement.setAttribute("data-current-user-id", user.id);
   }
-}
+};
+
 
 /**
  * Main initialization for pages using the mainframe: enforces auth,
@@ -237,10 +258,9 @@ function initMainframe() {
   requireAuth();
   updateCurrentUserId();
   initHeaderAvatar();
-  
-  // Dispatch Custom Event wenn fertig
   window.dispatchEvent(new CustomEvent('mainframe-ready'));
-}
+};
+
 
 document.addEventListener("DOMContentLoaded", initMainframe);
 

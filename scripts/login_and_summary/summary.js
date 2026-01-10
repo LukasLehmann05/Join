@@ -6,7 +6,8 @@ function getGreetingElements() {
   const greetingTextEl = document.querySelector(".greeting-text");
   const greetingNameEl = document.querySelector(".greeting-name");
   return { greetingTextEl, greetingNameEl };
-}
+};
+
 
 /**
  * Returns a display-safe user name or empty string for guest/anonymous.
@@ -19,7 +20,8 @@ function getSafeUserName(user) {
     return '';
   }
   return name;
-}
+};
+
 
 /**
  * Chooses appropriate greeting text based on hour of day.
@@ -30,7 +32,8 @@ function calculateGreeting(hour) {
   if (hour >= 12 && hour < 18) return "Good afternoon";
   if (hour >= 18 || hour < 5) return "Good evening";
   return "Good morning";
-}
+};
+
 
 /**
  * Renders greeting text and user name into provided elements.
@@ -42,7 +45,8 @@ function calculateGreeting(hour) {
 function showGreeting(greetingTextEl, greetingNameEl, greeting, fullName) {
   greetingTextEl.textContent = `${greeting},`;
   greetingNameEl.textContent = fullName;
-}
+};
+
 
 /**
  * Determines and renders the greeting for the summary page.
@@ -60,7 +64,7 @@ function renderGreeting() {
   } else {
     showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
   }
-}
+};
 
 
 /**
@@ -87,7 +91,8 @@ function showGreetingOverlay() {
   setTimeout(() => {
     overlay.classList.add('hidden');
   }, 5000);
-}
+};
+
 
 /**
  * Fetches tasks from the global data store for summary counts.
@@ -101,7 +106,8 @@ async function fetchTasksForSummary() {
     console.error("Error fetching tasks for summary:", error);
     return [];
   }
-}
+};
+
 
 /**
  * Sets text content of the first element matching selector.
@@ -112,7 +118,8 @@ function setTextContent(selector, value) {
   const el = document.querySelector(selector);
   if (!el) return;
   el.textContent = String(value);
-}
+};
+
 
 /**
  * Counts tasks matching a given state (case-insensitive).
@@ -124,7 +131,8 @@ function countTasksByState(tasks, state) {
   return tasks.filter(
     (task) => (task.state || "").toLowerCase() === state.toLowerCase()
   ).length;
-}
+};
+
 
 /**
  * Counts tasks with priority 'urgent'.
@@ -135,7 +143,8 @@ function countUrgentTasks(tasks) {
   return tasks.filter(
     (task) => (task.priority || "").toLowerCase() === "urgent"
   ).length;
-}
+};
+
 
 /**
  * Parses a due date string into a Date object handling several formats.
@@ -153,7 +162,8 @@ function parseDueDate(rawDate) {
     return new Date(`${year}-${month}-${day}`);
   }
   return null;
-}
+};
+
 
 /**
  * Finds the nearest upcoming due date among urgent tasks.
@@ -176,7 +186,8 @@ function findNextUrgentDeadline(tasks) {
     }
   }
   return nextDeadline;
-}
+};
+
 
 /**
  * Formats a Date for user display or returns a fallback string.
@@ -190,7 +201,8 @@ function formatDateForDisplay(date) {
     day: "numeric",
     year: "numeric",
   });
-}
+};
+
 
 /**
  * Updates the summary urgent card with count and next deadline.
@@ -201,7 +213,8 @@ function updateUrgentCard(tasks) {
   const nextDeadline = findNextUrgentDeadline(tasks);
   setTextContent(".urgent-number", urgentCount);
   setTextContent(".urgent-date", formatDateForDisplay(nextDeadline));
-}
+};
+
 
 /**
  * Loads summary data (tasks) and renders the various counters.
@@ -229,7 +242,8 @@ async function loadAndRenderSummary() {
     setTextContent(".urgent-number", 0);
     setTextContent(".urgent-date", "No deadline");
   }
-}
+};
+
 
 /**
  * Initializes the summary page: checks auth, optionally shows greeting
@@ -242,7 +256,8 @@ async function initSummaryPage() {
     showGreetingOverlay();
   }
   await loadAndRenderSummary();
-}
+};
+
 
 document.addEventListener("DOMContentLoaded", initSummaryPage);
 
