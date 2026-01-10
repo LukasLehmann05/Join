@@ -8,7 +8,7 @@ function noTasksDoToTemplate() {
                  <p>No tasks to do</p>
             </div>
             `
-}
+};
 
 /**
  * This function returns the HTML template for the "No tasks in progress" info.
@@ -20,7 +20,8 @@ function noTaskInProgressTemplate() {
                  <p>No tasks in progress</p>
             </div>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the "No tasks for feedback" info.
@@ -32,7 +33,8 @@ function noTaskInFeedbackTemplate() {
                  <p>No tasks for feedback</p>
             </div>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the "No tasks done" info.
@@ -44,7 +46,8 @@ function noTaskDoneTemplate() {
                  <p>No tasks done</p>
             </div>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the drop acceptance field.
@@ -54,7 +57,8 @@ function showDropAcceptanceTemplate() {
     return  `
             <div class="drop_acceptance"></div>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for a task card.
@@ -88,7 +92,8 @@ function taskCardTemplate(task, taskId) {
                 </div>
             </div>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for an assigned user icon.
@@ -101,7 +106,8 @@ function assignedUserIconTemplate(initials, contactColor) {
                 ${initials}
             </div>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the priority indicator.
@@ -112,7 +118,8 @@ function priorityIndicatorTemplate(iconPath) {
     return `
             <img src="${iconPath}" alt="Priority Icon" />
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the overlay content of a task.
@@ -176,7 +183,8 @@ function overlayContentTemplate(task, taskId, task_title) {
                 </button>
             </aside>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for an assigned user's name.
@@ -187,7 +195,8 @@ function assignedUserNameTemplate(userName) {
     return  `
                 <p>${userName}</p>
             `;
-}
+};
+
 
 /**
  * This function returns the HTML template for a subtask list item.
@@ -207,7 +216,8 @@ function subtasksListItemTemplate(taskId, title, counter) {
                 <p>${title}</p>
             </div>
             `;
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert task overlay.
@@ -246,7 +256,8 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribut
                 </section>
             </footer>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert task title input.
@@ -270,7 +281,8 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
                 </form>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert task description input.
@@ -286,7 +298,8 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
                 </form>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert task due date input.
@@ -310,7 +323,8 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
                 </form>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert task priority selection.
@@ -350,7 +364,8 @@ function overlayUpsertTaskPriorityTemplate() {
                 </form>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert assigned users section.
@@ -376,7 +391,8 @@ function overlayUpsertTaskAssignedUsersTemplate() {
                 </form>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert subtasks section.
@@ -413,7 +429,8 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                 </section>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert category option selection.
@@ -433,7 +450,8 @@ function overlayUpsertCategoryOptionTemplate() {
                 </form>
             </section>
             `
-}
+};
+
 
 /**
  * This function returns the HTML template for the upsert task details container.
@@ -445,4 +463,4 @@ function overlayUpsertTaskDetailsContainerTemplate() {
             <section class="overlay_separator_add_task" id="overlay_separator_add_task"></section>
             <section class="task_details_container" id="task_details_container_2"></section>
             `
-}
+};
