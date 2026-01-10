@@ -252,7 +252,7 @@ async function addContactsToAssign(join_data) {
     for (let contact_id in contacts) {
         let contact = contacts[contact_id]
         let contact_intial = await getInitialsFromUser(contact)
-        let contact_color = await contactColorProperty[contact_id]
+        let contact_color = contact.color
         let contact_option = returnContactTemplate(contact.name, contact_id, contact_intial, contact_color)
         task_assign.innerHTML += contact_option
     }
@@ -313,7 +313,7 @@ function unassignContact(contact_id) {
 async function renderSmallContacts(contact_id) {
     let contact = await getContactById(contact_id)
     let contact_intial = await getInitialsFromUser(contact)
-    let contact_color = await contactColorProperty[contact_id]
+    let contact_color = contact.color
     const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
     rendered_contact_images.innerHTML += small_contact_template
 }

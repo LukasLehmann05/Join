@@ -1,4 +1,4 @@
-@media (max-width: 1305px) {
+@media (max-width: 1455px) {
     .contact-display {
         margin-left: 25px;
         margin-top: 110px;
@@ -25,6 +25,7 @@
         width: 100px;
         height: 100px;
     }
+
 }
 
 @media (min-width: 1150px) {
@@ -40,7 +41,7 @@
         margin-top: 48px;
     }
 
-    .cancel-add-btn{
+    .cancel-add-btn {
         display: none;
     }
 
@@ -140,7 +141,7 @@
         translate: -50%;
     }
 
-    .edit-right{
+    .edit-right {
         padding-top: 60px;
     }
 
@@ -222,22 +223,12 @@
         font-size: 30px;
     }
 
-    .go-back-btn {
-        display: flex;
-    }
-
-    .main-name-btns {
-        display: none;
-    }
-
     .sub-header-information {
         margin-top: 20px;
         margin-bottom: 20px;
     }
 
-    .sub-menu-btn {
-        display: flex;
-    }
+
 
     .sub-menu-btns {
         right: 40px;
@@ -249,6 +240,32 @@
         left: 50%;
         translate: -50%;
     }
+}
+
+@media (max-width: 1149px) {
+    .go-back-btn {
+        display: flex;
+    }
+
+    .sub-menu-btn {
+        display: flex;
+    }
+
+    .main-name-btns {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .contact-main {
+        height: calc(100vh - 168px);
+    }
+
+    .sidebar-contacts {
+        height: calc(100vh - 150px);
+        z-index: 19;
+    }
+
 }
 
 
@@ -298,5 +315,32 @@
 
     .sub-menu-btns {
         margin-right: 6px;
+    }
+
+    .dialog-content {
+        margin: 14px 4%;
+    }
+
+    .main-left {
+        padding: 80px 4%;
+    }
+
+    .position {
+        top: 33%;
+    }
+
+    .contact-display {
+        margin-left: 16px;
+        margin-top: 25px;
+    }
+
+    .main-right {
+        flex: none;
+        padding-bottom: 21px;
+        padding-top: 24px;
+    }
+
+    .position-edit {
+        top: 26%;
     }
 }

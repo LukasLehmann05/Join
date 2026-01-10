@@ -171,13 +171,13 @@ function getAssigneesOfTask(taskAssignees) {
 function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
     if(renderOnlyId) {
         return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contactColorProperty[contactId])}
+                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
                     </div>
                 `;
     }
     else {
         return  `   <div class="assigned_user_content">
-                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contactColorProperty[contactId])}
+                    ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
                     ${assignedUserNameTemplate(contact.name)}
                     </div>
                 `;

@@ -131,7 +131,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
         const contact = await getContactById(contactId);
         if (!contact) continue;
         const initials = getInitialsFromUser(contact);
-        const iconHTML = assignedUserIconTemplate(initials, contactColorProperty[contactId]);
+        const iconHTML = assignedUserIconTemplate(initials, contact.color);
         const container = document.getElementById(taskId + '_' + containerIdSuffix);
         container.innerHTML += iconHTML;
     }

@@ -1,26 +1,4 @@
 /**
- * array for colours to choose from for generating background colour in contact list
- */
-const colours = [
-    '#FFE62B',
-    '#FF4646',
-    '#FFBB2B',
-    '#FFC701',
-    '#0038FF',
-    '#C3FF2B',
-    '#FF745E',
-    '#FFA35E',
-    '#FC71FF',
-    '#9327FF',
-    '#00BEE8',
-    '#1FD7C1',
-    '#FF7A00',
-    '#FF5EB3',
-    '#6E52FF'
-];
-
-
-/**
  * fetches Contact Data from firebase database. Includes rendering functions for the contact list
  * @async
  * @global AllData
@@ -28,10 +6,10 @@ const colours = [
 async function fetchContactList() {
     let contactData = (await fetchAllDataGlobal()).contacts;
     for (let contactID in contactData) {
-        assignColorToContact(contactID);
+        let color = contactData[contactID].color;
         let name = contactData[contactID].name;
         let singleContactData = contactData[contactID];
-        renderHtmlElements(singleContactData, contactID, name);
+        renderHtmlElements(singleContactData, contactID, name, color);
     }
 };
 
@@ -40,9 +18,9 @@ async function fetchContactList() {
  * vehicle for better structure
  * @async
  */
-async function renderHtmlElements(singleContactData, contactID, name) {
+async function renderHtmlElements(singleContactData, contactID, name, color) {
     await renderListLetter(name);
-    await renderContactList(singleContactData, contactID);
+    await renderContactList(singleContactData, contactID, color);
 };
 
 
@@ -78,14 +56,14 @@ function sortAlphabetically(parent) {
 /**
  * renders contact into contact list. Gets called in function: "fetchContactList()"
  */
-async function renderContactList(singleContactData, contactID) {
+async function renderContactList(singleContactData, contactID, color) {
     let name = singleContactData.name;
     let email = singleContactData.email;
     let phone = singleContactData.phone;
     let acronym = getAcronym(name);
     let letter = name.charAt(0).toUpperCase();
     document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
-    colorAcronym(contactID);
+    colorAcronym(contactID, color);
 };
 
 
@@ -106,21 +84,10 @@ function getAcronym(name) {
 /**
  * fetches color from array and assigns it as backgroundcolor for the user acronym
  */
-function colorAcronym(contactId) {
+function colorAcronym(contactId, color) {
     let element = document.getElementById("short-" + contactId);
-    if (!element) return; // guard if element not found
-    element.style.backgroundColor = contactColorProperty[contactId];
-};
-
-
-/**
- * chooses color for contact randomly from colours array. Gets called in function: "renderContactList()"
- * assigns colors to contact permanently in contactColorProperty
- * @const contactColorProperty
- */
-function assignColorToContact(contactId) {
-    let userColor = colours[Math.floor(Math.random() * colours.length)];
-    contactColorProperty[contactId] = userColor;
+    if (!element) return;
+    element.style.backgroundColor = color;
 };
 
 
@@ -161,10 +128,12 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
     let name = document.getElementById(nameInput).value;
     let phone = document.getElementById(phoneInput).value;
     let email = document.getElementById(emailInput).value;
+    let color = assignColorToContact();
     let newUser = {
         "email": email,
         "name": name,
         "phone": phone,
+        "color": color
     };
     return newUser;
 };
@@ -180,7 +149,7 @@ async function addNewContactToDatabase() {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
                 await postNewContactToDatabase(newUser);
-                await trimDownAddingContact(newUser, newUser.name);
+                await trimDownAddingContact(newUser, newUser.name, newUser.color);
             } else {
                 displayHint('required_phone');
             }
@@ -196,10 +165,9 @@ async function addNewContactToDatabase() {
 /**
  * shell for restructuring html templates and dialog appearences
  */
-async function trimDownAddingContact(newUser, name) {
+async function trimDownAddingContact(newUser, name, color) {
     let contactID = await getLastContactAddedFromDatabase();
-    assignColorToContact(contactID);
-    await renderHtmlElements(newUser, contactID, name);
+    await renderHtmlElements(newUser, contactID, name, color);
     emptyInput();
     dialogAppearences('dialogWindow', 'addContent');
 };
@@ -236,7 +204,7 @@ async function trimDownEditingUser(editID, editedUser) {
     removeThisContactFromList(editID);
     let letter = document.getElementById('mainName').innerText.charAt(0).toUpperCase();
     removeLetterSectionIfEmpty(letter);
-    await renderHtmlElements(editedUser, editID, editedUser.name);
+    await renderHtmlElements(editedUser, editID, editedUser.name, editedUser.color);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
@@ -251,10 +219,12 @@ function getEditedContactData() {
     let email = document.getElementById('emailEdit').value;
     let name = document.getElementById('nameEdit').value;
     let phone = document.getElementById('phoneEdit').value;
+    let color = document.getElementById("editedAvatar").style.backgroundColor;
     let editedContact = {
         "email": email,
         "name": name,
         "phone": phone,
+        "color": color
     };
     return editedContact;
 };
@@ -272,7 +242,7 @@ function getDataFromMain() {
         "email": email,
         "name": name,
         "phone": phone,
-        "id": currentId
+        "id": currentId,
     };
     return currentContact;
 };
