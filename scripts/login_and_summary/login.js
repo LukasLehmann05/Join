@@ -120,7 +120,7 @@ function handleLogin(email, password, errorBox) {
     .catch((error) => {
       showError(errorBox, 'Login failed: ' + error.message);
     });
-};
+}
 
 
 /**
@@ -134,7 +134,7 @@ function loginUser(email, password) {
     validateUserCredentials(user, password);
     return user;
   });
-};
+}
 
 
 /**
@@ -153,7 +153,7 @@ function validateUserCredentials(user, password) {
   if (user.password !== password) {
     throw new Error('Wrong password.');
   }
-};
+}
 
 
 /**
@@ -169,7 +169,7 @@ function handleLoginSuccess(user, isGuest, errorBox) {
   localStorage.setItem('isGuest', String(isGuest));
   sessionStorage.setItem("visiting", "true");
   window.location.href = '../html/summary.html';
-};
+}
 
 
 /**
@@ -185,7 +185,7 @@ function onGuestClick(errorBox) {
     .catch((error) => {
       showError(errorBox, 'Guest login failed: ' + error.message);
     });
-};
+}
 
 
 /**
@@ -199,7 +199,7 @@ async function saveDataToFirebase(payload, errorMessage) {
   const responseData = await sendDataToUrl(payload, errorMessage);
   const generatedId = responseData.name;
   return { id: generatedId, ...payload };
-};
+}
 
 
 /**
@@ -209,7 +209,7 @@ async function saveDataToFirebase(payload, errorMessage) {
  */
 function convertToArray(data) {
   return Array.isArray(data) ? data : Object.values(data);
-};
+}
 
 
 /**
@@ -219,7 +219,7 @@ function convertToArray(data) {
 async function loadAllUsers() {
   const url = buildFirebaseUrl('users');
   return await fetchDataFromUrl(url, 'Error loading users');
-};
+}
 
 
 /**
@@ -238,7 +238,7 @@ async function findUserByEmail(email) {
     }
   }
   return null;
-};
+}
 
 
 /**
@@ -249,7 +249,7 @@ async function findUserByEmail(email) {
  */
 function isEmailMatch(userEmail, searchEmail) {
   return userEmail.toLowerCase() === searchEmail.toLowerCase();
-};
+}
 
 
 /**
@@ -267,7 +267,7 @@ function createUserObject(name, email, password) {
     role: 'user',
     createdAt: new Date().toISOString(),
   };
-};
+}
 
 
 /**
@@ -281,7 +281,7 @@ function createGuestObject() {
     role: 'guest',
     createdAt: new Date().toISOString(),
   };
-};
+}
 
 
 /**
@@ -296,7 +296,7 @@ async function saveNewUser(name, email, password) {
   let newUser = createNewContactInSignUp(name, email);
   await postNewContactToDatabase(newUser)
   return await saveDataToFirebase(userData, 'Error creating user');
-};
+}
 
 
 /**
@@ -306,7 +306,7 @@ async function saveNewUser(name, email, password) {
 async function saveNewGuest() {
   const guestData = createGuestObject();
   return await saveDataToFirebase(guestData, 'Error creating guest user');
-};
+}
 
 
 /**
@@ -322,7 +322,7 @@ function searchGuestInUsers(allUsers) {
     }
   }
   return null;
-};
+}
 
 
 /**
@@ -337,5 +337,5 @@ async function loadOrCreateGuest() {
     return existingGuest;
   }
   return await saveNewGuest();
-};
+}
 

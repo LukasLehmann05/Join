@@ -4,7 +4,7 @@
  */
 function loadCurrentUserRaw() {
   return localStorage.getItem("currentUser");
-};
+}
 
 
 /**
@@ -18,7 +18,7 @@ function parseJsonSafe(json) {
   } catch (e) {
     return null;
   }
-};
+}
 
 
 /**
@@ -29,7 +29,7 @@ function getCurrentUserSafe() {
   const raw = loadCurrentUserRaw();
   if (!raw) return null;
   return parseJsonSafe(raw);
-};
+}
 
 
 /**
@@ -37,7 +37,7 @@ function getCurrentUserSafe() {
  */
 function redirectToLogin() {
   window.location.href = "../index.html";
-};
+}
 
 
 /**
@@ -51,7 +51,7 @@ function getInitialsFromParts(parts) {
     return parts[0][0].toUpperCase();
   }
   return (parts[0][0] + parts[1][0]).toUpperCase();
-};
+}
 
 
 /**
@@ -75,7 +75,7 @@ function getInitials(name) {
 function getUserInitials(user) {
   if (!user || !user.name) return "?";
   return getInitials(user.name);
-};
+}
 
 
 /**
@@ -85,7 +85,7 @@ function getUserInitials(user) {
  */
 function updateAvatarText(avatarElement, initials) {
   avatarElement.textContent = initials;
-};
+}
 
 
 /**
@@ -108,7 +108,7 @@ function getAvatarCoreElements() {
   const avatarButton = document.getElementById("avatar-button");
   const menu = document.getElementById("avatar-menu");
   return { avatarButton, menu };
-};
+}
 
 
 /**
@@ -119,7 +119,7 @@ function getAvatarCoreElements() {
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
   menu.classList.toggle("hidden");
-};
+}
 
 
 /**
@@ -131,7 +131,7 @@ function setupAvatarToggle(avatarButton, menu) {
   avatarButton.addEventListener("click", (event) => {
     toggleMenuVisibility(event, menu);
   });
-};
+}
 
 
 /**
@@ -147,7 +147,7 @@ function hideMenuIfClickedOutside(event, avatarButton, menu) {
   if (!inMenu && !inAvatar) {
     menu.classList.add("hidden");
   }
-};
+}
 
 
 /**
@@ -160,7 +160,7 @@ function setupAvatarOutsideClick(avatarButton, menu) {
   document.addEventListener("click", (event) => {
     hideMenuIfClickedOutside(event, avatarButton, menu);
   });
-};
+}
 
 
 /**
@@ -176,7 +176,7 @@ function handleLegalClick() {
  */
 function handlePrivacyClick() {
   window.location.href = "../html/privacy_policy.html";
-};
+}
 
 
 /**
@@ -186,7 +186,7 @@ function handleLogoutClick() {
   localStorage.removeItem("currentUser");
   localStorage.removeItem("isGuest");
   redirectToLogin();
-};
+}
 
 
 /**
@@ -197,7 +197,7 @@ function handleLogoutClick() {
 function addClickIfPresent(element, handler) {
   if (!element) return;
   element.addEventListener("click", handler);
-};
+}
 
 
 /**
@@ -210,7 +210,7 @@ function setupAvatarMenuLinks() {
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);
-};
+}
 
 
 /**
@@ -223,7 +223,7 @@ function initHeaderAvatar() {
   setupAvatarToggle(avatarButton, menu);
   setupAvatarOutsideClick(avatarButton, menu);
   setupAvatarMenuLinks();
-};
+}
 
 
 /**
@@ -234,7 +234,7 @@ function requireAuth() {
   if (!user) {
     redirectToLogin();
   }
-};
+}
 
 
 /**
@@ -247,7 +247,7 @@ function updateCurrentUserId() {
   if (userIdElement) {
     userIdElement.setAttribute("data-current-user-id", user.id);
   }
-};
+}
 
 
 /**
@@ -259,7 +259,7 @@ function initMainframe() {
   updateCurrentUserId();
   initHeaderAvatar();
   window.dispatchEvent(new CustomEvent('mainframe-ready'));
-};
+}
 
 
 document.addEventListener("DOMContentLoaded", initMainframe);

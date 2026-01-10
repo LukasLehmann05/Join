@@ -33,7 +33,7 @@ async function openEditTaskOverlay(buttonElement, taskId) {
     await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
     renderSubtaskEditListItems(task.subtasks || []);
     addTaskInit();
-};
+}
 
 
 /**
@@ -45,7 +45,7 @@ function upsertTaskTemplateHandler(taskId){
     renderOverlayUpsertTaskDetailsContainer();
     upsertTaskTemplatesWrapperContainer1(taskId);
     upsertTaskTemplatesWrapperContainer2(taskId);
-};
+}
    
 
 /**
@@ -55,7 +55,7 @@ function renderOverlayUpsertTaskDetailsContainer() {
     let mainContent = document.getElementById('overlay_main_content');
     let detailContainerHtml = overlayUpsertTaskDetailsContainerTemplate();
     mainContent.innerHTML = detailContainerHtml;
-};
+}
 
 
 /**
@@ -71,7 +71,7 @@ function upsertTaskTemplatesWrapperContainer1(taskId){
     ${overlayUpsertTaskTitleTemplate(task.title)}
     ${overlayUpsertTaskDescriptionTemplate(escapeTaskDescription)}
     ${overlayUpsertTaskDueDateTemplate(task.due_date)}`; 
-};
+}
 
 
 /**
@@ -86,7 +86,7 @@ function upsertTaskTemplatesWrapperContainer2(taskId){
     ${overlayUpsertTaskAssignedUsersTemplate()}
     ${overlayUpsertCategoryOptionTemplate()}
     ${overlayUpsertTaskSubtasksTemplate(taskId)}`;
-};
+}
 
 
 /**
@@ -101,7 +101,7 @@ function checkTaskToAddOrEdit(taskId) {
     } else {
         return getSingleTaskOfAllTasksObj(taskId);
     }
-};
+}
 
 
 /**
@@ -120,7 +120,7 @@ function createEmptyTask() {
         title: "",
         state: "todo"
     };
-};
+}
 
 
 /**
@@ -134,7 +134,7 @@ function escapeTextareaContent(text) {
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
-};
+}
 
 
 /**
@@ -159,7 +159,7 @@ async function openAddTaskOverlay(buttonElement) {
         addTaskInit();
     });
     disableScrollOnBody();
-};
+}
 
 
 /** 
@@ -169,7 +169,7 @@ function checkScreenSizeForRedirect() {
     if (window.innerWidth < 768) {
         window.location.href = 'add_task.html';
     }
-};
+}
 
 
 /**
@@ -185,7 +185,7 @@ function renderOverlayAddTask(taskId, taskState) {
     upsertTaskTemplateHandler(taskId);
     toggleTitleCategorySeparatorInAddTaskOverlay();
     return Promise.resolve();
-};
+}
 
 
 /**
@@ -203,7 +203,7 @@ function renderNewTaskAddedToastContainer() {
             resolve();
         }, TOAST_TOTAL_DURATION);
     });
-};
+}
 
 
 /**
@@ -212,4 +212,4 @@ function renderNewTaskAddedToastContainer() {
  */
 function toggleNewTaskToast() {
     document.getElementById('responseToast').classList.toggle('show');
-};
+}

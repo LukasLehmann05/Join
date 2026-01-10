@@ -11,13 +11,13 @@ const STATE_TO_COLUMN_ID = {
     [TASK_STATE_ARR[1]]: BOARD_COLUMN_ID_ARR[1],
     [TASK_STATE_ARR[2]]: BOARD_COLUMN_ID_ARR[2],
     [TASK_STATE_ARR[3]]: BOARD_COLUMN_ID_ARR[3],
-};
+}
 
 
 // Generate the reverse mapping
 const COLUMN_ID_TO_STATE = Object.fromEntries(
     Object.entries(STATE_TO_COLUMN_ID).map(([state, columnId]) => [columnId, state])
-);
+)
 
 
 /**
@@ -28,7 +28,7 @@ const COLUMN_ID_TO_STATE = Object.fromEntries(
  */
 function getColumnIdByTaskState(state) {
     return STATE_TO_COLUMN_ID[state] || BOARD_COLUMN_ID_ARR[0];
-};
+}
 
 
 /**
@@ -39,7 +39,7 @@ function getColumnIdByTaskState(state) {
  */
 function getTaskStateByColumnId(columnId) {
     return COLUMN_ID_TO_STATE[columnId] || TASK_STATE_ARR[0];
-};
+}
 
 
 /**
@@ -63,7 +63,7 @@ function renderNoTaskInfo(columnId) {
             container.innerHTML = noTaskDoneTemplate();
             break;
     }
-};
+}
 
 
 /**
@@ -77,7 +77,7 @@ function renderSubtaskProgress(taskId, subtasksArr) {
     const element = document.getElementById(elementId);
     element.innerHTML = formatSubtaskProgress(subtasksArr);
     renderSubtaskStatusBar(taskId, subtasksArr);
-};
+}
 
 
 /**
@@ -90,7 +90,7 @@ function formatSubtaskProgress(subtasks) {
     const completed = subtasks.filter(subtask => subtask.done).length;
     const total = subtasks.length;
     return `${completed}/${total}`;
-};
+}
 
 
 /**
@@ -107,8 +107,7 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
     }
     const fillElement = document.getElementById(taskId + '_subtasks_status_bar');
     fillElement.style.width = `${percentage}%`;
-};
-
+}
 
 
 /**
@@ -124,7 +123,7 @@ async function renderTaskCard(taskId, task) {
     renderSubtaskProgress(taskId, task.subtasks || []);
     await renderAssignedUserIcons(taskId, task.assigned_to || []);
     renderPriorityIndicator(taskId, task.priority, 'priority');
-};
+}
 
 
 /**
@@ -144,7 +143,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
         const container = document.getElementById(taskId + '_' + containerIdSuffix);
         container.innerHTML += iconHTML;
     }
-};
+}
 
 
 /**
@@ -160,7 +159,7 @@ function getInitialsFromUser(user) {
         .join('')
         .toUpperCase();
     return initials;
-};
+}
 
 
 /**
@@ -179,7 +178,7 @@ function getIconForPriority(priority) {
         case PRIORITY_ARR[0]:
             return iconfolderpath + "lowTask.svg";
     }
-};
+}
 
 
 /**
@@ -193,7 +192,7 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
     let iconPath = getIconForPriority(taskPriority);
     let element = document.getElementById(taskId + '_' + prioritySuffix);
     element.innerHTML = priorityIndicatorTemplate(iconPath);
-};
+}
 
 
 /**
@@ -206,7 +205,7 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
     updateAllTasksObj(newTaskId, newTask);
     renderTaskCard(newTaskId, newTask);
     removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
-};
+}
 
 
 /**
@@ -217,7 +216,7 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
  */
 function updateAllTasksObj(taskId, updatedTask) {
     allTasksObj[taskId] = updatedTask;
-};
+}
 
 
 /**
@@ -228,7 +227,7 @@ function updateAllTasksObj(taskId, updatedTask) {
  */
 function getSingleTaskOfAllTasksObj(taskId) {
     return allTasksObj[taskId];
-};
+}
 
 
 /**
@@ -247,7 +246,7 @@ function setAllTasksObj(allTasksByIdArr, allTasks) {
             allTasksObj[taskId] = task;
         }
     }
-};
+}
 
 
 /**
@@ -257,7 +256,7 @@ function setAllTasksObj(allTasksByIdArr, allTasks) {
  */
 function getAllTasksObj() {
     return allTasksObj; 
-};
+}
 
 
 /**
@@ -265,7 +264,7 @@ function getAllTasksObj() {
  */
 function resetAllTasksObj() {
     allTasksObj = {};
-};
+}
 
 
 /**
@@ -275,7 +274,7 @@ function renderNoTaskInfoOnDOMLoad(){
     BOARD_COLUMN_ID_ARR.forEach(columnId => {
         checkIfNoTasksInColumn(columnId);
     });
-};
+}
 
 
 /**
@@ -290,7 +289,7 @@ function checkIfNoTasksInColumn(columnId) {
     }
     container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
     });
-};
+}
 
 
 /**
@@ -307,7 +306,7 @@ function observeColumnEmpty(columnId) {
         }
     });
     observer.observe(container, { childList: true, subtree: false });
-};
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
     initializeBoard();
-});
+})
 
 
 /**
@@ -332,7 +331,7 @@ async function initializeBoard() {
     renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
     return allTasksByIdArr;
-};
+}
 
 
 /**
@@ -347,7 +346,7 @@ function getAllTaskIds(joinData) {
         allTaskIds.push(taskId);
     }
     return allTaskIds;
-};
+}
 
 
 /**
@@ -364,7 +363,7 @@ function renderAllTaskCardsOnBoard(allTasksByIdArr, allTaskData) {
         if (!task) continue;
         renderTaskCard(taskId, task);
     }
-};
+}
 
 
 /**
@@ -384,4 +383,4 @@ async function refreshTaskOnBoard(taskId, taskToUpdate) {
         await renderAssignedUserIcons(taskId, taskToUpdate.assigned_to || []);
         renderPriorityIndicator(taskId, taskToUpdate.priority, 'priority');
     }
-};
+}

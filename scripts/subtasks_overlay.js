@@ -15,7 +15,7 @@ function renderSubtasksListItems(taskId, subtasksArr) {
         container.innerHTML += subtaskHtml;
         renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtask.done);
     }
-};
+}
 
 /**
  * This function updates the global subtasks array for the current task.
@@ -28,7 +28,7 @@ function getSubtasksOfTask(subtasksArr) {
         let subtaskObj = { title: subtask.title, done: subtask.done };
         allSubtasksArr.push(subtaskObj);
     }
-};
+}
 
 
 /**
@@ -48,7 +48,7 @@ function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
     } else {
         checkboxCustomElement.innerHTML = `<img src="${undoneImgPath}" alt="checkbox undone icon">`;
     }
-};
+}
 
 
 /**
@@ -64,7 +64,7 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, task.subtasks[subtaskIndex].done);
     renderSubtaskProgress(taskId, task.subtasks);
     newSubtasksArr = task.subtasks;
-};
+}
 
 
 /**
@@ -82,4 +82,4 @@ function renderSubtaskEditListItems(subtasksArr) {
         let subtaskObj = { title: subtask.title, done: subtask.done };
         allSubtasksArr.push(subtaskObj);
     }
-};
+}

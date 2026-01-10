@@ -8,7 +8,7 @@ function changeDisplaySize() {
         contactList.style.display = "none";
         mainView.style.display = "block";
     }
-};
+}
 
 
 /**
@@ -26,7 +26,7 @@ window.addEventListener("resize", () => {
     if (window.innerWidth >= 1150 && mainView.style.display == "none" == true) {
         mainView.style.display = "block";
     }
-});
+})
 
 
 /**
@@ -37,7 +37,7 @@ function goBacktoList() {
     let mainView = document.getElementById('contactsMainElement');
     contactList.style.display = "flex";
     mainView.style.display = "none";
-};
+}
 
 
 /**
@@ -46,7 +46,7 @@ function goBacktoList() {
 function validatePhoneByLength(phone) {
     let validation = /^\d{5,15}$/;
     return validation.test(phone);
-};
+}
 
 
 /**
@@ -55,7 +55,7 @@ function validatePhoneByLength(phone) {
 function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
-};
+}
 
 
 /**
@@ -76,7 +76,7 @@ function emptyInput() {
     document.getElementById('nameAdd').value = "";
     document.getElementById('phoneAdd').value = "";
     document.getElementById('emailAdd').value = "";
-};
+}
 
 
 /**
@@ -89,7 +89,7 @@ function displayAvatarInEdit(id) {
     avatar.classList.add('fullname');
     avatar.innerText = acronym
     avatar.style.backgroundColor = color;
-};
+}
 
 
 /**
@@ -98,7 +98,7 @@ function displayAvatarInEdit(id) {
 function removeThisContactFromList(id) {
     let deletedContact = document.getElementById(id);
     deletedContact.remove();
-};
+}
 
 
 /**
@@ -110,7 +110,7 @@ function removeLetterSectionIfEmpty(letter) {
         deletedContact.parentElement.remove();
     }
     else return;
-};
+}
 
 
 /**
@@ -122,7 +122,7 @@ function displayMainDataInEditDialog() {
     document.getElementById('nameEdit').value = currentContact.name
     document.getElementById('phoneEdit').value = currentContact.phone
     displayAvatarInEdit(currentContact.id);
-};
+}
 
 
 /**
@@ -133,7 +133,7 @@ function displayEditedContactDataInList(editID, email, name) {
     document.getElementById('short-' + editID).innerText = acronym;
     document.getElementById('email-' + editID).innerText = email;
     document.getElementById('name-' + editID).innerText = name;
-};
+}
 
 
 /**
@@ -145,7 +145,7 @@ function displayEditedContactDataInMainDisplay(email, name, phone) {
     document.getElementById('mainName').innerText = name;
     document.getElementById('mainPhone').innerText = phone;
     document.getElementById('mainShort').innerText = acronym;
-};
+}
 
 
 

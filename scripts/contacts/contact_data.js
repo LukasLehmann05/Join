@@ -11,7 +11,7 @@ async function fetchContactList() {
         let singleContactData = contactData[contactID];
         renderHtmlElements(singleContactData, contactID, name, color);
     }
-};
+}
 
 
 /**
@@ -21,7 +21,7 @@ async function fetchContactList() {
 async function renderHtmlElements(singleContactData, contactID, name, color) {
     await renderListLetter(name);
     await renderContactList(singleContactData, contactID, color);
-};
+}
 
 
 /**
@@ -36,7 +36,7 @@ async function renderListLetter(name) {
         contactList.innerHTML += contactListLetterSection(letter);
     }
     sortAlphabetically(contactList);
-};
+}
 
 
 /**
@@ -50,7 +50,7 @@ function sortAlphabetically(parent) {
     childrenArray.forEach(child => {
         parent.appendChild(child);
     });
-};
+}
 
 
 /**
@@ -64,7 +64,7 @@ async function renderContactList(singleContactData, contactID, color) {
     let letter = name.charAt(0).toUpperCase();
     document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
     colorAcronym(contactID, color);
-};
+}
 
 
 /**
@@ -78,7 +78,7 @@ function getAcronym(name) {
         .map(word => word.charAt(0).toUpperCase())
         .join('');
     return acronym;
-};
+}
 
 
 /**
@@ -88,7 +88,7 @@ function colorAcronym(contactId, color) {
     let element = document.getElementById("short-" + contactId);
     if (!element) return;
     element.style.backgroundColor = color;
-};
+}
 
 
 /**
@@ -106,7 +106,7 @@ function displayInMain(id) {
     if (window.innerWidth >= 1150) {
         renderMainDisplay(currentId, currentName, currentPhone, currentMail);
     }
-};
+}
 
 
 /**
@@ -118,7 +118,7 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
     let color = document.getElementById("short-" + currentId).style.backgroundColor;
     mainDisplay.innerHTML = contactMain(currentId, currentName, currentPhone, currentMail, acronym);
     document.getElementById("mainShort").style.backgroundColor = color;
-};
+}
 
 
 /**
@@ -136,7 +136,7 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
         "color": color
     };
     return newUser;
-};
+}
 
 
 /**
@@ -159,7 +159,7 @@ async function addNewContactToDatabase() {
     } else {
         displayHint('required_name');
     }
-};
+}
 
 
 /**
@@ -170,7 +170,7 @@ async function trimDownAddingContact(newUser, name, color) {
     await renderHtmlElements(newUser, contactID, name, color);
     emptyInput();
     dialogAppearences('dialogWindow', 'addContent');
-};
+}
 
 
 /**
@@ -194,7 +194,7 @@ async function editContactInDatabase() {
     } else {
         displayHint('required_edit_name');
     }
-};
+}
 
 
 /**
@@ -209,7 +209,7 @@ async function trimDownEditingUser(editID, editedUser) {
     dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
     displayEditedContactDataInMainDisplay(editedUser.email, editedUser.name, editedUser.phone)
-};
+}
 
 
 /**
@@ -227,7 +227,7 @@ function getEditedContactData() {
         "color": color
     };
     return editedContact;
-};
+}
 
 
 /**
@@ -255,7 +255,7 @@ async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
     deleteThisUser(currentId)
     responseMessageAppearance();
-};
+}
 
 
 /**
@@ -266,7 +266,7 @@ async function deleteThisContactFromDialog() {
     deleteThisUser(currentId)
     dialogAppearences('dialogWindow', 'editContent');
     responseMessageAppearance();
-};
+}
 
 
 /**
@@ -279,7 +279,7 @@ async function deleteThisUser(currentId) {
     document.getElementById('mainView').innerHTML = "";
     document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
     await deleteThisContactFromDatabaseById(currentId);
-};
+}
 
 
 

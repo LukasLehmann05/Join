@@ -39,7 +39,7 @@ let subtask_amount = 0
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
     loadContactsForAssign()
-};
+}
 
 
 /**
@@ -61,7 +61,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
     req_title_text = document.getElementById("required_title");
     req_due_date_text = document.getElementById("required_date");
     req_category_text = document.getElementById("required_category");
-};
+}
 
 
 /**
@@ -71,7 +71,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
 function loadDataFromAPI() {
     let joinData = fetchAllDataGlobal()
     return joinData
-};
+}
 
 
 /**
@@ -88,7 +88,7 @@ async function createTask() {
         missingInputs()
         resetRequiredValues()
     }
-};
+}
 
 
 /**
@@ -97,7 +97,7 @@ async function createTask() {
  */
 async function sendTaskToDB(stateOfNewTask) {
     await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr);
-};
+}
 
 
 /**
@@ -105,7 +105,7 @@ async function sendTaskToDB(stateOfNewTask) {
  */
 function redirectToBoard() {
     window.location.replace("board.html");
-};
+}
 
 
 /**
@@ -130,7 +130,7 @@ function checkForRequired(requiredFields) {
         }
     }
     return isValid;
-};
+}
 
 
 /**
@@ -149,7 +149,7 @@ function clearAllInputs() {
     clearContacts()
     clearSubtask()
     subtask_amount = 0
-};
+}
 
 
 /**
@@ -170,7 +170,7 @@ function changePriority(priority) {
         default:
             break;
     }
-};
+}
 
 
 /**
@@ -191,7 +191,7 @@ function removeOldBackground() {
         default:
             break;
     }
-};
+}
 
 
 /**
@@ -201,7 +201,7 @@ function changeToLowPrio() {
     removeOldBackground()
     current_priority = PRIORITY_ARR[0]
     low_prio_button.classList.add("bg-green")
-};
+}
 
 
 /**
@@ -212,7 +212,7 @@ function changeToMedPrio() {
     current_priority = PRIORITY_ARR[1]
     medium_prio_button.classList.add("bg-yellow")
     medium_prio_button.classList.remove("yellow-filter")
-};
+}
 
 
 /**
@@ -222,7 +222,7 @@ function changeToUrgentPrio() {
     removeOldBackground()
     current_priority = PRIORITY_ARR[2]
     urgent_prio_button.classList.add("bg-red")
-};
+}
 
 
 /**
@@ -241,7 +241,7 @@ function missingInputs() {
         req_category_text.style.opacity = "1"
         task_category.classList.add("missing-input")
     }
-};
+}
 
 
 /**
@@ -251,7 +251,7 @@ function resetRequiredValues() {
     req_title = false
     req_due_date = false
     req_category = false
-};
+}
 
 
 /**
@@ -262,7 +262,7 @@ function showSubtaskButtons() {
         subtask_button_section.style.display = "flex"
         subtask_buttons_active = true
     }
-};
+}
 
 
 /**
@@ -273,7 +273,7 @@ function hideSubtaskButtons() {
         subtask_button_section.style.display = "none"
         subtask_buttons_active = false
     }
-};
+}
 
 
 /**
@@ -284,7 +284,7 @@ function clearSubtask() {
     allSubtasksArr = []
     document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
-};
+}
 
 
 /**
@@ -300,7 +300,7 @@ function clearContacts() {
     }
     allAssigneesArr = []
     rendered_contact_images.innerHTML = ""
-};
+}
 
 
 /**
@@ -317,7 +317,7 @@ function addSubtask() {
         task_subtask.value = ""
         hideSubtaskButtons()
     }
-};
+}
 
 
 /**
@@ -327,7 +327,7 @@ function addSubtask() {
 function returnSubtaskId() {
     subtask_amount += 1
     return "subtask_" + subtask_amount
-};
+}
 
 
 /**
@@ -344,7 +344,7 @@ async function addContactsToAssign(join_data) {
         let contact_option = returnContactTemplate(contact.name, contact_id, contact_intial, contact_color)
         task_assign.innerHTML += contact_option
     }
-};
+}
 
 
 /**
@@ -359,7 +359,7 @@ function getInitialsFromUser(user) {
         .join('')
         .toUpperCase();
     return initials;
-};
+}
 
 
 /**
@@ -369,7 +369,7 @@ async function loadContactsForAssign() {
     if (!document.getElementById("task_assign")) return;
     let join_data = await loadDataFromAPI()
     addContactsToAssign(join_data)
-};
+}
 
 
 /**
@@ -384,7 +384,7 @@ function showContacts() {
         contact_selector.style.display = "none"
         contacts_shown = false
     }
-};
+}
 
 
 /**
@@ -403,7 +403,7 @@ function assignContact(contact_id) {
         checkbox_icon.classList.add("checkbox-filter")
         renderSmallContacts(contact_id)
     }
-};
+}
 
 
 /**
@@ -419,7 +419,7 @@ function unassignContact(contact_id) {
     contact_element.classList.remove("assigned-contact")
     checkbox_icon.classList.remove("checkbox-filter")
     removeSmallContact(contact_id)
-};
+}
 
 
 /**
@@ -432,7 +432,7 @@ async function renderSmallContacts(contact_id) {
     let contact_color = contact.color
     const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
     rendered_contact_images.innerHTML += small_contact_template
-};
+}
 
 
 /**
@@ -442,7 +442,7 @@ async function renderSmallContacts(contact_id) {
 function removeSmallContact(contact_id) {
     const small_contact_element = document.getElementById("small_contact_" + contact_id)
     rendered_contact_images.removeChild(small_contact_element)
-};
+}
 
 
 /**
@@ -455,7 +455,7 @@ function clearRequiredIndicators() {
     task_title.classList.remove("missing-input")
     task_due_date.classList.remove("missing-input")
     task_category.classList.remove("missing-input")
-};
+}
 
 
 /**
@@ -479,7 +479,7 @@ function removeIndicatorOnInput(field) {
         default:
             break;
     }
-};
+}
 
 
 /**
@@ -491,7 +491,7 @@ function assignTaskToUserById(userId, taskId) {
     let allTasksOfUser = [];
     allTasksOfUser += taskId;
     updateUserTasksInDB(userId, allTasksOfUser);
-};
+}
 
 
 /**
@@ -504,7 +504,7 @@ function showSubtaskEdit(subtask_id) {
     removeSubtaskFromArray(original_subtask_text);
     let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
     subtask_to_edit.innerHTML = subtask_edit_template
-};
+}
 
 
 /**
@@ -518,7 +518,7 @@ function deleteSubtask(event, subtask_id) {
     removeSubtaskFromArray(subtask_text);
     let subtask_to_delete = document.getElementById(subtask_id)
     subtask_to_delete.remove()
-};
+}
 
 
 /**
@@ -532,7 +532,7 @@ function deleteSubtaskEdit(event, subtask_id) {
     removeSubtaskFromArray(subtask_text);
     let subtask_to_delete = document.getElementById(subtask_id)
     subtask_to_delete.remove()
-};
+}
 
 
 /**
@@ -544,7 +544,7 @@ function removeSubtaskFromArray(subtask_text) {
     if (subtask_index !== -1) {
         allSubtasksArr.splice(subtask_index, 1)
     }
-};
+}
 
 
 /**
@@ -556,7 +556,7 @@ function addSubtaskEditToArray(subtask_id) {
     let edited_subtask_text = subtask_input_field.value
     let subtaskObj = { title: edited_subtask_text, done: false }
     allSubtasksArr.push(subtaskObj)
-};
+}
 
 
 /**
@@ -569,7 +569,7 @@ function confirmSubtaskEdit(subtask_id) {
     let edited_subtask_text = document.getElementById("subtask_edit_input_" + subtask_id).value
     let subtask_template = returnEditedSubtaskTemplate(subtask_id, edited_subtask_text)
     subtask_to_confirm.innerHTML = subtask_template
-};
+}
 
 
 document.addEventListener("DOMContentLoaded", addTaskInit)

@@ -8,7 +8,7 @@ function noTasksDoToTemplate() {
                  <p>No tasks to do</p>
             </div>
             `
-};
+}
 
 /**
  * This function returns the HTML template for the "No tasks in progress" info.
@@ -20,7 +20,7 @@ function noTaskInProgressTemplate() {
                  <p>No tasks in progress</p>
             </div>
             `
-};
+}
 
 
 /**
@@ -33,7 +33,7 @@ function noTaskInFeedbackTemplate() {
                  <p>No tasks for feedback</p>
             </div>
             `
-};
+}
 
 
 /**
@@ -46,7 +46,7 @@ function noTaskDoneTemplate() {
                  <p>No tasks done</p>
             </div>
             `
-};
+}
 
 
 /**
@@ -57,7 +57,7 @@ function showDropAcceptanceTemplate() {
     return  `
             <div class="drop_acceptance"></div>
             `
-};
+}
 
 
 /**
@@ -92,7 +92,7 @@ function taskCardTemplate(task, taskId) {
                 </div>
             </div>
             `
-};
+}
 
 
 /**
@@ -106,7 +106,7 @@ function assignedUserIconTemplate(initials, contactColor) {
                 ${initials}
             </div>
             `
-};
+}
 
 
 /**
@@ -118,7 +118,7 @@ function priorityIndicatorTemplate(iconPath) {
     return `
             <img src="${iconPath}" alt="Priority Icon" />
             `
-};
+}
 
 
 /**
@@ -183,7 +183,7 @@ function overlayContentTemplate(task, taskId, task_title) {
                 </button>
             </aside>
             `
-};
+}
 
 
 /**
@@ -194,8 +194,8 @@ function overlayContentTemplate(task, taskId, task_title) {
 function assignedUserNameTemplate(userName) {
     return  `
                 <p>${userName}</p>
-            `;
-};
+            `
+}
 
 
 /**
@@ -215,8 +215,8 @@ function subtasksListItemTemplate(taskId, title, counter) {
                 </button>
                 <p>${title}</p>
             </div>
-            `;
-};
+            `
+}
 
 
 /**
@@ -256,7 +256,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribut
                 </section>
             </footer>
             `
-};
+}
 
 
 /**
@@ -281,7 +281,7 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
                 </form>
             </section>
             `
-};
+}
 
 
 /**
@@ -298,7 +298,7 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
                 </form>
             </section>
             `
-};
+}
 
 
 /**
@@ -323,7 +323,7 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
                 </form>
             </section>
             `
-};
+}
 
 
 /**
@@ -364,7 +364,7 @@ function overlayUpsertTaskPriorityTemplate() {
                 </form>
             </section>
             `
-};
+}
 
 
 /**
@@ -391,7 +391,7 @@ function overlayUpsertTaskAssignedUsersTemplate() {
                 </form>
             </section>
             `
-};
+}
 
 
 /**
@@ -429,7 +429,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
                 </section>
             </section>
             `
-};
+}
 
 
 /**
@@ -450,7 +450,7 @@ function overlayUpsertCategoryOptionTemplate() {
                 </form>
             </section>
             `
-};
+}
 
 
 /**
@@ -463,4 +463,4 @@ function overlayUpsertTaskDetailsContainerTemplate() {
             <section class="overlay_separator_add_task" id="overlay_separator_add_task"></section>
             <section class="task_details_container" id="task_details_container_2"></section>
             `
-};
+}

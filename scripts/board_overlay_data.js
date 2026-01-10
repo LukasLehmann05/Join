@@ -25,7 +25,7 @@ async function sendUpdatedTaskToDB(taskId) {
         await updateTask(taskId, taskToUpdate);
     }
     await refreshTaskOnBoard(taskId, taskToUpdate);
-};
+}
 
 
 /**
@@ -45,7 +45,7 @@ async function getTaskToUpdate(taskId) {
     if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
     if (newState !== "") taskToUpdate.state = newState;
     return taskToUpdate;
-};
+}
 
 
 /**
@@ -58,7 +58,7 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
     newPriority = current_priority;
     newAssigneesArr = allAssigneesArr;
     newSubtasksArr = allSubtasksArr;
-};
+}
 
 
 /**
@@ -74,7 +74,7 @@ async function openTaskInOverlay(taskId) {
     }, 10);
     await renderOverlayContent(taskId);
     disableScrollOnBody();
-};
+}
 
 
 /**
@@ -89,7 +89,7 @@ function clearElementsOfNewTask() {
     newAssigneesArr = [];
     newSubtasksArr = [];
     newState = "";
-};
+}
 
 
 /**
@@ -110,7 +110,7 @@ async function renderOverlayContent(taskId) {
     renderPriorityIndicator(taskId, task.priority, 'priority_overlay');
     await renderAssignedUserInfos(task.assigned_to, false, 'assigned_users_overlay');
     renderSubtasksListItems(taskId, task.subtasks || []);
-};
+}
 
 
 /**
@@ -118,7 +118,7 @@ async function renderOverlayContent(taskId) {
  */
 function disableScrollOnBody() {
     document.body.style.overflow = 'hidden';
-};
+}
 
 
 /**
@@ -126,7 +126,7 @@ function disableScrollOnBody() {
  */
 function enableScrollOnBody() {
     document.body.style.overflow = 'auto';
-};
+}
 
 
 /**
@@ -146,7 +146,7 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
             container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, contact, contactId);
         }
     }
-};
+}
 
 
 /**
@@ -160,7 +160,7 @@ function getAssigneesOfTask(taskAssignees) {
     for (let contactId of taskAssignees) {
         allAssigneesArr.push(contactId);
     }
-};
+}
 
 
 /**
@@ -184,7 +184,7 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
                     </div>
                 `;
     }
-};
+}
 
 
 /**
@@ -196,7 +196,7 @@ function closeOverlayByBackdrop(event) {
     if(event.target === event.currentTarget) {
         closeOverlay();
     }
-};
+}
 
 
 /**
@@ -245,7 +245,7 @@ async function closeOverlay(buttonElement, taskId) {
             }
         }, TOTAL_DELAY);
     }
-};
+}
 
 
 /**
@@ -260,7 +260,7 @@ function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
         sendUpdatedTaskToDB(taskId);        
     }
-};
+}
 
 
 /**
@@ -277,7 +277,7 @@ function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
         getAllFieldValuesOfEditTaskWhenUpdated();
         sendUpdatedTaskToDB(taskId);        
     }
-};
+}
 
 
 /**
@@ -300,7 +300,7 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
         return renderNewTaskAddedToastContainer();
     }
     return;
-};
+}
 
 
 /**
@@ -322,7 +322,7 @@ function swapImage(button, isHover) {
         p_tag.style.color = "#2A3647";
         p_tag.style.fontFamily = "Inter";
     }
-};
+}
 
 
 /**
@@ -337,7 +337,7 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('clear_button_container').classList.toggle('show');
     document.getElementById('required_text_field_section').classList.toggle('show');
     showWideOverlay = !showWideOverlay;
-};
+}
 
 
 /**
@@ -358,4 +358,4 @@ async function deleteTaskInOverlay(taskId) {
         console.error("Error deleting task with id: " + taskId, error);
         alert("An error occurred while deleting the task. Please try again.");
     }
-};
+}

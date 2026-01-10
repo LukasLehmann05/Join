@@ -10,7 +10,7 @@ function initSignup() {
   }
   attachPrivacyCheckboxHandler(ui);
   attachSignupHandler(ui);
-};
+}
 
 
 /**
@@ -28,7 +28,7 @@ function getSignupElements() {
     passwordConfirmInput: document.getElementById("signup-password-confirm"),
     errorBox: document.getElementById("signup-error-message"),
   };
-};
+}
 
 
 /**
@@ -43,7 +43,7 @@ function attachPrivacyCheckboxHandler(ui) {
   ui.checkbox.addEventListener("keydown", (e) => {
     handleCheckboxKeydown(e, ui);
   });
-};
+}
 
 
 /**
@@ -61,7 +61,7 @@ function handleCheckboxChange(ui) {
   } else {
     disableButton(ui.signupBtn);
   }
-};
+}
 
 
 /**
@@ -76,7 +76,7 @@ function handleCheckboxKeydown(e, ui) {
   e.preventDefault();
   ui.checkbox.checked = !ui.checkbox.checked;
   ui.checkbox.dispatchEvent(new Event("change"));
-};
+}
 
 
 /**
@@ -88,7 +88,7 @@ function attachSignupHandler(ui) {
     event.preventDefault();
     handleSignupSubmit(ui);
   });
-};
+}
 
 
 /**
@@ -105,7 +105,7 @@ async function handleSignupSubmit(ui) {
     return;
   }
   await submitSignup(data, ui);
-};
+}
 
 
 /**
@@ -120,7 +120,7 @@ function getFormData(ui) {
     password: ui.passwordInput.value,
     passwordConfirm: ui.passwordConfirmInput.value,
   };
-};
+}
 
 
 /**
@@ -137,7 +137,7 @@ function validateSignupData(data, checkbox) {
   validatePasswordConfirm(data, errors);
   validatePrivacy(checkbox, errors);
   return errors;
-};
+}
 
 
 /**
@@ -149,7 +149,7 @@ function validateName(data, errors) {
   if (!data.name) {
     errors.name = "Please enter your name.";
   }
-};
+}
 
 
 /**
@@ -166,7 +166,7 @@ function validateEmail(data, errors) {
   if (!emailRegex.test(data.email)) {
     errors.email = "Please enter a valid email.";
   }
-};
+}
 
 
 /**
@@ -182,7 +182,7 @@ function validatePassword(data, errors) {
   if (data.password.length < 6) {
     errors.password = "Password should be at least 6 characters long.";
   }
-};
+}
 
 
 /**
@@ -198,7 +198,7 @@ function validatePasswordConfirm(data, errors) {
   if (data.password !== data.passwordConfirm) {
     errors.passwordConfirm = "Passwords do not match.";
   }
-};
+}
 
 
 /**
@@ -210,7 +210,7 @@ function validatePrivacy(checkbox, errors) {
   if (!checkbox || !checkbox.checked) {
     errors.privacy = "You must accept the Privacy Policy.";
   }
-};
+}
 
 
 /**
@@ -220,7 +220,7 @@ function validatePrivacy(checkbox, errors) {
  */
 function hasErrors(errors) {
   return Object.keys(errors).length > 0;
-};
+}
 
 
 /**
@@ -242,7 +242,7 @@ function showValidationErrors(errors, ui) {
 function showNameError(errors, ui) {
   if (!errors.name) return;
   setFieldError(ui.nameInput, "error-signup-name", errors.name);
-};
+}
 
 
 /**
@@ -251,7 +251,7 @@ function showNameError(errors, ui) {
 function showEmailError(errors, ui) {
   if (!errors.email) return;
   setFieldError(ui.emailInput, "error-signup-email", errors.email);
-};
+}
 
 
 /**
@@ -260,7 +260,7 @@ function showEmailError(errors, ui) {
 function showPasswordError(errors, ui) {
   if (!errors.password) return;
   setFieldError(ui.passwordInput, "error-signup-password", errors.password);
-};
+}
 
 
 /**
@@ -273,7 +273,7 @@ function showPasswordConfirmError(errors, ui) {
     "error-signup-password-confirm",
     errors.passwordConfirm
   );
-};
+}
 
 
 /**
@@ -286,7 +286,7 @@ function showPrivacyError(errors) {
   if (privacyErr) {
     privacyErr.textContent = errors.privacy;
   }
-};
+}
 
 
 /**
@@ -296,7 +296,7 @@ function showPrivacyError(errors) {
 function showGlobalValidationMessage(ui) {
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Please correct the highlighted fields.";
-};
+}
 
 
 /**
@@ -313,7 +313,7 @@ function clearFieldErrors(ui) {
   if (ui.errorBox) {
     ui.errorBox.textContent = "";
   }
-};
+}
 
 
 /**
@@ -330,7 +330,7 @@ function setFieldError(inputElement, errorElementId, message) {
   if (inputElement) {
     inputElement.classList.add("error");
   }
-};
+}
 
 
 /**
@@ -362,7 +362,7 @@ async function submitSignup(data, ui) {
       setLoadingState(ui.signupBtn, false);
     }
   }
-};
+}
 
 
 /**
@@ -377,7 +377,7 @@ function handleExistingUser(ui) {
   );
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Please use another email address.";
-};
+}
 
 
 /**
@@ -391,7 +391,7 @@ function handleSignupSuccess(newUser) {
     localStorage.setItem("isGuest", "false");
     window.location.href = "../index.html";
   }, 1200);
-};
+}
 
 
 /**
@@ -401,7 +401,7 @@ function handleSignupSuccess(newUser) {
 function handleSignupError(ui) {
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Sign up failed. Please try again later.";
-};
+}
 
 
 /**
@@ -412,7 +412,7 @@ function handleSignupError(ui) {
 function setLoadingState(button, isLoading) {
   button.disabled = isLoading;
   button.textContent = isLoading ? "Signing up..." : "Sign up";
-};
+}
 
 
 /**
@@ -422,7 +422,7 @@ function setLoadingState(button, isLoading) {
 function enableButton(button) {
   button.disabled = false;
   button.classList.add("active");
-};
+}
 
 
 /**
@@ -432,7 +432,7 @@ function enableButton(button) {
 function disableButton(button) {
   button.disabled = true;
   button.classList.remove("active");
-};
+}
 
 
 /**
@@ -447,4 +447,4 @@ function showSignupToast() {
     toast.classList.remove("show");
     setTimeout(() => toast.classList.add("hidden"), 300);
   }, 2000);
-};
+}
