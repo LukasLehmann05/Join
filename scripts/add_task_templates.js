@@ -1,3 +1,9 @@
+/**
+ * Returns HTML markup for a subtask list item.
+ * @param {string} subtask - Subtask title text.
+ * @param {string} subtask_id - Unique id for the subtask element.
+ * @returns {string} HTML string for the subtask list item.
+ */
 function returnSubtaskTemplate(subtask, subtask_id) {
     return `<li class="subtask-list-element" id="${subtask_id}">
                 <button type="button" class="subtask-button" role="button" onclick="showSubtaskEdit('${subtask_id}')">
@@ -12,8 +18,15 @@ function returnSubtaskTemplate(subtask, subtask_id) {
                     </section>
                 </button>
             </li>`
-}
+};
 
+
+/**
+ * Returns HTML markup for an edited subtask display (non-list wrapper).
+ * @param {string} subtask_id - Unique id for the subtask element.
+ * @param {string} subtask_text - Text to display for the subtask.
+ * @returns {string} HTML string for the edited subtask.
+ */
 function returnEditedSubtaskTemplate(subtask_id, subtask_text) {
     return `<button type="button" class="subtask-button" role="button" onclick="showSubtaskEdit('${subtask_id}')">
                     <section class="subtask-text">
@@ -26,8 +39,17 @@ function returnEditedSubtaskTemplate(subtask_id, subtask_text) {
                         <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask(event,'${subtask_id}')">
                     </section>
                 </button>`
-}
+};
 
+
+/**
+ * Returns HTML markup for a selectable contact option used when assigning.
+ * @param {string} contact_name - Display name of the contact.
+ * @param {string} user_id - Contact's unique id.
+ * @param {string} contact_initial - Short initials to show in the icon.
+ * @param {string} contact_color - Background color for the contact icon.
+ * @returns {string} HTML string for a contact option element.
+ */
 function returnContactTemplate(contact_name,user_id,contact_initial,contact_color) {
     return `<li class="contact-element" id="${user_id}">
                 <button class="contact-select-button" type="button" onclick="assignContact('${user_id}')">
@@ -36,12 +58,27 @@ function returnContactTemplate(contact_name,user_id,contact_initial,contact_colo
                     <img src="../assets/icons/board/checkbox_undone.svg" alt="checkobx_icon" id="checkbox_${user_id}">
                 </button type="button">
             </li>`
-}
+};
 
+
+/**
+ * Returns HTML for a compact contact icon used in the assigned contacts area.
+ * @param {string} user_id - Contact's unique id.
+ * @param {string} contact_initial - Initials to display.
+ * @param {string} contact_color - Background color for the icon.
+ * @returns {string} HTML string for a small contact icon.
+ */
 function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
     return `<div class="contact-icon" style="background-color: ${contact_color};" id="small_contact_${user_id}">${contact_initial}</div>`
-}
+};
 
+
+/**
+ * Returns HTML for the subtask edit UI (input + action buttons).
+ * @param {string} subtask_id - Unique id for the subtask edit input.
+ * @param {string} subtask_text - Current subtask text to populate the input.
+ * @returns {string} HTML string for the subtask edit container.
+ */
 function returnSubtaskEditTemplate(subtask_id, subtask_text) {
     return `
                     <div class="subtask-edit-container">
@@ -55,4 +92,4 @@ function returnSubtaskEditTemplate(subtask_id, subtask_text) {
                         </article>
                         <aside class="subtask-underline-blue"></aside>
                     </div>`
-}
+};
