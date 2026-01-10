@@ -220,7 +220,7 @@ article {
     visibility: visible;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
@@ -239,12 +239,7 @@ article {
     text-decoration: underline;
 }
 
-.avatar-menu {
-    top: 55px;
-    right: 327px;
-}
-
-.help-icon{
+.help-icon {
     transition: transform 0.1s ease-in-out;
 }
 
