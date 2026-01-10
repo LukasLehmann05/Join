@@ -13,7 +13,8 @@ function initInputFieldEventListener(allTasksByIdArr) {
             handleTermOfInput(event, allTasksByIdArr);
         }, 500);
     });
-}
+};
+
 
 /**
  * This function handles the input event for task filtering.
@@ -23,7 +24,7 @@ function initInputFieldEventListener(allTasksByIdArr) {
 function handleTermOfInput(event, allTasksByIdArr) {
     let inputText = event.target.value;
     handleInputSubmit(inputText, allTasksByIdArr);
-}
+};
 
 
 /**
@@ -71,7 +72,8 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
         clearBoard();
         showNoSearchResultOnBoardInfo();
     }
-}
+};
+
 
 /**
  * Filters task IDs by a given field and input text.
@@ -88,14 +90,16 @@ function filterTaskIdsByField(inputText, field) {
         }
     }
     return filteredTaskIdsArr;
-}
+};
+
 
 /**
  * This function shows the "no search result" message on the board overlay.
  */
 function showNoSearchResultOnBoardInfo() {
     document.getElementById('no_task_found_message').classList.toggle('d-none', false);
-}
+};
+
 
 /**
  * This function disables the "no search result" message on the board overlay.
@@ -108,7 +112,8 @@ function disableShowNoSearchResultOnBoardInfo() {
     else {
         noInfoContainer.classList.toggle('d-none', true);
     }
-}
+};
+
 
 /**
  * This function clears all task cards from the board.
@@ -118,4 +123,4 @@ function clearBoard() {
         const container = document.getElementById(columnId);
         container.innerHTML = '';
     });
-}
+};
