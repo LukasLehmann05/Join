@@ -427,6 +427,9 @@ function unassignContact(contact_id) {
     }
 }
 
+/**
+ * Checks if the small contact image is rendered or not
+ */
 function checkForContactToRemove(contact_id) {
     let required_contact = document.getElementById("small_contact_" + contact_id)
     if (required_contact != undefined) {
@@ -456,6 +459,9 @@ async function renderSmallContacts(contact_id) {
     }
 }
 
+/**
+ * re-render all assigned contacts so that the max amount of assigned contacts can always be displayed (fires only when a already rendered assigned contact gets removed)
+ */
 function reRenderSmallContacts() {
     document.getElementById('rendered_contact_images').innerHTML = ""
     for (let index = 0; index < allAssigneesArr.length; index++) {
@@ -476,13 +482,19 @@ function removeSmallContact(contact_id) {
         rendered_contacts -= 1
     }
 }
-
+/**
+ * Checks if rendered_contacts is at the display limit
+ */
 function checkContactRenderAmount() {
     if (rendered_contacts > amount_for_render_overflow) {
         contactRenderOverflow(rendered_contacts - amount_for_render_overflow)
     }
 }
 
+/**
+ * Creates the overflow container if it not exists, otherwise changes its amount
+ * @param {number} amount
+ */
 function contactRenderOverflow(amount) {
     let contact_overflow_element = document.getElementById("contact_render_overflow")
     if (contact_overflow_element != undefined) {
