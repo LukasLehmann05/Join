@@ -120,10 +120,13 @@ article {
 }
 
 .header-side-buttons {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 16px;
     line-height: 0;
+    width: 200px;
+    justify-content: flex-end;
 }
 
 .logo-section {
@@ -184,7 +187,6 @@ article {
 }
 
 .avatar-wrapper {
-    position: relative;
     border: none;
     background: transparent;
     padding: 0;
