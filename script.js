@@ -33,4 +33,4 @@ const colours = [
 function assignColorToContact() {
     let userColor = colours[Math.floor(Math.random() * colours.length)];
     return userColor;
-};
+}

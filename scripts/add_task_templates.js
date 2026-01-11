@@ -18,7 +18,7 @@ function returnSubtaskTemplate(subtask, subtask_id) {
                     </section>
                 </button>
             </li>`
-};
+}
 
 
 /**
@@ -39,7 +39,7 @@ function returnEditedSubtaskTemplate(subtask_id, subtask_text) {
                         <img src="../assets/icons/board/delete_button.svg" alt="delete button" onclick="deleteSubtask(event,'${subtask_id}')">
                     </section>
                 </button>`
-};
+}
 
 
 /**
@@ -58,7 +58,7 @@ function returnContactTemplate(contact_name,user_id,contact_initial,contact_colo
                     <img src="../assets/icons/board/checkbox_undone.svg" alt="checkobx_icon" id="checkbox_${user_id}">
                 </button type="button">
             </li>`
-};
+}
 
 
 /**
@@ -70,7 +70,7 @@ function returnContactTemplate(contact_name,user_id,contact_initial,contact_colo
  */
 function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
     return `<div class="contact-icon" style="background-color: ${contact_color};" id="small_contact_${user_id}">${contact_initial}</div>`
-};
+}
 
 
 /**
@@ -92,4 +92,4 @@ function returnSubtaskEditTemplate(subtask_id, subtask_text) {
                         </article>
                         <aside class="subtask-underline-blue"></aside>
                     </div>`
-};
+}

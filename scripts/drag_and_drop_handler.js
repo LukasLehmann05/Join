@@ -5,7 +5,7 @@
  */
 function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
-};
+}
 
 
 /**
@@ -19,7 +19,7 @@ function dragOverHandler(event) {
     clearLastDropAcceptanceIfChangedColumn(currentColumnId);
     setDropAcceptanceInCurrentColumn(currentColumnId);
     event.preventDefault();
-};
+}
 
 
 /**
@@ -40,7 +40,7 @@ function getCurrentColumnId(event) {
         currentColumnId = getIdOfCurrentColumn(event);
     }
     return [startDropAcceptanceColumnId, currentColumnId];
-};
+}
 
 
 /**
@@ -53,7 +53,7 @@ function clearLastDropAcceptanceIfChangedColumn(currentColumnId) {
         removeDropAcceptanceFieldByColumnId(lastDropAcceptanceColumnId);
     }    
     lastDropAcceptanceColumnId = currentColumnId;
-};
+}
 
 
 /**
@@ -65,7 +65,7 @@ function setDropAcceptanceInCurrentColumn(currentColumnId) {
     if(startDropAcceptanceColumnId !== currentColumnId && currentColumnId !== null) {
         renderDropAcceptanceInColumn(currentColumnId);
     }
-};
+}
 
 
 /**
@@ -76,7 +76,7 @@ function setDropAcceptanceInCurrentColumn(currentColumnId) {
  */
 function getIdOfCurrentColumn(event) {
     return event.currentTarget.id;
-};
+}
 
 
 /**
@@ -90,7 +90,7 @@ function renderDropAcceptanceInColumn(columnId) {
         columnContent.innerHTML += showDropAcceptanceTemplate();
     }
     removeNoTaskInfoElement(columnId);
-};
+}
 
 
 /**
@@ -101,7 +101,7 @@ function renderDropAcceptanceInColumn(columnId) {
 function removeNoTaskInfoElement(columnId) {
     const columnContent = document.getElementById(columnId);
     findChildAndRemoveNoTaskElement(columnContent);
-};
+}
 
 
 /**
@@ -115,7 +115,7 @@ function findChildAndRemoveNoTaskElement(parentElement) {
     if (noTaskElement) {
         noTaskElement.remove();
     }
-};
+}
 
 
 /**
@@ -134,7 +134,7 @@ function dropHandler(event) {
     updateStateOfDroppedTask(taskId, event.currentTarget.id);
     startDropAcceptanceColumnId = null;
     dragOverCounter = 0;
-};
+}
 
 
 /**
@@ -157,7 +157,7 @@ async function updateStateOfDroppedTask(taskId, newColumnId) {
     catch(error){
         console.error('Error updating task in database:', error);
     }
-};
+}
 
 
 /**
@@ -168,4 +168,4 @@ async function updateStateOfDroppedTask(taskId, newColumnId) {
 function removeDropAcceptanceFieldByColumnId(columnId) {
     const columnOfDrop = document.getElementById(columnId).querySelectorAll('.drop_acceptance');
     columnOfDrop.forEach(drop => drop.remove());
-};
+}

@@ -15,7 +15,7 @@ function contactListSingle(contactID, name, email, acronym, phone) {
                   <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
                 </div>
             </div>`
-};
+}
 
 
 /**
@@ -29,7 +29,7 @@ function contactListLetterSection(letter) {
                 <div class="separator-list"></div>
                 <section class="list-user" id="${letter}"></section>
             </article>`
-};
+}
 
 
 /**
@@ -71,7 +71,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                     <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                 </div>
             </dialog>`
-};
+}
 
 
 /**
@@ -126,7 +126,7 @@ function addDialogHTML() {
                    </div>
                </section>
            </div> `
-};
+}
 
 
 /**
@@ -183,4 +183,4 @@ function editDialogHTML() {
                    </div>
                </section>
            </div>`
-};
+}

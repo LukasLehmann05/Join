@@ -6,7 +6,7 @@ function getGreetingElements() {
   const greetingTextEl = document.querySelector(".greeting-text");
   const greetingNameEl = document.querySelector(".greeting-name");
   return { greetingTextEl, greetingNameEl };
-};
+}
 
 
 /**
@@ -20,7 +20,7 @@ function getSafeUserName(user) {
     return '';
   }
   return name;
-};
+}
 
 
 /**
@@ -32,7 +32,7 @@ function calculateGreeting(hour) {
   if (hour >= 12 && hour < 18) return "Good afternoon";
   if (hour >= 18 || hour < 5) return "Good evening";
   return "Good morning";
-};
+}
 
 
 /**
@@ -45,7 +45,7 @@ function calculateGreeting(hour) {
 function showGreeting(greetingTextEl, greetingNameEl, greeting, fullName) {
   greetingTextEl.textContent = `${greeting},`;
   greetingNameEl.textContent = fullName;
-};
+}
 
 
 /**
@@ -64,7 +64,7 @@ function renderGreeting() {
   } else {
     showGreeting(greetingTextEl, greetingNameEl, greeting, fullName);
   }
-};
+}
 
 
 /**
@@ -91,7 +91,7 @@ function showGreetingOverlay() {
   setTimeout(() => {
     overlay.classList.add('hidden');
   }, 5000);
-};
+}
 
 
 /**
@@ -106,7 +106,7 @@ async function fetchTasksForSummary() {
     console.error("Error fetching tasks for summary:", error);
     return [];
   }
-};
+}
 
 
 /**
@@ -118,7 +118,7 @@ function setTextContent(selector, value) {
   const el = document.querySelector(selector);
   if (!el) return;
   el.textContent = String(value);
-};
+}
 
 
 /**
@@ -131,7 +131,7 @@ function countTasksByState(tasks, state) {
   return tasks.filter(
     (task) => (task.state || "").toLowerCase() === state.toLowerCase()
   ).length;
-};
+}
 
 
 /**
@@ -143,7 +143,7 @@ function countUrgentTasks(tasks) {
   return tasks.filter(
     (task) => (task.priority || "").toLowerCase() === "urgent"
   ).length;
-};
+}
 
 
 /**
@@ -162,7 +162,7 @@ function parseDueDate(rawDate) {
     return new Date(`${year}-${month}-${day}`);
   }
   return null;
-};
+}
 
 
 /**
@@ -186,7 +186,7 @@ function findNextUrgentDeadline(tasks) {
     }
   }
   return nextDeadline;
-};
+}
 
 
 /**
@@ -201,7 +201,7 @@ function formatDateForDisplay(date) {
     day: "numeric",
     year: "numeric",
   });
-};
+}
 
 
 /**
@@ -213,7 +213,7 @@ function updateUrgentCard(tasks) {
   const nextDeadline = findNextUrgentDeadline(tasks);
   setTextContent(".urgent-number", urgentCount);
   setTextContent(".urgent-date", formatDateForDisplay(nextDeadline));
-};
+}
 
 
 /**
@@ -242,7 +242,7 @@ async function loadAndRenderSummary() {
     setTextContent(".urgent-number", 0);
     setTextContent(".urgent-date", "No deadline");
   }
-};
+}
 
 
 /**
@@ -256,7 +256,7 @@ async function initSummaryPage() {
     showGreetingOverlay();
   }
   await loadAndRenderSummary();
-};
+}
 
 
 document.addEventListener("DOMContentLoaded", initSummaryPage);

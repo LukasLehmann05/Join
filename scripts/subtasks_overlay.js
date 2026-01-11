@@ -30,6 +30,7 @@ function getSubtasksOfTask(subtasksArr) {
     }
 }
 
+
 /**
  * This function renders the checkbox for a subtask list item.
  * 
@@ -49,6 +50,7 @@ function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
     }
 }
 
+
 /**
  * This function toggles the done state of a subtask and updates the UI.
  * 
@@ -63,6 +65,7 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
     renderSubtaskProgress(taskId, task.subtasks);
     newSubtasksArr = task.subtasks;
 }
+
 
 /**
  * This function renders the editable list items for subtasks in the overlay.

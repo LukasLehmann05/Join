@@ -13,7 +13,7 @@ function initInputFieldEventListener(allTasksByIdArr) {
             handleTermOfInput(event, allTasksByIdArr);
         }, 500);
     });
-};
+}
 
 
 /**
@@ -24,7 +24,7 @@ function initInputFieldEventListener(allTasksByIdArr) {
 function handleTermOfInput(event, allTasksByIdArr) {
     let inputText = event.target.value;
     handleInputSubmit(inputText, allTasksByIdArr);
-};
+}
 
 
 /**
@@ -47,6 +47,7 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
         disableShowNoSearchResultOnBoardInfo();
     }
 }
+
 
 /**
  * This function applies the search filter logic to the task board.
@@ -72,7 +73,7 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
         clearBoard();
         showNoSearchResultOnBoardInfo();
     }
-};
+}
 
 
 /**
@@ -90,7 +91,7 @@ function filterTaskIdsByField(inputText, field) {
         }
     }
     return filteredTaskIdsArr;
-};
+}
 
 
 /**
@@ -98,7 +99,7 @@ function filterTaskIdsByField(inputText, field) {
  */
 function showNoSearchResultOnBoardInfo() {
     document.getElementById('no_task_found_message').classList.toggle('d-none', false);
-};
+}
 
 
 /**
@@ -112,7 +113,7 @@ function disableShowNoSearchResultOnBoardInfo() {
     else {
         noInfoContainer.classList.toggle('d-none', true);
     }
-};
+}
 
 
 /**
@@ -123,4 +124,4 @@ function clearBoard() {
         const container = document.getElementById(columnId);
         container.innerHTML = '';
     });
-};
+}

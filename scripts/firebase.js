@@ -10,7 +10,7 @@ async function fetchAllDataGlobal() {
     let joinFetch = await fetch(BASE_URL + ".json");
     let joinData = await joinFetch.json();
     return AllData.data = joinData;
-};
+}
 
 
 /**
@@ -53,7 +53,7 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
             displayNewTaskOnBoard(newTaskId, newTask);
         }
     }
-};
+}
 
 
 /**
@@ -77,7 +77,7 @@ async function updateTask(taskId, taskToUpdate) {
     } catch (error) {
         console.error('Error updating task:', error)
     }
-};
+}
 
 
 /**
@@ -96,7 +96,7 @@ async function deleteTask(taskId) {
     } catch (error) {
         console.error('Error deleting task:', error)
     }
-};
+}
 
 
 /**
@@ -114,7 +114,7 @@ async function getTaskById(taskId) {
         console.error('Error fetching task by ID:', error);
         return error;
     }
-};
+}
 
 
 /**
@@ -145,7 +145,7 @@ async function deleteThisContactFromDatabaseById(contactID) {
             'Content-Type': 'application/json'
         },
     })
-};
+}
 
 
 /**
@@ -162,7 +162,7 @@ async function editContactDataInDatabase(editedUser, contactID) {
         },
         body: JSON.stringify(editedUser),
     });
-};
+}
 
 
 /**
@@ -173,7 +173,7 @@ async function getLastContactAddedFromDatabase() {
     let joinFetch = await fetch(BASE_URL + `/contacts.json`)
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
-};
+}
 
 
 /**
@@ -196,7 +196,7 @@ async function getContactById(contactID) {
         console.error('Error fetching contact by ID:', error)
         return null;
     }
-};
+}
 
 
 /**
@@ -216,4 +216,4 @@ async function sendDataToUrl(payload, errorMessage) {
     throw new Error(`${errorMessage}: ${response.status}`);
   }
   return await response.json();
-};
+}
