@@ -6,10 +6,6 @@
     .seperator {
         display: none;
     }
-
-    .header-nav {
-        padding-left: 48px;
-    }
 }
 
 @media (max-width: 900px) and (min-width: 768px) {
