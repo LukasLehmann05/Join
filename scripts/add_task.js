@@ -32,6 +32,7 @@ let allAssigneesArr = []
 
 let subtask_amount = 0
 let rendered_contacts = 0
+let amount_for_render_overflow = 3
 
 
 /**
@@ -432,7 +433,7 @@ async function renderSmallContacts(contact_id) {
     let contact_intial = await getInitialsFromUser(contact)
     let contact_color = contact.color
     rendered_contacts += 1
-    if (rendered_contacts <= 3) {
+    if (rendered_contacts <= amount_for_render_overflow) {
         const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
         rendered_contact_images.innerHTML += small_contact_template
         console.log("render" ,rendered_contacts);
@@ -457,8 +458,8 @@ function removeSmallContact(contact_id) {
 }
 
 function checkContactRenderAmount() {
-    if (rendered_contacts > 3) {
-        contactRenderOverflow(rendered_contacts - 3)
+    if (rendered_contacts > amount_for_render_overflow) {
+        contactRenderOverflow(rendered_contacts - amount_for_render_overflow)
     }
 }
 
