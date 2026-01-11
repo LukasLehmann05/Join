@@ -477,7 +477,11 @@ function checkContactRenderAmount() {
 function contactRenderOverflow(amount) {
     let contact_overflow_element = document.getElementById("contact_render_overflow")
     if (contact_overflow_element != undefined) {
-        contact_overflow_element.innerHTML = `+${amount}`
+        if (amount > 0) {
+            contact_overflow_element.innerHTML = `+${amount}`
+        } else {
+            contact_overflow_element.remove()
+        }
     } else {
         let new_overflow_emlement = returnSmallContactOverflowTemplate(`+${amount}`)
         rendered_contact_images.innerHTML += new_overflow_emlement
