@@ -16,7 +16,7 @@
     }
 
     .header-nav {
-        justify-content: space-between;
+        padding: 20px 16px;
     }
 
     .body {
