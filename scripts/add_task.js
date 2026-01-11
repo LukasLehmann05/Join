@@ -431,9 +431,16 @@ async function renderSmallContacts(contact_id) {
     let contact = await getContactById(contact_id)
     let contact_intial = await getInitialsFromUser(contact)
     let contact_color = contact.color
-    const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
-    rendered_contact_images.innerHTML += small_contact_template
     rendered_contacts += 1
+    if (rendered_contacts <= 3) {
+        const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
+        rendered_contact_images.innerHTML += small_contact_template
+        console.log("render" ,rendered_contacts);
+        
+    } else {
+        console.log("overflow" ,rendered_contacts);
+        checkContactRenderAmount()
+    }
 }
 
 
@@ -451,12 +458,18 @@ function removeSmallContact(contact_id) {
 
 function checkContactRenderAmount() {
     if (rendered_contacts > 3) {
-        contactRenderOverflow(action_type)
+        contactRenderOverflow(rendered_contacts - 3)
     }
 }
 
-function contactRenderOverflow(action_type,amount) {
-
+function contactRenderOverflow(amount) {
+    let contact_overflow_element = document.getElementById("contact_render_overflow")
+    if (contact_overflow_element != undefined) {
+        contact_overflow_element.innerHTML = `+${amount}`
+    } else {
+        let new_overflow_emlement = returnSmallContactOverflowTemplate(`+${amount}`)
+        rendered_contact_images.innerHTML += new_overflow_emlement
+    }
 }
 
 /**
