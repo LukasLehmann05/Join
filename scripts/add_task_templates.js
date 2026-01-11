@@ -72,8 +72,8 @@ function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
     return `<div class="contact-icon" style="background-color: ${contact_color};" id="small_contact_${user_id}">${contact_initial}</div>`
 }
 
-function returnSmallContactTemplate(contact_initial) {
-    return `<div class="contact-icon";" id="contact_render_overflow">${contact_initial}</div>`
+function returnSmallContactOverflowTemplate(overflow_amount) {
+    return `<div class="contact-icon contact-overflow-display";" id="contact_render_overflow">${overflow_amount}</div>`
 }
 
 
