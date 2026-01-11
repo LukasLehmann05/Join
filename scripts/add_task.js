@@ -34,7 +34,6 @@ let subtask_amount = 0
 let rendered_contacts = 0
 let amount_for_render_overflow = 3
 
-
 /**
  * Initializes add-task page: caches DOM refs and loads contacts.
  */
@@ -42,7 +41,6 @@ function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
     loadContactsForAssign()
 }
-
 
 /**
  * Caches frequently used DOM elements for priority, subtasks and inputs.
@@ -65,7 +63,6 @@ function loadPrioButtonsAndSubtaskSectionById() {
     req_category_text = document.getElementById("required_category");
 }
 
-
 /**
  * Returns a promise for the globally fetched data object.
  * @returns {Promise<Object>} Global join data promise.
@@ -74,7 +71,6 @@ function loadDataFromAPI() {
     let joinData = fetchAllDataGlobal()
     return joinData
 }
-
 
 /**
  * Validates required fields and creates a new task when valid.
@@ -92,7 +88,6 @@ async function createTask() {
     }
 }
 
-
 /**
  * Sends the new task payload to the database.
  * @param {string} stateOfNewTask - Initial state for the task.
@@ -101,14 +96,12 @@ async function sendTaskToDB(stateOfNewTask) {
     await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr);
 }
 
-
 /**
  * Redirects the user to the board page.
  */
 function redirectToBoard() {
     window.location.replace("board.html");
 }
-
 
 /**
  * Checks if the required fields are filled.
@@ -134,7 +127,6 @@ function checkForRequired(requiredFields) {
     return isValid;
 }
 
-
 /**
  * Clears all add-task form inputs and resets internal state.
  */
@@ -152,7 +144,6 @@ function clearAllInputs() {
     clearSubtask()
     subtask_amount = 0
 }
-
 
 /**
  * Changes button styling and internal priority state.
@@ -174,7 +165,6 @@ function changePriority(priority) {
     }
 }
 
-
 /**
  * Removes the CSS classes for the current priority button background.
  */
@@ -195,7 +185,6 @@ function removeOldBackground() {
     }
 }
 
-
 /**
  * Sets the UI and internal state to low priority.
  */
@@ -204,7 +193,6 @@ function changeToLowPrio() {
     current_priority = PRIORITY_ARR[0]
     low_prio_button.classList.add("bg-green")
 }
-
 
 /**
  * Sets the UI and internal state to medium priority.
@@ -216,7 +204,6 @@ function changeToMedPrio() {
     medium_prio_button.classList.remove("yellow-filter")
 }
 
-
 /**
  * Sets the UI and internal state to urgent priority.
  */
@@ -225,7 +212,6 @@ function changeToUrgentPrio() {
     current_priority = PRIORITY_ARR[2]
     urgent_prio_button.classList.add("bg-red")
 }
-
 
 /**
  * Shows UI indicators for any required fields that are missing.
@@ -245,7 +231,6 @@ function missingInputs() {
     }
 }
 
-
 /**
  * Resets internal flags that track required-field completion.
  */
@@ -254,7 +239,6 @@ function resetRequiredValues() {
     req_due_date = false
     req_category = false
 }
-
 
 /**
  * Displays subtask action buttons when a subtask is present.
@@ -266,7 +250,6 @@ function showSubtaskButtons() {
     }
 }
 
-
 /**
  * Hides the subtask action buttons.
  */
@@ -277,7 +260,6 @@ function hideSubtaskButtons() {
     }
 }
 
-
 /**
  * Clears subtask input, rendered list and resets subtask state.
  */
@@ -287,23 +269,6 @@ function clearSubtask() {
     document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
 }
-
-
-/**
- * Clears assigned contacts UI and internal assignee list.
- */
-function clearContacts() {
-    for (let index = 0; index < allAssigneesArr.length; index++) {
-        const contact_element = document.getElementById(allAssigneesArr[index]);
-        contact_element.classList.remove("assigned-contact")
-        const checkbox_icon = document.getElementById("checkbox_" + allAssigneesArr[index])
-        checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
-        checkbox_icon.classList.remove("checkbox-filter")
-    }
-    allAssigneesArr = []
-    rendered_contact_images.innerHTML = ""
-}
-
 
 /**
  * Adds a new subtask to the UI and internal subtasks array.
@@ -321,7 +286,6 @@ function addSubtask() {
     }
 }
 
-
 /**
  * Returns a new unique subtask id.
  * @returns {string}
@@ -329,184 +293,6 @@ function addSubtask() {
 function returnSubtaskId() {
     subtask_amount += 1
     return "subtask_" + subtask_amount
-}
-
-
-/**
- * Renders available contacts into the assign list.
- * @param {Object} join_data - Global data object containing contacts.
- */
-async function addContactsToAssign(join_data) {
-    if (!task_assign) return;
-    let contacts = join_data.contacts
-    for (let contact_id in contacts) {
-        let contact = contacts[contact_id]
-        let contact_intial = await getInitialsFromUser(contact)
-        let contact_color = contact.color
-        let contact_option = returnContactTemplate(contact.name, contact_id, contact_intial, contact_color)
-        task_assign.innerHTML += contact_option
-    }
-}
-
-
-/**
- * Computes initials string from a user's name.
- * @param {Object} user - User object with `name` property.
- * @returns {string}
- */
-function getInitialsFromUser(user) {
-    const initials = user.name
-        .split(' ')
-        .map(word => word[0])
-        .join('')
-        .toUpperCase();
-    return initials;
-}
-
-
-/**
- * Loads contact data and populates the assign list if present.
- */
-async function loadContactsForAssign() {
-    if (!document.getElementById("task_assign")) return;
-    let join_data = await loadDataFromAPI()
-    addContactsToAssign(join_data)
-}
-
-
-/**
- * Toggles visibility of the contact selector panel.
- */
-function showContacts() {
-    let contact_selector = document.getElementById("contact_selector");
-    if (contacts_shown == false) {
-        contact_selector.style.display = "block"
-        contacts_shown = true
-    } else {
-        contact_selector.style.display = "none"
-        contacts_shown = false
-    }
-}
-
-
-/**
- * Toggles assignment of a contact to the new task.
- * @param {string} contact_id
- */
-function assignContact(contact_id) {
-    if (allAssigneesArr.includes(contact_id)) {
-        unassignContact(contact_id)
-    } else {
-        allAssigneesArr.push(contact_id)
-        const contact_element = document.getElementById(contact_id)
-        const checkbox_icon = document.getElementById("checkbox_" + contact_id)
-        checkbox_icon.src = "../assets/icons/board/checkbox_done.svg"
-        contact_element.classList.add("assigned-contact")
-        checkbox_icon.classList.add("checkbox-filter")
-        renderSmallContacts(contact_id)
-    }
-}
-
-
-/**
- * Removes a contact from the assignees list and updates UI.
- * @param {string} contact_id
- */
-function unassignContact(contact_id) {
-    let contact_index = allAssigneesArr.indexOf(contact_id)
-    allAssigneesArr.splice(contact_index, 1)
-    const contact_element = document.getElementById(contact_id)
-    const checkbox_icon = document.getElementById("checkbox_" + contact_id)
-    checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
-    contact_element.classList.remove("assigned-contact")
-    checkbox_icon.classList.remove("checkbox-filter")
-    if (rendered_contacts <= amount_for_render_overflow) {
-        removeSmallContact(contact_id)
-    } else {
-        checkForContactToRemove(contact_id)
-    }
-}
-
-/**
- * Checks if the small contact image is rendered or not
- */
-function checkForContactToRemove(contact_id) {
-    let required_contact = document.getElementById("small_contact_" + contact_id)
-    if (required_contact != undefined) {
-        rendered_contacts = 0
-        reRenderSmallContacts()
-    } else {
-        rendered_contacts -= 1
-        contactRenderOverflow(rendered_contacts - amount_for_render_overflow)
-    }
-}
-
-
-/**
- * Renders a compact contact icon into the assigned-contacts area.
- * @param {string} contact_id
- */
-async function renderSmallContacts(contact_id) {
-    let contact = await getContactById(contact_id)
-    let contact_intial = getInitialsFromUser(contact)
-    let contact_color = contact.color
-    rendered_contacts += 1
-    if (rendered_contacts <= amount_for_render_overflow) {
-        const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
-        rendered_contact_images.innerHTML += small_contact_template
-    } else {
-        checkContactRenderAmount()
-    }
-}
-
-/**
- * re-render all assigned contacts so that the max amount of assigned contacts can always be displayed (fires only when a already rendered assigned contact gets removed)
- */
-function reRenderSmallContacts() {
-    document.getElementById('rendered_contact_images').innerHTML = ""
-    for (let index = 0; index < allAssigneesArr.length; index++) {
-        const assignee_to_rerender = allAssigneesArr[index];
-        renderSmallContacts(assignee_to_rerender)
-    }
-}
-
-
-/**
- * Removes a compact assigned-contact element from the DOM.
- * @param {string} contact_id
- */
-function removeSmallContact(contact_id) {
-    const small_contact_element = document.getElementById("small_contact_" + contact_id)
-    rendered_contact_images.removeChild(small_contact_element)
-    if (rendered_contacts > 0) {
-        rendered_contacts -= 1
-    }
-}
-/**
- * Checks if rendered_contacts is at the display limit
- */
-function checkContactRenderAmount() {
-    if (rendered_contacts > amount_for_render_overflow) {
-        contactRenderOverflow(rendered_contacts - amount_for_render_overflow)
-    }
-}
-
-/**
- * Creates the overflow container if it not exists, otherwise changes its amount
- * @param {number} amount
- */
-function contactRenderOverflow(amount) {
-    let contact_overflow_element = document.getElementById("contact_render_overflow")
-    if (contact_overflow_element != undefined) {
-        if (amount > 0) {
-            contact_overflow_element.innerHTML = `+${amount}`
-        } else {
-            contact_overflow_element.remove()
-        }
-    } else {
-        let new_overflow_emlement = returnSmallContactOverflowTemplate(`+${amount}`)
-        rendered_contact_images.innerHTML += new_overflow_emlement
-    }
 }
 
 /**
@@ -520,7 +306,6 @@ function clearRequiredIndicators() {
     task_due_date.classList.remove("missing-input")
     task_category.classList.remove("missing-input")
 }
-
 
 /**
  * Removes the missing-input indicator for a specific field.
@@ -545,19 +330,6 @@ function removeIndicatorOnInput(field) {
     }
 }
 
-
-/**
- * Associates a task id with a user by updating the user's tasks in DB.
- * @param {string} userId
- * @param {string} taskId
- */
-function assignTaskToUserById(userId, taskId) {
-    let allTasksOfUser = [];
-    allTasksOfUser += taskId;
-    updateUserTasksInDB(userId, allTasksOfUser);
-}
-
-
 /**
  * Replaces a subtask list item with its editable input UI.
  * @param {string} subtask_id
@@ -569,7 +341,6 @@ function showSubtaskEdit(subtask_id) {
     let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
     subtask_to_edit.innerHTML = subtask_edit_template
 }
-
 
 /**
  * Deletes a subtask element and removes it from internal array.
@@ -584,7 +355,6 @@ function deleteSubtask(event, subtask_id) {
     subtask_to_delete.remove()
 }
 
-
 /**
  * Deletes a subtask that is currently being edited.
  * @param {Event} event
@@ -598,7 +368,6 @@ function deleteSubtaskEdit(event, subtask_id) {
     subtask_to_delete.remove()
 }
 
-
 /**
  * Removes a subtask object from the internal subtasks array by text match.
  * @param {string} subtask_text
@@ -609,7 +378,6 @@ function removeSubtaskFromArray(subtask_text) {
         allSubtasksArr.splice(subtask_index, 1)
     }
 }
-
 
 /**
  * Reads the edited subtask input and appends it to the subtasks array.
@@ -622,7 +390,6 @@ function addSubtaskEditToArray(subtask_id) {
     allSubtasksArr.push(subtaskObj)
 }
 
-
 /**
  * Confirms an edit to a subtask: updates internal array and UI.
  * @param {string} subtask_id
@@ -634,6 +401,5 @@ function confirmSubtaskEdit(subtask_id) {
     let subtask_template = returnEditedSubtaskTemplate(subtask_id, edited_subtask_text)
     subtask_to_confirm.innerHTML = subtask_template
 }
-
 
 document.addEventListener("DOMContentLoaded", addTaskInit)
