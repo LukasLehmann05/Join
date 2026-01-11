@@ -14,23 +14,13 @@ const animatedLogo = document.querySelector('.animated-logo');
  * then transitions to a static logo position.
  */
 function initLogoAnimation() {
-    // Make login page visible immediately
     loginWrapper.classList.add('visible');
-    /**
-     * Fades out the overlay background after 1 second
-     * to reveal the login page beneath the moving logo
-     */
     setTimeout(() => {
         animationOverlay.classList.add('fade-out');
     }, 1000);
-    /**
-     * Converts the animated overlay to a static positioned element
-     * and transforms the animated logo into the permanent logo
-     */
     setTimeout(() => {
         animationOverlay.classList.add('static');
     }, 1500);
 }
 
-// Execute animation when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initLogoAnimation);
