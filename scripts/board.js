@@ -11,12 +11,14 @@ const STATE_TO_COLUMN_ID = {
     [TASK_STATE_ARR[1]]: BOARD_COLUMN_ID_ARR[1],
     [TASK_STATE_ARR[2]]: BOARD_COLUMN_ID_ARR[2],
     [TASK_STATE_ARR[3]]: BOARD_COLUMN_ID_ARR[3],
-};
+}
+
 
 // Generate the reverse mapping
 const COLUMN_ID_TO_STATE = Object.fromEntries(
     Object.entries(STATE_TO_COLUMN_ID).map(([state, columnId]) => [columnId, state])
-);
+)
+
 
 /**
  * This function returns the column ID corresponding to a given task state.
@@ -28,6 +30,7 @@ function getColumnIdByTaskState(state) {
     return STATE_TO_COLUMN_ID[state] || BOARD_COLUMN_ID_ARR[0];
 }
 
+
 /**
  * This function returns the task state corresponding to a given column ID.
  * 
@@ -37,6 +40,7 @@ function getColumnIdByTaskState(state) {
 function getTaskStateByColumnId(columnId) {
     return COLUMN_ID_TO_STATE[columnId] || TASK_STATE_ARR[0];
 }
+
 
 /**
  * This function renders the "no task" info template for a given column.
@@ -61,6 +65,7 @@ function renderNoTaskInfo(columnId) {
     }
 }
 
+
 /**
  * This function renders the subtask progress for a task.
  * 
@@ -74,6 +79,7 @@ function renderSubtaskProgress(taskId, subtasksArr) {
     renderSubtaskStatusBar(taskId, subtasksArr);
 }
 
+
 /**
  * This function formats the subtask progress as a string "completed/total".
  * 
@@ -85,6 +91,7 @@ function formatSubtaskProgress(subtasks) {
     const total = subtasks.length;
     return `${completed}/${total}`;
 }
+
 
 /**
  * This function renders the subtask status bar for a task.
@@ -118,6 +125,7 @@ async function renderTaskCard(taskId, task) {
     renderPriorityIndicator(taskId, task.priority, 'priority');
 }
 
+
 /**
  * This function renders the assigned user icons for a task.
  * 
@@ -137,6 +145,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
     }
 }
 
+
 /**
  * This function returns the initials from a user object.
  * 
@@ -151,6 +160,7 @@ function getInitialsFromUser(user) {
         .toUpperCase();
     return initials;
 }
+
 
 /**
  * This function returns the icon path for a given priority.
@@ -170,6 +180,7 @@ function getIconForPriority(priority) {
     }
 }
 
+
 /**
  * This function renders the priority indicator for a task.
  * 
@@ -183,6 +194,7 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
     element.innerHTML = priorityIndicatorTemplate(iconPath);
 }
 
+
 /**
  * This function displays a new task on the board.
  * 
@@ -195,6 +207,7 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
     removeNoTaskInfoElement(getColumnIdByTaskState(newTask.state));
 }
 
+
 /**
  * This function updates the allTasksObj with the updated task.
  * 
@@ -205,6 +218,7 @@ function updateAllTasksObj(taskId, updatedTask) {
     allTasksObj[taskId] = updatedTask;
 }
 
+
 /**
  * This function return a single task from allTasksObj by its ID.
  * 
@@ -214,6 +228,7 @@ function updateAllTasksObj(taskId, updatedTask) {
 function getSingleTaskOfAllTasksObj(taskId) {
     return allTasksObj[taskId];
 }
+
 
 /**
  * This function sets the allTasksObj from the given array of 
@@ -233,6 +248,7 @@ function setAllTasksObj(allTasksByIdArr, allTasks) {
     }
 }
 
+
 /**
  * This function returns all tasks.
  * 
@@ -242,12 +258,14 @@ function getAllTasksObj() {
     return allTasksObj; 
 }
 
+
 /**
  * This function resets the allTasksObj to an empty object.
  */
 function resetAllTasksObj() {
     allTasksObj = {};
 }
+
 
 /**
  * This function renders "no task" info for all columns on DOM load.
@@ -257,6 +275,7 @@ function renderNoTaskInfoOnDOMLoad(){
         checkIfNoTasksInColumn(columnId);
     });
 }
+
 
 /**
  * This function checks if a column has no tasks and renders "no task" info if needed.
@@ -271,6 +290,7 @@ function checkIfNoTasksInColumn(columnId) {
     container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
     });
 }
+
 
 /**
  * This function observes a column for becoming empty and renders "no task" info.
@@ -288,13 +308,14 @@ function observeColumnEmpty(columnId) {
     observer.observe(container, { childList: true, subtree: false });
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[0]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[1]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[2]);
     observeColumnEmpty(BOARD_COLUMN_ID_ARR[3]);
     initializeBoard();
-});
+})
 
 
 /**
@@ -312,6 +333,7 @@ async function initializeBoard() {
     return allTasksByIdArr;
 }
 
+
 /**
  * This function retrieves all task IDs from the join data.
  * 
@@ -325,6 +347,7 @@ function getAllTaskIds(joinData) {
     }
     return allTaskIds;
 }
+
 
 /**
  * This function renders all task cards on the board.

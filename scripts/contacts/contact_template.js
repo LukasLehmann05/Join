@@ -1,3 +1,12 @@
+/**
+ * This function returns the HTML template for a single contact in the contact list.
+ * @param {string} contactID 
+ * @param {string} name  
+ * @param {string} email 
+ * @param {string} acronym 
+ * @param {string} phone 
+ * @returns {string} The HTML string for a single contact.
+ */
 function contactListSingle(contactID, name, email, acronym, phone) {
     return `<div id="${contactID}" class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
                 <p id="short-${contactID}" class="two-letter-name-small">${acronym}</p>
@@ -6,18 +15,32 @@ function contactListSingle(contactID, name, email, acronym, phone) {
                   <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
                 </div>
             </div>`
-};
+}
 
 
+/**
+ * This function returns the HTML template for a section of the alphabetical structure of the whole contact list.
+ * @param {string} letter
+ * @returns {string} 
+ */
 function contactListLetterSection(letter) {
     return `<article class="single-letter-section">
                 <h2 class="single-letter font-size-20">${letter}</h2>
                 <div class="separator-list"></div>
                 <section class="list-user" id="${letter}"></section>
             </article>`
-};
+}
 
 
+/**
+ * This function returns the HTML template to display a single contact in the main window.
+ * @param {string} currentId 
+ * @param {string} currentName  
+ * @param {string} currentPhone 
+ * @param {string} currentMail 
+ * @param {string} acronym 
+ * @returns {string}
+ */
 function contactMain(currentId, currentName, currentPhone, currentMail, acronym) {
     return `<div class="main-name">
                 <div id="mainShort" class="two-letter-name fullname">${acronym}</div>
@@ -48,8 +71,12 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
                     <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>
                 </div>
             </dialog>`
-};
+}
 
+
+/**
+ * This function returns the HTML template for the dialog to add a contact.
+ */
 function addDialogHTML() {
     return `<div id="addContent" class="dialog-content">
                <section class="main-left">
@@ -99,9 +126,13 @@ function addDialogHTML() {
                    </div>
                </section>
            </div> `
-};
+}
 
 
+/**
+ * This function returns the HTML template for the dialog to edit a contact.
+ * @returns {string}
+ */
 function editDialogHTML() {
     return `<div id="editContent" class="dialog-content">
                <section class="main-left">
@@ -152,4 +183,4 @@ function editDialogHTML() {
                    </div>
                </section>
            </div>`
-};
+}

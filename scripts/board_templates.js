@@ -22,6 +22,7 @@ function noTaskInProgressTemplate() {
             `
 }
 
+
 /**
  * This function returns the HTML template for the "No tasks for feedback" info.
  * @returns {string} The HTML string for the info template.
@@ -33,6 +34,7 @@ function noTaskInFeedbackTemplate() {
             </div>
             `
 }
+
 
 /**
  * This function returns the HTML template for the "No tasks done" info.
@@ -46,6 +48,7 @@ function noTaskDoneTemplate() {
             `
 }
 
+
 /**
  * This function returns the HTML template for the drop acceptance field.
  * @returns {string} The HTML string for the drop acceptance field.
@@ -55,6 +58,7 @@ function showDropAcceptanceTemplate() {
             <div class="drop_acceptance"></div>
             `
 }
+
 
 /**
  * This function returns the HTML template for a task card.
@@ -90,6 +94,7 @@ function taskCardTemplate(task, taskId) {
             `
 }
 
+
 /**
  * This function returns the HTML template for an assigned user icon.
  * @param {string} initials The initials of the user.
@@ -103,6 +108,7 @@ function assignedUserIconTemplate(initials, contactColor) {
             `
 }
 
+
 /**
  * This function returns the HTML template for the priority indicator.
  * @param {string} iconPath The file path to the priority icon.
@@ -113,6 +119,7 @@ function priorityIndicatorTemplate(iconPath) {
             <img src="${iconPath}" alt="Priority Icon" />
             `
 }
+
 
 /**
  * This function returns the HTML template for the overlay content of a task.
@@ -178,6 +185,7 @@ function overlayContentTemplate(task, taskId, task_title) {
             `
 }
 
+
 /**
  * This function returns the HTML template for an assigned user's name.
  * @param {string} userName The name of the user.
@@ -186,8 +194,9 @@ function overlayContentTemplate(task, taskId, task_title) {
 function assignedUserNameTemplate(userName) {
     return  `
                 <p>${userName}</p>
-            `;
+            `
 }
+
 
 /**
  * This function returns the HTML template for a subtask list item.
@@ -206,8 +215,9 @@ function subtasksListItemTemplate(taskId, title, counter) {
                 </button>
                 <p>${title}</p>
             </div>
-            `;
+            `
 }
+
 
 /**
  * This function returns the HTML template for the upsert task overlay.
@@ -248,6 +258,7 @@ function overlayUpsertTaskTemplate(taskId, confirmButtonText, buttonDataAttribut
             `
 }
 
+
 /**
  * This function returns the HTML template for the upsert task title input.
  * @param {string} taskTitle The title of the task.
@@ -272,6 +283,7 @@ function overlayUpsertTaskTitleTemplate(taskTitle) {
             `
 }
 
+
 /**
  * This function returns the HTML template for the upsert task description input.
  * @param {string} taskDescription The description of the task.
@@ -287,6 +299,7 @@ function overlayUpsertTaskDescriptionTemplate(taskDescription) {
             </section>
             `
 }
+
 
 /**
  * This function returns the HTML template for the upsert task due date input.
@@ -311,6 +324,7 @@ function overlayUpsertTaskDueDateTemplate(taskDueDate) {
             </section>
             `
 }
+
 
 /**
  * This function returns the HTML template for the upsert task priority selection.
@@ -352,6 +366,7 @@ function overlayUpsertTaskPriorityTemplate() {
             `
 }
 
+
 /**
  * This function returns the HTML template for the upsert assigned users section.
  * @returns {string} The HTML string for the assigned users section.
@@ -377,6 +392,7 @@ function overlayUpsertTaskAssignedUsersTemplate() {
             </section>
             `
 }
+
 
 /**
  * This function returns the HTML template for the upsert subtasks section.
@@ -415,6 +431,7 @@ function overlayUpsertTaskSubtasksTemplate(taskId) {
             `
 }
 
+
 /**
  * This function returns the HTML template for the upsert category option selection.
  * @returns {string} The HTML string for the category option selection.
@@ -434,6 +451,7 @@ function overlayUpsertCategoryOptionTemplate() {
             </section>
             `
 }
+
 
 /**
  * This function returns the HTML template for the upsert task details container.

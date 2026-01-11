@@ -1,6 +1,22 @@
+ /**
+ * Duration (in ms) for which the toast is visibly displayed.
+ */
+const TOAST_DISPLAY_DURATION = 1500;
+
+/**
+ * Buffer time (in ms) to allow toast animations/setup before and after display.
+ */
+const TOAST_ANIMATION_BUFFER = 100;
+
+/**
+ * Total duration (in ms) from showing the toast to hiding it again.
+ * Equals TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER.
+ */
+const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
+
+
 /**
  * This function opens the edit overlay for a task and renders its content.
- * 
  * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  * @param {string} taskId The ID of the task to edit.
  */
@@ -145,6 +161,7 @@ async function openAddTaskOverlay(buttonElement) {
     disableScrollOnBody();
 }
 
+
 /** 
  * This function checks the screen size and redirects to the add task page if the width is less than 768px.
  */
@@ -170,21 +187,6 @@ function renderOverlayAddTask(taskId, taskState) {
     return Promise.resolve();
 }
 
- /**
- * Duration (in ms) for which the toast is visibly displayed.
- */
-const TOAST_DISPLAY_DURATION = 1500;
-
-/**
- * Buffer time (in ms) to allow toast animations/setup before and after display.
- */
-const TOAST_ANIMATION_BUFFER = 100;
-
-/**
- * Total duration (in ms) from showing the toast to hiding it again.
- * Equals TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER.
- */
-const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
 
 /**
  * This function renders a toast notification indicating that a new task has been added.
@@ -202,6 +204,7 @@ function renderNewTaskAddedToastContainer() {
         }, TOAST_TOTAL_DURATION);
     });
 }
+
 
 /**
  * This function toggles the visibility of the new task toast notification.

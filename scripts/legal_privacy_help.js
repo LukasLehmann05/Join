@@ -7,4 +7,4 @@ function redirectBack() {
     } else {
         window.location.href = document.referrer;
     }
-};
+}

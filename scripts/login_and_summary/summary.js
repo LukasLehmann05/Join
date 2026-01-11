@@ -1,9 +1,19 @@
+/**
+ * Returns DOM elements used for rendering the greeting.
+ * @returns {{greetingTextEl: Element|null, greetingNameEl: Element|null}}
+ */
 function getGreetingElements() {
   const greetingTextEl = document.querySelector(".greeting-text");
   const greetingNameEl = document.querySelector(".greeting-name");
   return { greetingTextEl, greetingNameEl };
 }
 
+
+/**
+ * Returns a display-safe user name or empty string for guest/anonymous.
+ * @param {?Object} user - User object.
+ * @returns {string} Clean name or empty string.
+ */
 function getSafeUserName(user) {
   const name = user?.name?.trim();
   if (!name || name.toLowerCase() === 'guest') {
@@ -12,17 +22,35 @@ function getSafeUserName(user) {
   return name;
 }
 
+
+/**
+ * Chooses appropriate greeting text based on hour of day.
+ * @param {number} hour - Hour in 0-23.
+ * @returns {string} Greeting string.
+ */
 function calculateGreeting(hour) {
   if (hour >= 12 && hour < 18) return "Good afternoon";
   if (hour >= 18 || hour < 5) return "Good evening";
   return "Good morning";
 }
 
+
+/**
+ * Renders greeting text and user name into provided elements.
+ * @param {Element} greetingTextEl - Element for greeting text.
+ * @param {Element} greetingNameEl - Element for name display.
+ * @param {string} greeting - Greeting text.
+ * @param {string} fullName - User name to display.
+ */
 function showGreeting(greetingTextEl, greetingNameEl, greeting, fullName) {
   greetingTextEl.textContent = `${greeting},`;
   greetingNameEl.textContent = fullName;
 }
 
+
+/**
+ * Determines and renders the greeting for the summary page.
+ */
 function renderGreeting() {
   const { greetingTextEl, greetingNameEl } = getGreetingElements();
   if (!greetingTextEl || !greetingNameEl) return;
@@ -39,6 +67,9 @@ function renderGreeting() {
 }
 
 
+/**
+ * Shows a mobile overlay greeting for short duration.
+ */
 function showGreetingOverlay() {
   if (window.innerWidth > 1025) return;
   const overlay = document.getElementById('greeting-overlay');
@@ -62,6 +93,11 @@ function showGreetingOverlay() {
   }, 5000);
 }
 
+
+/**
+ * Fetches tasks from the global data store for summary counts.
+ * @returns {Promise<Array>} Array of task objects.
+ */
 async function fetchTasksForSummary() {
   try {
     const tasksObj = (await fetchAllDataGlobal()).tasks;
@@ -72,24 +108,49 @@ async function fetchTasksForSummary() {
   }
 }
 
+
+/**
+ * Sets text content of the first element matching selector.
+ * @param {string} selector - CSS selector.
+ * @param {*} value - Value to display.
+ */
 function setTextContent(selector, value) {
   const el = document.querySelector(selector);
   if (!el) return;
   el.textContent = String(value);
 }
 
+
+/**
+ * Counts tasks matching a given state (case-insensitive).
+ * @param {Array} tasks - Array of task objects.
+ * @param {string} state - State to match.
+ * @returns {number} Number of matching tasks.
+ */
 function countTasksByState(tasks, state) {
   return tasks.filter(
     (task) => (task.state || "").toLowerCase() === state.toLowerCase()
   ).length;
 }
 
+
+/**
+ * Counts tasks with priority 'urgent'.
+ * @param {Array} tasks - Array of task objects.
+ * @returns {number} Number of urgent tasks.
+ */
 function countUrgentTasks(tasks) {
   return tasks.filter(
     (task) => (task.priority || "").toLowerCase() === "urgent"
   ).length;
 }
 
+
+/**
+ * Parses a due date string into a Date object handling several formats.
+ * @param {string} rawDate - Raw date string.
+ * @returns {?Date} Parsed Date or null.
+ */
 function parseDueDate(rawDate) {
   if (!rawDate) return null;
   if (rawDate.includes("-")) {
@@ -103,6 +164,12 @@ function parseDueDate(rawDate) {
   return null;
 }
 
+
+/**
+ * Finds the nearest upcoming due date among urgent tasks.
+ * @param {Array} tasks - Array of task objects.
+ * @returns {?Date} Closest urgent due date or null.
+ */
 function findNextUrgentDeadline(tasks) {
   const urgentTasks = tasks.filter(
     (task) => (task.priority || "").toLowerCase() === "urgent"
@@ -121,6 +188,12 @@ function findNextUrgentDeadline(tasks) {
   return nextDeadline;
 }
 
+
+/**
+ * Formats a Date for user display or returns a fallback string.
+ * @param {?Date} date - Date to format.
+ * @returns {string} Formatted date or fallback text.
+ */
 function formatDateForDisplay(date) {
   if (!date) return "No deadline";
   return date.toLocaleDateString("en-US", {
@@ -130,6 +203,11 @@ function formatDateForDisplay(date) {
   });
 }
 
+
+/**
+ * Updates the summary urgent card with count and next deadline.
+ * @param {Array} tasks - Array of task objects.
+ */
 function updateUrgentCard(tasks) {
   const urgentCount = countUrgentTasks(tasks);
   const nextDeadline = findNextUrgentDeadline(tasks);
@@ -137,6 +215,10 @@ function updateUrgentCard(tasks) {
   setTextContent(".urgent-date", formatDateForDisplay(nextDeadline));
 }
 
+
+/**
+ * Loads summary data (tasks) and renders the various counters.
+ */
 async function loadAndRenderSummary() {
   try {
     const tasks = await fetchTasksForSummary();
@@ -162,6 +244,11 @@ async function loadAndRenderSummary() {
   }
 }
 
+
+/**
+ * Initializes the summary page: checks auth, optionally shows greeting
+ * and loads summary data.
+ */
 async function initSummaryPage() {
   requireAuth();
   if (document.referrer.includes("index.html") && sessionStorage.getItem("visiting")){
@@ -170,6 +257,7 @@ async function initSummaryPage() {
   }
   await loadAndRenderSummary();
 }
+
 
 document.addEventListener("DOMContentLoaded", initSummaryPage);
 

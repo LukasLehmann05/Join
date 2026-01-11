@@ -15,6 +15,7 @@ function initInputFieldEventListener(allTasksByIdArr) {
     });
 }
 
+
 /**
  * This function handles the input event for task filtering.
  * 
@@ -47,6 +48,7 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
     }
 }
 
+
 /**
  * This function applies the search filter logic to the task board.
  * 
@@ -73,6 +75,7 @@ function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
     }
 }
 
+
 /**
  * Filters task IDs by a given field and input text.
  * @param {string} inputText The text to search for.
@@ -90,12 +93,14 @@ function filterTaskIdsByField(inputText, field) {
     return filteredTaskIdsArr;
 }
 
+
 /**
  * This function shows the "no search result" message on the board overlay.
  */
 function showNoSearchResultOnBoardInfo() {
     document.getElementById('no_task_found_message').classList.toggle('d-none', false);
 }
+
 
 /**
  * This function disables the "no search result" message on the board overlay.
@@ -109,6 +114,7 @@ function disableShowNoSearchResultOnBoardInfo() {
         noInfoContainer.classList.toggle('d-none', true);
     }
 }
+
 
 /**
  * This function clears all task cards from the board.

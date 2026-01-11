@@ -1,10 +1,19 @@
 document.addEventListener('DOMContentLoaded', initLogin);
 
+/**
+ * Initializes login page event handlers.
+ * Sets up normal and guest login flows when DOM is ready.
+ */
 function initLogin() {
   setupNormalLogin();
   setupGuestLogin();
 }
 
+
+/**
+ * Attaches submit handler for the normal login form.
+ * Binds form submit to `onLoginSubmit` and passes input elements.
+ */
 function setupNormalLogin() {
   const form = document.getElementById('login-form');
   const email = document.getElementById('login-email');
@@ -18,6 +27,11 @@ function setupNormalLogin() {
   });
 }
 
+
+/**
+ * Attaches click handler for guest login button.
+ * When clicked, triggers `onGuestClick` to perform guest login.
+ */
 function setupGuestLogin() {
   const guestBtn = document.getElementById('guest-login-btn');
   const errorBox = document.getElementById('login-error-message');
@@ -29,6 +43,12 @@ function setupGuestLogin() {
   });
 }
 
+
+/**
+ * Displays an error message either in `errorBox` element or via `alert`.
+ * @param {?HTMLElement} errorBox - Element to render the message into.
+ * @param {string} msg - Message to show.
+ */
 function showError(errorBox, msg) {
   if (errorBox) {
     errorBox.textContent = msg;
@@ -37,12 +57,26 @@ function showError(errorBox, msg) {
   alert(msg);
 }
 
+
+/**
+ * Clears an error message from the provided `errorBox` element.
+ * @param {?HTMLElement} errorBox - Element to clear the message from.
+ */
 function clearError(errorBox) {
   if (errorBox) {
     errorBox.textContent = '';
   }
 }
 
+
+/**
+ * Validates presence of email and password values.
+ * Shows an error if either value is missing.
+ * @param {string} email - Email value to validate.
+ * @param {string} password - Password value to validate.
+ * @param {?HTMLElement} errorBox - Element to show validation errors.
+ * @returns {boolean} True if inputs are valid.
+ */
 function validateLoginInputs(email, password, errorBox) {
   if (!email || !password) {
     showError(errorBox, 'Please enter email and password.');
@@ -51,6 +85,15 @@ function validateLoginInputs(email, password, errorBox) {
   return true;
 }
 
+
+/**
+ * Handles normal login form submission: prevents default, validates
+ * inputs and starts the login process.
+ * @param {Event} event - Submit event.
+ * @param {HTMLInputElement} emailInput - Email input element.
+ * @param {HTMLInputElement} passwordInput - Password input element.
+ * @param {?HTMLElement} errorBox - Element to display errors.
+ */
 function onLoginSubmit(event, emailInput, passwordInput, errorBox) {
   event.preventDefault();
   const email = emailInput.value.trim();
@@ -61,6 +104,14 @@ function onLoginSubmit(event, emailInput, passwordInput, errorBox) {
   handleLogin(email, password, errorBox);
 }
 
+
+/**
+ * Attempts to authenticate a user with provided credentials and
+ * handles success or failure.
+ * @param {string} email - User email.
+ * @param {string} password - User password.
+ * @param {?HTMLElement} errorBox - Element to display errors.
+ */
 function handleLogin(email, password, errorBox) {
   loginUser(email, password)
     .then((user) => {
@@ -71,6 +122,13 @@ function handleLogin(email, password, errorBox) {
     });
 }
 
+
+/**
+ * Finds a user by email and validates their password.
+ * @param {string} email - Email to search for.
+ * @param {string} password - Password to validate.
+ * @returns {Promise<Object>} Resolved user object if valid.
+ */
 function loginUser(email, password) {
   return findUserByEmail(email).then((user) => {
     validateUserCredentials(user, password);
@@ -78,6 +136,13 @@ function loginUser(email, password) {
   });
 }
 
+
+/**
+ * Validates retrieved user object against provided password and
+ * throws descriptive errors on mismatch or missing data.
+ * @param {?Object} user - User object retrieved from storage.
+ * @param {string} password - Password to check.
+ */
 function validateUserCredentials(user, password) {
   if (!user) {
     throw new Error('No account found with this email.');
@@ -90,6 +155,14 @@ function validateUserCredentials(user, password) {
   }
 }
 
+
+/**
+ * Finalizes login by clearing errors, saving session info and
+ * redirecting to the summary page.
+ * @param {Object} user - Authenticated user object.
+ * @param {boolean} isGuest - Whether the login is a guest login.
+ * @param {?HTMLElement} errorBox - Element to clear errors from.
+ */
 function handleLoginSuccess(user, isGuest, errorBox) {
   clearError(errorBox);
   localStorage.setItem('currentUser', JSON.stringify(user));
@@ -98,6 +171,12 @@ function handleLoginSuccess(user, isGuest, errorBox) {
   window.location.href = '../html/summary.html';
 }
 
+
+/**
+ * Handles guest login button click: loads or creates a guest user
+ * and advances to the logged-in state.
+ * @param {?HTMLElement} errorBox - Element to show errors.
+ */
 function onGuestClick(errorBox) {
   loadOrCreateGuest()
     .then((guestUser) => {
@@ -158,7 +237,6 @@ async function findUserByEmail(email) {
       return { id: userId, ...user };
     }
   }
-
   return null;
 }
 

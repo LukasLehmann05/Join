@@ -7,6 +7,7 @@ function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 
+
 /**
  * This function handles the drag over event for a column.
  * 
@@ -19,6 +20,7 @@ function dragOverHandler(event) {
     setDropAcceptanceInCurrentColumn(currentColumnId);
     event.preventDefault();
 }
+
 
 /**
  * This function gets the start and current column IDs during drag over.
@@ -40,6 +42,7 @@ function getCurrentColumnId(event) {
     return [startDropAcceptanceColumnId, currentColumnId];
 }
 
+
 /**
  * This function clears the last drop acceptance field if the column has changed.
  * 
@@ -52,6 +55,7 @@ function clearLastDropAcceptanceIfChangedColumn(currentColumnId) {
     lastDropAcceptanceColumnId = currentColumnId;
 }
 
+
 /**
  * This function sets the drop acceptance field in the current column.
  * 
@@ -63,6 +67,7 @@ function setDropAcceptanceInCurrentColumn(currentColumnId) {
     }
 }
 
+
 /**
  * This function gets the ID of the current column from the event.
  * 
@@ -72,6 +77,7 @@ function setDropAcceptanceInCurrentColumn(currentColumnId) {
 function getIdOfCurrentColumn(event) {
     return event.currentTarget.id;
 }
+
 
 /**
  * This function renders the drop acceptance field in a column.
@@ -86,6 +92,7 @@ function renderDropAcceptanceInColumn(columnId) {
     removeNoTaskInfoElement(columnId);
 }
 
+
 /**
  * This function removes the "no task" info element from a column.
  * 
@@ -95,6 +102,7 @@ function removeNoTaskInfoElement(columnId) {
     const columnContent = document.getElementById(columnId);
     findChildAndRemoveNoTaskElement(columnContent);
 }
+
 
 /**
  * This function finds and removes the "no task" element from a parent element.
@@ -108,6 +116,7 @@ function findChildAndRemoveNoTaskElement(parentElement) {
         noTaskElement.remove();
     }
 }
+
 
 /**
  * This function handles the drop event for a task card.
@@ -126,6 +135,7 @@ function dropHandler(event) {
     startDropAcceptanceColumnId = null;
     dragOverCounter = 0;
 }
+
 
 /**
  * This function updates the state of a dropped task and persists the change.
@@ -148,6 +158,7 @@ async function updateStateOfDroppedTask(taskId, newColumnId) {
         console.error('Error updating task in database:', error);
     }
 }
+
 
 /**
  * This function removes the drop acceptance field from a column by its ID.

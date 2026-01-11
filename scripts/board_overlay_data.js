@@ -112,12 +112,14 @@ async function renderOverlayContent(taskId) {
     renderSubtasksListItems(taskId, task.subtasks || []);
 }
 
+
 /**
  * This function disables scrolling on the body element.
  */
 function disableScrollOnBody() {
     document.body.style.overflow = 'hidden';
 }
+
 
 /**
  * This function enables scrolling on the body element.
@@ -336,6 +338,7 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
     document.getElementById('required_text_field_section').classList.toggle('show');
     showWideOverlay = !showWideOverlay;
 }
+
 
 /**
  * This function deletes a task from the overlay and updates the UI and database accordingly.

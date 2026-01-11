@@ -10,10 +10,21 @@ async function fetchAllDataGlobal() {
     let joinFetch = await fetch(BASE_URL + ".json");
     let joinData = await joinFetch.json();
     return AllData.data = joinData;
-};
+}
 
 
-//contacts and subtasks are arrays
+/**
+ * Adds a task object to the database and displays it on the board when applicable.
+ * @param {string} task_title - Title of the task.
+ * @param {string} task_description - Description text.
+ * @param {string} task_due_date - Due date string.
+ * @param {string} task_priority - Priority value.
+ * @param {string} task_category - Category value.
+ * @param {string} task_state - Initial state of the task.
+ * @param {Array<string>} allAssigneesArr - Array of assigned user ids.
+ * @param {Array<Object>} allSubtasksArr - Array of subtask objects.
+ * @returns {Promise<void>}
+ */
 async function addTaskToDB(task_title, task_description, task_due_date, task_priority, task_category, task_state, allAssigneesArr, allSubtasksArr) {
     const newTask = {
         "category": task_category,
@@ -25,7 +36,6 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
         "assigned_to": allAssigneesArr,
         "subtasks": allSubtasksArr,
     }
-
     let response = await fetch(`${BASE_URL}/tasks.json`, {
         method: 'POST',
         body: JSON.stringify(newTask),
@@ -46,6 +56,12 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
 }
 
 
+/**
+ * Updates an existing task in the database by replacing its data.
+ * @param {string} taskId - ID of the task to update.
+ * @param {Object} taskToUpdate - Task object to save.
+ * @returns {Promise<void>}
+ */
 async function updateTask(taskId, taskToUpdate) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
@@ -64,6 +80,11 @@ async function updateTask(taskId, taskToUpdate) {
 }
 
 
+/**
+ * Deletes a task from the database by id.
+ * @param {string} taskId - ID of the task to delete.
+ * @returns {Promise<void>}
+ */
 async function deleteTask(taskId) {
     try {
         let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
@@ -76,6 +97,7 @@ async function deleteTask(taskId) {
         console.error('Error deleting task:', error)
     }
 }
+
 
 /**
  * This function fetches a single task by its ID from the database.
@@ -96,7 +118,9 @@ async function getTaskById(taskId) {
 
 
 /**
- *department contacts: post new Contact that got add to database
+ * Adds a new contact to the contacts collection in the database.
+ * @param {Object} newUser - Contact object containing name, email, phone, etc.
+ * @returns {Promise<void>}
  */
 async function postNewContactToDatabase(newUser) {
     await fetch(BASE_URL + `/contacts.json`, {
@@ -106,11 +130,13 @@ async function postNewContactToDatabase(newUser) {
         },
         body: JSON.stringify(newUser),
     });
-};
+}
 
 
 /**
- *department contacts: deletes this single contact in firebase
+ * Deletes a contact from the database by id.
+ * @param {string} contactID - Contact id to delete.
+ * @returns {Promise<void>}
  */
 async function deleteThisContactFromDatabaseById(contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
@@ -119,11 +145,14 @@ async function deleteThisContactFromDatabaseById(contactID) {
             'Content-Type': 'application/json'
         },
     })
-};
+}
 
 
 /**
- *department contacts: post edited contact information in firebase
+ * Replaces contact data in the database for a given id.
+ * @param {Object} editedUser - Updated contact object.
+ * @param {string} contactID - Contact id to update.
+ * @returns {Promise<void>}
  */
 async function editContactDataInDatabase(editedUser, contactID) {
     await fetch(BASE_URL + `/contacts/${contactID}.json`, {
@@ -133,19 +162,25 @@ async function editContactDataInDatabase(editedUser, contactID) {
         },
         body: JSON.stringify(editedUser),
     });
-};
+}
 
 
 /**
- *department contacts: get last contact id that was added to the database
+ * Returns the key of the last contact added to the contacts collection.
+ * @returns {Promise<string|undefined>} Last contact id or undefined.
  */
 async function getLastContactAddedFromDatabase() {
     let joinFetch = await fetch(BASE_URL + `/contacts.json`)
     let joinData = await joinFetch.json();
     return Object.keys(joinData).at(-1);
-};
+}
 
 
+/**
+ * Fetches a single contact by id from the database.
+ * @param {string} contactID - Contact id to fetch.
+ * @returns {Promise<Object|null>} Contact object or null on error/not found.
+ */
 async function getContactById(contactID) {
     try {
     let contactFetch = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
@@ -177,10 +212,8 @@ async function sendDataToUrl(payload, errorMessage) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
-  
   if (!response.ok) {
     throw new Error(`${errorMessage}: ${response.status}`);
   }
-  
   return await response.json();
 }

@@ -10,7 +10,7 @@ function directionOfIncomingDialog(id, id2) {
         document.getElementById(id2).style.transform = 'translateX(200%)';
         openDialog(id, id2);
     }
-};
+}
 
 
 /**
@@ -23,7 +23,7 @@ function giveInitialPosition(id, id2) {
             document.getElementById(id2).style.transform = 'translateX(200%)';
             openDialog(id, id2);
         }
-};
+}
 
 
 /**
@@ -39,7 +39,7 @@ function openDialog(id, id2) {
             document.getElementById(id2).style.transform = 'translateY(0%)';
         }
     }, 10)
-};
+}
 
 
 /**
@@ -55,7 +55,7 @@ function closeDialog(id, id2) {
     setTimeout(() => {
         dialog.open = false;
     }, 1000)
-};
+}
 
 
 /**
@@ -66,7 +66,7 @@ function decideTranslationBigScreen(id2) {
     if (id2 == "responseDialogContent") {
         document.getElementById(id2).style.transform = 'translateX(590%)';
     }
-};
+}
 
 
 /**
@@ -80,7 +80,7 @@ function decideTranslationSmallScreen(id2) {
     if (id2 == "responseDialogContent") {
         document.getElementById(id2).style.transform = 'translateY(400%)';
     }
-};
+}
 
 
 /**
@@ -93,15 +93,12 @@ window.onclick = function (event) {
     let childEdit = document.getElementById('editContent');
     let childResp = document.getElementById('responseMenuContent');
     if (event.target == dialog && dialog.contains(childAdd)) {
-        closeDialog('dialogWindow', 'addContent');
-    }
+        closeDialog('dialogWindow', 'addContent');}
     if (event.target == dialog && dialog.contains(childEdit)) {
-        closeDialog('dialogWindow', 'editContent');
-    }
+        closeDialog('dialogWindow', 'editContent');}
     if (event.target == dialogResponsiv && dialogResponsiv.contains(childResp)) {
-        closeDialog('responsivMenu', 'responseMenuContent');
-    }
-};
+        closeDialog('responsivMenu', 'responseMenuContent');}
+}
 
 
 /**
@@ -118,7 +115,7 @@ function responseMessageAppearance() {
     setTimeout(() => {
         document.getElementById('responseMessage').innerHTML = "Contact successfully created.";
     }, 6000)
-};
+}
 
 
 /**
@@ -130,7 +127,7 @@ function adjustPosition() {
     } else {
         document.getElementById('responseDialogContent').style.transform = 'translateY(200%)';
     }
-};
+}
 
 
 /**
@@ -139,7 +136,7 @@ function adjustPosition() {
 function dialogAppearences(id, idContent) {
     closeDialog(id, idContent);
     responseMessageAppearance();
-};
+}
 
 
 /**
@@ -153,4 +150,4 @@ function renderDialog(id) {
     if (id === "editContent") {
         dialog.innerHTML = editDialogHTML();
     }
-};
+}
