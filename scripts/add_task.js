@@ -430,7 +430,8 @@ function unassignContact(contact_id) {
 function checkForContactToRemove(contact_id) {
     let required_contact = document.getElementById("small_contact_" + contact_id)
     if (required_contact != undefined) {
-        removeSmallContact(contact_id)
+        rendered_contacts = 0
+        reRenderSmallContacts()
     } else {
         rendered_contacts -= 1
         contactRenderOverflow(rendered_contacts - amount_for_render_overflow)
@@ -444,7 +445,7 @@ function checkForContactToRemove(contact_id) {
  */
 async function renderSmallContacts(contact_id) {
     let contact = await getContactById(contact_id)
-    let contact_intial = await getInitialsFromUser(contact)
+    let contact_intial = getInitialsFromUser(contact)
     let contact_color = contact.color
     rendered_contacts += 1
     if (rendered_contacts <= amount_for_render_overflow) {
@@ -452,6 +453,14 @@ async function renderSmallContacts(contact_id) {
         rendered_contact_images.innerHTML += small_contact_template
     } else {
         checkContactRenderAmount()
+    }
+}
+
+function reRenderSmallContacts() {
+    document.getElementById('rendered_contact_images').innerHTML = ""
+    for (let index = 0; index < allAssigneesArr.length; index++) {
+        const assignee_to_rerender = allAssigneesArr[index];
+        renderSmallContacts(assignee_to_rerender)
     }
 }
 
