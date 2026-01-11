@@ -533,3 +533,7 @@ textarea.task-input {
 .add-task-toast-adaption {
     margin-top: 40vh;
 }
+
+.contact-overflow-display {
+    background-color: #2A3647;
+}
