@@ -301,6 +301,21 @@ async function saveNewUser(name, email, password) {
 
 /**
  * Saves new guest user to database
+ */
+function createNewContactInSignUp(name, email) {
+  let color = assignColorToContact();
+  let newUser = {
+    "email": email,
+    "name": name,
+    "phone": "",
+    "color": color
+  };
+  return newUser;
+}
+
+
+/**
+ * Saves new guest user to database
  * @returns {Promise<Object>} Created guest user with ID
  */
 async function saveNewGuest() {
