@@ -245,7 +245,7 @@ function getDataFromMain() {
         "id": currentId,
     };
     return currentContact;
-};
+}
 
 
 /**

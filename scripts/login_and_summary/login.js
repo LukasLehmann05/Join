@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', initLogin);
 function initLogin() {
   setupNormalLogin();
   setupGuestLogin();
-};
+}
 
 
 /**
@@ -25,7 +25,7 @@ function setupNormalLogin() {
   form.addEventListener('submit', (event) => {
     onLoginSubmit(event, email, password, errorBox);
   });
-};
+}
 
 
 /**
@@ -41,7 +41,7 @@ function setupGuestLogin() {
   guestBtn.addEventListener('click', () => {
     onGuestClick(errorBox);
   });
-};
+}
 
 
 /**
@@ -55,7 +55,7 @@ function showError(errorBox, msg) {
     return;
   }
   alert(msg);
-};
+}
 
 
 /**
@@ -66,7 +66,7 @@ function clearError(errorBox) {
   if (errorBox) {
     errorBox.textContent = '';
   }
-};
+}
 
 
 /**
@@ -83,7 +83,7 @@ function validateLoginInputs(email, password, errorBox) {
     return false;
   }
   return true;
-};
+}
 
 
 /**
@@ -102,7 +102,7 @@ function onLoginSubmit(event, emailInput, passwordInput, errorBox) {
     return;
   }
   handleLogin(email, password, errorBox);
-};
+}
 
 
 /**

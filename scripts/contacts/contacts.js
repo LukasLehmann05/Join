@@ -66,7 +66,7 @@ function displayHint(id) {
     setTimeout(() => {
         document.getElementById(id).style.opacity = 0;
     }, 3000)
-};
+}
 
 
 /**

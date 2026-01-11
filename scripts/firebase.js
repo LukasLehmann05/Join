@@ -130,7 +130,7 @@ async function postNewContactToDatabase(newUser) {
         },
         body: JSON.stringify(newUser),
     });
-};
+}
 
 
 /**

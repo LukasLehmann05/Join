@@ -64,7 +64,7 @@ function getInitials(name) {
   if (!cleanName) return "?";
   const parts = cleanName.split(" ");
   return getInitialsFromParts(parts);
-};
+}
 
 
 /**
@@ -97,7 +97,7 @@ function renderHeaderAvatar() {
   const user = getCurrentUserSafe();
   const initials = getUserInitials(user);
   updateAvatarText(avatarElement, initials);
-};
+}
 
 
 /**
@@ -168,7 +168,7 @@ function setupAvatarOutsideClick(avatarButton, menu) {
  */
 function handleLegalClick() {
   window.location.href = "../html/legal_notice.html";
-};
+}
 
 
 /**
