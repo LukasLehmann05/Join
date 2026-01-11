@@ -420,7 +420,21 @@ function unassignContact(contact_id) {
     checkbox_icon.src = "../assets/icons/board/checkbox_undone.svg"
     contact_element.classList.remove("assigned-contact")
     checkbox_icon.classList.remove("checkbox-filter")
-    removeSmallContact(contact_id)
+    if (rendered_contacts <= amount_for_render_overflow) {
+        removeSmallContact(contact_id)
+    } else {
+        checkForContactToRemove(contact_id)
+    }
+}
+
+function checkForContactToRemove(contact_id) {
+    let required_contact = document.getElementById("small_contact_" + contact_id)
+    if (required_contact != undefined) {
+        removeSmallContact(contact_id)
+    } else {
+        rendered_contacts -= 1
+        contactRenderOverflow(rendered_contacts - amount_for_render_overflow)
+    }
 }
 
 
@@ -436,10 +450,7 @@ async function renderSmallContacts(contact_id) {
     if (rendered_contacts <= amount_for_render_overflow) {
         const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
         rendered_contact_images.innerHTML += small_contact_template
-        console.log("render" ,rendered_contacts);
-        
     } else {
-        console.log("overflow" ,rendered_contacts);
         checkContactRenderAmount()
     }
 }
