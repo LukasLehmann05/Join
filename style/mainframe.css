@@ -118,10 +118,13 @@ article {
 }
 
 .header-side-buttons {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 16px;
     line-height: 0;
+    width: 200px;
+    justify-content: flex-end;
 }
 
 .logo-section {
@@ -182,7 +185,6 @@ article {
 }
 
 .avatar-wrapper {
-    position: relative;
     border: none;
     background: transparent;
     padding: 0;
@@ -194,8 +196,8 @@ article {
 
 .avatar-menu {
     position: absolute;
-    top: 96px;             
-    right: 16px;           
+    top: 76px;             
+    right: -20px;           
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
     padding: 8px;
