@@ -8,24 +8,25 @@
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/summary_login/login.css">
     <link rel="stylesheet" href="../style/summary_login/login_responsive.css">
-    <link rel="stylesheet" href="../style/mainframe.css">
+    <link rel="stylesheet" href="../style/summary_login/animation.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 
 
 </head>
 
 <body class="body">
+
+<div class="animation-overlay" id="animationOverlay">
+    <img class="animated-logo" src="../assets/icons/logo/logoBig.svg" alt="Join logo">
+</div>
+
     <div class="login-wrapper">
-        <div class="login-logo-section">
-            <div class="login-logo">
-                <img src="../assets/icons/logo/logoSmall.svg" alt="Join logo">
-            </div>
+        
+        <div class="login-container">
             <div class="login-header">
                 <p class="login-header-text">Not a Join user?</p>
                 <a href="../html/signup.html" class="signup-button">Sign up</a>
             </div>
-        </div>
-        <div class="login-container">
             <main class="login-card">
                 <h1 class="login-title">Log in</h1>
                 <form class="login-form" id="login-form" novalidate>
@@ -39,7 +40,6 @@
                             placeholder="Password" required>
                         <img src="../assets/icons/login/lock.svg" alt="Lock icon" class="input-icon">
                     </div>
-                    <p class="login-error-message" id="login-error-message"></p>
                     <div class="login-buttons">
                         <button type="submit" class="login-button-primary" id="login-btn">
                             Log in
@@ -49,16 +49,13 @@
                         </button>
                     </div>
                 </form>
+                <p class="login-error-message" id="login-error-message"></p>
             </main>
-            <div class="login-mobile">
-                <p class="login-header-text">Not a Join user?</p>
-                <a href="../html/signup.html" class="signup-button">Sign up</a>
-            </div>
+            <footer class="login-footer">
+                <a href="../html/privacy_policy.html">Privacy Policy</a>
+                <a href="../html/legal_notice.html">Legal notice</a>
+            </footer>
         </div>
-        <footer class="login-footer sticky-bottom">
-            <a href="../html/privacy_policy_public.html">Privacy Policy</a>
-            <a href="../html/legal_notice_public.html">Legal notice</a>
-        </footer>
     </div>
 </body>
 <script src="../scripts/login_and_summary/animation.js"></script>
