@@ -189,11 +189,9 @@ async function editContactInDatabase() {
                 displayHint('required_edit_phone');
             }
         } else {
-            displayHint('required_edit_email');
-        }
+            displayHint('required_edit_email');}
     } else {
-        displayHint('required_edit_name');
-    }
+        displayHint('required_edit_name');}
 }
 
 

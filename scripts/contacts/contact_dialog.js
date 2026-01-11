@@ -93,14 +93,11 @@ window.onclick = function (event) {
     let childEdit = document.getElementById('editContent');
     let childResp = document.getElementById('responseMenuContent');
     if (event.target == dialog && dialog.contains(childAdd)) {
-        closeDialog('dialogWindow', 'addContent');
-    }
+        closeDialog('dialogWindow', 'addContent');}
     if (event.target == dialog && dialog.contains(childEdit)) {
-        closeDialog('dialogWindow', 'editContent');
-    }
+        closeDialog('dialogWindow', 'editContent');}
     if (event.target == dialogResponsiv && dialogResponsiv.contains(childResp)) {
-        closeDialog('responsivMenu', 'responseMenuContent');
-    }
+        closeDialog('responsivMenu', 'responseMenuContent');}
 }
 
 
