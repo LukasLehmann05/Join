@@ -164,6 +164,14 @@ function setupAvatarOutsideClick(avatarButton, menu) {
 
 
 /**
+ * Navigates to the help page.
+ */
+function handleHelpClick() {
+  window.location.href = "../html/help.html";
+}
+
+
+/**
  * Navigates to the legal notice page.
  */
 function handleLegalClick() {
