@@ -72,6 +72,10 @@ function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
     return `<div class="contact-icon" style="background-color: ${contact_color};" id="small_contact_${user_id}">${contact_initial}</div>`
 }
 
+function returnSmallContactTemplate(contact_initial) {
+    return `<div class="contact-icon";" id="contact_render_overflow">${contact_initial}</div>`
+}
+
 
 /**
  * Returns HTML for the subtask edit UI (input + action buttons).
