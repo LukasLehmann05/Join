@@ -140,7 +140,6 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
         rendered_amount += 1
         if (rendered_amount <= amount_for_render_overflow) {
             const contact = await getContactById(contactId);
-            if (!contact) continue;
             const initials = getInitialsFromUser(contact);
             const iconHTML = assignedUserIconTemplate(initials, contact.color);
             container.innerHTML += iconHTML;
@@ -149,6 +148,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
     checkForAsigneeOverflow(rendered_amount, container)
 }
 
+// This function adds a overflow div for asignee display when rendered amount higher than the limit
 function checkForAsigneeOverflow(rendered_amount, container) {
     if (rendered_amount > amount_for_render_overflow) {
         container.innerHTML += returnSmallContactOverflowTemplateBoard('+' + rendered_amount)
