@@ -115,7 +115,7 @@ async function renderSmallContacts(contact_id) {
     rendered_contacts += 1
     if (rendered_contacts <= amount_for_render_overflow) {
         const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
-        rendered_contact_images.innerHTML += small_contact_template
+        document.getElementById('rendered_contact_images').innerHTML += small_contact_template
     } else {
         checkContactRenderAmount()
     }
@@ -167,7 +167,7 @@ function contactRenderOverflow(amount) {
         }
     } else {
         let new_overflow_emlement = returnSmallContactOverflowTemplate(`+${amount}`)
-        rendered_contact_images.innerHTML += new_overflow_emlement
+        document.getElementById('rendered_contact_images').innerHTML += new_overflow_emlement
     }
 }
 

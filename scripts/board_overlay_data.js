@@ -131,15 +131,31 @@ function enableScrollOnBody() {
 
 /**
  * This function renders the assigned user infos in the overlay.
+ * It first checks if it is in edit mode to use add task rendering instead
  * 
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  * @param {boolean} onlyId Whether to render only the ID/icon or also the name.
  * @param {string} containerIdSuffix The ID of the container to render into.
  */
 async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix) {
-    let container = document.getElementById(containerIdSuffix);
     getAssigneesOfTask(taskAssignees);
-    
+    if (containerIdSuffix == 'rendered_contact_images' && onlyId == true) {
+        for (let contactId of allAssigneesArr) {
+            await renderSmallContacts(contactId)
+        }
+    } else {
+        renderEditOverlayAssignee(onlyId, containerIdSuffix)
+    }
+}
+
+/**
+ * This function renders the assigned user infos in the overlay.
+ * 
+ * @param {boolean} onlyId Whether to render only the ID/icon or also the name.
+ * @param {string} containerIdSuffix The ID of the container to render into.
+ */
+async function renderEditOverlayAssignee(onlyId, containerIdSuffix) {
+    let container = document.getElementById(containerIdSuffix);
     for (let contactId of allAssigneesArr) {
         const contact = await getContactById(contactId);
         if (contact) {
@@ -172,14 +188,14 @@ function getAssigneesOfTask(taskAssignees) {
  * @returns {string} The HTML string for the assigned user info.
  */
 function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
-    if(renderOnlyId) {
-        return  `   <div class="assigned_user_content">
+    if (renderOnlyId) {
+        return `   <div class="assigned_user_content">
                     ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
                     </div>
                 `;
     }
     else {
-        return  `   <div class="assigned_user_content">
+        return `   <div class="assigned_user_content">
                     ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
                     ${assignedUserNameTemplate(contact.name)}
                     </div>
@@ -194,7 +210,7 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
  * @param {Event} event The click event object.
  */
 function closeOverlayByBackdrop(event) {
-    if(event.target === event.currentTarget) {
+    if (event.target === event.currentTarget) {
         closeOverlay();
     }
 }
@@ -224,7 +240,7 @@ async function closeOverlay(buttonElement, taskId) {
 
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-    
+
     const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
     if (created instanceof Promise) {
         await created;
@@ -259,7 +275,7 @@ async function closeOverlay(buttonElement, taskId) {
 function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
-        sendUpdatedTaskToDB(taskId);        
+        sendUpdatedTaskToDB(taskId);
     }
 }
 
@@ -272,11 +288,11 @@ function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
  * @param {string} taskId The ID of the task to edit.
  */
 function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
-     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
+    const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonEditTaskAndCloseOverlay) {
         clearElementsOfNewTask();
         getAllFieldValuesOfEditTaskWhenUpdated();
-        sendUpdatedTaskToDB(taskId);        
+        sendUpdatedTaskToDB(taskId);
     }
 }
 
@@ -348,7 +364,7 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
  * @param {string} userId This is the id of the user who owns the task
  */
 async function deleteTaskInOverlay(taskId) {
-    const taskCardElement = document.getElementById(taskId+"_task_card")
+    const taskCardElement = document.getElementById(taskId + "_task_card")
     try {
         await deleteTask(taskId);
         if (taskCardElement) {
