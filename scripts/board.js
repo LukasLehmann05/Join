@@ -151,27 +151,25 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
 // This function adds a overflow div for asignee display when rendered amount higher than the limit
 function checkForAsigneeOverflow(rendered_amount, container) {
     if (rendered_amount > amount_for_render_overflow) {
-        container.innerHTML += returnSmallContactOverflowTemplateBoard('+' + rendered_amount)
+        let overflow_amount = rendered_amount - amount_for_render_overflow
+        container.innerHTML += returnSmallContactOverflowTemplateBoard('+' + overflow_amount)
     }
 }
 
 
 /**
  * This function returns the initials from a user object.
- * Checks if a user exists due to board overflow function
  * 
  * @param {Object} user The user object.
  * @returns {string} The initials of the user.
  */
 function getInitialsFromUser(user) {
-    if (user.name != undefined) {
-        const initials = user.name
-            .split(' ')
-            .map(word => word[0])
-            .join('')
-            .toUpperCase();
-        return initials;
-    }
+    const initials = user.name
+        .split(' ')
+        .map(word => word[0])
+        .join('')
+        .toUpperCase();
+    return initials;
 }
 
 

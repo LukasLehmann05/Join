@@ -224,7 +224,7 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    createTaskOverlay()
+    createTaskOverlay(buttonElement)
     handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
     handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
 
@@ -237,7 +237,7 @@ async function closeOverlay(buttonElement, taskId) {
 }
 
 //this function checks for new task creation
-function createTaskOverlay() {
+function createTaskOverlay(buttonElement) {
         if (buttonElement) {
         if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
             if (!checkForRequired(['title', 'dueDate', 'category'])) {
