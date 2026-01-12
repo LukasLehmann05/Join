@@ -7,14 +7,17 @@ async function addContactsToAssign(join_data) {
     let contacts = join_data.contacts
     for (let contact_id in contacts) {
         let contact = contacts[contact_id]
-        let contact_intial = await getInitialsFromUser(contact)
+        let contact_initial = await getInitialsFromUser(contact)
         let contact_color = contact.color
-        let contact_option = returnContactTemplate(contact.name, contact_id, contact_intial, contact_color)
+        let contact_option = returnContactTemplate(contact.name, contact_id, contact_initial, contact_color)
         task_assign.innerHTML += contact_option
     }
     checkForAlreadyAssigned()
 }
 
+/**
+ * Checks which contacts are already assigned to the task and updates the assign list UI accordingly.
+ */
 function checkForAlreadyAssigned() {
     for (let index = 0; index < allAssigneesArr.length; index++) {
         const assignee_to_check = allAssigneesArr[index];
