@@ -18,6 +18,7 @@
 
     .header-nav {
         padding: 20px 16px;
+        justify-content: flex-end;
     }
 
     .body {
