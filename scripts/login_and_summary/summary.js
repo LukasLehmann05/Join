@@ -100,7 +100,7 @@ function chooseGreeting(fullName, overlayText, overlayName, greeting) {
 
 
 /**
- * removes and adds css classes to the overlay
+ * Removes and adds css classes to the overlay
  */
 function displayOverlay(overlay) {
   overlay.classList.remove('hidden');
@@ -254,7 +254,7 @@ async function loadAndRenderSummary() {
 
 
 /**
- * displays fallback number if fetching the data failed
+ * Displays fallback number if fetching the data failed
  */
 function setFallback() {
   setTextContent(".todo-number", 0);
