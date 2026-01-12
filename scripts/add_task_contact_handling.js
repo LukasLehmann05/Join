@@ -166,8 +166,8 @@ function contactRenderOverflow(amount) {
             contact_overflow_element.remove()
         }
     } else {
-        let new_overflow_emlement = returnSmallContactOverflowTemplate(`+${amount}`)
-        document.getElementById('rendered_contact_images').innerHTML += new_overflow_emlement
+        let new_overflow_element = returnSmallContactOverflowTemplate(`+${amount}`)
+        document.getElementById('rendered_contact_images').innerHTML += new_overflow_element
     }
 }
 
