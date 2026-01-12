@@ -231,7 +231,12 @@ async function closeOverlay(buttonElement, taskId) {
     delayedClose()
 }
 
-//this function checks for new task creation
+/**
+ * Checks whether a new task should be created or an existing task edited based on
+    if (buttonElement) {
+ *
+ * @param {HTMLElement} buttonElement The button element that determines the task action.
+ */
 function createTaskOverlay(buttonElement) {
         if (buttonElement) {
         if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
