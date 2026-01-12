@@ -12,6 +12,20 @@ async function addContactsToAssign(join_data) {
         let contact_option = returnContactTemplate(contact.name, contact_id, contact_intial, contact_color)
         task_assign.innerHTML += contact_option
     }
+    checkForAlreadyAssigned()
+}
+
+function checkForAlreadyAssigned() {
+    for (let index = 0; index < allAssigneesArr.length; index++) {
+        const assignee_to_check = allAssigneesArr[index];
+        let assignee_section = document.getElementById(assignee_to_check)
+        if (assignee_section != undefined) {
+            assignee_section.classList.add('assigned-contact')
+            let assignee_section_checkbox = document.getElementById('checkbox_' + assignee_to_check)
+            assignee_section_checkbox.classList.add('checkbox-filter')
+            assignee_section_checkbox.src = '../assets/icons/board/checkbox_done.svg'
+        }
+    }
 }
 
 /**
