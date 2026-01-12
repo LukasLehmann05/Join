@@ -190,7 +190,7 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
                 `;
     }
     else {
-        return `   <div class="assigned_user_content">
+        return `   <div class="assigned_user_content display_limit_avatar">
                     ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
                     ${assignedUserNameTemplate(contact.name)}
                     </div>

@@ -239,6 +239,7 @@ h1 {
     width: 42px;
     height: 42px;
     border: 2px solid #fff;
+    aspect-ratio: 1;
 }
 
 .assigned_users_section_and_priority {
