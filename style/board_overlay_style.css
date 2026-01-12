@@ -175,7 +175,9 @@
 }
 
 .overlay_main_content .assigned_users_info .assigned_users{
-    margin-top: 8px
+    margin-top: 8px;
+    max-height: 168px;
+    overflow-y: auto;
 }
 
 .overlay_main_content .assigned_users_info .assigned_users .assigned_user_content{
