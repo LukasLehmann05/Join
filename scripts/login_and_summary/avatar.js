@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Manages the user avatar in the header, including
+ * rendering initials, toggling the avatar menu, and handling menu actions.
+ */
 let close_menu = false;
 
 
@@ -125,13 +129,18 @@ function toggleMenuVisibility(event, menu) {
     closeMenu(menu);
     close_menu = false;
   }
-  else{
+  else {
     openMenu(menu);
     close_menu = true;
   }
 }
 
 
+/**
+ * This function opens the avatar menu.
+ * 
+ * @param {HTMLElement} menu - This is the avatar menu element.
+ */
 function openMenu(menu) {
   document.body.classList.add('no-scroll');
   menu.style.display = 'flex';
@@ -141,6 +150,11 @@ function openMenu(menu) {
 }
 
 
+/**
+ * This function closes the avatar menu.
+ * 
+ * @param {HTMLElement} menu - This is the avatar menu element.
+ */
 function closeMenu(menu) {
   menu.classList.remove('show-avatar-menu');
   menu.addEventListener('transitionend', function handler() {
