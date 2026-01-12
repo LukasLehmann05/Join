@@ -125,7 +125,7 @@ async function renderSmallContacts(contact_id) {
  * re-render all assigned contacts so that the max amount of assigned contacts can always be displayed (fires only when a already rendered assigned contact gets removed)
  */
 function reRenderSmallContacts() {
-    document.getElementById('rendered_contact_images').innerHTML = ""
+    rendered_contact_images.innerHTML = ""
     for (let index = 0; index < allAssigneesArr.length; index++) {
         const assignee_to_rerender = allAssigneesArr[index];
         renderSmallContacts(assignee_to_rerender)
