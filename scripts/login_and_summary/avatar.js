@@ -175,6 +175,7 @@ function hideMenuIfClickedOutside(event, avatarButton, menu) {
   const inAvatar = avatarButton.contains(event.target);
   if (!inMenu && !inAvatar && close_menu) {
     menu.classList.remove("show-avatar-menu");
+    document.body.classList.remove('no-scroll');
     close_menu = false;
   }
 }
