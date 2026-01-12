@@ -184,6 +184,7 @@ function clearContacts() {
     }
     allAssigneesArr = []
     rendered_contact_images.innerHTML = ""
+    rendered_contacts = 0;
 }
 
 /**
