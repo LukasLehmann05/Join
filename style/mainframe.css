@@ -188,7 +188,6 @@ article {
 
 .no-scroll{
     overflow: hidden;
-    height: 100%;
     width: 100%;
     position: fixed;
     overscroll-behavior: none;
@@ -216,7 +215,7 @@ article {
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     z-index: 1000;
     transform: translateX(120%);
-    transition: opacity 0.0s, transform 0.0s, visibility 0.0s;
+    transition: opacity 0.01s, transform 0.01s, visibility 0.01s;
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
