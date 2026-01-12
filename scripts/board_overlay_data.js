@@ -246,7 +246,11 @@ async function closeOverlay(buttonElement, taskId) {
         await created;
     }
     enableScrollOnBody();
+    delayedClose()
+}
 
+//this function causes a delayed close of the overlay
+function delayedClose() {
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
     const DELAY_BETWEEN_CLASSES = 500;
