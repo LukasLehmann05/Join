@@ -114,6 +114,24 @@ function getAvatarCoreElements() {
 }
 
 
+/**
+ * Toggles visibility of the avatar menu and stops event propagation.
+ * @param {Event} event - Click event.
+ * @param {HTMLElement} menu - Menu element to toggle.
+ */
+function toggleMenuVisibility(event, menu) {
+  event.stopPropagation();
+  if (close_menu) {
+    closeMenu(menu);
+    close_menu = false;
+  }
+  else{
+    openMenu(menu);
+    close_menu = true;
+  }
+}
+
+
 function openMenu(menu) {
   document.body.classList.add('no-scroll');
   menu.style.display = 'flex';
@@ -130,24 +148,6 @@ function closeMenu(menu) {
     document.body.classList.remove('no-scroll');
     menu.removeEventListener('transitionend', handler);
   }, { once: true });
-}
-
-
-/**
- * Toggles visibility of the avatar menu and stops event propagation.
- * @param {Event} event - Click event.
- * @param {HTMLElement} menu - Menu element to toggle.
- */
-function toggleMenuVisibility(event, menu) {
-  event.stopPropagation();
-  if (close_menu) {
-    closeMenu(menu);
-    close_menu = false;
-  }
-  else{
-    openMenu(menu);
-    close_menu = true;
-  }
 }
 
 
