@@ -186,6 +186,14 @@ article {
     background-color: #CDCDCD;
 }
 
+.no-scroll{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overscroll-behavior: none;
+}
+
 .avatar-wrapper {
     border: none;
     background: transparent;
@@ -203,7 +211,7 @@ article {
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
     padding: 8px;
-    display: flex;
+    display: none;
     flex-direction: column;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     z-index: 1000;
