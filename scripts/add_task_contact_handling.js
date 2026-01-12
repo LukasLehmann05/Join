@@ -110,11 +110,11 @@ function checkForContactToRemove(contact_id) {
  */
 async function renderSmallContacts(contact_id) {
     let contact = await getContactById(contact_id)
-    let contact_intial = getInitialsFromUser(contact)
+    let contact_initial = getInitialsFromUser(contact)
     let contact_color = contact.color
     rendered_contacts += 1
     if (rendered_contacts <= amount_for_render_overflow) {
-        const small_contact_template = returnSmallContactTemplate(contact_id, contact_intial, contact_color)
+        const small_contact_template = returnSmallContactTemplate(contact_id, contact_initial, contact_color)
         document.getElementById('rendered_contact_images').innerHTML += small_contact_template
     } else {
         checkContactRenderAmount()
