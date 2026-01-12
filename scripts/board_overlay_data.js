@@ -171,6 +171,7 @@ function getAssigneesOfTask(taskAssignees) {
  * @returns {string} The HTML string for the assigned user info.
  */
 function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
+    rendered_contacts += 1
     if(renderOnlyId) {
         return  `   <div class="assigned_user_content">
                     ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
