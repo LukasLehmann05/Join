@@ -97,6 +97,8 @@ article {
 }
 
 .header {
+    position: sticky;
+    top: 0px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, .2);
     z-index: 20;
     font-weight: 400;
