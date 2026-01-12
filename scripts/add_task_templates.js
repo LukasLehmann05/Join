@@ -73,11 +73,11 @@ function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
 }
 
 function returnSmallContactOverflowTemplate(overflow_amount) {
-    return `<div class="contact-icon contact-overflow-display";" id="contact_render_overflow">${overflow_amount}</div>`
+    return `<div class="contact-icon contact-overflow-display" id="contact_render_overflow">${overflow_amount}</div>`
 }
 
 function returnSmallContactOverflowTemplateBoard(overflow_amount) {
-    return `<div class="assigned_user_avatar contact-overflow-display";" id="contact_render_overflow_board">${overflow_amount}</div>`
+    return `<div class="assigned_user_avatar contact-overflow-display" id="contact_render_overflow_board">${overflow_amount}</div>`
 }
 
 
