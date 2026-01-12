@@ -6,6 +6,11 @@
     .login-card {
         margin: 32px 16px;
     }
+
+    .login-logo {
+        padding-top: clamp(37px, 9.56vw - 20.33px, 80px);
+        padding-left: clamp(38px, 9.56vw - 20.33px, 77px);
+    }
 }
 
 @media (max-width: 1000px),
