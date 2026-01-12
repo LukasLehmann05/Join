@@ -1,3 +1,6 @@
+let close_menu = false;
+
+
 /**
  * Loads the raw `currentUser` JSON string from localStorage.
  * @returns {?string} Raw JSON string or null.
@@ -111,6 +114,25 @@ function getAvatarCoreElements() {
 }
 
 
+function openMenu(menu) {
+  document.body.classList.add('no-scroll');
+  menu.style.display = 'flex';
+  setTimeout(() => {
+      menu.classList.add('show-avatar-menu');
+  }, 10);
+}
+
+
+function closeMenu(menu) {
+  menu.classList.remove('show-avatar-menu');
+  menu.addEventListener('transitionend', function handler() {
+    menu.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+    menu.removeEventListener('transitionend', handler);
+  }, { once: true });
+}
+
+
 /**
  * Toggles visibility of the avatar menu and stops event propagation.
  * @param {Event} event - Click event.
@@ -118,7 +140,14 @@ function getAvatarCoreElements() {
  */
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
-  menu.classList.toggle("show-avatar-menu");
+  if (close_menu) {
+    closeMenu(menu);
+    close_menu = false;
+  }
+  else{
+    openMenu(menu);
+    close_menu = true;
+  }
 }
 
 
@@ -144,8 +173,9 @@ function hideMenuIfClickedOutside(event, avatarButton, menu) {
   if (!menu.classList.contains("show-avatar-menu")) return;
   const inMenu = menu.contains(event.target);
   const inAvatar = avatarButton.contains(event.target);
-  if (!inMenu && !inAvatar) {
+  if (!inMenu && !inAvatar && close_menu) {
     menu.classList.remove("show-avatar-menu");
+    close_menu = false;
   }
 }
 
