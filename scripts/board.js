@@ -148,7 +148,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
     checkForAsigneeOverflow(rendered_amount, container)
 }
 
-// This function adds a overflow div for asignee display when rendered amount higher than the limit
+// This function adds a overflow div for assignee display when rendered amount higher than the limit
 function checkForAsigneeOverflow(rendered_amount, container) {
     if (rendered_amount > amount_for_render_overflow) {
         let overflow_amount = rendered_amount - amount_for_render_overflow
