@@ -158,17 +158,20 @@ function checkForAsigneeOverflow(rendered_amount, container) {
 
 /**
  * This function returns the initials from a user object.
+ * Checks if a user exists due to board overflow function
  * 
  * @param {Object} user The user object.
  * @returns {string} The initials of the user.
  */
 function getInitialsFromUser(user) {
-    const initials = user.name
-        .split(' ')
-        .map(word => word[0])
-        .join('')
-        .toUpperCase();
-    return initials;
+    if (user.name != undefined) {
+        const initials = user.name
+            .split(' ')
+            .map(word => word[0])
+            .join('')
+            .toUpperCase();
+        return initials;
+    }
 }
 
 
