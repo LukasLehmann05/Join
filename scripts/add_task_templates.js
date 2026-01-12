@@ -76,6 +76,11 @@ function returnSmallContactOverflowTemplate(overflow_amount) {
     return `<div class="contact-icon contact-overflow-display";" id="contact_render_overflow">${overflow_amount}</div>`
 }
 
+function returnSmallContactOverflowTemplateBoard(overflow_amount) {
+    return `<div class="assigned_user_avatar contact-overflow-display";" id="contact_render_overflow">${overflow_amount}</div>`
+}
+
+
 
 /**
  * Returns HTML for the subtask edit UI (input + action buttons).
