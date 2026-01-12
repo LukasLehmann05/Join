@@ -7,8 +7,17 @@
         display: none;
     }
 
+    .hide-for-desktop{
+        display: unset;
+    }
+
+    .avatar-menu{
+        transition: opacity 0.5s, transform 0.3s, visibility 0.3s;
+        right: 0px;
+    }
+
     .header-nav {
-        justify-content: space-between;
+        padding: 20px 16px;
     }
 
     .body {

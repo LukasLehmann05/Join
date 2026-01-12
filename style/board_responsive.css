@@ -71,11 +71,7 @@
     }
 }
 
-@media (max-width: 767px) {
-    .header-nav {
-        padding-left: 48px;
-    }
-    
+@media (max-width: 767px) {  
     .board_table {
         flex-direction: column;
         height: auto;

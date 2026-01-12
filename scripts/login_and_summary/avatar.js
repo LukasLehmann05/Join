@@ -1,4 +1,11 @@
 /**
+ * @fileoverview Manages the user avatar in the header, including
+ * rendering initials, toggling the avatar menu, and handling menu actions.
+ */
+let avatarMenuIsActive = false;
+
+
+/**
  * Loads the raw `currentUser` JSON string from localStorage.
  * @returns {?string} Raw JSON string or null.
  */
@@ -118,7 +125,42 @@ function getAvatarCoreElements() {
  */
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
-  menu.classList.toggle("hidden");
+  avatarMenuIsActive = menu.classList.contains("show-avatar-menu");
+  if (avatarMenuIsActive) {
+    closeMenu(menu);
+  }
+  else {
+    openMenu(menu);
+  }
+}
+
+
+/**
+ * This function opens the avatar menu.
+ * 
+ * @param {HTMLElement} menu - This is the avatar menu element.
+ */
+function openMenu(menu) {
+  document.body.classList.add('no-scroll');
+  menu.style.display = 'flex';
+  setTimeout(() => {
+      menu.classList.add('show-avatar-menu');
+  }, 10);
+}
+
+
+/**
+ * This function closes the avatar menu.
+ * 
+ * @param {HTMLElement} menu - This is the avatar menu element.
+ */
+function closeMenu(menu) {
+  menu.classList.remove('show-avatar-menu');
+  menu.addEventListener('transitionend', function handler() {
+    menu.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+    menu.removeEventListener('transitionend', handler);
+  }, { once: true });
 }
 
 
@@ -141,11 +183,12 @@ function setupAvatarToggle(avatarButton, menu) {
  * @param {HTMLElement} menu - Menu element.
  */
 function hideMenuIfClickedOutside(event, avatarButton, menu) {
-  if (menu.classList.contains("hidden")) return;
+  if (!menu.classList.contains("show-avatar-menu")) return;
   const inMenu = menu.contains(event.target);
   const inAvatar = avatarButton.contains(event.target);
   if (!inMenu && !inAvatar) {
-    menu.classList.add("hidden");
+    menu.classList.remove("show-avatar-menu");
+    document.body.classList.remove('no-scroll');    
   }
 }
 
@@ -160,6 +203,14 @@ function setupAvatarOutsideClick(avatarButton, menu) {
   document.addEventListener("click", (event) => {
     hideMenuIfClickedOutside(event, avatarButton, menu);
   });
+}
+
+
+/**
+ * Navigates to the help page.
+ */
+function handleHelpClick() {
+  window.location.href = "../html/help.html";
 }
 
 
@@ -204,9 +255,11 @@ function addClickIfPresent(element, handler) {
  * Attaches click handlers to the avatar menu links (legal, privacy, logout).
  */
 function setupAvatarMenuLinks() {
+  const helpBtn = document.getElementById("menu-help");
   const legalBtn = document.getElementById("menu-legal");
   const privacyBtn = document.getElementById("menu-privacy");
   const logoutBtn = document.getElementById("menu-logout");
+  addClickIfPresent(helpBtn, handleHelpClick);
   addClickIfPresent(legalBtn, handleLegalClick);
   addClickIfPresent(privacyBtn, handlePrivacyClick);
   addClickIfPresent(logoutBtn, handleLogoutClick);

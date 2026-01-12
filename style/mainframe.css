@@ -25,6 +25,7 @@
 .body {
     display: flex;
     font-family: "Inter";
+    overflow-x: hidden;
 }
 
 article {
@@ -98,7 +99,7 @@ article {
 
 .header {
     box-shadow: 2px 4px 8px rgba(0, 0, 0, .2);
-    z-index: 20;
+    z-index: 21;
     font-weight: 400;
     font-size: 20px;
     line-height: 120%;
@@ -117,10 +118,13 @@ article {
 }
 
 .header-side-buttons {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 16px;
     line-height: 0;
+    width: 200px;
+    justify-content: flex-end;
 }
 
 .logo-section {
@@ -176,8 +180,18 @@ article {
     box-sizing: border-box;
 }
 
+.header-avatar:hover {
+    background-color: #CDCDCD;
+}
+
+.no-scroll{
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    overscroll-behavior: none;
+}
+
 .avatar-wrapper {
-    position: relative;
     border: none;
     background: transparent;
     padding: 0;
@@ -189,16 +203,27 @@ article {
 
 .avatar-menu {
     position: absolute;
-    top: 64px;             
-    right: 0;           
+    top: 76px;             
+    right: -20px;           
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
-    padding: 12px 18px;
-    display: flex;
+    padding: 8px;
+    display: none;
     flex-direction: column;
-    gap: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     z-index: 1000;
+    transform: translateX(120%);
+    transition: opacity 0.01s, transform 0.01s, visibility 0.01s;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.show-avatar-menu {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    visibility: visible;
 }
 
 .hidden {
@@ -213,14 +238,21 @@ article {
     font-family: Inter, sans-serif;
     text-align: left;
     cursor: pointer;
-    padding: 4px 0;
+    padding: 16px;
 }
 
 .avatar-menu-item:hover {
-    text-decoration: underline;
+    background-color: #2A3D59;
 }
 
-.avatar-menu {
-    top: 55px;
-    right: 327px;
+.help-icon {
+    transition: transform 0.1s ease-in-out;
+}
+
+.help-icon:hover {
+    transform: scale(1.2);
+}
+
+.hide-for-desktop {
+    display: none;
 }
