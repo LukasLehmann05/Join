@@ -162,7 +162,7 @@ async function openAddTaskOverlay(buttonElement) {
  * This function retrieves the task state attribute from a button element.
  * 
  * @param {HTMLElement} buttonElement - The button element from which to extract the task state. 
- * @returns 
+ * @returns - {string|null} The task state attribute value or null if not found.
  */
 function getTaskStateAttributeFromButtonElement(buttonElement) {
     if (buttonElement) {
