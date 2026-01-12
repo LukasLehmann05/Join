@@ -329,6 +329,10 @@
 
 .overlay_title {
     font-size: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .task_overlay_description {
