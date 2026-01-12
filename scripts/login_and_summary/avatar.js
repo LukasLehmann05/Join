@@ -2,7 +2,7 @@
  * @fileoverview Manages the user avatar in the header, including
  * rendering initials, toggling the avatar menu, and handling menu actions.
  */
-let isMenuOpen = false;
+let avatarMenuIsActive = false;
 
 
 /**
@@ -125,13 +125,12 @@ function getAvatarCoreElements() {
  */
 function toggleMenuVisibility(event, menu) {
   event.stopPropagation();
-  if (isMenuOpen) {
+  avatarMenuIsActive = menu.classList.contains("show-avatar-menu");
+  if (avatarMenuIsActive) {
     closeMenu(menu);
-    isMenuOpen = false;
   }
   else {
     openMenu(menu);
-    isMenuOpen = true;
   }
 }
 
@@ -189,8 +188,7 @@ function hideMenuIfClickedOutside(event, avatarButton, menu) {
   const inAvatar = avatarButton.contains(event.target);
   if (!inMenu && !inAvatar) {
     menu.classList.remove("show-avatar-menu");
-    document.body.classList.remove('no-scroll');
-    isMenuOpen = false;
+    document.body.classList.remove('no-scroll');    
   }
 }
 
