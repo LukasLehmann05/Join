@@ -176,6 +176,9 @@
     display: flex;
     flex: 1;
     justify-content: flex-start;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .contact-icon {
