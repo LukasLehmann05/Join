@@ -137,7 +137,7 @@ function overlayContentTemplate(task, taskId, task_title) {
             </header>
             <section class="overlay_main_content">
                 <h1 class="overlay_title">${task_title}</h1>
-                <p>${task.description}</p>
+                <p class="task_overlay_description">${task.description}</p>
                 <div class="due_date_info">
                     <p class="attribute">Due date:</p>
                     <p>${task.due_date}</p>
