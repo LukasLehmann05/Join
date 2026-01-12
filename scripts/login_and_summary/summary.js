@@ -80,6 +80,15 @@ function showGreetingOverlay() {
   const fullName = getSafeUserName(user);
   const hour = new Date().getHours();
   const greeting = calculateGreeting(hour);
+  chooseGreeting(fullName, overlayText, overlayName, greeting);
+  displayOverlay(overlay);
+}
+
+
+/**
+ * chooses the greeting message based on the availability of the user name
+ */
+function chooseGreeting(fullName, overlayText, overlayName, greeting) {
   if (!fullName) {
     overlayText.textContent = greeting + '!';
     overlayName.textContent = '';
@@ -87,12 +96,18 @@ function showGreetingOverlay() {
     overlayText.textContent = `${greeting},`;
     overlayName.textContent = fullName;
   }
+}
+
+
+/**
+ * Removes and adds css classes to the overlay
+ */
+function displayOverlay(overlay) {
   overlay.classList.remove('hidden');
   setTimeout(() => {
     overlay.classList.add('hidden');
   }, 5000);
 }
-
 
 /**
  * Fetches tasks from the global data store for summary counts.
@@ -184,8 +199,7 @@ function findNextUrgentDeadline(tasks) {
     if (!nextDeadline || date < nextDeadline) {
       nextDeadline = date;
     }
-  }
-  return nextDeadline;
+  } return nextDeadline;
 }
 
 
@@ -234,14 +248,22 @@ async function loadAndRenderSummary() {
     setTextContent(".feedback-number", awaitFeedback);
     updateUrgentCard(tasks);
   } catch (error) {
-    setTextContent(".todo-number", 0);
-    setTextContent(".done-number", 0);
-    setTextContent(".board-number", 0);
-    setTextContent(".progress-number", 0);
-    setTextContent(".feedback-number", 0);
-    setTextContent(".urgent-number", 0);
-    setTextContent(".urgent-date", "No deadline");
+    setFallback();
   }
+}
+
+
+/**
+ * Displays fallback number if fetching the data failed
+ */
+function setFallback() {
+  setTextContent(".todo-number", 0);
+  setTextContent(".done-number", 0);
+  setTextContent(".board-number", 0);
+  setTextContent(".progress-number", 0);
+  setTextContent(".feedback-number", 0);
+  setTextContent(".urgent-number", 0);
+  setTextContent(".urgent-date", "No deadline");
 }
 
 
@@ -251,7 +273,7 @@ async function loadAndRenderSummary() {
  */
 async function initSummaryPage() {
   requireAuth();
-  if (document.referrer.includes("index.html") && sessionStorage.getItem("visiting")){
+  if (document.referrer.includes("index.html") && sessionStorage.getItem("visiting")) {
     renderGreeting();
     showGreetingOverlay();
   }
