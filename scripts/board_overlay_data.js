@@ -143,6 +143,7 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
     for (let contactId of allAssigneesArr) {
         const contact = await getContactById(contactId);
         if (contact) {
+            rendered_contacts += 1
             container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, contact, contactId);
         }
     }
@@ -171,7 +172,6 @@ function getAssigneesOfTask(taskAssignees) {
  * @returns {string} The HTML string for the assigned user info.
  */
 function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
-    rendered_contacts += 1
     if(renderOnlyId) {
         return  `   <div class="assigned_user_content">
                     ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}
