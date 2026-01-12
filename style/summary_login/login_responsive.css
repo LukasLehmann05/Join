@@ -2,6 +2,12 @@
     display: none;
 }
 
+@media (max-width: 1050px) {
+    .login-card {
+        margin: 32px 16px;
+    }
+}
+
 @media (max-width: 1000px),
 (max-height: 900px) {
     .login-header {
@@ -42,6 +48,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+    }
+    .login-card{
+        padding-top: 32px;
+        padding-bottom: 32px;
     }
 
     .login-logo-section {
