@@ -162,10 +162,23 @@
         margin: 0;
     }
 
+    .summary-padding-top {
+        padding-top: 0px;
+    }
+
     .summary-cards-wrapper {
         max-width: 308px;
         height: 548px;
         margin: 0px -5px;
+    }
+
+    .contact-header-text {
+        gap: 8px !important;
+    }
+
+    .summary-cards-wrapper {
+        gap: 20px;
+        margin-bottom: 56px;
     }
 
     .summary-row {
@@ -192,4 +205,17 @@
         gap: 6px;
     }
 
+}
+
+@media (max-width: 375px),
+(max-height: 667px) {
+    .summary-cards-wrapper {
+        gap: 0px;
+        margin-bottom: 0px;
+        height: 364px;
+    }
+
+    .summary-content-layout {
+        margin-top: 6px;
+    }
 }
