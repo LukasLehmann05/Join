@@ -21,7 +21,7 @@ const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
  * @param {string} taskId The ID of the task to edit.
  */
 async function openEditTaskOverlay(buttonElement, taskId) {
-    rendered_contacts = 0
+    rendered_contacts = 0;
     let taskState = '';
     if (buttonElement) {
         taskState = buttonElement.getAttribute('data-task-state');
