@@ -224,7 +224,21 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    if (buttonElement) {
+    createTaskOverlay()
+    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
+    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+
+    const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
+    if (created instanceof Promise) {
+        await created;
+    }
+    enableScrollOnBody();
+    delayedClose()
+}
+
+//this function checks for new task creation
+function createTaskOverlay() {
+        if (buttonElement) {
         if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
             if (!checkForRequired(['title', 'dueDate', 'category'])) {
                 missingInputs();
@@ -237,16 +251,6 @@ async function closeOverlay(buttonElement, taskId) {
             }
         }
     }
-
-    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
-    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-
-    const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
-    if (created instanceof Promise) {
-        await created;
-    }
-    enableScrollOnBody();
-    delayedClose()
 }
 
 //this function causes a delayed close of the overlay
