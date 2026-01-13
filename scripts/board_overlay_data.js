@@ -220,15 +220,18 @@ function closeOverlayByBackdrop(event) {
  */
 async function closeOverlay(buttonElement, taskId) {
     createTaskOverlay(buttonElement)
-    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
-    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-
-    const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
+    let stateSaveAction = handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
+    let stateEditAction = handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+    let result = await handleButtonAddActionAndCloseOverlay(buttonElement);
+    const created = result[0];
+    let stateCreateAction = result[1];
     if (created instanceof Promise) {
         await created;
     }
     enableScrollOnBody();
-    delayedClose()
+    if (stateSaveAction || stateEditAction || stateCreateAction){
+        delayedClose()
+    }
     rendered_contacts = 0
 }
 
@@ -281,11 +284,18 @@ function delayedClose() {
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to save.
  */
-function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
+function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
         sendUpdatedTaskToDB(taskId);
     }
+    const checkCloseButtonPressed = buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
+    if (checkCloseButtonPressed){
+        return true;
+    } 
+    else {
+        return false;
+    } 
 }
 
 
@@ -298,10 +308,14 @@ function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
  */
 function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonEditTaskAndCloseOverlay) {
+    if (buttonEditTaskAndCloseOverlay === true && checkForRequired(['title', 'dueDate'])) {
         clearElementsOfNewTask();
         getAllFieldValuesOfEditTaskWhenUpdated();
         sendUpdatedTaskToDB(taskId);
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
@@ -323,9 +337,11 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonCreateTaskAndCloseOverlay) {
         await sendTaskToDB(taskState);
-        return renderNewTaskAddedToastContainer();
+        return [renderNewTaskAddedToastContainer(), true];
     }
-    return;
+    else {
+        return [null, false];
+    }
 }
 
 
