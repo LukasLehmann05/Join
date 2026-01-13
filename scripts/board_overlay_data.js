@@ -229,6 +229,7 @@ async function closeOverlay(buttonElement, taskId) {
     }
     enableScrollOnBody();
     delayedClose()
+    rendered_contacts = 0
 }
 
 /**
