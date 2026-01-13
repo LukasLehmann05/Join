@@ -196,12 +196,12 @@ function clearContacts() {
  * @returns {string}
  */
 function getInitialsFromUser(user) {
-    const initials = user.name
-        .split(' ')
-        .map(word => word[0])
-        .join('')
-        .toUpperCase();
-    return initials;
+    const words = user.name.split(' ').filter(word => word.length > 0);
+    if (words.length === 0) return '';
+    if (words.length === 1) return words[0][0].toUpperCase();
+    const firstInitial = words[0][0];
+    const lastInitial = words[words.length - 1][0];
+    return (firstInitial + lastInitial).toUpperCase();
 }
 
 /**
