@@ -229,8 +229,8 @@ async function closeOverlay(buttonElement, taskId) {
     if (saveAction || editAction || createAction) {
         enableScrollOnBody();
         delayedClose();
+        rendered_contacts = 0;
     }
-    rendered_contacts = 0;
 }
 
 /**
