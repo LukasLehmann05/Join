@@ -72,6 +72,25 @@ function returnSmallContactTemplate(user_id, contact_initial, contact_color) {
     return `<div class="contact-icon" style="background-color: ${contact_color};" id="small_contact_${user_id}">${contact_initial}</div>`
 }
 
+/**
+ * Returns HTML for a compact overflow contact indicator in the assigned contacts area.
+ * @param {(number|string)} overflow_amount - Number of additional contacts not shown.
+ * @returns {string} HTML string for the overflow indicator element.
+ */
+function returnSmallContactOverflowTemplate(overflow_amount) {
+    return `<div class="contact-icon contact-overflow-display";" id="contact_render_overflow">${overflow_amount}</div>`
+}
+
+/**
+ * Returns HTML for a compact overflow contact indicator in the board view.
+ * @param {(number|string)} overflow_amount - Number of additional contacts not shown.
+ * @returns {string} HTML string for the overflow indicator element.
+ */
+function returnSmallContactOverflowTemplateBoard(overflow_amount) {
+    return `<div class="assigned_user_avatar contact-overflow-display" id="contact_render_overflow_board">${overflow_amount}</div>`
+}
+
+
 
 /**
  * Returns HTML for the subtask edit UI (input + action buttons).

@@ -49,7 +49,7 @@ function getTaskStateByColumnId(columnId) {
  */
 function renderNoTaskInfo(columnId) {
     const container = document.getElementById(columnId);
-    switch(columnId) {
+    switch (columnId) {
         case BOARD_COLUMN_ID_ARR[0]:
             container.innerHTML = noTasksDoToTemplate();
             break;
@@ -117,7 +117,7 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
  * @param {Object} task The task object to render.
  */
 async function renderTaskCard(taskId, task) {
-    let containerId = getColumnIdByTaskState(task.state);    
+    let containerId = getColumnIdByTaskState(task.state);
     const container = document.getElementById(containerId);
     container.innerHTML += taskCardTemplate(task, taskId);
     renderSubtaskProgress(taskId, task.subtasks || []);
@@ -133,15 +133,26 @@ async function renderTaskCard(taskId, task) {
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  */
 async function renderAssignedUserIcons(taskId, taskAssignees) {
+    let rendered_amount = 0
     let containerIdSuffix = 'assigned_users';
-    
-    for (let contactId of taskAssignees) {        
-        const contact = await getContactById(contactId);
-        if (!contact) continue;
-        const initials = getInitialsFromUser(contact);
-        const iconHTML = assignedUserIconTemplate(initials, contact.color);
-        const container = document.getElementById(taskId + '_' + containerIdSuffix);
-        container.innerHTML += iconHTML;
+    const container = document.getElementById(taskId + '_' + containerIdSuffix);
+    for (let contactId of taskAssignees) {
+        rendered_amount += 1
+        if (rendered_amount <= amount_for_render_overflow) {
+            const contact = await getContactById(contactId);
+            const initials = getInitialsFromUser(contact);
+            const iconHTML = assignedUserIconTemplate(initials, contact.color);
+            container.innerHTML += iconHTML;
+        }
+    }
+    checkForAsigneeOverflow(rendered_amount, container)
+}
+
+// This function adds a overflow div for assignee display when rendered amount higher than the limit
+function checkForAsigneeOverflow(rendered_amount, container) {
+    if (rendered_amount > amount_for_render_overflow) {
+        let overflow_amount = rendered_amount - amount_for_render_overflow
+        container.innerHTML += returnSmallContactOverflowTemplateBoard('+' + overflow_amount)
     }
 }
 
@@ -153,7 +164,7 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
  * @returns {string} The initials of the user.
  */
 function getInitialsFromUser(user) {
-    const initials = user.name  
+    const initials = user.name
         .split(' ')
         .map(word => word[0])
         .join('')
@@ -170,7 +181,7 @@ function getInitialsFromUser(user) {
  */
 function getIconForPriority(priority) {
     const iconfolderpath = "../assets/icons/addTask/";
-    switch(priority) {
+    switch (priority) {
         case PRIORITY_ARR[2]:
             return iconfolderpath + "urgentTask.svg";
         case PRIORITY_ARR[1]:
@@ -255,7 +266,7 @@ function setAllTasksObj(allTasksByIdArr, allTasks) {
  * @returns {Object} The allTasksObj object.
  */
 function getAllTasksObj() {
-    return allTasksObj; 
+    return allTasksObj;
 }
 
 
@@ -270,7 +281,7 @@ function resetAllTasksObj() {
 /**
  * This function renders "no task" info for all columns on DOM load.
  */
-function renderNoTaskInfoOnDOMLoad(){
+function renderNoTaskInfoOnDOMLoad() {
     BOARD_COLUMN_ID_ARR.forEach(columnId => {
         checkIfNoTasksInColumn(columnId);
     });
@@ -287,7 +298,8 @@ function checkIfNoTasksInColumn(columnId) {
     if (container.innerHTML.trim() === '') {
         renderNoTaskInfo(columnId);
     }
-    container.querySelectorAll('.drop_acceptance').forEach(drop => { drop.remove()
+    container.querySelectorAll('.drop_acceptance').forEach(drop => {
+        drop.remove()
     });
 }
 
@@ -326,7 +338,7 @@ async function initializeBoard() {
     const joinData = await fetchAllDataGlobal();
     let allTasksByIdArr = getAllTaskIds(joinData);
     initInputFieldEventListener(allTasksByIdArr);
-    
+
     setAllTasksObj(allTasksByIdArr, joinData.tasks);
     renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
@@ -358,7 +370,7 @@ function getAllTaskIds(joinData) {
 function renderAllTaskCardsOnBoard(allTasksByIdArr, allTaskData) {
     for (let taskIndex in allTasksByIdArr) {
         if (allTasksByIdArr[taskIndex] === null) continue;
-        let taskId = allTasksByIdArr[taskIndex];        
+        let taskId = allTasksByIdArr[taskIndex];
         let task = allTaskData[taskId];
         if (!task) continue;
         renderTaskCard(taskId, task);

@@ -61,9 +61,4 @@
         display: block !important;
         height: 56px;
     }
-
-    .header {
-        position: sticky;
-        top: 0px;
-    }
 }

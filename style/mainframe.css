@@ -65,7 +65,7 @@ article {
     gap: 10px;
 }
 
-.sidebar-nav-section.active{
+.sidebar-nav-section.active {
     color: white;
 }
 
@@ -98,6 +98,8 @@ article {
 }
 
 .header {
+    position: sticky;
+    top: 0px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, .2);
     z-index: 21;
     font-weight: 400;
@@ -114,7 +116,7 @@ article {
     padding-right: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
-    max-width: calc(1440px - 156px);
+    max-width: calc(1440px - 388px);
 }
 
 .header-side-buttons {
@@ -133,10 +135,11 @@ article {
 }
 
 .main-content {
-    max-width: calc(1440px - 128px);
+    max-width: calc(1440px - 360px);
     padding: 0px 64px;
     background-color: #F6F7F8;
     height: 100%;
+    min-height: 100vh;
 }
 
 .current-selection {
@@ -152,10 +155,10 @@ article {
 }
 
 .content-wrapper {
-    max-width: 1440px;  
+    max-width: 1440px;
     width: 100%;
     min-height: 100vh;
-    display: flex;       
+    display: flex;
     background: #f6f7f8;
 }
 
@@ -204,7 +207,7 @@ article {
 .avatar-menu {
     position: absolute;
     top: 76px;             
-    right: -20px;           
+    right: -20px; 
     background-color: #2A3647;
     border-radius: 20px 0 20px 20px;
     padding: 8px;

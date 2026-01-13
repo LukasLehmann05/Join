@@ -1,4 +1,4 @@
-.overlay{
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,7 +47,7 @@
     transform: translateX(0);
 }
 
-.overlay_content .overlay_header{
+.overlay_content .overlay_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,7 +62,7 @@
     border-radius: 8px;
 }
 
-.overlay_content .overlay_header .close_overlay_button{
+.overlay_content .overlay_header .close_overlay_button {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -73,45 +73,45 @@
     border-radius: 12px;
 }
 
-.overlay_content .overlay_header .close_overlay_button:hover{
+.overlay_content .overlay_header .close_overlay_button:hover {
     background-color: #E7E7E7;
 }
 
-.overlay_content p{
+.overlay_content p {
     font-size: 20px;
     font-weight: 400;
     font-family: "Inter";
 }
 
-.overlay_content .overlay_main_content .required-info{
+.overlay_content .overlay_main_content .required-info {
     font-size: 16px;
     font-weight: 400;
 }
 
-.overlay_content .technical_task{
+.overlay_content .technical_task {
     background-color: #0038FF;
 }
 
-.overlay_content .user_story{
+.overlay_content .user_story {
     background-color: #1FD7C1;
 }
 
-.overlay_main_content{
+.overlay_main_content {
     display: flex;
     gap: 8px;
     flex-direction: column;
 }
 
-.overlay_content .show_separator{
+.overlay_content .show_separator {
     flex-direction: row;
 }
 
-.overlay_content.add_task_attributes{
+.overlay_content.add_task_attributes {
     width: 80%;
     padding: 64px 5%;
 }
 
-.overlay_main_content .task_details_container{
+.overlay_main_content .task_details_container {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -128,86 +128,88 @@
 }
 
 .overlay_main_content .due_date_info,
-.overlay_main_content .priority_info{
+.overlay_main_content .priority_info {
     display: flex;
 }
 
-.overlay_content .edit_overlay_button_container{
+.overlay_content .edit_overlay_button_container {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.overlay_content .edit_overlay_button_container .edit_overlay_button{
+.overlay_content .edit_overlay_button_container .edit_overlay_button {
     display: flex;
     gap: 8px;
     padding: 0px 8px;
     cursor: pointer;
-    color:#2A3647;
+    color: #2A3647;
     background-color: transparent;
     border: none;
 }
 
-.overlay_content .edit_overlay_button_container{
+.overlay_content .edit_overlay_button_container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    gap:8px
+    gap: 8px
 }
 
-.overlay_content .edit_overlay_button_container .separator_overlay{
+.overlay_content .edit_overlay_button_container .separator_overlay {
     border-right: 1px solid #A8A8A8;
 }
 
-.overlay_content .edit_overlay_button_container .edit_overlay_button p{
+.overlay_content .edit_overlay_button_container .edit_overlay_button p {
     font-size: 16px;
     font-weight: 400;
 }
 
-.overlay_main_content .priority_info .priority_content{
+.overlay_main_content .priority_info .priority_content {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.overlay_main_content .priority_info .priority_content .priority_indicator{
+.overlay_main_content .priority_info .priority_content .priority_indicator {
     display: flex;
 }
 
-.overlay_main_content .assigned_users_info .assigned_users{
-    margin-top: 8px
+.overlay_main_content .assigned_users_info .assigned_users {
+    margin-top: 8px;
+    max-height: 168px;
+    overflow-y: auto;
 }
 
-.overlay_main_content .assigned_users_info .assigned_users .assigned_user_content{
+.overlay_main_content .assigned_users_info .assigned_users .assigned_user_content {
     display: flex;
     gap: 16px;
     align-items: center;
     padding: 7px 16px;
 }
 
-.overlay_main_content .subtasks_info .subtasks_list{
+.overlay_main_content .subtasks_info .subtasks_list {
     margin-top: 8px;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item{
+.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item {
     display: flex;
     align-items: center;
     gap: 20px;
     padding: 6px 16px;
 }
 
-.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item p{
+.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item p {
     font-size: 16px;
     font-weight: 400;
 }
 
-.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item .subtask_checkbox_custom{
-    width:20px;
-    height:20px;
-    border:unset;
+.overlay_main_content .subtasks_info .subtasks_list .subtask_list_item .subtask_checkbox_custom {
+    width: 20px;
+    height: 20px;
+    border: unset;
     background-color: transparent;
     cursor: pointer;
     display: flex;
@@ -215,34 +217,34 @@
     justify-content: center;
 }
 
-.overlay_content .upsert_overlay_footer{
+.overlay_content .upsert_overlay_footer {
     justify-content: flex-end;
 }
 
-.overlay_content .task_field_title{
+.overlay_content .task_field_title {
     font-family: "Inter";
     font-size: 20px;
     color: #2A3647;
 }
 
-.overlay_content .upsert_description_container form.input-form.description{
+.overlay_content .upsert_description_container form.input-form.description {
     flex: unset;
-  
+
 }
 
-.overlay_content .upsert_description_container form textarea{
-    height: calc( 120px - 24px );
+.overlay_content .upsert_description_container form textarea {
+    height: calc(120px - 24px);
     line-height: 120%;
     font-size: 20px;
     font-family: "Inter";
 }
 
-.overlay_content .overlay_main_content{
+.overlay_content .overlay_main_content {
     flex-grow: 1;
     overflow-y: auto;
 }
 
-.overlay_content .upsert_subtasks_container .subtasks_upsert_list{
+.overlay_content .upsert_subtasks_container .subtasks_upsert_list {
     margin-top: 16px;
     display: flex;
     flex-direction: column;
@@ -250,21 +252,21 @@
     padding-left: 0px;
 }
 
-.overlay_header h1{
+.overlay_header h1 {
     visibility: hidden;
     opacity: 0;
     height: 24px;
     font-weight: 700;
 }
 
-.overlay_header h1.show{
+.overlay_header h1.show {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
     height: auto;
 }
 
-.overlay_content .upsert_category_container{
+.overlay_content .upsert_category_container {
     visibility: hidden;
     opacity: 0;
     height: 0;
@@ -277,7 +279,7 @@
     display: none;
 }
 
-.overlay_content .upsert_category_container.show{
+.overlay_content .upsert_category_container.show {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
@@ -291,40 +293,56 @@
     display: unset;
 }
 
-.overlay_separator_add_task{
+.overlay_separator_add_task {
     width: 1px;
     background-color: #D1D1D1;
     margin: 0px 5%;
     visibility: hidden;
 }
 
-.overlay_separator_add_task.show{
+.overlay_separator_add_task.show {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
 }
 
-.overlay_content .action-button-section{
+.overlay_content .action-button-section {
     margin-top: 12px;
 }
 
-.overlay_content .action-button-section .required-text{
+.overlay_content .action-button-section .required-text {
     font-size: 16px;
 }
-.overlay_content .action-button-section .button-section .clear-button{
+
+.overlay_content .action-button-section .button-section .clear-button {
     visibility: hidden;
 }
 
 .overlay_content .action-button-section .required-text.show,
-.overlay_content .action-button-section .button-section .clear-button.show{
+.overlay_content .action-button-section .button-section .clear-button.show {
     visibility: visible;
 }
 
-.overlay_content footer .required-field-section{
+.overlay_content footer .required-field-section {
     display: flex;
     align-items: flex-end;
 }
 
 .overlay_title {
     font-size: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.task_overlay_description {
+    word-break: break-all;
+}
+
+.display_limit_avatar p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
