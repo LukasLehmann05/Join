@@ -219,20 +219,25 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    createTaskOverlay(buttonElement)
-    let stateSaveAction = handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
-    let stateEditAction = handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-    let result = await handleButtonAddActionAndCloseOverlay(buttonElement);
-    const created = result[0];
-    let stateCreateAction = result[1];
-    if (created instanceof Promise) {
-        await created;
+    createTaskOverlay(buttonElement);
+
+    // Aktionen parallel ausführen, aber Reihenfolge und await beachten
+    const saveAction = handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
+    const editAction = handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+    const [createdToast, createAction] = await handleButtonAddActionAndCloseOverlay(buttonElement);
+
+    // Falls ein Toast zurückgegeben wird, ggf. auf Promise prüfen und abwarten
+    if (createdToast instanceof Promise) {
+        await createdToast;
     }
+
     enableScrollOnBody();
-    if (stateSaveAction || stateEditAction || stateCreateAction){
-        delayedClose()
+
+    // Overlay nur schließen, wenn eine Aktion ausgelöst wurde
+    if (saveAction || editAction || createAction) {
+        delayedClose();
     }
-    rendered_contacts = 0
+    rendered_contacts = 0;
 }
 
 /**
@@ -289,8 +294,8 @@ function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
         sendUpdatedTaskToDB(taskId);
     }
-    const checkCloseButtonPressed = buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
-    if (checkCloseButtonPressed){
+    const hasAttribute = buttonElement && buttonElement.hasAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
+    if (hasAttribute){
         return true;
     } 
     else {
@@ -335,7 +340,7 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
         taskState = 'todo';
     }
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonCreateTaskAndCloseOverlay) {
+    if (buttonCreateTaskAndCloseOverlay === true && checkForRequired(['title', 'dueDate', 'category'])) {
         await sendTaskToDB(taskState);
         return [renderNewTaskAddedToastContainer(), true];
     }
@@ -394,7 +399,8 @@ async function deleteTaskInOverlay(taskId) {
         await deleteTask(taskId);
         if (taskCardElement) {
             taskCardElement.remove();
-            closeOverlay();
+            enableScrollOnBody();
+            delayedClose();
         }
     } catch (error) {
         console.error("Error deleting task with id: " + taskId, error);
