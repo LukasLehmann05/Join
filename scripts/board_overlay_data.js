@@ -220,21 +220,14 @@ function closeOverlayByBackdrop(event) {
  */
 async function closeOverlay(buttonElement, taskId) {
     createTaskOverlay(buttonElement);
-
-    // Aktionen parallel ausführen, aber Reihenfolge und await beachten
     const saveAction = handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
     const editAction = handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     const [createdToast, createAction] = await handleButtonAddActionAndCloseOverlay(buttonElement);
-
-    // Falls ein Toast zurückgegeben wird, ggf. auf Promise prüfen und abwarten
     if (createdToast instanceof Promise) {
         await createdToast;
     }
-
-    enableScrollOnBody();
-
-    // Overlay nur schließen, wenn eine Aktion ausgelöst wurde
     if (saveAction || editAction || createAction) {
+        enableScrollOnBody();
         delayedClose();
     }
     rendered_contacts = 0;
