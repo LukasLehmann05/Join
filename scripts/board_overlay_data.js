@@ -255,7 +255,11 @@ function createTaskOverlay(buttonElement) {
     }
 }
 
-//this function causes a delayed close of the overlay
+
+/**
+ * This function adds a delay before removing the 'show' class from overlay elements,
+ * allowing for CSS transition effects to complete.
+ */
 function delayedClose() {
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
