@@ -219,8 +219,8 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    const saveAction = handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
-    const editAction = handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+    const saveAction = await handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
+    const editAction = await handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     const [createdToast, createAction] = await handleButtonAddActionAndCloseOverlay(buttonElement);
     if (createdToast instanceof Promise) {
         await createdToast;
@@ -263,10 +263,10 @@ function delayedClose() {
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to save.
  */
-function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
+async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
-        sendUpdatedTaskToDB(taskId);
+        await sendUpdatedTaskToDB(taskId);
     }
     const hasAttribute = buttonElement && buttonElement.hasAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
     if (hasAttribute){
@@ -285,12 +285,12 @@ function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to edit.
  */
-function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
+async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonEditTaskAndCloseOverlay && checkForRequired(['title', 'dueDate'])) {
         clearElementsOfNewTask();
         getAllFieldValuesOfEditTaskWhenUpdated();
-        sendUpdatedTaskToDB(taskId);
+        await sendUpdatedTaskToDB(taskId);
         return true;
     }
     else {
