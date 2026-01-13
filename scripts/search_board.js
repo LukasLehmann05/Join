@@ -56,21 +56,19 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
  * @param {Array} filteredByDescription 
  */
 function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
+    clearBoard();
+    let tasksToRender = [];
     if (filteredByTitle.length > 0 && filteredByDescription.length > 0) {
-        clearBoard();
-        disableShowNoSearchResultOnBoardInfo();
-        let combinedFiltered = [...new Set([...filteredByTitle, ...filteredByDescription])];
-        renderAllTaskCardsOnBoard(combinedFiltered, getAllTasksObj());
+        tasksToRender = [...new Set([...filteredByTitle, ...filteredByDescription])];
     } else if (filteredByTitle.length > 0) {
-        clearBoard();
-        disableShowNoSearchResultOnBoardInfo();
-        renderAllTaskCardsOnBoard(filteredByTitle, getAllTasksObj());
+        tasksToRender = filteredByTitle;
     } else if (filteredByDescription.length > 0) {
-        clearBoard();
+        tasksToRender = filteredByDescription;
+    }
+    if (tasksToRender.length > 0) {
         disableShowNoSearchResultOnBoardInfo();
-        renderAllTaskCardsOnBoard(filteredByDescription, getAllTasksObj());
+        renderAllTaskCardsOnBoard(tasksToRender, getAllTasksObj());
     } else {
-        clearBoard();
         showNoSearchResultOnBoardInfo();
     }
 }

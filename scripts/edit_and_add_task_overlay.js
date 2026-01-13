@@ -139,18 +139,13 @@ function escapeTextareaContent(text) {
 
 
 /**
- * This function opens the overlay for adding a new task and initializes the form.
+ * This function opens the add task overlay and renders its content.
  * @param {HTMLElement} buttonElement The button element that triggered the overlay.
  */
 async function openAddTaskOverlay(buttonElement) {
-    checkScreenSizeForRedirect()
-    let taskState = '';
-    if (buttonElement) {
-        taskState = buttonElement.getAttribute('data-task-state');
-    }
-    allAssigneesArr = [];
-    allSubtasksArr = [];
-    clearElementsOfNewTask();
+    checkScreenSizeForRedirect();
+    resetAddTaskOverlayFields();
+    let taskState = getTaskStateAttributeFromButtonElement(buttonElement);
     const taskId = 'new_task_id_' + Date.now();
     document.getElementById('overlay').classList.add('show');
     setTimeout(() => {
@@ -160,6 +155,30 @@ async function openAddTaskOverlay(buttonElement) {
         addTaskInit();
     });
     disableScrollOnBody();
+}
+
+
+/**
+ * This function retrieves the task state attribute from a button element.
+ * 
+ * @param {HTMLElement} buttonElement - The button element from which to extract the task state. 
+ * @returns - {string|null} The task state attribute value or null if not found.
+ */
+function getTaskStateAttributeFromButtonElement(buttonElement) {
+    if (buttonElement) {
+        return buttonElement.getAttribute('data-task-state');
+    }
+    return null;
+}
+
+
+/**
+ * This function resets the global arrays and clears input fields for adding a new task.
+ */
+function resetAddTaskOverlayFields() {
+    allAssigneesArr = [];
+    allSubtasksArr = [];
+    clearElementsOfNewTask();
 }
 
 

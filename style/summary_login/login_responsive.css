@@ -2,6 +2,17 @@
     display: none;
 }
 
+@media (max-width: 1050px) {
+    .login-card {
+        margin: 32px 16px;
+    }
+
+    .login-logo {
+        padding-top: clamp(37px, 9.56vw - 20.33px, 80px);
+        padding-left: clamp(38px, 9.56vw - 20.33px, 77px);
+    }
+}
+
 @media (max-width: 1000px),
 (max-height: 900px) {
     .login-header {
@@ -42,6 +53,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+    }
+    .login-card {
+        padding-top: 32px;
+        padding-bottom: 32px;
     }
 
     .login-logo-section {
@@ -168,5 +183,6 @@
     .login-card {
         padding-top: 32px;
         padding-bottom: 32px;
+        margin: 32px 16px;
     }
 }
