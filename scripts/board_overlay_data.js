@@ -219,7 +219,6 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    createTaskOverlay(buttonElement);
     const saveAction = handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
     const editAction = handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     const [createdToast, createAction] = await handleButtonAddActionAndCloseOverlay(buttonElement);
@@ -230,28 +229,6 @@ async function closeOverlay(buttonElement, taskId) {
         enableScrollOnBody();
         delayedClose();
         rendered_contacts = 0;
-    }
-}
-
-/**
- * Checks whether a new task should be created or an existing task edited based on
-    if (buttonElement) {
- *
- * @param {HTMLElement} buttonElement The button element that determines the task action.
- */
-function createTaskOverlay(buttonElement) {
-        if (buttonElement) {
-        if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
-            if (!checkForRequired(['title', 'dueDate', 'category'])) {
-                missingInputs();
-                return;
-            }
-        } else if (buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true') {
-            if (!checkForRequired(['title', 'dueDate'])) {
-                missingInputs();
-                return;
-            }
-        }
     }
 }
 
@@ -317,6 +294,7 @@ function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
         return true;
     }
     else {
+        missingInputs();
         return false;
     }
 }
@@ -342,6 +320,7 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
         return [renderNewTaskAddedToastContainer(), true];
     }
     else {
+        missingInputs();
         return [null, false];
     }
 }
