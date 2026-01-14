@@ -24,6 +24,7 @@
     .two-letter-name {
         width: 100px;
         height: 100px;
+        min-width: 100px;
     }
 
 }
@@ -59,9 +60,9 @@
 
     .add-contact-btn-position {
         bottom: 40px;
-        left: 630px;
+        
         margin-left: auto;
-        margin-top: 20px;
+        
     }
 
     .add-contact-btn {
@@ -117,8 +118,8 @@
         border-top-right-radius: 0;
         border-bottom-left-radius: 30px;
         min-width: 0;
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .create-contact-btn {
@@ -189,11 +190,6 @@
 
     .phone::after {
         margin-left: -18px;
-    }
-
-    .two-letter-name {
-        width: 100px;
-        height: 100px;
     }
 
     .contact-header-text {
@@ -326,7 +322,7 @@
     }
 
     .position {
-        top: 33%;
+        top: 23%;
     }
 
     .contact-display {
@@ -341,6 +337,6 @@
     }
 
     .position-edit {
-        top: 26%;
+        top: 18%;
     }
 }

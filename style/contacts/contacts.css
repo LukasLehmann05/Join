@@ -126,6 +126,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     width: 120px;
     height: 120px;
+    min-width: 120px;
 }
 
 .name-field {
@@ -194,6 +195,7 @@
     border-radius: 45px;
     width: 42px;
     height: 42px;
+    min-width: 42px;
 }
 
 .list-info {
