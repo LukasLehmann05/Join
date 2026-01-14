@@ -24,6 +24,7 @@
     .two-letter-name {
         min-width: 100px;
         height: 100px;
+        min-width: 100px;
     }
 
 }
@@ -31,6 +32,17 @@
 @media (min-width: 1150px) {
     #responsivMenu {
         display: none;
+    }
+}
+
+@media (max-width: 1250px) {
+    .dialog-content {
+        width: 1105px;
+    }
+
+    .position, .position-edit {
+        margin-right: 25px;
+        margin-left: 25px;
     }
 }
 
@@ -59,9 +71,7 @@
 
     .add-contact-btn-position {
         bottom: 40px;
-        left: 630px;
         margin-left: auto;
-        margin-top: 20px;
     }
 
     .add-contact-btn {
@@ -117,8 +127,8 @@
         border-top-right-radius: 0;
         border-bottom-left-radius: 30px;
         min-width: 0;
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .create-contact-btn {
@@ -189,11 +199,6 @@
 
     .phone::after {
         margin-left: -18px;
-    }
-
-    .two-letter-name {
-        min-width: 100px;
-        height: 100px;
     }
 
     .contact-header-text {
@@ -326,7 +331,7 @@
     }
 
     .position {
-        top: 33%;
+        top: 23%;
     }
 
     .contact-display {
@@ -341,6 +346,36 @@
     }
 
     .position-edit {
-        top: 26%;
+        top: 18%;
+    }
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+    .dialog-content {
+        width: 295px;
+    }
+
+    .position-edit {
+        top: 25%;
+    }
+
+    .contact-display {
+        width: 80%;
+    }
+
+    .sub-menu-btn {
+        right: 17%;
+    }
+
+    .sub-menu-btns {
+        margin-right: 56px;
+    }
+
+    .add-contact-btn-position {
+        margin-left: 56%;
+    }
+
+    .position {
+        top: 33%;
     }
 }

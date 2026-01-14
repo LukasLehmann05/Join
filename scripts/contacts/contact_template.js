@@ -11,7 +11,7 @@ function contactListSingle(contactID, name, email, userInitials, phone) {
     return `<div id="${contactID}" class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
                 <p id="short-${contactID}" class="two-letter-name-small">${userInitials}</p>
                 <div class="list-info">
-                  <p id="name-${contactID}" class="font-size-20">${name}</p>
+                  <p id="name-${contactID}" class="font-size-20 long-contact-name">${name}</p>
                   <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
                 </div>
             </div>`
@@ -45,7 +45,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
     return `<div class="main-name">
                 <div id="mainShort" class="two-letter-name fullname">${acronym}</div>
                 <div class="name-field">
-                    <p id="mainName" class="fullname">${currentName}</p>
+                    <p id="mainName" class="fullname long-contact-name">${currentName}</p>
                     <div id="subMenuBtns" class="main-name-btns">
                         <button id="editUser" data-id="${currentId}" onclick="directionOfIncomingDialog('dialogWindow' ,'editContent') , displayMainDataInEditDialog(this)" class="name-btn font-size-16">Edit</button>
                         <button onclick="deleteThisContactFromMain(this)" id="deleteUser" data-id="${currentId}" class="name-btn font-size-16">Delete</button>

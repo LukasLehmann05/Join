@@ -48,9 +48,24 @@
 
 .add-contact-btn-position {
     position: sticky;
-    top: 0px;
+    top: 12px;
     margin-top: 12px;
+}
 
+.position-stick-contacts {
+    position: sticky;
+    top: 96px;
+}
+
+.long-contact-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .add-contact-btn:hover {
@@ -128,6 +143,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     min-width: 120px;
     height: 120px;
+    min-width: 120px;
 }
 
 .name-field {
@@ -201,6 +217,7 @@
     border-radius: 45px;
     min-width: 42px;
     height: 42px;
+    min-width: 42px;
 }
 
 .list-info {
