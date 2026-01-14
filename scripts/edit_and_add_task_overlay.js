@@ -34,6 +34,7 @@ async function openEditTaskOverlay(buttonElement, taskId) {
     await renderAssignedUserInfos(task.assigned_to, true, 'rendered_contact_images');
     renderSubtaskEditListItems(task.subtasks || []);
     addTaskInit();
+    implementListenerToPreventEnterIssue();
 }
 
 
