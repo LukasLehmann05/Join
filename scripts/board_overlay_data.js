@@ -293,8 +293,11 @@ async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
         await sendUpdatedTaskToDB(taskId);
         return true;
     }
-    else {
+    else if (buttonEditTaskAndCloseOverlay) {
         missingInputs();
+        return false;
+    }
+    else {
         return false;
     }
 }
@@ -319,8 +322,11 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
         await sendTaskToDB(taskState);
         return [renderNewTaskAddedToastContainer(), true];
     }
-    else {
+    else if (buttonCreateTaskAndCloseOverlay) {
         missingInputs();
+        return [null, false];
+    }
+    else {
         return [null, false];
     }
 }
