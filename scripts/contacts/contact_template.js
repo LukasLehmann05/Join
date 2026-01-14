@@ -3,13 +3,13 @@
  * @param {string} contactID 
  * @param {string} name  
  * @param {string} email 
- * @param {string} acronym 
+ * @param {string} userInitials 
  * @param {string} phone 
  * @returns {string} The HTML string for a single contact.
  */
-function contactListSingle(contactID, name, email, acronym, phone) {
+function contactListSingle(contactID, name, email, userInitials, phone) {
     return `<div id="${contactID}" class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
-                <p id="short-${contactID}" class="two-letter-name-small">${acronym}</p>
+                <p id="short-${contactID}" class="two-letter-name-small">${userInitials}</p>
                 <div class="list-info">
                   <p id="name-${contactID}" class="font-size-20">${name}</p>
                   <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
