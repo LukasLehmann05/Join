@@ -154,7 +154,7 @@ function addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, render
     const container = document.getElementById(taskId + '_' + containerIdSuffix);
     if (container) {
         container.innerHTML = iconsHTML;
-        checkForAsigneeOverflow(rendered_amount, container);
+        checkForAssigneeOverflow(rendered_amount, container);
     }
 }
 
