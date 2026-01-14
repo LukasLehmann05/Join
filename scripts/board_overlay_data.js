@@ -120,7 +120,10 @@ function disableScrollOnBody() {
  * This function enables scrolling on the body element.
  */
 function enableScrollOnBody() {
-    document.body.style.overflow = 'auto';
+    const DELAY_BEFORE_ENABLING_SCROLL = 1000;
+    setTimeout(() => {
+        document.body.style.overflow = 'auto';
+    }, DELAY_BEFORE_ENABLING_SCROLL);
 }
 
 
@@ -219,42 +222,24 @@ function closeOverlayByBackdrop(event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    createTaskOverlay(buttonElement)
-    handleButtonActionSaveAndCloseOverlay(buttonElement, taskId);
-    handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
-
-    const created = await handleButtonAddActionAndCloseOverlay(buttonElement);
-    if (created instanceof Promise) {
-        await created;
+    const saveAction = await handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
+    const editAction = await handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
+    const [createdToast, createAction] = await handleButtonAddActionAndCloseOverlay(buttonElement);
+    if (createdToast instanceof Promise) {
+        await createdToast;
     }
-    enableScrollOnBody();
-    delayedClose()
-    rendered_contacts = 0
+    if (saveAction || editAction || createAction) {
+        delayedClose();
+        enableScrollOnBody();
+        rendered_contacts = 0;
+    }
 }
+
 
 /**
- * Checks whether a new task should be created or an existing task edited based on
-    if (buttonElement) {
- *
- * @param {HTMLElement} buttonElement The button element that determines the task action.
+ * This function adds a delay before removing the 'show' class from overlay elements,
+ * allowing for CSS transition effects to complete.
  */
-function createTaskOverlay(buttonElement) {
-        if (buttonElement) {
-        if (buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true') {
-            if (!checkForRequired(['title', 'dueDate', 'category'])) {
-                missingInputs();
-                return;
-            }
-        } else if (buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true') {
-            if (!checkForRequired(['title', 'dueDate'])) {
-                missingInputs();
-                return;
-            }
-        }
-    }
-}
-
-//this function causes a delayed close of the overlay
 function delayedClose() {
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
@@ -281,11 +266,18 @@ function delayedClose() {
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to save.
  */
-function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
+async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
-        sendUpdatedTaskToDB(taskId);
+        await sendUpdatedTaskToDB(taskId);
     }
+    const hasAttribute = buttonElement && buttonElement.hasAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
+    if (hasAttribute){
+        return true;
+    } 
+    else {
+        return false;
+    } 
 }
 
 
@@ -296,12 +288,20 @@ function handleButtonActionSaveAndCloseOverlay(buttonElement, taskId) {
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to edit.
  */
-function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
+async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonEditTaskAndCloseOverlay) {
+    if (buttonEditTaskAndCloseOverlay && checkForRequired(['title', 'dueDate'])) {
         clearElementsOfNewTask();
         getAllFieldValuesOfEditTaskWhenUpdated();
-        sendUpdatedTaskToDB(taskId);
+        await sendUpdatedTaskToDB(taskId);
+        return true;
+    }
+    else if (buttonEditTaskAndCloseOverlay) {
+        missingInputs();
+        return false;
+    }
+    else {
+        return false;
     }
 }
 
@@ -321,11 +321,17 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
         taskState = 'todo';
     }
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonCreateTaskAndCloseOverlay) {
+    if (buttonCreateTaskAndCloseOverlay && checkForRequired(['title', 'dueDate', 'category'])) {
         await sendTaskToDB(taskState);
-        return renderNewTaskAddedToastContainer();
+        return [renderNewTaskAddedToastContainer(), true];
     }
-    return;
+    else if (buttonCreateTaskAndCloseOverlay) {
+        missingInputs();
+        return [null, false];
+    }
+    else {
+        return [null, false];
+    }
 }
 
 
@@ -378,7 +384,8 @@ async function deleteTaskInOverlay(taskId) {
         await deleteTask(taskId);
         if (taskCardElement) {
             taskCardElement.remove();
-            closeOverlay();
+            enableScrollOnBody();
+            delayedClose();
         }
     } catch (error) {
         console.error("Error deleting task with id: " + taskId, error);
