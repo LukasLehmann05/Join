@@ -136,7 +136,6 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
     let rendered_amount = 0
     let containerIdSuffix = 'assigned_users';
     let iconsHTML = '';
-    
     for (let contactId of taskAssignees) {
         rendered_amount += 1
         if (rendered_amount <= amount_for_render_overflow) {
@@ -146,14 +145,19 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
             iconsHTML += iconHTML;
         }
     }
-    
-    // Get fresh container reference and update once
+    addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount)
+}
+
+
+// Get fresh container reference and update once
+function addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount) {
     const container = document.getElementById(taskId + '_' + containerIdSuffix);
     if (container) {
         container.innerHTML = iconsHTML;
         checkForAsigneeOverflow(rendered_amount, container);
     }
 }
+
 
 // This function adds a overflow div for assignee display when rendered amount higher than the limit
 function checkForAsigneeOverflow(rendered_amount, container) {
