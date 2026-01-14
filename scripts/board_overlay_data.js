@@ -155,7 +155,7 @@ async function renderEditOverlayAssignee(onlyId, containerIdSuffix) {
         const contact = await getContactById(contactId);
         if (contact) {
             rendered_contacts += 1
-            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, contact, contactId);
+            container.innerHTML += getContentToRenderAssignedUserInfos(onlyId, contact);
         }
     }
 }
@@ -182,7 +182,7 @@ function getAssigneesOfTask(taskAssignees) {
  * @param {Object} contact The user object.
  * @returns {string} The HTML string for the assigned user info.
  */
-function getContentToRenderAssignedUserInfos(renderOnlyId, contact, contactId) {
+function getContentToRenderAssignedUserInfos(renderOnlyId, contact) {
     if (renderOnlyId) {
         return `   <div class="assigned_user_content">
                     ${assignedUserIconTemplate(getInitialsFromUser(contact), contact.color)}

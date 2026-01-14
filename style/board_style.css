@@ -339,3 +339,8 @@ h1 {
     -webkit-box-orient: vertical;
     width: 100%;
 }
+
+.sidebar {
+    position: sticky;
+    top: 0px;
+}

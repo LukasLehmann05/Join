@@ -158,22 +158,6 @@ function checkForAsigneeOverflow(rendered_amount, container) {
 
 
 /**
- * This function returns the initials from a user object.
- * 
- * @param {Object} user The user object.
- * @returns {string} The initials of the user.
- */
-function getInitialsFromUser(user) {
-    const initials = user.name
-        .split(' ')
-        .map(word => word[0])
-        .join('')
-        .toUpperCase();
-    return initials;
-}
-
-
-/**
  * This function returns the icon path for a given priority.
  * 
  * @param {string} priority The priority level of the task.
