@@ -35,6 +35,17 @@
     }
 }
 
+@media (max-width: 1250px) {
+    .dialog-content {
+        width: 1105px;
+    }
+
+    .position, .position-edit {
+        margin-right: 25px;
+        margin-left: 25px;
+    }
+}
+
 @media (max-width: 1150px) {
     .contact-display {
         display: none;
@@ -60,9 +71,7 @@
 
     .add-contact-btn-position {
         bottom: 40px;
-
         margin-left: auto;
-
     }
 
     .add-contact-btn {
