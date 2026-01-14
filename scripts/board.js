@@ -135,21 +135,32 @@ async function renderTaskCard(taskId, task) {
 async function renderAssignedUserIcons(taskId, taskAssignees) {
     let rendered_amount = 0
     let containerIdSuffix = 'assigned_users';
-    const container = document.getElementById(taskId + '_' + containerIdSuffix);
+    let iconsHTML = '';
     for (let contactId of taskAssignees) {
         rendered_amount += 1
         if (rendered_amount <= amount_for_render_overflow) {
             const contact = await getContactById(contactId);
             const initials = getInitialsFromUser(contact);
             const iconHTML = assignedUserIconTemplate(initials, contact.color);
-            container.innerHTML += iconHTML;
+            iconsHTML += iconHTML;
         }
     }
-    checkForAsigneeOverflow(rendered_amount, container)
+    addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount)
 }
 
+
+// Get fresh container reference and update once
+function addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount) {
+    const container = document.getElementById(taskId + '_' + containerIdSuffix);
+    if (container) {
+        container.innerHTML = iconsHTML;
+        checkForAssigneeOverflow(rendered_amount, container);
+    }
+}
+
+
 // This function adds a overflow div for assignee display when rendered amount higher than the limit
-function checkForAsigneeOverflow(rendered_amount, container) {
+function checkForAssigneeOverflow(rendered_amount, container) {
     if (rendered_amount > amount_for_render_overflow) {
         let overflow_amount = rendered_amount - amount_for_render_overflow
         container.innerHTML += returnSmallContactOverflowTemplateBoard('+' + overflow_amount)

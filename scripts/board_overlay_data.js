@@ -17,8 +17,8 @@ const DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY = 'data-edit-task-and-close-ove
  * 
  * @param {string} taskId The ID of the task to update.
  */
-async function sendUpdatedTaskToDB(taskId) {
-    let taskToUpdate = await getTaskToUpdate(taskId);
+async function sendUpdatedTaskToDB(taskId, upsertMode) {
+    let taskToUpdate = await getTaskToUpdate(taskId, upsertMode);
     updateAllTasksObj(taskId, taskToUpdate);
     clearElementsOfNewTask();
     if (Object.keys(taskToUpdate).length !== 0) {
@@ -34,14 +34,14 @@ async function sendUpdatedTaskToDB(taskId) {
  * @param {string} taskId The ID of the task to update.
  * @returns {Promise<Object>} The updated task object.
  */
-async function getTaskToUpdate(taskId) {
+async function getTaskToUpdate(taskId, upsertMode) {
     let taskToUpdate = await getTaskById(taskId);
     if (newTitle !== "") taskToUpdate.title = newTitle;
     if (newCategory !== "") taskToUpdate.category = newCategory;
     if (newDescription !== "") taskToUpdate.description = newDescription;
     if (newDueDate !== "") taskToUpdate.due_date = newDueDate;
     if (newPriority !== "") taskToUpdate.priority = newPriority;
-    taskToUpdate.assigned_to = newAssigneesArr;
+    if (upsertMode !== false) taskToUpdate.assigned_to = newAssigneesArr;
     taskToUpdate.subtasks = newSubtasksArr;
     if (newState !== "") taskToUpdate.state = newState;
     return taskToUpdate;
@@ -269,7 +269,7 @@ function delayedClose() {
 async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
     if (buttonSaveStateOfSubtasksAndCloseOverlay) {
-        await sendUpdatedTaskToDB(taskId);
+        await sendUpdatedTaskToDB(taskId, false);
     }
     const hasAttribute = buttonElement && buttonElement.hasAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
     if (hasAttribute){
