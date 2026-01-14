@@ -47,9 +47,24 @@
 
 .add-contact-btn-position {
     position: sticky;
-    top: 0px;
+    top: 12px;
     margin-top: 12px;
+}
 
+.position-stick-contacts {
+    position: sticky;
+    top: 96px;
+}
+
+.long-contact-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .add-contact-btn:hover {
