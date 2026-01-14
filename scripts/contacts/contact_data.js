@@ -192,7 +192,7 @@ async function trimDownEditingUser(editID, editedUser) {
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     dialogAppearences('dialogWindow', 'editContent');
     displayEditedContactDataInList(editID, editedUser);
-    displayEditedContactDataInMainDisplay(editedUser)
+    displayEditedContactDataInMainDisplay(editedUser);
 }
 
 
