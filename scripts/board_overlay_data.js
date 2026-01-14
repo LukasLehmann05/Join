@@ -41,8 +41,8 @@ async function getTaskToUpdate(taskId) {
     if (newDescription !== "") taskToUpdate.description = newDescription;
     if (newDueDate !== "") taskToUpdate.due_date = newDueDate;
     if (newPriority !== "") taskToUpdate.priority = newPriority;
-    if (newAssigneesArr.length > 0) taskToUpdate.assigned_to = newAssigneesArr;
-    if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
+    taskToUpdate.assigned_to = newAssigneesArr;
+    taskToUpdate.subtasks = newSubtasksArr;
     if (newState !== "") taskToUpdate.state = newState;
     return taskToUpdate;
 }

@@ -128,23 +128,23 @@ function displayMainDataInEditDialog() {
 /**
  * updates data in contact list for the edited user
  */
-function displayEditedContactDataInList(editID, email, name) {
-    let acronym = getAcronym(name);
-    document.getElementById('short-' + editID).innerText = acronym;
-    document.getElementById('email-' + editID).innerText = email;
-    document.getElementById('name-' + editID).innerText = name;
+function displayEditedContactDataInList(editID, editedUser) {
+    let userInitials = getInitialsFromUser(editedUser);
+    document.getElementById('short-' + editID).innerText = userInitials;
+    document.getElementById('email-' + editID).innerText = editedUser.email;
+    document.getElementById('name-' + editID).innerText = editedUser.name;
 }
 
 
 /**
  * updates data in main display for the edited user
  */
-function displayEditedContactDataInMainDisplay(email, name, phone) {
-    let acronym = getAcronym(name);
-    document.getElementById('mainMail').innerText = email;
-    document.getElementById('mainName').innerText = name;
-    document.getElementById('mainPhone').innerText = phone;
-    document.getElementById('mainShort').innerText = acronym;
+function displayEditedContactDataInMainDisplay(editedUser) {
+    let userInitials = getInitialsFromUser(editedUser);
+    document.getElementById('mainMail').innerText = editedUser.email;
+    document.getElementById('mainName').innerText = editedUser.name;
+    document.getElementById('mainPhone').innerText = editedUser.phone;
+    document.getElementById('mainShort').innerText = userInitials;
 }
 
 

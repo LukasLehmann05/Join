@@ -60,24 +60,10 @@ async function renderContactList(singleContactData, contactID, color) {
     let name = singleContactData.name;
     let email = singleContactData.email;
     let phone = singleContactData.phone;
-    let acronym = getAcronym(name);
+    let userInitials = getInitialsFromUser(singleContactData);
     let letter = name.charAt(0).toUpperCase();
-    document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, acronym, phone);
+    document.getElementById(letter).innerHTML += contactListSingle(contactID, name, email, userInitials, phone);
     colorAcronym(contactID, color);
-}
-
-
-/**
- * generates acronym from contact name. Gets called in function: "renderContactList()"
- */
-function getAcronym(name) {
-    if (!name || typeof name !== 'string') return '';
-    let names = name.trim().split(/\s+/);
-    let firstTwoNames = names.slice(0, 2);
-    let acronym = firstTwoNames
-        .map(word => word.charAt(0).toUpperCase())
-        .join('');
-    return acronym;
 }
 
 
@@ -205,8 +191,8 @@ async function trimDownEditingUser(editID, editedUser) {
     await renderHtmlElements(editedUser, editID, editedUser.name, editedUser.color);
     document.getElementById('responseMessage').innerHTML = "Contact successfully edited.";
     dialogAppearences('dialogWindow', 'editContent');
-    displayEditedContactDataInList(editID, editedUser.email, editedUser.name)
-    displayEditedContactDataInMainDisplay(editedUser.email, editedUser.name, editedUser.phone)
+    displayEditedContactDataInList(editID, editedUser);
+    displayEditedContactDataInMainDisplay(editedUser);
 }
 
 
