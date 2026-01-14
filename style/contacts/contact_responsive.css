@@ -22,7 +22,7 @@
     }
 
     .two-letter-name {
-        width: 100px;
+        min-width: 100px;
         height: 100px;
     }
 
@@ -192,7 +192,7 @@
     }
 
     .two-letter-name {
-        width: 100px;
+        min-width: 100px;
         height: 100px;
     }
 
