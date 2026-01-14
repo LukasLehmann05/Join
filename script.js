@@ -34,3 +34,16 @@ function assignColorToContact() {
     let userColor = colours[Math.floor(Math.random() * colours.length)];
     return userColor;
 }
+
+
+/**
+ * Sets event listener to the subtask input field to prevent loading the site in enter
+ */
+function implementListenerToPreventEnterIssue() {
+    document.getElementById('task_subtask').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addSubtask();
+        }
+    });
+}
