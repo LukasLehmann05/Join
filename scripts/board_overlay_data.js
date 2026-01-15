@@ -120,7 +120,7 @@ function disableScrollOnBody() {
  * This function enables scrolling on the body element.
  */
 function enableScrollOnBody() {
-    const DELAY_BEFORE_ENABLING_SCROLL = 1000;
+    const DELAY_BEFORE_ENABLING_SCROLL = 300;
     setTimeout(() => {
         document.body.style.overflow = 'auto';
     }, DELAY_BEFORE_ENABLING_SCROLL);
@@ -243,8 +243,8 @@ async function closeOverlay(buttonElement, taskId) {
 function delayedClose() {
     const overlay = document.getElementById('overlay');
     const overlayContent = document.getElementById('overlay_content');
-    const DELAY_BETWEEN_CLASSES = 500;
-    const TOTAL_DELAY = 1000;
+    const DELAY_BETWEEN_CLASSES = 100;
+    const TOTAL_DELAY = 300;
     if (overlay.classList.contains('show')) {
         setTimeout(() => {
             overlayContent.classList.remove('show');
