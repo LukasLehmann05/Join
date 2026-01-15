@@ -40,7 +40,12 @@
 
 .sidebar-footer .active{
     background-color: #091931;
-    padding: 8px 62px;
+    padding: 8px 64px;
+}
+
+.sidebar-footer .active-legal{
+    background-color: #091931;
+    padding: 8px 71px;
 }
 
 .disabled {
