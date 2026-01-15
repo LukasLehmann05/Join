@@ -80,7 +80,7 @@
             </nav>
         </header>
         <main class="main-content">
-            <div id="overlay" class="overlay" onclick="closeOverlayByBackdrop(event)">
+            <div id="overlay" class="overlay" onclick="closeOverlayByBackdrop(this, event)" data-save-task-when-close-overlay="false">
                 <div id="overlay_content" class="overlay_content"></div>
                 <div id="responseToast" class="responseToastContent">
                     <p>Task added to board</p>

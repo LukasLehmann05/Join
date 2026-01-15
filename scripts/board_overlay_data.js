@@ -42,7 +42,7 @@ async function getTaskToUpdate(taskId, upsertMode) {
     if (newDueDate !== "") taskToUpdate.due_date = newDueDate;
     if (newPriority !== "") taskToUpdate.priority = newPriority;
     if (upsertMode !== false) taskToUpdate.assigned_to = newAssigneesArr;
-    taskToUpdate.subtasks = newSubtasksArr;
+    if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
     if (newState !== "") taskToUpdate.state = newState;
     return taskToUpdate;
 }
@@ -205,11 +205,12 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, contact) {
 /**
  * This function closes the overlay if the background is clicked.
  * 
+ * @param {HTMLElement} divElement The overlay div element.
  * @param {Event} event The click event object.
  */
-function closeOverlayByBackdrop(event) {
+function closeOverlayByBackdrop(divElement, event) {
     if (event.target === event.currentTarget) {
-        closeOverlay();
+        closeOverlay(divElement, null);
     }
 }
 
@@ -268,7 +269,7 @@ function delayedClose() {
  */
 async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonSaveStateOfSubtasksAndCloseOverlay) {
+    if (buttonSaveStateOfSubtasksAndCloseOverlay && taskId !== null) {
         await sendUpdatedTaskToDB(taskId, false);
     }
     const hasAttribute = buttonElement && buttonElement.hasAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
