@@ -216,8 +216,7 @@ function closeOverlayByBackdrop(divElement, event) {
 
 
 /**
- * This function removes the 'show' class from overlay elements and optionally triggers actions
- * such as saving, editing, or creating a task, depending on the data attributes of the button element.
+ * This function closes the overlay and handles saving, editing, or creating tasks based on button attributes.
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
  * @param {string} taskId The ID of the task to save or edit (optional).
@@ -266,6 +265,7 @@ function delayedClose() {
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to save.
+ * @returns {Promise<Array<boolean>>} An array indicating whether the save action or only close action was performed.
  */
 async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
     const saveTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : null;
@@ -289,6 +289,7 @@ async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to edit.
+ * @returns {Promise<boolean>} A boolean indicating whether the edit action was performed.
  */
 async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
@@ -313,15 +314,10 @@ async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
  * and if so, triggers the creation of a new task.
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
+ * @returns {Promise<Array>} An array containing the toast container and a boolean indicating whether the create action was performed.
  */
 async function handleButtonAddActionAndCloseOverlay(buttonElement) {
-    let taskState = '';
-    if (buttonElement) {
-        taskState = buttonElement.getAttribute('data-task-state');
-    }
-    else {
-        taskState = 'todo';
-    }
+    let taskState = getTaskStateFromOverlay(buttonElement);
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
     if (buttonCreateTaskAndCloseOverlay && checkForRequired(['title', 'dueDate', 'category'])) {
         await sendTaskToDB(taskState);
@@ -334,6 +330,24 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
     else {
         return [null, false];
     }
+}
+
+
+/**
+ * This function retrieves the task state from the overlay button element.
+ * 
+ * @param {HTMLElement} buttonElement - The button element containing the task state data attribute.
+ * @returns {string} The task state retrieved from the button element or a default value.
+ */
+function getTaskStateFromOverlay(buttonElement) {
+    let taskState = '';
+    if (buttonElement) {
+        taskState = buttonElement.getAttribute('data-task-state');
+    }
+    else {
+        taskState = 'todo';
+    }
+    return taskState;
 }
 
 
