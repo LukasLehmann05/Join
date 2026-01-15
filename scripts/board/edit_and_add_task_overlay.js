@@ -1,7 +1,7 @@
  /**
  * Duration (in ms) for which the toast is visibly displayed.
  */
-const TOAST_DISPLAY_DURATION = 1500;
+const TOAST_DISPLAY_DURATION = 700;
 
 /**
  * Buffer time (in ms) to allow toast animations/setup before and after display.
@@ -156,6 +156,7 @@ async function openAddTaskOverlay(buttonElement) {
         addTaskInit();
     });
     disableScrollOnBody();
+    implementListenerToPreventEnterIssue();
 }
 
 

@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Board</title>
-    <link rel="stylesheet" href="../style/add_task.css">
-    <link rel="stylesheet" href="../style/add_task_subtask_contacts.css">
+    <link rel="stylesheet" href="../style/add_task/add_task.css">
+    <link rel="stylesheet" href="../style/add_task/add_task_subtask_contacts.css">
     <link rel="stylesheet" href="../style/contacts/add_contact.css">
-    <link rel="stylesheet" href="../style/board_style.css">
-    <link rel="stylesheet" href="../style/board_overlay_style.css">
+    <link rel="stylesheet" href="../style/board/board_style.css">
+    <link rel="stylesheet" href="../style/board/board_overlay_style.css">
     <link rel="stylesheet" href="../style/standard.css">
     <link rel="stylesheet" href="../style/mainframe.css">
     <link rel="stylesheet" href="../style/mainframe_responsive.css">
-    <link rel="stylesheet" href="../style/board_responsive.css">
-    <link rel="stylesheet" href="../style/board_overlay_responsive.css">
+    <link rel="stylesheet" href="../style/board/board_responsive.css">
+    <link rel="stylesheet" href="../style/board/board_overlay_responsive.css">
     <link rel="shortcut icon" href="../assets/icons/logo/logoSmall.svg">
 
     <script src="../scripts/login_and_summary/avatar.js"></script>
 </head>
 
 <body class="body">
-    <aside class="sidebar">
+    <aside class="sidebar sidebar-sticky">
         <div class="sidebar_upper_section">
             <section class="logo-section">
                 <img class="logo" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
@@ -80,7 +80,7 @@
             </nav>
         </header>
         <main class="main-content">
-            <div id="overlay" class="overlay" onclick="closeOverlayByBackdrop(event)">
+            <div id="overlay" class="overlay" onclick="closeOverlayByBackdrop(this, event)" data-save-task-when-close-overlay="false">
                 <div id="overlay_content" class="overlay_content"></div>
                 <div id="responseToast" class="responseToastContent">
                     <p>Task added to board</p>
@@ -155,20 +155,20 @@
             </section>
         </main>
     </article>
-
+    
     <script src="../scripts/firebase.js"></script>
-    <script src="../scripts/add_task.js"></script>
+    <script src="../scripts/add_task/add_task.js"></script>
+    <script src="../scripts/add_task/add_task_templates.js"></script>
+    <script src="../scripts/add_task/add_task_contact_handling.js"></script>
     <script src="../scripts/contacts/contact_data.js"></script>
     <script src="../script.js"></script>
-    <script src="../scripts/add_task_templates.js"></script>
-    <script src="../scripts/add_task_contact_handling.js"></script>
-    <script src="../scripts/board_templates.js"></script>
-    <script src="../scripts/board.js"></script>
-    <script src="../scripts/search_board.js"></script>
-    <script src="../scripts/drag_and_drop_handler.js"></script>
-    <script src="../scripts/subtasks_overlay.js"></script>
-    <script src="../scripts/edit_and_add_task_overlay.js"></script>
-    <script src="../scripts/board_overlay_data.js"></script>
+    <script src="../scripts/board/board_templates.js"></script>
+    <script src="../scripts/board/board.js"></script>
+    <script src="../scripts/board/search_board.js"></script>
+    <script src="../scripts/board/drag_and_drop_handler.js"></script>
+    <script src="../scripts/board/subtasks_overlay.js"></script>
+    <script src="../scripts/board/edit_and_add_task_overlay.js"></script>
+    <script src="../scripts/board/board_overlay_data.js"></script>
 </body>
 
 

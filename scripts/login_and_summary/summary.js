@@ -274,9 +274,9 @@ function setFallback() {
 async function initSummaryPage() {
   requireAuth();
   if (document.referrer.includes("index.html") && sessionStorage.getItem("visiting")) {
-    renderGreeting();
     showGreetingOverlay();
   }
+  renderGreeting();
   await loadAndRenderSummary();
 }
 

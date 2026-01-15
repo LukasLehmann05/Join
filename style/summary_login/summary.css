@@ -186,9 +186,10 @@
 }
 
 .greeting-name {
-    font-size: 61px;
+    font-size: 64px;
     font-weight: 700;
     color: #29ABE2;
+    font-family: "Inter_bold";
 }
 
 .sidebar-nav-section.current-selection {
