@@ -276,6 +276,7 @@ async function initSummaryPage() {
   if (document.referrer.includes("index.html") && sessionStorage.getItem("visiting")) {
     showGreetingOverlay();
   }
+  renderGreeting();
   await loadAndRenderSummary();
 }
 
