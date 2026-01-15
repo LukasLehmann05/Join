@@ -223,13 +223,13 @@ function closeOverlayByBackdrop(divElement, event) {
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
 async function closeOverlay(buttonElement, taskId) {
-    const saveAction = await handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
+    const [saveAction, onlyCloseAction] = await handleButtonSaveActionAndCloseOverlay(buttonElement, taskId);
     const editAction = await handleButtonEditActionAndCloseOverlay(buttonElement, taskId);
     const [createdToast, createAction] = await handleButtonAddActionAndCloseOverlay(buttonElement);
     if (createdToast instanceof Promise) {
         await createdToast;
     }
-    if (saveAction || editAction || createAction) {
+    if (saveAction || onlyCloseAction || editAction || createAction) {
         delayedClose();
         enableScrollOnBody();
         rendered_contacts = 0;
@@ -261,24 +261,23 @@ function delayedClose() {
 
 
 /**
- * This function checks if the button has the data attribute for saving the task and closing the overlay,
- * and if so, saves the updated task to the database.
+ * This function checks if the button has the data attribute for saving the task when closing the overlay,
+ * and if so, sends the updated task to the database.
  * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to save.
  */
 async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
+    let saveAndCloseAction = false;
+    let onlyCloseAction = false;
     const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
     if (buttonSaveStateOfSubtasksAndCloseOverlay && taskId !== null) {
         await sendUpdatedTaskToDB(taskId, false);
+        return [saveAndCloseAction = true, onlyCloseAction = false];
     }
-    const hasAttribute = buttonElement && buttonElement.hasAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY);
-    if (hasAttribute){
-        return true;
-    } 
     else {
-        return false;
-    } 
+        return [saveAndCloseAction = false, onlyCloseAction = true];
+    }
 }
 
 
