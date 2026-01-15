@@ -268,15 +268,17 @@ function delayedClose() {
  * @param {string} taskId The ID of the task to save.
  */
 async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
-    let saveAndCloseAction = false;
-    let onlyCloseAction = false;
-    const buttonSaveStateOfSubtasksAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonSaveStateOfSubtasksAndCloseOverlay && taskId !== null) {
+    const saveTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'true' : null;
+    const onlyCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY) === 'false' : null;
+    if (saveTaskAndCloseOverlay && taskId !== null) {
         await sendUpdatedTaskToDB(taskId, false);
-        return [saveAndCloseAction = true, onlyCloseAction = false];
+        return [true, false];
+    }
+    else if (onlyCloseOverlay) {
+        return [false, true];
     }
     else {
-        return [saveAndCloseAction = false, onlyCloseAction = true];
+        return [false, false];
     }
 }
 
