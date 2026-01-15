@@ -100,7 +100,7 @@ h1 {
     display: flex;
     gap: 24px;
     overflow-y: hidden;
-    height: calc(100vh - 400px);
+    height: calc(100vh - 350px);
 }
 
 .board_table .column_content {
