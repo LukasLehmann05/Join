@@ -156,6 +156,7 @@ async function openAddTaskOverlay(buttonElement) {
         addTaskInit();
     });
     disableScrollOnBody();
+    implementListenerToPreventEnterIssue();
 }
 
 
