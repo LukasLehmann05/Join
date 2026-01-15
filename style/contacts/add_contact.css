@@ -149,8 +149,8 @@ dialog[open] {
 
 .dialog-message {
    position: sticky;
-   top: 800px;
-   left: 750px;
+   top: 90%;
+   left: calc(50% - 120px/2);
    height: 10px; 
    align-items: center;
    background-color: #2A3647;
