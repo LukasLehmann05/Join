@@ -259,7 +259,7 @@
 
 @keyframes logoAnimation {
     0% {
-        content: url(/assets/icons/logo/logoSmall.svg);
+        content: url(../../assets/icons/logo/logoSmall.svg);
         position: fixed;
         width: 274px;
         height: auto;
@@ -269,7 +269,7 @@
     }
 
     100% {
-        content: url(/assets/icons/logo/logoSmall.svg);
+        content: url(../../assets/icons/logo/logoSmall.svg);
         position: fixed;
         width: 100px;
         top: 80px;
