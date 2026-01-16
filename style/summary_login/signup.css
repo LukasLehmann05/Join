@@ -98,7 +98,7 @@ button.signup-button-primary:disabled {
 
 .signup-toast {
     position: fixed;
-    top: 70px;
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #2A3647;
