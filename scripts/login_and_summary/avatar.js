@@ -280,12 +280,18 @@ function initHeaderAvatar() {
 
 
 /**
- * Ensures a user is authenticated, redirects to login if not.
+ * This function checks if the user is authenticated.
+ * If not, it redirects to the login page.
+ * Public pages are exempt from this check.
  */
 function requireAuth() {
-  const user = getCurrentUserSafe();
-  if (!user) {
-    redirectToLogin();
+  const publicPages = ['privacy_policy_public.html', 'legal_notice_public.html'];
+  const path = window.location.pathname;
+  if (publicPages.some(page => path.endsWith(page))) {
+      return;
+  }
+  if (!getCurrentUserSafe()) {
+      window.location.href = '../index.html';
   }
 }
 
