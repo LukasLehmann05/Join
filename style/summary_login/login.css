@@ -6,6 +6,7 @@
     flex-direction: column;
     position: relative;
     background-color: #F6F7F8;
+    align-items: center;
 }
 
 .login-logo-section {
