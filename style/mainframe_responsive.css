@@ -1,6 +1,6 @@
 @media (max-width: 1300px) {
     .main-content {
-        min-height: 100vh;
+        min-height: calc(100vh - 96px)
     }
 }
 
