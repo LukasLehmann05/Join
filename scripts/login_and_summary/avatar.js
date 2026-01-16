@@ -290,7 +290,7 @@ function requireAuth() {
   if (publicPages.some(page => path.endsWith(page))) {
       return;
   }
-  if (!isUserLoggedIn()) {
+  if (!getCurrentUserSafe()) {
       window.location.href = '../index.html';
   }
 }
