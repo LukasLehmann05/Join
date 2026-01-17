@@ -45,7 +45,7 @@
     }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .login-container {
         width: 100%;
         max-width: 100%;
@@ -62,7 +62,7 @@
     .login-logo-section {
         min-height: 114px;
     }
-}
+} */
 
 @media (max-width: 600px) {
     .login-header {
