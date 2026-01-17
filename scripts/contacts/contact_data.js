@@ -166,7 +166,7 @@ async function trimDownAddingContact(newUser, name, color) {
 async function editContactInDatabase() {
     let editedUser = getEditedContactData();
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
-    if (editedUser.name.length <= 0 == false) {
+    if (editedUser.name.length <= 0 == false && !isNotLetter(editedUser.name.charAt(0))) {
         if (validateEmail(editedUser.email) == true && editedUser.email != "") {
             if (validatePhoneByLength(editedUser.phone) == true && editedUser.phone != "") {
                 await editContactDataInDatabase(editedUser, currentId)

@@ -154,7 +154,7 @@ function editDialogHTML() {
                        <label class="subtask-section name">
                            <input id="nameEdit" type="text" placeholder="Name">
                        </label>
-                       <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name.</p>
+                       <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
                        <label class="subtask-section mail">
                            <input id="emailEdit" type="email" placeholder="Email">
                        </label>
