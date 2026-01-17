@@ -100,7 +100,7 @@ function addDialogHTML() {
                        <label class="subtask-section name label-responsiv">
                            <input id="nameAdd" type="text" placeholder="Name">
                        </label>
-                       <p id="required_name" class="required-info margin-add-dialog">Please enter a name.</p>
+                       <p id="required_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
                        <label class="subtask-section mail label-responsiv">
                            <input id="emailAdd" type="email" placeholder="Email">
                        </label>

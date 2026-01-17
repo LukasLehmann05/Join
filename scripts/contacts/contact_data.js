@@ -131,7 +131,7 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
  */
 async function addNewContactToDatabase() {
     let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
-    if (newUser.name.length <= 0 == false) {
+    if (newUser.name.length <= 0 == false && !isNotLetter(newUser.name.charAt(0))) {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
                 await postNewContactToDatabase(newUser);
@@ -265,6 +265,13 @@ async function deleteThisUser(currentId) {
     await deleteThisContactFromDatabaseById(currentId);
 }
 
+
+/**
+ * checks if character entered is a number or a letter
+ */
+function isNotLetter(char) {
+  return !/^[a-zA-Z]$/.test(char);
+}
 
 
 
