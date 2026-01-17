@@ -6,6 +6,13 @@
     border-color: #D1D1D1;
 }
 
+.login-logo-signup {
+    padding-top: 80px;
+    padding-left: 77px;
+    display: flex;
+    object-fit: contain;
+}
+
 .signup-form {
     width: 100%;
     max-width: 432px;
