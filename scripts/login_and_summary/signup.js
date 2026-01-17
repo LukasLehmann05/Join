@@ -96,8 +96,8 @@ function validateSignupData(data, checkbox) {
  * @param {Object} errors - Errors map to populate.
  */
 function validateName(data, errors) {
-  if (!data.name) {
-    errors.name = "Please enter your name.";
+  if (data.name.length <= 0 == false && isNotLetter(data.name.charAt(0))) {
+    errors.name = "Please enter your name starting with a letter.";
   }
 }
 
@@ -366,4 +366,12 @@ function showSignupToast() {
     toast.classList.remove("show");
     setTimeout(() => toast.classList.add("hidden"), 300);
   }, 2000);
+}
+
+
+/**
+ * checks if character entered is a number or a letter
+ */
+function isNotLetter(char) {
+  return !/^[a-zA-Z]$/.test(char);
 }
