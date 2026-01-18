@@ -258,3 +258,9 @@ article {
 .hide-for-desktop {
     display: none;
 }
+
+.public-links {
+    display: none;
+    align-items: center;
+    gap: 12px;
+}

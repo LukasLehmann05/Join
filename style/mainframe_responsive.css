@@ -67,4 +67,12 @@
         display: block !important;
         height: 56px;
     }
+
+    .public-links {
+        display: flex;
+    }
+
+    .flex-none{
+        flex: none;
+    }
 }

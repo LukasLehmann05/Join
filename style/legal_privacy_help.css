@@ -1,9 +1,9 @@
-.help-header{
+.help-header {
     display: flex;
     justify-content: space-between;
 }
 
-.contact-display a{
+.contact-display a {
     color: #29ABE2;
 }
 
@@ -26,24 +26,24 @@
     font-weight: bold;
 }
 
-.display-in-wide{
+.display-in-wide {
     display: flex !important;
 }
 
-.margin-top{
+.margin-top {
     margin-top: 20px;
 }
 
 .break-link {
-  word-break: break-all;
+    word-break: break-all;
 }
 
-.sidebar-footer .active{
+.sidebar-footer .active {
     background-color: #091931;
     padding: 8px 64px;
 }
 
-.sidebar-footer .active-legal{
+.sidebar-footer .active-legal {
     background-color: #091931;
     padding: 8px 71px;
 }
