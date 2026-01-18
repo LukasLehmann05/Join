@@ -10,8 +10,7 @@ async function fetchAllDataGlobal() {
     let joinFetch = await fetch(BASE_URL + ".json", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': '*'
+            "Content-Type": "application/json"
         }
     });
     let joinData = await joinFetch.json();

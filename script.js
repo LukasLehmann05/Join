@@ -47,3 +47,11 @@ function implementListenerToPreventEnterIssue() {
         }
     });
 }
+
+
+/**
+ * Checks if the given character is not a letter (returns true if character is not a-z or A-Z).
+ */
+function isNotLetter(char) {
+  return !/^[a-zA-Z]$/.test(char);
+}

@@ -131,7 +131,7 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
  */
 async function addNewContactToDatabase() {
     let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
-    if (newUser.name.length <= 0 == false && !isNotLetter(newUser.name.charAt(0))) {
+    if (newUser.name.length > 0 && !isNotLetter(newUser.name.charAt(0))) {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
                 await postNewContactToDatabase(newUser);
@@ -166,7 +166,7 @@ async function trimDownAddingContact(newUser, name, color) {
 async function editContactInDatabase() {
     let editedUser = getEditedContactData();
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
-    if (editedUser.name.length <= 0 == false && !isNotLetter(editedUser.name.charAt(0))) {
+    if (editedUser.name.length > 0 && !isNotLetter(editedUser.name.charAt(0))) {
         if (validateEmail(editedUser.email) == true && editedUser.email != "") {
             if (validatePhoneByLength(editedUser.phone) == true && editedUser.phone != "") {
                 await editContactDataInDatabase(editedUser, currentId)
@@ -264,22 +264,3 @@ async function deleteThisUser(currentId) {
     document.getElementById('responseMessage').innerHTML = "Contact successfully deleted.";
     await deleteThisContactFromDatabaseById(currentId);
 }
-
-
-/**
- * checks if character entered is a number or a letter
- */
-function isNotLetter(char) {
-  return !/^[a-zA-Z]$/.test(char);
-}
-
-
-
-
-
-
-
-
-
-
-

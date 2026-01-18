@@ -367,11 +367,3 @@ function showSignupToast() {
     setTimeout(() => toast.classList.add("hidden"), 300);
   }, 2000);
 }
-
-
-/**
- * checks if character entered is a number or a letter
- */
-function isNotLetter(char) {
-  return !/^[a-zA-Z]$/.test(char);
-}

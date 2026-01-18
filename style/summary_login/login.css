@@ -14,8 +14,7 @@
     max-width: 1440px;
     display: flex;
     justify-content: space-between;
-    min-height: 202px;
-    
+    min-height: 202px; 
 }
 
 .login-container {
@@ -274,8 +273,8 @@
         content: url(../../assets/icons/logo/logoSmall.svg);
         position: absolute;
         width: 100px;
-        top: -161px;    
-        left: calc(89vw - 100vw);    
+        top: -161px;
+        left: min(-11vw, 390px);   
         transform: translate(0, 0);
     }
 }
