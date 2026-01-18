@@ -6,6 +6,7 @@
     flex-direction: column;
     position: relative;
     background-color: #F6F7F8;
+    align-items: center;
 }
 
 .login-logo-section {
@@ -13,7 +14,7 @@
     max-width: 1440px;
     display: flex;
     justify-content: space-between;
-    min-height: 202px;
+    min-height: 202px; 
 }
 
 .login-container {
@@ -260,7 +261,7 @@
 @keyframes logoAnimation {
     0% {
         content: url(../../assets/icons/logo/logoSmall.svg);
-        position: fixed;
+        position: absolute;
         width: 274px;
         height: auto;
         top: 50%;
@@ -270,10 +271,10 @@
 
     100% {
         content: url(../../assets/icons/logo/logoSmall.svg);
-        position: fixed;
+        position: absolute;
         width: 100px;
-        top: 80px;
-        left: 77px;
+        top: -161px;
+        left: min(-11vw, 390px);   
         transform: translate(0, 0);
     }
 }

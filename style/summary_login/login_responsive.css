@@ -45,7 +45,7 @@
     }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .login-container {
         width: 100%;
         max-width: 100%;
@@ -62,7 +62,7 @@
     .login-logo-section {
         min-height: 114px;
     }
-}
+} */
 
 @media (max-width: 600px) {
     .login-header {
@@ -71,7 +71,7 @@
 
     @keyframes logoAnimation {
         0% {
-            content: url(../../assets/icons/logo/logoSmall.svg);
+            content: url(../../assets/icons/logo/logo_white.svg);
             position: fixed;
             width: 274px;
             height: auto;
@@ -84,8 +84,9 @@
             content: url(../../assets/icons/logo/logoSmall.svg);
             position: fixed;
             width: 64px;
-            top: 37px;
+            top: 20px;
             left: 38px;
+            margin-bottom: 2px;
             transform: translate(0, 0);
         }
     }
@@ -164,6 +165,20 @@
 @media (max-width: 365px) {
     .login-buttons button {
         font-size: 18px;
+    }
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+    .login-logo-section {
+        min-height: 102px;
+    }
+
+    .login-card {
+        margin: 12px 16px !important;
+    }
+
+    .login-footer {
+        padding: 16px 0;
     }
 }
 

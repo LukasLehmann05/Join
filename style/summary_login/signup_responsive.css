@@ -10,6 +10,16 @@
         max-width: 100%;
         font-size: 18px;
     }
+
+    .login-logo-signup img {
+        width: 64px;
+        height: 78px;
+    }
+
+    .login-logo-signup {
+        padding-top: 37px;
+        padding-left: 38px;
+    }
 }
 
 @media (max-width: 500px) {
@@ -23,7 +33,7 @@
     .login-title {
         font-size: 43px;
     }
-    
+
     .login-footer {
         margin-top: 40px;
         padding-bottom: 32px;
@@ -32,14 +42,18 @@
         gap: 16px;
         flex-wrap: wrap;
     }
-    
+
     .input-error {
         font-size: 16px;
     }
 
     .back-arrow {
         top: 40px;
-        left: 40px;
+        left: 20px;
+    }
+
+    .input-error-password {
+        margin: 10px 0px;
     }
 }
 

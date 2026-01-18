@@ -1,6 +1,6 @@
 @media (max-width: 1300px) {
     .main-content {
-        min-height: 100vh;
+        min-height: calc(100vh - 96px);
     }
 }
 
@@ -66,5 +66,21 @@
     .logo-responsive {
         display: block !important;
         height: 56px;
+    }
+
+    .public-links {
+        display: flex;
+    }
+
+    .public-links a {
+        padding: 20px 4px;
+    }
+
+    .flex-none{
+        flex: none;
+    }
+
+    .log-out {
+        padding: 8px 16px;
     }
 }

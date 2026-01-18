@@ -118,7 +118,7 @@ function handleLogin(email, password, errorBox) {
       handleLoginSuccess(user, false, errorBox);
     })
     .catch((error) => {
-      showError(errorBox, 'Login failed: ' + error.message);
+      showError(errorBox, "The email or password you’ve entered is wrong.");
     });
 }
 

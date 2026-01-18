@@ -1,6 +1,7 @@
 dialog[open] {
    display: flex;
    z-index: 31;
+   justify-content: center;
 }
 
 .dialog-content.show-side {
