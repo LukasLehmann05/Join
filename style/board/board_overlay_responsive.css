@@ -26,6 +26,10 @@
     .overlay_content p {
         font-size: 16px;
     }
+
+    .overlay_title {
+        min-height: 38px;
+    }
 }
 
 @media (max-width: 650px) {
