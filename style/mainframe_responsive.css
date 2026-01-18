@@ -72,7 +72,15 @@
         display: flex;
     }
 
+    .public-links a {
+        padding: 20px 4px;
+    }
+
     .flex-none{
         flex: none;
+    }
+
+    .log-out {
+        padding: 8px 16px;
     }
 }
