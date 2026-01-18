@@ -1,4 +1,4 @@
-const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join"
+const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/"
 
 
 /**
@@ -10,7 +10,8 @@ async function fetchAllDataGlobal() {
     let joinFetch = await fetch(BASE_URL + ".json", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': '*'
         }
     });
     let joinData = await joinFetch.json();
