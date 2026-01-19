@@ -200,8 +200,8 @@
 
 @media (max-height: 800px) {
     .login-card {
-        padding-top: 32px;
-        padding-bottom: 32px;
-        margin: 32px 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin: 16px;
     }
 }
