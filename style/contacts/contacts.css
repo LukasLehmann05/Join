@@ -246,6 +246,7 @@
 .single-User {
     display: flex;
     gap: 35px;
+    width: 100%;
 }
 
 #editUser:hover {
