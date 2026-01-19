@@ -134,6 +134,7 @@ button.signup-button-primary:disabled {
     display: flex;
     align-items: center;
     margin-top: 4px;
+    margin-left: 8px;
     font-size: 16px;
     color: #FF3B3B;
     font-family: Inter, sans-serif;
