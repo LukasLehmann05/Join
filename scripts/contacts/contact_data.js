@@ -92,6 +92,7 @@ function displayInMain(id) {
     if (window.innerWidth >= 1150) {
         renderMainDisplay(currentId, currentName, currentPhone, currentMail);
     }
+    checkForActiveClass(currentId);
 }
 
 
