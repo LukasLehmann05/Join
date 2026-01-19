@@ -14,7 +14,8 @@
     max-width: 1440px;
     display: flex;
     justify-content: space-between;
-    min-height: 202px; 
+    min-height: 202px;
+    position: relative;
 }
 
 .login-container {
@@ -245,7 +246,7 @@
 
 #animatedLogo {
     z-index: 26;
-    animation: logoAnimation .7s ease-in-out forwards;
+    animation: logoAnimation 0.7s ease-in-out forwards;
 }
 
 .animation-overlay {
@@ -254,7 +255,7 @@
 }
 
 .placeholder {
-    animation: placeholder .7s ease-in-out forwards;
+    animation: placeholder 0.7s ease-in-out forwards;
 }
 
 
@@ -264,7 +265,7 @@
         position: absolute;
         width: 274px;
         height: auto;
-        top: 50%;
+        top: 50vh;
         left: 50%;
         transform: translate(-50%, -50%);
     }
@@ -273,8 +274,8 @@
         content: url(../../assets/icons/logo/logoSmall.svg);
         position: absolute;
         width: 100px;
-        top: -161px;
-        left: min(-11vw, 390px);   
+        top: 80px;
+        left: 77px;
         transform: translate(0, 0);
     }
 }
