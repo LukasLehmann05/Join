@@ -254,6 +254,7 @@
 
 .single-User:hover {
     background-color: rgba(84, 87, 84, 0.1);
+    color: black;
 }
 
 .user-active{

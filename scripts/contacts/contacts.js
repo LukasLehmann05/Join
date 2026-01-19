@@ -18,10 +18,10 @@ window.addEventListener("resize", () => {
     let contactList = document.getElementById('contactsAsideElement');
     let mainView = document.getElementById('contactsMainElement');
     if (window.innerWidth >= 1150 && contactList.style.display == "none" == true) {
-        contactList.style.display = "flex"; 
+        contactList.style.display = "flex";
     }
     if (window.innerWidth <= 1150 && contactList.style.display == "none" == false) {
-        mainView.style.display = "none";  
+        mainView.style.display = "none";
     }
     if (window.innerWidth >= 1150 && mainView.style.display == "none" == true) {
         mainView.style.display = "block";
@@ -147,6 +147,20 @@ function displayEditedContactDataInMainDisplay(editedUser) {
     document.getElementById('mainShort').innerText = userInitials;
 }
 
+
+/**
+ * sets active class for contact being displayed in the main display and removes said class from other contact
+ */
+function checkForActiveClass(elementId) {
+    let parent = document.getElementById('contactList');
+    if (parent.querySelector(".user-active") === null) {
+        document.getElementById(elementId).classList.add('user-active');
+    } else {
+        let child = parent.querySelector(".user-active");
+        child.classList.remove("user-active");
+        document.getElementById(elementId).classList.add('user-active');
+    }
+}
 
 
 
