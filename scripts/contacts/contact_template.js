@@ -12,7 +12,7 @@ function contactListSingle(contactID, name, email, userInitials, phone) {
                 <p id="short-${contactID}" class="two-letter-name-small">${userInitials}</p>
                 <div class="list-info">
                   <p id="name-${contactID}" class="font-size-20 long-contact-name">${name}</p>
-                  <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
+                  <a id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
                 </div>
             </div>`
 }
