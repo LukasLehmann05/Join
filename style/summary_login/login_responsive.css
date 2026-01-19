@@ -69,13 +69,17 @@
         display: none;
     }
 
+      .login-logo-section {
+        min-height: 115px;
+    }
+
     @keyframes logoAnimation {
         0% {
             content: url(../../assets/icons/logo/logo_white.svg);
             position: absolute;
             width: 274px;
-            height: 77px;
-            top: 50%;
+            height: auto;
+            top: 50vh;
             left: 50%;
             transform: translate(-50%, -50%);
         }
