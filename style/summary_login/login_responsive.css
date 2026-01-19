@@ -72,9 +72,9 @@
     @keyframes logoAnimation {
         0% {
             content: url(../../assets/icons/logo/logo_white.svg);
-            position: fixed;
+            position: absolute;
             width: 274px;
-            height: auto;
+            height: 77px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -82,7 +82,7 @@
 
         100% {
             content: url(../../assets/icons/logo/logoSmall.svg);
-            position: fixed;
+            position: absolute;
             width: 64px;
             top: 20px;
             left: 38px;

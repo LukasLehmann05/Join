@@ -264,7 +264,7 @@
         content: url(../../assets/icons/logo/logoSmall.svg);
         position: absolute;
         width: 274px;
-        height: auto;
+        height: 120px;
         top: 50vh;
         left: 50%;
         transform: translate(-50%, -50%);
