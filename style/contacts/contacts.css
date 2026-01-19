@@ -219,6 +219,7 @@
     min-width: 42px;
     height: 42px;
     min-width: 42px;
+    border: 3px solid #FFFFFF;
 }
 
 .list-info {
@@ -247,6 +248,17 @@
     display: flex;
     gap: 35px;
     width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.single-User:hover {
+    background-color: rgba(84, 87, 84, 0.1);
+}
+
+.user-active{
+    background-color: #2a3647;
+    color: white;
 }
 
 #editUser:hover {
