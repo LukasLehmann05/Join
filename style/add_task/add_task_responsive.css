@@ -51,6 +51,10 @@
     .hide-req-text-767 {
         display: none;
     }
+
+    .add-task-content {
+        margin-top: 0;
+    }
 }
 
 @media (max-width: 500px) {
