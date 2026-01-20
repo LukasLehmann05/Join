@@ -54,21 +54,7 @@ dialog[open] {
    padding-right: 30px;
    padding-bottom: 30px;
    padding-top: 30px;
-   min-width: 400px;
-}
-
-.position {
-   margin-top: auto;
-   margin-bottom: auto;
-   margin-right: 50px;
-   margin-left: 50px;
-}
-
-.position-edit{
-   margin-top: auto;
-   margin-bottom: auto;
-   margin-right: 50px;
-   margin-left: 50px;
+   min-width: fit-content;
 }
 
 .white {
