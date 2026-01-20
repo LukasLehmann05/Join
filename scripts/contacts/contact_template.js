@@ -98,16 +98,16 @@ function addDialogHTML() {
                              </picture>
                        </button>
                        <label class="subtask-section name label-responsiv">
-                           <input id="nameAdd" type="text" placeholder="Name">
+                           <input id="nameAdd" type="text" placeholder="Name" class="input-width-contacts">
                        </label>
                        <p id="required_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
                        <label class="subtask-section mail label-responsiv">
-                           <input id="emailAdd" type="email" placeholder="Email">
+                           <input id="emailAdd" type="email" placeholder="Email" class="input-width-contacts">
                        </label>
                        <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email
                            address.</p>
                        <label class="subtask-section phone label-responsiv">
-                           <input id="phoneAdd" type="tel" placeholder="Phone">
+                           <input id="phoneAdd" type="tel" placeholder="Phone" class="input-width-contacts">
                        </label>
                        <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone
                            number.</p>
@@ -152,16 +152,16 @@ function editDialogHTML() {
                              </picture>
                        </button>
                        <label class="subtask-section name">
-                           <input id="nameEdit" type="text" placeholder="Name">
+                           <input id="nameEdit" type="text" placeholder="Name" class="input-width-contacts">
                        </label>
                        <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
-                       <label class="subtask-section mail">
-                           <input id="emailEdit" type="email" placeholder="Email">
+                       <label class="subtask-section">
+                           <input id="emailEdit" type="email" placeholder="Email" class="input-width-contacts">
                        </label>
                        <p id="required_edit_email" class="required-info margin-add-dialog">Please enter a valid
                            email address.</p>
                        <label class="subtask-section phone">
-                           <input id="phoneEdit" type="tel" placeholder="Phone">
+                           <input id="phoneEdit" type="tel" placeholder="Phone" class="input-width-contacts">
                        </label>
                        <p id="required_edit_phone" class="required-info margin-add-dialog">Please enter a valid
                            phone number.</p>
