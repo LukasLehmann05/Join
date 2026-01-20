@@ -245,6 +245,10 @@
     font-size: 20px;
 }
 
+.input-width-contacts{
+    max-width: 85%;
+}
+
 .single-User {
     display: flex;
     gap: 35px;
