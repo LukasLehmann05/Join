@@ -87,7 +87,7 @@ function displayInMain(id) {
     let currentMail = id.getAttribute('data-email');
     if (window.innerWidth <= 1150) {
         changeDisplaySize();
-        renderMainDisplay(currentId, currentName, currentPhone, currentMail) 
+        renderMainDisplay(currentId, currentName, currentPhone, currentMail)
     }
     if (window.innerWidth >= 1150) {
         renderMainDisplay(currentId, currentName, currentPhone, currentMail);
@@ -176,9 +176,11 @@ async function editContactInDatabase() {
                 displayHint('required_edit_phone');
             }
         } else {
-            displayHint('required_edit_email');}
+            displayHint('required_edit_email');
+        }
     } else {
-        displayHint('required_edit_name');}
+        displayHint('required_edit_name');
+    }
 }
 
 

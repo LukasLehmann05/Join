@@ -152,14 +152,14 @@ function displayEditedContactDataInMainDisplay(editedUser) {
  * sets active class for contact being displayed in the main display and removes said class from other contact
  */
 function checkForActiveClass(elementId) {
-    let parent = document.getElementById('contactList');
-    if (parent.querySelector(".user-active") === null) {
-        document.getElementById(elementId).classList.add('user-active');
-    } else {
-        let child = parent.querySelector(".user-active");
-        child.classList.remove("user-active");
-        document.getElementById(elementId).classList.add('user-active');
-    }
+        let parent = document.getElementById('contactList');
+        if (parent.querySelector(".user-active") === null) {
+            document.getElementById(elementId).classList.add('user-active');
+        } else {
+            let child = parent.querySelector(".user-active");
+            child.classList.remove("user-active");
+            document.getElementById(elementId).classList.add('user-active');
+        }
 }
 
 

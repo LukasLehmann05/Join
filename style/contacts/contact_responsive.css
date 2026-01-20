@@ -281,6 +281,13 @@
     .sub-menu-btns {
         right: 8%;
     }
+
+    .truncate {
+        width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media (max-width: 400px) {
