@@ -11,8 +11,8 @@ function contactListSingle(contactID, name, email, userInitials, phone) {
     return `<div id="${contactID}" class="single-User" data-id="${contactID}" data-name="${name}" data-email="${email}" data-phone="${phone}" onclick="displayInMain(this)">
                 <p id="short-${contactID}" class="two-letter-name-small">${userInitials}</p>
                 <div class="list-info">
-                  <p id="name-${contactID}" class="font-size-20 long-contact-name">${name}</p>
-                  <a id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
+                  <p id="name-${contactID}" class="font-size-20 long-contact-name truncate">${name}</p>
+                  <a id="email-${contactID}" class="font-size-16 color-mail truncate">${email}</a>
                 </div>
             </div>`
 }
