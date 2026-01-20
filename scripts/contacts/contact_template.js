@@ -86,7 +86,7 @@ function addDialogHTML() {
                    <div class="separator-horizontal"></div>
                </section>
                <section class="main-right">
-                   <div class="two-letter-name position">
+                   <div class="two-letter-name position-two-letter">
                        <img src="../assets/icons/contacts/person_white.svg" alt="placeholder for name">
                    </div>
                    <div class="add-contact-info">
@@ -141,9 +141,9 @@ function editDialogHTML() {
                    <div class="separator-horizontal"></div>
                </section>
                <section class="main-right edit-right">
-                   <div id="editedAvatar" class="two-letter-name position-edit">
+                   <div id="editedAvatar" class="two-letter-name position-two-letter">
                       </div>
-                   <div class="add-contact-info">
+                   <div class="add-contact-info gap-extra">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'editContent')">
                            <picture>
                                <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">

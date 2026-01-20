@@ -24,9 +24,8 @@
     .two-letter-name {
         min-width: 100px;
         height: 100px;
-        min-width: 100px;
+        max-width: 100px;
     }
-
 }
 
 @media (min-width: 1150px) {
@@ -39,11 +38,6 @@
     .dialog-content {
         width: 1105px;
     }
-
-    .position, .position-edit {
-        margin-right: 25px;
-        margin-left: 25px;
-    }
 }
 
 @media (max-width: 1150px) {
@@ -51,6 +45,10 @@
         display: none;
         margin-left: 16px;
         margin-top: 48px;
+    }
+
+    .position-two-letter {
+        margin: -85px auto 5px auto;
     }
 
     .cancel-add-btn {
@@ -94,10 +92,6 @@
         padding: 17px 4%;
     }
 
-    .list-user {
-        padding-left: 4%;
-    }
-
     .dialog-window {
         padding: 0;
     }
@@ -105,7 +99,7 @@
     .dialog-content {
         flex-direction: column;
         min-width: 0;
-        height: auto;
+        height: fit-content;
         margin: 95px 4%;
     }
 
@@ -133,26 +127,6 @@
 
     .create-contact-btn {
         margin-top: 12px;
-    }
-
-    .position {
-        margin: 0;
-        position: fixed;
-        top: 42%;
-        left: 50%;
-        translate: -50%;
-    }
-
-    .position-edit {
-        margin: 0;
-        position: fixed;
-        top: 37%;
-        left: 50%;
-        translate: -50%;
-    }
-
-    .edit-right {
-        padding-top: 60px;
     }
 
     .subtask-section {
@@ -330,10 +304,6 @@
         padding: 80px 4%;
     }
 
-    .position {
-        top: 23%;
-    }
-
     .contact-display {
         margin-left: 16px;
         margin-top: 25px;
@@ -345,18 +315,44 @@
         padding-top: 24px;
     }
 
-    .position-edit {
-        top: 18%;
+    .main-left {
+        padding: 65px 7%;
+    }
+
+    .position-two-letter {
+        margin: -48px auto 5px auto;
+    }
+
+    .add-contact-info {
+        margin-top: 5px;
+        gap: 37px;
+    }
+
+    .main-right {
+        padding-top: 0px;
+    }
+
+    .subtask-section {
+        padding: 6px 21px;
+    }
+
+    .gap-extra {
+        gap: 40px !important;
+    }
+
+    .two-letter-name {
+        min-width: 80px;
+        height: 80px;
+    }
+
+    .label-responsiv {
+        padding: 7px 3px !important;
     }
 }
 
 @media (max-width: 375px) and (max-height: 667px) {
     .dialog-content {
         width: 295px;
-    }
-
-    .position-edit {
-        top: 25%;
     }
 
     .sub-menu-btn {
@@ -369,9 +365,5 @@
 
     .add-contact-btn-position {
         margin-left: 56%;
-    }
-
-    .position {
-        top: 33%;
     }
 }

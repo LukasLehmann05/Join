@@ -141,9 +141,12 @@
     color: white;
     border-radius: 70px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    min-width: 120px;
     height: 120px;
     min-width: 120px;
+}
+
+.position-two-letter {
+   margin: auto 20px;
 }
 
 .name-field {
@@ -152,7 +155,7 @@
     gap: 5px;
 }
 
-.name-field p{
+.name-field p {
     word-break: break-word;
     overflow-wrap: break-word;
 }
@@ -205,7 +208,6 @@
     align-items: flex-start;
     padding-top: 5px;
     padding-bottom: 10px;
-    padding-left: 36px;
     cursor: pointer;
     gap: 35px;
 }
@@ -229,7 +231,7 @@
     gap: 5px;
 }
 
-.list-info p{
+.list-info p {
     word-break: break-word;
     overflow-wrap: break-word;
 }
@@ -257,7 +259,7 @@
     color: black;
 }
 
-.user-active{
+.user-active {
     background-color: #2a3647;
     color: white;
 }
