@@ -153,6 +153,9 @@ function displayEditedContactDataInMainDisplay(editedUser) {
  */
 function checkForActiveClass(elementId) {
         let parent = document.getElementById('contactList');
+        if (window.innerWidth <= 1150){
+            return
+        }
         if (parent.querySelector(".user-active") === null) {
             document.getElementById(elementId).classList.add('user-active');
         } else {
