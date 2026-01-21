@@ -79,16 +79,18 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
  */
 function addDialogHTML() {
     return `<div id="addContent" class="dialog-content">
-               <section class="main-left">
+                <section class="main-left">
+                    <div class="main-left-title">
+                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
+                        <h1 class="white margin">Add Contact</h1>
+                        <p class="contact-sub white margin">Tasks are better with a team!</p>
+                        <div class="separator-horizontal"></div>
+                    </div>
                     <button class="close-btn d-none" onclick="closeDialog('dialogWindow' ,'addContent')">
                         <img class="icon-close" src="../assets/icons/contacts/close_white.svg" alt="close overlay icon">
                     </button>
-                    <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                   <h1 class="white margin">Add Contact</h1>
-                   <p class="contact-sub white margin">Tasks are better with a team!</p>
-                   <div class="separator-horizontal"></div>
-               </section>
-               <section class="main-right">
+                </section>
+                <section class="main-right">
                    <div class="two-letter-name position-two-letter">
                        <img src="../assets/icons/contacts/person_white.svg" alt="placeholder for name">
                    </div>
@@ -137,12 +139,14 @@ function addDialogHTML() {
 function editDialogHTML() {
     return `<div id="editContent" class="dialog-content">
                <section class="main-left">
+                    <div class="main-left-title">
+                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">               
+                        <h1 class="white margin">Edit Contact</h1>
+                        <div class="separator-horizontal"></div>
+                    </div>
                     <button class="close-btn d-none" onclick="closeDialog('dialogWindow' ,'editContent')">
                         <img class="icon-close" src="../assets/icons/contacts/close_white.svg" alt="close overlay icon">
-                    </button>    
-                    <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">               
-                    <h1 class="white margin">Edit Contact</h1>
-                    <div class="separator-horizontal"></div>
+                    </button>
                </section>
                <section class="main-right edit-right">
                    <div id="editedAvatar" class="two-letter-name position-two-letter">
