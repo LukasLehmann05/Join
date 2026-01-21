@@ -87,6 +87,10 @@
         min-width: 200px;
         max-width: 220px;
     }
+
+    .board_menu {
+        padding-top: 0;
+    }
 }
 
 @media (max-width: 500px) {

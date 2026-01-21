@@ -81,7 +81,7 @@ function attachSignupHandler(ui) {
  */
 function validateSignupData(data, checkbox) {
   const errors = {};
-  validateName(data, errors);
+  validateName(data.name, errors);
   validateEmail(data, errors);
   validatePassword(data, errors);
   validatePasswordConfirm(data, errors);
@@ -92,12 +92,12 @@ function validateSignupData(data, checkbox) {
 
 /**
  * Validates the name field and appends to errors if invalid.
- * @param {Object} data - Form data.
+ * @param {string} name - The name string.
  * @param {Object} errors - Errors map to populate.
  */
-function validateName(data, errors) {
-  if (data.name.length <= 0 == false && isNotLetter(data.name.charAt(0))) {
-    errors.name = "Please enter your name starting with a letter.";
+function validateName(name, errors) {
+  if (!name.length > 0 || !isOnlyLetters(name)) {
+    errors.name = "Please enter a valid name.";
   }
 }
 
@@ -130,7 +130,7 @@ function validatePassword(data, errors) {
     return;
   }
   if (data.password.length < 6) {
-    errors.password = "Password should be at least 6 characters long.";
+    errors.password = "Password length at least 6 characters.";
   }
 }
 

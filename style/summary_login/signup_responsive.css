@@ -17,7 +17,7 @@
     }
 
     .login-logo-signup {
-        padding-top: 37px;
+        padding-top: 20px;
         padding-left: 38px;
     }
 }
@@ -31,12 +31,11 @@
 
 @media (max-width: 400px) {
     .login-title {
-        font-size: 43px;
+        font-size: 40px;
     }
 
     .login-footer {
         margin-top: 40px;
-        padding-bottom: 32px;
         display: flex;
         justify-content: center;
         gap: 16px;
@@ -58,6 +57,12 @@
 }
 
 @media (min-width: 1260px) and (max-width: 1300px) and (min-height: 780px) and (max-height: 820px) {
+    .login-footer {
+        margin-top: 20px;
+    }
+}
+
+@media (max-height: 700px) {
     .login-footer {
         margin-top: 20px;
     }

@@ -69,20 +69,24 @@
         display: none;
     }
 
+      .login-logo-section {
+        min-height: 115px;
+    }
+
     @keyframes logoAnimation {
         0% {
             content: url(../../assets/icons/logo/logo_white.svg);
-            position: fixed;
+            position: absolute;
             width: 274px;
             height: auto;
-            top: 50%;
+            top: 50vh;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
         100% {
             content: url(../../assets/icons/logo/logoSmall.svg);
-            position: fixed;
+            position: absolute;
             width: 64px;
             top: 20px;
             left: 38px;
@@ -121,12 +125,13 @@
         justify-content: center;
         align-items: center;
         gap: 12px;
+        margin-top: 32px;
     }
 
     .login-button-primary,
     .login-button-secondary,
     .login-input {
-        font-size: 18px;
+        font-size: 16px;
     }
 
 }
@@ -168,7 +173,7 @@
     }
 }
 
-@media (max-width: 375px) and (max-height: 667px) {
+@media (max-width: 380px) and (max-height: 670px) {
     .login-logo-section {
         min-height: 102px;
     }
@@ -178,7 +183,11 @@
     }
 
     .login-footer {
-        padding: 16px 0;
+        padding: 8px 0;
+    }
+
+    .login-input{
+        height: 32px;
     }
 }
 
@@ -196,8 +205,8 @@
 
 @media (max-height: 800px) {
     .login-card {
-        padding-top: 32px;
-        padding-bottom: 32px;
-        margin: 32px 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin: 16px;
     }
 }

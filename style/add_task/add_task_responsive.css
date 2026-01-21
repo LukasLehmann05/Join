@@ -51,6 +51,10 @@
     .hide-req-text-767 {
         display: none;
     }
+
+    .add-task-content {
+        margin-top: 0;
+    }
 }
 
 @media (max-width: 500px) {
@@ -75,5 +79,15 @@
 
     .contact-button {
         padding: 12px 4px;
+    }
+
+    .input-form p,
+    .input-form label,
+    .input-form input,
+    .input-form option,
+    .input-form select,
+    .input-form textarea,
+    .required-text {
+        font-size: 16px;
     }
 }

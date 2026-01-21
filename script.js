@@ -50,8 +50,10 @@ function implementListenerToPreventEnterIssue() {
 
 
 /**
- * Checks if the given character is not a letter (returns true if character is not a-z or A-Z).
+ * This function checks if a string contains only letters (a-z, A-Z).
+ * @param {string} str - The string to check.
+ * @returns {boolean} - True if the string contains only letters, false otherwise.
  */
-function isNotLetter(char) {
-  return !/^[a-zA-Z]$/.test(char);
+function isOnlyLetters(str) {
+  return /^[a-zA-Z]+$/.test(str);
 }
