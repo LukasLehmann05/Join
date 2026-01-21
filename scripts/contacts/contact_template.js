@@ -80,7 +80,10 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
 function addDialogHTML() {
     return `<div id="addContent" class="dialog-content">
                <section class="main-left">
-                   <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
+                    <button class="close-btn d-none" onclick="closeDialog('dialogWindow' ,'addContent')">
+                        <img class="icon-close" src="../assets/icons/contacts/close_white.svg" alt="close overlay icon">
+                    </button>
+                    <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
                    <h1 class="white margin">Add Contact</h1>
                    <p class="contact-sub white margin">Tasks are better with a team!</p>
                    <div class="separator-horizontal"></div>
@@ -92,9 +95,7 @@ function addDialogHTML() {
                    <div class="add-contact-info">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'addContent')">
                              <picture>
-                               <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">
-                               <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                               alt="close overlay icon">
+                               <img class="icon-close" src="../assets/icons/contacts/close.svg" alt="close overlay icon">
                              </picture>
                        </button>
                        <label class="subtask-section name label-responsiv">
@@ -136,9 +137,12 @@ function addDialogHTML() {
 function editDialogHTML() {
     return `<div id="editContent" class="dialog-content">
                <section class="main-left">
-                   <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                   <h1 class="white margin">Edit Contact</h1>
-                   <div class="separator-horizontal"></div>
+                    <button class="close-btn d-none" onclick="closeDialog('dialogWindow' ,'editContent')">
+                        <img class="icon-close" src="../assets/icons/contacts/close_white.svg" alt="close overlay icon">
+                    </button>    
+                    <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">               
+                    <h1 class="white margin">Edit Contact</h1>
+                    <div class="separator-horizontal"></div>
                </section>
                <section class="main-right edit-right">
                    <div id="editedAvatar" class="two-letter-name position-two-letter">
@@ -146,9 +150,7 @@ function editDialogHTML() {
                    <div class="add-contact-info gap-extra">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'editContent')">
                            <picture>
-                               <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">
-                               <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                               alt="close overlay icon">
+                               <img class="icon-close" src="../assets/icons/contacts/close.svg" alt="close overlay icon">
                              </picture>
                        </button>
                        <label class="subtask-section name">
