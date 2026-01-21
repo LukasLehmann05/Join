@@ -315,10 +315,6 @@
         margin: 14px 4%;
     }
 
-    .main-left {
-        padding: 80px 4%;
-    }
-
     .contact-display {
         margin-left: 16px;
         margin-top: 25px;
@@ -328,10 +324,6 @@
         flex: none;
         padding-bottom: 21px;
         padding-top: 24px;
-    }
-
-    .main-left {
-        padding: 65px 7%;
     }
 
     .position-two-letter {
@@ -363,12 +355,6 @@
     .label-responsiv {
         padding: 7px 3px !important;
     }
-
-     .main-left .close-btn {
-        position: relative;
-        top: -40px;
-        right: 0;
-     }
 }
 
 @media (max-width: 375px) and (max-height: 667px) {
