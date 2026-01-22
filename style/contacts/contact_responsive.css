@@ -255,20 +255,6 @@
 
 }
 
-
-@media (max-width: 767px) {
-    .contact-main {
-        height: calc(100vh - 168px);
-    }
-
-    .sidebar-contacts {
-        height: calc(100vh - 150px);
-        z-index: 19;
-    }
-
-}
-
-
 @media (max-width: 596px) {
     .sub-menu-btns {
         right: 7%;
