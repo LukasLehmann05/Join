@@ -382,4 +382,8 @@
     .dialog-content {
         margin: 20px 4%;
     }
+
+    .add-contact-info {
+        gap: 28px;
+    }
 }
