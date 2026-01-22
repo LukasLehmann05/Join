@@ -164,7 +164,7 @@
     }
 
     h1 {
-        font-size: 35px;
+        font-size: 35px !important;
     }
 
     .contact-sub {
@@ -214,7 +214,6 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
 
 
     .sub-menu-btns {
@@ -277,10 +276,6 @@
 @media (max-width: 560px) {
     .dialog-message {
         translate: -11%;
-    }
-
-    h1 {
-        font-size: 40px;
     }
 }
 
