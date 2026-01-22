@@ -96,7 +96,7 @@ function validateSignupData(data, checkbox) {
  * @param {Object} errors - Errors map to populate.
  */
 function validateName(name, errors) {
-  if (!name.length > 0 || !isOnlyLetters(name)) {
+  if (!(name.length > 3) || !isOnlyLetters(name)) {
     errors.name = "Please enter a valid name.";
   }
 }
