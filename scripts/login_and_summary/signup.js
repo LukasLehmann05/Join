@@ -292,7 +292,7 @@ function handleExistingUser(ui) {
   setFieldError(
     ui.emailInput,
     "error-signup-email",
-    "An account with this email already exists."
+    "This mail exists already."
   );
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Please use another email address.";
