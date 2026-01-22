@@ -338,7 +338,7 @@
     }
 
     .gap-extra {
-        gap: 40px !important;
+        gap: 28px;
     }
 
     .two-letter-name {
@@ -387,7 +387,7 @@
     }
 }
 
-@media (max-height: 640px) {
+@media (max-height: 620px) {
     .dialog-window {
         overflow-y: auto;
     }
