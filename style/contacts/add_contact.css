@@ -2,6 +2,7 @@ dialog[open] {
    display: flex;
    z-index: 31;
    justify-content: center;
+   align-items: center;
 }
 
 .dialog-content.show-side {
