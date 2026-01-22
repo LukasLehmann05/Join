@@ -140,7 +140,7 @@ function editDialogHTML() {
     return `<div id="editContent" class="dialog-content">
                <section class="main-left">
                     <div class="main-left-title">
-                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">               
+                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">       
                         <h1 class="white margin">Edit Contact</h1>
                         <div class="separator-horizontal"></div>
                     </div>

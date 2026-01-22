@@ -148,7 +148,7 @@
 }
 
 .position-two-letter {
-   margin: auto 20px;
+    margin: auto 20px;
 }
 
 .name-field {
@@ -222,7 +222,6 @@
     border-radius: 45px;
     min-width: 42px;
     height: 42px;
-    min-width: 42px;
     border: 3px solid #FFFFFF;
 }
 
@@ -247,7 +246,7 @@
     font-size: 20px;
 }
 
-.input-width-contacts{
+.input-width-contacts {
     max-width: 85%;
 }
 

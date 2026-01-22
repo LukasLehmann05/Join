@@ -79,7 +79,7 @@
     }
 
     .main-content {
-        height: calc( 100vh - 96px - 72px);
+        height: calc(100vh - 96px - 72px);
         min-height: unset;
         display: flex;
         flex-direction: column;
@@ -91,7 +91,7 @@
         padding-left: 16px;
     }
 
-     .summary-row{
+    .summary-row {
         gap: 0px;
     }
 
@@ -99,7 +99,7 @@
         font-size: 16px;
     }
 
-    .summary-cards-last-row{
+    .summary-cards-last-row {
         width: calc(100% / 3);
     }
 }
@@ -161,7 +161,7 @@
         gap: 20px;
     }
 
-    .summary-cards-last-row{
+    .summary-cards-last-row {
         margin: 5px;
     }
 

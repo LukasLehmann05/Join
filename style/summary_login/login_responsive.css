@@ -69,7 +69,7 @@
         display: none;
     }
 
-      .login-logo-section {
+    .login-logo-section {
         min-height: 115px;
     }
 
@@ -186,7 +186,7 @@
         padding: 8px 0;
     }
 
-    .login-input{
+    .login-input {
         height: 32px;
     }
 }
