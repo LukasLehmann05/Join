@@ -57,3 +57,25 @@ function implementListenerToPreventEnterIssue() {
 function isOnlyLetters(str) {
   return /^[a-zA-Z]+( [a-zA-Z]+)*$/.test(str);
 }
+
+
+/**
+ * 
+ * This function checks if assignees in tasks exist in contacts.
+ * @param {Array} allTasksByIdArr - Array of all task IDs.
+ * @param {Object} joinData - Object containing tasks and contacts data.
+ */  
+async function checkAssigneesExistence(allTasksByIdArr, joinData){
+    for (let i = 0; i < allTasksByIdArr.length; i++) {
+        const singleTaskId = allTasksByIdArr[i];
+        const assigneeIdArray = joinData.tasks[singleTaskId].assigned_to;
+        for (let assigneeId of assigneeIdArray) {
+            const assigneeExists = joinData.contacts.hasOwnProperty(assigneeId);
+            if (!assigneeExists) {
+                let taskToUpdate = joinData.tasks[singleTaskId];
+                taskToUpdate.assigned_to = taskToUpdate.assigned_to.filter(id => id !== assigneeId);
+                await updateTask(singleTaskId, taskToUpdate);
+            }
+        }
+    }
+}

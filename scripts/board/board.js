@@ -335,6 +335,7 @@ async function initializeBoard() {
     initInputFieldEventListener(allTasksByIdArr);
 
     setAllTasksObj(allTasksByIdArr, joinData.tasks);
+    await checkAssigneesExistence(allTasksByIdArr, joinData);
     renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
     return allTasksByIdArr;
