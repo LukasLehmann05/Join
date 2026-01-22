@@ -84,3 +84,17 @@
         padding: 8px 16px;
     }
 }
+
+@media (max-height: 750px) {
+    .sidebar_upper_section {
+        gap: 40px;
+    }
+
+    .sidebar-footer {
+        margin-top: 20px;
+    }
+
+    .sidebar {
+        overflow-y: auto;
+    }
+}
