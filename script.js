@@ -55,5 +55,5 @@ function implementListenerToPreventEnterIssue() {
  * @returns {boolean} - True if the string contains only letters, false otherwise.
  */
 function isOnlyLetters(str) {
-  return /^[a-zA-Z]+$/.test(str);
+  return /^[a-zA-Z]+( [a-zA-Z]+)*$/.test(str);
 }
