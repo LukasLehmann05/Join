@@ -140,9 +140,11 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
         rendered_amount += 1
         if (rendered_amount <= amount_for_render_overflow) {
             const contact = await getContactById(contactId);
-            const initials = getInitialsFromUser(contact);
-            const iconHTML = assignedUserIconTemplate(initials, contact.color);
-            iconsHTML += iconHTML;
+            if (contact != undefined) {
+                const initials = getInitialsFromUser(contact);
+                const iconHTML = assignedUserIconTemplate(initials, contact.color);
+                iconsHTML += iconHTML;
+            }
         }
     }
     addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount)
