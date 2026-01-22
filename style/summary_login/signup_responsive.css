@@ -64,6 +64,6 @@
 
 @media (max-height: 700px) {
     .login-footer {
-        margin-top: 20px;
+        margin-top: 0;
     }
 }
