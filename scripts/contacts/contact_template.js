@@ -103,7 +103,7 @@ function addDialogHTML() {
                        <label class="subtask-section name label-responsiv">
                            <input id="nameAdd" type="text" placeholder="Name" class="input-width-contacts">
                        </label>
-                       <p id="required_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
+                       <p id="required_name" class="required-info margin-add-dialog">Please enter a valid name.</p>
                        <label class="subtask-section mail label-responsiv">
                            <input id="emailAdd" type="email" placeholder="Email" class="input-width-contacts">
                        </label>
@@ -160,7 +160,7 @@ function editDialogHTML() {
                        <label class="subtask-section name">
                            <input id="nameEdit" type="text" placeholder="Name" class="input-width-contacts">
                        </label>
-                       <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
+                       <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a valid name.</p>
                        <label class="subtask-section">
                            <input id="emailEdit" type="email" placeholder="Email" class="input-width-contacts">
                        </label>
