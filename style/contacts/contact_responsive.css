@@ -373,3 +373,9 @@
         margin-left: 70%;
     }
 }
+
+@media (max-height: 880px) {
+    .main-left-title {
+        padding: 50px 0px;
+    }
+}
