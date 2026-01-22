@@ -378,4 +378,8 @@
     .main-left-title {
         padding: 50px 0px;
     }
+
+    .dialog-content {
+        margin: 20px 4%;
+    }
 }
