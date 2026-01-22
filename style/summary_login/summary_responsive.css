@@ -83,8 +83,8 @@
         min-height: unset;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         box-sizing: border-box;
+        overflow-y: auto;
     }
 
     .contact-header-text {
