@@ -227,6 +227,16 @@
         left: 50%;
         translate: -50%;
     }
+
+    .user-active {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .user-active:hover {
+        background-color: rgba(84, 87, 84, 0.1);
+        color: black;
+    }
 }
 
 @media (max-width: 1149px) {
@@ -252,7 +262,6 @@
         height: calc(100vh - 150px);
         z-index: 19;
     }
-
 }
 
 @media (max-width: 596px) {
