@@ -278,6 +278,10 @@
     .dialog-message {
         translate: -11%;
     }
+
+    h1 {
+        font-size: 40px;
+    }
 }
 
 @media (max-width: 470px) {
