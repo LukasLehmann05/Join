@@ -62,15 +62,14 @@
 
     .sidebar-contacts {
         width: 100%;
-        display: flex;
-        flex-direction: column-reverse;
         max-height: 100vh;
         min-width: 302px;
     }
 
     .add-contact-btn-position {
-        bottom: 40px;
         margin-left: auto;
+        margin-top: 0;
+        top: 85%;
     }
 
     .add-contact-btn {
@@ -86,7 +85,7 @@
     }
 
     .contact-list {
-        padding: 17px 4%;
+        padding: 0px 4% 17px 4%;
     }
 
     .dialog-window {
@@ -363,10 +362,6 @@
 
     .sub-menu-btns {
         margin-right: 15px;
-    }
-
-    .add-contact-btn-position {
-        margin-left: 70%;
     }
 }
 

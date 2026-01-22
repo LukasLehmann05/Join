@@ -8,6 +8,7 @@
 .sidebar-contacts {
     display: flex;
     overflow-y: auto;
+    overflow-anchor: auto;
     background: #FFFFFF;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
     min-width: 390px;

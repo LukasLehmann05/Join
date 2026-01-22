@@ -10,7 +10,7 @@ async function fetchContactList() {
         let name = contactData[contactID].name;
         let singleContactData = contactData[contactID];
         renderHtmlElements(singleContactData, contactID, name, color);
-    }
+    } 
 }
 
 
