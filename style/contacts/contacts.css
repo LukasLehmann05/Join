@@ -269,6 +269,11 @@
     color: white;
 }
 
+.user-active:hover {
+    background-color: #3a4555;
+    color: white;
+}
+
 #editUser:hover {
     font-family: "Inter_bold";
     color: #29ABE2;

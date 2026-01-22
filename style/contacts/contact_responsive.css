@@ -164,7 +164,7 @@
     }
 
     h1 {
-        font-size: 35px;
+        font-size: 35px !important;
     }
 
     .contact-sub {
@@ -216,7 +216,6 @@
     }
 
 
-
     .sub-menu-btns {
         right: 40px;
     }
@@ -224,8 +223,17 @@
     .dialog-message {
         position: sticky;
         top: 80%;
-        left: 50%;
-        translate: -50%;
+        left: 0;
+    }
+
+    .user-active {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .user-active:hover {
+        background-color: rgba(84, 87, 84, 0.1);
+        color: black;
     }
 }
 
@@ -253,35 +261,14 @@
         z-index: 19;
     }
 
-}
-
-
-@media (max-width: 767px) {
-    .contact-main {
-        height: calc(100vh - 168px);
-    }
-
-    .sidebar-contacts {
-        height: calc(100vh - 150px);
-        z-index: 19;
-    }
-
-}
-
-
-@media (max-width: 596px) {
-    .sub-menu-btns {
-        right: 7%;
-    }
-
-    .dialog-message {
+     .dialog-message {
         top: 76%;
     }
 }
 
-@media (max-width: 560px) {
-    .dialog-message {
-        translate: -11%;
+@media (max-width: 596px) {
+    .sub-menu-btns {
+        right: 7%;
     }
 }
 
@@ -344,7 +331,7 @@
     }
 
     .gap-extra {
-        gap: 40px !important;
+        gap: 28px;
     }
 
     .two-letter-name {
@@ -354,6 +341,10 @@
 
     .label-responsiv {
         padding: 7px 3px !important;
+    }
+
+    .font-size-20{
+        font-size: 16px;
     }
 }
 
@@ -376,5 +367,29 @@
 
     .add-contact-btn-position {
         margin-left: 70%;
+    }
+}
+
+@media (max-height: 880px) {
+    .main-left-title {
+        padding: 50px 0px;
+    }
+
+    .dialog-content {
+        margin: 20px 4%;
+    }
+
+    .add-contact-info {
+        gap: 28px;
+    }
+
+    .required-info{
+        padding-top: 8px;
+    }
+}
+
+@media (max-height: 620px) {
+    .dialog-window {
+        overflow-y: auto;
     }
 }
