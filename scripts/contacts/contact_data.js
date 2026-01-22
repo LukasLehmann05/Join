@@ -117,9 +117,9 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
     let email = document.getElementById(emailInput).value;
     let color = assignColorToContact();
     let newUser = {
-        "email": email,
-        "name": name,
-        "phone": phone,
+        "email": email.trim(),
+        "name": name.trim(),
+        "phone": phone.trim(),
         "color": color
     };
     return newUser;
@@ -132,7 +132,7 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
  */
 async function addNewContactToDatabase() {
     let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
-    if (newUser.name.length > 0 && !isNotLetter(newUser.name.charAt(0))) {
+    if (newUser.name.length > 3 && isOnlyLetters(newUser.name)) {
         if (validateEmail(newUser.email) == true && newUser.email != "") {
             if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
                 await postNewContactToDatabase(newUser);
@@ -167,7 +167,7 @@ async function trimDownAddingContact(newUser, name, color) {
 async function editContactInDatabase() {
     let editedUser = getEditedContactData();
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
-    if (editedUser.name.length > 0 && !isNotLetter(editedUser.name.charAt(0))) {
+    if (editedUser.name.length > 3 && isOnlyLetters(editedUser.name)) {
         if (validateEmail(editedUser.email) == true && editedUser.email != "") {
             if (validatePhoneByLength(editedUser.phone) == true && editedUser.phone != "") {
                 await editContactDataInDatabase(editedUser, currentId)
@@ -201,6 +201,7 @@ async function trimDownEditingUser(editID, editedUser) {
 
 /**
  * get edited contact data
+ * @return {Object} editedContact - The edited contact data.
  */
 function getEditedContactData() {
     let email = document.getElementById('emailEdit').value;
@@ -208,9 +209,9 @@ function getEditedContactData() {
     let phone = document.getElementById('phoneEdit').value;
     let color = document.getElementById("editedAvatar").style.backgroundColor;
     let editedContact = {
-        "email": email,
-        "name": name,
-        "phone": phone,
+        "email": email.trim(),
+        "name": name.trim(),
+        "phone": phone.trim(),
         "color": color
     };
     return editedContact;
@@ -219,6 +220,7 @@ function getEditedContactData() {
 
 /**
  * get contact Data from Main Display to edit dialog window
+ * @return {Object} currentContact - The current contact data from the main display.
  */
 function getDataFromMain() {
     let email = document.getElementById('mainMail').innerText;
