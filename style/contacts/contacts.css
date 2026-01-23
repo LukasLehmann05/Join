@@ -63,7 +63,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     width: 100%;
     word-break: break-word;
@@ -230,6 +230,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
+    flex: 1;
 }
 
 .list-info p {
@@ -256,6 +257,7 @@
     width: 100%;
     padding: 8px;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .single-User:hover {
