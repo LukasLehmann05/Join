@@ -27,7 +27,7 @@ dialog[open] {
    min-width: 950px;
    width: 1200px;
    min-height: 500px;
-   transition: transform 1s ease-in-out;
+   transition: transform 0.5s ease-in-out;
 }
 
 .main-left {
