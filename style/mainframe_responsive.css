@@ -4,6 +4,20 @@
     }
 }
 
+@media (width: 768px) and (height: 1024px) {
+    .main-content {
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        max-height: none;
+    }
+
+    .sidebar-footer {
+        margin-bottom: 140px;
+    }
+}
+
 @media (max-width: 767px) {
     .header-nav p {
         display: none;
@@ -76,7 +90,7 @@
         padding: 20px 4px;
     }
 
-    .flex-none{
+    .flex-none {
         flex: none;
     }
 
