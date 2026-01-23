@@ -15,6 +15,8 @@
     height: calc(100vh - 96px);
     flex-direction: column;
     padding: 0 2% 0 2%;
+    mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
 }
 
 .contact-list {
@@ -61,7 +63,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     width: 100%;
     word-break: break-word;
@@ -83,7 +85,7 @@
 
 .single-letter {
     margin: 8px;
-    padding: 17px 36px;
+    padding: 17px 17px;
 }
 
 .single-letter-section {
@@ -141,9 +143,12 @@
     color: white;
     border-radius: 70px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    min-width: 120px;
     height: 120px;
     min-width: 120px;
+}
+
+.position-two-letter {
+    margin: auto 20px;
 }
 
 .name-field {
@@ -152,7 +157,7 @@
     gap: 5px;
 }
 
-.name-field p{
+.name-field p {
     word-break: break-word;
     overflow-wrap: break-word;
 }
@@ -203,8 +208,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 15px;
-    padding-left: 36px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     cursor: pointer;
     gap: 35px;
 }
@@ -217,7 +222,7 @@
     border-radius: 45px;
     min-width: 42px;
     height: 42px;
-    min-width: 42px;
+    border: 3px solid #FFFFFF;
 }
 
 .list-info {
@@ -225,16 +230,16 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
+    flex: 1;
 }
 
-.list-info p{
+.list-info p {
     word-break: break-word;
     overflow-wrap: break-word;
 }
 
 .color-mail {
     color: #007CEE;
-    cursor: pointer;
 }
 
 .font-size-20 {
@@ -242,9 +247,32 @@
     font-size: 20px;
 }
 
+.input-width-contacts {
+    max-width: 85%;
+}
+
 .single-User {
     display: flex;
     gap: 35px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.single-User:hover {
+    background-color: rgba(84, 87, 84, 0.1);
+    color: black;
+}
+
+.user-active {
+    background-color: #2a3647;
+    color: white;
+}
+
+.user-active:hover {
+    background-color: #3a4555;
+    color: white;
 }
 
 #editUser:hover {

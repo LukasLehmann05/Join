@@ -133,16 +133,18 @@ async function renderTaskCard(taskId, task) {
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  */
 async function renderAssignedUserIcons(taskId, taskAssignees) {
-    let rendered_amount = 0
+    let rendered_amount = 0;
     let containerIdSuffix = 'assigned_users';
     let iconsHTML = '';
     for (let contactId of taskAssignees) {
         rendered_amount += 1
         if (rendered_amount <= amount_for_render_overflow) {
             const contact = await getContactById(contactId);
-            const initials = getInitialsFromUser(contact);
-            const iconHTML = assignedUserIconTemplate(initials, contact.color);
-            iconsHTML += iconHTML;
+            if (contact != undefined) {
+                const initials = getInitialsFromUser(contact);
+                const iconHTML = assignedUserIconTemplate(initials, contact.color);
+                iconsHTML += iconHTML;
+            }
         }
     }
     addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount)
@@ -335,6 +337,7 @@ async function initializeBoard() {
     initInputFieldEventListener(allTasksByIdArr);
 
     setAllTasksObj(allTasksByIdArr, joinData.tasks);
+    await checkAssigneesExistence(allTasksByIdArr, joinData);
     renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);
     renderNoTaskInfoOnDOMLoad();
     return allTasksByIdArr;

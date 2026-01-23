@@ -12,7 +12,7 @@ function contactListSingle(contactID, name, email, userInitials, phone) {
                 <p id="short-${contactID}" class="two-letter-name-small">${userInitials}</p>
                 <div class="list-info">
                   <p id="name-${contactID}" class="font-size-20 long-contact-name">${name}</p>
-                  <a href="mailto:${email}" id="email-${contactID}" class="font-size-16 color-mail">${email}</a>
+                  <a id="email-${contactID}" class="font-size-16 color-mail truncate">${email}</a>
                 </div>
             </div>`
 }
@@ -79,35 +79,38 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
  */
 function addDialogHTML() {
     return `<div id="addContent" class="dialog-content">
-               <section class="main-left">
-                   <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                   <h1 class="white margin">Add Contact</h1>
-                   <p class="contact-sub white margin">Tasks are better with a team!</p>
-                   <div class="separator-horizontal"></div>
-               </section>
-               <section class="main-right">
-                   <div class="two-letter-name position">
+                <section class="main-left">
+                    <div class="main-left-title">
+                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
+                        <h1 class="white margin">Add Contact</h1>
+                        <p class="contact-sub white margin">Tasks are better with a team!</p>
+                        <div class="separator-horizontal"></div>
+                    </div>
+                    <button class="close-btn d-none" onclick="closeDialog('dialogWindow' ,'addContent')">
+                        <img class="icon-close" src="../assets/icons/contacts/close_white.svg" alt="close overlay icon">
+                    </button>
+                </section>
+                <section class="main-right">
+                   <div class="two-letter-name position-two-letter">
                        <img src="../assets/icons/contacts/person_white.svg" alt="placeholder for name">
                    </div>
                    <div class="add-contact-info">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'addContent')">
                              <picture>
-                               <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">
-                               <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                               alt="close overlay icon">
+                               <img class="icon-close" src="../assets/icons/contacts/close.svg" alt="close overlay icon">
                              </picture>
                        </button>
                        <label class="subtask-section name label-responsiv">
-                           <input id="nameAdd" type="text" placeholder="Name">
+                           <input id="nameAdd" type="text" placeholder="Name" class="input-width-contacts">
                        </label>
-                       <p id="required_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
+                       <p id="required_name" class="required-info margin-add-dialog">Please enter a valid name.</p>
                        <label class="subtask-section mail label-responsiv">
-                           <input id="emailAdd" type="email" placeholder="Email">
+                           <input id="emailAdd" type="email" placeholder="Email" class="input-width-contacts">
                        </label>
                        <p id="required_email" class="required-info margin-add-dialog">Please enter a valid email
                            address.</p>
                        <label class="subtask-section phone label-responsiv">
-                           <input id="phoneAdd" type="tel" placeholder="Phone">
+                           <input id="phoneAdd" type="tel" placeholder="Phone" class="input-width-contacts">
                        </label>
                        <p id="required_phone" class="required-info margin-add-dialog">Please enter a valid phone
                            number.</p>
@@ -136,32 +139,35 @@ function addDialogHTML() {
 function editDialogHTML() {
     return `<div id="editContent" class="dialog-content">
                <section class="main-left">
-                   <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">
-                   <h1 class="white margin">Edit Contact</h1>
-                   <div class="separator-horizontal"></div>
+                    <div class="main-left-title">
+                        <img class="logo-dialog" src="../assets/icons/logo/logo_white.svg" alt="Join logo">       
+                        <h1 class="white margin">Edit Contact</h1>
+                        <div class="separator-horizontal"></div>
+                    </div>
+                    <button class="close-btn d-none" onclick="closeDialog('dialogWindow' ,'editContent')">
+                        <img class="icon-close" src="../assets/icons/contacts/close_white.svg" alt="close overlay icon">
+                    </button>
                </section>
                <section class="main-right edit-right">
-                   <div id="editedAvatar" class="two-letter-name position-edit">
+                   <div id="editedAvatar" class="two-letter-name position-two-letter">
                       </div>
-                   <div class="add-contact-info">
+                   <div class="add-contact-info gap-extra">
                        <button class="close-btn" onclick="closeDialog('dialogWindow' ,'editContent')">
                            <picture>
-                               <source media="(max-width: 767px)" srcset="../assets/icons/contacts/close_white.svg">
-                               <img class="icon-close" src="../assets/icons/contacts/close.svg"
-                               alt="close overlay icon">
+                               <img class="icon-close" src="../assets/icons/contacts/close.svg" alt="close overlay icon">
                              </picture>
                        </button>
                        <label class="subtask-section name">
-                           <input id="nameEdit" type="text" placeholder="Name">
+                           <input id="nameEdit" type="text" placeholder="Name" class="input-width-contacts">
                        </label>
-                       <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a name starting with a letter.</p>
-                       <label class="subtask-section mail">
-                           <input id="emailEdit" type="email" placeholder="Email">
+                       <p id="required_edit_name" class="required-info margin-add-dialog">Please enter a valid name.</p>
+                       <label class="subtask-section">
+                           <input id="emailEdit" type="email" placeholder="Email" class="input-width-contacts">
                        </label>
                        <p id="required_edit_email" class="required-info margin-add-dialog">Please enter a valid
                            email address.</p>
                        <label class="subtask-section phone">
-                           <input id="phoneEdit" type="tel" placeholder="Phone">
+                           <input id="phoneEdit" type="tel" placeholder="Phone" class="input-width-contacts">
                        </label>
                        <p id="required_edit_phone" class="required-info margin-add-dialog">Please enter a valid
                            phone number.</p>

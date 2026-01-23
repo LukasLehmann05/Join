@@ -96,7 +96,7 @@ function validateSignupData(data, checkbox) {
  * @param {Object} errors - Errors map to populate.
  */
 function validateName(name, errors) {
-  if (!name.length > 0 || !isOnlyLetters(name)) {
+  if (!(name.length > 3) || !isOnlyLetters(name)) {
     errors.name = "Please enter a valid name.";
   }
 }
@@ -292,7 +292,7 @@ function handleExistingUser(ui) {
   setFieldError(
     ui.emailInput,
     "error-signup-email",
-    "An account with this email already exists."
+    "This mail exists already."
   );
   if (!ui.errorBox) return;
   ui.errorBox.textContent = "Please use another email address.";

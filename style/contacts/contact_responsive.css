@@ -24,9 +24,8 @@
     .two-letter-name {
         min-width: 100px;
         height: 100px;
-        min-width: 100px;
+        max-width: 100px;
     }
-
 }
 
 @media (min-width: 1150px) {
@@ -39,11 +38,6 @@
     .dialog-content {
         width: 1105px;
     }
-
-    .position, .position-edit {
-        margin-right: 25px;
-        margin-left: 25px;
-    }
 }
 
 @media (max-width: 1150px) {
@@ -51,6 +45,11 @@
         display: none;
         margin-left: 16px;
         margin-top: 48px;
+    }
+
+    .position-two-letter {
+        margin: -85px auto 5px auto;
+        z-index: 1;
     }
 
     .cancel-add-btn {
@@ -63,15 +62,14 @@
 
     .sidebar-contacts {
         width: 100%;
-        display: flex;
-        flex-direction: column-reverse;
         max-height: 100vh;
         min-width: 302px;
     }
 
     .add-contact-btn-position {
-        bottom: 40px;
         margin-left: auto;
+        margin-top: 0;
+        top: 85%;
     }
 
     .add-contact-btn {
@@ -87,15 +85,7 @@
     }
 
     .contact-list {
-        padding: 17px 4%;
-    }
-
-    .single-letter {
-        padding: 17px 4%;
-    }
-
-    .list-user {
-        padding-left: 4%;
+        padding: 0px 4% 17px 4%;
     }
 
     .dialog-window {
@@ -105,7 +95,7 @@
     .dialog-content {
         flex-direction: column;
         min-width: 0;
-        height: auto;
+        height: fit-content;
         margin: 95px 4%;
     }
 
@@ -114,12 +104,13 @@
     }
 
     .main-left {
-        padding: 125px 4%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
         gap: 12px;
         border-top-right-radius: 30px;
         border-bottom-left-radius: 0;
+        position: relative;
     }
 
     .main-right {
@@ -131,39 +122,29 @@
         padding-right: 2%;
     }
 
+    .main-left-title {
+        padding: 125px 0 125px 0;
+    }
+
     .create-contact-btn {
         margin-top: 12px;
-    }
-
-    .position {
-        margin: 0;
-        position: fixed;
-        top: 42%;
-        left: 50%;
-        translate: -50%;
-    }
-
-    .position-edit {
-        margin: 0;
-        position: fixed;
-        top: 37%;
-        left: 50%;
-        translate: -50%;
-    }
-
-    .edit-right {
-        padding-top: 60px;
     }
 
     .subtask-section {
         padding: 10px 10px;
     }
 
-    .close-btn {
-        position: fixed;
-        top: 1%;
-        left: 92%;
-        translate: -50%;
+    .main-left .close-btn {
+        position: relative;
+        top: 24px;
+        right: 0;
+        margin-bottom: 0;
+        display: flex;
+        padding: 0;
+    }
+
+    .main-right .close-btn {
+        display: none;
     }
 
     .add-contact-info {
@@ -182,7 +163,7 @@
     }
 
     h1 {
-        font-size: 35px;
+        font-size: 35px !important;
     }
 
     .contact-sub {
@@ -234,7 +215,6 @@
     }
 
 
-
     .sub-menu-btns {
         right: 40px;
     }
@@ -242,8 +222,17 @@
     .dialog-message {
         position: sticky;
         top: 80%;
-        left: 50%;
-        translate: -50%;
+        left: 0;
+    }
+
+    .user-active {
+        background-color: #FFFFFF;
+        color: black;
+    }
+
+    .user-active:hover {
+        background-color: rgba(84, 87, 84, 0.1);
+        color: black;
     }
 }
 
@@ -271,41 +260,27 @@
         z-index: 19;
     }
 
-}
-
-
-@media (max-width: 767px) {
-    .contact-main {
-        height: calc(100vh - 168px);
-    }
-
-    .sidebar-contacts {
-        height: calc(100vh - 150px);
-        z-index: 19;
-    }
-
-}
-
-
-@media (max-width: 596px) {
-    .sub-menu-btns {
-        right: 7%;
-    }
-
     .dialog-message {
         top: 76%;
     }
 }
 
-@media (max-width: 560px) {
-    .dialog-message {
-        translate: -11%;
+@media (max-width: 596px) {
+    .sub-menu-btns {
+        right: 7%;
     }
 }
 
 @media (max-width: 470px) {
     .sub-menu-btns {
         right: 8%;
+    }
+
+    .truncate {
+        width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -326,14 +301,6 @@
         margin: 14px 4%;
     }
 
-    .main-left {
-        padding: 80px 4%;
-    }
-
-    .position {
-        top: 23%;
-    }
-
     .contact-display {
         margin-left: 16px;
         margin-top: 25px;
@@ -345,8 +312,38 @@
         padding-top: 24px;
     }
 
-    .position-edit {
-        top: 18%;
+    .position-two-letter {
+        margin: -48px auto 5px auto;
+    }
+
+    .add-contact-info {
+        margin-top: 5px;
+        gap: 37px;
+    }
+
+    .main-right {
+        padding-top: 0px;
+    }
+
+    .subtask-section {
+        padding: 6px 21px;
+    }
+
+    .gap-extra {
+        gap: 28px;
+    }
+
+    .two-letter-name {
+        min-width: 80px;
+        height: 80px;
+    }
+
+    .label-responsiv {
+        padding: 7px 3px !important;
+    }
+
+    .font-size-20 {
+        font-size: 16px;
     }
 }
 
@@ -355,27 +352,39 @@
         width: 295px;
     }
 
-    .position-edit {
-        top: 25%;
-    }
-
-    .contact-display {
-        width: 80%;
+    .main-left-title {
+        padding: 36px 0 60px 0;
     }
 
     .sub-menu-btn {
-        right: 17%;
+        right: 5%;
     }
 
     .sub-menu-btns {
-        margin-right: 56px;
+        margin-right: 15px;
+    }
+}
+
+@media (max-height: 880px) {
+    .main-left-title {
+        padding: 50px 0px;
     }
 
-    .add-contact-btn-position {
-        margin-left: 56%;
+    .dialog-content {
+        margin: 20px 4%;
     }
 
-    .position {
-        top: 33%;
+    .add-contact-info {
+        gap: 28px;
+    }
+
+    .required-info {
+        padding-top: 8px;
+    }
+}
+
+@media (max-height: 620px) {
+    .dialog-window {
+        overflow-y: auto;
     }
 }
