@@ -69,7 +69,7 @@ async function checkAssigneesExistence(allTasksByIdArr, joinData) {
         const singleTaskId = allTasksByIdArr[i];
         const assigneeIdArray = joinData.tasks[singleTaskId].assigned_to;
         if (assigneeIdArray === undefined) {
-            return;
+            continue;
         }
         for (let assigneeId of assigneeIdArray) {
             const assigneeExists = joinData.contacts.hasOwnProperty(assigneeId);

@@ -133,7 +133,7 @@ async function renderTaskCard(taskId, task) {
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  */
 async function renderAssignedUserIcons(taskId, taskAssignees) {
-    let rendered_amount = 0
+    let rendered_amount = 0;
     let containerIdSuffix = 'assigned_users';
     let iconsHTML = '';
     for (let contactId of taskAssignees) {
