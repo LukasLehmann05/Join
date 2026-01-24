@@ -81,3 +81,13 @@ async function checkAssigneesExistence(allTasksByIdArr, joinData) {
         }
     }
 }
+
+
+/**
+ * sets pickable date to a future date only
+ */
+function setDateToFuture() {
+    let tomorrow = new Date();
+    let minDate = tomorrow.toISOString().split('T')[0];
+    document.getElementById("task_due_date").setAttribute('min', minDate);
+}

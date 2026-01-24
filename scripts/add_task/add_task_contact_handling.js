@@ -221,3 +221,30 @@ function assignTaskToUserById(userId, taskId) {
     allTasksOfUser += taskId;
     updateUserTasksInDB(userId, allTasksOfUser);
 }
+
+
+/**
+ * closes assignee list via observing if the button is loaded
+ */
+const observer = new MutationObserver((mutations, obs) => {
+    let element = document.getElementById('contact-button');
+    if (element) {
+        document.addEventListener('click', function (event) {
+            let list = document.getElementById("contact_selector");
+            let button = document.getElementById('contact-button');
+            if (!button) {
+                return
+            }
+            if (!list.contains(event.target) && !button.contains(event.target)) {
+                list.style.display = "none"
+                contacts_shown = false
+            }
+        });
+        obs.disconnect();
+    }
+});
+
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
