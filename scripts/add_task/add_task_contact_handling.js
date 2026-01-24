@@ -221,3 +221,17 @@ function assignTaskToUserById(userId, taskId) {
     allTasksOfUser += taskId;
     updateUserTasksInDB(userId, allTasksOfUser);
 }
+
+
+/**
+ * closes assignee list via window click
+ */
+document.addEventListener('click', function (event) {
+    let list = document.getElementById("contact_selector");
+    let button = document.getElementById('contact-button');
+    if (!list.contains(event.target) && !button.contains(event.target)) {
+        list.style.display = "none"
+        contacts_shown = false
+    }
+});
+
