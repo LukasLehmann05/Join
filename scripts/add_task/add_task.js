@@ -39,7 +39,7 @@ let amount_for_render_overflow = 3
  */
 function addTaskInit() {
     loadPrioButtonsAndSubtaskSectionById();
-    loadContactsForAssign()
+    loadContactsForAssign();
 }
 
 /**
@@ -116,7 +116,7 @@ function checkForRequired(requiredFields) {
                 if (!document.getElementById('task_title').value.trim()) isValid = false;
                 break;
             case 'dueDate':
-                if (!document.getElementById('task_due_date').value.trim()) isValid = false;
+                if (!document.getElementById('task_due_date').value.trim()|| checkDate()) isValid = false;
                 break;
             case 'category':
                 if (!document.getElementById('task_category').value.trim()) isValid = false;
@@ -125,6 +125,18 @@ function checkForRequired(requiredFields) {
         }
     }
     return isValid;
+}
+
+
+/**
+ * checks if the due date is in the future and therefore valid
+ */
+function checkDate() {
+    let date = new Date(document.getElementById('task_due_date').value);
+    let today = new Date();
+    if (date <= today) {
+        return true
+    } 
 }
 
 /**

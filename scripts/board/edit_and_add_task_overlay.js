@@ -35,6 +35,7 @@ async function openEditTaskOverlay(buttonElement, taskId) {
     renderSubtaskEditListItems(task.subtasks || []);
     addTaskInit();
     implementListenerToPreventEnterIssue();
+    setDateToFuture();
 }
 
 
@@ -157,6 +158,7 @@ async function openAddTaskOverlay(buttonElement) {
     });
     disableScrollOnBody();
     implementListenerToPreventEnterIssue();
+    setDateToFuture();
 }
 
 
