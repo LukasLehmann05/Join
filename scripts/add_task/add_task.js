@@ -118,7 +118,7 @@ function checkForRequired(requiredFields, editOnlyMode) {
                 if (!document.getElementById('task_title').value.trim()) isValid = false;
                 break;
             case 'dueDate':
-                if (!document.getElementById('task_due_date').value.trim()|| checkDate(editOnlyMode)) isValid = false;
+                if (!document.getElementById('task_due_date').value.trim() || checkDate(editOnlyMode)) isValid = false;
                 break;
             case 'category':
                 if (!document.getElementById('task_category').value.trim()) isValid = false;
@@ -151,7 +151,9 @@ function setRequiredValues(editOnlyMode) {
 function checkDate(editOnlyMode) {
     let date = new Date(document.getElementById('task_due_date').value);
     let today = new Date();
-    if (date <= today && !editOnlyMode) {
+    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+    if (date < today && !editOnlyMode) {
         req_due_date_invalid = true
         return true
     }
