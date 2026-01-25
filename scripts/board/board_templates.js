@@ -78,7 +78,7 @@ function taskCardTemplate(task, taskId) {
                 <h3>${task.title}</h3>
                 <p class="task_card_description">${task.description}</p>
                 <div class="subtask_status_bar">
-                    <div class="subtask_status_bar_bg">
+                    <div id="${taskId}_subtasks_status_bar_element" class="subtask_status_bar_bg">
                         <div class="subtask_status_bar_fill" id="${taskId}_subtasks_status_bar" style="width: 60%;"></div>
                     </div>
                     <div class="subtask_info">
