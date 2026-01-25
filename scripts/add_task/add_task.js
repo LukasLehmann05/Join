@@ -109,6 +109,7 @@ function redirectToBoard() {
  * @returns {boolean} true if all required fields are filled, false otherwise
  */
 function checkForRequired(requiredFields) {
+    setRequiredValues()
     let isValid = true;
     for (const field of requiredFields) {
         switch (field) {
@@ -125,6 +126,21 @@ function checkForRequired(requiredFields) {
         }
     }
     return isValid;
+}
+
+/**
+ * this function sets the required value flags based on current input values to be used in validation
+ */
+function setRequiredValues() {
+    if (task_title.value.trim() !== "") {
+        req_title = true
+    }
+    if (task_due_date.value.trim() !== "" && !checkDate()) {
+        req_due_date = true
+    }
+    if (task_category.value.trim() !== "") {
+        req_category = true
+    }
 }
 
 
