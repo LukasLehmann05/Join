@@ -293,7 +293,7 @@ async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
  */
 async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonEditTaskAndCloseOverlay && checkForRequired(['title', 'dueDate'])) {
+    if (buttonEditTaskAndCloseOverlay && checkForRequired(['title', 'dueDate'],true)) {
         clearElementsOfNewTask();
         getAllFieldValuesOfEditTaskWhenUpdated();
         await sendUpdatedTaskToDB(taskId);
