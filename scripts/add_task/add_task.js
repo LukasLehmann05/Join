@@ -167,6 +167,7 @@ function clearAllInputs() {
     req_title = false
     req_due_date = false
     req_category = false
+    req_due_date_invalid = false
     allSubtasksArr = []
     changePriority(PRIORITY_ARR[1]) // reset to medium priority
     clearRequiredIndicators()
@@ -254,8 +255,7 @@ function missingInputs() {
     if (req_due_date == false) {
         req_due_date_text.style.opacity = "1"
         task_due_date.classList.add("missing-input")
-    }
-    if (req_due_date_invalid == true) {
+    } else if (req_due_date_invalid == true) {
         req_due_date_text.innerText = "Due date must not be in the past"
         req_due_date_text.style.opacity = "1"
         task_due_date.classList.add("missing-input")
