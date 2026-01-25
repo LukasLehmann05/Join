@@ -25,6 +25,7 @@ let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
 
 let req_title = false
 let req_due_date = false
+let req_due_date_invalid = false
 let req_category = false
 
 let allSubtasksArr = []
@@ -108,7 +109,8 @@ function redirectToBoard() {
  * @param {Array<string>} requiredFields - Array of field names to check (e.g. ['title', 'dueDate', 'category'])
  * @returns {boolean} true if all required fields are filled, false otherwise
  */
-function checkForRequired(requiredFields) {
+function checkForRequired(requiredFields, editOnlyMode) {
+    setRequiredValues(editOnlyMode)
     let isValid = true;
     for (const field of requiredFields) {
         switch (field) {
@@ -116,7 +118,7 @@ function checkForRequired(requiredFields) {
                 if (!document.getElementById('task_title').value.trim()) isValid = false;
                 break;
             case 'dueDate':
-                if (!document.getElementById('task_due_date').value.trim()|| checkDate()) isValid = false;
+                if (!document.getElementById('task_due_date').value.trim()|| checkDate(editOnlyMode)) isValid = false;
                 break;
             case 'category':
                 if (!document.getElementById('task_category').value.trim()) isValid = false;
@@ -127,16 +129,32 @@ function checkForRequired(requiredFields) {
     return isValid;
 }
 
+/**
+ * this function sets the required value flags based on current input values to be used in validation
+ */
+function setRequiredValues(editOnlyMode) {
+    if (task_title.value.trim() !== "") {
+        req_title = true
+    }
+    if (task_due_date.value.trim()) {
+        req_due_date = true
+    }
+    if (task_category.value.trim() !== "") {
+        req_category = true
+    }
+}
+
 
 /**
  * checks if the due date is in the future and therefore valid
  */
-function checkDate() {
+function checkDate(editOnlyMode) {
     let date = new Date(document.getElementById('task_due_date').value);
     let today = new Date();
-    if (date <= today) {
+    if (date <= today && !editOnlyMode) {
+        req_due_date_invalid = true
         return true
-    } 
+    }
 }
 
 /**
@@ -149,6 +167,7 @@ function clearAllInputs() {
     req_title = false
     req_due_date = false
     req_category = false
+    req_due_date_invalid = false
     allSubtasksArr = []
     changePriority(PRIORITY_ARR[1]) // reset to medium priority
     clearRequiredIndicators()
@@ -234,6 +253,10 @@ function missingInputs() {
         task_title.classList.add("missing-input")
     }
     if (req_due_date == false) {
+        req_due_date_text.style.opacity = "1"
+        task_due_date.classList.add("missing-input")
+    } else if (req_due_date_invalid == true) {
+        req_due_date_text.innerText = "Due date must not be in the past"
         req_due_date_text.style.opacity = "1"
         task_due_date.classList.add("missing-input")
     }
