@@ -136,7 +136,7 @@ function setRequiredValues(editOnlyMode) {
     if (task_title.value.trim() !== "") {
         req_title = true
     }
-    if (task_due_date.value.trim() !== "" && checkDate(editOnlyMode)) {
+    if (task_due_date.value.trim()) {
         req_due_date = true
     }
     if (task_category.value.trim() !== "") {
