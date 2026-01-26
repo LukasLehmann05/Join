@@ -107,10 +107,11 @@ function redirectToBoard() {
 /**
  * Checks if the required fields are filled.
  * @param {Array<string>} requiredFields - Array of field names to check (e.g. ['title', 'dueDate', 'category'])
+ * @param {boolean} editOnlyMode - If true, skips certain validations (like past date check).
  * @returns {boolean} true if all required fields are filled, false otherwise
  */
 function checkForRequired(requiredFields, editOnlyMode) {
-    setRequiredValues(editOnlyMode)
+    setRequiredValues();
     let isValid = true;
     for (const field of requiredFields) {
         switch (field) {
@@ -130,9 +131,9 @@ function checkForRequired(requiredFields, editOnlyMode) {
 }
 
 /**
- * this function sets the required value flags based on current input values to be used in validation
+ * This function sets the required value flags based on current input values to be used in validation
  */
-function setRequiredValues(editOnlyMode) {
+function setRequiredValues() {
     if (task_title.value.trim() !== "") {
         req_title = true
     }
@@ -146,7 +147,9 @@ function setRequiredValues(editOnlyMode) {
 
 
 /**
- * checks if the due date is in the future and therefore valid
+ * This function checks if the due date is in the future and therefore valid
+ * @param {boolean} editOnlyMode - If true, skips the past date check.
+ * @returns {boolean} - true if the date is invalid (in the past), false otherwise.
  */
 function checkDate(editOnlyMode) {
     let date = new Date(document.getElementById('task_due_date').value);
