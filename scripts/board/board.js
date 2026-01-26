@@ -5,7 +5,6 @@ let allTasksObj = {};
 
 const BOARD_COLUMN_ID_ARR = ['toDoColumn', 'inProgressColumn', 'awaitFeedbackColumn', 'doneColumn'];
 
-// Define the mapping from state to column ID
 const STATE_TO_COLUMN_ID = {
     [TASK_STATE_ARR[0]]: BOARD_COLUMN_ID_ARR[0],
     [TASK_STATE_ARR[1]]: BOARD_COLUMN_ID_ARR[1],
@@ -13,8 +12,6 @@ const STATE_TO_COLUMN_ID = {
     [TASK_STATE_ARR[3]]: BOARD_COLUMN_ID_ARR[3],
 }
 
-
-// Generate the reverse mapping
 const COLUMN_ID_TO_STATE = Object.fromEntries(
     Object.entries(STATE_TO_COLUMN_ID).map(([state, columnId]) => [columnId, state])
 )
@@ -22,7 +19,6 @@ const COLUMN_ID_TO_STATE = Object.fromEntries(
 
 /**
  * This function returns the column ID corresponding to a given task state.
- * 
  * @param {string} state The state of the task.
  * @returns {string} The column ID associated with the given task state.
  */
@@ -33,7 +29,6 @@ function getColumnIdByTaskState(state) {
 
 /**
  * This function returns the task state corresponding to a given column ID.
- * 
  * @param {string} columnId The ID of the column.
  * @returns {string} The task state associated with the given column ID.
  */
@@ -44,7 +39,6 @@ function getTaskStateByColumnId(columnId) {
 
 /**
  * This function renders the "no task" info template for a given column.
- * 
  * @param {string} columnId The ID of the column to render the info in.
  */
 function renderNoTaskInfo(columnId) {
@@ -68,7 +62,6 @@ function renderNoTaskInfo(columnId) {
 
 /**
  * This function renders the subtask progress for a task.
- * 
  * @param {string} taskId The ID of the task.
  * @param {Array} subtasksArr Array of subtasks for the task.
  */
@@ -82,7 +75,6 @@ function renderSubtaskProgress(taskId, subtasksArr) {
 
 /**
  * This function formats the subtask progress as a string "completed/total".
- * 
  * @param {Array} subtasks Array of subtask objects.
  * @returns {string} A string representing completed and total subtasks.
  */
@@ -95,7 +87,6 @@ function formatSubtaskProgress(subtasks) {
 
 /**
  * This function renders the subtask status bar for a task.
- * 
  * @param {string} taskId The ID of the task.
  * @param {Array} subtasksArr Array of subtasks for the task.
  */
@@ -116,7 +107,6 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
 
 /**
  * This function renders a task card in the appropriate column.
- * 
  * @param {string} taskId The ID of the task.
  * @param {Object} task The task object to render.
  */
@@ -132,7 +122,6 @@ async function renderTaskCard(taskId, task) {
 
 /**
  * This function renders the assigned user icons for a task.
- * 
  * @param {string} taskId The ID of the task.
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  */
@@ -155,7 +144,13 @@ async function renderAssignedUserIcons(taskId, taskAssignees) {
 }
 
 
-// Get fresh container reference and update once
+/**
+ * This function adds assignee icons to a task card.
+ * @param {string} taskId The ID of the task.
+ * @param {string} containerIdSuffix The suffix for the container element ID.
+ * @param {string} iconsHTML The HTML string of assignee icons.
+ * @param {number} rendered_amount The number of rendered assignees.
+ */
 function addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, rendered_amount) {
     const container = document.getElementById(taskId + '_' + containerIdSuffix);
     if (container) {
@@ -165,7 +160,11 @@ function addAssigneeIconsToTaskCard(taskId, containerIdSuffix, iconsHTML, render
 }
 
 
-// This function adds a overflow div for assignee display when rendered amount higher than the limit
+/**
+ * This function adds a overflow div for assignee display when rendered amount higher than the limit
+ * @param {number} rendered_amount The number of rendered assignees.
+ * @param {HTMLElement} container The container element to add the overflow div to.
+ */ 
 function checkForAssigneeOverflow(rendered_amount, container) {
     if (rendered_amount > amount_for_render_overflow) {
         let overflow_amount = rendered_amount - amount_for_render_overflow
@@ -176,7 +175,6 @@ function checkForAssigneeOverflow(rendered_amount, container) {
 
 /**
  * This function returns the icon path for a given priority.
- * 
  * @param {string} priority The priority level of the task.
  * @returns {string} The file path to the priority icon.
  */
@@ -195,7 +193,6 @@ function getIconForPriority(priority) {
 
 /**
  * This function renders the priority indicator for a task.
- * 
  * @param {string} taskId The ID of the task.
  * @param {string} taskPriority The priority of the task.
  * @param {string} prioritySuffix The suffix for the element ID.
@@ -209,7 +206,6 @@ function renderPriorityIndicator(taskId, taskPriority, prioritySuffix) {
 
 /**
  * This function displays a new task on the board.
- * 
  * @param {string} newTaskId The ID of the new task.
  * @param {Object} newTask The new task object.
  */
@@ -222,7 +218,6 @@ function displayNewTaskOnBoard(newTaskId, newTask) {
 
 /**
  * This function updates the allTasksObj with the updated task.
- * 
  * @param {string} taskId The ID of the task to update.
  * @param {Object} updatedTask The updated task object.
  */
@@ -233,7 +228,6 @@ function updateAllTasksObj(taskId, updatedTask) {
 
 /**
  * This function return a single task from allTasksObj by its ID.
- * 
  * @param {string} taskId The ID of the task to retrieve.
  * @returns {Object} The task object.
  */
@@ -263,7 +257,6 @@ function setAllTasksObj(allTasksByIdArr, allTasks) {
 
 /**
  * This function returns all tasks.
- * 
  * @returns {Object} The allTasksObj object.
  */
 function getAllTasksObj() {
@@ -291,7 +284,6 @@ function renderNoTaskInfoOnDOMLoad() {
 
 /**
  * This function checks if a column has no tasks and renders "no task" info if needed.
- * 
  * @param {string} columnId The ID of the column to check.
  */
 function checkIfNoTasksInColumn(columnId) {
@@ -307,7 +299,6 @@ function checkIfNoTasksInColumn(columnId) {
 
 /**
  * This function observes a column for becoming empty and renders "no task" info.
- * 
  * @param {string} columnId The ID of the column to observe.
  */
 function observeColumnEmpty(columnId) {
@@ -350,7 +341,6 @@ async function initializeBoard() {
 
 /**
  * This function retrieves all task IDs from the join data.
- * 
  * @param {Object} joinData This is the global join data object.
  * @returns {Array} Array of all task IDs.
  */
@@ -365,7 +355,6 @@ function getAllTaskIds(joinData) {
 
 /**
  * This function renders all task cards on the board.
- * 
  * @param {Array} allTasksByIdArr Array of task IDs.
  * @param {Object} allTaskData The global task data object.
  */
@@ -382,7 +371,6 @@ function renderAllTaskCardsOnBoard(allTasksByIdArr, allTaskData) {
 
 /**
  * This function refreshes a task card on the board after an update.
- * 
  * @param {string} taskId The ID of the task to refresh.
  * @param {Object} taskToUpdate The updated task object.
  */

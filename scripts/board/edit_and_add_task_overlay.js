@@ -1,17 +1,5 @@
- /**
- * Duration (in ms) for which the toast is visibly displayed.
- */
 const TOAST_DISPLAY_DURATION = 700;
-
-/**
- * Buffer time (in ms) to allow toast animations/setup before and after display.
- */
 const TOAST_ANIMATION_BUFFER = 100;
-
-/**
- * Total duration (in ms) from showing the toast to hiding it again.
- * Equals TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER.
- */
 const TOAST_TOTAL_DURATION = TOAST_DISPLAY_DURATION + TOAST_ANIMATION_BUFFER;
 
 
