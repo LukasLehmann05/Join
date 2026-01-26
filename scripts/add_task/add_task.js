@@ -77,7 +77,7 @@ function loadDataFromAPI() {
  * Validates required fields and creates a new task when valid.
  */
 async function createTask() {
-    let can_create = checkForRequired(['title', 'dueDate', 'category'])
+    let can_create = checkForRequired(['title', 'dueDate', 'category'], false)
     if (can_create == true) {
         await sendTaskToDB(TASK_STATE_ARR[0]);
         await renderNewTaskAddedToastContainer();
@@ -124,7 +124,6 @@ function checkForRequired(requiredFields, editOnlyMode) {
             case 'category':
                 if (!document.getElementById('task_category').value.trim()) isValid = false;
                 break;
-            // ggf. weitere Felder ergänzen
         }
     }
     return isValid;
@@ -137,7 +136,7 @@ function setRequiredValues() {
     if (task_title.value.trim() !== "") {
         req_title = true
     }
-    if (task_due_date.value.trim()) {
+    if (task_due_date.value.trim() !== "") {
         req_due_date = true
     }
     if (task_category.value.trim() !== "") {
