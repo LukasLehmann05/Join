@@ -91,3 +91,61 @@ function setDateToFuture() {
     let minDate = tomorrow.toISOString().split('T')[0];
     document.getElementById("task_due_date").setAttribute('min', minDate);
 }
+
+
+/**
+ * Checks if the required fields are filled.
+ * @param {Array<string>} requiredFields - Array of field names to check (e.g. ['title', 'dueDate', 'category'])
+ * @param {boolean} editOnlyMode - If true, skips certain validations (like past date check).
+ * @returns {boolean} true if all required fields are filled, false otherwise
+ */
+function checkForRequired(requiredFields, editOnlyMode) {
+    setRequiredValues();
+    let isValid = true;
+    for (const field of requiredFields) {
+        switch (field) {
+            case 'title':
+                if (!document.getElementById('task_title').value.trim()) isValid = false;
+                break;
+            case 'dueDate':
+                if (!document.getElementById('task_due_date').value.trim() || checkDate(editOnlyMode)) isValid = false;
+                break;
+            case 'category':
+                if (!document.getElementById('task_category').value.trim()) isValid = false;
+                break;
+        }
+    }
+    return isValid;
+}
+
+/**
+ * This function sets the required value flags based on current input values to be used in validation
+ */
+function setRequiredValues() {
+    if (task_title.value.trim() !== "") {
+        req_title = true
+    }
+    if (task_due_date.value.trim() !== "") {
+        req_due_date = true
+    }
+    if (task_category.value.trim() !== "") {
+        req_category = true
+    }
+}
+
+
+/**
+ * This function checks if the due date is in the future and therefore valid
+ * @param {boolean} editOnlyMode - If true, skips the past date check.
+ * @returns {boolean} - true if the date is invalid (in the past), false otherwise.
+ */
+function checkDate(editOnlyMode) {
+    let date = new Date(document.getElementById('task_due_date').value);
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+    if (date < today && !editOnlyMode) {
+        req_due_date_invalid = true
+        return true
+    }
+}
