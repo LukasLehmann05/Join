@@ -148,4 +148,6 @@ function checkDate(editOnlyMode) {
         req_due_date_invalid = true
         return true
     }
+    req_due_date_invalid = false
+    return false;
 }
