@@ -7,16 +7,18 @@ const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebase
  */
 async function fetchAllDataGlobal() {
     let AllData = {};
-    let joinFetch = await fetch(BASE_URL + ".json", {
+    let response = await fetch(BASE_URL + ".json", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
-    });
-    let joinData = await joinFetch.json();
+    })
+    if (!response.ok) {
+        throw new Error('Error fetching data: ' + response.status);
+    }
+    let joinData = await response.json();
     return AllData.data = joinData;
 }
-
 
 /**
  * Adds a task object to the database and displays it on the board when applicable.
@@ -51,12 +53,10 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
     if (!response.ok) {
         throw new Error('Error adding task: ' + response.status);
     }
-    else {
-        let responseData = await response.json();
-        let newTaskId = responseData.name;
-        if (window.location.pathname.endsWith('board.html')) {
-            displayNewTaskOnBoard(newTaskId, newTask);
-        }
+    let responseData = await response.json();
+    let newTaskId = responseData.name;
+    if (window.location.pathname.endsWith('board.html')) {
+        displayNewTaskOnBoard(newTaskId, newTask);
     }
 }
 
@@ -68,20 +68,16 @@ async function addTaskToDB(task_title, task_description, task_due_date, task_pri
  * @returns {Promise<void>}
  */
 async function updateTask(taskId, taskToUpdate) {
-    try {
-        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(taskToUpdate),
-            headers: {
-                'Content-Type': 'application/json'
+    let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+        method: 'PUT',
+        body: JSON.stringify(taskToUpdate),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (!response.ok) {
+        throw new Error('Error updating task: ' + response.status);
             }
-        })
-        if (!response.ok) {
-            throw new Error('Error updating task: ' + response.status);
-            }
-    } catch (error) {
-        console.error('Error updating task:', error)
-    }
 }
 
 
@@ -91,15 +87,11 @@ async function updateTask(taskId, taskToUpdate) {
  * @returns {Promise<void>}
  */
 async function deleteTask(taskId) {
-    try {
-        let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-            method: 'DELETE'
-        })
-        if (!response.ok) {
-            throw new Error('Error deleting task: ' + response.status);
-        }
-    } catch (error) {
-        console.error('Error deleting task:', error)
+    let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+        method: 'DELETE'
+    })
+    if (!response.ok) {
+        throw new Error('Error deleting task: ' + response.status);
     }
 }
 
@@ -111,14 +103,12 @@ async function deleteTask(taskId) {
  * @returns {Object|null} Task data object or null if not found
  */
 async function getTaskById(taskId) {
-    try {
-        let taskFetch = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
-        let taskData = await taskFetch.json();
-        return taskData;
-    } catch (error) {
-        console.error('Error fetching task by ID:', error);
-        return error;
+    let response = await fetch(`${BASE_URL}/tasks/${taskId}.json`);
+    if (!response.ok) {
+        throw new Error('Error fetching task: ' + response.status);
     }
+    let taskData = await response.json();
+    return taskData;
 }
 
 
@@ -128,13 +118,16 @@ async function getTaskById(taskId) {
  * @returns {Promise<void>}
  */
 async function postNewContactToDatabase(newUser) {
-    await fetch(BASE_URL + `/contacts.json`, {
+    let response = await fetch(BASE_URL + `/contacts.json`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newUser),
     });
+    if (!response.ok) {
+        throw new Error('Error adding contact: ' + response.status);
+    }
 }
 
 
@@ -144,12 +137,15 @@ async function postNewContactToDatabase(newUser) {
  * @returns {Promise<void>}
  */
 async function deleteThisContactFromDatabaseById(contactID) {
-    await fetch(BASE_URL + `/contacts/${contactID}.json`, {
+    let response = await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
     })
+    if (!response.ok) {
+        throw new Error('Error deleting contact: ' + response.status);
+    }
 }
 
 
@@ -160,13 +156,16 @@ async function deleteThisContactFromDatabaseById(contactID) {
  * @returns {Promise<void>}
  */
 async function editContactDataInDatabase(editedUser, contactID) {
-    await fetch(BASE_URL + `/contacts/${contactID}.json`, {
+    let response = await fetch(BASE_URL + `/contacts/${contactID}.json`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(editedUser),
     });
+    if (!response.ok) {
+        throw new Error('Error updating contact: ' + response.status);
+    }
 }
 
 
@@ -175,8 +174,11 @@ async function editContactDataInDatabase(editedUser, contactID) {
  * @returns {Promise<string|undefined>} Last contact id or undefined.
  */
 async function getLastContactAddedFromDatabase() {
-    let joinFetch = await fetch(BASE_URL + `/contacts.json`)
-    let joinData = await joinFetch.json();
+    let response = await fetch(BASE_URL + `/contacts.json`)
+    if (!response.ok) {
+        throw new Error('Error fetching contacts: ' + response.status);
+    }
+    let joinData = await response.json();
     return Object.keys(joinData).at(-1);
 }
 
@@ -187,20 +189,15 @@ async function getLastContactAddedFromDatabase() {
  * @returns {Promise<Object|null>} Contact object or null on error/not found.
  */
 async function getContactById(contactID) {
-    try {
-    let contactFetch = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
-    if (!contactFetch.ok) {
+    let response = await fetch(`${BASE_URL}/contacts/${contactID}.json`);
+    if (!response.ok) {
         throw new Error('Network response was not ok');
     }
-    let contactData = await contactFetch.json();
+    let contactData = await response.json();
     if (contactData === null) {
         return null;
     }
     return contactData;
-    } catch (error) {
-        console.error('Error fetching contact by ID:', error)
-        return null;
-    }
 }
 
 
@@ -212,7 +209,7 @@ async function getContactById(contactID) {
  * @returns {Promise<Object>} Response data
  */
 async function sendDataToUrl(payload, errorMessage) {
-  const response = await fetch(BASE_URL + `/users.json`, {
+  let response = await fetch(BASE_URL + `/users.json`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

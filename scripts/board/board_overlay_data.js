@@ -293,7 +293,7 @@ async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
  */
 async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
     const buttonEditTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonEditTaskAndCloseOverlay && checkForRequired(['title', 'dueDate'],true)) {
+    if (buttonEditTaskAndCloseOverlay && checkForRequired(['title', 'dueDate'], true)) {
         clearElementsOfNewTask();
         getAllFieldValuesOfEditTaskWhenUpdated();
         await sendUpdatedTaskToDB(taskId);
@@ -319,7 +319,7 @@ async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
 async function handleButtonAddActionAndCloseOverlay(buttonElement) {
     let taskState = getTaskStateFromOverlay(buttonElement);
     const buttonCreateTaskAndCloseOverlay = buttonElement ? buttonElement.getAttribute(DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY) === 'true' : false;
-    if (buttonCreateTaskAndCloseOverlay && checkForRequired(['title', 'dueDate', 'category'])) {
+    if (buttonCreateTaskAndCloseOverlay && checkForRequired(['title', 'dueDate', 'category'], false)) {
         await sendTaskToDB(taskState);
         return [renderNewTaskAddedToastContainer(), true];
     }

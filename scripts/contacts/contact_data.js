@@ -132,20 +132,38 @@ function getContactInputData(nameInput, phoneInput, emailInput) {
  */
 async function addNewContactToDatabase() {
     let newUser = getContactInputData("nameAdd", "phoneAdd", "emailAdd");
-    if (newUser.name.length > 3 && isOnlyLetters(newUser.name)) {
-        if (validateEmail(newUser.email) == true && newUser.email != "") {
-            if (validatePhoneByLength(newUser.phone) == true && newUser.phone != "") {
-                await postNewContactToDatabase(newUser);
-                await trimDownAddingContact(newUser, newUser.name, newUser.color);
-            } else {
-                displayHint('required_phone');
-            }
-        } else {
-            displayHint('required_email');
-        }
-    } else {
-        displayHint('required_name');
+    const isValid = validateContactInput(newUser, {
+        name: 'required_name',
+        email: 'required_email',
+        phone: 'required_phone'
+    });
+    if (!isValid) return;
+    await postNewContactToDatabase(newUser);
+    await trimDownAddingContact(newUser, newUser.name, newUser.color);
+}
+
+
+/**
+ * Validates contact input data and displays hints for invalid fields.
+ * @param {Object} user - The contact object to validate.
+ * @param {Object} hintKeys - Object with keys for name, email, phone hints.
+ * @returns {boolean} true if all fields are valid, false otherwise.
+ */
+function validateContactInput(user, hintKeys) {
+    let valid = true;
+    if (user.name.length <= 3 || !isOnlyLetters(user.name)) {
+        displayHint(hintKeys.name);
+        valid = false;
     }
+    if (!validateEmail(user.email) || user.email === "") {
+        displayHint(hintKeys.email);
+        valid = false;
+    }
+    if (!validatePhoneByLength(user.phone) || user.phone === "") {
+        displayHint(hintKeys.phone);
+        valid = false;
+    }
+    return valid;
 }
 
 
@@ -161,26 +179,20 @@ async function trimDownAddingContact(newUser, name, color) {
 
 
 /**
- * shell for handling the whole process of editing a new contact including validation, editing data in firebase, restructuring html list and confirmation for user
+ * shell for handling the whole process of editing a new contact including validation, editing data in firebase, restructuring html list and confirmation for user 
  * @async
  */
 async function editContactInDatabase() {
     let editedUser = getEditedContactData();
     let currentId = document.getElementById('deleteUser').getAttribute('data-id');
-    if (editedUser.name.length > 3 && isOnlyLetters(editedUser.name)) {
-        if (validateEmail(editedUser.email) == true && editedUser.email != "") {
-            if (validatePhoneByLength(editedUser.phone) == true && editedUser.phone != "") {
-                await editContactDataInDatabase(editedUser, currentId)
-                trimDownEditingUser(currentId, editedUser)
-            } else {
-                displayHint('required_edit_phone');
-            }
-        } else {
-            displayHint('required_edit_email');
-        }
-    } else {
-        displayHint('required_edit_name');
-    }
+    const isValid = validateContactInput(editedUser, {
+        name: 'required_edit_name',
+        email: 'required_edit_email',
+        phone: 'required_edit_phone'
+    });
+    if (!isValid) return;
+    await editContactDataInDatabase(editedUser, currentId);
+    await trimDownEditingUser(currentId, editedUser);
 }
 
 
