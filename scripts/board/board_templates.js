@@ -98,6 +98,7 @@ function taskCardTemplate(task, taskId) {
 /**
  * This function returns the HTML template for an assigned user icon.
  * @param {string} initials The initials of the user.
+ * @param {string} contactColor The background color for the user icon.
  * @returns {string} The HTML string for the user icon.
  */
 function assignedUserIconTemplate(initials, contactColor) {
@@ -125,6 +126,7 @@ function priorityIndicatorTemplate(iconPath) {
  * This function returns the HTML template for the overlay content of a task.
  * @param {Object} task The task object.
  * @param {string} taskId The ID of the task.
+ * @param {string} task_title The title of the task.
  * @returns {string} The HTML string for the overlay content.
  */
 function overlayContentTemplate(task, taskId, task_title) {
@@ -396,10 +398,9 @@ function overlayUpsertTaskAssignedUsersTemplate() {
 
 /**
  * This function returns the HTML template for the upsert subtasks section.
- * @param {string} taskId The ID of the task.
  * @returns {string} The HTML string for the subtasks section.
  */
-function overlayUpsertTaskSubtasksTemplate(taskId) {
+function overlayUpsertTaskSubtasksTemplate() {
     return  `
             <section class="upsert_subtasks_container">
                 <form class="input-form">

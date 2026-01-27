@@ -1,7 +1,11 @@
 let searchEvent=false;
+
+
 /**
  * This function initializes the input field event listener for task filtering.
  * It adds a debounced input event listener to the input field with ID 'task_filter_input_field'.
+ * @param {Array} allTasksByIdArr Array of all tasks indexed by their IDs.
+ * @returns {void}
  */
 function initInputFieldEventListener(allTasksByIdArr) {
     const inputField = document.getElementById('task_filter_input_field');
@@ -20,6 +24,7 @@ function initInputFieldEventListener(allTasksByIdArr) {
  * This function handles the input event for task filtering.
  * 
  * @param {*} event The input event object.
+ * @param {Array} allTasksByIdArr Array of all tasks indexed by their IDs.
  */
 function handleTermOfInput(event, allTasksByIdArr) {
     let inputText = event.target.value;
@@ -31,6 +36,7 @@ function handleTermOfInput(event, allTasksByIdArr) {
  * This function handles the input submission for task filtering.
  * 
  * @param {string} inputText The text input for filtering tasks.
+ * @param {Array} allTasksByIdArr Array of all tasks indexed by their IDs.
  */
 async function handleInputSubmit(inputText, allTasksByIdArr) {
     if (inputText.length > 2) {
@@ -52,8 +58,8 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
 /**
  * This function applies the search filter logic to the task board.
  * 
- * @param {Array} filteredByTitle 
- * @param {Array} filteredByDescription 
+ * @param {Array} filteredByTitle Array of task IDs filtered by title.
+ * @param {Array} filteredByDescription Array of task IDs filtered by description.
  */
 function searchTaskBoardFilterLogic(filteredByTitle, filteredByDescription) {
     clearBoard();

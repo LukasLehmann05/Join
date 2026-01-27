@@ -32,6 +32,7 @@ async function sendUpdatedTaskToDB(taskId, upsertMode) {
  * This function retrieves the updated task object with new field values.
  * 
  * @param {string} taskId The ID of the task to update.
+ * @param {boolean} upsertMode Whether the function is called in upsert mode.
  * @returns {Promise<Object>} The updated task object.
  */
 async function getTaskToUpdate(taskId, upsertMode) {
@@ -96,6 +97,7 @@ function clearElementsOfNewTask() {
  * This function renders the overlay content for a given task.
  * 
  * @param {string} taskId The ID of the task to render in the overlay.
+ * @returns {Promise<void>} A promise that resolves when the content is rendered.
  */
 async function renderOverlayContent(taskId) {
     const overlayContent = document.getElementById('overlay_content');

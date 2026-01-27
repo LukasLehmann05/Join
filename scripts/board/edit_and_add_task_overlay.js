@@ -36,7 +36,7 @@ async function openEditTaskOverlay(buttonElement, taskId) {
 function upsertTaskTemplateHandler(taskId){
     renderOverlayUpsertTaskDetailsContainer();
     upsertTaskTemplatesWrapperContainer1(taskId);
-    upsertTaskTemplatesWrapperContainer2(taskId);
+    upsertTaskTemplatesWrapperContainer2();
 }
    
 
@@ -69,15 +69,14 @@ function upsertTaskTemplatesWrapperContainer1(taskId){
 /**
  * This function renders the second wrapper container for the upsert task overlay.
  * 
- * @param {string} taskId The ID of the task to add or edit.
  */
-function upsertTaskTemplatesWrapperContainer2(taskId){
+function upsertTaskTemplatesWrapperContainer2(){
     let taskDetailsContainer2 = document.getElementById('task_details_container_2');
     taskDetailsContainer2.innerHTML = `
     ${overlayUpsertTaskPriorityTemplate()}
     ${overlayUpsertTaskAssignedUsersTemplate()}
     ${overlayUpsertCategoryOptionTemplate()}
-    ${overlayUpsertTaskSubtasksTemplate(taskId)}`;
+    ${overlayUpsertTaskSubtasksTemplate()}`;
 }
 
 
@@ -190,6 +189,7 @@ function checkScreenSizeForRedirect() {
  * This function renders the overlay content for adding a new task.
  * 
  * @param {string} taskId The ID of the new task.
+ * @param {string} taskState The state of the new task.
  * @returns {Promise<void>} A promise that resolves when rendering is complete.
  */
 function renderOverlayAddTask(taskId, taskState) {

@@ -300,6 +300,7 @@ function checkIfNoTasksInColumn(columnId) {
 /**
  * This function observes a column for becoming empty and renders "no task" info.
  * @param {string} columnId The ID of the column to observe.
+ * @returns {void}
  */
 function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
