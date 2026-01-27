@@ -1,11 +1,5 @@
 const userColorProperty = {};
-const contactColorProperty = {};
-
 const AllData = {};
-
-/**
- * array for colours to choose from for generating background colour in contact list
- */
 const colours = [
     '#b4a429ff',
     '#FF4646',
@@ -26,9 +20,8 @@ const colours = [
 
 
 /**
- * chooses color for contact randomly from colours array. Gets called in function: "renderContactList()"
- * assigns colors to contact permanently in contactColorProperty
- * @const contactColorProperty
+ * Assigns a random color from the colours array to a contact.
+ * @returns {string} - The assigned color in hexadecimal format.
  */
 function assignColorToContact() {
     let userColor = colours[Math.floor(Math.random() * colours.length)];
