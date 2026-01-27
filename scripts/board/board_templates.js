@@ -10,6 +10,7 @@ function noTasksDoToTemplate() {
             `
 }
 
+
 /**
  * This function returns the HTML template for the "No tasks in progress" info.
  * @returns {string} The HTML string for the info template.

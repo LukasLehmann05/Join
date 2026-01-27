@@ -16,6 +16,7 @@ function renderSubtasksListItems(taskId, subtasksArr) {
     }
 }
 
+
 /**
  * This function updates the global subtasks array for the current task.
  * @param {Array} subtasksArr Array of subtask objects.
