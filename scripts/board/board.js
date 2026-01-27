@@ -102,10 +102,6 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
          let subtaskContainer = document.getElementById(taskId + '_subtask_status_bar_container');
          subtaskContainer.style.display ="none";
     }
-    if (relationOfDoneSubtasks[0] === '0') {
-        let taskBar = document.getElementById(taskId + '_subtasks_status_bar_element');
-        taskBar.style.display ="none";
-    }
 }
 
 
