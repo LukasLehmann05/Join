@@ -143,6 +143,7 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
     }
 }
 
+
 /**
  * This function renders the assigned user infos in the overlay.
  * @param {boolean} onlyId Whether to render only the ID/icon or also the name.

@@ -43,6 +43,7 @@ function addTaskInit() {
     loadContactsForAssign();
 }
 
+
 /**
  * Caches frequently used DOM elements for priority, subtasks and inputs.
  */
@@ -64,6 +65,7 @@ function loadPrioButtonsAndSubtaskSectionById() {
     req_category_text = document.getElementById("required_category");
 }
 
+
 /**
  * Returns a promise for the globally fetched data object.
  * @returns {Promise<Object>} Global join data promise.
@@ -72,6 +74,7 @@ function loadDataFromAPI() {
     let joinData = fetchAllDataGlobal()
     return joinData
 }
+
 
 /**
  * Validates required fields and creates a new task when valid.
@@ -89,6 +92,7 @@ async function createTask() {
     }
 }
 
+
 /**
  * Sends the new task payload to the database.
  * @param {string} stateOfNewTask - Initial state for the task.
@@ -96,6 +100,7 @@ async function createTask() {
 async function sendTaskToDB(stateOfNewTask) {
     await addTaskToDB(task_title.value, task_description.value, task_due_date.value, current_priority, task_category.value, stateOfNewTask, allAssigneesArr, allSubtasksArr);
 }
+
 
 /**
  * Redirects the user to the board page.
@@ -124,6 +129,7 @@ function clearAllInputs() {
     subtask_amount = 0
 }
 
+
 /**
  * Changes button styling and internal priority state.
  * @param {string} priority - One of PRIORITY_ARR values.
@@ -143,6 +149,7 @@ function changePriority(priority) {
             break;
     }
 }
+
 
 /**
  * Removes the CSS classes for the current priority button background.
@@ -164,6 +171,7 @@ function removeOldBackground() {
     }
 }
 
+
 /**
  * Sets the UI and internal state to low priority.
  */
@@ -172,6 +180,7 @@ function changeToLowPrio() {
     current_priority = PRIORITY_ARR[0]
     low_prio_button.classList.add("bg-green")
 }
+
 
 /**
  * Sets the UI and internal state to medium priority.
@@ -183,6 +192,7 @@ function changeToMedPrio() {
     medium_prio_button.classList.remove("yellow-filter")
 }
 
+
 /**
  * Sets the UI and internal state to urgent priority.
  */
@@ -191,6 +201,7 @@ function changeToUrgentPrio() {
     current_priority = PRIORITY_ARR[2]
     urgent_prio_button.classList.add("bg-red")
 }
+
 
 /**
  * Shows UI indicators for any required fields that are missing.
@@ -214,6 +225,7 @@ function missingInputs() {
     }
 }
 
+
 /**
  * Resets internal flags that track required-field completion.
  */
@@ -222,6 +234,7 @@ function resetRequiredValues() {
     req_due_date = false
     req_category = false
 }
+
 
 /**
  * Displays subtask action buttons when a subtask is present.
@@ -233,6 +246,7 @@ function showSubtaskButtons() {
     }
 }
 
+
 /**
  * Hides the subtask action buttons.
  */
@@ -243,6 +257,7 @@ function hideSubtaskButtons() {
     }
 }
 
+
 /**
  * Clears subtask input, rendered list and resets subtask state.
  */
@@ -252,6 +267,7 @@ function clearSubtask() {
     document.getElementById("subtask_render").innerHTML = ""
     hideSubtaskButtons()
 }
+
 
 /**
  * Adds a new subtask to the UI and internal subtasks array.
@@ -269,6 +285,7 @@ function addSubtask() {
     }
 }
 
+
 /**
  * Returns a new unique subtask id.
  * @returns {string}
@@ -277,6 +294,7 @@ function returnSubtaskId() {
     subtask_amount += 1
     return "subtask_" + subtask_amount
 }
+
 
 /**
  * Clears UI indicators for required fields.
@@ -289,6 +307,7 @@ function clearRequiredIndicators() {
     task_due_date.classList.remove("missing-input")
     task_category.classList.remove("missing-input")
 }
+
 
 /**
  * Removes the missing-input indicator for a specific field.
@@ -313,6 +332,7 @@ function removeIndicatorOnInput(field) {
     }
 }
 
+
 /**
  * Replaces a subtask list item with its editable input UI.
  * @param {string} subtask_id - The id of the subtask to edit.
@@ -324,6 +344,7 @@ function showSubtaskEdit(subtask_id) {
     let subtask_edit_template = returnSubtaskEditTemplate(subtask_id, original_subtask_text);
     subtask_to_edit.innerHTML = subtask_edit_template
 }
+
 
 /**
  * Deletes a subtask element and removes it from internal array.
@@ -338,6 +359,7 @@ function deleteSubtask(event, subtask_id) {
     subtask_to_delete.remove()
 }
 
+
 /**
  * Deletes a subtask that is currently being edited.
  * @param {Event} event - The event object.
@@ -351,6 +373,7 @@ function deleteSubtaskEdit(event, subtask_id) {
     subtask_to_delete.remove()
 }
 
+
 /**
  * Removes a subtask object from the internal subtasks array by text match.
  * @param {string} subtask_text - The text of the subtask to remove.
@@ -362,6 +385,7 @@ function removeSubtaskFromArray(subtask_text) {
     }
 }
 
+
 /**
  * Reads the edited subtask input and appends it to the subtasks array.
  * @param {string} subtask_id - The id of the subtask being edited.
@@ -372,6 +396,7 @@ function addSubtaskEditToArray(subtask_id) {
     let subtaskObj = { title: edited_subtask_text, done: false }
     allSubtasksArr.push(subtaskObj)
 }
+
 
 /**
  * Confirms an edit to a subtask: updates internal array and UI.

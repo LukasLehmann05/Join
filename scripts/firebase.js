@@ -1,6 +1,5 @@
 const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebasedatabase.app/join/"
 
-
 /**
  * fetches data onetime and stores it in const "AllData" for everybodys use at the start
  * @returns {Promise<Object>} All data from the database
@@ -20,6 +19,7 @@ async function fetchAllDataGlobal() {
     let joinData = await response.json();
     return AllData.data = joinData;
 }
+
 
 /**
  * Adds a task object to the database and displays it on the board when applicable.

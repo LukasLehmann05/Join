@@ -114,6 +114,7 @@ function displayOverlay(overlay) {
   }, 5000);
 }
 
+
 /**
  * Fetches tasks from the global data store for summary counts.
  * @returns {Promise<Array>} Array of task objects.

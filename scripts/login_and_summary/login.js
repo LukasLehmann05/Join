@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', initLogin);
 
+
 /**
  * Initializes login page event handlers.
  * Sets up normal and guest login flows when DOM is ready.
