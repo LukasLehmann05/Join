@@ -111,6 +111,7 @@ function checkForRequired(requiredFields, editOnlyMode) {
     return isValid;
 }
 
+
 /**
  * This function sets the required value flags based on current input values to be used in validation
  */
