@@ -28,7 +28,7 @@
     }
 
     .overlay_title {
-        min-height: 38px;
+        height: auto;
     }
 }
 
