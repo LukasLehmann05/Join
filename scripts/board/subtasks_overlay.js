@@ -1,6 +1,5 @@
 /**
  * This function renders the list items for subtasks in the overlay.
- * 
  * @param {string} taskId The ID of the task.
  * @param {Array} subtasksArr Array of subtask objects.
  */
@@ -19,7 +18,6 @@ function renderSubtasksListItems(taskId, subtasksArr) {
 
 /**
  * This function updates the global subtasks array for the current task.
- * 
  * @param {Array} subtasksArr Array of subtask objects.
  */
 function getSubtasksOfTask(subtasksArr) {
@@ -33,7 +31,6 @@ function getSubtasksOfTask(subtasksArr) {
 
 /**
  * This function renders the checkbox for a subtask list item.
- * 
  * @param {string} taskId The ID of the task.
  * @param {number} subtaskCounter The index of the subtask (1-based).
  * @param {boolean} subtaskDone Whether the subtask is done.
@@ -53,7 +50,6 @@ function renderSubtaskListItemsCheckboxes(taskId, subtaskCounter, subtaskDone) {
 
 /**
  * This function toggles the done state of a subtask and updates the UI.
- * 
  * @param {string} taskId The ID of the task.
  * @param {number} subtaskCounter The index of the subtask (1-based).
  */
@@ -69,7 +65,6 @@ function toggleSubtaskDone(taskId, subtaskCounter) {
 
 /**
  * This function renders the editable list items for subtasks in the overlay.
- * 
  * @param {Array} subtasksArr Array of subtask objects.
  */
 function renderSubtaskEditListItems(subtasksArr) {

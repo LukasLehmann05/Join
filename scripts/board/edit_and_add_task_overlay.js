@@ -30,7 +30,6 @@ async function openEditTaskOverlay(buttonElement, taskId) {
 
 /**
  * This function handles rendering the upsert task template containers.
- * 
  * @param {string} taskId The ID of the task to add or edit.
  */
 function upsertTaskTemplateHandler(taskId){
@@ -52,7 +51,6 @@ function renderOverlayUpsertTaskDetailsContainer() {
 
 /**
  * This function renders the first wrapper container for the upsert task overlay.
- * 
  * @param {string} taskId The ID of the task to add or edit.
  */
 function upsertTaskTemplatesWrapperContainer1(taskId){
@@ -68,7 +66,6 @@ function upsertTaskTemplatesWrapperContainer1(taskId){
 
 /**
  * This function renders the second wrapper container for the upsert task overlay.
- * 
  */
 function upsertTaskTemplatesWrapperContainer2(){
     let taskDetailsContainer2 = document.getElementById('task_details_container_2');
@@ -82,7 +79,6 @@ function upsertTaskTemplatesWrapperContainer2(){
 
 /**
  * This function checks if a task is being added or edited and returns the appropriate object.
- * 
  * @param {string} taskId The ID of the task.
  * @returns {Object} The task object to add or edit.
  */
@@ -97,7 +93,6 @@ function checkTaskToAddOrEdit(taskId) {
 
 /**
  * This function creates and returns an empty task object.
- * 
  * @returns {Object} An empty task object.
  */
 function createEmptyTask() {
@@ -116,7 +111,6 @@ function createEmptyTask() {
 
 /**
  * This function escapes special characters in textarea content for safe HTML rendering.
- * 
  * @param {string} text The text to escape.
  * @returns {string} The escaped text.
  */
@@ -152,7 +146,6 @@ async function openAddTaskOverlay(buttonElement) {
 
 /**
  * This function retrieves the task state attribute from a button element.
- * 
  * @param {HTMLElement} buttonElement - The button element from which to extract the task state. 
  * @returns - {string|null} The task state attribute value or null if not found.
  */
@@ -187,7 +180,6 @@ function checkScreenSizeForRedirect() {
 
 /**
  * This function renders the overlay content for adding a new task.
- * 
  * @param {string} taskId The ID of the new task.
  * @param {string} taskState The state of the new task.
  * @returns {Promise<void>} A promise that resolves when rendering is complete.

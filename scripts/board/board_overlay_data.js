@@ -14,7 +14,6 @@ const DATA_ATTRIBUTE_EDIT_TASK_AND_CLOSE_OVERLAY = 'data-edit-task-and-close-ove
 
 /**
  * This function sends the updated task to the database and refreshes the board.
- * 
  * @param {string} taskId The ID of the task to update.
  */
 async function sendUpdatedTaskToDB(taskId, upsertMode) {
@@ -30,7 +29,6 @@ async function sendUpdatedTaskToDB(taskId, upsertMode) {
 
 /**
  * This function retrieves the updated task object with new field values.
- * 
  * @param {string} taskId The ID of the task to update.
  * @param {boolean} upsertMode Whether the function is called in upsert mode.
  * @returns {Promise<Object>} The updated task object.
@@ -64,7 +62,6 @@ function getAllFieldValuesOfEditTaskWhenUpdated() {
 
 /**
  * This function opens a task in the overlay and renders its content.
- * 
  * @param {string} taskId The ID of the task to open.
  */
 async function openTaskInOverlay(taskId) {
@@ -95,7 +92,6 @@ function clearElementsOfNewTask() {
 
 /**
  * This function renders the overlay content for a given task.
- * 
  * @param {string} taskId The ID of the task to render in the overlay.
  * @returns {Promise<void>} A promise that resolves when the content is rendered.
  */
@@ -132,7 +128,6 @@ function enableScrollOnBody() {
 /**
  * This function renders the assigned user infos in the overlay.
  * It first checks if it is in edit mode to use add task rendering instead
- * 
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  * @param {boolean} onlyId Whether to render only the ID/icon or also the name.
  * @param {string} containerIdSuffix The ID of the container to render into.
@@ -150,7 +145,6 @@ async function renderAssignedUserInfos(taskAssignees, onlyId, containerIdSuffix)
 
 /**
  * This function renders the assigned user infos in the overlay.
- * 
  * @param {boolean} onlyId Whether to render only the ID/icon or also the name.
  * @param {string} containerIdSuffix The ID of the container to render into.
  */
@@ -168,7 +162,6 @@ async function renderEditOverlayAssignee(onlyId, containerIdSuffix) {
 
 /**
  * This function updates the global assignees array for the current task.
- * 
  * @param {Array} taskAssignees Array of user/contact IDs assigned to the task.
  */
 function getAssigneesOfTask(taskAssignees) {
@@ -182,7 +175,6 @@ function getAssigneesOfTask(taskAssignees) {
 
 /**
  * This function returns the HTML content to render assigned user infos.
- * 
  * @param {boolean} renderOnlyId Whether to render only the ID/icon or also the name.
  * @param {Object} contact The user object.
  * @returns {string} The HTML string for the assigned user info.
@@ -206,7 +198,6 @@ function getContentToRenderAssignedUserInfos(renderOnlyId, contact) {
 
 /**
  * This function closes the overlay if the background is clicked.
- * 
  * @param {HTMLElement} divElement The overlay div element.
  * @param {Event} event The click event object.
  */
@@ -219,7 +210,6 @@ function closeOverlayByBackdrop(divElement, event) {
 
 /**
  * This function closes the overlay and handles saving, editing, or creating tasks based on button attributes.
- * 
  * @param {HTMLElement} buttonElement The button element that triggered the close (optional).
  * @param {string} taskId The ID of the task to save or edit (optional).
  */
@@ -264,7 +254,6 @@ function delayedClose() {
 /**
  * This function checks if the button has the data attribute for saving the task when closing the overlay,
  * and if so, sends the updated task to the database.
- * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to save.
  * @returns {Promise<Array<boolean>>} An array indicating whether the save action or only close action was performed.
@@ -288,7 +277,6 @@ async function handleButtonSaveActionAndCloseOverlay(buttonElement, taskId) {
 /**
  * This function checks if the button has the data attribute for editing the task and closing the overlay,
  * and if so, collects the updated field values and saves the task to the database.
- * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @param {string} taskId The ID of the task to edit.
  * @returns {Promise<boolean>} A boolean indicating whether the edit action was performed.
@@ -314,7 +302,6 @@ async function handleButtonEditActionAndCloseOverlay(buttonElement, taskId) {
 /**
  * This function checks if the button has the data attribute for creating a new task and closing the overlay,
  * and if so, triggers the creation of a new task.
- * 
  * @param {HTMLElement} buttonElement The button element that triggered the action.
  * @returns {Promise<Array>} An array containing the toast container and a boolean indicating whether the create action was performed.
  */
@@ -337,7 +324,6 @@ async function handleButtonAddActionAndCloseOverlay(buttonElement) {
 
 /**
  * This function retrieves the task state from the overlay button element.
- * 
  * @param {HTMLElement} buttonElement - The button element containing the task state data attribute.
  * @returns {string} The task state retrieved from the button element or a default value.
  */
@@ -355,7 +341,6 @@ function getTaskStateFromOverlay(buttonElement) {
 
 /**
  * This function swaps the image and text style on hover for a button.
- * 
  * @param {HTMLElement} button The button element.
  * @param {boolean} isHover Whether the button is being hovered.
  */
@@ -392,7 +377,6 @@ function toggleTitleCategorySeparatorInAddTaskOverlay() {
 
 /**
  * This function deletes a task from the overlay and updates the UI and database accordingly.
- * 
  * @param {string} taskId This is the id of the task to delete
  * @param {string} userId This is the id of the user who owns the task
  */

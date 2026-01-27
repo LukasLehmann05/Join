@@ -117,7 +117,7 @@ function clearAllInputs() {
     req_category = false
     req_due_date_invalid = false
     allSubtasksArr = []
-    changePriority(PRIORITY_ARR[1]) // reset to medium priority
+    changePriority(PRIORITY_ARR[1])
     clearRequiredIndicators()
     clearContacts()
     clearSubtask()

@@ -1,4 +1,4 @@
-let searchEvent=false;
+let searchEvent = false;
 
 
 /**
@@ -22,7 +22,6 @@ function initInputFieldEventListener(allTasksByIdArr) {
 
 /**
  * This function handles the input event for task filtering.
- * 
  * @param {*} event The input event object.
  * @param {Array} allTasksByIdArr Array of all tasks indexed by their IDs.
  */
@@ -34,7 +33,6 @@ function handleTermOfInput(event, allTasksByIdArr) {
 
 /**
  * This function handles the input submission for task filtering.
- * 
  * @param {string} inputText The text input for filtering tasks.
  * @param {Array} allTasksByIdArr Array of all tasks indexed by their IDs.
  */
@@ -57,7 +55,6 @@ async function handleInputSubmit(inputText, allTasksByIdArr) {
 
 /**
  * This function applies the search filter logic to the task board.
- * 
  * @param {Array} filteredByTitle Array of task IDs filtered by title.
  * @param {Array} filteredByDescription Array of task IDs filtered by description.
  */
@@ -108,7 +105,6 @@ function showNoSearchResultOnBoardInfo() {
 
 /**
  * This function disables the "no search result" message on the board overlay.
- * 
  */
 function disableShowNoSearchResultOnBoardInfo() {
     let noInfoContainer = document.getElementById('no_task_found_message');

@@ -331,7 +331,6 @@ async function initializeBoard() {
     const joinData = await fetchAllDataGlobal();
     let allTasksByIdArr = getAllTaskIds(joinData);
     initInputFieldEventListener(allTasksByIdArr);
-
     setAllTasksObj(allTasksByIdArr, joinData.tasks);
     await checkAssigneesExistence(allTasksByIdArr, joinData);
     renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);

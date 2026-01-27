@@ -133,7 +133,6 @@ function toggleMenuVisibility(event, menu) {
 
 /**
  * This function opens the avatar menu.
- * 
  * @param {HTMLElement} menu - This is the avatar menu element.
  */
 function openMenu(menu) {
@@ -147,7 +146,6 @@ function openMenu(menu) {
 
 /**
  * This function closes the avatar menu.
- * 
  * @param {HTMLElement} menu - This is the avatar menu element.
  */
 function closeMenu(menu) {
