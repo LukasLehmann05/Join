@@ -3,6 +3,7 @@ const BASE_URL = "https://remotestorage-d19c5-default-rtdb.europe-west1.firebase
 
 /**
  * fetches data onetime and stores it in const "AllData" for everybodys use at the start
+ * @returns {Promise<Object>} All data from the database
  * @async @global
  */
 async function fetchAllDataGlobal() {
@@ -115,7 +116,6 @@ async function getTaskById(taskId) {
 /**
  * Adds a new contact to the contacts collection in the database.
  * @param {Object} newUser - Contact object containing name, email, phone, etc.
- * @returns {Promise<void>}
  */
 async function postNewContactToDatabase(newUser) {
     let response = await fetch(BASE_URL + `/contacts.json`, {
@@ -203,7 +203,6 @@ async function getContactById(contactID) {
 
 /**
  * Sends data to URL via POST
- * @param {string} url - URL to send to
  * @param {Object} payload - Data to send
  * @param {string} errorMessage - Error message prefix
  * @returns {Promise<Object>} Response data
