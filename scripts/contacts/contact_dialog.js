@@ -1,5 +1,7 @@
 /**
  * checks for screen width to adjust dialog incoming direction.
+ * @param {string} id - The ID of the dialog window.
+ * @param {string} id2 - The ID of the dialog content.
  */
 function directionOfIncomingDialog(id, id2) {
     renderDialog(id2);
@@ -15,6 +17,8 @@ function directionOfIncomingDialog(id, id2) {
 
 /**
  * gives dialogs initial translating values
+ * @param {string} id - The ID of the dialog window.
+ * @param {string} id2 - The ID of the dialog content.
  */
 function giveInitialPosition(id, id2) {
     document.getElementById(id2).style.transform = 'translateY(200%)';
@@ -28,6 +32,8 @@ function giveInitialPosition(id, id2) {
 
 /**
  * opens dialog window.
+ * @param {string} id - The ID of the dialog window.
+ * @param {string} id2 - The ID of the dialog content.
  */
 function openDialog(id, id2) {
     let dialog = document.getElementById(id);
@@ -44,6 +50,8 @@ function openDialog(id, id2) {
 
 /**
  * closes dialog window via button
+ * @param {string} id - The ID of the dialog window.
+ * @param {string} id2 - The ID of the dialog content.
  */
 function closeDialog(id, id2) {
     let dialog = document.getElementById(id);
@@ -60,6 +68,7 @@ function closeDialog(id, id2) {
 
 /**
  * decides specific translation values for specific dialogs
+ * @param {string} id2 - The ID of the dialog content.
  */
 function decideTranslationBigScreen(id2) {
     document.getElementById(id2).style.transform = 'translateX(200%)';
@@ -71,6 +80,7 @@ function decideTranslationBigScreen(id2) {
 
 /**
  * choose specific values for specific dialogs
+ * @param {string} id2 - The ID of the dialog content.
  */
 function decideTranslationSmallScreen(id2) {
     document.getElementById(id2).style.transform = 'translateY(200%)';
@@ -85,6 +95,7 @@ function decideTranslationSmallScreen(id2) {
 
 /**
  * closes dialog window via window click
+ * @param {Event} event - The click event.
  */
 window.onclick = function (event) {
     let dialog = document.getElementById('dialogWindow');
@@ -132,6 +143,8 @@ function adjustPosition() {
 
 /**
  * handles the appearing/disappearing of the dialogs during the process of adding a new contact
+ * @param {string} id - The ID of the dialog window.
+ * @param {string} idContent - The ID of the dialog content.
  */
 function dialogAppearences(id, idContent) {
     closeDialog(id, idContent);
@@ -141,6 +154,7 @@ function dialogAppearences(id, idContent) {
 
 /**
  * renders edit or add dialog from html template
+ * @param {string} id - The ID of the dialog content.
  */
 function renderDialog(id) {
     let dialog = document.getElementById('dialogWindow');
