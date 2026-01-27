@@ -1,7 +1,3 @@
-/**
- * @fileoverview Manages the user avatar in the header, including
- * rendering initials, toggling the avatar menu, and handling menu actions.
- */
 let avatarMenuIsActive = false;
 
 

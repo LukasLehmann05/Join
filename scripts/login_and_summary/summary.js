@@ -87,6 +87,10 @@ function showGreetingOverlay() {
 
 /**
  * chooses the greeting message based on the availability of the user name
+ * @param {string} fullName - User's full name.
+ * @param {Element} overlayText - Element for greeting text.
+ * @param {Element} overlayName - Element for name display.
+ * @param {string} greeting - Greeting text.
  */
 function chooseGreeting(fullName, overlayText, overlayName, greeting) {
   if (!fullName) {
@@ -101,6 +105,7 @@ function chooseGreeting(fullName, overlayText, overlayName, greeting) {
 
 /**
  * Removes and adds css classes to the overlay
+ * @param {Element} overlay - Overlay element to display.
  */
 function displayOverlay(overlay) {
   overlay.classList.remove('hidden');

@@ -189,6 +189,8 @@ function showValidationErrors(errors, ui) {
 
 /**
  * Shows name field error if present.
+ * @param {Object} errors - Errors map.
+ * @param {Object} ui - Signup UI elements.
  */
 function showNameError(errors, ui) {
   if (!errors.name) return;
@@ -198,6 +200,8 @@ function showNameError(errors, ui) {
 
 /**
  * Shows email field error if present.
+ * @param {Object} errors - Errors map.
+ * @param {Object} ui - Signup UI elements.
  */
 function showEmailError(errors, ui) {
   if (!errors.email) return;
@@ -207,6 +211,8 @@ function showEmailError(errors, ui) {
 
 /**
  * Shows password field error if present.
+ * @param {Object} errors - Errors map.
+ * @param {Object} ui - Signup UI elements.
  */
 function showPasswordError(errors, ui) {
   if (!errors.password) return;
@@ -216,6 +222,8 @@ function showPasswordError(errors, ui) {
 
 /**
  * Shows password confirmation error if present.
+ * @param {Object} errors - Errors map.
+ * @param {Object} ui - Signup UI elements.
  */
 function showPasswordConfirmError(errors, ui) {
   if (!errors.passwordConfirm) return;
