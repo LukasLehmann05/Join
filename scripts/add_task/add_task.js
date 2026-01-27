@@ -20,8 +20,8 @@ let req_category_text = null;
 let subtask_buttons_active = false
 let contacts_shown = false
 
-let current_priority = PRIORITY_ARR[1]  // default medium priority
-let stateOfNewTask = TASK_STATE_ARR[0] // default "todo" state
+let current_priority = PRIORITY_ARR[1]
+let stateOfNewTask = TASK_STATE_ARR[0]
 
 let req_title = false
 let req_due_date = false
@@ -292,7 +292,7 @@ function clearRequiredIndicators() {
 
 /**
  * Removes the missing-input indicator for a specific field.
- * @param {string} field
+ * @param {string} field - One of "title", "due_date", "category".
  */
 function removeIndicatorOnInput(field) {
     switch (field) {
@@ -315,7 +315,7 @@ function removeIndicatorOnInput(field) {
 
 /**
  * Replaces a subtask list item with its editable input UI.
- * @param {string} subtask_id
+ * @param {string} subtask_id - The id of the subtask to edit.
  */
 function showSubtaskEdit(subtask_id) {
     let subtask_to_edit = document.getElementById(subtask_id);
@@ -327,8 +327,8 @@ function showSubtaskEdit(subtask_id) {
 
 /**
  * Deletes a subtask element and removes it from internal array.
- * @param {Event} event
- * @param {string} subtask_id
+ * @param {Event} event - The event object.
+ * @param {string} subtask_id - The id of the subtask to delete.
  */
 function deleteSubtask(event, subtask_id) {
     event.stopPropagation()
@@ -340,8 +340,8 @@ function deleteSubtask(event, subtask_id) {
 
 /**
  * Deletes a subtask that is currently being edited.
- * @param {Event} event
- * @param {string} subtask_id
+ * @param {Event} event - The event object.
+ * @param {string} subtask_id - The id of the subtask to delete.
  */
 function deleteSubtaskEdit(event, subtask_id) {
     event.stopPropagation()
@@ -353,7 +353,7 @@ function deleteSubtaskEdit(event, subtask_id) {
 
 /**
  * Removes a subtask object from the internal subtasks array by text match.
- * @param {string} subtask_text
+ * @param {string} subtask_text - The text of the subtask to remove.
  */
 function removeSubtaskFromArray(subtask_text) {
     let subtask_index = allSubtasksArr.findIndex(subtask => subtask.title === subtask_text)
@@ -364,7 +364,7 @@ function removeSubtaskFromArray(subtask_text) {
 
 /**
  * Reads the edited subtask input and appends it to the subtasks array.
- * @param {string} subtask_id
+ * @param {string} subtask_id - The id of the subtask being edited.
  */
 function addSubtaskEditToArray(subtask_id) {
     let subtask_input_field = document.getElementById("subtask_edit_input_" + subtask_id)
@@ -375,7 +375,7 @@ function addSubtaskEditToArray(subtask_id) {
 
 /**
  * Confirms an edit to a subtask: updates internal array and UI.
- * @param {string} subtask_id
+ * @param {string} subtask_id - The id of the subtask being edited.
  */
 function confirmSubtaskEdit(subtask_id) {
     addSubtaskEditToArray(subtask_id)

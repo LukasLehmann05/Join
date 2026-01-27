@@ -47,7 +47,7 @@ function showContacts() {
 
 /**
  * Toggles assignment of a contact to the new task.
- * @param {string} contact_id
+ * @param {string} contact_id - Unique id of the contact to assign/unassign.
  */
 function assignContact(contact_id) {
     if (allAssigneesArr.includes(contact_id)) {
@@ -75,7 +75,7 @@ async function loadContactsForAssign() {
 
 /**
  * Removes a contact from the assignees list and updates UI.
- * @param {string} contact_id
+ * @param {string} contact_id - Unique id of the contact to unassign.
  */
 function unassignContact(contact_id) {
     let contact_index = allAssigneesArr.indexOf(contact_id)
@@ -94,6 +94,7 @@ function unassignContact(contact_id) {
 
 /**
  * Checks if the small contact image is rendered or not
+ * @param {string} contact_id The ID of the contact to check.
  */
 function checkForContactToRemove(contact_id) {
     let required_contact = document.getElementById("small_contact_" + contact_id)
@@ -109,7 +110,7 @@ function checkForContactToRemove(contact_id) {
 
 /**
  * Renders a compact contact icon into the assigned-contacts area.
- * @param {string} contact_id
+ * @param {string} contact_id - Unique id of the contact to render.
  */
 async function renderSmallContacts(contact_id) {
     let contact = await getContactById(contact_id)
@@ -138,7 +139,7 @@ function reRenderSmallContacts() {
 
 /**
  * Removes a compact assigned-contact element from the DOM.
- * @param {string} contact_id
+ * @param {string} contact_id - Unique id of the contact to remove.
  */
 function removeSmallContact(contact_id) {
     const small_contact_element = document.getElementById("small_contact_" + contact_id)
@@ -158,7 +159,7 @@ function checkContactRenderAmount() {
 
 /**
  * Creates the overflow container if it not exists, otherwise changes its amount
- * @param {number} amount
+ * @param {number} amount - The amount to set in the overflow display.
  */
 function contactRenderOverflow(amount) {
     let contact_overflow_element = document.getElementById("contact_render_overflow")
@@ -213,8 +214,8 @@ function getInitialsFromUser(user) {
 
 /**
  * Associates a task id with a user by updating the user's tasks in DB.
- * @param {string} userId
- * @param {string} taskId
+ * @param {string} userId - Unique id of the user.
+ * @param {string} taskId - Unique id of the task to assign.
  */
 function assignTaskToUserById(userId, taskId) {
     let allTasksOfUser = [];
@@ -225,8 +226,10 @@ function assignTaskToUserById(userId, taskId) {
 
 /**
  * closes assignee list via observing if the button is loaded
+ * @param {string} contact_id - Unique id of the contact to unassign.
+ * @returns {string} HTML string for a contact option element.
  */
-const observer = new MutationObserver((mutations, obs) => {
+const observer = new MutationObserver((obs) => {
     let element = document.getElementById('contact-button');
     if (element) {
         document.addEventListener('click', function (event) {
