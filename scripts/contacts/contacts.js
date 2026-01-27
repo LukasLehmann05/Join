@@ -42,6 +42,7 @@ function goBacktoList() {
 
 /**
  * validates entered phone number
+ * @param {string} phone - phone number to validate
  */
 function validatePhoneByLength(phone) {
     let validation = /^\d{5,15}$/;
@@ -60,6 +61,7 @@ function validateEmail(email) {
 
 /**
  * displays hint if phone number or email are invalid. used in adding a new contact
+ * @param {string} id - id of the hint element to display
  */
 function displayHint(id) {
     document.getElementById(id).style.opacity = 1;
@@ -81,6 +83,7 @@ function emptyInput() {
 
 /**
  * displays current edited contact in editing dialog
+ * @param {string} id - id of the contact being edited
  */
 function displayAvatarInEdit(id) {
     let avatar = document.getElementById('editedAvatar');
@@ -94,6 +97,7 @@ function displayAvatarInEdit(id) {
 
 /**
  * remove contact from contact list
+ * @param {string} id - id of the contact being deleted
  */
 function removeThisContactFromList(id) {
     let deletedContact = document.getElementById(id);
@@ -103,6 +107,8 @@ function removeThisContactFromList(id) {
 
 /**
  * checks if the letter section is empty after deleting a contact and removes said section if empty
+ * @param {string} letter - letter section to check
+ * @returns {void}
  */
 function removeLetterSectionIfEmpty(letter) {
     let deletedContact = document.getElementById(letter);
@@ -127,6 +133,8 @@ function displayMainDataInEditDialog() {
 
 /**
  * updates data in contact list for the edited user
+ * @param {string} editID - id of the contact being edited
+ * @param {object} editedUser - object containing edited user data
  */
 function displayEditedContactDataInList(editID, editedUser) {
     let userInitials = getInitialsFromUser(editedUser);
@@ -138,6 +146,7 @@ function displayEditedContactDataInList(editID, editedUser) {
 
 /**
  * updates data in main display for the edited user
+ * @param {object} editedUser - object containing edited user data
  */
 function displayEditedContactDataInMainDisplay(editedUser) {
     let userInitials = getInitialsFromUser(editedUser);
@@ -150,6 +159,7 @@ function displayEditedContactDataInMainDisplay(editedUser) {
 
 /**
  * sets active class for contact being displayed in the main display and removes said class from other contact
+ * @param {string} elementId - id of the contact being displayed
  */
 function checkForActiveClass(elementId) {
         let parent = document.getElementById('contactList');

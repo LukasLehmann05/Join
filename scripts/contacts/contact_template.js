@@ -76,6 +76,7 @@ function contactMain(currentId, currentName, currentPhone, currentMail, acronym)
 
 /**
  * This function returns the HTML template for the dialog to add a contact.
+ * * @returns {string}
  */
 function addDialogHTML() {
     return `<div id="addContent" class="dialog-content">

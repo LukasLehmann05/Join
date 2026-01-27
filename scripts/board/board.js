@@ -99,7 +99,7 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
     const fillElement = document.getElementById(taskId + '_subtasks_status_bar');
     fillElement.style.width = `${percentage}%`;
     if (relationOfDoneSubtasks[0] === '0') {
-        let taskBar = document.getElementById(taskId + '_subtasks_status_bar_element');
+        let taskBar = document.getElementById(taskId + '_subtask_status_bar_container');
         taskBar.style.display ="none";
     }
 }
@@ -300,6 +300,7 @@ function checkIfNoTasksInColumn(columnId) {
 /**
  * This function observes a column for becoming empty and renders "no task" info.
  * @param {string} columnId The ID of the column to observe.
+ * @returns {void}
  */
 function observeColumnEmpty(columnId) {
     const container = document.getElementById(columnId);
@@ -330,7 +331,6 @@ async function initializeBoard() {
     const joinData = await fetchAllDataGlobal();
     let allTasksByIdArr = getAllTaskIds(joinData);
     initInputFieldEventListener(allTasksByIdArr);
-
     setAllTasksObj(allTasksByIdArr, joinData.tasks);
     await checkAssigneesExistence(allTasksByIdArr, joinData);
     renderAllTaskCardsOnBoard(allTasksByIdArr, joinData.tasks);

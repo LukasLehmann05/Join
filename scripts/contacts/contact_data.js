@@ -16,6 +16,10 @@ async function fetchContactList() {
 
 /**
  * vehicle for better structure
+ * @param {Object} singleContactData - The data of a single contact.
+ * @param {string} contactID - The ID of the contact.
+ * @param {string} name - The name of the contact.
+ * @param {string} color - The background color for the contact's acronym.
  * @async
  */
 async function renderHtmlElements(singleContactData, contactID, name, color) {
@@ -26,6 +30,7 @@ async function renderHtmlElements(singleContactData, contactID, name, color) {
 
 /**
  * renders the letters in the contactlist that function as a headline. Sorts them alphabetically at the end
+ * @param {string} name - The name of the contact.
  * @async
  */
 async function renderListLetter(name) {
@@ -41,6 +46,7 @@ async function renderListLetter(name) {
 
 /**
  * function for sorting headline letters alphabetically. Gets called in function: "renderListLetter()"
+ * @param {HTMLElement} parent - The parent element containing the letters to sort.
  */
 function sortAlphabetically(parent) {
     let childrenArray = Array.from(parent.children);
@@ -55,6 +61,10 @@ function sortAlphabetically(parent) {
 
 /**
  * renders contact into contact list. Gets called in function: "fetchContactList()"
+ * @param {Object} singleContactData - The data of a single contact.
+ * @param {string} contactID - The ID of the contact.
+ * @param {string} color - The background color for the contact's acronym.
+ * @async
  */
 async function renderContactList(singleContactData, contactID, color) {
     let name = singleContactData.name;
@@ -69,6 +79,8 @@ async function renderContactList(singleContactData, contactID, color) {
 
 /**
  * fetches color from array and assigns it as backgroundcolor for the user acronym
+ * @param {string} contactId - The ID of the contact.
+ * @param {string} color - The background color for the contact's acronym.
  */
 function colorAcronym(contactId, color) {
     let element = document.getElementById("short-" + contactId);
@@ -79,6 +91,7 @@ function colorAcronym(contactId, color) {
 
 /**
  * fetches contact data from firebase and renders data into main Display
+ * @param {HTMLElement} id - The HTML element containing data attributes for the contact.
  */
 function displayInMain(id) {
     let currentId = id.getAttribute('data-id');
@@ -98,6 +111,10 @@ function displayInMain(id) {
 
 /**
  * renders data into the main display. adds the phone number and background color
+ * @param {string} currentId - The ID of the contact.
+ * @param {string} currentName - The name of the contact.
+ * @param {string} currentPhone - The phone number of the contact.
+ * @param {string} currentMail - The email of the contact.
  */
 function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
     let mainDisplay = document.getElementById('mainView');
@@ -110,6 +127,10 @@ function renderMainDisplay(currentId, currentName, currentPhone, currentMail) {
 
 /**
  * fetches data from input fields and returns them as an object
+ * @param {string} nameInput - The ID of the name input field.
+ * @param {string} phoneInput - The ID of the phone input field.
+ * @param {string} emailInput - The ID of the email input field.
+ * @return {Object} newUser - The new contact data.
  */
 function getContactInputData(nameInput, phoneInput, emailInput) {
     let name = document.getElementById(nameInput).value;
@@ -169,6 +190,10 @@ function validateContactInput(user, hintKeys) {
 
 /**
  * shell for restructuring html templates and dialog appearences
+ * @param {Object} newUser - The new contact data.
+ * @param {string} name - The name of the contact.
+ * @param {string} color - The background color for the contact's acronym.
+ * @async
  */
 async function trimDownAddingContact(newUser, name, color) {
     let contactID = await getLastContactAddedFromDatabase();
@@ -198,6 +223,9 @@ async function editContactInDatabase() {
 
 /**
  * trim down for editing a user to improve readability and overview
+ * @param {string} editID - The ID of the contact being edited.
+ * @param {Object} editedUser - The edited contact data.
+ * @async
  */
 async function trimDownEditingUser(editID, editedUser) {
     removeThisContactFromList(editID);
@@ -251,6 +279,7 @@ function getDataFromMain() {
 
 /**
  * shell for handling the deleting process of a contact from the main display
+ * @param {HTMLElement} id - The HTML element containing data attributes for the contact.
  */
 async function deleteThisContactFromMain(id) {
     let currentId = id.getAttribute('data-id');
@@ -272,6 +301,7 @@ async function deleteThisContactFromDialog() {
 
 /**
  * calls functions deleting a contact from the database, emptying the main display and checking the contact list
+ * @param {string} currentId - The ID of the contact to delete.
  */
 async function deleteThisUser(currentId) {
     removeThisContactFromList(currentId);

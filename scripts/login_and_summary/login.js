@@ -190,7 +190,6 @@ function onGuestClick(errorBox) {
 
 /**
  * Saves data to Firebase and returns with ID
- * @param {string} path - Firebase path
  * @param {Object} payload - Data to save
  * @param {string} errorMessage - Error message prefix
  * @returns {Promise<Object>} Saved data with ID
@@ -301,6 +300,9 @@ async function saveNewUser(name, email, password) {
 
 /**
  * Saves new guest user to database
+ * @param {string} name - User name
+ * @param {string} email - User email
+ * @returns {Object} Created contact object
  */
 function createNewContactInSignUp(name, email) {
   let color = assignColorToContact();
