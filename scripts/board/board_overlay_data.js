@@ -6,7 +6,7 @@ let newDescription = "";
 let newDueDate = "";
 let newPriority = "";
 let newAssigneesArr = [];
-let newSubtasksArr = [];
+let newSubtasksArr = null;
 let newState = "";
 const DATA_ATTRIBUTE_SAVE_TASK_WHEN_CLOSE_OVERLAY = 'data-save-task-when-close-overlay';
 const DATA_ATTRIBUTE_CREATE_TASK_AND_CLOSE_OVERLAY = 'data-create-task-and-close-overlay';
@@ -41,7 +41,7 @@ async function getTaskToUpdate(taskId, upsertMode) {
     if (newDueDate !== "") taskToUpdate.due_date = newDueDate;
     if (newPriority !== "") taskToUpdate.priority = newPriority;
     if (upsertMode !== false) taskToUpdate.assigned_to = newAssigneesArr;
-    if (newSubtasksArr.length > 0) taskToUpdate.subtasks = newSubtasksArr;
+    if (newSubtasksArr !== null) taskToUpdate.subtasks = newSubtasksArr;
     if (newState !== "") taskToUpdate.state = newState;
     return taskToUpdate;
 }
@@ -85,7 +85,7 @@ function clearElementsOfNewTask() {
     newDueDate = "";
     newPriority = "";
     newAssigneesArr = [];
-    newSubtasksArr = [];
+    newSubtasksArr = null;
     newState = "";
 }
 
