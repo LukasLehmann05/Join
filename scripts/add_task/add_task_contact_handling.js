@@ -229,7 +229,7 @@ function assignTaskToUserById(userId, taskId) {
  * @param {string} contact_id - Unique id of the contact to unassign.
  * @returns {string} HTML string for a contact option element.
  */
-const observer = new MutationObserver((obs) => {
+const observer = new MutationObserver((mutations, obs) => {
     let element = document.getElementById('contact-button');
     if (element) {
         document.addEventListener('click', function (event) {
