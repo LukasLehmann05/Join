@@ -98,9 +98,9 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
     }
     const fillElement = document.getElementById(taskId + '_subtasks_status_bar');
     fillElement.style.width = `${percentage}%`;
-    if (relationOfDoneSubtasks[0] === '0') {
-        let taskBar = document.getElementById(taskId + '_subtasks_status_bar_element');
-        taskBar.style.display ="none";
+    if (relationOfDoneSubtasks[1] === '0') {
+         let subtaskContainer = document.getElementById(taskId + '_subtask_status_bar_container');
+         subtaskContainer.style.display ="none";
     }
 }
 
