@@ -77,7 +77,7 @@ function taskCardTemplate(task, taskId) {
                 <p class="category ${task.category.toLowerCase().replace(/ /g,"_")}">${task.category}</p>
                 <h3>${task.title}</h3>
                 <p class="task_card_description">${task.description}</p>
-                <div class="subtask_status_bar">
+                <div class="subtask_status_bar" id="${taskId}_subtask_status_bar_container">
                     <div id="${taskId}_subtasks_status_bar_element" class="subtask_status_bar_bg">
                         <div class="subtask_status_bar_fill" id="${taskId}_subtasks_status_bar" style="width: 60%;"></div>
                     </div>

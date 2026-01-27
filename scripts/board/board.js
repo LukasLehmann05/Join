@@ -99,7 +99,7 @@ function renderSubtaskStatusBar(taskId, subtasksArr) {
     const fillElement = document.getElementById(taskId + '_subtasks_status_bar');
     fillElement.style.width = `${percentage}%`;
     if (relationOfDoneSubtasks[0] === '0') {
-        let taskBar = document.getElementById(taskId + '_subtasks_status_bar_element');
+        let taskBar = document.getElementById(taskId + '_subtask_status_bar_container');
         taskBar.style.display ="none";
     }
 }
